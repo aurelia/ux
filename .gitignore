@@ -1,0 +1,10 @@
+node_modules
+jspm_packages
+bower_components
+.idea
+.DS_STORE
+*.swp
+npm-debug.log*
+.test
+dist/doc-temp
+dist/test

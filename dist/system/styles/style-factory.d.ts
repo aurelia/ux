@@ -1,0 +1,12 @@
+import { StyleController } from './style-controller';
+import { Container } from 'aurelia-dependency-injection';
+export declare class StyleFactory {
+    private styleObjectType;
+    private styles;
+    private expression;
+    id: string;
+    private defaultController;
+    constructor(styleObjectType: Function, styles: string[], expression: Object);
+    getOrCreateDefault(container: any): StyleController;
+    create(container: Container, destination?: Element, bindingContext?: any): StyleController;
+}

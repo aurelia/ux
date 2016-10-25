@@ -1,0 +1,11 @@
+
+#####
+# Circle CI
+#
+# For running docker images on circle ci, see: https://circleci.com/docs/docker
+# For circle.yml explanation, see: https://circleci.com/docs/manually
+#####
+
+machine:
+  node:
+    version: 6.4.0

@@ -1,0 +1,21 @@
+{
+  // this file is here only because typedoc doesn't yet support TypeScript 2.0
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es6",
+    "outDir": "dist/native-modules",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "noEmitHelpers": false
+  },
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "doc"
+  ]
+}

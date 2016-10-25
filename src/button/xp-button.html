@@ -1,0 +1,10 @@
+<template role="button">
+  <require from="./xp-button-styles"></require>
+
+  <button styles.button class="
+    ${disabled ? 'disabled' : ''}
+    ${'raised'|styleResolve:$xpButtonStyles.raised:raised}
+    ">
+    <slot></slot>
+  </button>
+</template>

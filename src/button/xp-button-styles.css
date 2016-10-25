@@ -1,0 +1,40 @@
+styles.button {
+  display: inline-block;
+  border: 0;
+  outline: none;
+  min-width: 88px;
+  height: 36px;
+  line-height: 36px;
+  margin: 6px 8px;
+  padding: 0 16px 0 16px;  
+  border-radius: 2px;
+  font-size: 0.9em;
+  background-color: ${background || $design.a1};
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+styles.button::-moz-focus-inner {
+  border: none;
+}
+
+styles.button:focus {
+  
+}
+
+styles.button.disabled {
+  background-color: ${backgroundDisabled || $design.a2};
+  color: #fff;
+}
+
+styles.button.raised {
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.2s;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+styles.button.raised:active {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+  transition-delay: 0s;
+}

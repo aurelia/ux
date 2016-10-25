@@ -1,0 +1,102 @@
+{
+  "name": "aurelia-xp",
+  "version": "0.1.0",
+  "description": "A user experience framework for Aurelia.",
+  "keywords": [
+    "aurelia",
+    "styles",
+    "components",
+    "ux"
+  ],
+  "homepage": "http://aurelia.io",
+  "bugs": {
+    "url": "https://github.com/aurelia/xp/issues"
+  },
+  "license": "MIT",
+  "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
+  "main": "dist/commonjs/aurelia-xp.js",
+  "typings": "dist/commonjs/aurelia-xp.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aurelia/xp"
+  },
+  "scripts": {
+    "lint": "cross-env ./node_modules/.bin/tslint --project tsconfig.json",
+    "pretest": "cross-env npm run lint",
+    "test": "cross-env ./node_modules/.bin/tsc && cross-env ./node_modules/karma/bin/karma start --single-run",
+    "test-watch": "concurrently \"./node_modules/.bin/tsc --watch\" \"./node_modules/karma/bin/karma start\"",
+    "prebuild:compile": "rimraf 'dist/**'",
+    "build:compile": "concurrently \"node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/amd\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/commonjs --module commonjs\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/native-modules --module es2015\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/system --module system\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/es2015 --target es2015 --module es2015\" || true",
+    "build": "npm run build:compile",
+    "postbuild": "npm run build:doc",
+    "prebuild:doc": "rimraf 'doc/api.json' && rimraf 'dist/doc-temp/**' && cross-env ./node_modules/.bin/tsc --project tsconfig.build.json --outFile dist/doc-temp/aurelia-validation.js && node doc/shape-defs",
+    "build:doc": "cross-env ./node_modules/.bin/typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-validation-docs --ignoreCompilerErrors --tsconfig doc/tsconfig.json dist/doc-temp/",
+    "postbuild:doc": "concurrently \"node doc/shape-doc\" \"rimraf 'dist/doc-temp/**'\""
+  },
+  "jspm": {
+    "registry": "npm",
+    "jspmPackage": true,
+    "main": "aurelia-xp",
+    "format": "amd",
+    "directories": {
+      "dist": "dist/amd"
+    },
+    "peerDependencies": {
+      "aurelia-binding": "^1.0.4",
+      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-logging": "^1.0.0",
+      "aurelia-pal": "^1.0.0",
+      "aurelia-task-queue": "^1.0.0",
+      "aurelia-templating": "^1.1.0"
+    },
+    "dependencies": {
+      "aurelia-binding": "^1.0.4",
+      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-logging": "^1.0.0",
+      "aurelia-pal": "^1.0.0",
+      "aurelia-task-queue": "^1.0.0",
+      "aurelia-templating": "^1.1.0"
+    },
+    "devDependencies": {}
+  },
+  "dependencies": {
+    "aurelia-binding": "^1.0.4",
+    "aurelia-dependency-injection": "^1.0.0",
+    "aurelia-logging": "^1.0.0",
+    "aurelia-pal": "^1.0.0",
+    "aurelia-task-queue": "^1.0.0",
+    "aurelia-templating": "^1.1.0"
+  },
+  "devDependencies": {
+    "aurelia-bootstrapper": "^1.0.0",
+    "aurelia-pal-browser": "^1.0.0",
+    "aurelia-polyfills": "^1.1.0",
+    "aurelia-testing": "^1.0.0-beta.2.0.0",
+    "concurrently": "^2.2.0",
+    "cross-env": "^2.0.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.2.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-requirejs": "^1.0.0",
+    "requirejs": "^2.2.0",
+    "requirejs-text": "^2.0.12",
+    "rimraf": "^2.5.4",
+    "tslint": "^3.15.1",
+    "typedoc": "^0.5.0",
+    "typescript": "^2.0.0"
+  },
+  "aurelia": {
+    "build": {
+      "resources": [
+
+      ]
+    },
+    "documentation": {
+      "articles": [
+
+      ]
+    }
+  }
+}
