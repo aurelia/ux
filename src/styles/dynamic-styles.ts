@@ -6,12 +6,16 @@ function getNextDynamicStyleId() {
   return 'DynamicStyles' + (++nextStyleId);
 }
 
-export function createDynamicStyleModule(styleUrl) {
+export interface StyleModule {
+  [x: string]: Function;
+}
+
+export function createDynamicStyleModule(styleUrl: string): StyleModule {
   @styles()
   @useStyles(styleUrl)
   class DynamicStyles {}
-  
+
   return {
     [getNextDynamicStyleId()]: DynamicStyles
-  }
+  };
 }

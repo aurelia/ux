@@ -5,34 +5,34 @@ import {metadata} from 'aurelia-metadata';
 import {StyleLocator} from './style-locator';
 
 /**
-* Decorator: Indicates that the target is a styles class.
-*/
+ * Decorator: Indicates that the target is a styles class.
+ */
 export function styles() {
   return resource(new StyleResource());
 }
 
 /**
-* Decorator: Associates a custom style strategy.
-* @param strategy The style strategy instance.
-*/
+ * Decorator: Associates a custom style strategy.
+ * @param strategy The style strategy instance.
+ */
 export function useStyleStrategy(strategy: StyleStrategy): any {
-  return function(target) {
+  return (target: Function) => {
     metadata.define(StyleLocator.styleStrategyMetadataKey, strategy, target);
   };
 }
 
 /**
-* Decorator: Provides a relative path to styles.
-* @param path The path to the styles.
-*/
+ * Decorator: Provides a relative path to styles.
+ * @param path The path to the styles.
+ */
 export function useStyles(path: string): any {
   return useStyleStrategy(new RelativeStyleStrategy(path));
 }
 
 /**
-* Decorator: Provides a style template, directly inline.
-* @param css The css.
-*/
-export function inlineStyles(css:string): any {
+ * Decorator: Provides a style template, directly inline.
+ * @param css The css.
+ */
+export function inlineStyles(css: string): any {
   return useStyleStrategy(new InlineStyleStrategy(css));
 }
