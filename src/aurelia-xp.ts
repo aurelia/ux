@@ -9,30 +9,38 @@ import {XpConfiguration} from './xp-configuration';
 
 @inject(XpConfiguration, Container)
 export class AureliaXP {
-  host: Host;
-  availableHosts: Host[];
-  @observable platform: Platform;
-  @observable design: Design;
+  public host: Host;
+  public availableHosts: Host[];
+  @observable public platform: Platform;
+  @observable public design: Design;
 
-  constructor(public use: XpConfiguration, private container: Container){
+  constructor(public use: XpConfiguration, container: Container){
     this.availableHosts = [
       container.get(Cordova),
       container.get(Web)
     ];
   }
 
-  private platformChanged(platform: Platform) {
+  public platformChanged(platform: Platform) {
     this.design = platform.design;
   }
 
-  start(host?: string | Host) {
+  public start(host?: string | Host) {
+    let found: Host | undefined;
+
     if (typeof host === 'string') {
-      this.host = this.availableHosts.find(x => x.type === host);
+      found = this.availableHosts.find(x => x.type === host);
     } else if (!host) {
-      this.host = this.availableHosts.find(x => x.isAvailable);
+      found = this.availableHosts.find(x => x.isAvailable);
     } else {
-      this.host = host;
+      found = host;
     }
+
+    if (found === undefined) {
+      throw new Error('Could not determine host environment');
+    }
+
+    this.host = found;
 
     return this.host.start().then(platform => {
       this.platform = platform;

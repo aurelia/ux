@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-dependency-injection';
 import {Loader} from 'aurelia-loader';
-import {ViewEngine} from 'aurelia-templating';
+import {ViewEngine, ViewResources} from 'aurelia-templating';
 import {createDynamicStyleModule} from './styles/dynamic-styles';
 import {SyntaxInterpreter} from 'aurelia-templating-binding';
 
@@ -8,19 +8,19 @@ import {SyntaxInterpreter} from 'aurelia-templating-binding';
 export class XpConfiguration {
   constructor(private loader: Loader, private viewEngine: ViewEngine) {}
 
-  defaultConfiguration() {
+  public defaultConfiguration() {
     this.styleLoaderPlugin();
     this.commandHandler();
     return this;
   }
 
-  styleLoaderPlugin() {
+  public styleLoaderPlugin() {
     this.viewEngine.addResourcePlugin('.css#xp', {
       fetch(address: string) {
         return Promise.resolve(createDynamicStyleModule(address.replace('.css#xp', '.css')));
       }
     });
-    
+
     this.loader.addPlugin('xp-styles', {
       fetch(address: string) {
         return Promise.resolve(createDynamicStyleModule(address + '.css'));
@@ -30,11 +30,12 @@ export class XpConfiguration {
     return this;
   }
 
-  commandHandler() {
+  public commandHandler() {
     let proto = <any>SyntaxInterpreter.prototype;
     let original = proto.handleUnknownCommand;
 
-    proto.handleUnknownCommand = function(resources, element, info, existingInstruction, context) {
+    proto.handleUnknownCommand = function(resources: ViewResources,
+      element: Element,info: any, existingInstruction?: any, context?: any) {
       if (info.attrName === 'styles') {
         info.attrName = 'class';
         info.attrValue = '$styles.' + info.command;
