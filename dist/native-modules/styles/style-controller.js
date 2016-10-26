@@ -7,7 +7,6 @@ export var StyleController = (function () {
         this.expression = expression;
         this.destination = destination;
         this.isDefault = false;
-        this.styleElement = null;
         this.bindingInstance = null;
         this.count = 0;
     }
@@ -34,7 +33,7 @@ export var StyleController = (function () {
         }
     };
     StyleController.prototype.ensureStyleElementIsAddedToDocument = function () {
-        if (this.styleElement === null) {
+        if (this.styleElement === undefined) {
             this.styleElement = DOM.injectStyles('', this.destination);
             this.bindingInstance = this.expression.createBinding(this.styleElement);
         }

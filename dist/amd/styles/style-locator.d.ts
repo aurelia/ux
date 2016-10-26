@@ -7,7 +7,7 @@ export declare class StyleLocator {
     /**
      * The metadata key for storing/finding style strategies associated with an class/object.
      */
-    private static styleStrategyMetadataKey;
+    static styleStrategyMetadataKey: string;
     /**
      * Gets the style strategy for the value.
      * @param value The value to locate the style strategy for.

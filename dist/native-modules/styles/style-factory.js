@@ -13,11 +13,10 @@ export var StyleFactory = (function () {
         this.styleObjectType = styleObjectType;
         this.styles = styles;
         this.expression = expression;
-        this.defaultController = null;
         this.id = camelCase(Origin.get(styleObjectType).moduleMember);
     }
     StyleFactory.prototype.getOrCreateDefault = function (container) {
-        if (this.defaultController === null) {
+        if (this.defaultController === undefined) {
             this.defaultController = this.create(container);
             this.defaultController.isDefault = true;
         }

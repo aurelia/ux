@@ -5,24 +5,24 @@ import {StyleEngine, Themable} from '../styles/style-engine';
 @inject(ViewResources, StyleEngine)
 @customElement('xp-button')
 export class XpButton implements Themable {
-  @bindable raised = null;
-  @bindable disabled = false;
-  @bindable theme = null;
+  @bindable public raised = null;
+  @bindable public disabled = false;
+  @bindable public theme = null;
   view: View;
 
   constructor(public resources: ViewResources, private styleEngine: StyleEngine) {}
 
-  created(owningView: View, myView: View) {
+  public created(_: any, myView: View) {
     this.view = myView;
   }
 
-  themeChanged(newValue) {
+  public themeChanged(newValue: any) {
     this.styleEngine.applyTheme(this, newValue);
   }
 }
 
 export class StyleResolveValueConverter {
-  toView(className, styleValue, elementValue) {
+  public toView(className: string, styleValue: boolean, elementValue: string) {
     if (elementValue === null) {
       return styleValue ? className : '';
     }

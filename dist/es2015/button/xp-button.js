@@ -15,7 +15,7 @@ export let XpButton = class XpButton {
         this.disabled = false;
         this.theme = null;
     }
-    created(owningView, myView) {
+    created(_, myView) {
         this.view = myView;
     }
     themeChanged(newValue) {

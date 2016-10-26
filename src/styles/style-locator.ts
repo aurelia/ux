@@ -8,7 +8,7 @@ export class StyleLocator {
   /**
    * The metadata key for storing/finding style strategies associated with an class/object.
    */
-  private static styleStrategyMetadataKey = 'aurelia:style-strategy';
+  public static styleStrategyMetadataKey = 'aurelia:style-strategy';
 
   /**
    * Gets the style strategy for the value.
@@ -16,10 +16,6 @@ export class StyleLocator {
    * @return The located StyleStrategy instance.
    */
   public getStyleStrategy(value: any): StyleStrategy {
-    if (!value) {
-      return null;
-    }
-
     if (typeof value === 'object' && 'getStyleStrategy' in value) {
       let origin = Origin.get(value.constructor);
 

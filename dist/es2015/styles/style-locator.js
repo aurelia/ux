@@ -10,9 +10,6 @@ export class StyleLocator {
      * @return The located StyleStrategy instance.
      */
     getStyleStrategy(value) {
-        if (!value) {
-            return null;
-        }
         if (typeof value === 'object' && 'getStyleStrategy' in value) {
             let origin = Origin.get(value.constructor);
             value = value.getStyleStrategy();

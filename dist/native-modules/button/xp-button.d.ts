@@ -8,9 +8,9 @@ export declare class XpButton implements Themable {
     theme: null;
     view: View;
     constructor(resources: ViewResources, styleEngine: StyleEngine);
-    created(owningView: View, myView: View): void;
+    created(_: any, myView: View): void;
     themeChanged(newValue: any): void;
 }
 export declare class StyleResolveValueConverter {
-    toView(className: any, styleValue: any, elementValue: any): any;
+    toView(className: string, styleValue: boolean, elementValue: string): string;
 }

@@ -6,14 +6,14 @@ import {Origin} from 'aurelia-metadata';
 
 export class StyleFactory {
   public id: string;
-  private defaultController: StyleController = null;
+  private defaultController: StyleController;
 
   constructor(private styleObjectType: Function, private styles: string[], private expression: Object) {
     this.id = camelCase(Origin.get(styleObjectType).moduleMember);
   }
 
   public getOrCreateDefault(container: Container) : StyleController {
-    if (this.defaultController === null) {
+    if (this.defaultController === undefined) {
       this.defaultController = this.create(container);
       this.defaultController.isDefault = true;
     }

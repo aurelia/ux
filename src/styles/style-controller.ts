@@ -4,7 +4,7 @@ import {DOM} from 'aurelia-pal';
 export class StyleController {
   public isDefault = false;
   private styleElementParent: Node;
-  private styleElement: HTMLStyleElement = null;
+  private styleElement: HTMLStyleElement;
   private bindingInstance: any = null;
   private count = 0;
 
@@ -46,7 +46,7 @@ export class StyleController {
   }
 
   private ensureStyleElementIsAddedToDocument() {
-    if (this.styleElement === null) {
+    if (this.styleElement === undefined) {
       this.styleElement = <HTMLStyleElement>DOM.injectStyles('', this.destination);
       this.bindingInstance = this.expression.createBinding(this.styleElement);
     } else if (!this.styleElement.parentNode) {

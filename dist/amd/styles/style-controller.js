@@ -8,7 +8,6 @@ define(["require", "exports", 'aurelia-pal'], function (require, exports, aureli
             this.expression = expression;
             this.destination = destination;
             this.isDefault = false;
-            this.styleElement = null;
             this.bindingInstance = null;
             this.count = 0;
         }
@@ -35,7 +34,7 @@ define(["require", "exports", 'aurelia-pal'], function (require, exports, aureli
             }
         };
         StyleController.prototype.ensureStyleElementIsAddedToDocument = function () {
-            if (this.styleElement === null) {
+            if (this.styleElement === undefined) {
                 this.styleElement = aurelia_pal_1.DOM.injectStyles('', this.destination);
                 this.bindingInstance = this.expression.createBinding(this.styleElement);
             }

@@ -12,9 +12,6 @@ export var StyleLocator = (function () {
      * @return The located StyleStrategy instance.
      */
     StyleLocator.prototype.getStyleStrategy = function (value) {
-        if (!value) {
-            return null;
-        }
         if (typeof value === 'object' && 'getStyleStrategy' in value) {
             var origin_1 = Origin.get(value.constructor);
             value = value.getStyleStrategy();

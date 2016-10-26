@@ -17,7 +17,6 @@ System.register(['aurelia-pal'], function(exports_1, context_1) {
                     this.expression = expression;
                     this.destination = destination;
                     this.isDefault = false;
-                    this.styleElement = null;
                     this.bindingInstance = null;
                     this.count = 0;
                 }
@@ -44,7 +43,7 @@ System.register(['aurelia-pal'], function(exports_1, context_1) {
                     }
                 };
                 StyleController.prototype.ensureStyleElementIsAddedToDocument = function () {
-                    if (this.styleElement === null) {
+                    if (this.styleElement === undefined) {
                         this.styleElement = aurelia_pal_1.DOM.injectStyles('', this.destination);
                         this.bindingInstance = this.expression.createBinding(this.styleElement);
                     }

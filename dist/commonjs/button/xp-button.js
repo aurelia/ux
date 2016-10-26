@@ -16,7 +16,7 @@ var XpButton = (function () {
         this.disabled = false;
         this.theme = null;
     }
-    XpButton.prototype.created = function (owningView, myView) {
+    XpButton.prototype.created = function (_, myView) {
         this.view = myView;
     };
     XpButton.prototype.themeChanged = function (newValue) {
