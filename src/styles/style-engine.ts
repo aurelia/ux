@@ -6,9 +6,9 @@ export interface Themable {
 }
 
 export class StyleEngine {
-  applyTheme(themable: Themable, theme) {
-    let instance;
-    
+  public applyTheme(themable: Themable, theme: any) {
+    let instance: any;
+
     if (typeof theme === 'string') {
       instance = themable.resources.getValue(theme);
       console.log(themable, theme, instance);

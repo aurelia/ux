@@ -8,7 +8,7 @@ export class StyleResource {
         this.container = container;
         this.hooks = new StyleViewEngineHooks(this);
     }
-    register(registry, name) {
+    register(registry) {
         registry.registerViewEngineHooks(this.hooks);
     }
     load(container) {

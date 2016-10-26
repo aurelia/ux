@@ -12,7 +12,6 @@ import { XpConfiguration } from './xp-configuration';
 export var AureliaXP = (function () {
     function AureliaXP(use, container) {
         this.use = use;
-        this.container = container;
         this.availableHosts = [
             container.get(Cordova),
             container.get(Web)
@@ -23,15 +22,20 @@ export var AureliaXP = (function () {
     };
     AureliaXP.prototype.start = function (host) {
         var _this = this;
+        var found;
         if (typeof host === 'string') {
-            this.host = this.availableHosts.find(function (x) { return x.type === host; });
+            found = this.availableHosts.find(function (x) { return x.type === host; });
         }
         else if (!host) {
-            this.host = this.availableHosts.find(function (x) { return x.isAvailable; });
+            found = this.availableHosts.find(function (x) { return x.isAvailable; });
         }
         else {
-            this.host = host;
+            found = host;
         }
+        if (found === undefined) {
+            throw new Error('Could not determine host environment');
+        }
+        this.host = found;
         return this.host.start().then(function (platform) {
             _this.platform = platform;
         });

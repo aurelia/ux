@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { Container, inject } from 'aurelia-dependency-injection';
 import { DOM, PLATFORM } from 'aurelia-pal';
-import { iOS } from '../platforms/ios';
+import { IOS } from '../platforms/ios';
 import { Android } from '../platforms/android';
 export var Cordova = (function () {
     function Cordova(container) {
@@ -22,11 +22,11 @@ export var Cordova = (function () {
     });
     Cordova.prototype.start = function () {
         var _this = this;
-        return new Promise(function (resolve, reject) {
+        return new Promise(function (resolve) {
             DOM.addEventListener('deviceready', function () {
                 switch (_this.getPlatformType()) {
                     case 'ios':
-                        resolve(_this.container.get(iOS));
+                        resolve(_this.container.get(IOS));
                         break;
                     default:
                         resolve(_this.container.get(Android));

@@ -5,14 +5,14 @@ import {Container} from 'aurelia-dependency-injection';
 import {Origin} from 'aurelia-metadata';
 
 export class StyleFactory {
-  id: string;
+  public id: string;
   private defaultController: StyleController = null;
 
   constructor(private styleObjectType: Function, private styles: string[], private expression: Object) {
     this.id = camelCase(Origin.get(styleObjectType).moduleMember);
   }
 
-  getOrCreateDefault(container) : StyleController {
+  public getOrCreateDefault(container: Container) : StyleController {
     if (this.defaultController === null) {
       this.defaultController = this.create(container);
       this.defaultController.isDefault = true;
@@ -21,8 +21,8 @@ export class StyleFactory {
     return this.defaultController;
   }
 
-  create(container: Container, destination?: Element, bindingContext?: any): StyleController {
-    let $styles = {};
+  public create(container: Container, destination?: Element, bindingContext?: any): StyleController {
+    let $styles: any = {};
     let xp = container.get(AureliaXP);
 
     if (bindingContext) {
@@ -57,8 +57,8 @@ function nextNumber() {
 }
 
 class StyleOverrideContext {
-  $on = '(min-width: 0)';
-  $off = '(max-width: 0)';
+  public $on = '(min-width: 0)';
+  public $off = '(max-width: 0)';
 
   constructor(public $xp: AureliaXP, public $styles: any) {}
 

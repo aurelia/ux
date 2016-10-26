@@ -15,8 +15,8 @@ export var StyleCompiler = (function () {
     }
     StyleCompiler.prototype.compile = function (styleObjectType, css) {
         var styles = Object.create(null);
-        var transformed = css.replace(classMatcher, function (str) {
-            var name = arguments[1];
+        var transformed = css.replace(classMatcher, function (_, capture) {
+            var name = capture;
             styles[name] = true;
             return '.${$styles.' + name + ' & oneTime}';
         });

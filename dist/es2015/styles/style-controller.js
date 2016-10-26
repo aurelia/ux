@@ -12,10 +12,11 @@ export class StyleController {
         this.count = 0;
     }
     bind(view) {
-        let $styles = view.overrideContext['$styles'] || {};
-        view.overrideContext['$' + this.factory.id] = this.bindingContext;
-        view.overrideContext['$design'] = this.overrideContext.$design;
-        view.overrideContext['$styles'] = Object.assign($styles, this.overrideContext.$styles);
+        let overrideContext = view.overrideContext;
+        let $styles = overrideContext['$styles'] || {};
+        overrideContext['$' + this.factory.id] = this.bindingContext;
+        overrideContext['$design'] = this.overrideContext.$design;
+        overrideContext['$styles'] = Object.assign($styles, this.overrideContext.$styles);
         if (this.count === 0) {
             this.ensureStyleElementIsAddedToDocument();
             this.count = 1;

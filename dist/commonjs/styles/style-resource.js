@@ -11,7 +11,7 @@ var StyleResource = (function () {
         this.container = container;
         this.hooks = new StyleViewEngineHooks(this);
     };
-    StyleResource.prototype.register = function (registry, name) {
+    StyleResource.prototype.register = function (registry) {
         registry.registerViewEngineHooks(this.hooks);
     };
     StyleResource.prototype.load = function (container) {

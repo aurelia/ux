@@ -8,7 +8,7 @@ System.register(['aurelia-dependency-injection', '../designs/ios-design'], funct
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var aurelia_dependency_injection_1, ios_design_1;
-    var iOS;
+    var IOS;
     return {
         setters:[
             function (aurelia_dependency_injection_1_1) {
@@ -18,17 +18,17 @@ System.register(['aurelia-dependency-injection', '../designs/ios-design'], funct
                 ios_design_1 = ios_design_1_1;
             }],
         execute: function() {
-            iOS = (function () {
-                function iOS(design) {
+            IOS = (function () {
+                function IOS(design) {
                     this.design = design;
                     this.type = 'ios';
                 }
-                iOS = __decorate([
-                    aurelia_dependency_injection_1.inject(ios_design_1.iOSDesign)
-                ], iOS);
-                return iOS;
+                IOS = __decorate([
+                    aurelia_dependency_injection_1.inject(ios_design_1.IOSDesign)
+                ], IOS);
+                return IOS;
             }());
-            exports_1("iOS", iOS);
+            exports_1("IOS", IOS);
         }
     }
 });

@@ -1,6 +1,6 @@
 import { swatches } from '../colors/swatches';
-export var iOSDesign = (function () {
-    function iOSDesign() {
+export var IOSDesign = (function () {
+    function IOSDesign() {
         this.type = 'ios';
         this.p1 = swatches.blue.p500;
         this.p2 = swatches.blue.p100;
@@ -9,5 +9,5 @@ export var iOSDesign = (function () {
         this.a2 = swatches.pink.a100;
         this.a3 = swatches.pink.a400;
     }
-    return iOSDesign;
+    return IOSDesign;
 }());

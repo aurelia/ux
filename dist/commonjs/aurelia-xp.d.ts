@@ -5,12 +5,11 @@ import { Platform } from './platforms/platform';
 import { XpConfiguration } from './xp-configuration';
 export declare class AureliaXP {
     use: XpConfiguration;
-    private container;
     host: Host;
     availableHosts: Host[];
     platform: Platform;
     design: Design;
     constructor(use: XpConfiguration, container: Container);
-    private platformChanged(platform);
+    platformChanged(platform: Platform): void;
     start(host?: string | Host): Promise<void>;
 }

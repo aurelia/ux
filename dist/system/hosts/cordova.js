@@ -38,11 +38,11 @@ System.register(['aurelia-dependency-injection', 'aurelia-pal', '../platforms/io
                 });
                 Cordova.prototype.start = function () {
                     var _this = this;
-                    return new Promise(function (resolve, reject) {
+                    return new Promise(function (resolve) {
                         aurelia_pal_1.DOM.addEventListener('deviceready', function () {
                             switch (_this.getPlatformType()) {
                                 case 'ios':
-                                    resolve(_this.container.get(ios_1.iOS));
+                                    resolve(_this.container.get(ios_1.IOS));
                                     break;
                                 default:
                                     resolve(_this.container.get(android_1.Android));

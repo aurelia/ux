@@ -15,8 +15,8 @@ export let StyleCompiler = class StyleCompiler {
     }
     compile(styleObjectType, css) {
         let styles = Object.create(null);
-        let transformed = css.replace(classMatcher, function (str) {
-            let name = arguments[1];
+        let transformed = css.replace(classMatcher, (_, capture) => {
+            let name = capture;
             styles[name] = true;
             return '.${$styles.' + name + ' & oneTime}';
         });

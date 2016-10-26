@@ -6,15 +6,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 define(["require", "exports", 'aurelia-dependency-injection', '../designs/ios-design'], function (require, exports, aurelia_dependency_injection_1, ios_design_1) {
     "use strict";
-    var iOS = (function () {
-        function iOS(design) {
+    var IOS = (function () {
+        function IOS(design) {
             this.design = design;
             this.type = 'ios';
         }
-        iOS = __decorate([
-            aurelia_dependency_injection_1.inject(ios_design_1.iOSDesign)
-        ], iOS);
-        return iOS;
+        IOS = __decorate([
+            aurelia_dependency_injection_1.inject(ios_design_1.IOSDesign)
+        ], IOS);
+        return IOS;
     }());
-    exports.iOS = iOS;
+    exports.IOS = IOS;
 });

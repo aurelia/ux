@@ -1,5 +1,5 @@
 import { Design } from './design';
-export declare class iOSDesign implements Design {
+export declare class IOSDesign implements Design {
     type: string;
     p1: string;
     p2: string;

@@ -7,6 +7,6 @@ export declare class StyleFactory {
     id: string;
     private defaultController;
     constructor(styleObjectType: Function, styles: string[], expression: Object);
-    getOrCreateDefault(container: any): StyleController;
+    getOrCreateDefault(container: Container): StyleController;
     create(container: Container, destination?: Element, bindingContext?: any): StyleController;
 }

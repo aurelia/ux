@@ -1,5 +1,5 @@
 import { swatches } from '../colors/swatches';
-export class iOSDesign {
+export class IOSDesign {
     constructor() {
         this.type = 'ios';
         this.p1 = swatches.blue.p500;

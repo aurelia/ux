@@ -1,7 +1,7 @@
 import { Platform } from './platform';
-import { iOSDesign } from '../designs/ios-design';
-export declare class iOS implements Platform {
-    design: iOSDesign;
+import { IOSDesign } from '../designs/ios-design';
+export declare class IOS implements Platform {
+    design: IOSDesign;
     type: string;
-    constructor(design: iOSDesign);
+    constructor(design: IOSDesign);
 }

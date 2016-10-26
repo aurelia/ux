@@ -1,33 +1,30 @@
 import {Origin} from 'aurelia-metadata';
 import {ViewResources, View} from 'aurelia-templating';
 import {Container} from 'aurelia-dependency-injection';
-import {relativeToFile} from 'aurelia-path';
-import {StyleCompiler} from './style-compiler';
 import {StyleFactory} from './style-factory';
-import {StyleController} from './style-controller';
 import {StyleLocator} from './style-locator';
 import {DOM} from 'aurelia-pal';
 import {metadata} from 'aurelia-metadata';
 
 export class StyleResource {
-  styleObjectType: Function;
-  css: string;
-  resources: ViewResources;
-  factory: StyleFactory;
-  container: Container;
-  hooks: StyleViewEngineHooks;
+  public styleObjectType: Function;
+  public css: string;
+  public resources: ViewResources;
+  public factory: StyleFactory;
+  public container: Container;
+  private hooks: StyleViewEngineHooks;
 
-  initialize(container: Container, target: Function): void {
+  public initialize(container: Container, target: Function): void {
     this.styleObjectType = target;
     this.container = container;
-    this.hooks = new StyleViewEngineHooks(this);    
+    this.hooks = new StyleViewEngineHooks(this);
   }
 
-  register(registry: ViewResources, name?: string): void {
+  public register(registry: ViewResources): void {
     registry.registerViewEngineHooks(this.hooks);
   }
 
-  load(container: Container): Promise<StyleResource> {
+  public load(container: Container): Promise<StyleResource> {
     let styleStrategy = (<StyleLocator>container.get(StyleLocator))
       .getStyleStrategy(this.styleObjectType);
 
@@ -44,19 +41,19 @@ export class StyleResource {
 }
 
 class StyleViewEngineHooks {
-  factory: StyleFactory;
+  public factory: StyleFactory;
 
   constructor(private owner: StyleResource) {}
 
-  beforeBind(view: View) {
+  public beforeBind(view: View) {
     this.locateController(view).bind(view);
   }
 
-  beforeUnbind(view: View) {
+  public beforeUnbind(view: View) {
     this.locateController(view).unbind();
   }
 
-  locateController(view) {
+  public locateController(view: any) {
     let controller = view[this.factory.id];
 
     if (controller === undefined) {
@@ -67,12 +64,12 @@ class StyleViewEngineHooks {
 
       view[this.factory.id] = controller = this.factory.getOrCreateDefault(this.owner.container);
     }
-    
+
     return controller;
   }
 }
 
-function injectIntoShadowDOM(view) {
+function injectIntoShadowDOM(view: View) {
   let behavior = <any>metadata.get(metadata.resource, view.bindingContext.constructor);
-  return behavior.usesShadowDOM
+  return behavior.usesShadowDOM;
 }

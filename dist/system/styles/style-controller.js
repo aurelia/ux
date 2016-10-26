@@ -22,10 +22,11 @@ System.register(['aurelia-pal'], function(exports_1, context_1) {
                     this.count = 0;
                 }
                 StyleController.prototype.bind = function (view) {
-                    var $styles = view.overrideContext['$styles'] || {};
-                    view.overrideContext['$' + this.factory.id] = this.bindingContext;
-                    view.overrideContext['$design'] = this.overrideContext.$design;
-                    view.overrideContext['$styles'] = Object.assign($styles, this.overrideContext.$styles);
+                    var overrideContext = view.overrideContext;
+                    var $styles = overrideContext['$styles'] || {};
+                    overrideContext['$' + this.factory.id] = this.bindingContext;
+                    overrideContext['$design'] = this.overrideContext.$design;
+                    overrideContext['$styles'] = Object.assign($styles, this.overrideContext.$styles);
                     if (this.count === 0) {
                         this.ensureStyleElementIsAddedToDocument();
                         this.count = 1;

@@ -2,15 +2,15 @@ System.register(['../colors/swatches'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var swatches_1;
-    var iOSDesign;
+    var IOSDesign;
     return {
         setters:[
             function (swatches_1_1) {
                 swatches_1 = swatches_1_1;
             }],
         execute: function() {
-            iOSDesign = (function () {
-                function iOSDesign() {
+            IOSDesign = (function () {
+                function IOSDesign() {
                     this.type = 'ios';
                     this.p1 = swatches_1.swatches.blue.p500;
                     this.p2 = swatches_1.swatches.blue.p100;
@@ -19,9 +19,9 @@ System.register(['../colors/swatches'], function(exports_1, context_1) {
                     this.a2 = swatches_1.swatches.pink.a100;
                     this.a3 = swatches_1.swatches.pink.a400;
                 }
-                return iOSDesign;
+                return IOSDesign;
             }());
-            exports_1("iOSDesign", iOSDesign);
+            exports_1("IOSDesign", IOSDesign);
         }
     }
 });

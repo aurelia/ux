@@ -10,19 +10,20 @@ export class StyleController {
 
   constructor(
     public factory: any,
-    public bindingContext: any, 
+    public bindingContext: any,
     public overrideContext: any,
-    private expression,
+    private expression: any,
     private destination?: Element
     ) {
   }
 
-  bind(view: View){
-    let $styles = view.overrideContext['$styles'] || {};
+  public bind(view: View){
+    let overrideContext: any = view.overrideContext;
+    let $styles = overrideContext['$styles'] || {};
 
-    view.overrideContext['$' + this.factory.id] = this.bindingContext;
-    view.overrideContext['$design'] = this.overrideContext.$design;
-    view.overrideContext['$styles'] = Object.assign(
+    overrideContext['$' + this.factory.id] = this.bindingContext;
+    overrideContext['$design'] = this.overrideContext.$design;
+    overrideContext['$styles'] = Object.assign(
       $styles, this.overrideContext.$styles
     );
 
@@ -35,7 +36,7 @@ export class StyleController {
     }
   }
 
-  unbind() {
+  public unbind() {
     this.count--;
 
     if (this.count === 0) {

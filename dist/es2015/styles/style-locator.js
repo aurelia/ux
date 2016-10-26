@@ -1,14 +1,14 @@
 import { metadata, Origin } from 'aurelia-metadata';
 import { styleStrategy, ConventionalStyleStrategy, RelativeStyleStrategy } from './style-strategy';
 /**
-* Locates a style for an object.
-*/
+ * Locates a style for an object.
+ */
 export class StyleLocator {
     /**
-    * Gets the style strategy for the value.
-    * @param value The value to locate the style strategy for.
-    * @return The located StyleStrategy instance.
-    */
+     * Gets the style strategy for the value.
+     * @param value The value to locate the style strategy for.
+     * @return The located StyleStrategy instance.
+     */
     getStyleStrategy(value) {
         if (!value) {
             return null;
@@ -48,27 +48,29 @@ export class StyleLocator {
         return strategy;
     }
     /**
-    * Creates a fallback Style Strategy. Used when unable to locate a configured strategy.
-    * The default implementation returns and instance of ConventionalStyleStrategy.
-    * @param origin The origin of the view model to return the strategy for.
-    * @return The fallback StyleStrategy.
-    */
+     * Creates a fallback Style Strategy. Used when unable to locate a configured strategy.
+     * The default implementation returns and instance of ConventionalStyleStrategy.
+     * @param origin The origin of the view model to return the strategy for.
+     * @return The fallback StyleStrategy.
+     */
     createFallbackStyleStrategy(origin) {
         return new ConventionalStyleStrategy(this, origin);
     }
     /**
-    * Conventionally converts a view model origin to a style url.
-    * Used by the ConventionalStyleStrategy.
-    * @param origin The origin of the view model to convert.
-    * @return The view url.
-    */
+     * Conventionally converts a view model origin to a style url.
+     * Used by the ConventionalStyleStrategy.
+     * @param origin The origin of the view model to convert.
+     * @return The view url.
+     */
     convertOriginToStyleUrl(origin) {
         let moduleId = origin.moduleId;
-        let id = (moduleId.endsWith('.js') || moduleId.endsWith('.ts')) ? moduleId.substring(0, moduleId.length - 3) : moduleId;
+        let id = (moduleId.endsWith('.js') || moduleId.endsWith('.ts'))
+            ? moduleId.substring(0, moduleId.length - 3)
+            : moduleId;
         return id + '.css';
     }
 }
 /**
-* The metadata key for storing/finding style strategies associated with an class/object.
-*/
+ * The metadata key for storing/finding style strategies associated with an class/object.
+ */
 StyleLocator.styleStrategyMetadataKey = 'aurelia:style-strategy';

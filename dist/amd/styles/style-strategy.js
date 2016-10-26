@@ -7,8 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 define(["require", "exports", 'aurelia-metadata', 'aurelia-pal', 'aurelia-path', './style-compiler', 'aurelia-loader'], function (require, exports, aurelia_metadata_1, aurelia_pal_1, aurelia_path_1, style_compiler_1, aurelia_loader_1) {
     "use strict";
     /**
-    * Decorator: Indicates that the decorated class/object is a style strategy.
-    */
+     * Decorator: Indicates that the decorated class/object is a style strategy.
+     */
     exports.styleStrategy = aurelia_metadata_1.protocol.create('aurelia:style-strategy', {
         validate: function (target) {
             if (!(typeof target.loadStyleFactory === 'function')) {
@@ -27,7 +27,7 @@ define(["require", "exports", 'aurelia-metadata', 'aurelia-pal', 'aurelia-path',
         if (typeof css !== 'string') {
             throw new Error("Failed loading required CSS file: " + address);
         }
-        return css.replace(cssUrlMatcher, function (match, p1) {
+        return css.replace(cssUrlMatcher, function (_, p1) {
             var quote = p1.charAt(0);
             if (quote === '\'' || quote === '"') {
                 p1 = p1.substr(1, p1.length - 2);
@@ -36,20 +36,20 @@ define(["require", "exports", 'aurelia-metadata', 'aurelia-pal', 'aurelia-path',
         });
     }
     /**
-    * A style strategy that loads a style relative to its associated view-model.
-    */
+     * A style strategy that loads a style relative to its associated view-model.
+     */
     var RelativeStyleStrategy = (function () {
         /**
-        * Creates an instance of RelativeStyleStrategy.
-        * @param path The relative path to the styles.
-        */
+         * Creates an instance of RelativeStyleStrategy.
+         * @param path The relative path to the styles.
+         */
         function RelativeStyleStrategy(path) {
             this.path = path;
             this.absolutePath = null;
         }
         /**
-        * Loads a style factory.
-        */
+         * Loads a style factory.
+         */
         RelativeStyleStrategy.prototype.loadStyleFactory = function (container, styleObjectType) {
             var _this = this;
             if (this.absolutePath === null && this.moduleId) {
@@ -58,7 +58,7 @@ define(["require", "exports", 'aurelia-metadata', 'aurelia-pal', 'aurelia-path',
             var styleUrl = this.absolutePath || this.path;
             return container.get(aurelia_loader_1.Loader)
                 .loadText(styleUrl)
-                .catch(function (err) { return null; })
+                .catch(function () { return null; })
                 .then(function (text) {
                 text = fixupCSSUrls(styleUrl, text);
                 _this.css = text;
@@ -67,9 +67,9 @@ define(["require", "exports", 'aurelia-metadata', 'aurelia-pal', 'aurelia-path',
             });
         };
         /**
-        * Makes the view loaded by this strategy relative to the provided file path.
-        * @param file The path to load the view relative to.
-        */
+         * Makes the view loaded by this strategy relative to the provided file path.
+         * @param file The path to load the view relative to.
+         */
         RelativeStyleStrategy.prototype.makeRelativeTo = function (file) {
             if (this.absolutePath === null) {
                 this.absolutePath = aurelia_path_1.relativeToFile(this.path, file);
@@ -82,26 +82,26 @@ define(["require", "exports", 'aurelia-metadata', 'aurelia-pal', 'aurelia-path',
     }());
     exports.RelativeStyleStrategy = RelativeStyleStrategy;
     /**
-    * A styles strategy based on naming conventions.
-    */
+     * A styles strategy based on naming conventions.
+     */
     var ConventionalStyleStrategy = (function () {
         /**
-        * Creates an instance of ConventionalStyleStrategy.
-        * @param viewLocator The view locator service for conventionally locating the view.
-        * @param origin The origin of the view model to conventionally load the view for.
-        */
+         * Creates an instance of ConventionalStyleStrategy.
+         * @param viewLocator The view locator service for conventionally locating the view.
+         * @param origin The origin of the view model to conventionally load the view for.
+         */
         function ConventionalStyleStrategy(styleLocator, origin) {
             this.moduleId = origin.moduleId;
             this.styleUrl = styleLocator.convertOriginToStyleUrl(origin);
         }
         /**
-        * Loads a style factory.
-        */
+         * Loads a style factory.
+         */
         ConventionalStyleStrategy.prototype.loadStyleFactory = function (container, styleObjectType) {
             var _this = this;
             return container.get(aurelia_loader_1.Loader)
                 .loadText(this.styleUrl)
-                .catch(function (err) { return null; })
+                .catch(function () { return null; })
                 .then(function (text) {
                 text = fixupCSSUrls(_this.styleUrl, text);
                 _this.css = text;
@@ -116,18 +116,18 @@ define(["require", "exports", 'aurelia-metadata', 'aurelia-pal', 'aurelia-path',
     }());
     exports.ConventionalStyleStrategy = ConventionalStyleStrategy;
     /**
-    * A styles strategy that allows the component author to inline css.
-    */
+     * A styles strategy that allows the component author to inline css.
+     */
     var InlineStyleStrategy = (function () {
         /**
-        * Creates an instance of InlineStyleStrategy.
-        */
+         * Creates an instance of InlineStyleStrategy.
+         */
         function InlineStyleStrategy(css) {
             this.css = css;
         }
         /**
-        * Loads a style factory.
-        */
+         * Loads a style factory.
+         */
         InlineStyleStrategy.prototype.loadStyleFactory = function (container, styleObjectType) {
             this.transformedCSS = fixupCSSUrls(this.moduleId, this.css);
             var compiler = container.get(style_compiler_1.StyleCompiler);

@@ -5,13 +5,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { inject } from 'aurelia-dependency-injection';
-import { iOSDesign } from '../designs/ios-design';
-export let iOS = class iOS {
+import { IOSDesign } from '../designs/ios-design';
+export let IOS = class IOS {
     constructor(design) {
         this.design = design;
         this.type = 'ios';
     }
 };
-iOS = __decorate([
-    inject(iOSDesign)
-], iOS);
+IOS = __decorate([
+    inject(IOSDesign)
+], IOS);

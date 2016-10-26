@@ -6,20 +6,17 @@ const classMatcher = /styles.([A-Za-z1-9]+)/g;
 
 @inject(BindingLanguage, ViewResources)
 export class StyleCompiler {
-  constructor(
-    private bindingLanguage: BindingLanguage,
-    private viewResources: ViewResources
-    ) {}
+  constructor(private bindingLanguage: BindingLanguage, private viewResources: ViewResources) {}
 
-  compile(styleObjectType: Function, css: string) {
+  public compile(styleObjectType: Function, css: string): StyleFactory {
     let styles = Object.create(null);
-    let transformed = css.replace(classMatcher, function(str: string) {
-      let name = arguments[1];
+    let transformed = css.replace(classMatcher, (_: string, capture: string) => {
+      let name = capture;
       styles[name] = true;
       return '.${$styles.' + name + ' & oneTime}';
     });
 
-    let expression = this.bindingLanguage.inspectTextContent(
+    let expression = <any>this.bindingLanguage.inspectTextContent(
       this.viewResources,
       transformed
     );
