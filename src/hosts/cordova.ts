@@ -1,6 +1,7 @@
 import {Host} from './host';
 import {Container, inject} from 'aurelia-dependency-injection';
 import {DOM, PLATFORM} from 'aurelia-pal';
+import {Platform} from '../platforms/platform';
 import {IOS} from '../platforms/ios';
 import {Android} from '../platforms/android';
 
@@ -14,7 +15,7 @@ export class Cordova implements Host {
     return !!PLATFORM.global.cordova;
   }
 
-  public start() {
+  public start(): Promise<Platform> {
     return new Promise((resolve) => {
       DOM.addEventListener('deviceready', () => {
 
