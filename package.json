@@ -29,8 +29,8 @@
     "build:compile": "concurrently \"node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/amd\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/commonjs --module commonjs\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/native-modules --module es2015\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/system --module system\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/es2015 --target es2015 --module es2015\" || true",
     "build": "npm run build:compile",
     "postbuild": "npm run build:doc",
-    "prebuild:doc": "rimraf 'doc/api.json' && rimraf 'dist/doc-temp/**' && cross-env ./node_modules/.bin/tsc --project tsconfig.build.json --outFile dist/doc-temp/aurelia-validation.js && node doc/shape-defs",
-    "build:doc": "cross-env ./node_modules/.bin/typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-validation-docs --ignoreCompilerErrors --tsconfig doc/tsconfig.json dist/doc-temp/",
+    "prebuild:doc": "rimraf 'doc/api.json' && rimraf 'dist/doc-temp/**' && cross-env ./node_modules/.bin/tsc --project tsconfig.build.json --outFile dist/doc-temp/aurelia-xp.js && node doc/shape-defs",
+    "build:doc": "cross-env ./node_modules/.bin/typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-xp-docs --ignoreCompilerErrors --tsconfig doc/tsconfig.json dist/doc-temp/",
     "postbuild:doc": "concurrently \"node doc/shape-doc\" \"rimraf 'dist/doc-temp/**'\""
   },
   "jspm": {

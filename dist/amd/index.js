@@ -1,6 +1,5 @@
-define(["require", "exports", './aurelia-xp', './aurelia-xp'], function (require, exports, aurelia_xp_1, aurelia_xp_2) {
+define(["require", "exports", './aurelia-xp'], function (require, exports, aurelia_xp_1) {
     "use strict";
-    exports.AureliaXP = aurelia_xp_2.AureliaXP;
     function configure(config, callback) {
         config.globalResources([
             './button/xp-button'

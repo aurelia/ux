@@ -20,9 +20,6 @@ System.register(['./aurelia-xp'], function(exports_1, context_1) {
         setters:[
             function (aurelia_xp_1_1) {
                 aurelia_xp_1 = aurelia_xp_1_1;
-                exports_1({
-                    "AureliaXP": aurelia_xp_1_1["AureliaXP"]
-                });
             }],
         execute: function() {
         }

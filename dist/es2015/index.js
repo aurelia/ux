@@ -1,5 +1,4 @@
 import { AureliaXP } from './aurelia-xp';
-export { AureliaXP } from './aurelia-xp';
 export function configure(config, callback) {
     config.globalResources([
         './button/xp-button'

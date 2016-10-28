@@ -1,7 +1,5 @@
 "use strict";
 var aurelia_xp_1 = require('./aurelia-xp');
-var aurelia_xp_2 = require('./aurelia-xp');
-exports.AureliaXP = aurelia_xp_2.AureliaXP;
 function configure(config, callback) {
     config.globalResources([
         './button/xp-button'
