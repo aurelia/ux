@@ -39,7 +39,7 @@ export class XpConfiguration {
       if (info.attrName === 'styles') {
         info.attrName = 'class';
         info.attrValue = '$styles.' + info.command;
-        return this['one-time'](resources, element, info, existingInstruction, context);
+        return this['one-way'](resources, element, info, existingInstruction, context);
       } else {
         return original.call(this, resources, element, info, existingInstruction, context);
       }
