@@ -6,5 +6,5 @@ export declare class Web implements Host, Platform {
     type: string;
     isAvailable: boolean;
     constructor(design: MaterialDesign);
-    start(): Promise<this>;
+    start(): Promise<Platform>;
 }
