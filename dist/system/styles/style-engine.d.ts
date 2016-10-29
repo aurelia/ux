@@ -10,4 +10,5 @@ export declare class StyleEngine {
     private taskQueue;
     constructor(container: Container, taskQueue: TaskQueue);
     applyTheme(themable: Themable, theme: string | Object): void;
+    renderingInShadowDOM(view: View): boolean;
 }

@@ -36,11 +36,22 @@ var StyleEngine = (function () {
             else {
                 bindingContext = theme;
             }
-            newController = currentController.factory.create(_this.container, null, bindingContext);
-            currentController.unbind();
-            themable.view[name] = newController;
-            newController.bind(themable.view);
+            if (_this.renderingInShadowDOM(themable.view)) {
+                currentController.unbind();
+                currentController.bindingContext = bindingContext;
+                currentController.bind(themable.view);
+            }
+            else {
+                newController = currentController.factory.create(_this.container, null, bindingContext);
+                currentController.unbind();
+                themable.view[name] = newController;
+                newController.bind(themable.view);
+            }
         });
+    };
+    StyleEngine.prototype.renderingInShadowDOM = function (view) {
+        var behavior = aurelia_metadata_1.metadata.get(aurelia_metadata_1.metadata.resource, view.bindingContext.constructor);
+        return behavior.usesShadowDOM;
     };
     StyleEngine = __decorate([
         aurelia_dependency_injection_1.inject(aurelia_dependency_injection_1.Container, aurelia_task_queue_1.TaskQueue)

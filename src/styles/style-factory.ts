@@ -38,7 +38,7 @@ export class StyleFactory {
 
     return new StyleController(
       this,
-      bindingContext, 
+      bindingContext,
       new StyleOverrideContext(xp, $styles),
       this.expression,
       destination

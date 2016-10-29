@@ -1,5 +1,5 @@
 import {ViewResources, View} from 'aurelia-templating';
-import {Origin} from 'aurelia-metadata';
+import {Origin, metadata} from 'aurelia-metadata';
 import {camelCase} from 'aurelia-binding';
 import {TaskQueue} from 'aurelia-task-queue';
 import {inject, Container} from 'aurelia-dependency-injection';
@@ -38,15 +38,26 @@ export class StyleEngine {
         bindingContext = theme;
       }
 
-      newController = currentController.factory.create(
-          this.container,
-          null,
-          bindingContext
-        );
+      if (this.renderingInShadowDOM(themable.view)) {
+        currentController.unbind();
+        currentController.bindingContext = bindingContext;
+        currentController.bind(themable.view);
+      } else {
+        newController = currentController.factory.create(
+            this.container,
+            null,
+            bindingContext
+          );
 
-      currentController.unbind();
-      (<any>themable.view)[name] = newController;
-      newController.bind(themable.view);
+        currentController.unbind();
+        (<any>themable.view)[name] = newController;
+        newController.bind(themable.view);
+      }
     });
+  }
+
+  public renderingInShadowDOM(view: View): boolean {
+    let behavior = <any>metadata.get(metadata.resource, view.bindingContext.constructor);
+    return behavior.usesShadowDOM;
   }
 }

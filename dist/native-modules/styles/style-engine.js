@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { Origin } from 'aurelia-metadata';
+import { Origin, metadata } from 'aurelia-metadata';
 import { camelCase } from 'aurelia-binding';
 import { TaskQueue } from 'aurelia-task-queue';
 import { inject, Container } from 'aurelia-dependency-injection';
@@ -35,11 +35,22 @@ export var StyleEngine = (function () {
             else {
                 bindingContext = theme;
             }
-            newController = currentController.factory.create(_this.container, null, bindingContext);
-            currentController.unbind();
-            themable.view[name] = newController;
-            newController.bind(themable.view);
+            if (_this.renderingInShadowDOM(themable.view)) {
+                currentController.unbind();
+                currentController.bindingContext = bindingContext;
+                currentController.bind(themable.view);
+            }
+            else {
+                newController = currentController.factory.create(_this.container, null, bindingContext);
+                currentController.unbind();
+                themable.view[name] = newController;
+                newController.bind(themable.view);
+            }
         });
+    };
+    StyleEngine.prototype.renderingInShadowDOM = function (view) {
+        var behavior = metadata.get(metadata.resource, view.bindingContext.constructor);
+        return behavior.usesShadowDOM;
     };
     StyleEngine = __decorate([
         inject(Container, TaskQueue)
