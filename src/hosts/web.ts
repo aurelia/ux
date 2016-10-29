@@ -10,7 +10,7 @@ export class Web implements Host, Platform {
 
   constructor(public design: MaterialDesign) {}
 
-  public start() {
+  public start(): Promise<Platform> {
     return Promise.resolve().then(() => this);
   }
 }
