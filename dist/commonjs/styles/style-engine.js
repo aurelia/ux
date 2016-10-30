@@ -9,6 +9,7 @@ var aurelia_metadata_1 = require('aurelia-metadata');
 var aurelia_binding_1 = require('aurelia-binding');
 var aurelia_task_queue_1 = require('aurelia-task-queue');
 var aurelia_dependency_injection_1 = require('aurelia-dependency-injection');
+var aurelia_pal_1 = require('aurelia-pal');
 var StyleEngine = (function () {
     function StyleEngine(container, taskQueue) {
         this.container = container;
@@ -48,6 +49,17 @@ var StyleEngine = (function () {
                 newController.bind(themable.view);
             }
         });
+    };
+    StyleEngine.prototype.getOrCreateStlyeController = function (view, factory) {
+        var controller = view[factory.id];
+        if (controller === undefined) {
+            if (this.renderingInShadowDOM(view)) {
+                var destination = view.container.get(aurelia_pal_1.DOM.boundary);
+                view[factory.id] = controller = factory.create(view.container, destination);
+            }
+            view[factory.id] = controller = factory.getOrCreateDefault(this.container);
+        }
+        return controller;
     };
     StyleEngine.prototype.renderingInShadowDOM = function (view) {
         var behavior = aurelia_metadata_1.metadata.get(aurelia_metadata_1.metadata.resource, view.bindingContext.constructor);

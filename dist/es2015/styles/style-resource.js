@@ -1,12 +1,11 @@
 import { Origin } from 'aurelia-metadata';
 import { StyleLocator } from './style-locator';
-import { DOM } from 'aurelia-pal';
-import { metadata } from 'aurelia-metadata';
+import { StyleEngine } from './style-engine';
 export class StyleResource {
     initialize(container, target) {
         this.styleObjectType = target;
         this.container = container;
-        this.hooks = new StyleViewEngineHooks(this);
+        this.hooks = new StyleViewEngineHooks(container.get(StyleEngine));
     }
     register(registry) {
         registry.registerViewEngineHooks(this.hooks);
@@ -25,28 +24,13 @@ export class StyleResource {
     }
 }
 class StyleViewEngineHooks {
-    constructor(owner) {
-        this.owner = owner;
+    constructor(engine) {
+        this.engine = engine;
     }
     beforeBind(view) {
-        this.locateController(view).bind(view);
+        this.engine.getOrCreateStlyeController(view, this.factory).bind(view);
     }
     beforeUnbind(view) {
-        this.locateController(view).unbind();
+        this.engine.getOrCreateStlyeController(view, this.factory).unbind();
     }
-    locateController(view) {
-        let controller = view[this.factory.id];
-        if (controller === undefined) {
-            if (injectIntoShadowDOM(view)) {
-                let destination = view.container.get(DOM.Element);
-                view[this.factory.id] = controller = this.factory.create(view.container, destination);
-            }
-            view[this.factory.id] = controller = this.factory.getOrCreateDefault(this.owner.container);
-        }
-        return controller;
-    }
-}
-function injectIntoShadowDOM(view) {
-    let behavior = metadata.get(metadata.resource, view.bindingContext.constructor);
-    return behavior.usesShadowDOM;
 }

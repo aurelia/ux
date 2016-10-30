@@ -4,6 +4,8 @@ import {camelCase} from 'aurelia-binding';
 import {TaskQueue} from 'aurelia-task-queue';
 import {inject, Container} from 'aurelia-dependency-injection';
 import {StyleController} from './style-controller';
+import {DOM} from 'aurelia-pal';
+import {StyleFactory} from './style-factory';
 
 export interface Themable {
   resources: ViewResources;
@@ -54,6 +56,21 @@ export class StyleEngine {
         newController.bind(themable.view);
       }
     });
+  }
+
+  public getOrCreateStlyeController(view: View, factory: StyleFactory): StyleController {
+    let controller = (<any>view)[factory.id];
+
+    if (controller === undefined) {
+      if (this.renderingInShadowDOM(view)) {
+        let destination = view.container.get(DOM.boundary);
+        (<any>view)[factory.id] = controller = factory.create(view.container, destination);
+      }
+
+      (<any>view)[factory.id] = controller = factory.getOrCreateDefault(this.container);
+    }
+
+    return controller;
   }
 
   public renderingInShadowDOM(view: View): boolean {

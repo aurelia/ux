@@ -8,6 +8,7 @@ import { Origin, metadata } from 'aurelia-metadata';
 import { camelCase } from 'aurelia-binding';
 import { TaskQueue } from 'aurelia-task-queue';
 import { inject, Container } from 'aurelia-dependency-injection';
+import { DOM } from 'aurelia-pal';
 export let StyleEngine = class StyleEngine {
     constructor(container, taskQueue) {
         this.container = container;
@@ -46,6 +47,17 @@ export let StyleEngine = class StyleEngine {
                 newController.bind(themable.view);
             }
         });
+    }
+    getOrCreateStlyeController(view, factory) {
+        let controller = view[factory.id];
+        if (controller === undefined) {
+            if (this.renderingInShadowDOM(view)) {
+                let destination = view.container.get(DOM.boundary);
+                view[factory.id] = controller = factory.create(view.container, destination);
+            }
+            view[factory.id] = controller = factory.getOrCreateDefault(this.container);
+        }
+        return controller;
     }
     renderingInShadowDOM(view) {
         let behavior = metadata.get(metadata.resource, view.bindingContext.constructor);

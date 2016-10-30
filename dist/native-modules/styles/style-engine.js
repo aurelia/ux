@@ -8,6 +8,7 @@ import { Origin, metadata } from 'aurelia-metadata';
 import { camelCase } from 'aurelia-binding';
 import { TaskQueue } from 'aurelia-task-queue';
 import { inject, Container } from 'aurelia-dependency-injection';
+import { DOM } from 'aurelia-pal';
 export var StyleEngine = (function () {
     function StyleEngine(container, taskQueue) {
         this.container = container;
@@ -47,6 +48,17 @@ export var StyleEngine = (function () {
                 newController.bind(themable.view);
             }
         });
+    };
+    StyleEngine.prototype.getOrCreateStlyeController = function (view, factory) {
+        var controller = view[factory.id];
+        if (controller === undefined) {
+            if (this.renderingInShadowDOM(view)) {
+                var destination = view.container.get(DOM.boundary);
+                view[factory.id] = controller = factory.create(view.container, destination);
+            }
+            view[factory.id] = controller = factory.getOrCreateDefault(this.container);
+        }
+        return controller;
     };
     StyleEngine.prototype.renderingInShadowDOM = function (view) {
         var behavior = metadata.get(metadata.resource, view.bindingContext.constructor);

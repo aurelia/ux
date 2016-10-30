@@ -1,4 +1,4 @@
-define(["require", "exports", 'aurelia-metadata', './style-locator', 'aurelia-pal', 'aurelia-metadata'], function (require, exports, aurelia_metadata_1, style_locator_1, aurelia_pal_1, aurelia_metadata_2) {
+define(["require", "exports", 'aurelia-metadata', './style-locator', './style-engine'], function (require, exports, aurelia_metadata_1, style_locator_1, style_engine_1) {
     "use strict";
     var StyleResource = (function () {
         function StyleResource() {
@@ -6,7 +6,7 @@ define(["require", "exports", 'aurelia-metadata', './style-locator', 'aurelia-pa
         StyleResource.prototype.initialize = function (container, target) {
             this.styleObjectType = target;
             this.container = container;
-            this.hooks = new StyleViewEngineHooks(this);
+            this.hooks = new StyleViewEngineHooks(container.get(style_engine_1.StyleEngine));
         };
         StyleResource.prototype.register = function (registry) {
             registry.registerViewEngineHooks(this.hooks);
@@ -28,30 +28,15 @@ define(["require", "exports", 'aurelia-metadata', './style-locator', 'aurelia-pa
     }());
     exports.StyleResource = StyleResource;
     var StyleViewEngineHooks = (function () {
-        function StyleViewEngineHooks(owner) {
-            this.owner = owner;
+        function StyleViewEngineHooks(engine) {
+            this.engine = engine;
         }
         StyleViewEngineHooks.prototype.beforeBind = function (view) {
-            this.locateController(view).bind(view);
+            this.engine.getOrCreateStlyeController(view, this.factory).bind(view);
         };
         StyleViewEngineHooks.prototype.beforeUnbind = function (view) {
-            this.locateController(view).unbind();
-        };
-        StyleViewEngineHooks.prototype.locateController = function (view) {
-            var controller = view[this.factory.id];
-            if (controller === undefined) {
-                if (injectIntoShadowDOM(view)) {
-                    var destination = view.container.get(aurelia_pal_1.DOM.Element);
-                    view[this.factory.id] = controller = this.factory.create(view.container, destination);
-                }
-                view[this.factory.id] = controller = this.factory.getOrCreateDefault(this.owner.container);
-            }
-            return controller;
+            this.engine.getOrCreateStlyeController(view, this.factory).unbind();
         };
         return StyleViewEngineHooks;
     }());
-    function injectIntoShadowDOM(view) {
-        var behavior = aurelia_metadata_2.metadata.get(aurelia_metadata_2.metadata.resource, view.bindingContext.constructor);
-        return behavior.usesShadowDOM;
-    }
 });

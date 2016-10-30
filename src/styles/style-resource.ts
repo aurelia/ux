@@ -3,8 +3,7 @@ import {ViewResources, View} from 'aurelia-templating';
 import {Container} from 'aurelia-dependency-injection';
 import {StyleFactory} from './style-factory';
 import {StyleLocator} from './style-locator';
-import {DOM} from 'aurelia-pal';
-import {metadata} from 'aurelia-metadata';
+import {StyleEngine} from './style-engine';
 
 export class StyleResource {
   public styleObjectType: Function;
@@ -17,7 +16,7 @@ export class StyleResource {
   public initialize(container: Container, target: Function): void {
     this.styleObjectType = target;
     this.container = container;
-    this.hooks = new StyleViewEngineHooks(this);
+    this.hooks = new StyleViewEngineHooks(container.get(StyleEngine));
   }
 
   public register(registry: ViewResources): void {
@@ -43,33 +42,13 @@ export class StyleResource {
 class StyleViewEngineHooks {
   public factory: StyleFactory;
 
-  constructor(private owner: StyleResource) {}
+  constructor(private engine: StyleEngine) {}
 
   public beforeBind(view: View) {
-    this.locateController(view).bind(view);
+    this.engine.getOrCreateStlyeController(view, this.factory).bind(view);
   }
 
   public beforeUnbind(view: View) {
-    this.locateController(view).unbind();
+    this.engine.getOrCreateStlyeController(view, this.factory).unbind();
   }
-
-  public locateController(view: any) {
-    let controller = view[this.factory.id];
-
-    if (controller === undefined) {
-      if (injectIntoShadowDOM(view)) {
-        let destination = view.container.get(DOM.Element);
-        view[this.factory.id] = controller = this.factory.create(view.container, destination);
-      }
-
-      view[this.factory.id] = controller = this.factory.getOrCreateDefault(this.owner.container);
-    }
-
-    return controller;
-  }
-}
-
-function injectIntoShadowDOM(view: View) {
-  let behavior = <any>metadata.get(metadata.resource, view.bindingContext.constructor);
-  return behavior.usesShadowDOM;
 }
