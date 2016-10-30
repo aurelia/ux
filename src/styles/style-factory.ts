@@ -3,6 +3,7 @@ import {AureliaXP} from '../aurelia-xp';
 import {computedFrom, camelCase} from 'aurelia-binding';
 import {Container} from 'aurelia-dependency-injection';
 import {Origin} from 'aurelia-metadata';
+import {swatches} from '../colors/swatches';
 
 export class StyleFactory {
   public id: string;
@@ -59,6 +60,7 @@ function nextNumber() {
 class StyleOverrideContext {
   public $on = '(min-width: 0)';
   public $off = '(max-width: 0)';
+  public $swatches = swatches;
 
   constructor(public $xp: AureliaXP, public $styles: any) {}
 
