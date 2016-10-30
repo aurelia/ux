@@ -34,14 +34,13 @@ export class XpConfiguration {
     let proto = <any>SyntaxInterpreter.prototype;
     let original = proto.handleUnknownCommand;
 
-    proto.handleUnknownCommand = function(resources: ViewResources,
-      element: Element,info: any, existingInstruction?: any, context?: any) {
-      if (info.attrName === 'styles') {
-        info.attrName = 'class';
-        info.attrValue = '$styles.' + info.command;
-        return this['one-way'](resources, element, info, existingInstruction, context);
+    proto.handleUnknownCommand = function(r: ViewResources, e: Element, i: any, ei?: any, c?: any) {
+      if (i.attrName === 'styles') {
+        i.attrName = 'class';
+        i.attrValue = '$styles.' + i.command;
+        return this['one-way'](r, e, i, ei, c);
       } else {
-        return original.call(this, resources, element, info, existingInstruction, context);
+        return original.call(this, r, e, i, ei, c);
       }
     };
 

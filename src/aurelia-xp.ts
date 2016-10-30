@@ -14,7 +14,7 @@ export class AureliaXP {
   @observable public platform: Platform;
   @observable public design: Design;
 
-  constructor(public use: XpConfiguration, container: Container){
+  constructor(public use: XpConfiguration, container: Container) {
     this.availableHosts = [
       container.get(Cordova),
       container.get(Web)

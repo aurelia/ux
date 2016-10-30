@@ -19,7 +19,7 @@ export class Cordova implements Host {
     return new Promise((resolve) => {
       DOM.addEventListener('deviceready', () => {
 
-        switch(this.getPlatformType()) {
+        switch (this.getPlatformType()) {
           case 'ios':
             resolve(this.container.get(IOS));
             break;

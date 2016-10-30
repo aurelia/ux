@@ -35,14 +35,14 @@ export var XpConfiguration = (function () {
     XpConfiguration.prototype.commandHandler = function () {
         var proto = SyntaxInterpreter.prototype;
         var original = proto.handleUnknownCommand;
-        proto.handleUnknownCommand = function (resources, element, info, existingInstruction, context) {
-            if (info.attrName === 'styles') {
-                info.attrName = 'class';
-                info.attrValue = '$styles.' + info.command;
-                return this['one-way'](resources, element, info, existingInstruction, context);
+        proto.handleUnknownCommand = function (r, e, i, ei, c) {
+            if (i.attrName === 'styles') {
+                i.attrName = 'class';
+                i.attrValue = '$styles.' + i.command;
+                return this['one-way'](r, e, i, ei, c);
             }
             else {
-                return original.call(this, resources, element, info, existingInstruction, context);
+                return original.call(this, r, e, i, ei, c);
             }
         };
         return this;
