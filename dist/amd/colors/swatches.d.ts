@@ -15,8 +15,6 @@ export interface Swatch {
     a700: string;
 }
 export declare const swatches: {
-    black: string;
-    white: string;
     red: {
         p50: string;
         p100: string;
@@ -309,4 +307,6 @@ export declare const swatches: {
         p800: string;
         p900: string;
     };
+    black: string;
+    white: string;
 };
