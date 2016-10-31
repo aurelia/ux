@@ -14,6 +14,7 @@ export declare const styleStrategy: Function;
  * A style strategy that loads a style relative to its associated view-model.
  */
 export declare class RelativeStyleStrategy implements StyleStrategy {
+    private pathOrDesignMap;
     private path;
     private absolutePath;
     private css;
@@ -22,7 +23,7 @@ export declare class RelativeStyleStrategy implements StyleStrategy {
      * Creates an instance of RelativeStyleStrategy.
      * @param path The relative path to the styles.
      */
-    constructor(path: string);
+    constructor(pathOrDesignMap: string | any);
     /**
      * Loads a style factory.
      */
@@ -55,13 +56,13 @@ export declare class ConventionalStyleStrategy implements StyleStrategy {
  * A styles strategy that allows the component author to inline css.
  */
 export declare class InlineStyleStrategy implements StyleStrategy {
-    private css;
+    private cssOrDesignMap;
     moduleId: string;
     private transformedCSS;
     /**
      * Creates an instance of InlineStyleStrategy.
      */
-    constructor(css: string);
+    constructor(cssOrDesignMap: string | any);
     /**
      * Loads a style factory.
      */

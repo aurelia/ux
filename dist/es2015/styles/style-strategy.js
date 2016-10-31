@@ -4,11 +4,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { protocol } from 'aurelia-metadata';
+import { protocol, Origin } from 'aurelia-metadata';
 import { PLATFORM } from 'aurelia-pal';
+import { StyleLocator } from './style-locator';
 import { relativeToFile } from 'aurelia-path';
 import { StyleCompiler } from './style-compiler';
 import { Loader } from 'aurelia-loader';
+import { AureliaXP } from '../aurelia-xp';
 /**
  * Decorator: Indicates that the decorated class/object is a style strategy.
  */
@@ -46,8 +48,8 @@ export let RelativeStyleStrategy = class RelativeStyleStrategy {
      * Creates an instance of RelativeStyleStrategy.
      * @param path The relative path to the styles.
      */
-    constructor(path) {
-        this.path = path;
+    constructor(pathOrDesignMap) {
+        this.pathOrDesignMap = pathOrDesignMap;
         this.absolutePath = null;
     }
     /**
@@ -55,9 +57,16 @@ export let RelativeStyleStrategy = class RelativeStyleStrategy {
      */
     loadStyleFactory(container, styleObjectType) {
         if (this.absolutePath === null && this.moduleId) {
-            this.absolutePath = relativeToFile(this.path, this.moduleId);
+            let path = resolveForDesign(this.pathOrDesignMap, container);
+            if (!path) {
+                this.absolutePath = container.get(StyleLocator)
+                    .convertOriginToStyleUrl(new Origin(this.moduleId, 'default'));
+            }
+            else {
+                this.absolutePath = relativeToFile(path, this.moduleId);
+            }
         }
-        let styleUrl = this.absolutePath || this.path;
+        let styleUrl = this.absolutePath || resolveForDesign(this.pathOrDesignMap, container);
         return container.get(Loader)
             .loadText(styleUrl)
             .catch(() => null)
@@ -119,14 +128,15 @@ export let InlineStyleStrategy = class InlineStyleStrategy {
     /**
      * Creates an instance of InlineStyleStrategy.
      */
-    constructor(css) {
-        this.css = css;
+    constructor(cssOrDesignMap) {
+        this.cssOrDesignMap = cssOrDesignMap;
     }
     /**
      * Loads a style factory.
      */
     loadStyleFactory(container, styleObjectType) {
-        this.transformedCSS = fixupCSSUrls(this.moduleId, this.css);
+        let css = resolveForDesign(this.cssOrDesignMap, container);
+        this.transformedCSS = fixupCSSUrls(this.moduleId, css);
         let compiler = container.get(StyleCompiler);
         return Promise.resolve(compiler.compile(styleObjectType, this.transformedCSS));
     }
@@ -134,3 +144,12 @@ export let InlineStyleStrategy = class InlineStyleStrategy {
 InlineStyleStrategy = __decorate([
     styleStrategy()
 ], InlineStyleStrategy);
+function resolveForDesign(valueOrDesignMap, container) {
+    if (typeof valueOrDesignMap === 'string') {
+        return valueOrDesignMap;
+    }
+    else {
+        let designType = container.get(AureliaXP).design.type;
+        return valueOrDesignMap[designType];
+    }
+}

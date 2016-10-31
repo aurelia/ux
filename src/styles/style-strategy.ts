@@ -6,6 +6,7 @@ import {relativeToFile} from 'aurelia-path';
 import {Container} from 'aurelia-dependency-injection';
 import {StyleCompiler} from './style-compiler';
 import {Loader} from 'aurelia-loader';
+import {AureliaXP} from '../aurelia-xp';
 
 export interface StyleStrategy {
   moduleId?: string;
@@ -62,8 +63,7 @@ export class RelativeStyleStrategy implements StyleStrategy {
    * Creates an instance of RelativeStyleStrategy.
    * @param path The relative path to the styles.
    */
-  constructor(path: string) {
-    this.path = path;
+  constructor(private pathOrDesignMap: string | any) {
     this.absolutePath = null;
   }
 
@@ -72,10 +72,17 @@ export class RelativeStyleStrategy implements StyleStrategy {
    */
   public loadStyleFactory(container: Container, styleObjectType: Function): Promise<StyleFactory> {
     if (this.absolutePath === null && this.moduleId) {
-      this.absolutePath = relativeToFile(this.path, this.moduleId);
+      let path = resolveForDesign(this.pathOrDesignMap, container);
+
+      if (!path) {
+        this.absolutePath = (<StyleLocator>container.get(StyleLocator))
+          .convertOriginToStyleUrl(new Origin(this.moduleId, 'default'));
+      } else {
+        this.absolutePath = relativeToFile(path, this.moduleId);
+      }
     }
 
-    let styleUrl = this.absolutePath || this.path;
+    let styleUrl = this.absolutePath || resolveForDesign(this.pathOrDesignMap, container);
 
     return container.get(Loader)
       .loadText(styleUrl)
@@ -145,14 +152,24 @@ export class InlineStyleStrategy implements StyleStrategy {
   /**
    * Creates an instance of InlineStyleStrategy.
    */
-  constructor(private css: string) {}
+  constructor(private cssOrDesignMap: string | any) {}
 
   /**
    * Loads a style factory.
    */
   public loadStyleFactory(container: Container, styleObjectType: Function): Promise<StyleFactory> {
-    this.transformedCSS = fixupCSSUrls(this.moduleId, this.css);
+    let css = resolveForDesign(this.cssOrDesignMap, container);
+    this.transformedCSS = fixupCSSUrls(this.moduleId, css);
     let compiler = <StyleCompiler>container.get(StyleCompiler);
     return Promise.resolve(compiler.compile(styleObjectType, this.transformedCSS));
+  }
+}
+
+function resolveForDesign(valueOrDesignMap: string | any, container: Container): string {
+  if (typeof valueOrDesignMap === 'string') {
+    return valueOrDesignMap;
+  } else {
+    let designType = (<AureliaXP>container.get(AureliaXP)).design.type;
+    return valueOrDesignMap[designType];
   }
 }

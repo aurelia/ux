@@ -7,9 +7,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var aurelia_metadata_1 = require('aurelia-metadata');
 var aurelia_pal_1 = require('aurelia-pal');
+var style_locator_1 = require('./style-locator');
 var aurelia_path_1 = require('aurelia-path');
 var style_compiler_1 = require('./style-compiler');
 var aurelia_loader_1 = require('aurelia-loader');
+var aurelia_xp_1 = require('../aurelia-xp');
 /**
  * Decorator: Indicates that the decorated class/object is a style strategy.
  */
@@ -47,8 +49,8 @@ var RelativeStyleStrategy = (function () {
      * Creates an instance of RelativeStyleStrategy.
      * @param path The relative path to the styles.
      */
-    function RelativeStyleStrategy(path) {
-        this.path = path;
+    function RelativeStyleStrategy(pathOrDesignMap) {
+        this.pathOrDesignMap = pathOrDesignMap;
         this.absolutePath = null;
     }
     /**
@@ -57,9 +59,16 @@ var RelativeStyleStrategy = (function () {
     RelativeStyleStrategy.prototype.loadStyleFactory = function (container, styleObjectType) {
         var _this = this;
         if (this.absolutePath === null && this.moduleId) {
-            this.absolutePath = aurelia_path_1.relativeToFile(this.path, this.moduleId);
+            var path = resolveForDesign(this.pathOrDesignMap, container);
+            if (!path) {
+                this.absolutePath = container.get(style_locator_1.StyleLocator)
+                    .convertOriginToStyleUrl(new aurelia_metadata_1.Origin(this.moduleId, 'default'));
+            }
+            else {
+                this.absolutePath = aurelia_path_1.relativeToFile(path, this.moduleId);
+            }
         }
-        var styleUrl = this.absolutePath || this.path;
+        var styleUrl = this.absolutePath || resolveForDesign(this.pathOrDesignMap, container);
         return container.get(aurelia_loader_1.Loader)
             .loadText(styleUrl)
             .catch(function () { return null; })
@@ -126,14 +135,15 @@ var InlineStyleStrategy = (function () {
     /**
      * Creates an instance of InlineStyleStrategy.
      */
-    function InlineStyleStrategy(css) {
-        this.css = css;
+    function InlineStyleStrategy(cssOrDesignMap) {
+        this.cssOrDesignMap = cssOrDesignMap;
     }
     /**
      * Loads a style factory.
      */
     InlineStyleStrategy.prototype.loadStyleFactory = function (container, styleObjectType) {
-        this.transformedCSS = fixupCSSUrls(this.moduleId, this.css);
+        var css = resolveForDesign(this.cssOrDesignMap, container);
+        this.transformedCSS = fixupCSSUrls(this.moduleId, css);
         var compiler = container.get(style_compiler_1.StyleCompiler);
         return Promise.resolve(compiler.compile(styleObjectType, this.transformedCSS));
     };
@@ -143,3 +153,12 @@ var InlineStyleStrategy = (function () {
     return InlineStyleStrategy;
 }());
 exports.InlineStyleStrategy = InlineStyleStrategy;
+function resolveForDesign(valueOrDesignMap, container) {
+    if (typeof valueOrDesignMap === 'string') {
+        return valueOrDesignMap;
+    }
+    else {
+        var designType = container.get(aurelia_xp_1.AureliaXP).design.type;
+        return valueOrDesignMap[designType];
+    }
+}

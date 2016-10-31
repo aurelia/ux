@@ -21,18 +21,20 @@ System.register(['./style-resource', 'aurelia-templating', './style-strategy', '
     exports_1("useStyleStrategy", useStyleStrategy);
     /**
      * Decorator: Provides a relative path to styles.
-     * @param path The path to the styles.
+     * @param pathOrDesignMap The path to the styles or an object with keys for different
+     * designs and values containing the paths to the styles.
      */
-    function useStyles(path) {
-        return useStyleStrategy(new style_strategy_1.RelativeStyleStrategy(path));
+    function useStyles(pathOrDesignMap) {
+        return useStyleStrategy(new style_strategy_1.RelativeStyleStrategy(pathOrDesignMap));
     }
     exports_1("useStyles", useStyles);
     /**
      * Decorator: Provides a style template, directly inline.
-     * @param css The css.
+     * @param cssOrDesignmap The css or an object with keys for different designs
+     * and values containing the css for each design.
      */
-    function inlineStyles(css) {
-        return useStyleStrategy(new style_strategy_1.InlineStyleStrategy(css));
+    function inlineStyles(cssOrDesignmap) {
+        return useStyleStrategy(new style_strategy_1.InlineStyleStrategy(cssOrDesignmap));
     }
     exports_1("inlineStyles", inlineStyles);
     return {

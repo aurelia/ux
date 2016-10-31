@@ -1,4 +1,4 @@
-System.register(['aurelia-metadata', 'aurelia-pal', 'aurelia-path', './style-compiler', 'aurelia-loader'], function(exports_1, context_1) {
+System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-path', './style-compiler', 'aurelia-loader', '../aurelia-xp'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -7,7 +7,7 @@ System.register(['aurelia-metadata', 'aurelia-pal', 'aurelia-path', './style-com
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_metadata_1, aurelia_pal_1, aurelia_path_1, style_compiler_1, aurelia_loader_1;
+    var aurelia_metadata_1, aurelia_pal_1, style_locator_1, aurelia_path_1, style_compiler_1, aurelia_loader_1, aurelia_xp_1;
     var styleStrategy, cssUrlMatcher, RelativeStyleStrategy, ConventionalStyleStrategy, InlineStyleStrategy;
     function fixupCSSUrls(address, css) {
         if (typeof css !== 'string') {
@@ -21,6 +21,15 @@ System.register(['aurelia-metadata', 'aurelia-pal', 'aurelia-path', './style-com
             return 'url(\'' + aurelia_path_1.relativeToFile(p1, address) + '\')';
         });
     }
+    function resolveForDesign(valueOrDesignMap, container) {
+        if (typeof valueOrDesignMap === 'string') {
+            return valueOrDesignMap;
+        }
+        else {
+            var designType = container.get(aurelia_xp_1.AureliaXP).design.type;
+            return valueOrDesignMap[designType];
+        }
+    }
     return {
         setters:[
             function (aurelia_metadata_1_1) {
@@ -28,6 +37,9 @@ System.register(['aurelia-metadata', 'aurelia-pal', 'aurelia-path', './style-com
             },
             function (aurelia_pal_1_1) {
                 aurelia_pal_1 = aurelia_pal_1_1;
+            },
+            function (style_locator_1_1) {
+                style_locator_1 = style_locator_1_1;
             },
             function (aurelia_path_1_1) {
                 aurelia_path_1 = aurelia_path_1_1;
@@ -37,6 +49,9 @@ System.register(['aurelia-metadata', 'aurelia-pal', 'aurelia-path', './style-com
             },
             function (aurelia_loader_1_1) {
                 aurelia_loader_1 = aurelia_loader_1_1;
+            },
+            function (aurelia_xp_1_1) {
+                aurelia_xp_1 = aurelia_xp_1_1;
             }],
         execute: function() {
             /**
@@ -64,8 +79,8 @@ System.register(['aurelia-metadata', 'aurelia-pal', 'aurelia-path', './style-com
                  * Creates an instance of RelativeStyleStrategy.
                  * @param path The relative path to the styles.
                  */
-                function RelativeStyleStrategy(path) {
-                    this.path = path;
+                function RelativeStyleStrategy(pathOrDesignMap) {
+                    this.pathOrDesignMap = pathOrDesignMap;
                     this.absolutePath = null;
                 }
                 /**
@@ -74,9 +89,16 @@ System.register(['aurelia-metadata', 'aurelia-pal', 'aurelia-path', './style-com
                 RelativeStyleStrategy.prototype.loadStyleFactory = function (container, styleObjectType) {
                     var _this = this;
                     if (this.absolutePath === null && this.moduleId) {
-                        this.absolutePath = aurelia_path_1.relativeToFile(this.path, this.moduleId);
+                        var path = resolveForDesign(this.pathOrDesignMap, container);
+                        if (!path) {
+                            this.absolutePath = container.get(style_locator_1.StyleLocator)
+                                .convertOriginToStyleUrl(new aurelia_metadata_1.Origin(this.moduleId, 'default'));
+                        }
+                        else {
+                            this.absolutePath = aurelia_path_1.relativeToFile(path, this.moduleId);
+                        }
                     }
-                    var styleUrl = this.absolutePath || this.path;
+                    var styleUrl = this.absolutePath || resolveForDesign(this.pathOrDesignMap, container);
                     return container.get(aurelia_loader_1.Loader)
                         .loadText(styleUrl)
                         .catch(function () { return null; })
@@ -143,14 +165,15 @@ System.register(['aurelia-metadata', 'aurelia-pal', 'aurelia-path', './style-com
                 /**
                  * Creates an instance of InlineStyleStrategy.
                  */
-                function InlineStyleStrategy(css) {
-                    this.css = css;
+                function InlineStyleStrategy(cssOrDesignMap) {
+                    this.cssOrDesignMap = cssOrDesignMap;
                 }
                 /**
                  * Loads a style factory.
                  */
                 InlineStyleStrategy.prototype.loadStyleFactory = function (container, styleObjectType) {
-                    this.transformedCSS = fixupCSSUrls(this.moduleId, this.css);
+                    var css = resolveForDesign(this.cssOrDesignMap, container);
+                    this.transformedCSS = fixupCSSUrls(this.moduleId, css);
                     var compiler = container.get(style_compiler_1.StyleCompiler);
                     return Promise.resolve(compiler.compile(styleObjectType, this.transformedCSS));
                 };
