@@ -32,6 +32,11 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', '../style
                 XpButton.prototype.created = function (_, myView) {
                     this.view = myView;
                 };
+                XpButton.prototype.bind = function () {
+                    if (this.theme) {
+                        this.styleEngine.applyTheme(this, this.theme);
+                    }
+                };
                 XpButton.prototype.themeChanged = function (newValue) {
                     this.styleEngine.applyTheme(this, newValue);
                 };

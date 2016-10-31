@@ -19,6 +19,7 @@ System.register(['aurelia-pal'], function(exports_1, context_1) {
                     this.isDefault = false;
                     this.bindingInstance = null;
                     this.count = 0;
+                    this.onRemove = function () { };
                 }
                 StyleController.prototype.bind = function (view) {
                     var overrideContext = view.overrideContext;
@@ -54,6 +55,7 @@ System.register(['aurelia-pal'], function(exports_1, context_1) {
                 StyleController.prototype.removeStyleElement = function () {
                     this.styleElementParent = this.styleElement.parentNode;
                     aurelia_pal_1.DOM.removeNode(this.styleElement);
+                    this.onRemove();
                 };
                 return StyleController;
             }());

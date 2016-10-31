@@ -6,48 +6,52 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { Origin, metadata } from 'aurelia-metadata';
 import { camelCase } from 'aurelia-binding';
-import { TaskQueue } from 'aurelia-task-queue';
 import { inject, Container } from 'aurelia-dependency-injection';
 import { DOM } from 'aurelia-pal';
 export var StyleEngine = (function () {
-    function StyleEngine(container, taskQueue) {
+    function StyleEngine(container) {
         this.container = container;
-        this.taskQueue = taskQueue;
+        this.controllers = new Map();
     }
     StyleEngine.prototype.applyTheme = function (themable, theme) {
         var _this = this;
-        this.taskQueue.queueMicroTask(function () {
-            var name = camelCase(Origin.get(themable.constructor).moduleMember + 'Styles');
-            var currentController = themable.view[name];
-            var bindingContext;
-            var newController;
-            if (!theme) {
-                if (currentController !== currentController.factory.defaultController) {
-                    currentController.unbind();
-                    newController = currentController.factory.defaultController;
-                    themable.view[name] = newController;
-                    newController.bind(themable.view);
-                }
-                return;
-            }
-            if (typeof theme === 'string') {
-                bindingContext = themable.resources.getValue(theme) || themable.view.container.get(theme);
-            }
-            else {
-                bindingContext = theme;
-            }
-            if (_this.renderingInShadowDOM(themable.view)) {
+        var name = camelCase(Origin.get(themable.constructor).moduleMember + 'Styles');
+        var currentController = themable.view[name];
+        var bindingContext;
+        var newController;
+        if (!theme) {
+            if (currentController !== currentController.factory.defaultController) {
                 currentController.unbind();
-                currentController.bindingContext = bindingContext;
-                currentController.bind(themable.view);
-            }
-            else {
-                newController = currentController.factory.create(_this.container, null, bindingContext);
-                currentController.unbind();
+                newController = currentController.factory.defaultController;
                 themable.view[name] = newController;
                 newController.bind(themable.view);
             }
-        });
+            return;
+        }
+        if (typeof theme === 'string') {
+            bindingContext = themable.resources.getValue(theme) || themable.view.container.get(theme);
+        }
+        else {
+            bindingContext = theme;
+        }
+        if (this.renderingInShadowDOM(themable.view)) {
+            currentController.unbind();
+            currentController.bindingContext = bindingContext;
+            currentController.bind(themable.view);
+        }
+        else {
+            newController = this.controllers.get(bindingContext);
+            if (!newController) {
+                newController = currentController.factory.create(this.container, null, bindingContext);
+            }
+            currentController.unbind();
+            themable.view[name] = newController;
+            newController.bind(themable.view);
+            this.controllers.set(bindingContext, newController);
+            newController.onRemove = function () {
+                _this.controllers.delete(bindingContext);
+            };
+        }
     };
     StyleEngine.prototype.getOrCreateStlyeController = function (view, factory) {
         var controller = view[factory.id];
@@ -65,7 +69,7 @@ export var StyleEngine = (function () {
         return behavior.usesShadowDOM;
     };
     StyleEngine = __decorate([
-        inject(Container, TaskQueue)
+        inject(Container)
     ], StyleEngine);
     return StyleEngine;
 }());

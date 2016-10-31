@@ -8,12 +8,18 @@ export class XpButton implements Themable {
   @bindable public raised = null;
   @bindable public disabled = false;
   @bindable public theme = null;
-  view: View;
+  public view: View;
 
   constructor(public resources: ViewResources, private styleEngine: StyleEngine) {}
 
   public created(_: any, myView: View) {
     this.view = myView;
+  }
+
+  public bind() {
+    if (this.theme) {
+      this.styleEngine.applyTheme(this, this.theme);
+    }
   }
 
   public themeChanged(newValue: any) {

@@ -8,6 +8,8 @@ export class StyleController {
   private bindingInstance: any = null;
   private count = 0;
 
+  public onRemove = () => {};
+
   constructor(
     public factory: any,
     public bindingContext: any,
@@ -17,7 +19,7 @@ export class StyleController {
     ) {
   }
 
-  public bind(view: View){
+  public bind(view: View) {
     let overrideContext: any = view.overrideContext;
     let $styles = overrideContext['$styles'] || {};
 
@@ -57,5 +59,6 @@ export class StyleController {
   private removeStyleElement() {
     this.styleElementParent = this.styleElement.parentNode;
     DOM.removeNode(this.styleElement);
+    this.onRemove();
   }
 }

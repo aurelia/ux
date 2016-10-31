@@ -6,47 +6,51 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { Origin, metadata } from 'aurelia-metadata';
 import { camelCase } from 'aurelia-binding';
-import { TaskQueue } from 'aurelia-task-queue';
 import { inject, Container } from 'aurelia-dependency-injection';
 import { DOM } from 'aurelia-pal';
 export let StyleEngine = class StyleEngine {
-    constructor(container, taskQueue) {
+    constructor(container) {
         this.container = container;
-        this.taskQueue = taskQueue;
+        this.controllers = new Map();
     }
     applyTheme(themable, theme) {
-        this.taskQueue.queueMicroTask(() => {
-            let name = camelCase(Origin.get(themable.constructor).moduleMember + 'Styles');
-            let currentController = themable.view[name];
-            let bindingContext;
-            let newController;
-            if (!theme) {
-                if (currentController !== currentController.factory.defaultController) {
-                    currentController.unbind();
-                    newController = currentController.factory.defaultController;
-                    themable.view[name] = newController;
-                    newController.bind(themable.view);
-                }
-                return;
-            }
-            if (typeof theme === 'string') {
-                bindingContext = themable.resources.getValue(theme) || themable.view.container.get(theme);
-            }
-            else {
-                bindingContext = theme;
-            }
-            if (this.renderingInShadowDOM(themable.view)) {
+        let name = camelCase(Origin.get(themable.constructor).moduleMember + 'Styles');
+        let currentController = themable.view[name];
+        let bindingContext;
+        let newController;
+        if (!theme) {
+            if (currentController !== currentController.factory.defaultController) {
                 currentController.unbind();
-                currentController.bindingContext = bindingContext;
-                currentController.bind(themable.view);
-            }
-            else {
-                newController = currentController.factory.create(this.container, null, bindingContext);
-                currentController.unbind();
+                newController = currentController.factory.defaultController;
                 themable.view[name] = newController;
                 newController.bind(themable.view);
             }
-        });
+            return;
+        }
+        if (typeof theme === 'string') {
+            bindingContext = themable.resources.getValue(theme) || themable.view.container.get(theme);
+        }
+        else {
+            bindingContext = theme;
+        }
+        if (this.renderingInShadowDOM(themable.view)) {
+            currentController.unbind();
+            currentController.bindingContext = bindingContext;
+            currentController.bind(themable.view);
+        }
+        else {
+            newController = this.controllers.get(bindingContext);
+            if (!newController) {
+                newController = currentController.factory.create(this.container, null, bindingContext);
+            }
+            currentController.unbind();
+            themable.view[name] = newController;
+            newController.bind(themable.view);
+            this.controllers.set(bindingContext, newController);
+            newController.onRemove = () => {
+                this.controllers.delete(bindingContext);
+            };
+        }
     }
     getOrCreateStlyeController(view, factory) {
         let controller = view[factory.id];
@@ -65,5 +69,5 @@ export let StyleEngine = class StyleEngine {
     }
 };
 StyleEngine = __decorate([
-    inject(Container, TaskQueue)
+    inject(Container)
 ], StyleEngine);

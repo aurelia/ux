@@ -9,6 +9,7 @@ export class StyleController {
         this.isDefault = false;
         this.bindingInstance = null;
         this.count = 0;
+        this.onRemove = () => { };
     }
     bind(view) {
         let overrideContext = view.overrideContext;
@@ -44,5 +45,6 @@ export class StyleController {
     removeStyleElement() {
         this.styleElementParent = this.styleElement.parentNode;
         DOM.removeNode(this.styleElement);
+        this.onRemove();
     }
 }

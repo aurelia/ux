@@ -4,47 +4,52 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-define(["require", "exports", 'aurelia-metadata', 'aurelia-binding', 'aurelia-task-queue', 'aurelia-dependency-injection', 'aurelia-pal'], function (require, exports, aurelia_metadata_1, aurelia_binding_1, aurelia_task_queue_1, aurelia_dependency_injection_1, aurelia_pal_1) {
+define(["require", "exports", 'aurelia-metadata', 'aurelia-binding', 'aurelia-dependency-injection', 'aurelia-pal'], function (require, exports, aurelia_metadata_1, aurelia_binding_1, aurelia_dependency_injection_1, aurelia_pal_1) {
     "use strict";
     var StyleEngine = (function () {
-        function StyleEngine(container, taskQueue) {
+        function StyleEngine(container) {
             this.container = container;
-            this.taskQueue = taskQueue;
+            this.controllers = new Map();
         }
         StyleEngine.prototype.applyTheme = function (themable, theme) {
             var _this = this;
-            this.taskQueue.queueMicroTask(function () {
-                var name = aurelia_binding_1.camelCase(aurelia_metadata_1.Origin.get(themable.constructor).moduleMember + 'Styles');
-                var currentController = themable.view[name];
-                var bindingContext;
-                var newController;
-                if (!theme) {
-                    if (currentController !== currentController.factory.defaultController) {
-                        currentController.unbind();
-                        newController = currentController.factory.defaultController;
-                        themable.view[name] = newController;
-                        newController.bind(themable.view);
-                    }
-                    return;
-                }
-                if (typeof theme === 'string') {
-                    bindingContext = themable.resources.getValue(theme) || themable.view.container.get(theme);
-                }
-                else {
-                    bindingContext = theme;
-                }
-                if (_this.renderingInShadowDOM(themable.view)) {
+            var name = aurelia_binding_1.camelCase(aurelia_metadata_1.Origin.get(themable.constructor).moduleMember + 'Styles');
+            var currentController = themable.view[name];
+            var bindingContext;
+            var newController;
+            if (!theme) {
+                if (currentController !== currentController.factory.defaultController) {
                     currentController.unbind();
-                    currentController.bindingContext = bindingContext;
-                    currentController.bind(themable.view);
-                }
-                else {
-                    newController = currentController.factory.create(_this.container, null, bindingContext);
-                    currentController.unbind();
+                    newController = currentController.factory.defaultController;
                     themable.view[name] = newController;
                     newController.bind(themable.view);
                 }
-            });
+                return;
+            }
+            if (typeof theme === 'string') {
+                bindingContext = themable.resources.getValue(theme) || themable.view.container.get(theme);
+            }
+            else {
+                bindingContext = theme;
+            }
+            if (this.renderingInShadowDOM(themable.view)) {
+                currentController.unbind();
+                currentController.bindingContext = bindingContext;
+                currentController.bind(themable.view);
+            }
+            else {
+                newController = this.controllers.get(bindingContext);
+                if (!newController) {
+                    newController = currentController.factory.create(this.container, null, bindingContext);
+                }
+                currentController.unbind();
+                themable.view[name] = newController;
+                newController.bind(themable.view);
+                this.controllers.set(bindingContext, newController);
+                newController.onRemove = function () {
+                    _this.controllers.delete(bindingContext);
+                };
+            }
         };
         StyleEngine.prototype.getOrCreateStlyeController = function (view, factory) {
             var controller = view[factory.id];
@@ -62,7 +67,7 @@ define(["require", "exports", 'aurelia-metadata', 'aurelia-binding', 'aurelia-ta
             return behavior.usesShadowDOM;
         };
         StyleEngine = __decorate([
-            aurelia_dependency_injection_1.inject(aurelia_dependency_injection_1.Container, aurelia_task_queue_1.TaskQueue)
+            aurelia_dependency_injection_1.inject(aurelia_dependency_injection_1.Container)
         ], StyleEngine);
         return StyleEngine;
     }());

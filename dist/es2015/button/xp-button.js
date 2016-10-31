@@ -18,6 +18,11 @@ export let XpButton = class XpButton {
     created(_, myView) {
         this.view = myView;
     }
+    bind() {
+        if (this.theme) {
+            this.styleEngine.applyTheme(this, this.theme);
+        }
+    }
     themeChanged(newValue) {
         this.styleEngine.applyTheme(this, newValue);
     }

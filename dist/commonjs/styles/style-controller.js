@@ -10,6 +10,7 @@ var StyleController = (function () {
         this.isDefault = false;
         this.bindingInstance = null;
         this.count = 0;
+        this.onRemove = function () { };
     }
     StyleController.prototype.bind = function (view) {
         var overrideContext = view.overrideContext;
@@ -45,6 +46,7 @@ var StyleController = (function () {
     StyleController.prototype.removeStyleElement = function () {
         this.styleElementParent = this.styleElement.parentNode;
         aurelia_pal_1.DOM.removeNode(this.styleElement);
+        this.onRemove();
     };
     return StyleController;
 }());
