@@ -9,8 +9,8 @@ styles.button {
   padding: 0 16px 0 16px;  
   border-radius: 2px;
   font-size: 0.9em;
-  background-color: ${background || $design.a1};
-  color: #fff;
+  background-color: ${background || $design.accent};
+  color: ${foreground || $design.accentForeground};
   text-align: center;
   text-transform: uppercase;
 }
@@ -24,8 +24,8 @@ styles.button:focus {
 }
 
 styles.button.disabled {
-  background-color: ${backgroundDisabled || $design.a2};
-  color: #fff;
+  background-color: ${backgroundDisabled || $design.accentLight};
+  color: ${foregroundDisabled || $design.accentLightForeground};
 }
 
 styles.button.raised {

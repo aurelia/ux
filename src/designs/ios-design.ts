@@ -3,10 +3,22 @@ import {swatches} from '../colors/swatches';
 
 export class IOSDesign implements Design {
   public type = 'ios';
-  public p1 = swatches.blue.p500;
-  public p2 = swatches.blue.p100;
-  public p3 = swatches.blue.p400;
-  public a1 = swatches.pink.a200;
-  public a2 = swatches.pink.a100;
-  public a3 = swatches.pink.a400;
+
+  public primary = swatches.indigo.p500;
+  public primaryForeground = swatches.white;
+
+  public primaryLight = swatches.indigo.p100;
+  public primaryLightForeground  = swatches.grey.p500;
+
+  public primaryDark = swatches.indigo.p700;
+  public primaryDarkForeground = swatches.white;
+
+  public accent = swatches.pink.a200;
+  public accentForeground = swatches.white;
+
+  public accentLight = swatches.pink.a100;
+  public accentLightForeground = swatches.white;
+
+  public accentDark = swatches.pink.a400;
+  public accentDarkForeground = swatches.white;
 }

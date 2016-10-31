@@ -1,10 +1,16 @@
 import { Design } from './design';
 export declare class IOSDesign implements Design {
     type: string;
-    p1: string;
-    p2: string;
-    p3: string;
-    a1: string;
-    a2: string;
-    a3: string;
+    primary: string;
+    primaryForeground: string;
+    primaryLight: string;
+    primaryLightForeground: string;
+    primaryDark: string;
+    primaryDarkForeground: string;
+    accent: string;
+    accentForeground: string;
+    accentLight: string;
+    accentLightForeground: string;
+    accentDark: string;
+    accentDarkForeground: string;
 }

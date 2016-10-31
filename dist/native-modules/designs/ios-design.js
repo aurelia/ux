@@ -2,12 +2,18 @@ import { swatches } from '../colors/swatches';
 export var IOSDesign = (function () {
     function IOSDesign() {
         this.type = 'ios';
-        this.p1 = swatches.blue.p500;
-        this.p2 = swatches.blue.p100;
-        this.p3 = swatches.blue.p400;
-        this.a1 = swatches.pink.a200;
-        this.a2 = swatches.pink.a100;
-        this.a3 = swatches.pink.a400;
+        this.primary = swatches.indigo.p500;
+        this.primaryForeground = swatches.white;
+        this.primaryLight = swatches.indigo.p100;
+        this.primaryLightForeground = swatches.grey.p500;
+        this.primaryDark = swatches.indigo.p700;
+        this.primaryDarkForeground = swatches.white;
+        this.accent = swatches.pink.a200;
+        this.accentForeground = swatches.white;
+        this.accentLight = swatches.pink.a100;
+        this.accentLightForeground = swatches.white;
+        this.accentDark = swatches.pink.a400;
+        this.accentDarkForeground = swatches.white;
     }
     return IOSDesign;
 }());
