@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var aurelia_templating_1 = require('aurelia-templating');
 var aurelia_dependency_injection_1 = require('aurelia-dependency-injection');
 var style_engine_1 = require('../styles/style-engine');
+var design_attributes_1 = require('../designs/design-attributes');
 var XpButton = (function () {
     function XpButton(resources, styleEngine) {
         this.resources = resources;
@@ -38,7 +39,8 @@ var XpButton = (function () {
     ], XpButton.prototype, "theme", void 0);
     XpButton = __decorate([
         aurelia_dependency_injection_1.inject(aurelia_templating_1.ViewResources, style_engine_1.StyleEngine),
-        aurelia_templating_1.customElement('xp-button')
+        aurelia_templating_1.customElement('xp-button'),
+        aurelia_templating_1.processAttributes(design_attributes_1.processDesignAttributes)
     ], XpButton);
     return XpButton;
 }());

@@ -1,9 +1,11 @@
-import {customElement, bindable, ViewResources, View} from 'aurelia-templating';
+import {customElement, bindable, ViewResources, View, processAttributes} from 'aurelia-templating';
 import {inject} from 'aurelia-dependency-injection';
 import {StyleEngine, Themable} from '../styles/style-engine';
+import {processDesignAttributes} from '../designs/design-attributes';
 
 @inject(ViewResources, StyleEngine)
 @customElement('xp-button')
+@processAttributes(processDesignAttributes)
 export class XpButton implements Themable {
   @bindable public raised = null;
   @bindable public disabled = false;

@@ -1,4 +1,4 @@
-System.register(['aurelia-templating', 'aurelia-dependency-injection', '../styles/style-engine'], function(exports_1, context_1) {
+System.register(['aurelia-templating', 'aurelia-dependency-injection', '../styles/style-engine', '../designs/design-attributes'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -7,7 +7,7 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', '../style
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_templating_1, aurelia_dependency_injection_1, style_engine_1;
+    var aurelia_templating_1, aurelia_dependency_injection_1, style_engine_1, design_attributes_1;
     var XpButton, StyleResolveValueConverter;
     return {
         setters:[
@@ -19,6 +19,9 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', '../style
             },
             function (style_engine_1_1) {
                 style_engine_1 = style_engine_1_1;
+            },
+            function (design_attributes_1_1) {
+                design_attributes_1 = design_attributes_1_1;
             }],
         execute: function() {
             XpButton = (function () {
@@ -51,7 +54,8 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', '../style
                 ], XpButton.prototype, "theme", void 0);
                 XpButton = __decorate([
                     aurelia_dependency_injection_1.inject(aurelia_templating_1.ViewResources, style_engine_1.StyleEngine),
-                    aurelia_templating_1.customElement('xp-button')
+                    aurelia_templating_1.customElement('xp-button'),
+                    aurelia_templating_1.processAttributes(design_attributes_1.processDesignAttributes)
                 ], XpButton);
                 return XpButton;
             }());
