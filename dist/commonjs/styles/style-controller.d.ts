@@ -4,7 +4,7 @@ export declare class StyleController {
     bindingContext: any;
     overrideContext: any;
     private expression;
-    private destination?;
+    private destination;
     isDefault: boolean;
     private styleElementParent;
     private styleElement;
