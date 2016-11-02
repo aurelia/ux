@@ -34,15 +34,17 @@ export class UXConfiguration {
     let proto = <any>SyntaxInterpreter.prototype;
     let original = proto.handleUnknownCommand;
 
+    /* tslint:disable:only-arrow-functions */
     proto.handleUnknownCommand = function(r: ViewResources, e: Element, i: any, ei?: any, c?: any) {
       if (i.attrName === 'styles') {
         i.attrName = 'class';
         i.attrValue = '$styles.' + i.command;
-        return this['one-way'](r, e, i, ei, c);
+        return (<any>this)['one-way'](r, e, i, ei, c);
       } else {
         return original.call(this, r, e, i, ei, c);
       }
     };
+    /* tslint:enable:only-arrow-functions */
 
     return this;
   }
