@@ -21,17 +21,35 @@
     "url": "https://github.com/aurelia/ux"
   },
   "scripts": {
-    "lint": "cross-env ./node_modules/.bin/tslint --project tsconfig.json",
+    "lint": "cross-env tslint --project tsconfig.json",
+
     "pretest": "cross-env npm run lint",
-    "test": "cross-env ./node_modules/.bin/tsc && cross-env ./node_modules/karma/bin/karma start --single-run",
-    "test-watch": "concurrently \"./node_modules/.bin/tsc --watch\" \"./node_modules/karma/bin/karma start\"",
-    "prebuild:compile": "rimraf 'dist/**'",
-    "build:compile": "concurrently \"node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/amd\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/commonjs --module commonjs\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/native-modules --module es2015\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/system --module system\" \"./node_modules/.bin/tsc --project tsconfig.build.json --outDir dist/es2015 --target es2015 --module es2015\" || true",
-    "build": "npm run build:compile",
+    "test": "cross-env tsc && karma start --single-run",
+    "test-watch": "concurrently \"./node_modules/.bin/tsc --watch\" \"./node_modules/.bin/karma start\"",
+
+    "prebuild:amd": "cross-env rimraf dist/amd",
+    "build:amd": "cross-env tsc --project tsconfig.build.json --outDir dist/amd --module amd",
+    "postbuild:amd": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/amd",
+
+    "prebuild:commonjs": "cross-env rimraf dist/commonjs",
+    "build:commonjs": "cross-env tsc --project tsconfig.build.json --outDir dist/commonjs --module commonjs",
+    "postbuild:commonjs": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/commonjs",
+
+    "prebuild:es2015": "cross-env rimraf dist/es2015",
+    "build:es2015": "cross-env tsc --project tsconfig.build.json --outDir dist/es2015 --module es2015",
+    "postbuild:es2015": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/es2015",
+
+    "prebuild:system": "cross-env rimraf dist/system",
+    "build:system": "cross-env tsc --project tsconfig.build.json --outDir dist/system --module system",
+    "postbuild:system": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/system",
+
+    "prebuild": "cross-env rimraf dist",
+    "build": "concurrently \"npm run build:amd\" \"npm run build:commonjs\" \"npm run build:es2015\" \"npm run build:native-modules\" \"npm run build:system\"",
     "postbuild": "npm run build:doc",
-    "prebuild:doc": "rimraf 'doc/api.json' && rimraf 'dist/doc-temp/**' && cross-env ./node_modules/.bin/tsc --project tsconfig.build.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs",
-    "build:doc": "cross-env ./node_modules/.bin/typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs --ignoreCompilerErrors --tsconfig doc/tsconfig.json dist/doc-temp/",
-    "postbuild:doc": "concurrently \"node doc/shape-doc\" \"rimraf 'dist/doc-temp/**'\""
+
+    "prebuild:doc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.build.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs",
+    "build:doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs --ignoreCompilerErrors --tsconfig doc/tsconfig.json dist/doc-temp/",
+    "postbuild:doc": "cross-env node doc/shape-doc && rimraf dist/doc-temp"
   },
   "jspm": {
     "registry": "npm",
@@ -78,6 +96,7 @@
     "aurelia-polyfills": "^1.1.0",
     "aurelia-testing": "^1.0.0-beta.2.0.0",
     "concurrently": "^2.2.0",
+    "copyfiles": "^1.0.0",
     "cross-env": "^2.0.1",
     "jasmine-core": "^2.4.1",
     "karma": "^1.2.0",
@@ -94,14 +113,10 @@
   },
   "aurelia": {
     "build": {
-      "resources": [
-
-      ]
+      "resources": []
     },
     "documentation": {
-      "articles": [
-
-      ]
+      "articles": []
     }
   }
 }
