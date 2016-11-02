@@ -6,13 +6,13 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
     './button/ux-button'
   ]);
 
-  let xp = <AureliaUX>config.container.get(AureliaUX);
+  let ux = <AureliaUX>config.container.get(AureliaUX);
 
   if (typeof callback === 'function') {
-    return Promise.resolve(callback(xp))
-      .then(() => xp.start(config));
+    return Promise.resolve(callback(ux))
+      .then(() => ux.start(config));
   } else {
-    xp.use.defaultConfiguration();
-    return xp.start(config);
+    ux.use.defaultConfiguration();
+    return ux.start(config);
   }
 }
