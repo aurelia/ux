@@ -8,11 +8,12 @@ System.register(['./aurelia-xp'], function(exports_1, context_1) {
         ]);
         var xp = config.container.get(aurelia_xp_1.AureliaXP);
         if (typeof callback === 'function') {
-            return callback(xp);
+            return Promise.resolve(callback(xp))
+                .then(function () { return xp.start(config); });
         }
         else {
             xp.use.defaultConfiguration();
-            return xp.start();
+            return xp.start(config);
         }
     }
     exports_1("configure", configure);

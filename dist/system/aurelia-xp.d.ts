@@ -3,6 +3,7 @@ import { Design } from './designs/design';
 import { Host } from './hosts/host';
 import { Platform } from './platforms/platform';
 import { XpConfiguration } from './xp-configuration';
+import { FrameworkConfiguration } from 'aurelia-framework';
 export declare class AureliaXP {
     use: XpConfiguration;
     host: Host;
@@ -11,5 +12,5 @@ export declare class AureliaXP {
     design: Design;
     constructor(use: XpConfiguration, container: Container);
     platformChanged(platform: Platform): void;
-    start(host?: string | Host): Promise<void>;
+    start(config: FrameworkConfiguration): Promise<void>;
 }

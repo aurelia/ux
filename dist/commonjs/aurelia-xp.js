@@ -9,35 +9,28 @@ var aurelia_dependency_injection_1 = require('aurelia-dependency-injection');
 var aurelia_binding_1 = require('aurelia-binding');
 var cordova_1 = require('./hosts/cordova');
 var web_1 = require('./hosts/web');
+var electron_1 = require('./hosts/electron');
 var xp_configuration_1 = require('./xp-configuration');
 var AureliaXP = (function () {
     function AureliaXP(use, container) {
         this.use = use;
         this.availableHosts = [
             container.get(cordova_1.Cordova),
+            container.get(electron_1.Electron),
             container.get(web_1.Web)
         ];
     }
     AureliaXP.prototype.platformChanged = function (platform) {
         this.design = platform.design;
     };
-    AureliaXP.prototype.start = function (host) {
+    AureliaXP.prototype.start = function (config) {
         var _this = this;
-        var found;
-        if (typeof host === 'string') {
-            found = this.availableHosts.find(function (x) { return x.type === host; });
-        }
-        else if (!host) {
-            found = this.availableHosts.find(function (x) { return x.isAvailable; });
-        }
-        else {
-            found = host;
-        }
+        var found = this.availableHosts.find(function (x) { return x.isAvailable; });
         if (found === undefined) {
             throw new Error('Could not determine host environment');
         }
         this.host = found;
-        return this.host.start().then(function (platform) {
+        return this.host.start(config).then(function (platform) {
             _this.platform = platform;
         });
     };

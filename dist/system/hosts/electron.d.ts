@@ -1,7 +1,8 @@
+import { Host } from './host';
 import { Platform } from '../platforms/platform';
 import { FrameworkConfiguration } from 'aurelia-framework';
-export interface Host {
+export declare class Electron implements Host {
     type: string;
-    isAvailable: boolean;
+    readonly isAvailable: any;
     start(config: FrameworkConfiguration): Promise<Platform>;
 }

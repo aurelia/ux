@@ -8,35 +8,28 @@ import { Container, inject } from 'aurelia-dependency-injection';
 import { observable } from 'aurelia-binding';
 import { Cordova } from './hosts/cordova';
 import { Web } from './hosts/web';
+import { Electron } from './hosts/electron';
 import { XpConfiguration } from './xp-configuration';
 export var AureliaXP = (function () {
     function AureliaXP(use, container) {
         this.use = use;
         this.availableHosts = [
             container.get(Cordova),
+            container.get(Electron),
             container.get(Web)
         ];
     }
     AureliaXP.prototype.platformChanged = function (platform) {
         this.design = platform.design;
     };
-    AureliaXP.prototype.start = function (host) {
+    AureliaXP.prototype.start = function (config) {
         var _this = this;
-        var found;
-        if (typeof host === 'string') {
-            found = this.availableHosts.find(function (x) { return x.type === host; });
-        }
-        else if (!host) {
-            found = this.availableHosts.find(function (x) { return x.isAvailable; });
-        }
-        else {
-            found = host;
-        }
+        var found = this.availableHosts.find(function (x) { return x.isAvailable; });
         if (found === undefined) {
             throw new Error('Could not determine host environment');
         }
         this.host = found;
-        return this.host.start().then(function (platform) {
+        return this.host.start(config).then(function (platform) {
             _this.platform = platform;
         });
     };

@@ -9,9 +9,10 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
   let xp = <AureliaXP>config.container.get(AureliaXP);
 
   if (typeof callback === 'function') {
-    return callback(xp);
+    return Promise.resolve(callback(xp))
+      .then(() => xp.start(config));
   } else {
     xp.use.defaultConfiguration();
-    return xp.start();
+    return xp.start(config);
   }
 }
