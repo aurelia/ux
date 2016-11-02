@@ -6,11 +6,10 @@ import { XpConfiguration } from './xp-configuration';
 import { FrameworkConfiguration } from 'aurelia-framework';
 export declare class AureliaXP {
     use: XpConfiguration;
+    private availableHosts;
     host: Host;
-    availableHosts: Host[];
     platform: Platform;
     design: Design;
     constructor(use: XpConfiguration, container: Container);
-    platformChanged(platform: Platform): void;
     start(config: FrameworkConfiguration): Promise<void>;
 }

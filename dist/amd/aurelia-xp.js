@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-define(["require", "exports", 'aurelia-dependency-injection', 'aurelia-binding', './hosts/cordova', './hosts/web', './hosts/electron', './xp-configuration'], function (require, exports, aurelia_dependency_injection_1, aurelia_binding_1, cordova_1, web_1, electron_1, xp_configuration_1) {
+define(["require", "exports", 'aurelia-dependency-injection', './hosts/cordova', './hosts/web', './hosts/electron', './xp-configuration'], function (require, exports, aurelia_dependency_injection_1, cordova_1, web_1, electron_1, xp_configuration_1) {
     "use strict";
     var AureliaXP = (function () {
         function AureliaXP(use, container) {
@@ -15,9 +15,6 @@ define(["require", "exports", 'aurelia-dependency-injection', 'aurelia-binding',
                 container.get(web_1.Web)
             ];
         }
-        AureliaXP.prototype.platformChanged = function (platform) {
-            this.design = platform.design;
-        };
         AureliaXP.prototype.start = function (config) {
             var _this = this;
             var found = this.availableHosts.find(function (x) { return x.isAvailable; });
@@ -27,14 +24,9 @@ define(["require", "exports", 'aurelia-dependency-injection', 'aurelia-binding',
             this.host = found;
             return this.host.start(config).then(function (platform) {
                 _this.platform = platform;
+                _this.design = platform.design;
             });
         };
-        __decorate([
-            aurelia_binding_1.observable
-        ], AureliaXP.prototype, "platform", void 0);
-        __decorate([
-            aurelia_binding_1.observable
-        ], AureliaXP.prototype, "design", void 0);
         AureliaXP = __decorate([
             aurelia_dependency_injection_1.inject(xp_configuration_1.XpConfiguration, aurelia_dependency_injection_1.Container)
         ], AureliaXP);

@@ -2,7 +2,6 @@ import {Container, inject} from 'aurelia-dependency-injection';
 import {Design} from './designs/design';
 import {Host} from './hosts/host';
 import {Platform} from './platforms/platform';
-import {observable} from 'aurelia-binding';
 import {Cordova} from './hosts/cordova';
 import {Web} from './hosts/web';
 import {Electron} from './hosts/electron';
@@ -11,10 +10,11 @@ import {FrameworkConfiguration} from 'aurelia-framework';
 
 @inject(XpConfiguration, Container)
 export class AureliaXP {
+  private availableHosts: Host[];
+
   public host: Host;
-  public availableHosts: Host[];
-  @observable public platform: Platform;
-  @observable public design: Design;
+  public platform: Platform;
+  public design: Design;
 
   constructor(public use: XpConfiguration, container: Container) {
     this.availableHosts = [
@@ -22,10 +22,6 @@ export class AureliaXP {
       container.get(Electron),
       container.get(Web)
     ];
-  }
-
-  public platformChanged(platform: Platform) {
-    this.design = platform.design;
   }
 
   public start(config: FrameworkConfiguration) {
@@ -39,6 +35,7 @@ export class AureliaXP {
 
     return this.host.start(config).then(platform => {
       this.platform = platform;
+      this.design = platform.design;
     });
   }
 }

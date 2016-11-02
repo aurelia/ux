@@ -5,7 +5,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { Container, inject } from 'aurelia-dependency-injection';
-import { observable } from 'aurelia-binding';
 import { Cordova } from './hosts/cordova';
 import { Web } from './hosts/web';
 import { Electron } from './hosts/electron';
@@ -19,9 +18,6 @@ export var AureliaXP = (function () {
             container.get(Web)
         ];
     }
-    AureliaXP.prototype.platformChanged = function (platform) {
-        this.design = platform.design;
-    };
     AureliaXP.prototype.start = function (config) {
         var _this = this;
         var found = this.availableHosts.find(function (x) { return x.isAvailable; });
@@ -31,14 +27,9 @@ export var AureliaXP = (function () {
         this.host = found;
         return this.host.start(config).then(function (platform) {
             _this.platform = platform;
+            _this.design = platform.design;
         });
     };
-    __decorate([
-        observable
-    ], AureliaXP.prototype, "platform", void 0);
-    __decorate([
-        observable
-    ], AureliaXP.prototype, "design", void 0);
     AureliaXP = __decorate([
         inject(XpConfiguration, Container)
     ], AureliaXP);
