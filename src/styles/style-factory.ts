@@ -1,19 +1,19 @@
 import {StyleController} from './style-controller';
-import {AureliaXP} from '../aurelia-xp';
+import {AureliaUX} from '../aurelia-ux';
 import {computedFrom, camelCase} from 'aurelia-binding';
 import {Container} from 'aurelia-dependency-injection';
 import {Origin} from 'aurelia-metadata';
 import {swatches} from '../colors/swatches';
 
 export class StyleFactory {
-  public id: string;
+  public themeKey: string;
   private defaultController: StyleController;
 
   constructor(private styleObjectType: Function, private styles: string[], private expression: Object) {
-    this.id = camelCase(Origin.get(styleObjectType).moduleMember);
+    this.themeKey = camelCase(Origin.get(styleObjectType).moduleMember);
   }
 
-  public getOrCreateDefault(container: Container) : StyleController {
+  public getOrCreateDefault(container: Container): StyleController {
     if (this.defaultController === undefined) {
       this.defaultController = this.create(container);
       this.defaultController.isDefault = true;
@@ -24,7 +24,7 @@ export class StyleFactory {
 
   public create(container: Container, destination?: Element, bindingContext?: any): StyleController {
     let $styles: any = {};
-    let xp = container.get(AureliaXP);
+    let ux = container.get(AureliaUX);
 
     if (bindingContext) {
       let baseStyles = this.getOrCreateDefault(container).bindingContext;
@@ -40,7 +40,7 @@ export class StyleFactory {
     return new StyleController(
       this,
       bindingContext,
-      new StyleOverrideContext(xp, $styles),
+      new StyleOverrideContext(ux, $styles),
       this.expression,
       destination
       );
@@ -50,7 +50,7 @@ export class StyleFactory {
 let currentNumber = 0;
 
 function generateRandomClass(key: string) {
-  return key + '_aurelia_xp_' + nextNumber();
+  return key + '_aurelia_ux_' + nextNumber();
 }
 
 function nextNumber() {
@@ -62,15 +62,15 @@ class StyleOverrideContext {
   public $off = '(max-width: 0)';
   public $swatches = swatches;
 
-  constructor(public $xp: AureliaXP, public $styles: any) {}
+  constructor(public $ux: AureliaUX, public $styles: any) {}
 
-  @computedFrom('$xp.platform')
+  @computedFrom('$ux.platform')
   get $platform() {
-    return this.$xp.platform;
+    return this.$ux.platform;
   }
 
-  @computedFrom('$xp.design')
+  @computedFrom('$ux.design')
   get $design() {
-    return this.$xp.design;
+    return this.$ux.design;
   }
 }

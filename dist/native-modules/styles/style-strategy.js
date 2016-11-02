@@ -10,7 +10,7 @@ import { StyleLocator } from './style-locator';
 import { relativeToFile } from 'aurelia-path';
 import { StyleCompiler } from './style-compiler';
 import { Loader } from 'aurelia-loader';
-import { AureliaXP } from '../aurelia-xp';
+import { AureliaUX } from '../aurelia-ux';
 /**
  * Decorator: Indicates that the decorated class/object is a style strategy.
  */
@@ -154,7 +154,7 @@ function resolveForDesign(valueOrDesignMap, container) {
         return valueOrDesignMap;
     }
     else {
-        var designType = container.get(AureliaXP).design.type;
+        var designType = container.get(AureliaUX).design.type;
         return valueOrDesignMap[designType];
     }
 }

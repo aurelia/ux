@@ -1,12 +1,12 @@
 import {FrameworkConfiguration} from 'aurelia-framework';
-import {AureliaXP} from './aurelia-xp';
+import {AureliaUX} from './aurelia-ux';
 
-export function configure(config: FrameworkConfiguration, callback?: (config: AureliaXP) => Promise<any>) {
+export function configure(config: FrameworkConfiguration, callback?: (config: AureliaUX) => Promise<any>) {
   config.globalResources([
-    './button/xp-button'
+    './button/ux-button'
   ]);
 
-  let xp = <AureliaXP>config.container.get(AureliaXP);
+  let xp = <AureliaUX>config.container.get(AureliaUX);
 
   if (typeof callback === 'function') {
     return Promise.resolve(callback(xp))

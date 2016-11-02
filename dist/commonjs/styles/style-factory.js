@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var style_controller_1 = require('./style-controller');
-var aurelia_xp_1 = require('../aurelia-xp');
+var aurelia_ux_1 = require('../aurelia-ux');
 var aurelia_binding_1 = require('aurelia-binding');
 var aurelia_metadata_1 = require('aurelia-metadata');
 var swatches_1 = require('../colors/swatches');
@@ -15,7 +15,7 @@ var StyleFactory = (function () {
         this.styleObjectType = styleObjectType;
         this.styles = styles;
         this.expression = expression;
-        this.id = aurelia_binding_1.camelCase(aurelia_metadata_1.Origin.get(styleObjectType).moduleMember);
+        this.themeKey = aurelia_binding_1.camelCase(aurelia_metadata_1.Origin.get(styleObjectType).moduleMember);
     }
     StyleFactory.prototype.getOrCreateDefault = function (container) {
         if (this.defaultController === undefined) {
@@ -26,7 +26,7 @@ var StyleFactory = (function () {
     };
     StyleFactory.prototype.create = function (container, destination, bindingContext) {
         var $styles = {};
-        var xp = container.get(aurelia_xp_1.AureliaXP);
+        var ux = container.get(aurelia_ux_1.AureliaUX);
         if (bindingContext) {
             var baseStyles = this.getOrCreateDefault(container).bindingContext;
             Object.setPrototypeOf(bindingContext, baseStyles);
@@ -37,21 +37,21 @@ var StyleFactory = (function () {
         Object.keys(this.styles).forEach(function (key) {
             $styles[key] = generateRandomClass(key);
         });
-        return new style_controller_1.StyleController(this, bindingContext, new StyleOverrideContext(xp, $styles), this.expression, destination);
+        return new style_controller_1.StyleController(this, bindingContext, new StyleOverrideContext(ux, $styles), this.expression, destination);
     };
     return StyleFactory;
 }());
 exports.StyleFactory = StyleFactory;
 var currentNumber = 0;
 function generateRandomClass(key) {
-    return key + '_aurelia_xp_' + nextNumber();
+    return key + '_aurelia_ux_' + nextNumber();
 }
 function nextNumber() {
     return ++currentNumber;
 }
 var StyleOverrideContext = (function () {
-    function StyleOverrideContext($xp, $styles) {
-        this.$xp = $xp;
+    function StyleOverrideContext($ux, $styles) {
+        this.$ux = $ux;
         this.$styles = $styles;
         this.$on = '(min-width: 0)';
         this.$off = '(max-width: 0)';
@@ -59,23 +59,23 @@ var StyleOverrideContext = (function () {
     }
     Object.defineProperty(StyleOverrideContext.prototype, "$platform", {
         get: function () {
-            return this.$xp.platform;
+            return this.$ux.platform;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(StyleOverrideContext.prototype, "$design", {
         get: function () {
-            return this.$xp.design;
+            return this.$ux.design;
         },
         enumerable: true,
         configurable: true
     });
     __decorate([
-        aurelia_binding_1.computedFrom('$xp.platform')
+        aurelia_binding_1.computedFrom('$ux.platform')
     ], StyleOverrideContext.prototype, "$platform", null);
     __decorate([
-        aurelia_binding_1.computedFrom('$xp.design')
+        aurelia_binding_1.computedFrom('$ux.design')
     ], StyleOverrideContext.prototype, "$design", null);
     return StyleOverrideContext;
 }());

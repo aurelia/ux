@@ -1,3 +1,3 @@
 import { FrameworkConfiguration } from 'aurelia-framework';
-import { AureliaXP } from './aurelia-xp';
-export declare function configure(config: FrameworkConfiguration, callback?: (config: AureliaXP) => Promise<any>): Promise<void>;
+import { AureliaUX } from './aurelia-ux';
+export declare function configure(config: FrameworkConfiguration, callback?: (config: AureliaUX) => Promise<any>): Promise<void>;

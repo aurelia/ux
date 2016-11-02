@@ -11,7 +11,7 @@ var style_locator_1 = require('./style-locator');
 var aurelia_path_1 = require('aurelia-path');
 var style_compiler_1 = require('./style-compiler');
 var aurelia_loader_1 = require('aurelia-loader');
-var aurelia_xp_1 = require('../aurelia-xp');
+var aurelia_ux_1 = require('../aurelia-ux');
 /**
  * Decorator: Indicates that the decorated class/object is a style strategy.
  */
@@ -158,7 +158,7 @@ function resolveForDesign(valueOrDesignMap, container) {
         return valueOrDesignMap;
     }
     else {
-        var designType = container.get(aurelia_xp_1.AureliaXP).design.type;
+        var designType = container.get(aurelia_ux_1.AureliaUX).design.type;
         return valueOrDesignMap[designType];
     }
 }

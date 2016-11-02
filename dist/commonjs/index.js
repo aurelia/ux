@@ -1,10 +1,10 @@
 "use strict";
-var aurelia_xp_1 = require('./aurelia-xp');
+var aurelia_ux_1 = require('./aurelia-ux');
 function configure(config, callback) {
     config.globalResources([
-        './button/xp-button'
+        './button/ux-button'
     ]);
-    var xp = config.container.get(aurelia_xp_1.AureliaXP);
+    var xp = config.container.get(aurelia_ux_1.AureliaUX);
     if (typeof callback === 'function') {
         return Promise.resolve(callback(xp))
             .then(function () { return xp.start(config); });

@@ -19,7 +19,7 @@ System.register(['aurelia-pal'], function(exports_1, context_1) {
                     this.isDefault = false;
                     this.bindingInstance = null;
                     this.count = 0;
-                    this.onRemove = function () { };
+                    this.onRemove = aurelia_pal_1.PLATFORM.noop;
                 }
                 StyleController.prototype.bind = function (view) {
                     var overrideContext = view.overrideContext;

@@ -1,4 +1,4 @@
 {
-  "name": "aurelia-xp",
-  "main": "dist/amd/aurelia-xp.d.ts"
+  "name": "aurelia-ux",
+  "main": "dist/amd/aurelia-ux.d.ts"
 }

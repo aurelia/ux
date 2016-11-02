@@ -8,22 +8,22 @@ System.register(['./decorators'], function(exports_1, context_1) {
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var decorators_1;
-    var nextStyleId;
-    function getNextDynamicStyleId() {
-        return 'DynamicStyles' + (++nextStyleId);
+    var nextThemeId;
+    function getNextDynamicThemeId() {
+        return 'DynamicTheme' + (++nextThemeId);
     }
     function createDynamicStyleModule(styleUrl) {
-        var DynamicStyles = (function () {
-            function DynamicStyles() {
+        var DynamicTheme = (function () {
+            function DynamicTheme() {
             }
-            DynamicStyles = __decorate([
+            DynamicTheme = __decorate([
                 decorators_1.styles(),
                 decorators_1.useStyles(styleUrl)
-            ], DynamicStyles);
-            return DynamicStyles;
+            ], DynamicTheme);
+            return DynamicTheme;
         }());
         return (_a = {},
-            _a[getNextDynamicStyleId()] = DynamicStyles,
+            _a[getNextDynamicThemeId()] = DynamicTheme,
             _a
         );
         var _a;
@@ -35,7 +35,7 @@ System.register(['./decorators'], function(exports_1, context_1) {
                 decorators_1 = decorators_1_1;
             }],
         execute: function() {
-            nextStyleId = 0;
+            nextThemeId = 0;
         }
     }
 });

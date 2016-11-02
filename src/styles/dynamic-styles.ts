@@ -1,9 +1,9 @@
 import {styles, useStyles} from './decorators';
 
-let nextStyleId = 0;
+let nextThemeId = 0;
 
-function getNextDynamicStyleId() {
-  return 'DynamicStyles' + (++nextStyleId);
+function getNextDynamicThemeId() {
+  return 'DynamicTheme' + (++nextThemeId);
 }
 
 export interface StyleModule {
@@ -13,9 +13,9 @@ export interface StyleModule {
 export function createDynamicStyleModule(styleUrl: string): StyleModule {
   @styles()
   @useStyles(styleUrl)
-  class DynamicStyles {}
+  class DynamicTheme {}
 
   return {
-    [getNextDynamicStyleId()]: DynamicStyles
+    [getNextDynamicThemeId()]: DynamicTheme
   };
 }

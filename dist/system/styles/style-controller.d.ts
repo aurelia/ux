@@ -10,7 +10,7 @@ export declare class StyleController {
     private styleElement;
     private bindingInstance;
     private count;
-    onRemove: () => void;
+    onRemove: Function;
     constructor(factory: any, bindingContext: any, overrideContext: any, expression: any, destination?: Element);
     bind(view: View): void;
     unbind(): void;

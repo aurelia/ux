@@ -6,7 +6,7 @@ import {relativeToFile} from 'aurelia-path';
 import {Container} from 'aurelia-dependency-injection';
 import {StyleCompiler} from './style-compiler';
 import {Loader} from 'aurelia-loader';
-import {AureliaXP} from '../aurelia-xp';
+import {AureliaUX} from '../aurelia-ux';
 
 export interface StyleStrategy {
   moduleId?: string;
@@ -169,7 +169,7 @@ function resolveForDesign(valueOrDesignMap: string | any, container: Container):
   if (typeof valueOrDesignMap === 'string') {
     return valueOrDesignMap;
   } else {
-    let designType = (<AureliaXP>container.get(AureliaXP)).design.type;
+    let designType = (<AureliaUX>container.get(AureliaUX)).design.type;
     return valueOrDesignMap[designType];
   }
 }

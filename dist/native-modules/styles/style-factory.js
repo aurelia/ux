@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { StyleController } from './style-controller';
-import { AureliaXP } from '../aurelia-xp';
+import { AureliaUX } from '../aurelia-ux';
 import { computedFrom, camelCase } from 'aurelia-binding';
 import { Origin } from 'aurelia-metadata';
 import { swatches } from '../colors/swatches';
@@ -14,7 +14,7 @@ export var StyleFactory = (function () {
         this.styleObjectType = styleObjectType;
         this.styles = styles;
         this.expression = expression;
-        this.id = camelCase(Origin.get(styleObjectType).moduleMember);
+        this.themeKey = camelCase(Origin.get(styleObjectType).moduleMember);
     }
     StyleFactory.prototype.getOrCreateDefault = function (container) {
         if (this.defaultController === undefined) {
@@ -25,7 +25,7 @@ export var StyleFactory = (function () {
     };
     StyleFactory.prototype.create = function (container, destination, bindingContext) {
         var $styles = {};
-        var xp = container.get(AureliaXP);
+        var ux = container.get(AureliaUX);
         if (bindingContext) {
             var baseStyles = this.getOrCreateDefault(container).bindingContext;
             Object.setPrototypeOf(bindingContext, baseStyles);
@@ -36,20 +36,20 @@ export var StyleFactory = (function () {
         Object.keys(this.styles).forEach(function (key) {
             $styles[key] = generateRandomClass(key);
         });
-        return new StyleController(this, bindingContext, new StyleOverrideContext(xp, $styles), this.expression, destination);
+        return new StyleController(this, bindingContext, new StyleOverrideContext(ux, $styles), this.expression, destination);
     };
     return StyleFactory;
 }());
 var currentNumber = 0;
 function generateRandomClass(key) {
-    return key + '_aurelia_xp_' + nextNumber();
+    return key + '_aurelia_ux_' + nextNumber();
 }
 function nextNumber() {
     return ++currentNumber;
 }
 var StyleOverrideContext = (function () {
-    function StyleOverrideContext($xp, $styles) {
-        this.$xp = $xp;
+    function StyleOverrideContext($ux, $styles) {
+        this.$ux = $ux;
         this.$styles = $styles;
         this.$on = '(min-width: 0)';
         this.$off = '(max-width: 0)';
@@ -57,23 +57,23 @@ var StyleOverrideContext = (function () {
     }
     Object.defineProperty(StyleOverrideContext.prototype, "$platform", {
         get: function () {
-            return this.$xp.platform;
+            return this.$ux.platform;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(StyleOverrideContext.prototype, "$design", {
         get: function () {
-            return this.$xp.design;
+            return this.$ux.design;
         },
         enumerable: true,
         configurable: true
     });
     __decorate([
-        computedFrom('$xp.platform')
+        computedFrom('$ux.platform')
     ], StyleOverrideContext.prototype, "$platform", null);
     __decorate([
-        computedFrom('$xp.design')
+        computedFrom('$ux.design')
     ], StyleOverrideContext.prototype, "$design", null);
     return StyleOverrideContext;
 }());

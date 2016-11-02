@@ -1,10 +1,10 @@
-define(["require", "exports", './aurelia-xp'], function (require, exports, aurelia_xp_1) {
+define(["require", "exports", './aurelia-ux'], function (require, exports, aurelia_ux_1) {
     "use strict";
     function configure(config, callback) {
         config.globalResources([
-            './button/xp-button'
+            './button/ux-button'
         ]);
-        var xp = config.container.get(aurelia_xp_1.AureliaXP);
+        var xp = config.container.get(aurelia_ux_1.AureliaUX);
         if (typeof callback === 'function') {
             return Promise.resolve(callback(xp))
                 .then(function () { return xp.start(config); });

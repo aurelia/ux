@@ -1,4 +1,4 @@
-System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-path', './style-compiler', 'aurelia-loader', '../aurelia-xp'], function(exports_1, context_1) {
+System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-path', './style-compiler', 'aurelia-loader', '../aurelia-ux'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -7,7 +7,7 @@ System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_metadata_1, aurelia_pal_1, style_locator_1, aurelia_path_1, style_compiler_1, aurelia_loader_1, aurelia_xp_1;
+    var aurelia_metadata_1, aurelia_pal_1, style_locator_1, aurelia_path_1, style_compiler_1, aurelia_loader_1, aurelia_ux_1;
     var styleStrategy, cssUrlMatcher, RelativeStyleStrategy, ConventionalStyleStrategy, InlineStyleStrategy;
     function fixupCSSUrls(address, css) {
         if (typeof css !== 'string') {
@@ -26,7 +26,7 @@ System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-
             return valueOrDesignMap;
         }
         else {
-            var designType = container.get(aurelia_xp_1.AureliaXP).design.type;
+            var designType = container.get(aurelia_ux_1.AureliaUX).design.type;
             return valueOrDesignMap[designType];
         }
     }
@@ -50,8 +50,8 @@ System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-
             function (aurelia_loader_1_1) {
                 aurelia_loader_1 = aurelia_loader_1_1;
             },
-            function (aurelia_xp_1_1) {
-                aurelia_xp_1 = aurelia_xp_1_1;
+            function (aurelia_ux_1_1) {
+                aurelia_ux_1 = aurelia_ux_1_1;
             }],
         execute: function() {
             /**

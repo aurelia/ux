@@ -10,7 +10,7 @@ define(["require", "exports", 'aurelia-pal'], function (require, exports, aureli
             this.isDefault = false;
             this.bindingInstance = null;
             this.count = 0;
-            this.onRemove = function () { };
+            this.onRemove = aurelia_pal_1.PLATFORM.noop;
         }
         StyleController.prototype.bind = function (view) {
             var overrideContext = view.overrideContext;

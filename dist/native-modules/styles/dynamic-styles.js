@@ -5,22 +5,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { styles, useStyles } from './decorators';
-var nextStyleId = 0;
-function getNextDynamicStyleId() {
-    return 'DynamicStyles' + (++nextStyleId);
+var nextThemeId = 0;
+function getNextDynamicThemeId() {
+    return 'DynamicTheme' + (++nextThemeId);
 }
 export function createDynamicStyleModule(styleUrl) {
-    var DynamicStyles = (function () {
-        function DynamicStyles() {
+    var DynamicTheme = (function () {
+        function DynamicTheme() {
         }
-        DynamicStyles = __decorate([
+        DynamicTheme = __decorate([
             styles(),
             useStyles(styleUrl)
-        ], DynamicStyles);
-        return DynamicStyles;
+        ], DynamicTheme);
+        return DynamicTheme;
     }());
     return (_a = {},
-        _a[getNextDynamicStyleId()] = DynamicStyles,
+        _a[getNextDynamicThemeId()] = DynamicTheme,
         _a
     );
     var _a;

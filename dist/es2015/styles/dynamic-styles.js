@@ -5,18 +5,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { styles, useStyles } from './decorators';
-let nextStyleId = 0;
-function getNextDynamicStyleId() {
-    return 'DynamicStyles' + (++nextStyleId);
+let nextThemeId = 0;
+function getNextDynamicThemeId() {
+    return 'DynamicTheme' + (++nextThemeId);
 }
 export function createDynamicStyleModule(styleUrl) {
-    let DynamicStyles = class DynamicStyles {
+    let DynamicTheme = class DynamicTheme {
     };
-    DynamicStyles = __decorate([
+    DynamicTheme = __decorate([
         styles(),
         useStyles(styleUrl)
-    ], DynamicStyles);
+    ], DynamicTheme);
     return {
-        [getNextDynamicStyleId()]: DynamicStyles
+        [getNextDynamicThemeId()]: DynamicTheme
     };
 }

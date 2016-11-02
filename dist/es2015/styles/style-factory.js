@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { StyleController } from './style-controller';
-import { AureliaXP } from '../aurelia-xp';
+import { AureliaUX } from '../aurelia-ux';
 import { computedFrom, camelCase } from 'aurelia-binding';
 import { Origin } from 'aurelia-metadata';
 import { swatches } from '../colors/swatches';
@@ -14,7 +14,7 @@ export class StyleFactory {
         this.styleObjectType = styleObjectType;
         this.styles = styles;
         this.expression = expression;
-        this.id = camelCase(Origin.get(styleObjectType).moduleMember);
+        this.themeKey = camelCase(Origin.get(styleObjectType).moduleMember);
     }
     getOrCreateDefault(container) {
         if (this.defaultController === undefined) {
@@ -25,7 +25,7 @@ export class StyleFactory {
     }
     create(container, destination, bindingContext) {
         let $styles = {};
-        let xp = container.get(AureliaXP);
+        let ux = container.get(AureliaUX);
         if (bindingContext) {
             let baseStyles = this.getOrCreateDefault(container).bindingContext;
             Object.setPrototypeOf(bindingContext, baseStyles);
@@ -36,34 +36,34 @@ export class StyleFactory {
         Object.keys(this.styles).forEach(key => {
             $styles[key] = generateRandomClass(key);
         });
-        return new StyleController(this, bindingContext, new StyleOverrideContext(xp, $styles), this.expression, destination);
+        return new StyleController(this, bindingContext, new StyleOverrideContext(ux, $styles), this.expression, destination);
     }
 }
 let currentNumber = 0;
 function generateRandomClass(key) {
-    return key + '_aurelia_xp_' + nextNumber();
+    return key + '_aurelia_ux_' + nextNumber();
 }
 function nextNumber() {
     return ++currentNumber;
 }
 class StyleOverrideContext {
-    constructor($xp, $styles) {
-        this.$xp = $xp;
+    constructor($ux, $styles) {
+        this.$ux = $ux;
         this.$styles = $styles;
         this.$on = '(min-width: 0)';
         this.$off = '(max-width: 0)';
         this.$swatches = swatches;
     }
     get $platform() {
-        return this.$xp.platform;
+        return this.$ux.platform;
     }
     get $design() {
-        return this.$xp.design;
+        return this.$ux.design;
     }
 }
 __decorate([
-    computedFrom('$xp.platform')
+    computedFrom('$ux.platform')
 ], StyleOverrideContext.prototype, "$platform", null);
 __decorate([
-    computedFrom('$xp.design')
+    computedFrom('$ux.design')
 ], StyleOverrideContext.prototype, "$design", null);

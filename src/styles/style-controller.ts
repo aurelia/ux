@@ -1,5 +1,5 @@
 import {View} from 'aurelia-templating';
-import {DOM} from 'aurelia-pal';
+import {DOM, PLATFORM} from 'aurelia-pal';
 
 export class StyleController {
   public isDefault = false;
@@ -8,7 +8,7 @@ export class StyleController {
   private bindingInstance: any = null;
   private count = 0;
 
-  public onRemove = () => {};
+  public onRemove = PLATFORM.noop;
 
   constructor(
     public factory: any,

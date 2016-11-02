@@ -1,15 +1,11 @@
-import { ViewResources, View } from 'aurelia-templating';
-import { Origin, metadata } from 'aurelia-metadata';
-import { camelCase } from 'aurelia-binding';
-import { inject, Container } from 'aurelia-dependency-injection';
-import { StyleController } from './style-controller';
-import { DOM } from 'aurelia-pal';
-import { StyleFactory } from './style-factory';
-
-export interface Themable {
-  resources: ViewResources;
-  view: View;
-}
+import {View} from 'aurelia-templating';
+import {metadata, Origin} from 'aurelia-metadata';
+import {inject, Container} from 'aurelia-dependency-injection';
+import {StyleController} from './style-controller';
+import {DOM} from 'aurelia-pal';
+import {StyleFactory} from './style-factory';
+import {Themable} from './themable';
+import {camelCase} from 'aurelia-binding';
 
 @inject(Container)
 export class StyleEngine {
@@ -17,9 +13,13 @@ export class StyleEngine {
 
   constructor(private container: Container) { }
 
+  public getThemeKeyForComponent(obj: any) {
+    return camelCase(Origin.get(obj.constructor).moduleMember + 'Theme');
+  }
+
   public applyTheme(themable: Themable, theme: string | Object | null) {
-    let name = camelCase(Origin.get(themable.constructor).moduleMember + 'Styles');
-    let currentController = (<any>themable.view)[name];
+    let themeKey = this.getThemeKeyForComponent(themable);
+    let currentController = (<any>themable.view)[themeKey];
     let bindingContext: any;
     let newController: StyleController | undefined;
 
@@ -27,7 +27,7 @@ export class StyleEngine {
       if (currentController !== currentController.factory.defaultController) {
         currentController.unbind();
         newController = <StyleController>currentController.factory.defaultController;
-        (<any>themable.view)[name] = newController;
+        (<any>themable.view)[themeKey] = newController;
         newController.bind(themable.view);
       }
 
@@ -56,7 +56,7 @@ export class StyleEngine {
       }
 
       currentController.unbind();
-      (<any>themable.view)[name] = newController;
+      (<any>themable.view)[themeKey] = newController;
       newController.bind(themable.view);
       this.controllers.set(bindingContext, newController);
 
@@ -67,15 +67,15 @@ export class StyleEngine {
   }
 
   public getOrCreateStlyeController(view: View, factory: StyleFactory): StyleController {
-    let controller = (<any>view)[factory.id];
+    let controller = (<any>view)[factory.themeKey];
 
     if (controller === undefined) {
       if (this.renderingInShadowDOM(view)) {
         let destination = view.container.get(DOM.boundary);
-        (<any>view)[factory.id] = controller = factory.create(view.container, destination);
+        (<any>view)[factory.themeKey] = controller = factory.create(view.container, destination);
       }
 
-      (<any>view)[factory.id] = controller = factory.getOrCreateDefault(this.container);
+      (<any>view)[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
     }
 
     return controller;

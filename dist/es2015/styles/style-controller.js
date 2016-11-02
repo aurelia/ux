@@ -1,4 +1,4 @@
-import { DOM } from 'aurelia-pal';
+import { DOM, PLATFORM } from 'aurelia-pal';
 export class StyleController {
     constructor(factory, bindingContext, overrideContext, expression, destination) {
         this.factory = factory;
@@ -9,7 +9,7 @@ export class StyleController {
         this.isDefault = false;
         this.bindingInstance = null;
         this.count = 0;
-        this.onRemove = () => { };
+        this.onRemove = PLATFORM.noop;
     }
     bind(view) {
         let overrideContext = view.overrideContext;

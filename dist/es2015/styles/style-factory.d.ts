@@ -4,7 +4,7 @@ export declare class StyleFactory {
     private styleObjectType;
     private styles;
     private expression;
-    id: string;
+    themeKey: string;
     private defaultController;
     constructor(styleObjectType: Function, styles: string[], expression: Object);
     getOrCreateDefault(container: Container): StyleController;
