@@ -1,6 +1,6 @@
 {
   "name": "aurelia-ux",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A user experience framework for Aurelia.",
   "keywords": [
     "aurelia",
@@ -14,8 +14,8 @@
   },
   "license": "MIT",
   "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
-  "main": "dist/commonjs/aurelia-ux.js",
-  "typings": "dist/commonjs/aurelia-ux.d.ts",
+  "main": "dist/commonjs/index.js",
+  "typings": "dist/commonjs/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/aurelia/ux"
@@ -47,14 +47,14 @@
     "build": "concurrently \"npm run build:amd\" \"npm run build:commonjs\" \"npm run build:es2015\" \"npm run build:system\"",
     "postbuild": "npm run build:doc",
 
-    "prebuild:doc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.build.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs",
+    "prebuild:doc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.build.json --outFile dist/doc-temp/index.js && node doc/shape-defs",
     "build:doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs --ignoreCompilerErrors --tsconfig doc/tsconfig.json dist/doc-temp/",
     "postbuild:doc": "cross-env node doc/shape-doc && rimraf dist/doc-temp"
   },
   "jspm": {
     "registry": "npm",
     "jspmPackage": true,
-    "main": "aurelia-ux",
+    "main": "index",
     "format": "amd",
     "directories": {
       "dist": "dist/amd"
