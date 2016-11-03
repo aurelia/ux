@@ -21,8 +21,32 @@ export class StyleCompiler {
       transformed
     );
 
-    expression['targetProperty'] = 'innerHTML';
+    if (expression === null) {
+      expression = new PlainCSSBindingExpression(transformed)
+    } else {
+      expression['targetProperty'] = 'innerHTML';
+    }
 
     return new StyleFactory(styleObjectType, styles, expression);
+  }
+}
+
+class PlainCSSBindingExpression {
+  constructor(private css: string) {}
+
+  public createBinding(styleElement: HTMLStyleElement) {
+    return new CSSBinding(this.css, styleElement);
+  }
+}
+
+class CSSBinding {
+  constructor(private css: string, private styleElement: HTMLStyleElement) {}
+
+  public bind() {
+    this.styleElement.innerHTML = this.css;
+  }
+
+  public unbind() {
+    this.styleElement.innerHTML = '';
   }
 }
