@@ -3,7 +3,7 @@
 
   <button styles.button class="
     ${disabled ? 'disabled' : ''}
-    ${$uxButtonTheme.raised : 'raised' : 'flat'}
+    ${$uxButtonTheme.raised ? 'raised' : 'flat'}
     ">
     <slot></slot>
   </button>
