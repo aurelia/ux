@@ -20,12 +20,12 @@ export var UXConfiguration = (function () {
         return this;
     };
     UXConfiguration.prototype.styleLoaderPlugin = function () {
-        this.viewEngine.addResourcePlugin('.css#xp', {
+        this.viewEngine.addResourcePlugin('.css#ux', {
             fetch: function (address) {
-                return Promise.resolve(createDynamicStyleModule(address.replace('.css#xp', '.css')));
+                return Promise.resolve(createDynamicStyleModule(address.replace('.css#ux', '.css')));
             }
         });
-        this.loader.addPlugin('xp-styles', {
+        this.loader.addPlugin('ux-styles', {
             fetch: function (address) {
                 return Promise.resolve(createDynamicStyleModule(address + '.css'));
             }

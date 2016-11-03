@@ -38,12 +38,12 @@ System.register(['aurelia-dependency-injection', 'aurelia-loader', 'aurelia-temp
                     return this;
                 };
                 UXConfiguration.prototype.styleLoaderPlugin = function () {
-                    this.viewEngine.addResourcePlugin('.css#xp', {
+                    this.viewEngine.addResourcePlugin('.css#ux', {
                         fetch: function (address) {
-                            return Promise.resolve(dynamic_styles_1.createDynamicStyleModule(address.replace('.css#xp', '.css')));
+                            return Promise.resolve(dynamic_styles_1.createDynamicStyleModule(address.replace('.css#ux', '.css')));
                         }
                     });
-                    this.loader.addPlugin('xp-styles', {
+                    this.loader.addPlugin('ux-styles', {
                         fetch: function (address) {
                             return Promise.resolve(dynamic_styles_1.createDynamicStyleModule(address + '.css'));
                         }
