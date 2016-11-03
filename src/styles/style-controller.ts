@@ -23,7 +23,7 @@ export class StyleController {
     let overrideContext: any = view.overrideContext;
     let $styles = overrideContext['$styles'] || {};
 
-    overrideContext['$' + this.factory.id] = this.bindingContext;
+    overrideContext['$' + this.factory.themeKey] = this.bindingContext;
     overrideContext['$design'] = this.overrideContext.$design;
     overrideContext['$styles'] = Object.assign(
       $styles, this.overrideContext.$styles
