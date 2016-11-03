@@ -1,4 +1,4 @@
-export const swatches = {
+export var swatches = {
     red: {
         p50: '#FFEBEE',
         p100: '#FFCDD2',

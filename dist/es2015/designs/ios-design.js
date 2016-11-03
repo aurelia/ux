@@ -1,6 +1,6 @@
 import { swatches } from '../colors/swatches';
-export class IOSDesign {
-    constructor() {
+export var IOSDesign = (function () {
+    function IOSDesign() {
         this.type = 'ios';
         this.primary = swatches.indigo.p500;
         this.primaryForeground = swatches.white;
@@ -15,4 +15,5 @@ export class IOSDesign {
         this.accentDark = swatches.pink.a400;
         this.accentDarkForeground = swatches.white;
     }
-}
+    return IOSDesign;
+}());

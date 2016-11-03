@@ -36,6 +36,7 @@ var UXConfiguration = (function () {
     UXConfiguration.prototype.commandHandler = function () {
         var proto = aurelia_templating_binding_1.SyntaxInterpreter.prototype;
         var original = proto.handleUnknownCommand;
+        /* tslint:disable:only-arrow-functions */
         proto.handleUnknownCommand = function (r, e, i, ei, c) {
             if (i.attrName === 'styles') {
                 i.attrName = 'class';
@@ -46,6 +47,7 @@ var UXConfiguration = (function () {
                 return original.call(this, r, e, i, ei, c);
             }
         };
+        /* tslint:enable:only-arrow-functions */
         return this;
     };
     UXConfiguration = __decorate([

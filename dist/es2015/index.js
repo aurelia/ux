@@ -3,13 +3,13 @@ export function configure(config, callback) {
     config.globalResources([
         './button/ux-button'
     ]);
-    let xp = config.container.get(AureliaUX);
+    var ux = config.container.get(AureliaUX);
     if (typeof callback === 'function') {
-        return Promise.resolve(callback(xp))
-            .then(() => xp.start(config));
+        return Promise.resolve(callback(ux))
+            .then(function () { return ux.start(config); });
     }
     else {
-        xp.use.defaultConfiguration();
-        return xp.start(config);
+        ux.use.defaultConfiguration();
+        return ux.start(config);
     }
 }

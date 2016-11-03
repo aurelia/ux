@@ -6,14 +6,14 @@ System.register(['./aurelia-ux'], function(exports_1, context_1) {
         config.globalResources([
             './button/ux-button'
         ]);
-        var xp = config.container.get(aurelia_ux_1.AureliaUX);
+        var ux = config.container.get(aurelia_ux_1.AureliaUX);
         if (typeof callback === 'function') {
-            return Promise.resolve(callback(xp))
-                .then(function () { return xp.start(config); });
+            return Promise.resolve(callback(ux))
+                .then(function () { return ux.start(config); });
         }
         else {
-            xp.use.defaultConfiguration();
-            return xp.start(config);
+            ux.use.defaultConfiguration();
+            return ux.start(config);
         }
     }
     exports_1("configure", configure);

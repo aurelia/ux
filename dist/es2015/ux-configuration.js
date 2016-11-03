@@ -9,32 +9,33 @@ import { Loader } from 'aurelia-loader';
 import { ViewEngine } from 'aurelia-templating';
 import { createDynamicStyleModule } from './styles/dynamic-styles';
 import { SyntaxInterpreter } from 'aurelia-templating-binding';
-export let UXConfiguration = class UXConfiguration {
-    constructor(loader, viewEngine) {
+export var UXConfiguration = (function () {
+    function UXConfiguration(loader, viewEngine) {
         this.loader = loader;
         this.viewEngine = viewEngine;
     }
-    defaultConfiguration() {
+    UXConfiguration.prototype.defaultConfiguration = function () {
         this.styleLoaderPlugin();
         this.commandHandler();
         return this;
-    }
-    styleLoaderPlugin() {
+    };
+    UXConfiguration.prototype.styleLoaderPlugin = function () {
         this.viewEngine.addResourcePlugin('.css#xp', {
-            fetch(address) {
+            fetch: function (address) {
                 return Promise.resolve(createDynamicStyleModule(address.replace('.css#xp', '.css')));
             }
         });
         this.loader.addPlugin('xp-styles', {
-            fetch(address) {
+            fetch: function (address) {
                 return Promise.resolve(createDynamicStyleModule(address + '.css'));
             }
         });
         return this;
-    }
-    commandHandler() {
-        let proto = SyntaxInterpreter.prototype;
-        let original = proto.handleUnknownCommand;
+    };
+    UXConfiguration.prototype.commandHandler = function () {
+        var proto = SyntaxInterpreter.prototype;
+        var original = proto.handleUnknownCommand;
+        /* tslint:disable:only-arrow-functions */
         proto.handleUnknownCommand = function (r, e, i, ei, c) {
             if (i.attrName === 'styles') {
                 i.attrName = 'class';
@@ -45,9 +46,11 @@ export let UXConfiguration = class UXConfiguration {
                 return original.call(this, r, e, i, ei, c);
             }
         };
+        /* tslint:enable:only-arrow-functions */
         return this;
-    }
-};
-UXConfiguration = __decorate([
-    inject(Loader, ViewEngine)
-], UXConfiguration);
+    };
+    UXConfiguration = __decorate([
+        inject(Loader, ViewEngine)
+    ], UXConfiguration);
+    return UXConfiguration;
+}());

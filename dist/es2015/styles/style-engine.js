@@ -8,19 +8,20 @@ import { metadata, Origin } from 'aurelia-metadata';
 import { inject, Container } from 'aurelia-dependency-injection';
 import { DOM } from 'aurelia-pal';
 import { camelCase } from 'aurelia-binding';
-export let StyleEngine = class StyleEngine {
-    constructor(container) {
+export var StyleEngine = (function () {
+    function StyleEngine(container) {
         this.container = container;
         this.controllers = new Map();
     }
-    getThemeKeyForComponent(obj) {
+    StyleEngine.prototype.getThemeKeyForComponent = function (obj) {
         return camelCase(Origin.get(obj.constructor).moduleMember + 'Theme');
-    }
-    applyTheme(themable, theme) {
-        let themeKey = this.getThemeKeyForComponent(themable);
-        let currentController = themable.view[themeKey];
-        let bindingContext;
-        let newController;
+    };
+    StyleEngine.prototype.applyTheme = function (themable, theme) {
+        var _this = this;
+        var themeKey = this.getThemeKeyForComponent(themable);
+        var currentController = themable.view[themeKey];
+        var bindingContext;
+        var newController;
         if (!theme) {
             if (currentController !== currentController.factory.defaultController) {
                 currentController.unbind();
@@ -50,27 +51,28 @@ export let StyleEngine = class StyleEngine {
             themable.view[themeKey] = newController;
             newController.bind(themable.view);
             this.controllers.set(bindingContext, newController);
-            newController.onRemove = () => {
-                this.controllers.delete(bindingContext);
+            newController.onRemove = function () {
+                _this.controllers.delete(bindingContext);
             };
         }
-    }
-    getOrCreateStlyeController(view, factory) {
-        let controller = view[factory.themeKey];
+    };
+    StyleEngine.prototype.getOrCreateStlyeController = function (view, factory) {
+        var controller = view[factory.themeKey];
         if (controller === undefined) {
             if (this.renderingInShadowDOM(view)) {
-                let destination = view.container.get(DOM.boundary);
+                var destination = view.container.get(DOM.boundary);
                 view[factory.themeKey] = controller = factory.create(view.container, destination);
             }
             view[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
         }
         return controller;
-    }
-    renderingInShadowDOM(view) {
-        let behavior = metadata.get(metadata.resource, view.bindingContext.constructor);
+    };
+    StyleEngine.prototype.renderingInShadowDOM = function (view) {
+        var behavior = metadata.get(metadata.resource, view.bindingContext.constructor);
         return behavior.usesShadowDOM;
-    }
-};
-StyleEngine = __decorate([
-    inject(Container)
-], StyleEngine);
+    };
+    StyleEngine = __decorate([
+        inject(Container)
+    ], StyleEngine);
+    return StyleEngine;
+}());

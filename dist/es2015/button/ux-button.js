@@ -8,33 +8,34 @@ import { customElement, bindable, ViewResources, processAttributes } from 'aurel
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { processDesignAttributes } from '../designs/design-attributes';
-export let UxButton = class UxButton {
-    constructor(resources, styleEngine) {
+export var UxButton = (function () {
+    function UxButton(resources, styleEngine) {
         this.resources = resources;
         this.styleEngine = styleEngine;
         this.disabled = false;
         this.theme = null;
     }
-    created(_, myView) {
+    UxButton.prototype.created = function (_, myView) {
         this.view = myView;
-    }
-    bind() {
+    };
+    UxButton.prototype.bind = function () {
         if (this.theme) {
             this.styleEngine.applyTheme(this, this.theme);
         }
-    }
-    themeChanged(newValue) {
+    };
+    UxButton.prototype.themeChanged = function (newValue) {
         this.styleEngine.applyTheme(this, newValue);
-    }
-};
-__decorate([
-    bindable
-], UxButton.prototype, "disabled", void 0);
-__decorate([
-    bindable
-], UxButton.prototype, "theme", void 0);
-UxButton = __decorate([
-    inject(ViewResources, StyleEngine),
-    customElement('ux-button'),
-    processAttributes(processDesignAttributes)
-], UxButton);
+    };
+    __decorate([
+        bindable
+    ], UxButton.prototype, "disabled", void 0);
+    __decorate([
+        bindable
+    ], UxButton.prototype, "theme", void 0);
+    UxButton = __decorate([
+        inject(ViewResources, StyleEngine),
+        customElement('ux-button'),
+        processAttributes(processDesignAttributes)
+    ], UxButton);
+    return UxButton;
+}());

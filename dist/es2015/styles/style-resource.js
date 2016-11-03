@@ -1,36 +1,41 @@
 import { Origin } from 'aurelia-metadata';
 import { StyleLocator } from './style-locator';
 import { StyleEngine } from './style-engine';
-export class StyleResource {
-    initialize(container, target) {
+export var StyleResource = (function () {
+    function StyleResource() {
+    }
+    StyleResource.prototype.initialize = function (container, target) {
         this.styleObjectType = target;
         this.container = container;
         this.hooks = new StyleViewEngineHooks(container.get(StyleEngine));
-    }
-    register(registry) {
+    };
+    StyleResource.prototype.register = function (registry) {
         registry.registerViewEngineHooks(this.hooks);
-    }
-    load(container) {
-        let styleStrategy = container.get(StyleLocator)
+    };
+    StyleResource.prototype.load = function (container) {
+        var _this = this;
+        var styleStrategy = container.get(StyleLocator)
             .getStyleStrategy(this.styleObjectType);
         if (!styleStrategy.moduleId) {
             styleStrategy.moduleId = Origin.get(this.styleObjectType).moduleId;
         }
-        return styleStrategy.loadStyleFactory(container, this.styleObjectType).then(styleFactory => {
-            this.factory = styleFactory;
-            this.hooks.factory = this.factory;
+        return styleStrategy.loadStyleFactory(container, this.styleObjectType).then(function (styleFactory) {
+            _this.factory = styleFactory;
+            _this.hooks.factory = _this.factory;
             return styleFactory;
         });
-    }
-}
-class StyleViewEngineHooks {
-    constructor(engine) {
+    };
+    return StyleResource;
+}());
+var StyleViewEngineHooks = (function () {
+    function StyleViewEngineHooks(engine) {
         this.engine = engine;
     }
-    beforeBind(view) {
+    StyleViewEngineHooks.prototype.beforeBind = function (view) {
         this.engine.getOrCreateStlyeController(view, this.factory).bind(view);
-    }
-    beforeUnbind(view) {
+    };
+    StyleViewEngineHooks.prototype.beforeUnbind = function (view) {
         this.engine.getOrCreateStlyeController(view, this.factory).unbind();
-    }
-}
+    };
+    return StyleViewEngineHooks;
+}());

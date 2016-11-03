@@ -8,18 +8,23 @@ import { inject } from 'aurelia-dependency-injection';
 import { MaterialDesign } from '../designs/material-design';
 import { Web } from './web';
 import { PLATFORM } from 'aurelia-pal';
-export let Electron = class Electron {
-    constructor() {
+export var Electron = (function () {
+    function Electron() {
         this.type = 'electron';
     }
-    get isAvailable() {
-        let p = PLATFORM.global.process;
-        return p && p.versions && p.versions.electron;
-    }
-    start(config) {
-        return Promise.resolve().then(() => config.container.get(Web));
-    }
-};
-Electron = __decorate([
-    inject(MaterialDesign)
-], Electron);
+    Object.defineProperty(Electron.prototype, "isAvailable", {
+        get: function () {
+            var p = PLATFORM.global.process;
+            return p && p.versions && p.versions.electron;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Electron.prototype.start = function (config) {
+        return Promise.resolve().then(function () { return config.container.get(Web); });
+    };
+    Electron = __decorate([
+        inject(MaterialDesign)
+    ], Electron);
+    return Electron;
+}());

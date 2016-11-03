@@ -3,22 +3,24 @@ import { styleStrategy, ConventionalStyleStrategy, RelativeStyleStrategy } from 
 /**
  * Locates a style for an object.
  */
-export class StyleLocator {
+export var StyleLocator = (function () {
+    function StyleLocator() {
+    }
     /**
      * Gets the style strategy for the value.
      * @param value The value to locate the style strategy for.
      * @return The located StyleStrategy instance.
      */
-    getStyleStrategy(value) {
+    StyleLocator.prototype.getStyleStrategy = function (value) {
         if (typeof value === 'object' && 'getStyleStrategy' in value) {
-            let origin = Origin.get(value.constructor);
+            var origin_1 = Origin.get(value.constructor);
             value = value.getStyleStrategy();
             if (typeof value === 'string') {
                 value = new RelativeStyleStrategy(value);
             }
             styleStrategy.assert(value);
-            if (origin.moduleId) {
-                value.makeRelativeTo(origin.moduleId);
+            if (origin_1.moduleId) {
+                value.makeRelativeTo(origin_1.moduleId);
             }
             return value;
         }
@@ -31,8 +33,8 @@ export class StyleLocator {
         if (typeof value !== 'function') {
             value = value.constructor;
         }
-        let origin = Origin.get(value);
-        let strategy = metadata.get(StyleLocator.styleStrategyMetadataKey, value);
+        var origin = Origin.get(value);
+        var strategy = metadata.get(StyleLocator.styleStrategyMetadataKey, value);
         if (!strategy) {
             if (!origin.moduleId) {
                 throw new Error('Cannot determine default style strategy for object.');
@@ -43,31 +45,32 @@ export class StyleLocator {
             strategy.moduleId = origin.moduleId;
         }
         return strategy;
-    }
+    };
     /**
      * Creates a fallback Style Strategy. Used when unable to locate a configured strategy.
      * The default implementation returns and instance of ConventionalStyleStrategy.
      * @param origin The origin of the view model to return the strategy for.
      * @return The fallback StyleStrategy.
      */
-    createFallbackStyleStrategy(origin) {
+    StyleLocator.prototype.createFallbackStyleStrategy = function (origin) {
         return new ConventionalStyleStrategy(this, origin);
-    }
+    };
     /**
      * Conventionally converts a view model origin to a style url.
      * Used by the ConventionalStyleStrategy.
      * @param origin The origin of the view model to convert.
      * @return The view url.
      */
-    convertOriginToStyleUrl(origin) {
-        let moduleId = origin.moduleId;
-        let id = (moduleId.endsWith('.js') || moduleId.endsWith('.ts'))
+    StyleLocator.prototype.convertOriginToStyleUrl = function (origin) {
+        var moduleId = origin.moduleId;
+        var id = (moduleId.endsWith('.js') || moduleId.endsWith('.ts'))
             ? moduleId.substring(0, moduleId.length - 3)
             : moduleId;
         return id + '.css';
-    }
-}
-/**
- * The metadata key for storing/finding style strategies associated with an class/object.
- */
-StyleLocator.styleStrategyMetadataKey = 'aurelia:style-strategy';
+    };
+    /**
+     * The metadata key for storing/finding style strategies associated with an class/object.
+     */
+    StyleLocator.styleStrategyMetadataKey = 'aurelia:style-strategy';
+    return StyleLocator;
+}());

@@ -9,61 +9,71 @@ import { AureliaUX } from '../aurelia-ux';
 import { computedFrom, camelCase } from 'aurelia-binding';
 import { Origin } from 'aurelia-metadata';
 import { swatches } from '../colors/swatches';
-export class StyleFactory {
-    constructor(styleObjectType, styles, expression) {
+export var StyleFactory = (function () {
+    function StyleFactory(styleObjectType, styles, expression) {
         this.styleObjectType = styleObjectType;
         this.styles = styles;
         this.expression = expression;
         this.themeKey = camelCase(Origin.get(styleObjectType).moduleMember);
     }
-    getOrCreateDefault(container) {
+    StyleFactory.prototype.getOrCreateDefault = function (container) {
         if (this.defaultController === undefined) {
             this.defaultController = this.create(container);
             this.defaultController.isDefault = true;
         }
         return this.defaultController;
-    }
-    create(container, destination, bindingContext) {
-        let $styles = {};
-        let ux = container.get(AureliaUX);
+    };
+    StyleFactory.prototype.create = function (container, destination, bindingContext) {
+        var $styles = {};
+        var ux = container.get(AureliaUX);
         if (bindingContext) {
-            let baseStyles = this.getOrCreateDefault(container).bindingContext;
+            var baseStyles = this.getOrCreateDefault(container).bindingContext;
             Object.setPrototypeOf(bindingContext, baseStyles);
         }
         else {
             bindingContext = container.get(this.styleObjectType);
         }
-        Object.keys(this.styles).forEach(key => {
+        Object.keys(this.styles).forEach(function (key) {
             $styles[key] = generateRandomClass(key);
         });
         return new StyleController(this, bindingContext, new StyleOverrideContext(ux, $styles), this.expression, destination);
-    }
-}
-let currentNumber = 0;
+    };
+    return StyleFactory;
+}());
+var currentNumber = 0;
 function generateRandomClass(key) {
     return key + '_aurelia_ux_' + nextNumber();
 }
 function nextNumber() {
     return ++currentNumber;
 }
-class StyleOverrideContext {
-    constructor($ux, $styles) {
+var StyleOverrideContext = (function () {
+    function StyleOverrideContext($ux, $styles) {
         this.$ux = $ux;
         this.$styles = $styles;
         this.$on = '(min-width: 0)';
         this.$off = '(max-width: 0)';
         this.$swatches = swatches;
     }
-    get $platform() {
-        return this.$ux.platform;
-    }
-    get $design() {
-        return this.$ux.design;
-    }
-}
-__decorate([
-    computedFrom('$ux.platform')
-], StyleOverrideContext.prototype, "$platform", null);
-__decorate([
-    computedFrom('$ux.design')
-], StyleOverrideContext.prototype, "$design", null);
+    Object.defineProperty(StyleOverrideContext.prototype, "$platform", {
+        get: function () {
+            return this.$ux.platform;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(StyleOverrideContext.prototype, "$design", {
+        get: function () {
+            return this.$ux.design;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        computedFrom('$ux.platform')
+    ], StyleOverrideContext.prototype, "$platform", null);
+    __decorate([
+        computedFrom('$ux.design')
+    ], StyleOverrideContext.prototype, "$design", null);
+    return StyleOverrideContext;
+}());

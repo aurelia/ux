@@ -1,6 +1,6 @@
 import { swatches } from '../colors/swatches';
-export class MaterialDesign {
-    constructor() {
+export var MaterialDesign = (function () {
+    function MaterialDesign() {
         this.type = 'material';
         this.primary = swatches.indigo.p500;
         this.primaryForeground = swatches.white;
@@ -15,4 +15,5 @@ export class MaterialDesign {
         this.accentDark = swatches.pink.a400;
         this.accentDarkForeground = swatches.white;
     }
-}
+    return MaterialDesign;
+}());

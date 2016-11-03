@@ -14,7 +14,7 @@ export function styles() {
  * @param strategy The style strategy instance.
  */
 export function useStyleStrategy(strategy) {
-    return (target) => {
+    return function (target) {
         metadata.define(StyleLocator.styleStrategyMetadataKey, strategy, target);
     };
 }

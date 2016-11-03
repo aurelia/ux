@@ -5,11 +5,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { styles } from '../styles/decorators';
-export let UxButtonTheme = class UxButtonTheme {
-    constructor() {
+export var UxButtonTheme = (function () {
+    function UxButtonTheme() {
         this.raised = true;
     }
-};
-UxButtonTheme = __decorate([
-    styles()
-], UxButtonTheme);
+    UxButtonTheme = __decorate([
+        styles()
+    ], UxButtonTheme);
+    return UxButtonTheme;
+}());

@@ -53,6 +53,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-loader', 'aurelia-temp
                 UXConfiguration.prototype.commandHandler = function () {
                     var proto = aurelia_templating_binding_1.SyntaxInterpreter.prototype;
                     var original = proto.handleUnknownCommand;
+                    /* tslint:disable:only-arrow-functions */
                     proto.handleUnknownCommand = function (r, e, i, ei, c) {
                         if (i.attrName === 'styles') {
                             i.attrName = 'class';
@@ -63,6 +64,7 @@ System.register(['aurelia-dependency-injection', 'aurelia-loader', 'aurelia-temp
                             return original.call(this, r, e, i, ei, c);
                         }
                     };
+                    /* tslint:enable:only-arrow-functions */
                     return this;
                 };
                 UXConfiguration = __decorate([

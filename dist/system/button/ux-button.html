@@ -1,0 +1,10 @@
+<template role="button">
+  <require from="./ux-button-theme"></require>
+
+  <button styles.button class="
+    ${disabled ? 'disabled' : ''}
+    ${$uxButtonTheme.raised : 'raised' : 'flat'}
+    ">
+    <slot></slot>
+  </button>
+</template>
