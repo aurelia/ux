@@ -1,4 +1,4 @@
-System.register(['./aurelia-ux'], function(exports_1, context_1) {
+System.register(['./aurelia-ux', './colors/swatches', './button/ux-button-theme', './styles/decorators', './ux-configuration'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var aurelia_ux_1;
@@ -17,10 +17,45 @@ System.register(['./aurelia-ux'], function(exports_1, context_1) {
         }
     }
     exports_1("configure", configure);
+    var exportedNames_1 = {
+        'configure': true,
+        'swatches': true,
+        'UxButtonTheme': true,
+        'AureliaUX': true,
+        'UXConfiguration': true
+    };
+    function exportStar_1(m) {
+        var exports = {};
+        for(var n in m) {
+            if (n !== "default"&& !exportedNames_1.hasOwnProperty(n)) exports[n] = m[n];
+        }
+        exports_1(exports);
+    }
     return {
         setters:[
             function (aurelia_ux_1_1) {
                 aurelia_ux_1 = aurelia_ux_1_1;
+                exports_1({
+                    "AureliaUX": aurelia_ux_1_1["AureliaUX"]
+                });
+            },
+            function (swatches_1_1) {
+                exports_1({
+                    "swatches": swatches_1_1["swatches"]
+                });
+            },
+            function (ux_button_theme_1_1) {
+                exports_1({
+                    "UxButtonTheme": ux_button_theme_1_1["UxButtonTheme"]
+                });
+            },
+            function (decorators_1_1) {
+                exportStar_1(decorators_1_1);
+            },
+            function (ux_configuration_1_1) {
+                exports_1({
+                    "UXConfiguration": ux_configuration_1_1["UXConfiguration"]
+                });
             }],
         execute: function() {
         }
