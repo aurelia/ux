@@ -14,7 +14,7 @@ export var StyleController = (function () {
     StyleController.prototype.bind = function (view) {
         var overrideContext = view.overrideContext;
         var $styles = overrideContext['$styles'] || {};
-        overrideContext['$' + this.factory.id] = this.bindingContext;
+        overrideContext['$' + this.factory.themeKey] = this.bindingContext;
         overrideContext['$design'] = this.overrideContext.$design;
         overrideContext['$styles'] = Object.assign($styles, this.overrideContext.$styles);
         if (this.count === 0) {
