@@ -15,13 +15,13 @@ export class UXConfiguration {
   }
 
   public styleLoaderPlugin() {
-    this.viewEngine.addResourcePlugin('.css#xp', {
+    this.viewEngine.addResourcePlugin('.css#ux', {
       fetch(address: string) {
-        return Promise.resolve(createDynamicStyleModule(address.replace('.css#xp', '.css')));
+        return Promise.resolve(createDynamicStyleModule(address.replace('.css#ux', '.css')));
       }
     });
 
-    this.loader.addPlugin('xp-styles', {
+    this.loader.addPlugin('ux-styles', {
       fetch(address: string) {
         return Promise.resolve(createDynamicStyleModule(address + '.css'));
       }
