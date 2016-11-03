@@ -20,7 +20,12 @@ define(["require", "exports", 'aurelia-templating', 'aurelia-dependency-injectio
                 return '.${$styles.' + name + ' & oneTime}';
             });
             var expression = this.bindingLanguage.inspectTextContent(this.viewResources, transformed);
-            expression['targetProperty'] = 'innerHTML';
+            if (expression === null) {
+                expression = new PlainCSSBindingExpression(transformed);
+            }
+            else {
+                expression['targetProperty'] = 'innerHTML';
+            }
             return new style_factory_1.StyleFactory(styleObjectType, styles, expression);
         };
         StyleCompiler = __decorate([
@@ -29,4 +34,26 @@ define(["require", "exports", 'aurelia-templating', 'aurelia-dependency-injectio
         return StyleCompiler;
     }());
     exports.StyleCompiler = StyleCompiler;
+    var PlainCSSBindingExpression = (function () {
+        function PlainCSSBindingExpression(css) {
+            this.css = css;
+        }
+        PlainCSSBindingExpression.prototype.createBinding = function (styleElement) {
+            return new CSSBinding(this.css, styleElement);
+        };
+        return PlainCSSBindingExpression;
+    }());
+    var CSSBinding = (function () {
+        function CSSBinding(css, styleElement) {
+            this.css = css;
+            this.styleElement = styleElement;
+        }
+        CSSBinding.prototype.bind = function () {
+            this.styleElement.innerHTML = this.css;
+        };
+        CSSBinding.prototype.unbind = function () {
+            this.styleElement.innerHTML = '';
+        };
+        return CSSBinding;
+    }());
 });

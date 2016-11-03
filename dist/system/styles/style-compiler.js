@@ -8,7 +8,7 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', './style-
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var aurelia_templating_1, aurelia_dependency_injection_1, style_factory_1;
-    var classMatcher, StyleCompiler;
+    var classMatcher, StyleCompiler, PlainCSSBindingExpression, CSSBinding;
     return {
         setters:[
             function (aurelia_templating_1_1) {
@@ -35,7 +35,12 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', './style-
                         return '.${$styles.' + name + ' & oneTime}';
                     });
                     var expression = this.bindingLanguage.inspectTextContent(this.viewResources, transformed);
-                    expression['targetProperty'] = 'innerHTML';
+                    if (expression === null) {
+                        expression = new PlainCSSBindingExpression(transformed);
+                    }
+                    else {
+                        expression['targetProperty'] = 'innerHTML';
+                    }
                     return new style_factory_1.StyleFactory(styleObjectType, styles, expression);
                 };
                 StyleCompiler = __decorate([
@@ -44,6 +49,28 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', './style-
                 return StyleCompiler;
             }());
             exports_1("StyleCompiler", StyleCompiler);
+            PlainCSSBindingExpression = (function () {
+                function PlainCSSBindingExpression(css) {
+                    this.css = css;
+                }
+                PlainCSSBindingExpression.prototype.createBinding = function (styleElement) {
+                    return new CSSBinding(this.css, styleElement);
+                };
+                return PlainCSSBindingExpression;
+            }());
+            CSSBinding = (function () {
+                function CSSBinding(css, styleElement) {
+                    this.css = css;
+                    this.styleElement = styleElement;
+                }
+                CSSBinding.prototype.bind = function () {
+                    this.styleElement.innerHTML = this.css;
+                };
+                CSSBinding.prototype.unbind = function () {
+                    this.styleElement.innerHTML = '';
+                };
+                return CSSBinding;
+            }());
         }
     }
 });

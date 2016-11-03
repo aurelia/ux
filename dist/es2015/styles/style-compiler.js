@@ -21,11 +21,38 @@ export var StyleCompiler = (function () {
             return '.${$styles.' + name + ' & oneTime}';
         });
         var expression = this.bindingLanguage.inspectTextContent(this.viewResources, transformed);
-        expression['targetProperty'] = 'innerHTML';
+        if (expression === null) {
+            expression = new PlainCSSBindingExpression(transformed);
+        }
+        else {
+            expression['targetProperty'] = 'innerHTML';
+        }
         return new StyleFactory(styleObjectType, styles, expression);
     };
     StyleCompiler = __decorate([
         inject(BindingLanguage, ViewResources)
     ], StyleCompiler);
     return StyleCompiler;
+}());
+var PlainCSSBindingExpression = (function () {
+    function PlainCSSBindingExpression(css) {
+        this.css = css;
+    }
+    PlainCSSBindingExpression.prototype.createBinding = function (styleElement) {
+        return new CSSBinding(this.css, styleElement);
+    };
+    return PlainCSSBindingExpression;
+}());
+var CSSBinding = (function () {
+    function CSSBinding(css, styleElement) {
+        this.css = css;
+        this.styleElement = styleElement;
+    }
+    CSSBinding.prototype.bind = function () {
+        this.styleElement.innerHTML = this.css;
+    };
+    CSSBinding.prototype.unbind = function () {
+        this.styleElement.innerHTML = '';
+    };
+    return CSSBinding;
 }());
