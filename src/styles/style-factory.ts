@@ -40,7 +40,7 @@ export class StyleFactory {
     return new StyleController(
       this,
       bindingContext,
-      new StyleOverrideContext(ux, $styles),
+      new StyleOverrideContext(ux, $styles, bindingContext),
       this.expression,
       destination
       );
@@ -62,7 +62,7 @@ class StyleOverrideContext {
   public $off = '(max-width: 0)';
   public $swatches = swatches;
 
-  constructor(public $ux: AureliaUX, public $styles: any) {}
+  constructor(public $ux: AureliaUX, public $styles: any, public bindingContext: any) {}
 
   @computedFrom('$ux.platform')
   get $platform() {
