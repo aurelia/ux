@@ -10,5 +10,5 @@ export declare class StyleEngine {
     getThemeKeyForComponent(obj: any): string;
     applyTheme(themable: Themable, theme: string | Object | null): void;
     getOrCreateStlyeController(view: View, factory: StyleFactory): StyleController;
-    renderingInShadowDOM(view: View): boolean;
+    private getShadowDOMRoot(view);
 }

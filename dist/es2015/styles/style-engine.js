@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { metadata, Origin } from 'aurelia-metadata';
+import { Origin } from 'aurelia-metadata';
 import { inject, Container } from 'aurelia-dependency-injection';
 import { DOM } from 'aurelia-pal';
 import { camelCase } from 'aurelia-binding';
@@ -37,7 +37,7 @@ export var StyleEngine = (function () {
         else {
             bindingContext = theme;
         }
-        if (this.renderingInShadowDOM(themable.view)) {
+        if (this.getShadowDOMRoot(themable.view) !== null) {
             currentController.unbind();
             currentController.bindingContext = bindingContext;
             currentController.bind(themable.view);
@@ -59,17 +59,22 @@ export var StyleEngine = (function () {
     StyleEngine.prototype.getOrCreateStlyeController = function (view, factory) {
         var controller = view[factory.themeKey];
         if (controller === undefined) {
-            if (this.renderingInShadowDOM(view)) {
-                var destination = view.container.get(DOM.boundary);
-                view[factory.themeKey] = controller = factory.create(view.container, destination);
+            var shadowDOMRoot = this.getShadowDOMRoot(view);
+            if (shadowDOMRoot === null) {
+                view[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
             }
-            view[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
+            else {
+                view[factory.themeKey] = controller = factory.create(view.container, shadowDOMRoot);
+            }
         }
         return controller;
     };
-    StyleEngine.prototype.renderingInShadowDOM = function (view) {
-        var behavior = metadata.get(metadata.resource, view.bindingContext.constructor);
-        return behavior.usesShadowDOM;
+    StyleEngine.prototype.getShadowDOMRoot = function (view) {
+        var root = view.container.get(DOM.boundary);
+        if (root && root.host instanceof Element) {
+            return root;
+        }
+        return null;
     };
     StyleEngine = __decorate([
         inject(Container)

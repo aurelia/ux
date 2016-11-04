@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var aurelia_templating_1 = require('aurelia-templating');
 var aurelia_dependency_injection_1 = require('aurelia-dependency-injection');
 var style_factory_1 = require('./style-factory');
-var classMatcher = /styles.([A-Za-z1-9]+)/g;
+var classMatcher = /styles.([A-Za-z1-9\-_]+)/g;
 var StyleCompiler = (function () {
     function StyleCompiler(bindingLanguage, viewResources) {
         this.bindingLanguage = bindingLanguage;

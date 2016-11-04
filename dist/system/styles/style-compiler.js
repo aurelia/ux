@@ -21,7 +21,7 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', './style-
                 style_factory_1 = style_factory_1_1;
             }],
         execute: function() {
-            classMatcher = /styles.([A-Za-z1-9]+)/g;
+            classMatcher = /styles.([A-Za-z1-9\-_]+)/g;
             StyleCompiler = (function () {
                 function StyleCompiler(bindingLanguage, viewResources) {
                     this.bindingLanguage = bindingLanguage;

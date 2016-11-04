@@ -38,7 +38,7 @@ var StyleEngine = (function () {
         else {
             bindingContext = theme;
         }
-        if (this.renderingInShadowDOM(themable.view)) {
+        if (this.getShadowDOMRoot(themable.view) !== null) {
             currentController.unbind();
             currentController.bindingContext = bindingContext;
             currentController.bind(themable.view);
@@ -60,17 +60,22 @@ var StyleEngine = (function () {
     StyleEngine.prototype.getOrCreateStlyeController = function (view, factory) {
         var controller = view[factory.themeKey];
         if (controller === undefined) {
-            if (this.renderingInShadowDOM(view)) {
-                var destination = view.container.get(aurelia_pal_1.DOM.boundary);
-                view[factory.themeKey] = controller = factory.create(view.container, destination);
+            var shadowDOMRoot = this.getShadowDOMRoot(view);
+            if (shadowDOMRoot === null) {
+                view[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
             }
-            view[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
+            else {
+                view[factory.themeKey] = controller = factory.create(view.container, shadowDOMRoot);
+            }
         }
         return controller;
     };
-    StyleEngine.prototype.renderingInShadowDOM = function (view) {
-        var behavior = aurelia_metadata_1.metadata.get(aurelia_metadata_1.metadata.resource, view.bindingContext.constructor);
-        return behavior.usesShadowDOM;
+    StyleEngine.prototype.getShadowDOMRoot = function (view) {
+        var root = view.container.get(aurelia_pal_1.DOM.boundary);
+        if (root && root.host instanceof Element) {
+            return root;
+        }
+        return null;
     };
     StyleEngine = __decorate([
         aurelia_dependency_injection_1.inject(aurelia_dependency_injection_1.Container)
