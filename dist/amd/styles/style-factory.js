@@ -33,7 +33,7 @@ define(["require", "exports", './style-controller', '../aurelia-ux', 'aurelia-bi
             Object.keys(this.styles).forEach(function (key) {
                 $styles[key] = generateRandomClass(key);
             });
-            return new style_controller_1.StyleController(this, bindingContext, new StyleOverrideContext(ux, $styles), this.expression, destination);
+            return new style_controller_1.StyleController(this, bindingContext, new StyleOverrideContext(ux, $styles, bindingContext), this.expression, destination);
         };
         return StyleFactory;
     }());
@@ -46,9 +46,10 @@ define(["require", "exports", './style-controller', '../aurelia-ux', 'aurelia-bi
         return ++currentNumber;
     }
     var StyleOverrideContext = (function () {
-        function StyleOverrideContext($ux, $styles) {
+        function StyleOverrideContext($ux, $styles, bindingContext) {
             this.$ux = $ux;
             this.$styles = $styles;
+            this.bindingContext = bindingContext;
             this.$on = '(min-width: 0)';
             this.$off = '(max-width: 0)';
             this.$swatches = swatches_1.swatches;

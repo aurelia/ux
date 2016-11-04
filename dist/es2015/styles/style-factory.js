@@ -36,7 +36,7 @@ export var StyleFactory = (function () {
         Object.keys(this.styles).forEach(function (key) {
             $styles[key] = generateRandomClass(key);
         });
-        return new StyleController(this, bindingContext, new StyleOverrideContext(ux, $styles), this.expression, destination);
+        return new StyleController(this, bindingContext, new StyleOverrideContext(ux, $styles, bindingContext), this.expression, destination);
     };
     return StyleFactory;
 }());
@@ -48,9 +48,10 @@ function nextNumber() {
     return ++currentNumber;
 }
 var StyleOverrideContext = (function () {
-    function StyleOverrideContext($ux, $styles) {
+    function StyleOverrideContext($ux, $styles, bindingContext) {
         this.$ux = $ux;
         this.$styles = $styles;
+        this.bindingContext = bindingContext;
         this.$on = '(min-width: 0)';
         this.$off = '(max-width: 0)';
         this.$swatches = swatches;
