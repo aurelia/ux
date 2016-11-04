@@ -11,7 +11,7 @@ export class StyleCompiler {
   public compile(styleObjectType: Function, css: string): StyleFactory {
     let styles = Object.create(null);
     let transformed = css.replace(classMatcher, (_: string, capture: string) => {
-      let name = capture;
+      let name = capture.replace(/\-/g, '_');
       styles[name] = true;
       return '.${$styles.' + name + ' & oneTime}';
     });

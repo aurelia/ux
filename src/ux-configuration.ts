@@ -38,7 +38,7 @@ export class UXConfiguration {
     proto.handleUnknownCommand = function(r: ViewResources, e: Element, i: any, ei?: any, c?: any) {
       if (i.attrName === 'styles') {
         i.attrName = 'class';
-        i.attrValue = '$styles.' + i.command;
+        i.attrValue = '$styles.' + i.command.replace(/\-/g, '_');
         return (<any>this)['one-way'](r, e, i, ei, c);
       } else {
         return original.call(this, r, e, i, ei, c);
