@@ -30,7 +30,7 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', './style-
                 StyleCompiler.prototype.compile = function (styleObjectType, css) {
                     var styles = Object.create(null);
                     var transformed = css.replace(classMatcher, function (_, capture) {
-                        var name = capture;
+                        var name = capture.replace(/\-/g, '_');
                         styles[name] = true;
                         return '.${$styles.' + name + ' & oneTime}';
                     });

@@ -40,7 +40,7 @@ var UXConfiguration = (function () {
         proto.handleUnknownCommand = function (r, e, i, ei, c) {
             if (i.attrName === 'styles') {
                 i.attrName = 'class';
-                i.attrValue = '$styles.' + i.command;
+                i.attrValue = '$styles.' + i.command.replace(/\-/g, '_');
                 return this['one-way'](r, e, i, ei, c);
             }
             else {
