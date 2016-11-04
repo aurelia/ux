@@ -2,7 +2,7 @@ import {BindingLanguage, ViewResources} from 'aurelia-templating';
 import {inject} from 'aurelia-dependency-injection';
 import {StyleFactory} from './style-factory';
 
-const classMatcher = /styles.([A-Za-z1-9]+)/g;
+const classMatcher = /styles.([A-Za-z1-9\-_]+)/g;
 
 @inject(BindingLanguage, ViewResources)
 export class StyleCompiler {
