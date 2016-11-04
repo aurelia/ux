@@ -1,5 +1,5 @@
 import {View} from 'aurelia-templating';
-import {metadata, Origin} from 'aurelia-metadata';
+import {Origin} from 'aurelia-metadata';
 import {inject, Container} from 'aurelia-dependency-injection';
 import {StyleController} from './style-controller';
 import {DOM} from 'aurelia-pal';
@@ -40,7 +40,7 @@ export class StyleEngine {
       bindingContext = theme;
     }
 
-    if (this.renderingInShadowDOM(themable.view)) {
+    if (this.getShadowDOMRoot(themable.view) !== null) {
       currentController.unbind();
       currentController.bindingContext = bindingContext;
       currentController.bind(themable.view);
@@ -70,19 +70,25 @@ export class StyleEngine {
     let controller = (<any>view)[factory.themeKey];
 
     if (controller === undefined) {
-      if (this.renderingInShadowDOM(view)) {
-        let destination = view.container.get(DOM.boundary);
-        (<any>view)[factory.themeKey] = controller = factory.create(view.container, destination);
-      }
+      let shadowDOMRoot = this.getShadowDOMRoot(view);
 
-      (<any>view)[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
+      if (shadowDOMRoot === null) {
+        (<any>view)[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
+      } else {
+        (<any>view)[factory.themeKey] = controller = factory.create(view.container, shadowDOMRoot);
+      }
     }
 
     return controller;
   }
 
-  public renderingInShadowDOM(view: View): boolean {
-    let behavior = <any>metadata.get(metadata.resource, view.bindingContext.constructor);
-    return behavior.usesShadowDOM;
+  private getShadowDOMRoot(view: View) {
+    let root = view.container.get(DOM.boundary);
+
+    if (root && root.host instanceof Element) {
+      return root;
+    }
+
+    return null;
   }
 }
