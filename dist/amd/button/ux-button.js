@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-define(["require", "exports", 'aurelia-templating', 'aurelia-dependency-injection', '../styles/style-engine', '../designs/design-attributes'], function (require, exports, aurelia_templating_1, aurelia_dependency_injection_1, style_engine_1, design_attributes_1) {
+define(["require", "exports", 'aurelia-templating', 'aurelia-dependency-injection', '../styles/style-engine', '../designs/design-attributes', '../effects/paper-ripple'], function (require, exports, aurelia_templating_1, aurelia_dependency_injection_1, style_engine_1, design_attributes_1, paper_ripple_1) {
     "use strict";
     var UxButton = (function () {
         function UxButton(resources, styleEngine) {
@@ -14,6 +14,7 @@ define(["require", "exports", 'aurelia-templating', 'aurelia-dependency-injectio
             this.size = null;
             this.disabled = false;
             this.theme = null;
+            this.ripple = null;
         }
         UxButton.prototype.created = function (_, myView) {
             this.view = myView;
@@ -25,6 +26,24 @@ define(["require", "exports", 'aurelia-templating', 'aurelia-dependency-injectio
         };
         UxButton.prototype.themeChanged = function (newValue) {
             this.styleEngine.applyTheme(this, newValue);
+        };
+        UxButton.prototype.onMouseDown = function (e) {
+            if (this.ripple === null) {
+                this.ripple = new paper_ripple_1.PaperRipple();
+                this.button.appendChild(this.ripple.$);
+            }
+            if (this.button.classList.contains('fab')) {
+                this.ripple.center = true;
+                this.ripple.round = true;
+            }
+            this.ripple.downAction(e);
+            return true;
+        };
+        UxButton.prototype.onMouseUp = function () {
+            if (this.ripple !== null) {
+                this.ripple.upAction();
+            }
+            return true;
         };
         __decorate([
             aurelia_templating_1.bindable

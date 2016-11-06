@@ -9,6 +9,7 @@ var aurelia_templating_1 = require('aurelia-templating');
 var aurelia_dependency_injection_1 = require('aurelia-dependency-injection');
 var style_engine_1 = require('../styles/style-engine');
 var design_attributes_1 = require('../designs/design-attributes');
+var paper_ripple_1 = require('../effects/paper-ripple');
 var UxButton = (function () {
     function UxButton(resources, styleEngine) {
         this.resources = resources;
@@ -17,6 +18,7 @@ var UxButton = (function () {
         this.size = null;
         this.disabled = false;
         this.theme = null;
+        this.ripple = null;
     }
     UxButton.prototype.created = function (_, myView) {
         this.view = myView;
@@ -28,6 +30,24 @@ var UxButton = (function () {
     };
     UxButton.prototype.themeChanged = function (newValue) {
         this.styleEngine.applyTheme(this, newValue);
+    };
+    UxButton.prototype.onMouseDown = function (e) {
+        if (this.ripple === null) {
+            this.ripple = new paper_ripple_1.PaperRipple();
+            this.button.appendChild(this.ripple.$);
+        }
+        if (this.button.classList.contains('fab')) {
+            this.ripple.center = true;
+            this.ripple.round = true;
+        }
+        this.ripple.downAction(e);
+        return true;
+    };
+    UxButton.prototype.onMouseUp = function () {
+        if (this.ripple !== null) {
+            this.ripple.upAction();
+        }
+        return true;
     };
     __decorate([
         aurelia_templating_1.bindable

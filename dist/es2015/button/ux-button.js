@@ -8,6 +8,7 @@ import { customElement, bindable, ViewResources, processAttributes } from 'aurel
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { processDesignAttributes } from '../designs/design-attributes';
+import { PaperRipple } from '../effects/paper-ripple';
 export var UxButton = (function () {
     function UxButton(resources, styleEngine) {
         this.resources = resources;
@@ -16,6 +17,7 @@ export var UxButton = (function () {
         this.size = null;
         this.disabled = false;
         this.theme = null;
+        this.ripple = null;
     }
     UxButton.prototype.created = function (_, myView) {
         this.view = myView;
@@ -27,6 +29,24 @@ export var UxButton = (function () {
     };
     UxButton.prototype.themeChanged = function (newValue) {
         this.styleEngine.applyTheme(this, newValue);
+    };
+    UxButton.prototype.onMouseDown = function (e) {
+        if (this.ripple === null) {
+            this.ripple = new PaperRipple();
+            this.button.appendChild(this.ripple.$);
+        }
+        if (this.button.classList.contains('fab')) {
+            this.ripple.center = true;
+            this.ripple.round = true;
+        }
+        this.ripple.downAction(e);
+        return true;
+    };
+    UxButton.prototype.onMouseUp = function () {
+        if (this.ripple !== null) {
+            this.ripple.upAction();
+        }
+        return true;
     };
     __decorate([
         bindable

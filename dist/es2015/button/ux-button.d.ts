@@ -9,8 +9,12 @@ export declare class UxButton implements Themable {
     disabled: boolean;
     theme: null;
     view: View;
+    private ripple;
+    private button;
     constructor(resources: ViewResources, styleEngine: StyleEngine);
     created(_: any, myView: View): void;
     bind(): void;
     themeChanged(newValue: any): void;
+    onMouseDown(e: MouseEvent): boolean;
+    onMouseUp(): boolean;
 }

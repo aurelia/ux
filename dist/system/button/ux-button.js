@@ -1,4 +1,4 @@
-System.register(['aurelia-templating', 'aurelia-dependency-injection', '../styles/style-engine', '../designs/design-attributes'], function(exports_1, context_1) {
+System.register(['aurelia-templating', 'aurelia-dependency-injection', '../styles/style-engine', '../designs/design-attributes', '../effects/paper-ripple'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -7,7 +7,7 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', '../style
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_templating_1, aurelia_dependency_injection_1, style_engine_1, design_attributes_1;
+    var aurelia_templating_1, aurelia_dependency_injection_1, style_engine_1, design_attributes_1, paper_ripple_1;
     var UxButton;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', '../style
             },
             function (design_attributes_1_1) {
                 design_attributes_1 = design_attributes_1_1;
+            },
+            function (paper_ripple_1_1) {
+                paper_ripple_1 = paper_ripple_1_1;
             }],
         execute: function() {
             UxButton = (function () {
@@ -32,6 +35,7 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', '../style
                     this.size = null;
                     this.disabled = false;
                     this.theme = null;
+                    this.ripple = null;
                 }
                 UxButton.prototype.created = function (_, myView) {
                     this.view = myView;
@@ -43,6 +47,24 @@ System.register(['aurelia-templating', 'aurelia-dependency-injection', '../style
                 };
                 UxButton.prototype.themeChanged = function (newValue) {
                     this.styleEngine.applyTheme(this, newValue);
+                };
+                UxButton.prototype.onMouseDown = function (e) {
+                    if (this.ripple === null) {
+                        this.ripple = new paper_ripple_1.PaperRipple();
+                        this.button.appendChild(this.ripple.$);
+                    }
+                    if (this.button.classList.contains('fab')) {
+                        this.ripple.center = true;
+                        this.ripple.round = true;
+                    }
+                    this.ripple.downAction(e);
+                    return true;
+                };
+                UxButton.prototype.onMouseUp = function () {
+                    if (this.ripple !== null) {
+                        this.ripple.upAction();
+                    }
+                    return true;
                 };
                 __decorate([
                     aurelia_templating_1.bindable
