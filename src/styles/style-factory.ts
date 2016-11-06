@@ -50,7 +50,7 @@ export class StyleFactory {
 let currentNumber = 0;
 
 function generateRandomClass(key: string) {
-  return key + '_aurelia_ux_' + nextNumber();
+  return key + '_au_ux_' + nextNumber();
 }
 
 function nextNumber() {

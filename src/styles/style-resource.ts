@@ -45,10 +45,10 @@ class StyleViewEngineHooks {
   constructor(private engine: StyleEngine) {}
 
   public beforeBind(view: View) {
-    this.engine.getOrCreateStlyeController(view, this.factory).bind(view);
+    this.engine.getOrCreateStyleController(view, this.factory).bind(view);
   }
 
   public beforeUnbind(view: View) {
-    this.engine.getOrCreateStlyeController(view, this.factory).unbind();
+    this.engine.getOrCreateStyleController(view, this.factory).unbind();
   }
 }
