@@ -44,7 +44,7 @@ var StyleFactory = (function () {
 exports.StyleFactory = StyleFactory;
 var currentNumber = 0;
 function generateRandomClass(key) {
-    return key + '_aurelia_ux_' + nextNumber();
+    return key + '_au_ux_' + nextNumber();
 }
 function nextNumber() {
     return ++currentNumber;

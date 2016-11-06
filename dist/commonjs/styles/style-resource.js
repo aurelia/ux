@@ -34,10 +34,10 @@ var StyleViewEngineHooks = (function () {
         this.engine = engine;
     }
     StyleViewEngineHooks.prototype.beforeBind = function (view) {
-        this.engine.getOrCreateStlyeController(view, this.factory).bind(view);
+        this.engine.getOrCreateStyleController(view, this.factory).bind(view);
     };
     StyleViewEngineHooks.prototype.beforeUnbind = function (view) {
-        this.engine.getOrCreateStlyeController(view, this.factory).unbind();
+        this.engine.getOrCreateStyleController(view, this.factory).unbind();
     };
     return StyleViewEngineHooks;
 }());

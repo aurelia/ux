@@ -9,6 +9,6 @@ export declare class StyleEngine {
     constructor(container: Container);
     getThemeKeyForComponent(obj: any): string;
     applyTheme(themable: Themable, theme: string | Object | null): void;
-    getOrCreateStlyeController(view: View, factory: StyleFactory): StyleController;
+    getOrCreateStyleController(view: View, factory: StyleFactory): StyleController;
     private getShadowDOMRoot(view);
 }

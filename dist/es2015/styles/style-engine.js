@@ -56,7 +56,7 @@ export var StyleEngine = (function () {
             };
         }
     };
-    StyleEngine.prototype.getOrCreateStlyeController = function (view, factory) {
+    StyleEngine.prototype.getOrCreateStyleController = function (view, factory) {
         var controller = view[factory.themeKey];
         if (controller === undefined) {
             var shadowDOMRoot = this.getShadowDOMRoot(view);

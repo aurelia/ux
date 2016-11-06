@@ -10,7 +10,7 @@ System.register(['./style-controller', '../aurelia-ux', 'aurelia-binding', 'aure
     var style_controller_1, aurelia_ux_1, aurelia_binding_1, aurelia_metadata_1, swatches_1;
     var StyleFactory, currentNumber, StyleOverrideContext;
     function generateRandomClass(key) {
-        return key + '_aurelia_ux_' + nextNumber();
+        return key + '_au_ux_' + nextNumber();
     }
     function nextNumber() {
         return ++currentNumber;
