@@ -9,6 +9,7 @@ export var UxButtonTheme = (function () {
     function UxButtonTheme() {
         this.type = 'raised'; // flat, raised or fab
         this.size = 'medium'; // small, medium or large
+        this.effect = 'ripple'; // ripple or none
     }
     UxButtonTheme = __decorate([
         styles()

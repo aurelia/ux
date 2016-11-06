@@ -16,6 +16,7 @@ var UxButton = (function () {
         this.styleEngine = styleEngine;
         this.type = null;
         this.size = null;
+        this.effect = null;
         this.disabled = false;
         this.theme = null;
         this.ripple = null;
@@ -32,19 +33,21 @@ var UxButton = (function () {
         this.styleEngine.applyTheme(this, newValue);
     };
     UxButton.prototype.onMouseDown = function (e) {
-        if (this.ripple === null) {
-            this.ripple = new paper_ripple_1.PaperRipple();
-            this.button.appendChild(this.ripple.$);
+        if (this.button.classList.contains('ripple')) {
+            if (this.ripple === null) {
+                this.ripple = new paper_ripple_1.PaperRipple();
+                this.button.appendChild(this.ripple.$);
+            }
+            if (this.button.classList.contains('fab')) {
+                this.ripple.center = true;
+                this.ripple.round = true;
+            }
+            this.ripple.downAction(e);
         }
-        if (this.button.classList.contains('fab')) {
-            this.ripple.center = true;
-            this.ripple.round = true;
-        }
-        this.ripple.downAction(e);
         return true;
     };
     UxButton.prototype.onMouseUp = function () {
-        if (this.ripple !== null) {
+        if (this.button.classList.contains('ripple') && this.ripple !== null) {
             this.ripple.upAction();
         }
         return true;
@@ -55,6 +58,9 @@ var UxButton = (function () {
     __decorate([
         aurelia_templating_1.bindable
     ], UxButton.prototype, "size", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
+    ], UxButton.prototype, "effect", void 0);
     __decorate([
         aurelia_templating_1.bindable
     ], UxButton.prototype, "disabled", void 0);

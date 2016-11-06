@@ -6,6 +6,7 @@ export declare class UxButton implements Themable {
     private styleEngine;
     type: null;
     size: null;
+    effect: null;
     disabled: boolean;
     theme: null;
     view: View;

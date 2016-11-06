@@ -11,6 +11,7 @@ import {PaperRipple} from '../effects/paper-ripple';
 export class UxButton implements Themable {
   @bindable public type = null;
   @bindable public size = null;
+  @bindable public effect = null;
   @bindable public disabled = false;
   @bindable public theme = null;
 
@@ -35,23 +36,25 @@ export class UxButton implements Themable {
   }
 
   public onMouseDown(e: MouseEvent) {
-    if (this.ripple === null) {
-      this.ripple = new PaperRipple();
-      this.button.appendChild(this.ripple.$);
-    }
+    if (this.button.classList.contains('ripple')) {
+      if (this.ripple === null) {
+        this.ripple = new PaperRipple();
+        this.button.appendChild(this.ripple.$);
+      }
 
-    if (this.button.classList.contains('fab')) {
-      this.ripple.center = true;
-      this.ripple.round = true;
-    }
+      if (this.button.classList.contains('fab')) {
+        this.ripple.center = true;
+        this.ripple.round = true;
+      }
 
-    this.ripple.downAction(e);
+      this.ripple.downAction(e);
+    }
 
     return true;
   }
 
   public onMouseUp() {
-    if (this.ripple !== null) {
+    if (this.button.classList.contains('ripple') && this.ripple !== null) {
       this.ripple.upAction();
     }
 

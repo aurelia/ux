@@ -4,6 +4,7 @@
   <button ref="button" styles.button class="
     ${size !== null ? size : $uxButtonTheme.size}
     ${type !== null ? type : $uxButtonTheme.type}  
+    ${effect !== null ? effect : $uxButtonTheme.effect}
     ${disabled ? 'disabled' : ''}
     "
     mousedown.trigger="onMouseDown($event)"
