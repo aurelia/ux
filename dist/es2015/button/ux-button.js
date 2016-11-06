@@ -12,6 +12,8 @@ export var UxButton = (function () {
     function UxButton(resources, styleEngine) {
         this.resources = resources;
         this.styleEngine = styleEngine;
+        this.type = null;
+        this.size = null;
         this.disabled = false;
         this.theme = null;
     }
@@ -26,6 +28,12 @@ export var UxButton = (function () {
     UxButton.prototype.themeChanged = function (newValue) {
         this.styleEngine.applyTheme(this, newValue);
     };
+    __decorate([
+        bindable
+    ], UxButton.prototype, "type", void 0);
+    __decorate([
+        bindable
+    ], UxButton.prototype, "size", void 0);
     __decorate([
         bindable
     ], UxButton.prototype, "disabled", void 0);

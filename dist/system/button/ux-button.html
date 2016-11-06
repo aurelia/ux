@@ -2,8 +2,9 @@
   <require from="./ux-button-theme"></require>
 
   <button styles.button class="
+    ${size !== null ? size : $uxButtonTheme.size}
+    ${type !== null ? type : $uxButtonTheme.type}  
     ${disabled ? 'disabled' : ''}
-    ${$uxButtonTheme.raised ? 'raised' : 'flat'}
     ">
     <slot></slot>
   </button>

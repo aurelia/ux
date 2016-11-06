@@ -8,7 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var decorators_1 = require('../styles/decorators');
 var UxButtonTheme = (function () {
     function UxButtonTheme() {
-        this.raised = true;
+        this.type = 'raised';
+        this.size = 'medium';
     }
     UxButtonTheme = __decorate([
         decorators_1.styles()

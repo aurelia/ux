@@ -10,6 +10,8 @@ define(["require", "exports", 'aurelia-templating', 'aurelia-dependency-injectio
         function UxButton(resources, styleEngine) {
             this.resources = resources;
             this.styleEngine = styleEngine;
+            this.type = null;
+            this.size = null;
             this.disabled = false;
             this.theme = null;
         }
@@ -24,6 +26,12 @@ define(["require", "exports", 'aurelia-templating', 'aurelia-dependency-injectio
         UxButton.prototype.themeChanged = function (newValue) {
             this.styleEngine.applyTheme(this, newValue);
         };
+        __decorate([
+            aurelia_templating_1.bindable
+        ], UxButton.prototype, "type", void 0);
+        __decorate([
+            aurelia_templating_1.bindable
+        ], UxButton.prototype, "size", void 0);
         __decorate([
             aurelia_templating_1.bindable
         ], UxButton.prototype, "disabled", void 0);

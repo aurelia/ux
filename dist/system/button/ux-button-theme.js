@@ -17,7 +17,8 @@ System.register(['../styles/decorators'], function(exports_1, context_1) {
         execute: function() {
             UxButtonTheme = (function () {
                 function UxButtonTheme() {
-                    this.raised = true;
+                    this.type = 'raised';
+                    this.size = 'medium';
                 }
                 UxButtonTheme = __decorate([
                     decorators_1.styles()

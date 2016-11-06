@@ -7,7 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { styles } from '../styles/decorators';
 export var UxButtonTheme = (function () {
     function UxButtonTheme() {
-        this.raised = true;
+        this.type = 'raised';
+        this.size = 'medium';
     }
     UxButtonTheme = __decorate([
         styles()

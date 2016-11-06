@@ -2,7 +2,8 @@ import {styles} from '../styles/decorators';
 
 @styles()
 export class UxButtonTheme {
-  public raised = true;
+  public type = 'raised';
+  public size = 'medium';
 
   public background: string;
   public foreground: string;

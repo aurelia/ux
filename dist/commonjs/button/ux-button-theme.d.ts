@@ -1,5 +1,6 @@
 export declare class UxButtonTheme {
-    raised: boolean;
+    type: string;
+    size: string;
     background: string;
     foreground: string;
     backgroundDisabled: string;

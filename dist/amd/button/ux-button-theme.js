@@ -8,7 +8,8 @@ define(["require", "exports", '../styles/decorators'], function (require, export
     "use strict";
     var UxButtonTheme = (function () {
         function UxButtonTheme() {
-            this.raised = true;
+            this.type = 'raised';
+            this.size = 'medium';
         }
         UxButtonTheme = __decorate([
             decorators_1.styles()

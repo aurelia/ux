@@ -8,6 +8,8 @@ import {processDesignAttributes} from '../designs/design-attributes';
 @customElement('ux-button')
 @processAttributes(processDesignAttributes)
 export class UxButton implements Themable {
+  @bindable public type = null;
+  @bindable public size = null;
   @bindable public disabled = false;
   @bindable public theme = null;
 

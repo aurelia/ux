@@ -4,6 +4,8 @@ import { Themable } from '../styles/themable';
 export declare class UxButton implements Themable {
     resources: ViewResources;
     private styleEngine;
+    type: null;
+    size: null;
     disabled: boolean;
     theme: null;
     view: View;
