@@ -66,7 +66,7 @@ export class StyleEngine {
     }
   }
 
-  public getOrCreateStlyeController(view: View, factory: StyleFactory): StyleController {
+  public getOrCreateStyleController(view: View, factory: StyleFactory): StyleController {
     let controller = (<any>view)[factory.themeKey];
 
     if (controller === undefined) {
