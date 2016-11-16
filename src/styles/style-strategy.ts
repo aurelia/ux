@@ -19,7 +19,7 @@ export interface StyleStrategy {
 export const styleStrategy: Function = (<any>protocol).create('aurelia:style-strategy', {
   validate(target: any): string | boolean {
     if (!(typeof target.loadStyleFactory === 'function')) {
-      return 'Style strategies must implement: loadStyleStrateg(): Promise<StyleFactory>';
+      return 'Style strategies must implement: loadStyleFactory(): Promise<StyleFactory>';
     }
 
     return true;
