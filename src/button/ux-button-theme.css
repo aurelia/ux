@@ -14,7 +14,7 @@ styles.button::-moz-focus-inner {
 styles.button.raised, styles.button.flat {
   min-width: 88px;
   margin: 6px 8px;
-  padding: 0 16px 0 16px;  
+  padding: 0 16px 0 16px;
   border-radius: 2px;
 }
 
