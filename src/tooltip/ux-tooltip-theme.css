@@ -1,0 +1,74 @@
+styles.wrapper {
+  position: relative;
+}
+
+styles.tooltip {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+styles.target:hover + styles.tooltip,
+styles.target:focus + styles.tooltip {
+  visibility: visible;
+  opacity: .9;
+  height: auto;
+  width: auto;
+  max-width: 170px;
+  line-height: 14px;
+  text-align: center;
+  padding: 8px;
+  color: ${foreground || $design.accentForeground};
+  background-color: ${background || $swatches.grey.p700};
+  border-radius: 2px;
+  pointer-events: auto;
+}
+
+styles.tooltip.top {
+  top: auto;
+  right: auto;
+  bottom: 100%;
+  left: 50%;
+  margin-bottom: 14px;
+  transform: translate(-50%, 0);
+}
+
+styles.tooltip.right {
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  left: 100%;
+  margin-left: 14px;
+  transform: translate(0, -50%);
+}
+
+styles.tooltip.bottom {
+  top: 100%;
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  margin-top: 14px;
+  transform: translate(-50%, 0);
+}
+
+styles.tooltip.left {
+  top: 50%;
+  right: 100%;
+  bottom: auto;
+  left: auto;
+  margin-right: 14px;
+  transform: translate(0, -50%);
+}
+
+styles.tooltip.ease  {
+  transition: opacity 150ms cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+styles.target:hover + styles.tooltip.ease,
+styles.target:focus + styles.tooltip.ease {
+  transition: opacity 150ms cubic-bezier(0.4, 0.0, 1, 1);
+}
