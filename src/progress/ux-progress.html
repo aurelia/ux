@@ -1,0 +1,10 @@
+<template>
+  <require from="./ux-progress-theme"></require>
+
+  <div styles.progress class="
+    ${type !== null ? type : $UxProgressTheme.type}
+    ">
+    <div class="bar" css.bind="barWidth"></div>
+  </div>
+
+</template>
