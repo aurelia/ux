@@ -2,13 +2,13 @@
   "compilerOptions": {
     "module": "amd",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "es2017",
       "dom"
     ],
     "outDir": "dist/test",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
