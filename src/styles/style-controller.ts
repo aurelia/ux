@@ -3,7 +3,7 @@ import {DOM, PLATFORM} from 'aurelia-pal';
 
 export class StyleController {
   public isDefault = false;
-  private styleElementParent: Node;
+  private styleElementParent: Node | null;
   private styleElement: HTMLStyleElement;
   private bindingInstance: any = null;
   private count = 0;
@@ -52,7 +52,9 @@ export class StyleController {
       this.styleElement = <HTMLStyleElement>DOM.injectStyles('', this.destination);
       this.bindingInstance = this.expression.createBinding(this.styleElement);
     } else if (!this.styleElement.parentNode) {
-      this.styleElementParent.appendChild(this.styleElement);
+      if (this.styleElementParent) {
+        this.styleElementParent.appendChild(this.styleElement);
+      }
     }
   }
 
