@@ -1,0 +1,15 @@
+<template role="tooltip">
+  <require from="./ux-tooltip-theme"></require>
+
+  <div styles.wrapper>
+    <div styles.target>
+      <slot name="tooltip-target"></slot>
+    </div>
+    <div styles.tooltip class="
+      ${effect !== null ? effect : $uxTooltipTheme.effect}
+      ${position !== null ? position : $uxTooltipTheme.position}
+      ">
+      <slot name="tooltip-content"></slot>
+    </div>
+  </div>
+</template>
