@@ -22,7 +22,7 @@ export class StyleCompiler {
     );
 
     if (expression === null) {
-      expression = new PlainCSSBindingExpression(transformed)
+      expression = new PlainCSSBindingExpression(transformed);
     } else {
       expression['targetProperty'] = 'innerHTML';
     }
