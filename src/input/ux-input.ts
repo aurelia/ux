@@ -1,4 +1,5 @@
-import {customElement, bindable, ViewResources, View, processAttributes} from 'aurelia-templating';
+import {customElement, ViewResources, View, processAttributes} from 'aurelia-templating';
+import { bindable, bindingMode } from 'aurelia-framework';
 import {inject} from 'aurelia-dependency-injection';
 import {StyleEngine} from '../styles/style-engine';
 import {Themable} from '../styles/themable';
@@ -13,9 +14,10 @@ export class UxInput implements Themable {
   @bindable public type = null;
   @bindable public disabled = false;
   @bindable public theme = null;
+  @bindable({ defaultBindingMode: bindingMode.twoWay })  public value = null;
 
   public view: View;
-  // private input: HTMLInputElement;
+  // private textbox: HTMLInputElement;
 
   constructor(public resources: ViewResources, private styleEngine: StyleEngine) {}
 
