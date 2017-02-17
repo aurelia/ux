@@ -1,0 +1,7 @@
+<template role="textbox">
+  <require from="./ux-input-theme"></require>
+
+  <input ref="textbox" styles.input class="
+    ${type !== null ? type : $uxInputTheme.type}
+    ${disabled ? 'disabled' : ''}" />
+</template>

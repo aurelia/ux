@@ -4,13 +4,15 @@ import {AureliaUX} from './aurelia-ux';
 export {swatches} from './colors/swatches';
 export {shadows} from './colors/shadows';
 export {UxButtonTheme} from './button/ux-button-theme';
+export {UxInputTheme} from './input/ux-input-theme';
 export * from './styles/decorators';
 export {AureliaUX} from './aurelia-ux';
 export {UXConfiguration} from './ux-configuration';
 
 export function configure(config: FrameworkConfiguration, callback?: (config: AureliaUX) => Promise<any>) {
   config.globalResources([
-    './button/ux-button'
+    './button/ux-button',
+    './input/ux-input'
   ]);
 
   let ux = <AureliaUX>config.container.get(AureliaUX);

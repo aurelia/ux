@@ -1,0 +1,23 @@
+styles.input {
+  display: block;
+  border: 0;
+  outline: none;
+  position: relative;
+  padding: 8px;
+}
+
+styles.input.single-line {
+  background-color: transparent;
+  padding-left:0;
+  padding-right:0;
+  transition: 250ms;
+  border-bottom: 2px solid ${background || $design.primaryLightForeground};
+}
+
+styles.input.single-line:hover {
+  border-bottom-color: ${background || $design.accent};
+}
+
+styles.input.single-line:focus {
+  border-bottom-color: ${background || $design.accentDark};
+}
