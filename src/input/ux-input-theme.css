@@ -1,23 +1,36 @@
+ux-input {
+  display: block;
+  width: 100%;
+}
+
 styles.input {
   display: block;
   border: 0;
   outline: none;
   position: relative;
   padding: 8px;
+  width: 100%;
 }
 
-styles.input.single-line {
-  background-color: transparent;
-  padding-left:0;
-  padding-right:0;
-  transition: 250ms;
-  border-bottom: 2px solid ${background || $design.primaryLightForeground};
-}
+  styles.input.single-line {
+    background-color: transparent;
+    padding-left:0;
+    padding-right:0;
+    transition: 250ms;
+    border-bottom: 2px solid ${background || $design.primaryLightForeground};
+  }
 
-styles.input.single-line:hover {
-  border-bottom-color: ${background || $design.accent};
-}
+    styles.input.single-line:hover {
+      border-bottom-color: ${background || $design.accent};
+    }
 
-styles.input.single-line:focus {
-  border-bottom-color: ${background || $design.accentDark};
-}
+    styles.input.single-line:focus {
+      border-bottom-color: ${background || $design.accentDark};
+    }
+
+  styles.input.full-width {
+    padding: 20px;
+    font-size: 16px;
+    background-color: ${background || $swatches.white};
+    border-bottom: 1px solid ${$swatches.grey.p200};
+  }
