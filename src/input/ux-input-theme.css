@@ -32,5 +32,5 @@ styles.input {
     padding: 20px;
     font-size: 16px;
     background-color: ${background || $swatches.white};
-    border-bottom: 1px solid ${$swatches.grey.p200};
+    border: 1px solid ${$swatches.grey.p200};
   }
