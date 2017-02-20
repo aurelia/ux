@@ -4,7 +4,11 @@
   <input ref="textbox" 
          styles.input 
          value.bind="value" 
-         class="
-    ${type !== null ? type : $uxInputTheme.type}
-    ${disabled ? 'disabled' : ''}" />
+         type.bind="type"
+         class="${disabled ? 'disabled' : ''}" />
+
+  <div class="counter" if.bind="inputCounter !== null">
+    <span>${value.length ? value.length : 0}</span>
+    <span if.bind="maxlength > 0">/${maxlength}</span>
+  </div>
 </template>

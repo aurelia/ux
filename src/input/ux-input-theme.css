@@ -12,25 +12,43 @@ styles.input {
   width: 100%;
 }
 
-  styles.input.single-line {
+  ux-input.single-line > styles.input {
     background-color: transparent;
     padding-left:0;
     padding-right:0;
     transition: 250ms;
-    border-bottom: 2px solid ${background || $design.primaryLightForeground};
+    border-bottom: 2px solid ${foreground || $design.primaryLightForeground};
   }
 
-    styles.input.single-line:hover {
+  ux-input.single-line > div.counter {
+    padding: 8px;
+    display: flex;
+    justify-content: flex-end;
+    color:  ${foreground || $design.primaryLightForeground};
+  }
+
+    ux-input.single-line > styles.input:hover {
       border-bottom-color: ${background || $design.accent};
     }
 
-    styles.input.single-line:focus {
+    ux-input.single-line > styles.input:focus {
       border-bottom-color: ${background || $design.accentDark};
     }
 
-  styles.input.full-width {
+  ux-input.full-width > styles.input {
     padding: 20px;
     font-size: 16px;
     background-color: ${background || $swatches.white};
     border: 1px solid ${$swatches.grey.p200};
+  }
+
+  ux-input.full-width > div.counter {
+    position: absolute;
+    right: 0;
+    width: 0;
+    top: 12px;
+    padding: 8px;
+    display: flex;
+    justify-content: flex-end;
+    color:  ${foreground || $design.primaryLightForeground};
   }
