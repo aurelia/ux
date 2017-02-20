@@ -25,11 +25,17 @@ styles.input {
     display: flex;
     justify-content: flex-end;
     color:  ${foreground || $design.primaryLightForeground};
+    transition: 250ms;
   }
 
     ux-input.single-line > styles.input:hover {
       border-bottom-color: ${background || $design.accent};
     }
+    
+      ux-input.single-line > styles.input:focus+div.counter,
+      ux-input.full-width > styles.input:focus+div.counter {
+        color: ${$design.accent};
+      }
 
     ux-input.single-line > styles.input:focus {
       border-bottom-color: ${background || $design.accentDark};
@@ -51,4 +57,5 @@ styles.input {
     display: flex;
     justify-content: flex-end;
     color:  ${foreground || $design.primaryLightForeground};
+    transition: 250ms;
   }
