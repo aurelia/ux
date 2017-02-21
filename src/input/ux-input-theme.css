@@ -20,6 +20,13 @@ styles.input {
     border-bottom: 2px solid ${foreground || $design.primaryLightForeground};
   }
 
+  ux-input.single-line > styles.input[disabled],
+  ux-input.single-line > styles.input[disabled]:hover,
+  ux-input.single-line > styles.input[disabled]:focus {
+    color: ${$swatches.grey.p500};
+    border-bottom: 1px dashed ${$swatches.grey.p300};
+  }
+
   ux-input.single-line > div.counter {
     padding: 8px;
     display: flex;
@@ -46,6 +53,14 @@ styles.input {
     font-size: 16px;
     background-color: ${background || $swatches.white};
     border: 1px solid ${$swatches.grey.p200};
+  }
+
+  ux-input.full-width > styles.input[disabled]
+  ux-input.full-width > styles.input[disabled]:hover,
+  ux-input.full-width > styles.input[disabled]:focus, {
+    background-color: ${$swatches.grey.p200};
+    border: 1px solid ${$swatches.grey.p300};
+    color: ${$swatches.grey.p500}
   }
 
   ux-input.full-width > div.counter {
