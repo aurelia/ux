@@ -14,7 +14,7 @@ export class UxInput implements Themable {
   @bindable public type = 'text';
   @bindable public theme = null;
   @bindable public inputCounter = null;
-  @bindable public disabled = false;
+  @bindable public disabled: any = false;
   @bindable public minlength: any = null;
   @bindable public maxlength: any = null;
   @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: any = null;
@@ -33,9 +33,11 @@ export class UxInput implements Themable {
       this.styleEngine.applyTheme(this, this.theme);
     }
 
-    // Input textbox attributes: minlength and maxlength added here.
-    // When bound to null the binding defaults to 0 which prevents
-    // the textbox from accepting any input.
+    // Input textbox attributes: disabled, minlength, and maxlength 
+    // added here. When bound to null the binding defaults to 0 which 
+    // prevents the textbox from accepting any input. The disabled attribute
+    // looks for explicitly false to decide whether to add the disabled attribute
+    // to the base input control or not.
     if (this.minlength) {
       this.textbox.setAttribute('minlength', this.minlength);
     }
@@ -43,35 +45,21 @@ export class UxInput implements Themable {
     if (this.maxlength) {
       this.textbox.setAttribute('maxlength', this.maxlength);
     }
+
+    if ( this.disabled || this.disabled === '' ) {
+      this.textbox.setAttribute('disabled', '');
+    }
+  }
+
+  public disabledChanged(newValue: any) {
+    if (newValue === true || newValue === '') {
+      this.textbox.setAttribute('disabled', 'true');
+    } else {
+      this.textbox.removeAttribute('disabled');
+    }
   }
 
   public themeChanged(newValue: any) {
     this.styleEngine.applyTheme(this, newValue);
   }
-
-
-  // public inputReceived(event: any) {
-  //   // Check for Disabled
-  //   if (this.disabled) {
-  //     return;
-  //   }
-
-  //   let thiss = event;
-
-  //   thiss = event;
-  //   // Check For Min and Max Length
-  //   if (this.textbox.value) {
-  //     if (this.minlength !== -1 && this.textbox.value.length < this.minlength) {
-  //       return;
-  //     }
-
-  //     if (this.maxlength !== -1 && this.textbox.value.length >= this.maxlength) {
-  //       return;
-  //     }
-  //   }
-
-  //   return true;
-  // }
-
-
 }
