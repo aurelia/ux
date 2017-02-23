@@ -15,8 +15,13 @@ export class UxInput implements Themable {
   @bindable public theme = null;
   @bindable public inputCounter = null;
   @bindable public disabled: any = false;
+  @bindable public readonly: any = false;
   @bindable public minlength: any = null;
   @bindable public maxlength: any = null;
+  @bindable public required: boolean = false;
+
+  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  public step: any = null;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public placeholder: any = null;
@@ -38,6 +43,10 @@ export class UxInput implements Themable {
       this.styleEngine.applyTheme(this, this.theme);
     }
 
+    if (this.required) {
+      this.textbox.setAttribute('required', '');
+    }
+
     if (this.minlength) {
       this.textbox.setAttribute('minlength', this.minlength);
     }
@@ -48,6 +57,10 @@ export class UxInput implements Themable {
 
     if (this.disabled || this.disabled === '') {
       this.textbox.setAttribute('disabled', '');
+    }
+
+    if (this.readonly || this.readonly === '') {
+      this.textbox.setAttribute('readonly', '');
     }
   }
 
@@ -70,6 +83,14 @@ export class UxInput implements Themable {
       this.textbox.setAttribute('disabled', 'true');
     } else {
       this.textbox.removeAttribute('disabled');
+    }
+  }
+
+  public readonlyChanged(newValue: any) {
+    if (newValue === true || newValue === '') {
+      this.textbox.setAttribute('readonly', 'true');
+    } else {
+      this.textbox.removeAttribute('readonly');
     }
   }
 

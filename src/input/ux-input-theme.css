@@ -22,7 +22,10 @@ styles.input {
 
   ux-input > styles.input[disabled],
   ux-input > styles.input[disabled]:hover,
-  ux-input > styles.input[disabled]:focus {
+  ux-input > styles.input[disabled]:focus,
+  ux-input > styles.input[readonly],
+  ux-input > styles.input[readonly]:hover,
+  ux-input > styles.input[readonly]:focus {
     color: ${$swatches.grey.p500};
     border-bottom: 1px dashed ${$swatches.grey.p300};
   }
@@ -44,7 +47,10 @@ styles.input {
 
   ux-input.full-width > styles.input[disabled]
   ux-input.full-width > styles.input[disabled]:hover,
-  ux-input.full-width > styles.input[disabled]:focus, {
+  ux-input.full-width > styles.input[disabled]:focus,
+  ux-input.full-width > styles.input[readonly],
+  ux-input.full-width > styles.input[readonly]:hover,
+  ux-input.full-width > styles.input[readonly]:focus  {
     background-color: ${$swatches.grey.p200};
     border: 1px solid ${$swatches.grey.p300};
     color: ${$swatches.grey.p500}
