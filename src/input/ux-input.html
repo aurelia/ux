@@ -1,14 +1,20 @@
 <template role="textbox">
   <require from="./ux-input-theme"></require>
 
-  <input ref="textbox" 
-         styles.input 
+  <input styles.input 
+         ref="textbox" 
+         class="${disabled ? 'disabled' : ''}"
          value.bind="value" 
-         type.bind="type"
-         class="${disabled ? 'disabled' : ''}" />
-
-  <div class="counter" if.bind="inputCounter !== null">
-    <span>${value.length ? value.length : 0}</span>
-    <span if.bind="maxlength > 0">/${maxlength}</span>
+         type.bind="type" 
+         placeholder.bind="placeholder" />
+  <div class="input-info">
+    <span class="hint-text">
+      
+    </span>
+    <div class="counter" if.bind="inputCounter !== null">
+      <span>${value.length ? value.length : 0}</span>
+      <span if.bind="maxlength > 0">/${maxlength}</span>
+    </div>
   </div>
+
 </template>

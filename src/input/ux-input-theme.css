@@ -12,7 +12,7 @@ styles.input {
   width: 100%;
 }
 
-  ux-input.single-line > styles.input {
+  ux-input > styles.input {
     background-color: transparent;
     padding-left:0;
     padding-right:0;
@@ -20,31 +20,18 @@ styles.input {
     border-bottom: 2px solid ${foreground || $design.primaryLightForeground};
   }
 
-  ux-input.single-line > styles.input[disabled],
-  ux-input.single-line > styles.input[disabled]:hover,
-  ux-input.single-line > styles.input[disabled]:focus {
+  ux-input > styles.input[disabled],
+  ux-input > styles.input[disabled]:hover,
+  ux-input > styles.input[disabled]:focus {
     color: ${$swatches.grey.p500};
     border-bottom: 1px dashed ${$swatches.grey.p300};
   }
 
-  ux-input.single-line > div.counter {
-    padding: 8px;
-    display: flex;
-    justify-content: flex-end;
-    color:  ${foreground || $design.primaryLightForeground};
-    transition: 250ms;
-  }
-
-    ux-input.single-line > styles.input:hover {
+    ux-input > styles.input:hover {
       border-bottom-color: ${background || $design.accent};
     }
-    
-      ux-input.single-line > styles.input:focus+div.counter,
-      ux-input.full-width > styles.input:focus+div.counter {
-        color: ${$design.accent};
-      }
 
-    ux-input.single-line > styles.input:focus {
+    ux-input > styles.input:focus {
       border-bottom-color: ${background || $design.accentDark};
     }
 
@@ -73,4 +60,27 @@ styles.input {
     justify-content: flex-end;
     color:  ${foreground || $design.primaryLightForeground};
     transition: 250ms;
+  }
+  
+ux-input .input-info { 
+  display: flex;
+  margin-top: 4px;
+  font-size: 14px;
+  color: ${foreground || $design.primaryLightForeground};
+}
+
+ux-input .input-info>.hint-text {
+  flex-grow: 1;
+}
+
+  ux-input .input-info>div.counter {
+    transition: 250ms;
+  }
+
+  ux-input > styles.input:focus+.input-info>div.counter {
+    color: ${$design.accent};
+  }
+
+  ux-input>styles.input[disabled]+.input-info {
+    display: none;
   }
