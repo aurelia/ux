@@ -11,20 +11,20 @@ import { processDesignAttributes } from '../designs/design-attributes';
 @processAttributes(processDesignAttributes)
 
 export class UxInput implements Themable {
-  @bindable public type = 'text';
-  @bindable public theme = null;
-  @bindable public inputCounter = null;
   @bindable public disabled: any = false;
-  @bindable public readonly: any = false;
-  @bindable public minlength: any = null;
+  @bindable public inputCounter = null;
   @bindable public maxlength: any = null;
+  @bindable public minlength: any = null;
+  @bindable public readonly: any = false;
   @bindable public required: boolean = false;
-
-  @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public step: any = null;
+  @bindable public theme = null;
+  @bindable public type = 'text';
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public placeholder: any = null;
+
+  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  public step: any = null;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = null;
@@ -75,8 +75,6 @@ export class UxInput implements Themable {
 
     this.textbox.removeEventListener('blur', () => this.element.dispatchEvent(blurEvent));
   }
-
-  public unbind() { }
 
   public disabledChanged(newValue: any) {
     if (newValue === true || newValue === '') {
