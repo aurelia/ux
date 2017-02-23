@@ -11,12 +11,13 @@ import { processDesignAttributes } from '../designs/design-attributes';
 @processAttributes(processDesignAttributes)
 
 export class UxInput implements Themable {
+  @bindable public autofocus = null;
   @bindable public disabled: any = false;
   @bindable public inputCounter = null;
   @bindable public maxlength: any = null;
   @bindable public minlength: any = null;
   @bindable public readonly: any = false;
-  @bindable public required: boolean = false;
+  @bindable public required: any = false;
   @bindable public theme = null;
   @bindable public type = 'text';
 
@@ -27,7 +28,7 @@ export class UxInput implements Themable {
   public step: any = null;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public value: any = null;
+  public value: any = undefined;
 
   public view: View;
   private textbox: HTMLInputElement;
@@ -41,6 +42,12 @@ export class UxInput implements Themable {
   public bind() {
     if (this.theme) {
       this.styleEngine.applyTheme(this, this.theme);
+    }
+
+    if (this.autofocus || this.autofocus === '') {
+      setTimeout(() => {
+        this.textbox.focus();
+      }, 0);
     }
 
     if (this.required) {
