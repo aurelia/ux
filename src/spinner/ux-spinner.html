@@ -1,0 +1,18 @@
+<template>
+  <require from="./ux-spinner-theme"></require>
+
+  <div styles.spinner class="
+    ${size !== null ? size : $UxLoadingTheme.size}
+    ">
+    <div class="spinner-layer">
+      <div class="circle-clipper left">
+      <div class="circle"></div>
+      </div><div class="gap-patch">
+      <div class="circle"></div>
+      </div><div class="circle-clipper right">
+      <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+
+</template>
