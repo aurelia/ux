@@ -1,4 +1,4 @@
-System.register(['./aurelia-ux', './colors/swatches', './button/ux-button-theme', './styles/decorators', './ux-configuration'], function(exports_1, context_1) {
+System.register(['./aurelia-ux', './colors/swatches', './colors/shadows', './button/ux-button-theme', './styles/decorators', './ux-configuration'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var aurelia_ux_1;
@@ -20,6 +20,7 @@ System.register(['./aurelia-ux', './colors/swatches', './button/ux-button-theme'
     var exportedNames_1 = {
         'configure': true,
         'swatches': true,
+        'shadows': true,
         'UxButtonTheme': true,
         'AureliaUX': true,
         'UXConfiguration': true
@@ -42,6 +43,11 @@ System.register(['./aurelia-ux', './colors/swatches', './button/ux-button-theme'
             function (swatches_1_1) {
                 exports_1({
                     "swatches": swatches_1_1["swatches"]
+                });
+            },
+            function (shadows_1_1) {
+                exports_1({
+                    "shadows": shadows_1_1["shadows"]
                 });
             },
             function (ux_button_theme_1_1) {

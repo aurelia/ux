@@ -17,7 +17,7 @@ import { AureliaUX } from '../aurelia-ux';
 export var styleStrategy = protocol.create('aurelia:style-strategy', {
     validate: function (target) {
         if (!(typeof target.loadStyleFactory === 'function')) {
-            return 'Style strategies must implement: loadStyleStrateg(): Promise<StyleFactory>';
+            return 'Style strategies must implement: loadStyleFactory(): Promise<StyleFactory>';
         }
         return true;
     },

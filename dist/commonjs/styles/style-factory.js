@@ -10,6 +10,7 @@ var aurelia_ux_1 = require('../aurelia-ux');
 var aurelia_binding_1 = require('aurelia-binding');
 var aurelia_metadata_1 = require('aurelia-metadata');
 var swatches_1 = require('../colors/swatches');
+var shadows_1 = require('../colors/shadows');
 var StyleFactory = (function () {
     function StyleFactory(styleObjectType, styles, expression) {
         this.styleObjectType = styleObjectType;
@@ -57,6 +58,7 @@ var StyleOverrideContext = (function () {
         this.$on = '(min-width: 0)';
         this.$off = '(max-width: 0)';
         this.$swatches = swatches_1.swatches;
+        this.$shadows = shadows_1.shadows;
     }
     Object.defineProperty(StyleOverrideContext.prototype, "$platform", {
         get: function () {
