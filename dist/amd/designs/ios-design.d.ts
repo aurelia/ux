@@ -13,4 +13,13 @@ export declare class IOSDesign implements Design {
     accentLightForeground: string;
     accentDark: string;
     accentDarkForeground: string;
+    elevationNone: string;
+    elevation2dp: string;
+    elevation3dp: string;
+    elevation4dp: string;
+    elevation6dp: string;
+    elevation8dp: string;
+    elevation16dp: string;
+    elevation24dp: string;
+    elevationFocus: string;
 }

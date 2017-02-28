@@ -1,5 +1,6 @@
 import { AureliaUX } from './aurelia-ux';
 export { swatches } from './colors/swatches';
+export { shadows } from './colors/shadows';
 export { UxButtonTheme } from './button/ux-button-theme';
 export * from './styles/decorators';
 export { AureliaUX } from './aurelia-ux';
