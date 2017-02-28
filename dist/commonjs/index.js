@@ -5,6 +5,8 @@ function __export(m) {
 var aurelia_ux_1 = require('./aurelia-ux');
 var swatches_1 = require('./colors/swatches');
 exports.swatches = swatches_1.swatches;
+var shadows_1 = require('./colors/shadows');
+exports.shadows = shadows_1.shadows;
 var ux_button_theme_1 = require('./button/ux-button-theme');
 exports.UxButtonTheme = ux_button_theme_1.UxButtonTheme;
 __export(require('./styles/decorators'));
