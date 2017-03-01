@@ -90,3 +90,15 @@ ux-input .input-info>.hint-text {
   ux-input>styles.input[disabled]+.input-info {
     display: none;
   }
+
+  ux-input.has-error styles.input {
+    border-bottom-color: #f00;
+  }
+
+  ux-input.full-width.has-error styles.input {
+    border-color: #f00;
+  }
+
+  ux-input.has-error .input-info {
+    color: #f00;
+  }
