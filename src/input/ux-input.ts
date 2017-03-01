@@ -85,13 +85,31 @@ export class UxInput implements Themable {
   public attached() {
     let blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
 
-    this.textbox.addEventListener('blur', () => this.element.dispatchEvent(blurEvent));
+    this.textbox.addEventListener('focus', () => {
+      this.element.classList.add('focused');
+    });
+
+    this.textbox.addEventListener('blur', () => {
+      this.element.classList.remove('focused');
+      this.element.dispatchEvent(blurEvent);
+    });
   }
 
   public detached() {
     let blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
 
-    this.textbox.removeEventListener('blur', () => this.element.dispatchEvent(blurEvent));
+    this.textbox.removeEventListener('focus', () => {
+      this.element.classList.add('focused');
+    });
+
+    this.textbox.removeEventListener('blur', () => {
+      this.element.classList.remove('focused');
+      this.element.dispatchEvent(blurEvent);
+    });
+  }
+
+  public focus() {
+    alert('hi');
   }
 
   public disabledChanged(newValue: any) {
