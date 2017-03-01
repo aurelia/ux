@@ -3,14 +3,11 @@
 
   <input styles.input 
          ref="textbox" 
-         class="${disabled ? 'disabled' : ''}"
          value.bind="value" 
-         type.bind="type" 
-         placeholder.bind="placeholder ? placeholder : ''"
-         step.bind="step" />
+         type.bind="type" />
   <div class="input-info">
     <span class="hint-text">
-      
+
     </span>
     <div class="counter" if.bind="inputCounter !== null">
       <span>${value.length ? value.length : 0}</span>

@@ -17,15 +17,8 @@ export class UxInput implements Themable {
   @bindable public maxlength: any = null;
   @bindable public minlength: any = null;
   @bindable public readonly: any = false;
-  @bindable public required: any = false;
   @bindable public theme = null;
   @bindable public type = 'text';
-
-  @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public placeholder: any = null;
-
-  @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public step: any = null;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
@@ -50,8 +43,27 @@ export class UxInput implements Themable {
       }, 0);
     }
 
-    if (this.required) {
+    if (this.element.hasAttribute('required')) {
       this.textbox.setAttribute('required', '');
+      this.element.removeAttribute('required');
+    }
+
+    if (this.element.hasAttribute('placeholder')) {
+      let attributeValue = this.element.getAttribute('placeholder');
+
+      if (attributeValue) {
+        this.textbox.setAttribute('placeholder', attributeValue);
+        this.element.removeAttribute('placeholder');
+      }
+    }
+
+    if (this.element.hasAttribute('step')) {
+      let attributeValue = this.element.getAttribute('step');
+
+      if (attributeValue) {
+        this.textbox.setAttribute('step', attributeValue);
+        this.element.removeAttribute('step');
+      }
     }
 
     if (this.minlength) {
