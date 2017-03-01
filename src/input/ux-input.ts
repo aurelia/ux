@@ -13,7 +13,6 @@ import { processDesignAttributes } from '../designs/design-attributes';
 export class UxInput implements Themable {
   @bindable public autofocus = null;
   @bindable public disabled: any = false;
-  @bindable public inputCounter = null;
   @bindable public maxlength: any = null;
   @bindable public minlength: any = null;
   @bindable public readonly: any = false;
