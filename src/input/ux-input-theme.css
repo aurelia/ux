@@ -55,50 +55,11 @@ styles.input {
     border: 1px solid ${$swatches.grey.p300};
     color: ${$swatches.grey.p500}
   }
-
-  ux-input.full-width > div.counter {
-    position: absolute;
-    right: 0;
-    width: 0;
-    top: 12px;
-    padding: 8px;
-    display: flex;
-    justify-content: flex-end;
-    color:  ${$design.primaryLightForeground};
-    transition: 250ms;
-  }
   
-ux-input .input-info { 
-  display: flex;
-  margin-top: 4px;
-  font-size: 14px;
-  color: ${$design.primaryLightForeground};
-}
-
-ux-input .input-info>.hint-text {
-  flex-grow: 1;
-}
-
-  ux-input .input-info>div.counter {
-    transition: 250ms;
-  }
-
-  ux-input > styles.input:focus+.input-info>div.counter {
-    color: ${$design.accent};
-  }
-
-  ux-input>styles.input[disabled]+.input-info {
-    display: none;
-  }
-
   ux-input.has-error styles.input {
     border-bottom-color: #f00;
   }
 
   ux-input.full-width.has-error styles.input {
     border-color: #f00;
-  }
-
-  ux-input.has-error .input-info {
-    color: #f00;
   }
