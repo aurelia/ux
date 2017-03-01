@@ -14,7 +14,7 @@ ux-input-info>.hint-text {
     transition: 250ms;
   }
 
-  ux-input > styles.input:focus+ux-input-info>div.counter {
+  ux-input.focused+ux-input-info>div.counter {
     color: ${$design.accent};
   }
 
