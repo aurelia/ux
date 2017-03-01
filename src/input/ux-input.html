@@ -5,14 +5,5 @@
          ref="textbox" 
          value.bind="value" 
          type.bind="type" />
-  <div class="input-info">
-    <span class="hint-text">
-
-    </span>
-    <div class="counter" if.bind="inputCounter !== null">
-      <span>${value.length ? value.length : 0}</span>
-      <span if.bind="maxlength > 0">/${maxlength}</span>
-    </div>
-  </div>
 
 </template>

@@ -10,7 +10,8 @@ import { UxInput } from './ux-input';
 @processAttributes(processDesignAttributes)
 
 export class UxInputInfo implements Themable {
-  @bindable public input: UxInput;
+  @bindable public target: UxInput;
+  @bindable public uxInputCounter = null;
   @bindable public theme = null;
 
   public view: View;
