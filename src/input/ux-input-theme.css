@@ -40,6 +40,8 @@ styles.input {
 
   ux-input.full-width > styles.input {
     padding: 20px;
+    padding-left: 8px;
+    padding-right: 8px;
     font-size: 16px;
     background-color: ${$swatches.white};
     border: 1px solid ${$swatches.grey.p200};
