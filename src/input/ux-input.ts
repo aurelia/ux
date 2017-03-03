@@ -13,11 +13,13 @@ import { processDesignAttributes } from '../designs/design-attributes';
 export class UxInput implements Themable {
   @bindable public autofocus = null;
   @bindable public disabled: any = false;
-  @bindable public maxlength: any = null;
-  @bindable public minlength: any = null;
+  @bindable public maxlength: number;
+  @bindable public minlength: number;
+  @bindable public min: number;
+  @bindable public max: number;
   @bindable public readonly: any = false;
   @bindable public theme = null;
-  @bindable public type = 'text';
+  @bindable public type: any;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
@@ -65,12 +67,26 @@ export class UxInput implements Themable {
       }
     }
 
+    if (this.type) {
+      if (this.type !== 'text' && this.type !== 'password' && this.type !== 'number') {
+        this.type = 'text';
+      }
+    }
+
+    if (this.min) {
+      this.textbox.setAttribute('min', this.min.toString());
+    }
+
+    if (this.max) {
+      this.textbox.setAttribute('max', this.max.toString());
+    }
+
     if (this.minlength) {
-      this.textbox.setAttribute('minlength', this.minlength);
+      this.textbox.setAttribute('minlength', this.minlength.toString());
     }
 
     if (this.maxlength) {
-      this.textbox.setAttribute('maxlength', this.maxlength);
+      this.textbox.setAttribute('maxlength', this.maxlength.toString());
     }
 
     if (this.disabled || this.disabled === '') {
@@ -130,5 +146,28 @@ export class UxInput implements Themable {
 
   public themeChanged(newValue: any) {
     this.styleEngine.applyTheme(this, newValue);
+  }
+
+  public typeChanged(newValue: any) {
+    if (newValue !== 'text' && newValue !== 'password' && newValue !== 'number') {
+      this.type = 'text';
+    }
+  }
+
+  public valueChanged(newValue: any) {
+    if (this.type === 'number' && !isNaN(newValue) && newValue !== '') {
+      if (this.min && newValue < this.min) {
+        this.value = this.min;
+      }
+
+      if (this.max && newValue > this.max) {
+        this.value = this.max;
+      }
+
+      if (isNaN(newValue)) {
+        this.value = '';
+      }
+    }
+
   }
 }
