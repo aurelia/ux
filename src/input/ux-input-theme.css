@@ -5,29 +5,19 @@ ux-input {
 
 styles.input {
   display: block;
+  position: relative;
+  width: 100%;
+  padding: 8px;
   border: 0;
   outline: none;
-  position: relative;
-  padding: 8px;
-  width: 100%;
 }
 
   ux-input > styles.input {
-    background-color: transparent;
     padding-left:0;
     padding-right:0;
     transition: 250ms;
-    border-bottom: 2px solid ${$design.primaryLightForeground};
-  }
-
-  ux-input > styles.input[disabled],
-  ux-input > styles.input[disabled]:hover,
-  ux-input > styles.input[disabled]:focus,
-  ux-input > styles.input[readonly],
-  ux-input > styles.input[readonly]:hover,
-  ux-input > styles.input[readonly]:focus {
-    color: ${$swatches.grey.p500};
-    border-bottom: 1px dashed ${$swatches.grey.p300};
+    background-color: ${background};
+    border-bottom: 2px solid ${foreground || $design.primaryLightForeground};
   }
 
     ux-input > styles.input:hover {
@@ -38,30 +28,40 @@ styles.input {
       border-bottom-color: ${$design.accentDark};
     }
 
+    ux-input > styles.input[disabled],
+    ux-input > styles.input[disabled]:hover,
+    ux-input > styles.input[disabled]:focus,
+    ux-input > styles.input[readonly],
+    ux-input > styles.input[readonly]:hover,
+    ux-input > styles.input[readonly]:focus {
+      color: ${foregroundDisabled || $swatches.grey.p500};
+      border-bottom: 1px dashed ${foregroundDisabled || $swatches.grey.p300};
+    }
+
   ux-input.full-width > styles.input {
     padding: 20px;
     padding-left: 8px;
     padding-right: 8px;
     font-size: 16px;
-    background-color: ${$swatches.white};
     border: 1px solid ${$swatches.grey.p200};
+    background-color: ${$swatches.white};
   }
 
-  ux-input.full-width > styles.input[disabled]
-  ux-input.full-width > styles.input[disabled]:hover,
-  ux-input.full-width > styles.input[disabled]:focus,
-  ux-input.full-width > styles.input[readonly],
-  ux-input.full-width > styles.input[readonly]:hover,
-  ux-input.full-width > styles.input[readonly]:focus  {
-    background-color: ${$swatches.grey.p200};
-    border: 1px solid ${$swatches.grey.p300};
-    color: ${$swatches.grey.p500}
-  }
+    ux-input.full-width > styles.input[disabled]
+    ux-input.full-width > styles.input[disabled]:hover,
+    ux-input.full-width > styles.input[disabled]:focus,
+    ux-input.full-width > styles.input[readonly],
+    ux-input.full-width > styles.input[readonly]:hover,
+    ux-input.full-width > styles.input[readonly]:focus  {
+      background-color: ${backgroundDisabled || $swatches.grey.p200};
+      border: 1px solid ${foregroundDisabled || $swatches.grey.p300};
+      color: ${foregroundDisabled || $swatches.grey.p500}
+    }
   
   ux-input.has-error styles.input {
-    border-bottom-color: #f00;
+    border-bottom-color: ${errorAccent || $swatches.red.p500};
   }
 
   ux-input.full-width.has-error styles.input {
-    border-color: #f00;
+    border-color: ${errorAccent || $swatches.red.p500};
   }

@@ -3,18 +3,18 @@ ux-input-info {
   margin-top: 4px;
   font-size: 14px;
   width: 100%;
-  color: ${$design.primaryLightForeground};
+  color: ${hintText || $design.primaryLightForeground};
 }
 
-ux-input-info>.hint-text {
-  flex-grow: 1;
-}
+  ux-input-info>.hint-text {
+    flex-grow: 1;
+  }
 
-  ux-input-info>div.counter {
+  ux-input-info>.counter {
     transition: 250ms;
   }
 
-  ux-input.focused+ux-input-info>div.counter {
+  ux-input.focused+ux-input-info>.counter {
     color: ${$design.accent};
   }
 
@@ -23,5 +23,5 @@ ux-input-info>.hint-text {
   }
 
   ux-input.has-error+ux-input-info {
-    color: #f00;
+    color: ${errorAccent || $swatches.red.p500};
   }
