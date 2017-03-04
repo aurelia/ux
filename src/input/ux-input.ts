@@ -124,10 +124,6 @@ export class UxInput implements Themable {
     });
   }
 
-  public focus() {
-    alert('hi');
-  }
-
   public disabledChanged(newValue: any) {
     if (newValue === true || newValue === '') {
       this.textbox.setAttribute('disabled', 'true');
