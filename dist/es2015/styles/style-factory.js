@@ -9,6 +9,7 @@ import { AureliaUX } from '../aurelia-ux';
 import { computedFrom, camelCase } from 'aurelia-binding';
 import { Origin } from 'aurelia-metadata';
 import { swatches } from '../colors/swatches';
+import { shadows } from '../colors/shadows';
 export var StyleFactory = (function () {
     function StyleFactory(styleObjectType, styles, expression) {
         this.styleObjectType = styleObjectType;
@@ -55,6 +56,7 @@ var StyleOverrideContext = (function () {
         this.$on = '(min-width: 0)';
         this.$off = '(max-width: 0)';
         this.$swatches = swatches;
+        this.$shadows = shadows;
     }
     Object.defineProperty(StyleOverrideContext.prototype, "$platform", {
         get: function () {

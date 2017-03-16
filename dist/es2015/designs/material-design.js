@@ -1,4 +1,5 @@
 import { swatches } from '../colors/swatches';
+import { shadows } from '../colors/shadows';
 export var MaterialDesign = (function () {
     function MaterialDesign() {
         this.type = 'material';
@@ -14,6 +15,15 @@ export var MaterialDesign = (function () {
         this.accentLightForeground = swatches.white;
         this.accentDark = swatches.pink.a400;
         this.accentDarkForeground = swatches.white;
+        this.elevationNone = shadows.depth_0;
+        this.elevation2dp = shadows.depth_2dp;
+        this.elevation3dp = shadows.depth_3dp;
+        this.elevation4dp = shadows.depth_4dp;
+        this.elevation6dp = shadows.depth_6dp;
+        this.elevation8dp = shadows.depth_8dp;
+        this.elevation16dp = shadows.depth_16dp;
+        this.elevation24dp = shadows.depth_24dp;
+        this.elevationFocus = shadows.depth_focus;
     }
     return MaterialDesign;
 }());

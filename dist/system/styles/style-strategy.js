@@ -60,7 +60,7 @@ System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-
             exports_1("styleStrategy", styleStrategy = aurelia_metadata_1.protocol.create('aurelia:style-strategy', {
                 validate: function (target) {
                     if (!(typeof target.loadStyleFactory === 'function')) {
-                        return 'Style strategies must implement: loadStyleStrateg(): Promise<StyleFactory>';
+                        return 'Style strategies must implement: loadStyleFactory(): Promise<StyleFactory>';
                     }
                     return true;
                 },

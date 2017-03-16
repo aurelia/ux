@@ -4,6 +4,7 @@ import {computedFrom, camelCase} from 'aurelia-binding';
 import {Container} from 'aurelia-dependency-injection';
 import {Origin} from 'aurelia-metadata';
 import {swatches} from '../colors/swatches';
+import {shadows} from '../colors/shadows';
 
 export class StyleFactory {
   public themeKey: string;
@@ -61,6 +62,7 @@ class StyleOverrideContext {
   public $on = '(min-width: 0)';
   public $off = '(max-width: 0)';
   public $swatches = swatches;
+  public $shadows = shadows;
 
   constructor(public $ux: AureliaUX, public $styles: any, public bindingContext: any) {}
 

@@ -1,4 +1,4 @@
-System.register(['./style-controller', '../aurelia-ux', 'aurelia-binding', 'aurelia-metadata', '../colors/swatches'], function(exports_1, context_1) {
+System.register(['./style-controller', '../aurelia-ux', 'aurelia-binding', 'aurelia-metadata', '../colors/swatches', '../colors/shadows'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -7,7 +7,7 @@ System.register(['./style-controller', '../aurelia-ux', 'aurelia-binding', 'aure
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var style_controller_1, aurelia_ux_1, aurelia_binding_1, aurelia_metadata_1, swatches_1;
+    var style_controller_1, aurelia_ux_1, aurelia_binding_1, aurelia_metadata_1, swatches_1, shadows_1;
     var StyleFactory, currentNumber, StyleOverrideContext;
     function generateRandomClass(key) {
         return key + '_au_ux_' + nextNumber();
@@ -31,6 +31,9 @@ System.register(['./style-controller', '../aurelia-ux', 'aurelia-binding', 'aure
             },
             function (swatches_1_1) {
                 swatches_1 = swatches_1_1;
+            },
+            function (shadows_1_1) {
+                shadows_1 = shadows_1_1;
             }],
         execute: function() {
             StyleFactory = (function () {
@@ -74,6 +77,7 @@ System.register(['./style-controller', '../aurelia-ux', 'aurelia-binding', 'aure
                     this.$on = '(min-width: 0)';
                     this.$off = '(max-width: 0)';
                     this.$swatches = swatches_1.swatches;
+                    this.$shadows = shadows_1.shadows;
                 }
                 Object.defineProperty(StyleOverrideContext.prototype, "$platform", {
                     get: function () {

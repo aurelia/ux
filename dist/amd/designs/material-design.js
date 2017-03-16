@@ -1,4 +1,4 @@
-define(["require", "exports", '../colors/swatches'], function (require, exports, swatches_1) {
+define(["require", "exports", '../colors/swatches', '../colors/shadows'], function (require, exports, swatches_1, shadows_1) {
     "use strict";
     var MaterialDesign = (function () {
         function MaterialDesign() {
@@ -15,6 +15,15 @@ define(["require", "exports", '../colors/swatches'], function (require, exports,
             this.accentLightForeground = swatches_1.swatches.white;
             this.accentDark = swatches_1.swatches.pink.a400;
             this.accentDarkForeground = swatches_1.swatches.white;
+            this.elevationNone = shadows_1.shadows.depth_0;
+            this.elevation2dp = shadows_1.shadows.depth_2dp;
+            this.elevation3dp = shadows_1.shadows.depth_3dp;
+            this.elevation4dp = shadows_1.shadows.depth_4dp;
+            this.elevation6dp = shadows_1.shadows.depth_6dp;
+            this.elevation8dp = shadows_1.shadows.depth_8dp;
+            this.elevation16dp = shadows_1.shadows.depth_16dp;
+            this.elevation24dp = shadows_1.shadows.depth_24dp;
+            this.elevationFocus = shadows_1.shadows.depth_focus;
         }
         return MaterialDesign;
     }());
