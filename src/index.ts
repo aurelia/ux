@@ -5,7 +5,7 @@ export {swatches} from './colors/swatches';
 export {shadows} from './colors/shadows';
 export {UxButtonTheme} from './button/ux-button-theme';
 export {UxInputTheme} from './input/ux-input-theme';
-export {UxInputInfoTheme} from './input/ux-input-info-theme';
+export {UxInputInfoTheme} from './input-info/ux-input-info-theme';
 export * from './styles/decorators';
 export {AureliaUX} from './aurelia-ux';
 export {UXConfiguration} from './ux-configuration';
@@ -14,7 +14,7 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
   config.globalResources([
     './button/ux-button',
     './input/ux-input',
-    './input/ux-input-info'
+    './input-info/ux-input-info'
   ]);
 
   let ux = <AureliaUX>config.container.get(AureliaUX);
