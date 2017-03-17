@@ -12,32 +12,32 @@ import { processDesignAttributes } from '../designs/design-attributes';
 
 export class UxTextarea implements Themable {
   @bindable public autofocus = null;
-  @bindable public disabled: any = false;
+  @bindable public autoResize = null;
   @bindable public cols: number;
-  @bindable public rows: number;
-  @bindable public wrap: string;
+  @bindable public disabled: any = false;
   @bindable public maxlength: number;
   @bindable public minlength: number;
   @bindable public readonly: any = false;
+  @bindable public rows: number;
   @bindable public theme = null;
-  @bindable public autoResize = null;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
 
-  public view: View;
   public textbox: HTMLTextAreaElement;
+  public view: View;
 
   constructor(
     private element: HTMLTextAreaElement,
     private styleEngine: StyleEngine,
-    public resources: ViewResources) { }
+    public  resources: ViewResources) { }
 
   public created(_: any, myView: View) {
     this.view = myView;
   }
 
   public bind() {
+
     if (this.theme) {
       this.styleEngine.applyTheme(this, this.theme);
     }
@@ -46,11 +46,6 @@ export class UxTextarea implements Themable {
       setTimeout(() => {
         this.textbox.focus();
       }, 0);
-    }
-
-    if (this.element.hasAttribute('required')) {
-      this.textbox.setAttribute('required', '');
-      this.element.removeAttribute('required');
     }
 
     if (this.element.hasAttribute('placeholder')) {
@@ -62,8 +57,19 @@ export class UxTextarea implements Themable {
       }
     }
 
+    if (this.element.hasAttribute('required')) {
+      this.textbox.setAttribute('required', '');
+      this.element.removeAttribute('required');
+    }
+
+    if (this.cols) {
+      this.textbox.setAttribute('cols', this.cols.toString());
+      this.element.removeAttribute('cols');
+    }
+
     if (this.rows) {
       this.textbox.setAttribute('rows', this.rows.toString());
+      this.element.removeAttribute('rows');
     }
 
     if (this.minlength) {
