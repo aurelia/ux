@@ -38,6 +38,10 @@ styles.textarea {
       color: ${foregroundDisabled || $swatches.grey.p500};
       border-bottom: 1px dashed ${foregroundDisabled || $swatches.grey.p300};
     }
+    
+  ux-textarea.show-grip > styles.textarea {
+    resize: both;
+  }
 
   ux-textarea.full-width > styles.textarea {
     padding: 20px;

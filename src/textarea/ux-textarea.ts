@@ -20,6 +20,7 @@ export class UxTextarea implements Themable {
   @bindable public minlength: number;
   @bindable public readonly: any = false;
   @bindable public theme = null;
+  @bindable public autoResize = null;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
@@ -61,8 +62,8 @@ export class UxTextarea implements Themable {
       }
     }
 
-    if (this.cols) {
-      this.textbox.setAttribute('cols', this.cols.toString());
+    if (this.rows) {
+      this.textbox.setAttribute('rows', this.rows.toString());
     }
 
     if (this.minlength) {
@@ -126,5 +127,12 @@ export class UxTextarea implements Themable {
 
   public themeChanged(newValue: any) {
     this.styleEngine.applyTheme(this, newValue);
+  }
+
+  public valueChanged() {
+    if (this.autoResize !== null) {
+      this.textbox.style.height = 'auto';
+      this.textbox.style.height = `${this.textbox.scrollHeight + 2}px`;
+    }
   }
 }
