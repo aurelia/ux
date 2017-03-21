@@ -3,14 +3,13 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { Themable } from '../styles/themable';
 import { processDesignAttributes } from '../designs/design-attributes';
-import { UxInput } from './ux-input';
 
 @inject(Element, ViewResources, StyleEngine)
 @customElement('ux-input-info')
 @processAttributes(processDesignAttributes)
 
 export class UxInputInfo implements Themable {
-  @bindable public target: UxInput;
+  @bindable public target: Element;
   @bindable public uxInputCounter = null;
   @bindable public theme = null;
 
