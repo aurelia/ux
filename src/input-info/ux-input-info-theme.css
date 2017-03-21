@@ -22,6 +22,6 @@ ux-input-info {
     display: none;
   }
 
-  ux-input.has-error+ux-input-info {
+  .has-error+ux-input-info {
     color: ${errorAccent || $swatches.red.p500};
   }
