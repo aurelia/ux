@@ -21,35 +21,35 @@
     "url": "https://github.com/aurelia/ux"
   },
   "scripts": {
+    "postinstall": "npm uninstall @types/fs-extra @types/handlebars @types/highlight.js @types/lodash @types/marked @types/minimatch @types/shelljs",
     "lint": "cross-env tslint --project tsconfig.json",
-
     "pretest": "cross-env npm run lint",
-    "test": "cross-env tsc && karma start --single-run",
-    "test-watch": "concurrently \"./node_modules/.bin/tsc --watch\" \"./node_modules/.bin/karma start\"",
-
+    "test": "cross-env rimraf dist && tsc && karma start --single-run",
+    "develop": "concurrently \"./node_modules/.bin/tsc --watch\" \"./node_modules/.bin/karma start\"",
     "prebuild:amd": "cross-env rimraf dist/amd",
     "build:amd": "cross-env tsc --project tsconfig.build.json --outDir dist/amd --module amd",
     "postbuild:amd": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/amd",
-
     "prebuild:commonjs": "cross-env rimraf dist/commonjs",
     "build:commonjs": "cross-env tsc --project tsconfig.build.json --outDir dist/commonjs --module commonjs",
     "postbuild:commonjs": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/commonjs",
-
     "prebuild:es2015": "cross-env rimraf dist/es2015",
-    "build:es2015": "cross-env tsc --project tsconfig.build.json --outDir dist/es2015 --module es2015",
+    "build:es2015": "cross-env tsc --project tsconfig.build.json --outDir dist/es2015 --module es2015 --target es2015",
     "postbuild:es2015": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/es2015",
-
+    "prebuild:native-modules": "cross-env rimraf dist/native-modules",
+    "build:native-modules": "cross-env tsc --project tsconfig.build.json --outDir dist/native-modules --module es2015",
+    "postbuild:native-modules": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/native-modules",
     "prebuild:system": "cross-env rimraf dist/system",
     "build:system": "cross-env tsc --project tsconfig.build.json --outDir dist/system --module system",
     "postbuild:system": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/system",
-
     "prebuild": "cross-env rimraf dist",
-    "build": "concurrently \"npm run build:amd\" \"npm run build:commonjs\" \"npm run build:es2015\" \"npm run build:system\"",
-    "postbuild": "npm run build:doc",
-
-    "prebuild:doc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.build.json --outFile dist/doc-temp/index.js && node doc/shape-defs",
-    "build:doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs --ignoreCompilerErrors --tsconfig doc/tsconfig.json dist/doc-temp/",
-    "postbuild:doc": "cross-env node doc/shape-doc && rimraf dist/doc-temp"
+    "build": "concurrently \"npm run build:amd\" \"npm run build:commonjs\" \"npm run build:es2015\" \"npm run build:native-modules\" \"npm run build:system\"",
+    "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.build.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
+    "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
+    "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",
+    "changelog": "cross-env conventional-changelog -p ux -i doc/CHANGELOG.md -s",
+    "bump-version": "npm --no-git-tag-version version",
+    "preprepare-release": "cross-env npm run test",
+    "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
   },
   "jspm": {
     "registry": "npm",
@@ -91,25 +91,28 @@
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
-    "aurelia-bootstrapper": "^1.0.0",
-    "aurelia-pal-browser": "^1.0.0",
-    "aurelia-polyfills": "^1.1.0",
-    "aurelia-testing": "^1.0.0-beta.2.0.0",
-    "concurrently": "^2.2.0",
-    "copyfiles": "^1.0.0",
-    "cross-env": "^2.0.1",
-    "jasmine-core": "^2.4.1",
-    "karma": "^1.2.0",
+    "@types/node": "^7.0.11",
+    "aurelia-bootstrapper": "^2.1.1",
+    "aurelia-pal-browser": "^1.2.0",
+    "aurelia-pal-nodejs": "^1.0.0-beta.1.0.0",
+    "aurelia-polyfills": "^1.2.1",
+    "aurelia-testing": "^1.0.0-beta.3.0.1",
+    "concurrently": "^3.4.0",
+    "conventional-changelog-cli": "^1.3.1",
+    "copyfiles": "^1.2.0",
+    "cross-env": "^3.2.4",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-ie-launcher": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
-    "karma-requirejs": "^1.0.0",
-    "requirejs": "^2.2.0",
-    "requirejs-text": "^2.0.12",
-    "rimraf": "^2.5.4",
-    "tslint": "^3.15.1",
-    "typedoc": "^0.5.0",
-    "typescript": "^2.0.0"
+    "karma-jasmine": "^1.1.0",
+    "karma-requirejs": "^1.1.0",
+    "requirejs": "^2.3.3",
+    "requirejs-text": "^2.0.15",
+    "rimraf": "^2.6.1",
+    "tslint": "^4.4.2",
+    "typedoc": "^0.5.9",
+    "typescript": "^2.2.1"
   },
   "aurelia": {
     "build": {

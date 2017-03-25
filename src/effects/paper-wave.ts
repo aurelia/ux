@@ -339,7 +339,7 @@ export class PaperWave {
    * @returns Current instance for method chaining.
    */
   public remove() {
-    this.$.parentNode.removeChild(this.$);
+    (this.$.parentNode as Node).removeChild(this.$);
     return this;
   }
 }
