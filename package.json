@@ -47,8 +47,8 @@
     "build": "concurrently \"npm run build:amd\" \"npm run build:commonjs\" \"npm run build:es2015\" \"npm run build:system\"",
     "postbuild": "npm run build:doc",
 
-    "prebuild:doc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.build.json --outFile dist/doc-temp/index.js && node doc/shape-defs",
-    "build:doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs --ignoreCompilerErrors --tsconfig doc/tsconfig.json dist/doc-temp/",
+    "prebuild:doc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.build.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs",
+    "build:doc": "cross-env typedoc --json doc/api.json --disableOutputCheck --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs --ignoreCompilerErrors --project tsconfig.json --out dist/doc-temp/",
     "postbuild:doc": "cross-env node doc/shape-doc && rimraf dist/doc-temp"
   },
   "jspm": {

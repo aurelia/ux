@@ -34,7 +34,7 @@ export class StyleResource {
     return styleStrategy.loadStyleFactory(container, this.styleObjectType).then(styleFactory => {
       this.factory = styleFactory;
       this.hooks.factory = this.factory;
-      return styleFactory;
+      return this;
     });
   }
 }
