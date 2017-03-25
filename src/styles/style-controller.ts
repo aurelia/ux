@@ -57,7 +57,7 @@ export class StyleController {
   }
 
   private removeStyleElement() {
-    this.styleElementParent = this.styleElement.parentNode;
+    this.styleElementParent = this.styleElement.parentNode as Node;
     DOM.removeNode(this.styleElement);
     this.onRemove();
   }
