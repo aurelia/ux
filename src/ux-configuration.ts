@@ -31,15 +31,15 @@ export class UXConfiguration {
   }
 
   public commandHandler() {
-    let proto = <any>SyntaxInterpreter.prototype;
-    let original = proto.handleUnknownCommand;
+    const proto = SyntaxInterpreter.prototype as any;
+    const original = proto.handleUnknownCommand;
 
     /* tslint:disable:only-arrow-functions */
     proto.handleUnknownCommand = function(r: ViewResources, e: Element, i: any, ei?: any, c?: any) {
       if (i.attrName === 'styles') {
         i.attrName = 'class';
         i.attrValue = '$styles.' + i.command.replace(/\-/g, '_');
-        return (<any>this)['one-way'](r, e, i, ei, c);
+        return (this as any)['one-way'](r, e, i, ei, c);
       } else {
         return original.call(this, r, e, i, ei, c);
       }

@@ -19,7 +19,7 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
     './textarea/ux-textarea'
   ]);
 
-  let ux = <AureliaUX>config.container.get(AureliaUX);
+  const ux = config.container.get(AureliaUX) as AureliaUX;
 
   if (typeof callback === 'function') {
     return Promise.resolve(callback(ux))

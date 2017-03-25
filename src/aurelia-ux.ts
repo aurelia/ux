@@ -25,7 +25,7 @@ export class AureliaUX {
   }
 
   public start(config: FrameworkConfiguration) {
-    let found = this.availableHosts.find(x => x.isAvailable);
+    const found = this.availableHosts.find(x => x.isAvailable);
 
     if (found === undefined) {
       throw new Error('Could not determine host environment');

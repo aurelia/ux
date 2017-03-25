@@ -17,7 +17,7 @@ export class StyleLocator {
    */
   public getStyleStrategy(value: any): StyleStrategy {
     if (typeof value === 'object' && 'getStyleStrategy' in value) {
-      let origin = Origin.get(value.constructor);
+      const origin = Origin.get(value.constructor);
 
       value = value.getStyleStrategy();
 
@@ -25,7 +25,7 @@ export class StyleLocator {
         value = new RelativeStyleStrategy(value);
       }
 
-      (<any>styleStrategy).assert(value);
+      (styleStrategy as any).assert(value);
 
       if (origin.moduleId) {
         value.makeRelativeTo(origin.moduleId);
@@ -38,7 +38,7 @@ export class StyleLocator {
       value = new RelativeStyleStrategy(value);
     }
 
-    if ((<any>styleStrategy).validate(value)) {
+    if ((styleStrategy as any).validate(value)) {
       return value;
     }
 
@@ -46,8 +46,8 @@ export class StyleLocator {
       value = value.constructor;
     }
 
-    let origin = Origin.get(value);
-    let strategy = <StyleStrategy>metadata.get(StyleLocator.styleStrategyMetadataKey, value);
+    const origin = Origin.get(value);
+    let strategy = metadata.get(StyleLocator.styleStrategyMetadataKey, value) as StyleStrategy;
 
     if (!strategy) {
       if (!origin.moduleId) {
@@ -79,8 +79,8 @@ export class StyleLocator {
    * @return The view url.
    */
   public convertOriginToStyleUrl(origin: Origin): string {
-    let moduleId = origin.moduleId;
-    let id = (moduleId.endsWith('.js') || moduleId.endsWith('.ts'))
+    const moduleId = origin.moduleId;
+    const id = (moduleId.endsWith('.js') || moduleId.endsWith('.ts'))
       ? moduleId.substring(0, moduleId.length - 3)
       : moduleId;
 

@@ -50,7 +50,7 @@ export class UxInput implements Themable {
     }
 
     if (this.element.hasAttribute('placeholder')) {
-      let attributeValue = this.element.getAttribute('placeholder');
+      const attributeValue = this.element.getAttribute('placeholder');
 
       if (attributeValue) {
         this.textbox.setAttribute('placeholder', attributeValue);
@@ -59,7 +59,7 @@ export class UxInput implements Themable {
     }
 
     if (this.element.hasAttribute('step')) {
-      let attributeValue = this.element.getAttribute('step');
+      const attributeValue = this.element.getAttribute('step');
 
       if (attributeValue) {
         this.textbox.setAttribute('step', attributeValue);
@@ -99,7 +99,7 @@ export class UxInput implements Themable {
   }
 
   public attached() {
-    let blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
+    const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
 
     this.textbox.addEventListener('focus', () => {
       this.element.classList.add('focused');
@@ -112,7 +112,7 @@ export class UxInput implements Themable {
   }
 
   public detached() {
-    let blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
+    const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
 
     this.textbox.removeEventListener('focus', () => {
       this.element.classList.add('focused');

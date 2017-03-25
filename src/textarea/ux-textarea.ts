@@ -49,7 +49,7 @@ export class UxTextarea implements Themable {
     }
 
     if (this.element.hasAttribute('placeholder')) {
-      let attributeValue = this.element.getAttribute('placeholder');
+      const attributeValue = this.element.getAttribute('placeholder');
 
       if (attributeValue) {
         this.textbox.setAttribute('placeholder', attributeValue);
@@ -90,7 +90,7 @@ export class UxTextarea implements Themable {
   }
 
   public attached() {
-    let blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
+    const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
 
     this.textbox.addEventListener('focus', () => {
       this.element.classList.add('focused');
@@ -103,7 +103,7 @@ export class UxTextarea implements Themable {
   }
 
   public detached() {
-    let blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
+    const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
 
     this.textbox.removeEventListener('focus', () => {
       this.element.classList.add('focused');

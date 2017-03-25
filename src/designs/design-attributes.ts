@@ -6,17 +6,19 @@ export function processDesignAttributes(
   node: Element,
   attributes: NamedNodeMap,
   ___: any) {
-  let prefix = 'material-'; // TODO: get this from somewhere
-  let length = prefix.length;
+  const prefix = 'material-'; // TODO: get this from somewhere
+  const length = prefix.length;
 
+  // tslint:disable:prefer-const
   for (let i = 0, ii = attributes.length; i < ii; ++i) {
-    let current = attributes[i];
+    const current = attributes[i];
 
     if (current.name.indexOf(prefix) === 0) {
-      let realName = current.name.substring(length);
+      const realName = current.name.substring(length);
       node.setAttribute(realName, current.value);
     }
   }
+  // tslint:enable:prefer-const
 
   return true;
 }

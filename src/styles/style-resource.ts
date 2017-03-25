@@ -24,7 +24,7 @@ export class StyleResource {
   }
 
   public load(container: Container): Promise<StyleResource> {
-    let styleStrategy = (<StyleLocator>container.get(StyleLocator))
+    const styleStrategy = (container.get(StyleLocator) as StyleLocator)
       .getStyleStrategy(this.styleObjectType);
 
     if (!styleStrategy.moduleId) {
