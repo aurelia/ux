@@ -97,7 +97,7 @@ define(["require", "exports"], function (require, exports) {
             a400: '#2979FF',
             a700: '#2962FF'
         },
-        lgithBlue: {
+        lightBlue: {
             p50: '#E1F5FE',
             p100: '#B3E5FC',
             p200: '#81D4FA',

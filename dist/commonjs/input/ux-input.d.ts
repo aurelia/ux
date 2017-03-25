@@ -1,0 +1,30 @@
+import { ViewResources, View } from 'aurelia-templating';
+import { StyleEngine } from '../styles/style-engine';
+import { Themable } from '../styles/themable';
+export declare class UxInput implements Themable {
+    private element;
+    resources: ViewResources;
+    private styleEngine;
+    autofocus: null;
+    disabled: any;
+    maxlength: number;
+    minlength: number;
+    min: number;
+    max: number;
+    readonly: any;
+    theme: null;
+    type: any;
+    value: any;
+    view: View;
+    private textbox;
+    constructor(element: HTMLInputElement, resources: ViewResources, styleEngine: StyleEngine);
+    created(_: any, myView: View): void;
+    bind(): void;
+    attached(): void;
+    detached(): void;
+    disabledChanged(newValue: any): void;
+    readonlyChanged(newValue: any): void;
+    themeChanged(newValue: any): void;
+    typeChanged(newValue: any): void;
+    valueChanged(newValue: any): void;
+}

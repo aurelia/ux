@@ -1,0 +1,27 @@
+ux-input-info {
+  display: flex;
+  margin-top: 4px;
+  font-size: 14px;
+  width: 100%;
+  color: ${hintText || $design.primaryLightForeground};
+}
+
+  ux-input-info>.hint-text {
+    flex-grow: 1;
+  }
+
+  ux-input-info>.counter {
+    transition: 250ms;
+  }
+
+  ux-input.focused+ux-input-info>.counter {
+    color: ${$design.accent};
+  }
+
+  ux-input>styles.input[disabled]+ux-input-info {
+    display: none;
+  }
+
+  .has-error+ux-input-info {
+    color: ${errorAccent || $swatches.red.p500};
+  }

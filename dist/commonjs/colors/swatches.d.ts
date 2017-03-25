@@ -111,7 +111,7 @@ export declare const swatches: {
         a400: string;
         a700: string;
     };
-    lgithBlue: {
+    lightBlue: {
         p50: string;
         p100: string;
         p200: string;

@@ -1,10 +1,13 @@
-System.register(['./aurelia-ux', './colors/swatches', './colors/shadows', './button/ux-button-theme', './styles/decorators', './ux-configuration'], function(exports_1, context_1) {
+System.register(['./aurelia-ux', './colors/swatches', './colors/shadows', './button/ux-button-theme', './input/ux-input-theme', './input-info/ux-input-info-theme', './textarea/ux-textarea-theme', './styles/decorators', './ux-configuration'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var aurelia_ux_1;
     function configure(config, callback) {
         config.globalResources([
-            './button/ux-button'
+            './button/ux-button',
+            './input/ux-input',
+            './input-info/ux-input-info',
+            './textarea/ux-textarea'
         ]);
         var ux = config.container.get(aurelia_ux_1.AureliaUX);
         if (typeof callback === 'function') {
@@ -22,6 +25,9 @@ System.register(['./aurelia-ux', './colors/swatches', './colors/shadows', './but
         'swatches': true,
         'shadows': true,
         'UxButtonTheme': true,
+        'UxInputTheme': true,
+        'UxInputInfoTheme': true,
+        'UxTextareaTheme': true,
         'AureliaUX': true,
         'UXConfiguration': true
     };
@@ -53,6 +59,21 @@ System.register(['./aurelia-ux', './colors/swatches', './colors/shadows', './but
             function (ux_button_theme_1_1) {
                 exports_1({
                     "UxButtonTheme": ux_button_theme_1_1["UxButtonTheme"]
+                });
+            },
+            function (ux_input_theme_1_1) {
+                exports_1({
+                    "UxInputTheme": ux_input_theme_1_1["UxInputTheme"]
+                });
+            },
+            function (ux_input_info_theme_1_1) {
+                exports_1({
+                    "UxInputInfoTheme": ux_input_info_theme_1_1["UxInputInfoTheme"]
+                });
+            },
+            function (ux_textarea_theme_1_1) {
+                exports_1({
+                    "UxTextareaTheme": ux_textarea_theme_1_1["UxTextareaTheme"]
                 });
             },
             function (decorators_1_1) {
