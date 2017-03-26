@@ -110,21 +110,21 @@ export class PaperRipple {
   }
 
   private initTarget(target: HTMLElement | null = null) {
-    let _doc: Document = PLATFORM.global.document;
+    const doc: Document = PLATFORM.global.document;
 
-    this.$ = target || _doc.createElement('div');
+    this.$ = target || doc.createElement('div');
     this.$.classList.add('paper-ripple');
 
     if (!this.$background) {
       this.$background = target &&
-        <HTMLElement>target.querySelector('.paper-ripple__background') || _doc.createElement('div');
+        target.querySelector('.paper-ripple__background') as HTMLElement || doc.createElement('div');
       this.$background.classList.add('paper-ripple__background');
       this.$.appendChild(this.$background);
     }
 
     if (!this.$waves) {
       this.$waves = target &&
-        <HTMLElement>target.querySelector('.paper-ripple__waves') || _doc.createElement('div');
+        target.querySelector('.paper-ripple__waves') as HTMLElement || doc.createElement('div');
       this.$waves.classList.add('paper-ripple__waves');
       this.$.appendChild(this.$waves);
     }
@@ -137,7 +137,7 @@ export class PaperRipple {
    * @returns Current instance for method chaining.
    */
   public addWave() {
-    let wave = new PaperWave(this);
+    const wave = new PaperWave(this);
     this.$waves.appendChild(wave.$);
     this.$background.style.backgroundColor = wave.color;
     this.waves.push(wave);
@@ -151,7 +151,7 @@ export class PaperRipple {
    * @returns Current instance for method chaining.
    */
   public downAction(ev: MouseEvent) {
-    let wave = this.addWave();
+    const wave = this.addWave();
     wave.downAction(ev);
     this.animate();
     return this;
@@ -173,7 +173,7 @@ export class PaperRipple {
    * @returns Current instance for method chaining.
    */
   public removeWave(wave: PaperWave) {
-    let waveIndex = this.waves.indexOf(wave);
+    const waveIndex = this.waves.indexOf(wave);
 
     if (waveIndex < 0) {
       return this;
@@ -189,8 +189,9 @@ export class PaperRipple {
    * @returns Current instance for method chaining.
    */
   public animate() {
+    // tslint:disable:prefer-const
     for (let i = 0, l = this.waves.length; i < l; i++) {
-      let wave = this.waves[i];
+      const wave = this.waves[i];
 
       if (wave) {
         wave.draw();
@@ -202,6 +203,7 @@ export class PaperRipple {
         }
       }
     }
+    // tslint:enable:prefer-const
 
     if (!this.shouldKeepAnimating && this.waves.length === 0) {
       this.$background.style.backgroundColor = null;

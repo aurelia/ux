@@ -2,9 +2,11 @@ import { PLATFORM } from 'aurelia-pal';
 import { ElementRect } from './element-rect';
 import { Point } from './point';
 
-let _window: Window = PLATFORM.global,
-  _doc = _window.document,
-  _now = PLATFORM.performance.now.bind(PLATFORM.performance);
+// tslint:disable:variable-name
+const _window: Window = PLATFORM.global;
+const  _doc = _window.document;
+const  _now = PLATFORM.performance.now.bind(PLATFORM.performance);
+// tslint:enable:variable-name
 
 /**
  * Provides all the logic to produce a one-time rippling effect.
@@ -155,13 +157,13 @@ export class PaperWave {
    * @returns {Number} The value of the wave's radius.
    */
   get radius() {
-    let radius = Math.min(
+    const radius = Math.min(
       Math.sqrt(Math.pow(this.containerRect.width, 2) + Math.pow(this.containerRect.height, 2)),
       PaperWave.MAX_RADIUS
-    ) * 1.1 + 5,
-      elapsed = 1.1 - 0.2 * (radius / PaperWave.MAX_RADIUS),
-      currentTime = this.mouseInteractionSeconds / elapsed,
-      actualRadius = radius * (1 - Math.pow(80, -currentTime));
+    ) * 1.1 + 5;
+    const elapsed = 1.1 - 0.2 * (radius / PaperWave.MAX_RADIUS);
+    const currentTime = this.mouseInteractionSeconds / elapsed;
+    const actualRadius = radius * (1 - Math.pow(80, -currentTime));
 
     return Math.abs(actualRadius);
   }
@@ -223,9 +225,9 @@ export class PaperWave {
    * @returns {{x: Number, y: Number}} Object containing coordinates of the wave's current position.
    */
   get currentPosition() {
-    let translateFraction = this.translationFraction,
-      x = this.startPosition.x,
-      y = this.startPosition.y;
+    const translateFraction = this.translationFraction;
+    let x = this.startPosition.x;
+    let y = this.startPosition.y;
 
     if (this.endPosition.x) {
       x = this.startPosition.x + translateFraction * (this.endPosition.x - this.startPosition.x);
@@ -265,10 +267,10 @@ export class PaperWave {
    * @returns Current instance for method chaining.
    */
   public draw() {
-    let scaleFactor = this.radius / (this.containerRect.size / 2),
-      containerCenter = this.containerRect.center,
-      currentPos = this.currentPosition,
-      deltaPos = {
+    const scaleFactor = this.radius / (this.containerRect.size / 2);
+    const containerCenter = this.containerRect.center;
+    const currentPos = this.currentPosition;
+    const deltaPos = {
         x: currentPos.x - containerCenter.x,
         y: currentPos.y - containerCenter.y
       };
@@ -298,7 +300,7 @@ export class PaperWave {
    * @returns Current instance for method chaining.
    */
   public downAction(event: MouseEvent | null = null) {
-    let containerCenter = this.containerRect.center;
+    const containerCenter = this.containerRect.center;
 
     this.resetDefaults();
 

@@ -75,16 +75,17 @@ export class ElementRect {
    * @param {Number} ev.y - The `y` coordinate of the point.
    * @param {Number} ev.clientX - The `x` coordinate of the point.
    * @param {Number} ev.clientY - The `y` coordinate of the point.
-   * @returns {Boolean} Returns `true` if the `x` and `y` coordinates of point is a point inside this element's rectangle, otherwise `false`.
+   * @returns {Boolean} Returns `true` if the `x` and `y` coordinates of point is a
+   * point inside this element's rectangle, otherwise `false`.
    */
   public contains(ev: any) {
-    let l = this.boundingRect.left,
-      t = this.boundingRect.top,
-      w = this.boundingRect.width,
-      h = this.boundingRect.height,
-      _x = ev.x || ev.clientX || 0,
-      _y = ev.y || ev.clientY || 0;
+    const l = this.boundingRect.left;
+    const t = this.boundingRect.top;
+    const w = this.boundingRect.width;
+    const h = this.boundingRect.height;
+    const x = ev.x || ev.clientX || 0;
+    const y = ev.y || ev.clientY || 0;
 
-    return _x >= l && _x <= l + w && _y >= t && _y <= t + h;
+    return x >= l && x <= l + w && y >= t && y <= t + h;
   }
 }

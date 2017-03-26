@@ -20,8 +20,8 @@ export class StyleController {
   }
 
   public bind(view: View) {
-    let overrideContext: any = view.overrideContext;
-    let $styles = overrideContext['$styles'] || {};
+    const overrideContext: any = view.overrideContext;
+    const $styles = overrideContext['$styles'] || {};
 
     overrideContext['$' + this.factory.themeKey] = this.bindingContext;
     overrideContext['$design'] = this.overrideContext.$design;
@@ -49,7 +49,7 @@ export class StyleController {
 
   private ensureStyleElementIsAddedToDocument() {
     if (this.styleElement === undefined) {
-      this.styleElement = <HTMLStyleElement>DOM.injectStyles('', this.destination);
+      this.styleElement = DOM.injectStyles('', this.destination) as HTMLStyleElement;
       this.bindingInstance = this.expression.createBinding(this.styleElement);
     } else if (!this.styleElement.parentNode) {
       this.styleElementParent.appendChild(this.styleElement);

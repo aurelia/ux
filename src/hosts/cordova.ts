@@ -32,7 +32,7 @@ export class Cordova implements Host {
   }
 
   private getPlatformType() {
-    let device = PLATFORM.global.device || {platform: 'android'};
+    const device = PLATFORM.global.device || {platform: 'android'};
     return device.platform.toLowerCase();
   }
 }

@@ -16,7 +16,7 @@ export interface StyleStrategy {
 /**
  * Decorator: Indicates that the decorated class/object is a style strategy.
  */
-export const styleStrategy: Function = (<any>protocol).create('aurelia:style-strategy', {
+export const styleStrategy: Function = (protocol as any).create('aurelia:style-strategy', {
   validate(target: any): string | boolean {
     if (!(typeof target.loadStyleFactory === 'function')) {
       return 'Style strategies must implement: loadStyleFactory(): Promise<StyleFactory>';
@@ -31,7 +31,7 @@ export const styleStrategy: Function = (<any>protocol).create('aurelia:style-str
   }
 });
 
-let cssUrlMatcher = /url\((?!['"]data)([^)]+)\)/gi;
+const cssUrlMatcher = /url\((?!['"]data)([^)]+)\)/gi;
 
 function fixupCSSUrls(address: string, css: string) {
   if (typeof css !== 'string') {
@@ -39,7 +39,7 @@ function fixupCSSUrls(address: string, css: string) {
   }
 
   return css.replace(cssUrlMatcher, (_, p1) => {
-    let quote = p1.charAt(0);
+    const quote = p1.charAt(0);
 
     if (quote === '\'' || quote === '"') {
       p1 = p1.substr(1, p1.length - 2);
@@ -72,17 +72,17 @@ export class RelativeStyleStrategy implements StyleStrategy {
    */
   public loadStyleFactory(container: Container, styleObjectType: Function): Promise<StyleFactory> {
     if (this.absolutePath === null && this.moduleId) {
-      let path = resolveForDesign(this.pathOrDesignMap, container);
+      const path = resolveForDesign(this.pathOrDesignMap, container);
 
       if (!path) {
-        this.absolutePath = (<StyleLocator>container.get(StyleLocator))
+        this.absolutePath = (container.get(StyleLocator) as StyleLocator)
           .convertOriginToStyleUrl(new Origin(this.moduleId, 'default'));
       } else {
         this.absolutePath = relativeToFile(path, this.moduleId);
       }
     }
 
-    let styleUrl = this.absolutePath || resolveForDesign(this.pathOrDesignMap, container);
+    const styleUrl = this.absolutePath || resolveForDesign(this.pathOrDesignMap, container);
 
     return container.get(Loader)
       .loadText(styleUrl)
@@ -90,7 +90,7 @@ export class RelativeStyleStrategy implements StyleStrategy {
       .then((text: string) => {
         text = fixupCSSUrls(styleUrl, text);
         this.css = text;
-        let compiler = <StyleCompiler>container.get(StyleCompiler);
+        const compiler = container.get(StyleCompiler) as StyleCompiler;
         return compiler.compile(styleObjectType, this.css);
       });
   }
@@ -135,7 +135,7 @@ export class ConventionalStyleStrategy implements StyleStrategy {
       .then((text: string) => {
         text = fixupCSSUrls(this.styleUrl, text);
         this.css = text;
-        let compiler = <StyleCompiler>container.get(StyleCompiler);
+        const compiler = container.get(StyleCompiler) as StyleCompiler;
         return compiler.compile(styleObjectType, this.css);
       });
   }
@@ -158,9 +158,9 @@ export class InlineStyleStrategy implements StyleStrategy {
    * Loads a style factory.
    */
   public loadStyleFactory(container: Container, styleObjectType: Function): Promise<StyleFactory> {
-    let css = resolveForDesign(this.cssOrDesignMap, container);
+    const css = resolveForDesign(this.cssOrDesignMap, container);
     this.transformedCSS = fixupCSSUrls(this.moduleId, css);
-    let compiler = <StyleCompiler>container.get(StyleCompiler);
+    const compiler = container.get(StyleCompiler) as StyleCompiler;
     return Promise.resolve(compiler.compile(styleObjectType, this.transformedCSS));
   }
 }
@@ -169,7 +169,7 @@ function resolveForDesign(valueOrDesignMap: string | any, container: Container):
   if (typeof valueOrDesignMap === 'string') {
     return valueOrDesignMap;
   } else {
-    let designType = (<AureliaUX>container.get(AureliaUX)).design.type;
+    const designType = (container.get(AureliaUX) as AureliaUX).design.type;
     return valueOrDesignMap[designType];
   }
 }

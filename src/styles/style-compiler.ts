@@ -9,17 +9,17 @@ export class StyleCompiler {
   constructor(private bindingLanguage: BindingLanguage, private viewResources: ViewResources) {}
 
   public compile(styleObjectType: Function, css: string): StyleFactory {
-    let styles = Object.create(null);
-    let transformed = css.replace(classMatcher, (_: string, capture: string) => {
-      let name = capture.replace(/\-/g, '_');
+    const styles = Object.create(null);
+    const transformed = css.replace(classMatcher, (_: string, capture: string) => {
+      const name = capture.replace(/\-/g, '_');
       styles[name] = true;
       return '.${$styles.' + name + ' & oneTime}';
     });
 
-    let expression = <any>this.bindingLanguage.inspectTextContent(
+    let expression = this.bindingLanguage.inspectTextContent(
       this.viewResources,
       transformed
-    );
+    ) as any;
 
     if (expression === null) {
       expression = new PlainCSSBindingExpression(transformed);
