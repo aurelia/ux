@@ -1,8 +1,8 @@
-import {StyleResource} from './style-resource';
-import {resource} from 'aurelia-templating';
-import {RelativeStyleStrategy, StyleStrategy, InlineStyleStrategy} from './style-strategy';
-import {metadata} from 'aurelia-metadata';
-import {StyleLocator} from './style-locator';
+import { StyleResource } from './style-resource';
+import { resource } from 'aurelia-templating';
+import { RelativeStyleStrategy, StyleStrategy, InlineStyleStrategy } from './style-strategy';
+import { metadata } from 'aurelia-metadata';
+import { StyleLocator } from './style-locator';
 
 /**
  * Decorator: Indicates that the target is a styles class.
@@ -16,7 +16,7 @@ export function styles() {
  * @param strategy The style strategy instance.
  */
 export function useStyleStrategy(strategy: StyleStrategy): any {
-  return (target: Function) => {
+  return (target: new () => any) => {
     metadata.define(StyleLocator.styleStrategyMetadataKey, strategy, target);
   };
 }

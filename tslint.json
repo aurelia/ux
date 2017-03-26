@@ -13,7 +13,6 @@
     "array-type": ["array-simple"],
     "arrow-parens": false,
     "max-classes-per-file": [false],
-    "prefer-for-of": false,
-    "ban-types": false
+    "prefer-for-of": false
   }
 }

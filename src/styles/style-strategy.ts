@@ -1,22 +1,22 @@
-import {StyleFactory} from './style-factory';
-import {protocol, Origin} from 'aurelia-metadata';
-import {PLATFORM} from 'aurelia-pal';
-import {StyleLocator} from './style-locator';
-import {relativeToFile} from 'aurelia-path';
-import {Container} from 'aurelia-dependency-injection';
-import {StyleCompiler} from './style-compiler';
-import {Loader} from 'aurelia-loader';
-import {AureliaUX} from '../aurelia-ux';
+import { StyleFactory } from './style-factory';
+import { protocol, Origin } from 'aurelia-metadata';
+import { PLATFORM } from 'aurelia-pal';
+import { StyleLocator } from './style-locator';
+import { relativeToFile } from 'aurelia-path';
+import { Container } from 'aurelia-dependency-injection';
+import { StyleCompiler } from './style-compiler';
+import { Loader } from 'aurelia-loader';
+import { AureliaUX } from '../aurelia-ux';
 
 export interface StyleStrategy {
   moduleId?: string;
-  loadStyleFactory(container: Container, styleObjectType: Function): Promise<StyleFactory>;
+  loadStyleFactory(container: Container, styleObjectType: new () => any): Promise<StyleFactory>;
 }
 
 /**
  * Decorator: Indicates that the decorated class/object is a style strategy.
  */
-export const styleStrategy: Function = (protocol as any).create('aurelia:style-strategy', {
+export const styleStrategy: () => (target: any) => void = (protocol as any).create('aurelia:style-strategy', {
   validate(target: any): string | boolean {
     if (!(typeof target.loadStyleFactory === 'function')) {
       return 'Style strategies must implement: loadStyleFactory(): Promise<StyleFactory>';
@@ -70,7 +70,7 @@ export class RelativeStyleStrategy implements StyleStrategy {
   /**
    * Loads a style factory.
    */
-  public loadStyleFactory(container: Container, styleObjectType: Function): Promise<StyleFactory> {
+  public loadStyleFactory(container: Container, styleObjectType: new () => any): Promise<StyleFactory> {
     if (this.absolutePath === null && this.moduleId) {
       const path = resolveForDesign(this.pathOrDesignMap, container);
 
@@ -128,7 +128,7 @@ export class ConventionalStyleStrategy implements StyleStrategy {
   /**
    * Loads a style factory.
    */
-  public loadStyleFactory(container: Container, styleObjectType: Function): Promise<StyleFactory> {
+  public loadStyleFactory(container: Container, styleObjectType: new () => any): Promise<StyleFactory> {
     return container.get(Loader)
       .loadText(this.styleUrl)
       .catch(() => null)
@@ -152,12 +152,12 @@ export class InlineStyleStrategy implements StyleStrategy {
   /**
    * Creates an instance of InlineStyleStrategy.
    */
-  constructor(private cssOrDesignMap: string | any) {}
+  constructor(private cssOrDesignMap: string | any) { }
 
   /**
    * Loads a style factory.
    */
-  public loadStyleFactory(container: Container, styleObjectType: Function): Promise<StyleFactory> {
+  public loadStyleFactory(container: Container, styleObjectType: new () => any): Promise<StyleFactory> {
     const css = resolveForDesign(this.cssOrDesignMap, container);
     this.transformedCSS = fixupCSSUrls(this.moduleId, css);
     const compiler = container.get(StyleCompiler) as StyleCompiler;
