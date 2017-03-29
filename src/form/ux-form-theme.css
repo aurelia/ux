@@ -1,0 +1,22 @@
+styles.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+styles.form .form-row {
+  display: flex;
+  flex-direction: row;
+}
+
+styles.form .form-row>* {    
+  margin: 0 8px;
+}
+
+styles.form .form-row>*:last-child {
+  margin-right: 0;
+}
+
+styles.form .form-row>*:first-child {
+  margin-left: 0;
+}
