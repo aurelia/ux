@@ -2,19 +2,14 @@ ux-textarea {
   display: block;
   width: 100%;
 }
-
-styles.textarea {
-  display: block;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 8px;
-  border: 0;
-  outline: none;
-  resize: none;
-}
-
-  ux-textarea > styles.textarea {
+  styles.textarea {
+    width: 100%;
+    height: 100%;
+    padding: 16px 0 8px 0;
+    margin-bottom: 8px;
+    border: 0;
+    outline: none;
+    resize: none;
     padding-left:0;
     padding-right:0;
     transition: 250ms;
@@ -22,20 +17,17 @@ styles.textarea {
     border-bottom: 2px solid ${foreground || $design.primaryLightForeground};
   }
 
-    ux-textarea > styles.textarea:hover {
+    styles.textarea:hover,
+    styles.textarea:focus {
       border-bottom-color: ${$design.accent};
     }
 
-    ux-textarea > styles.textarea:focus {
-      border-bottom-color: ${$design.accentDark};
-    }
-
-    ux-textarea > styles.textarea[disabled],
-    ux-textarea > styles.textarea[disabled]:hover,
-    ux-textarea > styles.textarea[disabled]:focus,
-    ux-textarea > styles.textarea[readonly],
-    ux-textarea > styles.textarea[readonly]:hover,
-    ux-textarea > styles.textarea[readonly]:focus {
+    styles.textarea[disabled],
+    styles.textarea[disabled]:hover,
+    styles.textarea[disabled]:focus,
+    styles.textarea[readonly],
+    styles.textarea[readonly]:hover,
+    styles.textarea[readonly]:focus {
       color: ${foregroundDisabled || $swatches.grey.p500};
       border-bottom: 1px dashed ${foregroundDisabled || $swatches.grey.p300};
     }
@@ -45,9 +37,8 @@ styles.textarea {
   }
 
   ux-textarea.full-width > styles.textarea {
-    padding: 20px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 20px 8px;
+    margin-bottom: 0;
     font-size: 16px;
     border: 1px solid ${$swatches.grey.p200};
     background-color: ${$swatches.white};

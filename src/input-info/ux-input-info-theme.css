@@ -1,6 +1,5 @@
 ux-input-info {
   display: flex;
-  margin-top: 4px;
   font-size: 14px;
   width: 100%;
   color: ${hintText || $design.primaryLightForeground};
