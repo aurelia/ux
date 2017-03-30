@@ -11,7 +11,7 @@ export class Electron implements Host {
   public type = 'electron';
 
   public get isAvailable() {
-    let p = PLATFORM.global.process;
+    const p = PLATFORM.global.process;
     return p && p.versions && p.versions.electron;
   }
 

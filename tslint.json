@@ -8,7 +8,11 @@
     "interface-name": [true, "never-prefix"],
     "no-shadowed-variable": false,
     "no-string-literal": false,
-    "trailing-comma": false,
-    "member-ordering": ["fields-first"]
+    "trailing-comma": [false],
+    "member-ordering": ["fields-first"],
+    "array-type": ["array-simple"],
+    "arrow-parens": false,
+    "max-classes-per-file": [false],
+    "prefer-for-of": false
   }
 }

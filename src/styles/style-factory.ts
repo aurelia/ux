@@ -1,16 +1,16 @@
-import {StyleController} from './style-controller';
-import {AureliaUX} from '../aurelia-ux';
-import {computedFrom, camelCase} from 'aurelia-binding';
-import {Container} from 'aurelia-dependency-injection';
-import {Origin} from 'aurelia-metadata';
-import {swatches} from '../colors/swatches';
-import {shadows} from '../colors/shadows';
+import { StyleController } from './style-controller';
+import { AureliaUX } from '../aurelia-ux';
+import { computedFrom, camelCase } from 'aurelia-binding';
+import { Container } from 'aurelia-dependency-injection';
+import { Origin } from 'aurelia-metadata';
+import { swatches } from '../colors/swatches';
+import { shadows } from '../colors/shadows';
 
 export class StyleFactory {
   public themeKey: string;
   private defaultController: StyleController;
 
-  constructor(private styleObjectType: Function, private styles: string[], private expression: Object) {
+  constructor(private styleObjectType: new () => any, private styles: string[], private expression: object) {
     this.themeKey = camelCase(Origin.get(styleObjectType).moduleMember);
   }
 
@@ -24,11 +24,11 @@ export class StyleFactory {
   }
 
   public create(container: Container, destination?: Element, bindingContext?: any): StyleController {
-    let $styles: any = {};
-    let ux = container.get(AureliaUX);
+    const $styles: any = {};
+    const ux = container.get(AureliaUX);
 
     if (bindingContext) {
-      let baseStyles = this.getOrCreateDefault(container).bindingContext;
+      const baseStyles = this.getOrCreateDefault(container).bindingContext;
       Object.setPrototypeOf(bindingContext, baseStyles);
     } else {
       bindingContext = container.get(this.styleObjectType);
@@ -44,7 +44,7 @@ export class StyleFactory {
       new StyleOverrideContext(ux, $styles, bindingContext),
       this.expression,
       destination
-      );
+    );
   }
 }
 
@@ -64,7 +64,7 @@ class StyleOverrideContext {
   public $swatches = swatches;
   public $shadows = shadows;
 
-  constructor(public $ux: AureliaUX, public $styles: any, public bindingContext: any) {}
+  constructor(public $ux: AureliaUX, public $styles: any, public bindingContext: any) { }
 
   @computedFrom('$ux.platform')
   get $platform() {

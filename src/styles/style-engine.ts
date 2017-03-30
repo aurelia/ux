@@ -17,17 +17,17 @@ export class StyleEngine {
     return camelCase(Origin.get(obj.constructor).moduleMember + 'Theme');
   }
 
-  public applyTheme(themable: Themable, theme: string | Object | null) {
-    let themeKey = this.getThemeKeyForComponent(themable);
-    let currentController = (<any>themable.view)[themeKey];
+  public applyTheme(themable: Themable, theme: string | object | null) {
+    const themeKey = this.getThemeKeyForComponent(themable);
+    const currentController = (themable.view as any)[themeKey];
     let bindingContext: any;
     let newController: StyleController | undefined;
 
     if (!theme) {
       if (currentController !== currentController.factory.defaultController) {
         currentController.unbind();
-        newController = <StyleController>currentController.factory.defaultController;
-        (<any>themable.view)[themeKey] = newController;
+        newController = currentController.factory.defaultController as StyleController;
+        (themable.view as any)[themeKey] = newController;
         newController.bind(themable.view);
       }
 
@@ -48,15 +48,15 @@ export class StyleEngine {
       newController = this.controllers.get(bindingContext);
 
       if (!newController) {
-        newController = <StyleController>currentController.factory.create(
+        newController = currentController.factory.create(
           this.container,
           null,
           bindingContext
-        );
+        ) as StyleController;
       }
 
       currentController.unbind();
-      (<any>themable.view)[themeKey] = newController;
+      (themable.view as any)[themeKey] = newController;
       newController.bind(themable.view);
       this.controllers.set(bindingContext, newController);
 
@@ -67,15 +67,15 @@ export class StyleEngine {
   }
 
   public getOrCreateStyleController(view: View, factory: StyleFactory): StyleController {
-    let controller = (<any>view)[factory.themeKey];
+    let controller = (view as any)[factory.themeKey];
 
     if (controller === undefined) {
-      let shadowDOMRoot = this.getShadowDOMRoot(view);
+      const shadowDOMRoot = this.getShadowDOMRoot(view);
 
       if (shadowDOMRoot === null) {
-        (<any>view)[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
+        (view as any)[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
       } else {
-        (<any>view)[factory.themeKey] = controller = factory.create(view.container, shadowDOMRoot);
+        (view as any)[factory.themeKey] = controller = factory.create(view.container, shadowDOMRoot);
       }
     }
 
@@ -83,7 +83,7 @@ export class StyleEngine {
   }
 
   private getShadowDOMRoot(view: View) {
-    let root = view.container.get(DOM.boundary);
+    const root = view.container.get(DOM.boundary);
 
     if (root && root.host instanceof Element) {
       return root;
