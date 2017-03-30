@@ -13,9 +13,10 @@ export class UxInputInfo implements Themable {
   @bindable public uxInputCounter = null;
   @bindable public theme = null;
 
+  public inputElementModel: any;
   public view: View;
 
-  constructor(public resources: ViewResources, private styleEngine: StyleEngine) { }
+  constructor(private element: Element, public resources: ViewResources, private styleEngine: StyleEngine) { }
 
   public created(_: any, myView: View) {
     this.view = myView;
@@ -25,9 +26,25 @@ export class UxInputInfo implements Themable {
     if (this.theme) {
       this.styleEngine.applyTheme(this, this.theme);
     }
+
+    if (this.target === undefined) {
+      this.findAndSetTarget(this.element);
+    }
   }
 
   public themeChanged(newValue: any) {
     this.styleEngine.applyTheme(this, newValue);
+  }
+
+  private findAndSetTarget(element: any) {
+    const inputElement = element.previousElementSibling;
+
+    if (!inputElement) {
+      return;
+    }
+
+    if (inputElement.nodeName === 'UX-INPUT' || inputElement.nodeName === 'UX-TEXTAREA') {
+      this.target = inputElement.au.controller.viewModel;
+    }
   }
 }
