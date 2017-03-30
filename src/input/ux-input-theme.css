@@ -5,20 +5,25 @@ ux-input {
 
   styles.input {
     width: 100%;
-    padding: 16px 0 8px 0;
-    margin-bottom: 8px;
+    padding: 6px 0 4px 0;
+    margin-bottom: 4px;
     border: 0;
     outline: none;
     padding-left:0;
     padding-right:0;
-    transition: 250ms;
+    transition: border-color 250ms ease;
     background-color: ${background};
-    border-bottom: 2px solid ${foreground || $design.primaryLightForeground};
+    border-bottom: 1px solid ${foreground || $design.primaryLightForeground};
   }
 
     styles.input:hover,
     styles.input:focus {
       border-bottom-color: ${$design.accent};
+    }
+
+    styles.input:focus {
+      border-bottom-width: 2px;
+      padding-bottom: 3px;
     }
 
     styles.input[disabled],
@@ -34,7 +39,7 @@ ux-input {
   ux-input.full-width > styles.input {
     padding: 20px 8px;
     font-size: 16px;
-  margin-bottom: 0;
+    margin-bottom: 0;
     border: 1px solid ${$swatches.grey.p200};
     background-color: ${$swatches.white};
   }

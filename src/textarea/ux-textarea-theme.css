@@ -5,21 +5,26 @@ ux-textarea {
   styles.textarea {
     width: 100%;
     height: 100%;
-    padding: 16px 0 8px 0;
-    margin-bottom: 8px;
+    padding: 6px 0 4px 0;
+    margin-bottom: 4px;
     border: 0;
     outline: none;
     resize: none;
     padding-left:0;
     padding-right:0;
-    transition: 250ms;
+    transition: border-color 250ms ease;
     background-color: ${background};
-    border-bottom: 2px solid ${foreground || $design.primaryLightForeground};
+    border-bottom: 1px solid ${foreground || $design.primaryLightForeground};
   }
 
     styles.textarea:hover,
     styles.textarea:focus {
       border-bottom-color: ${$design.accent};
+    }
+
+    styles.textarea:focus {
+      border-bottom-width: 2px;
+      padding-bottom: 3px;
     }
 
     styles.textarea[disabled],
