@@ -67,10 +67,16 @@ export class UxInput implements Themable {
       }
     }
 
-    if (this.type) {
-      if (this.type !== 'text' && this.type !== 'password' && this.type !== 'number') {
-        this.type = 'text';
-      }
+    if ([
+      'text',
+      'password',
+      'number',
+      'email',
+      'url',
+      'tel',
+      'search'
+    ].includes(this.type)) {
+      this.textbox.setAttribute('type', this.type);
     }
 
     if (this.min) {
