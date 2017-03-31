@@ -33,10 +33,6 @@ export class UxField implements Themable {
         }
     }
 
-    // public attached() { }
-
-    // public detached() { }
-
     public themeChanged(newValue: any) {
         this.styleEngine.applyTheme(this, newValue);
     }

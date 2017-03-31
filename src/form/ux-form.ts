@@ -1,19 +1,21 @@
 import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { Themable } from '../styles/themable';
 import { processDesignAttributes } from '../designs/design-attributes';
 
-@inject(ViewResources, StyleEngine)
+@inject(Element, ViewResources, StyleEngine)
 @customElement('ux-form')
 @processAttributes(processDesignAttributes)
 
 export class UxForm implements Themable {
     @bindable public theme = null;
+    @bindable public submit: any;
 
     public view: View;
 
-    constructor(public resources: ViewResources, private styleEngine: StyleEngine) { }
+    constructor(private element: Element, public resources: ViewResources, private styleEngine: StyleEngine) { }
 
     public created(_: any, myView: View) {
         this.view = myView;
@@ -25,12 +27,15 @@ export class UxForm implements Themable {
         }
     }
 
-    // public attached() { }
-
-    // public detached() { }
-
-
     public themeChanged(newValue: any) {
         this.styleEngine.applyTheme(this, newValue);
+    }
+
+    public submitForm() {
+        if (this.submit) {
+            const submitEvent = DOM.createCustomEvent('submit', { bubbles: true, target: this.element });
+
+            this.element.dispatchEvent(submitEvent);
+        }
     }
 }

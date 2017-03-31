@@ -23,7 +23,8 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
     './input-info/ux-input-info',
     './textarea/ux-textarea',
     './form/ux-form',
-    './form/ux-field'
+    './form/ux-field',
+    './form/ux-submit-attribute'
   ]);
 
   const ux = config.container.get(AureliaUX) as AureliaUX;
