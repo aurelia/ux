@@ -4,16 +4,17 @@ import { StyleEngine } from '../styles/style-engine';
 import { Themable } from '../styles/themable';
 import { processDesignAttributes } from '../designs/design-attributes';
 
-@inject(ViewResources, StyleEngine)
+@inject(Element, ViewResources, StyleEngine)
 @customElement('ux-field')
 @processAttributes(processDesignAttributes)
 
 export class UxField implements Themable {
     @bindable public theme = null;
+    @bindable public label: string;
 
     public view: View;
 
-    constructor(public resources: ViewResources, private styleEngine: StyleEngine) { }
+    constructor(private element: Element, public resources: ViewResources, private styleEngine: StyleEngine) { }
 
     public created(_: any, myView: View) {
         this.view = myView;
@@ -22,6 +23,13 @@ export class UxField implements Themable {
     public bind() {
         if (this.theme) {
             this.styleEngine.applyTheme(this, this.theme);
+        }
+
+        if (this.label && !this.element.closest('label')) {
+            const newLabel = document.createElement('label');
+            newLabel.textContent = this.label;
+
+            this.element.insertBefore(newLabel, this.element.firstChild);
         }
     }
 
