@@ -11,9 +11,10 @@ import { processDesignAttributes } from '../designs/design-attributes';
 
 export class UxForm implements Themable {
     @bindable public theme = null;
-    @bindable public submit: any;
+    @bindable public submitOnEnter: any;
 
     public view: View;
+    private bindSubmitToEnter: boolean = false;
 
     constructor(private element: Element, public resources: ViewResources, private styleEngine: StyleEngine) { }
 
@@ -25,6 +26,30 @@ export class UxForm implements Themable {
         if (this.theme) {
             this.styleEngine.applyTheme(this, this.theme);
         }
+
+        if (this.submitOnEnter !== undefined) {
+            this.bindSubmitToEnter = true;
+        }
+    }
+
+    public attached() {
+        if (this.bindSubmitToEnter) {
+            this.element.addEventListener('keyup', (e: KeyboardEvent) => {
+                if (e.keyCode === 13) {
+                    this.submitForm();
+                }
+            });
+        }
+    }
+
+    public detached() {
+        if (this.bindSubmitToEnter) {
+            this.element.removeEventListener('keyup', (e: KeyboardEvent) => {
+                if (e.keyCode === 13) {
+                    this.submitForm();
+                }
+            });
+        }
     }
 
     public themeChanged(newValue: any) {
@@ -32,10 +57,8 @@ export class UxForm implements Themable {
     }
 
     public submitForm() {
-        if (this.submit) {
-            const submitEvent = DOM.createCustomEvent('submit', { bubbles: true, target: this.element });
+        const submitEvent = DOM.createCustomEvent('submit', { bubbles: true, target: this.element });
 
-            this.element.dispatchEvent(submitEvent);
-        }
+        this.element.dispatchEvent(submitEvent);
     }
 }
