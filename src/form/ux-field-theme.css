@@ -6,6 +6,6 @@ styles.field {
 }
 
 styles.field > label {
-    font-size: 12px;
+    font-size: ${labelFontSize};
     color: ${labelColor || $swatches.grey.p500};
 }

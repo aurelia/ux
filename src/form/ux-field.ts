@@ -24,9 +24,12 @@ export class UxField implements Themable {
         if (this.theme) {
             this.styleEngine.applyTheme(this, this.theme);
         }
+    }
 
-        if (this.label && !this.element.closest('label')) {
+    public attached() {
+        if (this.label && !this.element.querySelector('label')) {
             const newLabel = document.createElement('label');
+
             newLabel.textContent = this.label;
 
             this.element.insertBefore(newLabel, this.element.firstChild);

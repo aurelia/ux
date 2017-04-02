@@ -6,4 +6,5 @@ export class UxFieldTheme {
   public foreground: string;
 
   public labelColor: string = '#444';
+  public labelFontSize: string = '12px';
 }
