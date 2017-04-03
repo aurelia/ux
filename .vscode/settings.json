@@ -1,6 +1,7 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "editor.formatOnSave": true,
+  // editor.formatOnSave setting causes issues when trying to save changes to CSS files that have binding mixed in
+  "editor.formatOnSave": false, 
   "typescript.format.enable": true,
   "json.format.enable": false,
   "html.format.enable": false,

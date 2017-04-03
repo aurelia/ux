@@ -3,46 +3,43 @@ ux-input {
   width: 100%;
 }
 
-styles.input {
-  display: block;
-  position: relative;
-  width: 100%;
-  padding: 8px;
-  border: 0;
-  outline: none;
-}
-
-  ux-input > styles.input {
+  styles.input {
+    width: 100%;
+    padding: 6px 0 4px 0;
+    margin-bottom: 4px;
+    border: 0;
+    outline: none;
     padding-left:0;
     padding-right:0;
-    transition: 250ms;
+    transition: border-color 250ms ease;
     background-color: ${background};
-    border-bottom: 2px solid ${foreground || $design.primaryLightForeground};
+    border-bottom: 1px solid ${foreground || $design.primaryLightForeground};
   }
 
-    ux-input > styles.input:hover {
+    styles.input:hover,
+    styles.input:focus {
       border-bottom-color: ${$design.accent};
     }
 
-    ux-input > styles.input:focus {
-      border-bottom-color: ${$design.accentDark};
+    styles.input:focus {
+      border-bottom-width: 2px;
+      padding-bottom: 3px;
     }
 
-    ux-input > styles.input[disabled],
-    ux-input > styles.input[disabled]:hover,
-    ux-input > styles.input[disabled]:focus,
-    ux-input > styles.input[readonly],
-    ux-input > styles.input[readonly]:hover,
-    ux-input > styles.input[readonly]:focus {
+    styles.input[disabled],
+    styles.input[disabled]:hover,
+    styles.input[disabled]:focus,
+    styles.input[readonly],
+    styles.input[readonly]:hover,
+    styles.input[readonly]:focus {
       color: ${foregroundDisabled || $swatches.grey.p500};
       border-bottom: 1px dashed ${foregroundDisabled || $swatches.grey.p300};
     }
 
   ux-input.full-width > styles.input {
-    padding: 20px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 20px 8px;
     font-size: 16px;
+    margin-bottom: 0;
     border: 1px solid ${$swatches.grey.p200};
     background-color: ${$swatches.white};
   }
