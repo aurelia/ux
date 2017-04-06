@@ -10,6 +10,9 @@ export { UxInputInfoTheme } from './input-info/ux-input-info-theme';
 export { UxTextareaTheme } from './textarea/ux-textarea-theme';
 export { UxFormTheme } from './form/ux-form-theme';
 export { UxFieldTheme } from './form/ux-field-theme';
+export { UxChipInputTheme } from './chip-input/ux-chip-input-theme';
+export { UxTagTheme } from './chip-input/ux-tag-theme';
+export { UxChipTheme } from './chip-input/ux-chip-theme';
 
 export * from './styles/decorators';
 
@@ -24,7 +27,10 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
     './textarea/ux-textarea',
     './form/ux-form',
     './form/ux-field',
-    './form/ux-submit-attribute'
+    './form/ux-submit-attribute',
+    './chip-input/ux-chip-input',
+    './chip-input/ux-chip',
+    './chip-input/ux-tag'
   ]);
 
   const ux = config.container.get(AureliaUX) as AureliaUX;
