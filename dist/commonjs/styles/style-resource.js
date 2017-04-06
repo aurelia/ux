@@ -1,7 +1,8 @@
 "use strict";
-var aurelia_metadata_1 = require('aurelia-metadata');
-var style_locator_1 = require('./style-locator');
-var style_engine_1 = require('./style-engine');
+Object.defineProperty(exports, "__esModule", { value: true });
+var aurelia_metadata_1 = require("aurelia-metadata");
+var style_locator_1 = require("./style-locator");
+var style_engine_1 = require("./style-engine");
 var StyleResource = (function () {
     function StyleResource() {
     }
@@ -23,7 +24,7 @@ var StyleResource = (function () {
         return styleStrategy.loadStyleFactory(container, this.styleObjectType).then(function (styleFactory) {
             _this.factory = styleFactory;
             _this.hooks.factory = _this.factory;
-            return styleFactory;
+            return _this;
         });
     };
     return StyleResource;

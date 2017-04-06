@@ -1,10 +1,10 @@
-System.register([], function(exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var ElementRect;
     return {
-        setters:[],
-        execute: function() {
+        setters: [],
+        execute: function () {
             /**
              * Provides the utilities for getting element's metrics.
              */
@@ -66,15 +66,21 @@ System.register([], function(exports_1, context_1) {
                  * @param {Number} ev.y - The `y` coordinate of the point.
                  * @param {Number} ev.clientX - The `x` coordinate of the point.
                  * @param {Number} ev.clientY - The `y` coordinate of the point.
-                 * @returns {Boolean} Returns `true` if the `x` and `y` coordinates of point is a point inside this element's rectangle, otherwise `false`.
+                 * @returns {Boolean} Returns `true` if the `x` and `y` coordinates of point is a
+                 * point inside this element's rectangle, otherwise `false`.
                  */
                 ElementRect.prototype.contains = function (ev) {
-                    var l = this.boundingRect.left, t = this.boundingRect.top, w = this.boundingRect.width, h = this.boundingRect.height, _x = ev.x || ev.clientX || 0, _y = ev.y || ev.clientY || 0;
-                    return _x >= l && _x <= l + w && _y >= t && _y <= t + h;
+                    var l = this.boundingRect.left;
+                    var t = this.boundingRect.top;
+                    var w = this.boundingRect.width;
+                    var h = this.boundingRect.height;
+                    var x = ev.x || ev.clientX || 0;
+                    var y = ev.y || ev.clientY || 0;
+                    return x >= l && x <= l + w && y >= t && y <= t + h;
                 };
                 return ElementRect;
             }());
             exports_1("ElementRect", ElementRect);
         }
-    }
+    };
 });

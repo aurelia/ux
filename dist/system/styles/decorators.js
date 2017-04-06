@@ -1,7 +1,6 @@
-System.register(['./style-resource', 'aurelia-templating', './style-strategy', 'aurelia-metadata', './style-locator'], function(exports_1, context_1) {
+System.register(["./style-resource", "aurelia-templating", "./style-strategy", "aurelia-metadata", "./style-locator"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var style_resource_1, aurelia_templating_1, style_strategy_1, aurelia_metadata_1, style_locator_1;
     /**
      * Decorator: Indicates that the target is a styles class.
      */
@@ -37,8 +36,9 @@ System.register(['./style-resource', 'aurelia-templating', './style-strategy', '
         return useStyleStrategy(new style_strategy_1.InlineStyleStrategy(cssOrDesignmap));
     }
     exports_1("inlineStyles", inlineStyles);
+    var style_resource_1, aurelia_templating_1, style_strategy_1, aurelia_metadata_1, style_locator_1;
     return {
-        setters:[
+        setters: [
             function (style_resource_1_1) {
                 style_resource_1 = style_resource_1_1;
             },
@@ -53,8 +53,9 @@ System.register(['./style-resource', 'aurelia-templating', './style-strategy', '
             },
             function (style_locator_1_1) {
                 style_locator_1 = style_locator_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
         }
-    }
+    };
 });

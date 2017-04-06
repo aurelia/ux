@@ -4,8 +4,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-define(["require", "exports", 'aurelia-templating', 'aurelia-dependency-injection', './style-factory'], function (require, exports, aurelia_templating_1, aurelia_dependency_injection_1, style_factory_1) {
+define(["require", "exports", "aurelia-templating", "aurelia-dependency-injection", "./style-factory"], function (require, exports, aurelia_templating_1, aurelia_dependency_injection_1, style_factory_1) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var classMatcher = /styles.([A-Za-z1-9\-_]+)/g;
     var StyleCompiler = (function () {
         function StyleCompiler(bindingLanguage, viewResources) {
@@ -28,11 +29,11 @@ define(["require", "exports", 'aurelia-templating', 'aurelia-dependency-injectio
             }
             return new style_factory_1.StyleFactory(styleObjectType, styles, expression);
         };
-        StyleCompiler = __decorate([
-            aurelia_dependency_injection_1.inject(aurelia_templating_1.BindingLanguage, aurelia_templating_1.ViewResources)
-        ], StyleCompiler);
         return StyleCompiler;
     }());
+    StyleCompiler = __decorate([
+        aurelia_dependency_injection_1.inject(aurelia_templating_1.BindingLanguage, aurelia_templating_1.ViewResources)
+    ], StyleCompiler);
     exports.StyleCompiler = StyleCompiler;
     var PlainCSSBindingExpression = (function () {
         function PlainCSSBindingExpression(css) {

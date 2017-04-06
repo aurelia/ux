@@ -1,10 +1,10 @@
-System.register([], function(exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var swatches;
     return {
-        setters:[],
-        execute: function() {
+        setters: [],
+        execute: function () {
             exports_1("swatches", swatches = {
                 red: {
                     p50: '#FFEBEE',
@@ -302,5 +302,5 @@ System.register([], function(exports_1, context_1) {
                 white: '#FFFFFF'
             });
         }
-    }
+    };
 });

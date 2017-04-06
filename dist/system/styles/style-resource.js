@@ -1,10 +1,9 @@
-System.register(['aurelia-metadata', './style-locator', './style-engine'], function(exports_1, context_1) {
+System.register(["aurelia-metadata", "./style-locator", "./style-engine"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var aurelia_metadata_1, style_locator_1, style_engine_1;
-    var StyleResource, StyleViewEngineHooks;
+    var aurelia_metadata_1, style_locator_1, style_engine_1, StyleResource, StyleViewEngineHooks;
     return {
-        setters:[
+        setters: [
             function (aurelia_metadata_1_1) {
                 aurelia_metadata_1 = aurelia_metadata_1_1;
             },
@@ -13,8 +12,9 @@ System.register(['aurelia-metadata', './style-locator', './style-engine'], funct
             },
             function (style_engine_1_1) {
                 style_engine_1 = style_engine_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             StyleResource = (function () {
                 function StyleResource() {
                 }
@@ -36,7 +36,7 @@ System.register(['aurelia-metadata', './style-locator', './style-engine'], funct
                     return styleStrategy.loadStyleFactory(container, this.styleObjectType).then(function (styleFactory) {
                         _this.factory = styleFactory;
                         _this.hooks.factory = _this.factory;
-                        return styleFactory;
+                        return _this;
                     });
                 };
                 return StyleResource;
@@ -55,5 +55,5 @@ System.register(['aurelia-metadata', './style-locator', './style-engine'], funct
                 return StyleViewEngineHooks;
             }());
         }
-    }
+    };
 });

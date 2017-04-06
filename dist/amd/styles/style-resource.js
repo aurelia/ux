@@ -1,5 +1,6 @@
-define(["require", "exports", 'aurelia-metadata', './style-locator', './style-engine'], function (require, exports, aurelia_metadata_1, style_locator_1, style_engine_1) {
+define(["require", "exports", "aurelia-metadata", "./style-locator", "./style-engine"], function (require, exports, aurelia_metadata_1, style_locator_1, style_engine_1) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var StyleResource = (function () {
         function StyleResource() {
         }
@@ -21,7 +22,7 @@ define(["require", "exports", 'aurelia-metadata', './style-locator', './style-en
             return styleStrategy.loadStyleFactory(container, this.styleObjectType).then(function (styleFactory) {
                 _this.factory = styleFactory;
                 _this.hooks.factory = _this.factory;
-                return styleFactory;
+                return _this;
             });
         };
         return StyleResource;

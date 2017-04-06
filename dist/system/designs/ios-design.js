@@ -1,17 +1,17 @@
-System.register(['../colors/swatches', '../colors/shadows'], function(exports_1, context_1) {
+System.register(["../colors/swatches", "../colors/shadows"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var swatches_1, shadows_1;
-    var IOSDesign;
+    var swatches_1, shadows_1, IOSDesign;
     return {
-        setters:[
+        setters: [
             function (swatches_1_1) {
                 swatches_1 = swatches_1_1;
             },
             function (shadows_1_1) {
                 shadows_1 = shadows_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             IOSDesign = (function () {
                 function IOSDesign() {
                     this.type = 'ios';
@@ -41,5 +41,5 @@ System.register(['../colors/swatches', '../colors/shadows'], function(exports_1,
             }());
             exports_1("IOSDesign", IOSDesign);
         }
-    }
+    };
 });

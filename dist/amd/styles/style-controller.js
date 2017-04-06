@@ -1,5 +1,6 @@
-define(["require", "exports", 'aurelia-pal'], function (require, exports, aurelia_pal_1) {
+define(["require", "exports", "aurelia-pal"], function (require, exports, aurelia_pal_1) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var StyleController = (function () {
         function StyleController(factory, bindingContext, overrideContext, expression, destination) {
             this.factory = factory;

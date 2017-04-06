@@ -6,6 +6,8 @@ export { UxButtonTheme } from './button/ux-button-theme';
 export { UxInputTheme } from './input/ux-input-theme';
 export { UxInputInfoTheme } from './input-info/ux-input-info-theme';
 export { UxTextareaTheme } from './textarea/ux-textarea-theme';
+export { UxFormTheme } from './form/ux-form-theme';
+export { UxFieldTheme } from './form/ux-field-theme';
 export * from './styles/decorators';
 export { AureliaUX } from './aurelia-ux';
 export { UXConfiguration } from './ux-configuration';

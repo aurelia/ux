@@ -5,11 +5,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var aurelia_dependency_injection_1 = require('aurelia-dependency-injection');
-var cordova_1 = require('./hosts/cordova');
-var web_1 = require('./hosts/web');
-var electron_1 = require('./hosts/electron');
-var ux_configuration_1 = require('./ux-configuration');
+Object.defineProperty(exports, "__esModule", { value: true });
+var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
+var cordova_1 = require("./hosts/cordova");
+var web_1 = require("./hosts/web");
+var electron_1 = require("./hosts/electron");
+var ux_configuration_1 = require("./ux-configuration");
 var AureliaUX = (function () {
     function AureliaUX(use, container) {
         this.use = use;
@@ -31,9 +32,9 @@ var AureliaUX = (function () {
             _this.design = platform.design;
         });
     };
-    AureliaUX = __decorate([
-        aurelia_dependency_injection_1.inject(ux_configuration_1.UXConfiguration, aurelia_dependency_injection_1.Container)
-    ], AureliaUX);
     return AureliaUX;
 }());
+AureliaUX = __decorate([
+    aurelia_dependency_injection_1.inject(ux_configuration_1.UXConfiguration, aurelia_dependency_injection_1.Container)
+], AureliaUX);
 exports.AureliaUX = AureliaUX;

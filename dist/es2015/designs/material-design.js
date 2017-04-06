@@ -1,7 +1,7 @@
 import { swatches } from '../colors/swatches';
 import { shadows } from '../colors/shadows';
-export var MaterialDesign = (function () {
-    function MaterialDesign() {
+export class MaterialDesign {
+    constructor() {
         this.type = 'material';
         this.primary = swatches.indigo.p500;
         this.primaryForeground = swatches.white;
@@ -25,5 +25,4 @@ export var MaterialDesign = (function () {
         this.elevation24dp = shadows.depth_24dp;
         this.elevationFocus = shadows.depth_focus;
     }
-    return MaterialDesign;
-}());
+}

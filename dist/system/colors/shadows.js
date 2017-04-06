@@ -1,10 +1,10 @@
-System.register([], function(exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var shadows;
     return {
-        setters:[],
-        execute: function() {
+        setters: [],
+        execute: function () {
             exports_1("shadows", shadows = {
                 depth_0: 'none',
                 depth_2dp: '0 2px 2px 0 rgba(0, 0, 0, 0.14),' +
@@ -32,5 +32,5 @@ System.register([], function(exports_1, context_1) {
                     '0 8px 16px rgba(0,0,0,.36)'
             });
         }
-    }
+    };
 });

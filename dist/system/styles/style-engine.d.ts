@@ -8,7 +8,7 @@ export declare class StyleEngine {
     private controllers;
     constructor(container: Container);
     getThemeKeyForComponent(obj: any): string;
-    applyTheme(themable: Themable, theme: string | Object | null): void;
+    applyTheme(themable: Themable, theme: string | object | null): void;
     getOrCreateStyleController(view: View, factory: StyleFactory): StyleController;
     private getShadowDOMRoot(view);
 }

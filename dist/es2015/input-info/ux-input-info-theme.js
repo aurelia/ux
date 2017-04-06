@@ -5,11 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { styles } from '../styles/decorators';
-export var UxInputInfoTheme = (function () {
-    function UxInputInfoTheme() {
-    }
-    UxInputInfoTheme = __decorate([
-        styles()
-    ], UxInputInfoTheme);
-    return UxInputInfoTheme;
-}());
+let UxInputInfoTheme = class UxInputInfoTheme {
+};
+UxInputInfoTheme = __decorate([
+    styles()
+], UxInputInfoTheme);
+export { UxInputInfoTheme };

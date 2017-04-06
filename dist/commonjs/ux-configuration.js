@@ -5,11 +5,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var aurelia_dependency_injection_1 = require('aurelia-dependency-injection');
-var aurelia_loader_1 = require('aurelia-loader');
-var aurelia_templating_1 = require('aurelia-templating');
-var dynamic_styles_1 = require('./styles/dynamic-styles');
-var aurelia_templating_binding_1 = require('aurelia-templating-binding');
+Object.defineProperty(exports, "__esModule", { value: true });
+var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
+var aurelia_loader_1 = require("aurelia-loader");
+var aurelia_templating_1 = require("aurelia-templating");
+var dynamic_styles_1 = require("./styles/dynamic-styles");
+var aurelia_templating_binding_1 = require("aurelia-templating-binding");
 var UXConfiguration = (function () {
     function UXConfiguration(loader, viewEngine) {
         this.loader = loader;
@@ -50,9 +51,9 @@ var UXConfiguration = (function () {
         /* tslint:enable:only-arrow-functions */
         return this;
     };
-    UXConfiguration = __decorate([
-        aurelia_dependency_injection_1.inject(aurelia_loader_1.Loader, aurelia_templating_1.ViewEngine)
-    ], UXConfiguration);
     return UXConfiguration;
 }());
+UXConfiguration = __decorate([
+    aurelia_dependency_injection_1.inject(aurelia_loader_1.Loader, aurelia_templating_1.ViewEngine)
+], UXConfiguration);
 exports.UXConfiguration = UXConfiguration;

@@ -1,6 +1,7 @@
 "use strict";
-var swatches_1 = require('../colors/swatches');
-var shadows_1 = require('../colors/shadows');
+Object.defineProperty(exports, "__esModule", { value: true });
+var swatches_1 = require("../colors/swatches");
+var shadows_1 = require("../colors/shadows");
 var IOSDesign = (function () {
     function IOSDesign() {
         this.type = 'ios';

@@ -1,14 +1,12 @@
-System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-path', './style-compiler', 'aurelia-loader', '../aurelia-ux'], function(exports_1, context_1) {
+System.register(["aurelia-metadata", "aurelia-pal", "./style-locator", "aurelia-path", "./style-compiler", "aurelia-loader", "../aurelia-ux"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_metadata_1, aurelia_pal_1, style_locator_1, aurelia_path_1, style_compiler_1, aurelia_loader_1, aurelia_ux_1;
-    var styleStrategy, cssUrlMatcher, RelativeStyleStrategy, ConventionalStyleStrategy, InlineStyleStrategy;
+    var __moduleName = context_1 && context_1.id;
     function fixupCSSUrls(address, css) {
         if (typeof css !== 'string') {
             throw new Error("Failed loading required CSS file: " + address);
@@ -30,8 +28,9 @@ System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-
             return valueOrDesignMap[designType];
         }
     }
+    var aurelia_metadata_1, aurelia_pal_1, style_locator_1, aurelia_path_1, style_compiler_1, aurelia_loader_1, aurelia_ux_1, styleStrategy, cssUrlMatcher, RelativeStyleStrategy, ConventionalStyleStrategy, InlineStyleStrategy;
     return {
-        setters:[
+        setters: [
             function (aurelia_metadata_1_1) {
                 aurelia_metadata_1 = aurelia_metadata_1_1;
             },
@@ -52,8 +51,9 @@ System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-
             },
             function (aurelia_ux_1_1) {
                 aurelia_ux_1 = aurelia_ux_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             /**
              * Decorator: Indicates that the decorated class/object is a style strategy.
              */
@@ -71,9 +71,6 @@ System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-
                 }
             }));
             cssUrlMatcher = /url\((?!['"]data)([^)]+)\)/gi;
-            /**
-             * A style strategy that loads a style relative to its associated view-model.
-             */
             RelativeStyleStrategy = (function () {
                 /**
                  * Creates an instance of RelativeStyleStrategy.
@@ -118,15 +115,12 @@ System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-
                         this.absolutePath = aurelia_path_1.relativeToFile(this.path, file);
                     }
                 };
-                RelativeStyleStrategy = __decorate([
-                    styleStrategy()
-                ], RelativeStyleStrategy);
                 return RelativeStyleStrategy;
             }());
+            RelativeStyleStrategy = __decorate([
+                styleStrategy()
+            ], RelativeStyleStrategy);
             exports_1("RelativeStyleStrategy", RelativeStyleStrategy);
-            /**
-             * A styles strategy based on naming conventions.
-             */
             ConventionalStyleStrategy = (function () {
                 /**
                  * Creates an instance of ConventionalStyleStrategy.
@@ -152,15 +146,12 @@ System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-
                         return compiler.compile(styleObjectType, _this.css);
                     });
                 };
-                ConventionalStyleStrategy = __decorate([
-                    styleStrategy()
-                ], ConventionalStyleStrategy);
                 return ConventionalStyleStrategy;
             }());
+            ConventionalStyleStrategy = __decorate([
+                styleStrategy()
+            ], ConventionalStyleStrategy);
             exports_1("ConventionalStyleStrategy", ConventionalStyleStrategy);
-            /**
-             * A styles strategy that allows the component author to inline css.
-             */
             InlineStyleStrategy = (function () {
                 /**
                  * Creates an instance of InlineStyleStrategy.
@@ -177,12 +168,12 @@ System.register(['aurelia-metadata', 'aurelia-pal', './style-locator', 'aurelia-
                     var compiler = container.get(style_compiler_1.StyleCompiler);
                     return Promise.resolve(compiler.compile(styleObjectType, this.transformedCSS));
                 };
-                InlineStyleStrategy = __decorate([
-                    styleStrategy()
-                ], InlineStyleStrategy);
                 return InlineStyleStrategy;
             }());
+            InlineStyleStrategy = __decorate([
+                styleStrategy()
+            ], InlineStyleStrategy);
             exports_1("InlineStyleStrategy", InlineStyleStrategy);
         }
-    }
+    };
 });

@@ -8,37 +8,50 @@ import { customElement, bindable, ViewResources, processAttributes } from 'aurel
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { processDesignAttributes } from '../designs/design-attributes';
-export var UxInputInfo = (function () {
-    function UxInputInfo(resources, styleEngine) {
+let UxInputInfo = class UxInputInfo {
+    constructor(element, resources, styleEngine) {
+        this.element = element;
         this.resources = resources;
         this.styleEngine = styleEngine;
         this.uxInputCounter = null;
         this.theme = null;
     }
-    UxInputInfo.prototype.created = function (_, myView) {
+    created(_, myView) {
         this.view = myView;
-    };
-    UxInputInfo.prototype.bind = function () {
+    }
+    bind() {
         if (this.theme) {
             this.styleEngine.applyTheme(this, this.theme);
         }
-    };
-    UxInputInfo.prototype.themeChanged = function (newValue) {
+        if (this.target === undefined) {
+            this.findAndSetTarget(this.element);
+        }
+    }
+    themeChanged(newValue) {
         this.styleEngine.applyTheme(this, newValue);
-    };
-    __decorate([
-        bindable
-    ], UxInputInfo.prototype, "target", void 0);
-    __decorate([
-        bindable
-    ], UxInputInfo.prototype, "uxInputCounter", void 0);
-    __decorate([
-        bindable
-    ], UxInputInfo.prototype, "theme", void 0);
-    UxInputInfo = __decorate([
-        inject(Element, ViewResources, StyleEngine),
-        customElement('ux-input-info'),
-        processAttributes(processDesignAttributes)
-    ], UxInputInfo);
-    return UxInputInfo;
-}());
+    }
+    findAndSetTarget(element) {
+        const inputElement = element.previousElementSibling;
+        if (!inputElement) {
+            return;
+        }
+        if (inputElement.nodeName === 'UX-INPUT' || inputElement.nodeName === 'UX-TEXTAREA') {
+            this.target = inputElement.au.controller.viewModel;
+        }
+    }
+};
+__decorate([
+    bindable
+], UxInputInfo.prototype, "target", void 0);
+__decorate([
+    bindable
+], UxInputInfo.prototype, "uxInputCounter", void 0);
+__decorate([
+    bindable
+], UxInputInfo.prototype, "theme", void 0);
+UxInputInfo = __decorate([
+    inject(Element, ViewResources, StyleEngine),
+    customElement('ux-input-info'),
+    processAttributes(processDesignAttributes)
+], UxInputInfo);
+export { UxInputInfo };

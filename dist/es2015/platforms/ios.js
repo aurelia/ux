@@ -6,13 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { inject } from 'aurelia-dependency-injection';
 import { IOSDesign } from '../designs/ios-design';
-export var IOS = (function () {
-    function IOS(design) {
+let IOS = class IOS {
+    constructor(design) {
         this.design = design;
         this.type = 'ios';
     }
-    IOS = __decorate([
-        inject(IOSDesign)
-    ], IOS);
-    return IOS;
-}());
+};
+IOS = __decorate([
+    inject(IOSDesign)
+], IOS);
+export { IOS };

@@ -5,13 +5,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var aurelia_metadata_1 = require('aurelia-metadata');
-var aurelia_pal_1 = require('aurelia-pal');
-var style_locator_1 = require('./style-locator');
-var aurelia_path_1 = require('aurelia-path');
-var style_compiler_1 = require('./style-compiler');
-var aurelia_loader_1 = require('aurelia-loader');
-var aurelia_ux_1 = require('../aurelia-ux');
+Object.defineProperty(exports, "__esModule", { value: true });
+var aurelia_metadata_1 = require("aurelia-metadata");
+var aurelia_pal_1 = require("aurelia-pal");
+var style_locator_1 = require("./style-locator");
+var aurelia_path_1 = require("aurelia-path");
+var style_compiler_1 = require("./style-compiler");
+var aurelia_loader_1 = require("aurelia-loader");
+var aurelia_ux_1 = require("../aurelia-ux");
 /**
  * Decorator: Indicates that the decorated class/object is a style strategy.
  */
@@ -88,11 +89,11 @@ var RelativeStyleStrategy = (function () {
             this.absolutePath = aurelia_path_1.relativeToFile(this.path, file);
         }
     };
-    RelativeStyleStrategy = __decorate([
-        exports.styleStrategy()
-    ], RelativeStyleStrategy);
     return RelativeStyleStrategy;
 }());
+RelativeStyleStrategy = __decorate([
+    exports.styleStrategy()
+], RelativeStyleStrategy);
 exports.RelativeStyleStrategy = RelativeStyleStrategy;
 /**
  * A styles strategy based on naming conventions.
@@ -122,11 +123,11 @@ var ConventionalStyleStrategy = (function () {
             return compiler.compile(styleObjectType, _this.css);
         });
     };
-    ConventionalStyleStrategy = __decorate([
-        exports.styleStrategy()
-    ], ConventionalStyleStrategy);
     return ConventionalStyleStrategy;
 }());
+ConventionalStyleStrategy = __decorate([
+    exports.styleStrategy()
+], ConventionalStyleStrategy);
 exports.ConventionalStyleStrategy = ConventionalStyleStrategy;
 /**
  * A styles strategy that allows the component author to inline css.
@@ -147,11 +148,11 @@ var InlineStyleStrategy = (function () {
         var compiler = container.get(style_compiler_1.StyleCompiler);
         return Promise.resolve(compiler.compile(styleObjectType, this.transformedCSS));
     };
-    InlineStyleStrategy = __decorate([
-        exports.styleStrategy()
-    ], InlineStyleStrategy);
     return InlineStyleStrategy;
 }());
+InlineStyleStrategy = __decorate([
+    exports.styleStrategy()
+], InlineStyleStrategy);
 exports.InlineStyleStrategy = InlineStyleStrategy;
 function resolveForDesign(valueOrDesignMap, container) {
     if (typeof valueOrDesignMap === 'string') {

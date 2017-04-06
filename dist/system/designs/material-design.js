@@ -1,17 +1,17 @@
-System.register(['../colors/swatches', '../colors/shadows'], function(exports_1, context_1) {
+System.register(["../colors/swatches", "../colors/shadows"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var swatches_1, shadows_1;
-    var MaterialDesign;
+    var swatches_1, shadows_1, MaterialDesign;
     return {
-        setters:[
+        setters: [
             function (swatches_1_1) {
                 swatches_1 = swatches_1_1;
             },
             function (shadows_1_1) {
                 shadows_1 = shadows_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             MaterialDesign = (function () {
                 function MaterialDesign() {
                     this.type = 'material';
@@ -41,5 +41,5 @@ System.register(['../colors/swatches', '../colors/shadows'], function(exports_1,
             }());
             exports_1("MaterialDesign", MaterialDesign);
         }
-    }
+    };
 });

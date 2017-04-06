@@ -48,7 +48,8 @@ export declare class ElementRect {
      * @param {Number} ev.y - The `y` coordinate of the point.
      * @param {Number} ev.clientX - The `x` coordinate of the point.
      * @param {Number} ev.clientY - The `y` coordinate of the point.
-     * @returns {Boolean} Returns `true` if the `x` and `y` coordinates of point is a point inside this element's rectangle, otherwise `false`.
+     * @returns {Boolean} Returns `true` if the `x` and `y` coordinates of point is a
+     * point inside this element's rectangle, otherwise `false`.
      */
     contains(ev: any): boolean;
 }

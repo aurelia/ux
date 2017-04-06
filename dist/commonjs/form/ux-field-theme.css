@@ -1,0 +1,11 @@
+styles.field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 16px;
+}
+
+styles.field > label {
+    font-size: ${labelFontSize};
+    color: ${labelColor || $swatches.grey.p500};
+}

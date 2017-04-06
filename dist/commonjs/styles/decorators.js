@@ -1,9 +1,10 @@
 "use strict";
-var style_resource_1 = require('./style-resource');
-var aurelia_templating_1 = require('aurelia-templating');
-var style_strategy_1 = require('./style-strategy');
-var aurelia_metadata_1 = require('aurelia-metadata');
-var style_locator_1 = require('./style-locator');
+Object.defineProperty(exports, "__esModule", { value: true });
+var style_resource_1 = require("./style-resource");
+var aurelia_templating_1 = require("aurelia-templating");
+var style_strategy_1 = require("./style-strategy");
+var aurelia_metadata_1 = require("aurelia-metadata");
+var style_locator_1 = require("./style-locator");
 /**
  * Decorator: Indicates that the target is a styles class.
  */

@@ -1,16 +1,15 @@
-System.register(['aurelia-templating', 'aurelia-pal', 'aurelia-binding', 'aurelia-dependency-injection', '../styles/style-engine', '../designs/design-attributes'], function(exports_1, context_1) {
+System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "../styles/style-engine", "../designs/design-attributes"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, style_engine_1, design_attributes_1;
-    var UxTextarea;
+    var __moduleName = context_1 && context_1.id;
+    var aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, style_engine_1, design_attributes_1, UxTextarea;
     return {
-        setters:[
+        setters: [
             function (aurelia_templating_1_1) {
                 aurelia_templating_1 = aurelia_templating_1_1;
             },
@@ -28,8 +27,9 @@ System.register(['aurelia-templating', 'aurelia-pal', 'aurelia-binding', 'aureli
             },
             function (design_attributes_1_1) {
                 design_attributes_1 = design_attributes_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             UxTextarea = (function () {
                 function UxTextarea(element, styleEngine, resources) {
                     this.element = element;
@@ -131,47 +131,47 @@ System.register(['aurelia-templating', 'aurelia-pal', 'aurelia-binding', 'aureli
                 UxTextarea.prototype.valueChanged = function () {
                     if (this.autoResize !== null) {
                         this.textbox.style.height = 'auto';
-                        this.textbox.style.height = (this.textbox.scrollHeight + 2) + "px";
+                        this.textbox.style.height = this.textbox.scrollHeight + 2 + "px";
                     }
                 };
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxTextarea.prototype, "autofocus", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxTextarea.prototype, "autoResize", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxTextarea.prototype, "cols", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxTextarea.prototype, "disabled", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxTextarea.prototype, "maxlength", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxTextarea.prototype, "minlength", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxTextarea.prototype, "readonly", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxTextarea.prototype, "rows", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxTextarea.prototype, "theme", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
-                ], UxTextarea.prototype, "value", void 0);
-                UxTextarea = __decorate([
-                    aurelia_dependency_injection_1.inject(Element, style_engine_1.StyleEngine, aurelia_templating_1.ViewResources),
-                    aurelia_templating_1.customElement('ux-textarea'),
-                    aurelia_templating_1.processAttributes(design_attributes_1.processDesignAttributes)
-                ], UxTextarea);
                 return UxTextarea;
             }());
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxTextarea.prototype, "autofocus", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxTextarea.prototype, "autoResize", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxTextarea.prototype, "cols", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxTextarea.prototype, "disabled", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxTextarea.prototype, "maxlength", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxTextarea.prototype, "minlength", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxTextarea.prototype, "readonly", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxTextarea.prototype, "rows", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxTextarea.prototype, "theme", void 0);
+            __decorate([
+                aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
+            ], UxTextarea.prototype, "value", void 0);
+            UxTextarea = __decorate([
+                aurelia_dependency_injection_1.inject(Element, style_engine_1.StyleEngine, aurelia_templating_1.ViewResources),
+                aurelia_templating_1.customElement('ux-textarea'),
+                aurelia_templating_1.processAttributes(design_attributes_1.processDesignAttributes)
+            ], UxTextarea);
             exports_1("UxTextarea", UxTextarea);
         }
-    }
+    };
 });

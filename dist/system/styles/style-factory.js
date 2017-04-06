@@ -1,22 +1,21 @@
-System.register(['./style-controller', '../aurelia-ux', 'aurelia-binding', 'aurelia-metadata', '../colors/swatches', '../colors/shadows'], function(exports_1, context_1) {
+System.register(["./style-controller", "../aurelia-ux", "aurelia-binding", "aurelia-metadata", "../colors/swatches", "../colors/shadows"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var style_controller_1, aurelia_ux_1, aurelia_binding_1, aurelia_metadata_1, swatches_1, shadows_1;
-    var StyleFactory, currentNumber, StyleOverrideContext;
+    var __moduleName = context_1 && context_1.id;
     function generateRandomClass(key) {
         return key + '_au_ux_' + nextNumber();
     }
     function nextNumber() {
         return ++currentNumber;
     }
+    var style_controller_1, aurelia_ux_1, aurelia_binding_1, aurelia_metadata_1, swatches_1, shadows_1, StyleFactory, currentNumber, StyleOverrideContext;
     return {
-        setters:[
+        setters: [
             function (style_controller_1_1) {
                 style_controller_1 = style_controller_1_1;
             },
@@ -34,8 +33,9 @@ System.register(['./style-controller', '../aurelia-ux', 'aurelia-binding', 'aure
             },
             function (shadows_1_1) {
                 shadows_1 = shadows_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             StyleFactory = (function () {
                 function StyleFactory(styleObjectType, styles, expression) {
                     this.styleObjectType = styleObjectType;
@@ -93,14 +93,14 @@ System.register(['./style-controller', '../aurelia-ux', 'aurelia-binding', 'aure
                     enumerable: true,
                     configurable: true
                 });
-                __decorate([
-                    aurelia_binding_1.computedFrom('$ux.platform')
-                ], StyleOverrideContext.prototype, "$platform", null);
-                __decorate([
-                    aurelia_binding_1.computedFrom('$ux.design')
-                ], StyleOverrideContext.prototype, "$design", null);
                 return StyleOverrideContext;
             }());
+            __decorate([
+                aurelia_binding_1.computedFrom('$ux.platform')
+            ], StyleOverrideContext.prototype, "$platform", null);
+            __decorate([
+                aurelia_binding_1.computedFrom('$ux.design')
+            ], StyleOverrideContext.prototype, "$design", null);
         }
-    }
+    };
 });

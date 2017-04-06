@@ -5,11 +5,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var aurelia_templating_1 = require('aurelia-templating');
-var aurelia_dependency_injection_1 = require('aurelia-dependency-injection');
-var style_engine_1 = require('../styles/style-engine');
-var design_attributes_1 = require('../designs/design-attributes');
-var paper_ripple_1 = require('../effects/paper-ripple');
+Object.defineProperty(exports, "__esModule", { value: true });
+var aurelia_templating_1 = require("aurelia-templating");
+var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
+var style_engine_1 = require("../styles/style-engine");
+var design_attributes_1 = require("../designs/design-attributes");
+var paper_ripple_1 = require("../effects/paper-ripple");
 var UxButton = (function () {
     function UxButton(resources, styleEngine) {
         this.resources = resources;
@@ -52,26 +53,26 @@ var UxButton = (function () {
         }
         return true;
     };
-    __decorate([
-        aurelia_templating_1.bindable
-    ], UxButton.prototype, "type", void 0);
-    __decorate([
-        aurelia_templating_1.bindable
-    ], UxButton.prototype, "size", void 0);
-    __decorate([
-        aurelia_templating_1.bindable
-    ], UxButton.prototype, "effect", void 0);
-    __decorate([
-        aurelia_templating_1.bindable
-    ], UxButton.prototype, "disabled", void 0);
-    __decorate([
-        aurelia_templating_1.bindable
-    ], UxButton.prototype, "theme", void 0);
-    UxButton = __decorate([
-        aurelia_dependency_injection_1.inject(aurelia_templating_1.ViewResources, style_engine_1.StyleEngine),
-        aurelia_templating_1.customElement('ux-button'),
-        aurelia_templating_1.processAttributes(design_attributes_1.processDesignAttributes)
-    ], UxButton);
     return UxButton;
 }());
+__decorate([
+    aurelia_templating_1.bindable
+], UxButton.prototype, "type", void 0);
+__decorate([
+    aurelia_templating_1.bindable
+], UxButton.prototype, "size", void 0);
+__decorate([
+    aurelia_templating_1.bindable
+], UxButton.prototype, "effect", void 0);
+__decorate([
+    aurelia_templating_1.bindable
+], UxButton.prototype, "disabled", void 0);
+__decorate([
+    aurelia_templating_1.bindable
+], UxButton.prototype, "theme", void 0);
+UxButton = __decorate([
+    aurelia_dependency_injection_1.inject(aurelia_templating_1.ViewResources, style_engine_1.StyleEngine),
+    aurelia_templating_1.customElement('ux-button'),
+    aurelia_templating_1.processAttributes(design_attributes_1.processDesignAttributes)
+], UxButton);
 exports.UxButton = UxButton;

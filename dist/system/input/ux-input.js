@@ -1,16 +1,15 @@
-System.register(['aurelia-templating', 'aurelia-pal', 'aurelia-binding', 'aurelia-dependency-injection', '../styles/style-engine', '../designs/design-attributes'], function(exports_1, context_1) {
+System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "../styles/style-engine", "../designs/design-attributes"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, style_engine_1, design_attributes_1;
-    var UxInput;
+    var __moduleName = context_1 && context_1.id;
+    var aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, style_engine_1, design_attributes_1, UxInput;
     return {
-        setters:[
+        setters: [
             function (aurelia_templating_1_1) {
                 aurelia_templating_1 = aurelia_templating_1_1;
             },
@@ -28,8 +27,9 @@ System.register(['aurelia-templating', 'aurelia-pal', 'aurelia-binding', 'aureli
             },
             function (design_attributes_1_1) {
                 design_attributes_1 = design_attributes_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             UxInput = (function () {
                 function UxInput(element, resources, styleEngine) {
                     this.element = element;
@@ -72,10 +72,16 @@ System.register(['aurelia-templating', 'aurelia-pal', 'aurelia-binding', 'aureli
                             this.element.removeAttribute('step');
                         }
                     }
-                    if (this.type) {
-                        if (this.type !== 'text' && this.type !== 'password' && this.type !== 'number') {
-                            this.type = 'text';
-                        }
+                    if ([
+                        'text',
+                        'password',
+                        'number',
+                        'email',
+                        'url',
+                        'tel',
+                        'search'
+                    ].includes(this.type)) {
+                        this.textbox.setAttribute('type', this.type);
                     }
                     if (this.min) {
                         this.textbox.setAttribute('min', this.min.toString());
@@ -155,44 +161,44 @@ System.register(['aurelia-templating', 'aurelia-pal', 'aurelia-binding', 'aureli
                         }
                     }
                 };
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxInput.prototype, "autofocus", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxInput.prototype, "disabled", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxInput.prototype, "maxlength", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxInput.prototype, "minlength", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxInput.prototype, "min", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxInput.prototype, "max", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxInput.prototype, "readonly", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxInput.prototype, "theme", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
-                ], UxInput.prototype, "type", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
-                ], UxInput.prototype, "value", void 0);
-                UxInput = __decorate([
-                    aurelia_dependency_injection_1.inject(Element, aurelia_templating_1.ViewResources, style_engine_1.StyleEngine),
-                    aurelia_templating_1.customElement('ux-input'),
-                    aurelia_templating_1.processAttributes(design_attributes_1.processDesignAttributes)
-                ], UxInput);
                 return UxInput;
             }());
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxInput.prototype, "autofocus", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxInput.prototype, "disabled", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxInput.prototype, "maxlength", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxInput.prototype, "minlength", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxInput.prototype, "min", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxInput.prototype, "max", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxInput.prototype, "readonly", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxInput.prototype, "theme", void 0);
+            __decorate([
+                aurelia_templating_1.bindable
+            ], UxInput.prototype, "type", void 0);
+            __decorate([
+                aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
+            ], UxInput.prototype, "value", void 0);
+            UxInput = __decorate([
+                aurelia_dependency_injection_1.inject(Element, aurelia_templating_1.ViewResources, style_engine_1.StyleEngine),
+                aurelia_templating_1.customElement('ux-input'),
+                aurelia_templating_1.processAttributes(design_attributes_1.processDesignAttributes)
+            ], UxInput);
             exports_1("UxInput", UxInput);
         }
-    }
+    };
 });

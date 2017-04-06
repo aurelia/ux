@@ -1,18 +1,22 @@
-System.register(['aurelia-pal', './element-rect'], function(exports_1, context_1) {
+System.register(["aurelia-pal", "./element-rect"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var aurelia_pal_1, element_rect_1;
-    var _window, _doc, _now, PaperWave;
+    var aurelia_pal_1, element_rect_1, _window, _doc, _now, PaperWave;
     return {
-        setters:[
+        setters: [
             function (aurelia_pal_1_1) {
                 aurelia_pal_1 = aurelia_pal_1_1;
             },
             function (element_rect_1_1) {
                 element_rect_1 = element_rect_1_1;
-            }],
-        execute: function() {
-            _window = aurelia_pal_1.PLATFORM.global, _doc = _window.document, _now = aurelia_pal_1.PLATFORM.performance.now.bind(aurelia_pal_1.PLATFORM.performance);
+            }
+        ],
+        execute: function () {
+            // tslint:disable:variable-name
+            _window = aurelia_pal_1.PLATFORM.global;
+            _doc = _window.document;
+            _now = aurelia_pal_1.PLATFORM.performance.now.bind(aurelia_pal_1.PLATFORM.performance);
+            // tslint:enable:variable-name
             /**
              * Provides all the logic to produce a one-time rippling effect.
              */
@@ -104,7 +108,10 @@ System.register(['aurelia-pal', './element-rect'], function(exports_1, context_1
                      * @returns {Number} The value of the wave's radius.
                      */
                     get: function () {
-                        var radius = Math.min(Math.sqrt(Math.pow(this.containerRect.width, 2) + Math.pow(this.containerRect.height, 2)), PaperWave.MAX_RADIUS) * 1.1 + 5, elapsed = 1.1 - 0.2 * (radius / PaperWave.MAX_RADIUS), currentTime = this.mouseInteractionSeconds / elapsed, actualRadius = radius * (1 - Math.pow(80, -currentTime));
+                        var radius = Math.min(Math.sqrt(Math.pow(this.containerRect.width, 2) + Math.pow(this.containerRect.height, 2)), PaperWave.MAX_RADIUS) * 1.1 + 5;
+                        var elapsed = 1.1 - 0.2 * (radius / PaperWave.MAX_RADIUS);
+                        var currentTime = this.mouseInteractionSeconds / elapsed;
+                        var actualRadius = radius * (1 - Math.pow(80, -currentTime));
                         return Math.abs(actualRadius);
                     },
                     enumerable: true,
@@ -185,7 +192,9 @@ System.register(['aurelia-pal', './element-rect'], function(exports_1, context_1
                      * @returns {{x: Number, y: Number}} Object containing coordinates of the wave's current position.
                      */
                     get: function () {
-                        var translateFraction = this.translationFraction, x = this.startPosition.x, y = this.startPosition.y;
+                        var translateFraction = this.translationFraction;
+                        var x = this.startPosition.x;
+                        var y = this.startPosition.y;
                         if (this.endPosition.x) {
                             x = this.startPosition.x + translateFraction * (this.endPosition.x - this.startPosition.x);
                         }
@@ -226,7 +235,10 @@ System.register(['aurelia-pal', './element-rect'], function(exports_1, context_1
                  * @returns Current instance for method chaining.
                  */
                 PaperWave.prototype.draw = function () {
-                    var scaleFactor = this.radius / (this.containerRect.size / 2), containerCenter = this.containerRect.center, currentPos = this.currentPosition, deltaPos = {
+                    var scaleFactor = this.radius / (this.containerRect.size / 2);
+                    var containerCenter = this.containerRect.center;
+                    var currentPos = this.currentPosition;
+                    var deltaPos = {
                         x: currentPos.x - containerCenter.x,
                         y: currentPos.y - containerCenter.y
                     };
@@ -288,13 +300,13 @@ System.register(['aurelia-pal', './element-rect'], function(exports_1, context_1
                     this.$.parentNode.removeChild(this.$);
                     return this;
                 };
-                /**
-                 * Represents the max possible value of the wave's radius.
-                 */
-                PaperWave.MAX_RADIUS = 300;
                 return PaperWave;
             }());
+            /**
+             * Represents the max possible value of the wave's radius.
+             */
+            PaperWave.MAX_RADIUS = 300;
             exports_1("PaperWave", PaperWave);
         }
-    }
+    };
 });

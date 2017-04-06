@@ -4,5 +4,5 @@ export declare class StyleCompiler {
     private bindingLanguage;
     private viewResources;
     constructor(bindingLanguage: BindingLanguage, viewResources: ViewResources);
-    compile(styleObjectType: Function, css: string): StyleFactory;
+    compile(styleObjectType: new () => any, css: string): StyleFactory;
 }

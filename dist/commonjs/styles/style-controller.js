@@ -1,5 +1,6 @@
 "use strict";
-var aurelia_pal_1 = require('aurelia-pal');
+Object.defineProperty(exports, "__esModule", { value: true });
+var aurelia_pal_1 = require("aurelia-pal");
 var StyleController = (function () {
     function StyleController(factory, bindingContext, overrideContext, expression, destination) {
         this.factory = factory;

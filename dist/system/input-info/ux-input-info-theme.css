@@ -1,27 +1,34 @@
-ux-input-info {
+styles.inputinfo {
   display: flex;
-  margin-top: 4px;
   font-size: 14px;
   width: 100%;
   color: ${hintText || $design.primaryLightForeground};
 }
 
-  ux-input-info>.hint-text {
+  styles.inputinfo>.hint-text,
+  styles.inputinfo>.error-text {
     flex-grow: 1;
   }
 
-  ux-input-info>.counter {
-    transition: 250ms;
+  styles.inputinfo>.error-text+.hint-text {
+    display:none;
   }
 
-  ux-input.focused+ux-input-info>.counter {
+  styles.inputinfo>.counter {
+    transition: 250ms;
+    flex-wrap: nowrap;
+    display: flex;
+  }
+
+  ux-input.focused+styles.inputinfo>.counter {
     color: ${$design.accent};
   }
 
-  ux-input>styles.input[disabled]+ux-input-info {
+  ux-input>styles.input[disabled]+styles.inputinfo {
     display: none;
   }
 
-  .has-error+ux-input-info {
+  .has-error+styles.inputinfo {
     color: ${errorAccent || $swatches.red.p500};
   }
+

@@ -1,5 +1,6 @@
-define(["require", "exports", './style-resource', 'aurelia-templating', './style-strategy', 'aurelia-metadata', './style-locator'], function (require, exports, style_resource_1, aurelia_templating_1, style_strategy_1, aurelia_metadata_1, style_locator_1) {
+define(["require", "exports", "./style-resource", "aurelia-templating", "./style-strategy", "aurelia-metadata", "./style-locator"], function (require, exports, style_resource_1, aurelia_templating_1, style_strategy_1, aurelia_metadata_1, style_locator_1) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * Decorator: Indicates that the target is a styles class.
      */

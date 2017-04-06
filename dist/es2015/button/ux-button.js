@@ -9,8 +9,8 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { processDesignAttributes } from '../designs/design-attributes';
 import { PaperRipple } from '../effects/paper-ripple';
-export var UxButton = (function () {
-    function UxButton(resources, styleEngine) {
+let UxButton = class UxButton {
+    constructor(resources, styleEngine) {
         this.resources = resources;
         this.styleEngine = styleEngine;
         this.type = null;
@@ -20,18 +20,18 @@ export var UxButton = (function () {
         this.theme = null;
         this.ripple = null;
     }
-    UxButton.prototype.created = function (_, myView) {
+    created(_, myView) {
         this.view = myView;
-    };
-    UxButton.prototype.bind = function () {
+    }
+    bind() {
         if (this.theme) {
             this.styleEngine.applyTheme(this, this.theme);
         }
-    };
-    UxButton.prototype.themeChanged = function (newValue) {
+    }
+    themeChanged(newValue) {
         this.styleEngine.applyTheme(this, newValue);
-    };
-    UxButton.prototype.onMouseDown = function (e) {
+    }
+    onMouseDown(e) {
         if (this.button.classList.contains('ripple')) {
             if (this.ripple === null) {
                 this.ripple = new PaperRipple();
@@ -44,32 +44,32 @@ export var UxButton = (function () {
             this.ripple.downAction(e);
         }
         return true;
-    };
-    UxButton.prototype.onMouseUp = function () {
+    }
+    onMouseUp() {
         if (this.button.classList.contains('ripple') && this.ripple !== null) {
             this.ripple.upAction();
         }
         return true;
-    };
-    __decorate([
-        bindable
-    ], UxButton.prototype, "type", void 0);
-    __decorate([
-        bindable
-    ], UxButton.prototype, "size", void 0);
-    __decorate([
-        bindable
-    ], UxButton.prototype, "effect", void 0);
-    __decorate([
-        bindable
-    ], UxButton.prototype, "disabled", void 0);
-    __decorate([
-        bindable
-    ], UxButton.prototype, "theme", void 0);
-    UxButton = __decorate([
-        inject(ViewResources, StyleEngine),
-        customElement('ux-button'),
-        processAttributes(processDesignAttributes)
-    ], UxButton);
-    return UxButton;
-}());
+    }
+};
+__decorate([
+    bindable
+], UxButton.prototype, "type", void 0);
+__decorate([
+    bindable
+], UxButton.prototype, "size", void 0);
+__decorate([
+    bindable
+], UxButton.prototype, "effect", void 0);
+__decorate([
+    bindable
+], UxButton.prototype, "disabled", void 0);
+__decorate([
+    bindable
+], UxButton.prototype, "theme", void 0);
+UxButton = __decorate([
+    inject(ViewResources, StyleEngine),
+    customElement('ux-button'),
+    processAttributes(processDesignAttributes)
+], UxButton);
+export { UxButton };

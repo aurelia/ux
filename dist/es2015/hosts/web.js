@@ -6,18 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { inject } from 'aurelia-dependency-injection';
 import { MaterialDesign } from '../designs/material-design';
-export var Web = (function () {
-    function Web(design) {
+let Web = class Web {
+    constructor(design) {
         this.design = design;
         this.type = 'web';
         this.isAvailable = true;
     }
-    Web.prototype.start = function () {
-        var _this = this;
-        return Promise.resolve().then(function () { return _this; });
-    };
-    Web = __decorate([
-        inject(MaterialDesign)
-    ], Web);
-    return Web;
-}());
+    start() {
+        return Promise.resolve().then(() => this);
+    }
+};
+Web = __decorate([
+    inject(MaterialDesign)
+], Web);
+export { Web };

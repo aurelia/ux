@@ -5,14 +5,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { styles } from '../styles/decorators';
-export var UxButtonTheme = (function () {
-    function UxButtonTheme() {
+let UxButtonTheme = class UxButtonTheme {
+    constructor() {
         this.type = 'raised'; // flat, raised or fab
         this.size = 'medium'; // small, medium or large
         this.effect = 'ripple'; // ripple or none
     }
-    UxButtonTheme = __decorate([
-        styles()
-    ], UxButtonTheme);
-    return UxButtonTheme;
-}());
+};
+UxButtonTheme = __decorate([
+    styles()
+], UxButtonTheme);
+export { UxButtonTheme };

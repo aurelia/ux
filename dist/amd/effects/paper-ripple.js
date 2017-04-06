@@ -1,5 +1,6 @@
-define(["require", "exports", './paper-wave', 'aurelia-pal'], function (require, exports, paper_wave_1, aurelia_pal_1) {
+define(["require", "exports", "./paper-wave", "aurelia-pal"], function (require, exports, paper_wave_1, aurelia_pal_1) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * Provides all the logic to produce ripple visual effect.
      * Other elements can use it to simulate rippling effect emanating from the point of contact.
@@ -95,18 +96,18 @@ define(["require", "exports", './paper-wave', 'aurelia-pal'], function (require,
         });
         PaperRipple.prototype.initTarget = function (target) {
             if (target === void 0) { target = null; }
-            var _doc = aurelia_pal_1.PLATFORM.global.document;
-            this.$ = target || _doc.createElement('div');
+            var doc = aurelia_pal_1.PLATFORM.global.document;
+            this.$ = target || doc.createElement('div');
             this.$.classList.add('paper-ripple');
             if (!this.$background) {
                 this.$background = target &&
-                    target.querySelector('.paper-ripple__background') || _doc.createElement('div');
+                    target.querySelector('.paper-ripple__background') || doc.createElement('div');
                 this.$background.classList.add('paper-ripple__background');
                 this.$.appendChild(this.$background);
             }
             if (!this.$waves) {
                 this.$waves = target &&
-                    target.querySelector('.paper-ripple__waves') || _doc.createElement('div');
+                    target.querySelector('.paper-ripple__waves') || doc.createElement('div');
                 this.$waves.classList.add('paper-ripple__waves');
                 this.$.appendChild(this.$waves);
             }
@@ -163,6 +164,7 @@ define(["require", "exports", './paper-wave', 'aurelia-pal'], function (require,
          * @returns Current instance for method chaining.
          */
         PaperRipple.prototype.animate = function () {
+            // tslint:disable:prefer-const
             for (var i = 0, l = this.waves.length; i < l; i++) {
                 var wave = this.waves[i];
                 if (wave) {
@@ -173,6 +175,7 @@ define(["require", "exports", './paper-wave', 'aurelia-pal'], function (require,
                     }
                 }
             }
+            // tslint:enable:prefer-const
             if (!this.shouldKeepAnimating && this.waves.length === 0) {
                 this.$background.style.backgroundColor = null;
             }

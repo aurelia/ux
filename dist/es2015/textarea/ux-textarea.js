@@ -10,8 +10,8 @@ import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { processDesignAttributes } from '../designs/design-attributes';
-export var UxTextarea = (function () {
-    function UxTextarea(element, styleEngine, resources) {
+let UxTextarea = class UxTextarea {
+    constructor(element, styleEngine, resources) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.resources = resources;
@@ -22,21 +22,20 @@ export var UxTextarea = (function () {
         this.theme = null;
         this.value = undefined;
     }
-    UxTextarea.prototype.created = function (_, myView) {
+    created(_, myView) {
         this.view = myView;
-    };
-    UxTextarea.prototype.bind = function () {
-        var _this = this;
+    }
+    bind() {
         if (this.theme) {
             this.styleEngine.applyTheme(this, this.theme);
         }
         if (this.autofocus || this.autofocus === '') {
-            setTimeout(function () {
-                _this.textbox.focus();
+            setTimeout(() => {
+                this.textbox.focus();
             }, 0);
         }
         if (this.element.hasAttribute('placeholder')) {
-            var attributeValue = this.element.getAttribute('placeholder');
+            const attributeValue = this.element.getAttribute('placeholder');
             if (attributeValue) {
                 this.textbox.setAttribute('placeholder', attributeValue);
                 this.element.removeAttribute('placeholder');
@@ -66,88 +65,86 @@ export var UxTextarea = (function () {
         if (this.readonly || this.readonly === '') {
             this.textbox.setAttribute('readonly', '');
         }
-    };
-    UxTextarea.prototype.attached = function () {
-        var _this = this;
-        var blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-        this.textbox.addEventListener('focus', function () {
-            _this.element.classList.add('focused');
+    }
+    attached() {
+        const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
+        this.textbox.addEventListener('focus', () => {
+            this.element.classList.add('focused');
         });
-        this.textbox.addEventListener('blur', function () {
-            _this.element.classList.remove('focused');
-            _this.element.dispatchEvent(blurEvent);
+        this.textbox.addEventListener('blur', () => {
+            this.element.classList.remove('focused');
+            this.element.dispatchEvent(blurEvent);
         });
-    };
-    UxTextarea.prototype.detached = function () {
-        var _this = this;
-        var blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-        this.textbox.removeEventListener('focus', function () {
-            _this.element.classList.add('focused');
+    }
+    detached() {
+        const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
+        this.textbox.removeEventListener('focus', () => {
+            this.element.classList.add('focused');
         });
-        this.textbox.removeEventListener('blur', function () {
-            _this.element.classList.remove('focused');
-            _this.element.dispatchEvent(blurEvent);
+        this.textbox.removeEventListener('blur', () => {
+            this.element.classList.remove('focused');
+            this.element.dispatchEvent(blurEvent);
         });
-    };
-    UxTextarea.prototype.disabledChanged = function (newValue) {
+    }
+    disabledChanged(newValue) {
         if (newValue === true || newValue === '') {
             this.textbox.setAttribute('disabled', 'true');
         }
         else {
             this.textbox.removeAttribute('disabled');
         }
-    };
-    UxTextarea.prototype.readonlyChanged = function (newValue) {
+    }
+    readonlyChanged(newValue) {
         if (newValue === true || newValue === '') {
             this.textbox.setAttribute('readonly', 'true');
         }
         else {
             this.textbox.removeAttribute('readonly');
         }
-    };
-    UxTextarea.prototype.themeChanged = function (newValue) {
+    }
+    themeChanged(newValue) {
         this.styleEngine.applyTheme(this, newValue);
-    };
-    UxTextarea.prototype.valueChanged = function () {
+    }
+    valueChanged() {
         if (this.autoResize !== null) {
             this.textbox.style.height = 'auto';
-            this.textbox.style.height = (this.textbox.scrollHeight + 2) + "px";
+            this.textbox.style.height = `${this.textbox.scrollHeight + 2}px`;
         }
-    };
-    __decorate([
-        bindable
-    ], UxTextarea.prototype, "autofocus", void 0);
-    __decorate([
-        bindable
-    ], UxTextarea.prototype, "autoResize", void 0);
-    __decorate([
-        bindable
-    ], UxTextarea.prototype, "cols", void 0);
-    __decorate([
-        bindable
-    ], UxTextarea.prototype, "disabled", void 0);
-    __decorate([
-        bindable
-    ], UxTextarea.prototype, "maxlength", void 0);
-    __decorate([
-        bindable
-    ], UxTextarea.prototype, "minlength", void 0);
-    __decorate([
-        bindable
-    ], UxTextarea.prototype, "readonly", void 0);
-    __decorate([
-        bindable
-    ], UxTextarea.prototype, "rows", void 0);
-    __decorate([
-        bindable
-    ], UxTextarea.prototype, "theme", void 0);
-    __decorate([
-        bindable({ defaultBindingMode: bindingMode.twoWay })
-    ], UxTextarea.prototype, "value", void 0);
-    UxTextarea = __decorate([
-        inject(Element, StyleEngine, ViewResources),
-        customElement('ux-textarea'),
-        processAttributes(processDesignAttributes)
-    ], UxTextarea);
-    return UxTextarea;
-}());
+    }
+};
+__decorate([
+    bindable
+], UxTextarea.prototype, "autofocus", void 0);
+__decorate([
+    bindable
+], UxTextarea.prototype, "autoResize", void 0);
+__decorate([
+    bindable
+], UxTextarea.prototype, "cols", void 0);
+__decorate([
+    bindable
+], UxTextarea.prototype, "disabled", void 0);
+__decorate([
+    bindable
+], UxTextarea.prototype, "maxlength", void 0);
+__decorate([
+    bindable
+], UxTextarea.prototype, "minlength", void 0);
+__decorate([
+    bindable
+], UxTextarea.prototype, "readonly", void 0);
+__decorate([
+    bindable
+], UxTextarea.prototype, "rows", void 0);
+__decorate([
+    bindable
+], UxTextarea.prototype, "theme", void 0);
+__decorate([
+    bindable({ defaultBindingMode: bindingMode.twoWay })
+], UxTextarea.prototype, "value", void 0);
+UxTextarea = __decorate([
+    inject(Element, StyleEngine, ViewResources),
+    customElement('ux-textarea'),
+    processAttributes(processDesignAttributes)
+], UxTextarea);
+export { UxTextarea };

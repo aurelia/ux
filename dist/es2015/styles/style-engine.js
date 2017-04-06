@@ -8,20 +8,19 @@ import { Origin } from 'aurelia-metadata';
 import { inject, Container } from 'aurelia-dependency-injection';
 import { DOM } from 'aurelia-pal';
 import { camelCase } from 'aurelia-binding';
-export var StyleEngine = (function () {
-    function StyleEngine(container) {
+let StyleEngine = class StyleEngine {
+    constructor(container) {
         this.container = container;
         this.controllers = new Map();
     }
-    StyleEngine.prototype.getThemeKeyForComponent = function (obj) {
+    getThemeKeyForComponent(obj) {
         return camelCase(Origin.get(obj.constructor).moduleMember + 'Theme');
-    };
-    StyleEngine.prototype.applyTheme = function (themable, theme) {
-        var _this = this;
-        var themeKey = this.getThemeKeyForComponent(themable);
-        var currentController = themable.view[themeKey];
-        var bindingContext;
-        var newController;
+    }
+    applyTheme(themable, theme) {
+        const themeKey = this.getThemeKeyForComponent(themable);
+        const currentController = themable.view[themeKey];
+        let bindingContext;
+        let newController;
         if (!theme) {
             if (currentController !== currentController.factory.defaultController) {
                 currentController.unbind();
@@ -51,15 +50,15 @@ export var StyleEngine = (function () {
             themable.view[themeKey] = newController;
             newController.bind(themable.view);
             this.controllers.set(bindingContext, newController);
-            newController.onRemove = function () {
-                _this.controllers.delete(bindingContext);
+            newController.onRemove = () => {
+                this.controllers.delete(bindingContext);
             };
         }
-    };
-    StyleEngine.prototype.getOrCreateStyleController = function (view, factory) {
-        var controller = view[factory.themeKey];
+    }
+    getOrCreateStyleController(view, factory) {
+        let controller = view[factory.themeKey];
         if (controller === undefined) {
-            var shadowDOMRoot = this.getShadowDOMRoot(view);
+            const shadowDOMRoot = this.getShadowDOMRoot(view);
             if (shadowDOMRoot === null) {
                 view[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
             }
@@ -68,16 +67,16 @@ export var StyleEngine = (function () {
             }
         }
         return controller;
-    };
-    StyleEngine.prototype.getShadowDOMRoot = function (view) {
-        var root = view.container.get(DOM.boundary);
+    }
+    getShadowDOMRoot(view) {
+        const root = view.container.get(DOM.boundary);
         if (root && root.host instanceof Element) {
             return root;
         }
         return null;
-    };
-    StyleEngine = __decorate([
-        inject(Container)
-    ], StyleEngine);
-    return StyleEngine;
-}());
+    }
+};
+StyleEngine = __decorate([
+    inject(Container)
+], StyleEngine);
+export { StyleEngine };

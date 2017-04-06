@@ -7,20 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { BindingLanguage, ViewResources } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleFactory } from './style-factory';
-var classMatcher = /styles.([A-Za-z1-9\-_]+)/g;
-export var StyleCompiler = (function () {
-    function StyleCompiler(bindingLanguage, viewResources) {
+const classMatcher = /styles.([A-Za-z1-9\-_]+)/g;
+let StyleCompiler = class StyleCompiler {
+    constructor(bindingLanguage, viewResources) {
         this.bindingLanguage = bindingLanguage;
         this.viewResources = viewResources;
     }
-    StyleCompiler.prototype.compile = function (styleObjectType, css) {
-        var styles = Object.create(null);
-        var transformed = css.replace(classMatcher, function (_, capture) {
-            var name = capture.replace(/\-/g, '_');
+    compile(styleObjectType, css) {
+        const styles = Object.create(null);
+        const transformed = css.replace(classMatcher, (_, capture) => {
+            const name = capture.replace(/\-/g, '_');
             styles[name] = true;
             return '.${$styles.' + name + ' & oneTime}';
         });
-        var expression = this.bindingLanguage.inspectTextContent(this.viewResources, transformed);
+        let expression = this.bindingLanguage.inspectTextContent(this.viewResources, transformed);
         if (expression === null) {
             expression = new PlainCSSBindingExpression(transformed);
         }
@@ -28,31 +28,29 @@ export var StyleCompiler = (function () {
             expression['targetProperty'] = 'innerHTML';
         }
         return new StyleFactory(styleObjectType, styles, expression);
-    };
-    StyleCompiler = __decorate([
-        inject(BindingLanguage, ViewResources)
-    ], StyleCompiler);
-    return StyleCompiler;
-}());
-var PlainCSSBindingExpression = (function () {
-    function PlainCSSBindingExpression(css) {
+    }
+};
+StyleCompiler = __decorate([
+    inject(BindingLanguage, ViewResources)
+], StyleCompiler);
+export { StyleCompiler };
+class PlainCSSBindingExpression {
+    constructor(css) {
         this.css = css;
     }
-    PlainCSSBindingExpression.prototype.createBinding = function (styleElement) {
+    createBinding(styleElement) {
         return new CSSBinding(this.css, styleElement);
-    };
-    return PlainCSSBindingExpression;
-}());
-var CSSBinding = (function () {
-    function CSSBinding(css, styleElement) {
+    }
+}
+class CSSBinding {
+    constructor(css, styleElement) {
         this.css = css;
         this.styleElement = styleElement;
     }
-    CSSBinding.prototype.bind = function () {
+    bind() {
         this.styleElement.innerHTML = this.css;
-    };
-    CSSBinding.prototype.unbind = function () {
+    }
+    unbind() {
         this.styleElement.innerHTML = '';
-    };
-    return CSSBinding;
-}());
+    }
+}

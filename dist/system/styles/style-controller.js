@@ -1,14 +1,14 @@
-System.register(['aurelia-pal'], function(exports_1, context_1) {
+System.register(["aurelia-pal"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var aurelia_pal_1;
-    var StyleController;
+    var aurelia_pal_1, StyleController;
     return {
-        setters:[
+        setters: [
             function (aurelia_pal_1_1) {
                 aurelia_pal_1 = aurelia_pal_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             StyleController = (function () {
                 function StyleController(factory, bindingContext, overrideContext, expression, destination) {
                     this.factory = factory;
@@ -61,5 +61,5 @@ System.register(['aurelia-pal'], function(exports_1, context_1) {
             }());
             exports_1("StyleController", StyleController);
         }
-    }
+    };
 });

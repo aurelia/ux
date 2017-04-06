@@ -4,8 +4,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-define(["require", "exports", 'aurelia-metadata', 'aurelia-dependency-injection', 'aurelia-pal', 'aurelia-binding'], function (require, exports, aurelia_metadata_1, aurelia_dependency_injection_1, aurelia_pal_1, aurelia_binding_1) {
+define(["require", "exports", "aurelia-metadata", "aurelia-dependency-injection", "aurelia-pal", "aurelia-binding"], function (require, exports, aurelia_metadata_1, aurelia_dependency_injection_1, aurelia_pal_1, aurelia_binding_1) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var StyleEngine = (function () {
         function StyleEngine(container) {
             this.container = container;
@@ -74,10 +75,10 @@ define(["require", "exports", 'aurelia-metadata', 'aurelia-dependency-injection'
             }
             return null;
         };
-        StyleEngine = __decorate([
-            aurelia_dependency_injection_1.inject(aurelia_dependency_injection_1.Container)
-        ], StyleEngine);
         return StyleEngine;
     }());
+    StyleEngine = __decorate([
+        aurelia_dependency_injection_1.inject(aurelia_dependency_injection_1.Container)
+    ], StyleEngine);
     exports.StyleEngine = StyleEngine;
 });

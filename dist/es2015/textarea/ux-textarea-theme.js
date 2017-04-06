@@ -5,12 +5,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { styles } from '../styles/decorators';
-export var UxTextareaTheme = (function () {
-    function UxTextareaTheme() {
+let UxTextareaTheme = class UxTextareaTheme {
+    constructor() {
         this.background = 'transparent';
     }
-    UxTextareaTheme = __decorate([
-        styles()
-    ], UxTextareaTheme);
-    return UxTextareaTheme;
-}());
+};
+UxTextareaTheme = __decorate([
+    styles()
+], UxTextareaTheme);
+export { UxTextareaTheme };

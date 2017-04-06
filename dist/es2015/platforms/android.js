@@ -6,13 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { inject } from 'aurelia-dependency-injection';
 import { MaterialDesign } from '../designs/material-design';
-export var Android = (function () {
-    function Android(design) {
+let Android = class Android {
+    constructor(design) {
         this.design = design;
         this.type = 'android';
     }
-    Android = __decorate([
-        inject(MaterialDesign)
-    ], Android);
-    return Android;
-}());
+};
+Android = __decorate([
+    inject(MaterialDesign)
+], Android);
+export { Android };

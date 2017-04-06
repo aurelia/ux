@@ -5,12 +5,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { styles } from '../styles/decorators';
-export var UxInputTheme = (function () {
-    function UxInputTheme() {
+let UxInputTheme = class UxInputTheme {
+    constructor() {
         this.background = 'transparent';
     }
-    UxInputTheme = __decorate([
-        styles()
-    ], UxInputTheme);
-    return UxInputTheme;
-}());
+};
+UxInputTheme = __decorate([
+    styles()
+], UxInputTheme);
+export { UxInputTheme };

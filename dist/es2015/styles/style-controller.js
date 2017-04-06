@@ -1,6 +1,6 @@
 import { DOM, PLATFORM } from 'aurelia-pal';
-export var StyleController = (function () {
-    function StyleController(factory, bindingContext, overrideContext, expression, destination) {
+export class StyleController {
+    constructor(factory, bindingContext, overrideContext, expression, destination) {
         this.factory = factory;
         this.bindingContext = bindingContext;
         this.overrideContext = overrideContext;
@@ -11,9 +11,9 @@ export var StyleController = (function () {
         this.count = 0;
         this.onRemove = PLATFORM.noop;
     }
-    StyleController.prototype.bind = function (view) {
-        var overrideContext = view.overrideContext;
-        var $styles = overrideContext['$styles'] || {};
+    bind(view) {
+        const overrideContext = view.overrideContext;
+        const $styles = overrideContext['$styles'] || {};
         overrideContext['$' + this.factory.themeKey] = this.bindingContext;
         overrideContext['$design'] = this.overrideContext.$design;
         overrideContext['$styles'] = Object.assign($styles, this.overrideContext.$styles);
@@ -25,15 +25,15 @@ export var StyleController = (function () {
         else {
             this.count++;
         }
-    };
-    StyleController.prototype.unbind = function () {
+    }
+    unbind() {
         this.count--;
         if (this.count === 0) {
             this.removeStyleElement();
             this.bindingInstance.unbind();
         }
-    };
-    StyleController.prototype.ensureStyleElementIsAddedToDocument = function () {
+    }
+    ensureStyleElementIsAddedToDocument() {
         if (this.styleElement === undefined) {
             this.styleElement = DOM.injectStyles('', this.destination);
             this.bindingInstance = this.expression.createBinding(this.styleElement);
@@ -41,11 +41,10 @@ export var StyleController = (function () {
         else if (!this.styleElement.parentNode) {
             this.styleElementParent.appendChild(this.styleElement);
         }
-    };
-    StyleController.prototype.removeStyleElement = function () {
+    }
+    removeStyleElement() {
         this.styleElementParent = this.styleElement.parentNode;
         DOM.removeNode(this.styleElement);
         this.onRemove();
-    };
-    return StyleController;
-}());
+    }
+}

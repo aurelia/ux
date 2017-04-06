@@ -1,16 +1,15 @@
-System.register(['aurelia-dependency-injection', 'aurelia-loader', 'aurelia-templating', './styles/dynamic-styles', 'aurelia-templating-binding'], function(exports_1, context_1) {
+System.register(["aurelia-dependency-injection", "aurelia-loader", "aurelia-templating", "./styles/dynamic-styles", "aurelia-templating-binding"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_dependency_injection_1, aurelia_loader_1, aurelia_templating_1, dynamic_styles_1, aurelia_templating_binding_1;
-    var UXConfiguration;
+    var __moduleName = context_1 && context_1.id;
+    var aurelia_dependency_injection_1, aurelia_loader_1, aurelia_templating_1, dynamic_styles_1, aurelia_templating_binding_1, UXConfiguration;
     return {
-        setters:[
+        setters: [
             function (aurelia_dependency_injection_1_1) {
                 aurelia_dependency_injection_1 = aurelia_dependency_injection_1_1;
             },
@@ -25,8 +24,9 @@ System.register(['aurelia-dependency-injection', 'aurelia-loader', 'aurelia-temp
             },
             function (aurelia_templating_binding_1_1) {
                 aurelia_templating_binding_1 = aurelia_templating_binding_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             UXConfiguration = (function () {
                 function UXConfiguration(loader, viewEngine) {
                     this.loader = loader;
@@ -67,12 +67,12 @@ System.register(['aurelia-dependency-injection', 'aurelia-loader', 'aurelia-temp
                     /* tslint:enable:only-arrow-functions */
                     return this;
                 };
-                UXConfiguration = __decorate([
-                    aurelia_dependency_injection_1.inject(aurelia_loader_1.Loader, aurelia_templating_1.ViewEngine)
-                ], UXConfiguration);
                 return UXConfiguration;
             }());
+            UXConfiguration = __decorate([
+                aurelia_dependency_injection_1.inject(aurelia_loader_1.Loader, aurelia_templating_1.ViewEngine)
+            ], UXConfiguration);
             exports_1("UXConfiguration", UXConfiguration);
         }
-    }
+    };
 });

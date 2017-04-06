@@ -14,26 +14,26 @@ import { AureliaUX } from '../aurelia-ux';
 /**
  * Decorator: Indicates that the decorated class/object is a style strategy.
  */
-export var styleStrategy = protocol.create('aurelia:style-strategy', {
-    validate: function (target) {
+export const styleStrategy = protocol.create('aurelia:style-strategy', {
+    validate(target) {
         if (!(typeof target.loadStyleFactory === 'function')) {
             return 'Style strategies must implement: loadStyleFactory(): Promise<StyleFactory>';
         }
         return true;
     },
-    compose: function (target) {
+    compose(target) {
         if (!(typeof target.makeRelativeTo === 'function')) {
             target.makeRelativeTo = PLATFORM.noop;
         }
     }
 });
-var cssUrlMatcher = /url\((?!['"]data)([^)]+)\)/gi;
+const cssUrlMatcher = /url\((?!['"]data)([^)]+)\)/gi;
 function fixupCSSUrls(address, css) {
     if (typeof css !== 'string') {
-        throw new Error("Failed loading required CSS file: " + address);
+        throw new Error(`Failed loading required CSS file: ${address}`);
     }
-    return css.replace(cssUrlMatcher, function (_, p1) {
-        var quote = p1.charAt(0);
+    return css.replace(cssUrlMatcher, (_, p1) => {
+        const quote = p1.charAt(0);
         if (quote === '\'' || quote === '"') {
             p1 = p1.substr(1, p1.length - 2);
         }
@@ -43,22 +43,21 @@ function fixupCSSUrls(address, css) {
 /**
  * A style strategy that loads a style relative to its associated view-model.
  */
-export var RelativeStyleStrategy = (function () {
+let RelativeStyleStrategy = class RelativeStyleStrategy {
     /**
      * Creates an instance of RelativeStyleStrategy.
      * @param path The relative path to the styles.
      */
-    function RelativeStyleStrategy(pathOrDesignMap) {
+    constructor(pathOrDesignMap) {
         this.pathOrDesignMap = pathOrDesignMap;
         this.absolutePath = null;
     }
     /**
      * Loads a style factory.
      */
-    RelativeStyleStrategy.prototype.loadStyleFactory = function (container, styleObjectType) {
-        var _this = this;
+    loadStyleFactory(container, styleObjectType) {
         if (this.absolutePath === null && this.moduleId) {
-            var path = resolveForDesign(this.pathOrDesignMap, container);
+            const path = resolveForDesign(this.pathOrDesignMap, container);
             if (!path) {
                 this.absolutePath = container.get(StyleLocator)
                     .convertOriginToStyleUrl(new Origin(this.moduleId, 'default'));
@@ -67,94 +66,93 @@ export var RelativeStyleStrategy = (function () {
                 this.absolutePath = relativeToFile(path, this.moduleId);
             }
         }
-        var styleUrl = this.absolutePath || resolveForDesign(this.pathOrDesignMap, container);
+        const styleUrl = this.absolutePath || resolveForDesign(this.pathOrDesignMap, container);
         return container.get(Loader)
             .loadText(styleUrl)
-            .catch(function () { return null; })
-            .then(function (text) {
+            .catch(() => null)
+            .then((text) => {
             text = fixupCSSUrls(styleUrl, text);
-            _this.css = text;
-            var compiler = container.get(StyleCompiler);
-            return compiler.compile(styleObjectType, _this.css);
+            this.css = text;
+            const compiler = container.get(StyleCompiler);
+            return compiler.compile(styleObjectType, this.css);
         });
-    };
+    }
     /**
      * Makes the view loaded by this strategy relative to the provided file path.
      * @param file The path to load the view relative to.
      */
-    RelativeStyleStrategy.prototype.makeRelativeTo = function (file) {
+    makeRelativeTo(file) {
         if (this.absolutePath === null) {
             this.absolutePath = relativeToFile(this.path, file);
         }
-    };
-    RelativeStyleStrategy = __decorate([
-        styleStrategy()
-    ], RelativeStyleStrategy);
-    return RelativeStyleStrategy;
-}());
+    }
+};
+RelativeStyleStrategy = __decorate([
+    styleStrategy()
+], RelativeStyleStrategy);
+export { RelativeStyleStrategy };
 /**
  * A styles strategy based on naming conventions.
  */
-export var ConventionalStyleStrategy = (function () {
+let ConventionalStyleStrategy = class ConventionalStyleStrategy {
     /**
      * Creates an instance of ConventionalStyleStrategy.
      * @param viewLocator The view locator service for conventionally locating the view.
      * @param origin The origin of the view model to conventionally load the view for.
      */
-    function ConventionalStyleStrategy(styleLocator, origin) {
+    constructor(styleLocator, origin) {
         this.moduleId = origin.moduleId;
         this.styleUrl = styleLocator.convertOriginToStyleUrl(origin);
     }
     /**
      * Loads a style factory.
      */
-    ConventionalStyleStrategy.prototype.loadStyleFactory = function (container, styleObjectType) {
-        var _this = this;
+    loadStyleFactory(container, styleObjectType) {
         return container.get(Loader)
             .loadText(this.styleUrl)
-            .catch(function () { return null; })
-            .then(function (text) {
-            text = fixupCSSUrls(_this.styleUrl, text);
-            _this.css = text;
-            var compiler = container.get(StyleCompiler);
-            return compiler.compile(styleObjectType, _this.css);
+            .catch(() => null)
+            .then((text) => {
+            text = fixupCSSUrls(this.styleUrl, text);
+            this.css = text;
+            const compiler = container.get(StyleCompiler);
+            return compiler.compile(styleObjectType, this.css);
         });
-    };
-    ConventionalStyleStrategy = __decorate([
-        styleStrategy()
-    ], ConventionalStyleStrategy);
-    return ConventionalStyleStrategy;
-}());
+    }
+};
+ConventionalStyleStrategy = __decorate([
+    styleStrategy()
+], ConventionalStyleStrategy);
+export { ConventionalStyleStrategy };
 /**
  * A styles strategy that allows the component author to inline css.
  */
-export var InlineStyleStrategy = (function () {
+let InlineStyleStrategy = class InlineStyleStrategy {
     /**
      * Creates an instance of InlineStyleStrategy.
      */
-    function InlineStyleStrategy(cssOrDesignMap) {
+    constructor(cssOrDesignMap) {
         this.cssOrDesignMap = cssOrDesignMap;
     }
     /**
      * Loads a style factory.
      */
-    InlineStyleStrategy.prototype.loadStyleFactory = function (container, styleObjectType) {
-        var css = resolveForDesign(this.cssOrDesignMap, container);
+    loadStyleFactory(container, styleObjectType) {
+        const css = resolveForDesign(this.cssOrDesignMap, container);
         this.transformedCSS = fixupCSSUrls(this.moduleId, css);
-        var compiler = container.get(StyleCompiler);
+        const compiler = container.get(StyleCompiler);
         return Promise.resolve(compiler.compile(styleObjectType, this.transformedCSS));
-    };
-    InlineStyleStrategy = __decorate([
-        styleStrategy()
-    ], InlineStyleStrategy);
-    return InlineStyleStrategy;
-}());
+    }
+};
+InlineStyleStrategy = __decorate([
+    styleStrategy()
+], InlineStyleStrategy);
+export { InlineStyleStrategy };
 function resolveForDesign(valueOrDesignMap, container) {
     if (typeof valueOrDesignMap === 'string') {
         return valueOrDesignMap;
     }
     else {
-        var designType = container.get(AureliaUX).design.type;
+        const designType = container.get(AureliaUX).design.type;
         return valueOrDesignMap[designType];
     }
 }

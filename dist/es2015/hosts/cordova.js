@@ -8,39 +8,34 @@ import { Container, inject } from 'aurelia-dependency-injection';
 import { DOM, PLATFORM } from 'aurelia-pal';
 import { IOS } from '../platforms/ios';
 import { Android } from '../platforms/android';
-export var Cordova = (function () {
-    function Cordova(container) {
+let Cordova = class Cordova {
+    constructor(container) {
         this.container = container;
         this.type = 'cordova';
     }
-    Object.defineProperty(Cordova.prototype, "isAvailable", {
-        get: function () {
-            return !!PLATFORM.global.cordova;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Cordova.prototype.start = function () {
-        var _this = this;
-        return new Promise(function (resolve) {
-            DOM.addEventListener('deviceready', function () {
-                switch (_this.getPlatformType()) {
+    get isAvailable() {
+        return !!PLATFORM.global.cordova;
+    }
+    start() {
+        return new Promise((resolve) => {
+            DOM.addEventListener('deviceready', () => {
+                switch (this.getPlatformType()) {
                     case 'ios':
-                        resolve(_this.container.get(IOS));
+                        resolve(this.container.get(IOS));
                         break;
                     default:
-                        resolve(_this.container.get(Android));
+                        resolve(this.container.get(Android));
                         break;
                 }
             }, false);
         });
-    };
-    Cordova.prototype.getPlatformType = function () {
-        var device = PLATFORM.global.device || { platform: 'android' };
+    }
+    getPlatformType() {
+        const device = PLATFORM.global.device || { platform: 'android' };
         return device.platform.toLowerCase();
-    };
-    Cordova = __decorate([
-        inject(Container)
-    ], Cordova);
-    return Cordova;
-}());
+    }
+};
+Cordova = __decorate([
+    inject(Container)
+], Cordova);
+export { Cordova };

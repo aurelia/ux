@@ -5,12 +5,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var style_controller_1 = require('./style-controller');
-var aurelia_ux_1 = require('../aurelia-ux');
-var aurelia_binding_1 = require('aurelia-binding');
-var aurelia_metadata_1 = require('aurelia-metadata');
-var swatches_1 = require('../colors/swatches');
-var shadows_1 = require('../colors/shadows');
+Object.defineProperty(exports, "__esModule", { value: true });
+var style_controller_1 = require("./style-controller");
+var aurelia_ux_1 = require("../aurelia-ux");
+var aurelia_binding_1 = require("aurelia-binding");
+var aurelia_metadata_1 = require("aurelia-metadata");
+var swatches_1 = require("../colors/swatches");
+var shadows_1 = require("../colors/shadows");
 var StyleFactory = (function () {
     function StyleFactory(styleObjectType, styles, expression) {
         this.styleObjectType = styleObjectType;
@@ -74,11 +75,11 @@ var StyleOverrideContext = (function () {
         enumerable: true,
         configurable: true
     });
-    __decorate([
-        aurelia_binding_1.computedFrom('$ux.platform')
-    ], StyleOverrideContext.prototype, "$platform", null);
-    __decorate([
-        aurelia_binding_1.computedFrom('$ux.design')
-    ], StyleOverrideContext.prototype, "$design", null);
     return StyleOverrideContext;
 }());
+__decorate([
+    aurelia_binding_1.computedFrom('$ux.platform')
+], StyleOverrideContext.prototype, "$platform", null);
+__decorate([
+    aurelia_binding_1.computedFrom('$ux.design')
+], StyleOverrideContext.prototype, "$design", null);

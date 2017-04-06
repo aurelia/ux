@@ -1,16 +1,15 @@
-System.register(['aurelia-dependency-injection', 'aurelia-pal', '../platforms/ios', '../platforms/android'], function(exports_1, context_1) {
+System.register(["aurelia-dependency-injection", "aurelia-pal", "../platforms/ios", "../platforms/android"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var aurelia_dependency_injection_1, aurelia_pal_1, ios_1, android_1;
-    var Cordova;
+    var __moduleName = context_1 && context_1.id;
+    var aurelia_dependency_injection_1, aurelia_pal_1, ios_1, android_1, Cordova;
     return {
-        setters:[
+        setters: [
             function (aurelia_dependency_injection_1_1) {
                 aurelia_dependency_injection_1 = aurelia_dependency_injection_1_1;
             },
@@ -22,8 +21,9 @@ System.register(['aurelia-dependency-injection', 'aurelia-pal', '../platforms/io
             },
             function (android_1_1) {
                 android_1 = android_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             Cordova = (function () {
                 function Cordova(container) {
                     this.container = container;
@@ -55,12 +55,12 @@ System.register(['aurelia-dependency-injection', 'aurelia-pal', '../platforms/io
                     var device = aurelia_pal_1.PLATFORM.global.device || { platform: 'android' };
                     return device.platform.toLowerCase();
                 };
-                Cordova = __decorate([
-                    aurelia_dependency_injection_1.inject(aurelia_dependency_injection_1.Container)
-                ], Cordova);
                 return Cordova;
             }());
+            Cordova = __decorate([
+                aurelia_dependency_injection_1.inject(aurelia_dependency_injection_1.Container)
+            ], Cordova);
             exports_1("Cordova", Cordova);
         }
-    }
+    };
 });

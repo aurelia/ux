@@ -1,17 +1,17 @@
-System.register(['aurelia-metadata', './style-strategy'], function(exports_1, context_1) {
+System.register(["aurelia-metadata", "./style-strategy"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var aurelia_metadata_1, style_strategy_1;
-    var StyleLocator;
+    var aurelia_metadata_1, style_strategy_1, StyleLocator;
     return {
-        setters:[
+        setters: [
             function (aurelia_metadata_1_1) {
                 aurelia_metadata_1 = aurelia_metadata_1_1;
             },
             function (style_strategy_1_1) {
                 style_strategy_1 = style_strategy_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             /**
              * Locates a style for an object.
              */
@@ -80,13 +80,13 @@ System.register(['aurelia-metadata', './style-strategy'], function(exports_1, co
                         : moduleId;
                     return id + '.css';
                 };
-                /**
-                 * The metadata key for storing/finding style strategies associated with an class/object.
-                 */
-                StyleLocator.styleStrategyMetadataKey = 'aurelia:style-strategy';
                 return StyleLocator;
             }());
+            /**
+             * The metadata key for storing/finding style strategies associated with an class/object.
+             */
+            StyleLocator.styleStrategyMetadataKey = 'aurelia:style-strategy';
             exports_1("StyleLocator", StyleLocator);
         }
-    }
+    };
 });

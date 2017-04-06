@@ -1,6 +1,7 @@
 "use strict";
-var aurelia_metadata_1 = require('aurelia-metadata');
-var style_strategy_1 = require('./style-strategy');
+Object.defineProperty(exports, "__esModule", { value: true });
+var aurelia_metadata_1 = require("aurelia-metadata");
+var style_strategy_1 = require("./style-strategy");
 /**
  * Locates a style for an object.
  */
@@ -69,10 +70,10 @@ var StyleLocator = (function () {
             : moduleId;
         return id + '.css';
     };
-    /**
-     * The metadata key for storing/finding style strategies associated with an class/object.
-     */
-    StyleLocator.styleStrategyMetadataKey = 'aurelia:style-strategy';
     return StyleLocator;
 }());
+/**
+ * The metadata key for storing/finding style strategies associated with an class/object.
+ */
+StyleLocator.styleStrategyMetadataKey = 'aurelia:style-strategy';
 exports.StyleLocator = StyleLocator;

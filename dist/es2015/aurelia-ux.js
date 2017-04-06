@@ -9,8 +9,8 @@ import { Cordova } from './hosts/cordova';
 import { Web } from './hosts/web';
 import { Electron } from './hosts/electron';
 import { UXConfiguration } from './ux-configuration';
-export var AureliaUX = (function () {
-    function AureliaUX(use, container) {
+let AureliaUX = class AureliaUX {
+    constructor(use, container) {
         this.use = use;
         this.availableHosts = [
             container.get(Cordova),
@@ -18,20 +18,19 @@ export var AureliaUX = (function () {
             container.get(Web)
         ];
     }
-    AureliaUX.prototype.start = function (config) {
-        var _this = this;
-        var found = this.availableHosts.find(function (x) { return x.isAvailable; });
+    start(config) {
+        const found = this.availableHosts.find(x => x.isAvailable);
         if (found === undefined) {
             throw new Error('Could not determine host environment');
         }
         this.host = found;
-        return this.host.start(config).then(function (platform) {
-            _this.platform = platform;
-            _this.design = platform.design;
+        return this.host.start(config).then(platform => {
+            this.platform = platform;
+            this.design = platform.design;
         });
-    };
-    AureliaUX = __decorate([
-        inject(UXConfiguration, Container)
-    ], AureliaUX);
-    return AureliaUX;
-}());
+    }
+};
+AureliaUX = __decorate([
+    inject(UXConfiguration, Container)
+], AureliaUX);
+export { AureliaUX };

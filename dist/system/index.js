@@ -1,13 +1,15 @@
-System.register(['./aurelia-ux', './colors/swatches', './colors/shadows', './button/ux-button-theme', './input/ux-input-theme', './input-info/ux-input-info-theme', './textarea/ux-textarea-theme', './styles/decorators', './ux-configuration'], function(exports_1, context_1) {
+System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./styles/decorators", "./ux-configuration"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var aurelia_ux_1;
     function configure(config, callback) {
         config.globalResources([
             './button/ux-button',
             './input/ux-input',
             './input-info/ux-input-info',
-            './textarea/ux-textarea'
+            './textarea/ux-textarea',
+            './form/ux-form',
+            './form/ux-field',
+            './form/ux-submit-attribute'
         ]);
         var ux = config.container.get(aurelia_ux_1.AureliaUX);
         if (typeof callback === 'function') {
@@ -20,26 +22,29 @@ System.register(['./aurelia-ux', './colors/swatches', './colors/shadows', './but
         }
     }
     exports_1("configure", configure);
+    var aurelia_ux_1;
     var exportedNames_1 = {
-        'configure': true,
-        'swatches': true,
-        'shadows': true,
-        'UxButtonTheme': true,
-        'UxInputTheme': true,
-        'UxInputInfoTheme': true,
-        'UxTextareaTheme': true,
-        'AureliaUX': true,
-        'UXConfiguration': true
+        "configure": true,
+        "swatches": true,
+        "shadows": true,
+        "UxButtonTheme": true,
+        "UxInputTheme": true,
+        "UxInputInfoTheme": true,
+        "UxTextareaTheme": true,
+        "UxFormTheme": true,
+        "UxFieldTheme": true,
+        "AureliaUX": true,
+        "UXConfiguration": true
     };
     function exportStar_1(m) {
         var exports = {};
-        for(var n in m) {
-            if (n !== "default"&& !exportedNames_1.hasOwnProperty(n)) exports[n] = m[n];
+        for (var n in m) {
+            if (n !== "default" && !exportedNames_1.hasOwnProperty(n)) exports[n] = m[n];
         }
         exports_1(exports);
     }
     return {
-        setters:[
+        setters: [
             function (aurelia_ux_1_1) {
                 aurelia_ux_1 = aurelia_ux_1_1;
                 exports_1({
@@ -76,6 +81,16 @@ System.register(['./aurelia-ux', './colors/swatches', './colors/shadows', './but
                     "UxTextareaTheme": ux_textarea_theme_1_1["UxTextareaTheme"]
                 });
             },
+            function (ux_form_theme_1_1) {
+                exports_1({
+                    "UxFormTheme": ux_form_theme_1_1["UxFormTheme"]
+                });
+            },
+            function (ux_field_theme_1_1) {
+                exports_1({
+                    "UxFieldTheme": ux_field_theme_1_1["UxFieldTheme"]
+                });
+            },
             function (decorators_1_1) {
                 exportStar_1(decorators_1_1);
             },
@@ -83,8 +98,9 @@ System.register(['./aurelia-ux', './colors/swatches', './colors/shadows', './but
                 exports_1({
                     "UXConfiguration": ux_configuration_1_1["UXConfiguration"]
                 });
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
         }
-    }
+    };
 });
