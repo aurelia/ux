@@ -25,6 +25,8 @@ export class UxChipInput implements Themable {
 
   public view: View;
   private textbox: HTMLInputElement;
+  private chiprepeat: Element;
+  private tagrepeat: Element;
 
   constructor(private element: HTMLInputElement, public resources: ViewResources, private styleEngine: StyleEngine) { }
 
@@ -48,10 +50,14 @@ export class UxChipInput implements Themable {
 
     if (this.disabled || this.disabled === '') {
       this.textbox.setAttribute('disabled', '');
+      this.chiprepeat.removeAttribute('deletable');
+      this.tagrepeat.removeAttribute('deletable');
     }
 
     if (this.readonly || this.readonly === '') {
       this.textbox.setAttribute('readonly', '');
+      this.chiprepeat.removeAttribute('deletable');
+      this.tagrepeat.removeAttribute('deletable');
     }
   }
 
@@ -130,7 +136,6 @@ export class UxChipInput implements Themable {
     }
 
     this.value = this.chipArray.join(seperator);
-
   }
 
   public valueChanged() {
@@ -146,16 +151,24 @@ export class UxChipInput implements Themable {
   public disabledChanged(newValue: any) {
     if (newValue === true || newValue === '') {
       this.textbox.setAttribute('disabled', 'true');
+      this.chiprepeat.removeAttribute('deletable');
+      this.tagrepeat.removeAttribute('deletable');
     } else {
       this.textbox.removeAttribute('disabled');
+      this.chiprepeat.setAttribute('deletable', '');
+      this.tagrepeat.setAttribute('deletable', '');
     }
   }
 
   public readonlyChanged(newValue: any) {
     if (newValue === true || newValue === '') {
       this.textbox.setAttribute('readonly', 'true');
+      this.chiprepeat.removeAttribute('deletable');
+      this.tagrepeat.removeAttribute('deletable');
     } else {
       this.textbox.removeAttribute('readonly');
+      this.chiprepeat.setAttribute('deletable', '');
+      this.tagrepeat.setAttribute('deletable', '');
     }
   }
 
