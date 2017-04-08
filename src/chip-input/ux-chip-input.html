@@ -1,6 +1,20 @@
 <template role="textbox" styles.chipinput>
   <require from="./ux-chip-input-theme"></require>
 
-  <input ref="textbox" value.bind="value" />
-
+    <ux-chip deletable
+             close.trigger="removeChip(chip)"
+             dblclick.trigger="editChip(chip)"
+             if.bind="type.toLowerCase() !== 'tag'"
+             repeat.for="chip of chipArray">
+             ${chip}
+             </ux-chip>
+    <ux-tag deletable
+            close.trigger="removeChip(chip)"
+            dblclick.trigger="editChip(chip)"
+            if.bind="type.toLowerCase() === 'tag'"
+            repeat.for="chip of chipArray">
+            ${chip}
+            </ux-tag>
+    <input ref="textbox" keyup.delegate="handleKeyup($event)"/>
+  <div class="bottom-border"></div>
 </template>
