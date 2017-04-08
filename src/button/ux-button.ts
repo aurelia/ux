@@ -42,6 +42,11 @@ export class UxButton implements Themable {
         this.button.appendChild(this.ripple.$);
       }
 
+      if (this.button.classList.contains('icon')) {
+        this.ripple.center = true;
+        this.ripple.round = true;
+      }
+
       if (this.button.classList.contains('fab')) {
         this.ripple.center = true;
         this.ripple.round = true;

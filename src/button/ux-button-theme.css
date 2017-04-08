@@ -76,6 +76,18 @@ styles.button.flat:active {
   background-color: ${background || $swatches.grey.p300};
 }
 
+styles.button.icon {
+  display: inline-flex;
+  align-content: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  background-color: transparent;
+  color: ${foreground || $design.accent};
+}
+
 styles.button.fab {
   border-radius: 50%;
   overflow: hidden;

@@ -2,7 +2,7 @@ import {styles} from '../styles/decorators';
 
 @styles()
 export class UxButtonTheme {
-  public type = 'raised'; // flat, raised or fab
+  public type = 'raised'; // flat, raised, icon or fab
   public size = 'medium'; // small, medium or large
   public effect = 'ripple'; // ripple or none
 
