@@ -135,7 +135,9 @@ export class UxChipInput implements Themable {
       seperator = this.separator;
     }
 
-    this.value = this.chipArray.join(seperator);
+    if (this.chipArray) {
+      this.value = this.chipArray.join(seperator);
+    }
   }
 
   public valueChanged() {
@@ -144,8 +146,10 @@ export class UxChipInput implements Themable {
     if (this.separator) {
       seperator = this.separator;
     }
-
-    this.chipArray = this.value.split(seperator);
+    
+    if (this.value) {
+      this.chipArray = this.value.split(seperator);
+    }
   }
 
   public disabledChanged(newValue: any) {
