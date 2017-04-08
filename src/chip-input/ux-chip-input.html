@@ -2,6 +2,7 @@
   <require from="./ux-chip-input-theme"></require>
 
     <ux-chip deletable
+             ref="chiprepeat"
              close.trigger="removeChip(chip)"
              dblclick.trigger="editChip(chip)"
              if.bind="type.toLowerCase() !== 'tag'"
@@ -9,6 +10,7 @@
              ${chip}
              </ux-chip>
     <ux-tag deletable
+            ref="tagrepeat"
             close.trigger="removeChip(chip)"
             dblclick.trigger="editChip(chip)"
             if.bind="type.toLowerCase() === 'tag'"
