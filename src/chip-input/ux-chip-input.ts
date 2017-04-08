@@ -21,7 +21,7 @@ export class UxChipInput implements Themable {
   public value: any = undefined;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public chipArray: Array<string> = new Array<string>();
+  public chips: Array<string> = new Array<string>();
 
   public view: View;
   private textbox: HTMLInputElement;
@@ -97,8 +97,8 @@ export class UxChipInput implements Themable {
     }
 
     if (key === 37) {
-      if (this.chipArray) {
-        const chip = this.chipArray.pop();
+      if (this.chips) {
+        const chip = this.chips.pop();
 
         if (chip !== undefined) {
           this.textbox.value = chip;
@@ -109,11 +109,11 @@ export class UxChipInput implements Themable {
 
   public addChip() {
     if (this.textbox.value.length) {
-      if (!this.chipArray) {
-        this.chipArray = new Array<string>();
+      if (!this.chips) {
+        this.chips = new Array<string>();
       }
 
-      this.chipArray.push(this.textbox.value);
+      this.chips.push(this.textbox.value);
       this.textbox.value = '';
       this.chipsChanged();
     }
@@ -128,10 +128,10 @@ export class UxChipInput implements Themable {
   }
 
   public removeChip(value: string) {
-    const chipIndex = this.chipArray.indexOf(value, 0);
+    const chipIndex = this.chips.indexOf(value, 0);
 
     if (chipIndex > -1) {
-      this.chipArray.splice(chipIndex, 1);
+      this.chips.splice(chipIndex, 1);
       this.chipsChanged();
     }
   }
@@ -143,7 +143,7 @@ export class UxChipInput implements Themable {
       seperator = this.separator;
     }
 
-    this.value = this.chipArray.join(seperator);
+    this.value = this.chips.join(seperator);
   }
 
   public valueChanged() {
@@ -157,7 +157,7 @@ export class UxChipInput implements Themable {
       seperator = this.separator;
     }
 
-    this.chipArray = this.value.split(seperator);
+    this.chips = this.value.split(seperator);
   }
 
   public disabledChanged(newValue: any) {
