@@ -1,6 +1,10 @@
 <template role="textbox" styles.chip>
   <require from="./ux-chip-theme"></require>
 
-  <slot></slot>
+  <span>
+    <slot></slot>
+  </span>
 
+  <span class="close" click.delegate="closeChip()">
+  </span>
 </template>
