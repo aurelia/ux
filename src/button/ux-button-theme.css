@@ -85,7 +85,11 @@ styles.button.icon {
   height: 40px;
 
   background-color: transparent;
-  color: ${foreground || $design.accent};
+  color: ${foreground || $swatches.grey.p700};
+}
+
+styles.button.icon:hover {
+  color: ${$design.accent}
 }
 
 styles.button.fab {
