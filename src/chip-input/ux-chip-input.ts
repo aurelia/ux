@@ -157,7 +157,13 @@ export class UxChipInput implements Themable {
       seperator = this.separator;
     }
 
-    this.chips = this.value.split(seperator);
+    let newValue: string | null = this.chips.join(seperator);
+
+    if (newValue === '') {
+      newValue = null;
+    }
+
+    this.value = newValue;
   }
 
   public disabledChanged(newValue: any) {
