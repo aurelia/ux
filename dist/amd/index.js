@@ -1,4 +1,4 @@
-define(["require", "exports", "./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./styles/decorators", "./aurelia-ux", "./ux-configuration"], function (require, exports, aurelia_ux_1, swatches_1, shadows_1, ux_button_theme_1, ux_input_theme_1, ux_input_info_theme_1, ux_textarea_theme_1, ux_form_theme_1, ux_field_theme_1, decorators_1, aurelia_ux_2, ux_configuration_1) {
+define(["require", "exports", "./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./chip-input/ux-chip-input-theme", "./chip-input/ux-tag-theme", "./chip-input/ux-chip-theme", "./styles/decorators", "./aurelia-ux", "./ux-configuration"], function (require, exports, aurelia_ux_1, swatches_1, shadows_1, ux_button_theme_1, ux_input_theme_1, ux_input_info_theme_1, ux_textarea_theme_1, ux_form_theme_1, ux_field_theme_1, ux_chip_input_theme_1, ux_tag_theme_1, ux_chip_theme_1, decorators_1, aurelia_ux_2, ux_configuration_1) {
     "use strict";
     function __export(m) {
         for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
@@ -12,6 +12,9 @@ define(["require", "exports", "./aurelia-ux", "./colors/swatches", "./colors/sha
     exports.UxTextareaTheme = ux_textarea_theme_1.UxTextareaTheme;
     exports.UxFormTheme = ux_form_theme_1.UxFormTheme;
     exports.UxFieldTheme = ux_field_theme_1.UxFieldTheme;
+    exports.UxChipInputTheme = ux_chip_input_theme_1.UxChipInputTheme;
+    exports.UxTagTheme = ux_tag_theme_1.UxTagTheme;
+    exports.UxChipTheme = ux_chip_theme_1.UxChipTheme;
     __export(decorators_1);
     exports.AureliaUX = aurelia_ux_2.AureliaUX;
     exports.UXConfiguration = ux_configuration_1.UXConfiguration;
@@ -23,7 +26,10 @@ define(["require", "exports", "./aurelia-ux", "./colors/swatches", "./colors/sha
             './textarea/ux-textarea',
             './form/ux-form',
             './form/ux-field',
-            './form/ux-submit-attribute'
+            './form/ux-submit-attribute',
+            './chip-input/ux-chip-input',
+            './chip-input/ux-chip',
+            './chip-input/ux-tag'
         ]);
         var ux = config.container.get(aurelia_ux_1.AureliaUX);
         if (typeof callback === 'function') {

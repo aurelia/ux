@@ -1,0 +1,39 @@
+styles.tag {
+  display: inline-flex;
+  align-items: center;
+
+  font-size: 14px;
+
+  height: 24px;
+
+  border-radius: 2px;
+
+  background-color: ${background || $design.accent};
+  color: ${foreground || $design.accentForeground};
+}
+
+styles.tag > span {
+    margin: 0 8px;
+  }
+
+    styles.tag > span.close {
+      display:none;
+    }
+
+  styles.tag[deletable] > span {
+    margin-right: 0;
+  }
+
+    styles.tag[deletable] > span.close {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 4px;
+      cursor: pointer;
+    }
+
+      styles.tag[deletable] > span.close::before {
+        content: '+';    
+        font-size: 24px;
+        transform: rotate(45deg);
+      }

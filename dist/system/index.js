@@ -1,4 +1,4 @@
-System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./styles/decorators", "./ux-configuration"], function (exports_1, context_1) {
+System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./chip-input/ux-chip-input-theme", "./chip-input/ux-tag-theme", "./chip-input/ux-chip-theme", "./styles/decorators", "./ux-configuration"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function configure(config, callback) {
@@ -9,7 +9,10 @@ System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./but
             './textarea/ux-textarea',
             './form/ux-form',
             './form/ux-field',
-            './form/ux-submit-attribute'
+            './form/ux-submit-attribute',
+            './chip-input/ux-chip-input',
+            './chip-input/ux-chip',
+            './chip-input/ux-tag'
         ]);
         var ux = config.container.get(aurelia_ux_1.AureliaUX);
         if (typeof callback === 'function') {
@@ -33,6 +36,9 @@ System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./but
         "UxTextareaTheme": true,
         "UxFormTheme": true,
         "UxFieldTheme": true,
+        "UxChipInputTheme": true,
+        "UxTagTheme": true,
+        "UxChipTheme": true,
         "AureliaUX": true,
         "UXConfiguration": true
     };
@@ -89,6 +95,21 @@ System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./but
             function (ux_field_theme_1_1) {
                 exports_1({
                     "UxFieldTheme": ux_field_theme_1_1["UxFieldTheme"]
+                });
+            },
+            function (ux_chip_input_theme_1_1) {
+                exports_1({
+                    "UxChipInputTheme": ux_chip_input_theme_1_1["UxChipInputTheme"]
+                });
+            },
+            function (ux_tag_theme_1_1) {
+                exports_1({
+                    "UxTagTheme": ux_tag_theme_1_1["UxTagTheme"]
+                });
+            },
+            function (ux_chip_theme_1_1) {
+                exports_1({
+                    "UxChipTheme": ux_chip_theme_1_1["UxChipTheme"]
                 });
             },
             function (decorators_1_1) {

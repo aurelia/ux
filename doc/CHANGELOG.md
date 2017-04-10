@@ -1,3 +1,18 @@
+<a name="0.1.18"></a>
+## 0.1.18 (2017-04-10)
+
+* refactor(chip): code cleanup ([971c1f2](https://github.com/aurelia/ux/commit/971c1f2))
+* refactor(chip): code cleanup ([6767f1b](https://github.com/aurelia/ux/commit/6767f1b))
+* refactor(chips): refactor chips ([62e6391](https://github.com/aurelia/ux/commit/62e6391))
+* fix(chip-input): null check ([b026e70](https://github.com/aurelia/ux/commit/b026e70))
+* fix(chip): more value checking ([b981456](https://github.com/aurelia/ux/commit/b981456))
+* feat(chip): add closeable chip and final size ([3b73225](https://github.com/aurelia/ux/commit/3b73225))
+* feat(chip): add tag closing and finish styling ([085273d](https://github.com/aurelia/ux/commit/085273d))
+* feat(chips): add chip input ([32c5792](https://github.com/aurelia/ux/commit/32c5792))
+* feat(tag-input): add implimentation for tag components ([38c945e](https://github.com/aurelia/ux/commit/38c945e))
+
+
+
 <a name="0.1.17"></a>
 ## 0.1.17 (2017-04-06)
 

@@ -20,6 +20,12 @@ var ux_form_theme_1 = require("./form/ux-form-theme");
 exports.UxFormTheme = ux_form_theme_1.UxFormTheme;
 var ux_field_theme_1 = require("./form/ux-field-theme");
 exports.UxFieldTheme = ux_field_theme_1.UxFieldTheme;
+var ux_chip_input_theme_1 = require("./chip-input/ux-chip-input-theme");
+exports.UxChipInputTheme = ux_chip_input_theme_1.UxChipInputTheme;
+var ux_tag_theme_1 = require("./chip-input/ux-tag-theme");
+exports.UxTagTheme = ux_tag_theme_1.UxTagTheme;
+var ux_chip_theme_1 = require("./chip-input/ux-chip-theme");
+exports.UxChipTheme = ux_chip_theme_1.UxChipTheme;
 __export(require("./styles/decorators"));
 var aurelia_ux_2 = require("./aurelia-ux");
 exports.AureliaUX = aurelia_ux_2.AureliaUX;
@@ -33,7 +39,10 @@ function configure(config, callback) {
         './textarea/ux-textarea',
         './form/ux-form',
         './form/ux-field',
-        './form/ux-submit-attribute'
+        './form/ux-submit-attribute',
+        './chip-input/ux-chip-input',
+        './chip-input/ux-chip',
+        './chip-input/ux-tag'
     ]);
     var ux = config.container.get(aurelia_ux_1.AureliaUX);
     if (typeof callback === 'function') {

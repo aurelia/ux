@@ -1,0 +1,48 @@
+styles.chip {
+  display: inline-flex;
+  align-items: center;
+
+  font-size: 14px;
+
+  height: 32px;
+  border-radius: 100px;
+
+  background-color: ${background || $design.accent};
+  color: ${foreground || $design.accentForeground};
+}
+
+  styles.chip:focus {
+    outline: none;
+    box-shadow: ${$design.elevation4dp};
+  }
+
+  styles.chip > span {
+    margin: 0 12px;
+  }
+
+    styles.chip > span.close {
+      display:none;
+    }
+
+  styles.chip[deletable] > span {
+    margin-right: 0;
+  }
+
+    styles.chip[deletable] > span.close {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 4px;
+      color: ${background || $design.accent};
+      background-color: #a6a6a6;
+      height: 24px;
+      width: 24px;
+      border-radius: 24px;
+      cursor: pointer;
+    }
+
+      styles.chip[deletable] > span.close::before {
+        content: '+';    
+        font-size: 24px;
+        transform: rotate(45deg);
+      }
