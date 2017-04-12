@@ -1,0 +1,11 @@
+styles.checkbox {
+  display: inline-flex;
+  align-items: center;
+}
+
+styles.checkbox>.box {
+    width: 20px;
+    height: 20px;
+    border: #5d5d5d solid 2px;
+    border-radius: 3px;
+}
