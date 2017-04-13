@@ -1,10 +1,10 @@
 <template styles.checkbox>
   <require from="./ux-checkbox-theme"></require>
 
-  <div class="box">
+  <div class="box" click.trigger="toggle()">
+    <div class="background-box"></div>
   </div>
 
-  <label>
-    <slot></slot>
-  </label>
+  <!-- Leave Inline, uses :not(:empty) selector to determine margin -->
+  <label ref="label"><slot></slot></label>
 </template>

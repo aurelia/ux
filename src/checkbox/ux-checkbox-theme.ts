@@ -6,6 +6,7 @@ export class UxCheckboxTheme {
 
   public background: string;
   public foreground: string;
+  public border: string;
 
   public backgroundDisabled: string;
   public foregroundDisabled: string;
