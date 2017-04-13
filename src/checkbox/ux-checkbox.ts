@@ -9,8 +9,10 @@ import { processDesignAttributes } from '../designs/design-attributes';
 @customElement('ux-checkbox')
 @processAttributes(processDesignAttributes)
 export class UxCheckbox implements Themable {
-  @bindable public effect = null;
   @bindable public disabled = false;
+  @bindable public effect = null;
+  @bindable public matcher = (a: any, b: any) => a === b;
+  @bindable public model: any;
   @bindable public theme = null;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
@@ -33,7 +35,7 @@ export class UxCheckbox implements Themable {
     }
 
     if (this.checked) {
-      this.element.classList.add('checked');
+      this.checkedChanged();
     }
   }
 
@@ -41,15 +43,42 @@ export class UxCheckbox implements Themable {
     this.styleEngine.applyTheme(this, newValue);
   }
 
-  public checkedChanged(newValue: any) {
-    if (newValue) {
+  public checkedChanged() {
+    const elementValue = this.model ? this.model : this.value;
+    let isChecked = this.checked;
+
+    if (Array.isArray(this.checked)) {
+      isChecked = this.checked.some(item => this.matcher(item, elementValue));
+    }
+
+    if (isChecked) {
       this.element.classList.add('checked');
     } else {
       this.element.classList.remove('checked');
     }
   }
 
-  public toggle() {
-    this.checked = !this.checked;
+  public toggleCheckbox() {
+    const elementValue = this.model ? this.model : this.value;
+
+    if (Array.isArray(this.checked)) {
+      const index = this.checked.findIndex(item => this.matcher(item, elementValue));
+
+      if (index === -1) {
+        this.checked.push(elementValue);
+      } else if (index !== -1) {
+        this.checked.splice(index, 1);
+      }
+
+      this.checkedChanged();
+    } else if (typeof elementValue !== 'boolean') {
+      if (this.checked) {
+        delete this.checked;
+      } else {
+        this.checked = elementValue;
+      }
+    } else {
+      this.checked = !this.checked;
+    }
   }
 }
