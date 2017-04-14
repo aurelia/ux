@@ -53,8 +53,10 @@ export class UxCheckbox implements Themable {
 
     if (isChecked) {
       this.element.classList.add('checked');
+      this.element.setAttribute('aria-checked', 'true');
     } else {
       this.element.classList.remove('checked');
+      this.element.setAttribute('aria-checked', 'false');
     }
   }
 
