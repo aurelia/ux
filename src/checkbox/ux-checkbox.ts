@@ -12,6 +12,7 @@ import { processDesignAttributes } from '../designs/design-attributes';
 export class UxCheckbox implements Themable {
   @bindable public disabled: any = null;
   @bindable public effect = null;
+  @bindable public label: string;
   @bindable public matcher = (a: any, b: any) => a === b;
   @bindable public model: any;
   @bindable public tabindex = 0;
