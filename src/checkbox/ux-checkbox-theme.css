@@ -54,3 +54,26 @@ styles.checkbox.checked>.box>.background-box {
   transform: scale3d(1, 1, 1);
   border-radius: 0;
 }
+
+styles.checkbox[disabled=""],
+styles.checkbox[disabled="true"] {
+  pointer-events: none;
+  cursor: default;
+}
+
+styles.checkbox[disabled=""]>.box:hover,
+styles.checkbox[disabled="true"]>.box:hover {
+  border: ${disabledBorder || $swatches.grey.p400} solid 2px;
+  border-radius: 3px;
+}
+
+styles.checkbox.checked[disabled=""]>.box,
+styles.checkbox.checked[disabled="true"]>.box {
+  background-color: ${disabledBackground || $swatches.grey.p500};
+  border: ${disabledBackground || $swatches.grey.p500} solid 2px;
+}
+
+styles.checkbox[disabled=""]>.box>.background-box::after,
+styles.checkbox[disabled="true"]>.box>.background-box::after {
+  border-color: ${disabledForeground || $swatches.white};
+}

@@ -9,7 +9,7 @@ import { processDesignAttributes } from '../designs/design-attributes';
 @customElement('ux-checkbox')
 @processAttributes(processDesignAttributes)
 export class UxCheckbox implements Themable {
-  @bindable public disabled = false;
+  @bindable public disabled: any = null;
   @bindable public effect = null;
   @bindable public matcher = (a: any, b: any) => a === b;
   @bindable public model: any;
@@ -59,6 +59,10 @@ export class UxCheckbox implements Themable {
   }
 
   public toggleCheckbox() {
+    if (this.disabled === true || this.disabled === '') {
+      return;
+    }
+
     const elementValue = this.model ? this.model : this.value;
 
     if (Array.isArray(this.checked)) {
