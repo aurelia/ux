@@ -3,6 +3,7 @@ import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { Themable } from '../styles/themable';
+import { PaperRipple } from '../effects/paper-ripple';
 import { processDesignAttributes } from '../designs/design-attributes';
 
 @inject(Element, ViewResources, StyleEngine)
@@ -13,6 +14,7 @@ export class UxCheckbox implements Themable {
   @bindable public effect = null;
   @bindable public matcher = (a: any, b: any) => a === b;
   @bindable public model: any;
+  @bindable public tabindex = 0;
   @bindable public theme = null;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
@@ -22,8 +24,14 @@ export class UxCheckbox implements Themable {
   @bindable public value: any = false;
 
   public view: View;
+  private checkbox: Element;
+  private ripple: PaperRipple | null = null;
 
-  constructor(public element: Element, public resources: ViewResources, private styleEngine: StyleEngine) { }
+  public get isDisabled() {
+    return this.disabled === true || this.disabled === '' || this.disabled === 'disabled';
+  }
+
+  constructor(public element: HTMLElement, public resources: ViewResources, private styleEngine: StyleEngine) { }
 
   public created(_: any, myView: View) {
     this.view = myView;
@@ -61,7 +69,7 @@ export class UxCheckbox implements Themable {
   }
 
   public toggleCheckbox() {
-    if (this.disabled === true || this.disabled === '') {
+    if (this.isDisabled) {
       return;
     }
 
@@ -85,6 +93,49 @@ export class UxCheckbox implements Themable {
       }
     } else {
       this.checked = !this.checked;
+    }
+  }
+
+  public onKeyup(e: KeyboardEvent) {
+    const key = e.which || e.keyCode;
+
+    if (key === 13) {
+      this.toggleCheckbox();
+    }
+  }
+
+  public onMouseDown(e: MouseEvent) {
+    if (e.button !== 0 || this.isDisabled) {
+      return;
+    }
+
+    if (this.checkbox.classList.contains('ripple')) {
+      if (this.ripple === null) {
+        this.ripple = new PaperRipple();
+        const container = this.element.querySelector('.ripplecontainer');
+
+        if (container != null) {
+          container.appendChild(this.ripple.$);
+        }
+      }
+
+      this.ripple.center = true;
+      this.ripple.round = true;
+
+      this.ripple.downAction(e);
+    }
+
+    this.toggleCheckbox();
+    e.preventDefault();
+  }
+
+  public onMouseUp(e: MouseEvent) {
+    if (e.button !== 0 || this.isDisabled) {
+      return;
+    }
+
+    if (this.checkbox.classList.contains('ripple') && this.ripple !== null) {
+      this.ripple.upAction();
     }
   }
 }
