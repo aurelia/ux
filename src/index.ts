@@ -13,6 +13,7 @@ export { UxFieldTheme } from './form/ux-field-theme';
 export { UxChipInputTheme } from './chip-input/ux-chip-input-theme';
 export { UxTagTheme } from './chip-input/ux-tag-theme';
 export { UxChipTheme } from './chip-input/ux-chip-theme';
+export { UxCheckboxTheme } from './checkbox/ux-checkbox-theme';
 
 export * from './styles/decorators';
 
@@ -30,7 +31,8 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
     './form/ux-submit-attribute',
     './chip-input/ux-chip-input',
     './chip-input/ux-chip',
-    './chip-input/ux-tag'
+    './chip-input/ux-tag',
+    './checkbox/ux-checkbox'
   ]);
 
   const ux = config.container.get(AureliaUX) as AureliaUX;
