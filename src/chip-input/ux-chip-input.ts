@@ -15,7 +15,7 @@ export class UxChipInput implements Themable {
   @bindable public readonly: any = false;
   @bindable public theme = null;
   @bindable public type: any;
-  @bindable public separator: string;
+  @bindable public separator: string = ', ';
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
@@ -137,33 +137,13 @@ export class UxChipInput implements Themable {
   }
 
   public chipsChanged() {
-    let seperator = ', ';
+    let chipValue: string | null = this.chips.join(this.separator);
 
-    if (this.separator) {
-      seperator = this.separator;
+    if (chipValue === '') {
+      chipValue = null;
     }
 
-    this.value = this.chips.join(seperator);
-  }
-
-  public valueChanged() {
-    if (this.value === null) {
-      return;
-    }
-
-    let seperator = ', ';
-
-    if (this.separator) {
-      seperator = this.separator;
-    }
-
-    let newValue: string | null = this.chips.join(seperator);
-
-    if (newValue === '') {
-      newValue = null;
-    }
-
-    this.value = newValue;
+    this.value = chipValue;
   }
 
   public disabledChanged(newValue: any) {
