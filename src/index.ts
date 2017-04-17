@@ -1,4 +1,4 @@
-import { FrameworkConfiguration } from 'aurelia-framework';
+import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
 import { AureliaUX } from './aurelia-ux';
 
 export { swatches } from './colors/swatches';
@@ -22,17 +22,17 @@ export { UXConfiguration } from './ux-configuration';
 
 export function configure(config: FrameworkConfiguration, callback?: (config: AureliaUX) => Promise<any>) {
   config.globalResources([
-    './button/ux-button',
-    './input/ux-input',
-    './input-info/ux-input-info',
-    './textarea/ux-textarea',
-    './form/ux-form',
-    './form/ux-field',
-    './form/ux-submit-attribute',
-    './chip-input/ux-chip-input',
-    './chip-input/ux-chip',
-    './chip-input/ux-tag',
-    './checkbox/ux-checkbox'
+    PLATFORM.moduleName('./button/ux-button'),
+    PLATFORM.moduleName('./input/ux-input'),
+    PLATFORM.moduleName('./input-info/ux-input-info'),
+    PLATFORM.moduleName('./textarea/ux-textarea'),
+    PLATFORM.moduleName('./form/ux-form'),
+    PLATFORM.moduleName('./form/ux-field'),
+    PLATFORM.moduleName('./form/ux-submit-attribute'),
+    PLATFORM.moduleName('./chip-input/ux-chip-input'),
+    PLATFORM.moduleName('./chip-input/ux-chip'),
+    PLATFORM.moduleName('./chip-input/ux-tag'),
+    PLATFORM.moduleName('./checkbox/ux-checkbox')
   ]);
 
   const ux = config.container.get(AureliaUX) as AureliaUX;
