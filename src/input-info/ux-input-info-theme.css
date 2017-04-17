@@ -9,9 +9,14 @@ styles.inputinfo {
   styles.inputinfo>.error-text {
     flex-grow: 1;
   }
+  styles.inputinfo>.hint-text:first-child,
+  styles.inputinfo>.error-text:first-child {
+    display: block;
+  }
 
-  styles.inputinfo>.error-text+.hint-text {
-    display:none;
+  styles.inputinfo>.hint-text,
+  styles.inputinfo>.error-text {
+    display: none;
   }
 
   styles.inputinfo>.counter {
