@@ -27,5 +27,5 @@ npm run test
 ## Developing
 
 ```shell
-npm run test-watch
+npm run develop
 ```
