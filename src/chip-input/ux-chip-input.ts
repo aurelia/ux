@@ -48,6 +48,10 @@ export class UxChipInput implements Themable {
       }
     }
 
+    if (this.value) {
+      this.chips = this.value.split(this.separator);
+    }
+
     if (this.disabled || this.disabled === '') {
       this.textbox.setAttribute('disabled', '');
       this.chiprepeat.removeAttribute('deletable');
@@ -143,7 +147,15 @@ export class UxChipInput implements Themable {
       chipValue = null;
     }
 
-    this.value = chipValue;
+    if (chipValue !== this.value) {
+      this.value = chipValue;
+    }
+  }
+
+  public valueChanged(newValue: string) {
+    if (newValue && newValue !== this.chips.join(this.separator)) {
+      this.chips = newValue.split(this.separator);
+    }
   }
 
   public disabledChanged(newValue: any) {
