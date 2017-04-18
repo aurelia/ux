@@ -97,7 +97,7 @@ export class UxChipInput implements Themable {
     }
 
     if (key === 37) {
-      if (this.chips) {
+      if (this.chips && this.textbox.value === '') {
         const chip = this.chips.pop();
 
         if (chip !== undefined) {
