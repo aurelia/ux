@@ -1,3 +1,25 @@
+<a name="0.1.19"></a>
+## 0.1.19 (2017-04-27)
+
+* refactor(index): wrap exports in PLATFORM.moduleName ([345ccc1](https://github.com/aurelia/ux/commit/345ccc1))
+* fix(chip-input): add value changed back ([30c2f75](https://github.com/aurelia/ux/commit/30c2f75))
+* fix(chip-input): check for value on left arrow ([cc0bd39](https://github.com/aurelia/ux/commit/cc0bd39)), closes [#64](https://github.com/aurelia/ux/issues/64)
+* fix(chipinput): add transparent background ([d2ebeb5](https://github.com/aurelia/ux/commit/d2ebeb5))
+* fix(chips): correctly delete single chip in input ([0aeba74](https://github.com/aurelia/ux/commit/0aeba74))
+* fix(chips): remove last chip without freezing browser ([78b224c](https://github.com/aurelia/ux/commit/78b224c)), closes [#60](https://github.com/aurelia/ux/issues/60)
+* fix(readme): correct test-watch command ([3e5cbd7](https://github.com/aurelia/ux/commit/3e5cbd7)), closes [#58](https://github.com/aurelia/ux/issues/58)
+* style(input-info): change error display ([ad5d9ad](https://github.com/aurelia/ux/commit/ad5d9ad))
+* feat(checkbox): accessibility ([3504664](https://github.com/aurelia/ux/commit/3504664))
+* feat(checkbox): add binding support ([67d73ff](https://github.com/aurelia/ux/commit/67d73ff))
+* feat(checkbox): add disabled state ([fbcf50b](https://github.com/aurelia/ux/commit/fbcf50b))
+* feat(checkbox): add label attribute binding ([c989f32](https://github.com/aurelia/ux/commit/c989f32))
+* feat(checkbox): add ux-checkbox ([a417b46](https://github.com/aurelia/ux/commit/a417b46))
+* feat(checkbox): focus state ripple and selection ([6367b16](https://github.com/aurelia/ux/commit/6367b16))
+* feat(checkbox): simple checkbox features ([fde48f4](https://github.com/aurelia/ux/commit/fde48f4))
+* feat(label): add label attribute binding ([8e06eac](https://github.com/aurelia/ux/commit/8e06eac))
+
+
+
 <a name="0.1.18"></a>
 ## 0.1.18 (2017-04-10)
 

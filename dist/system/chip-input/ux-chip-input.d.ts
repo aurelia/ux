@@ -26,7 +26,7 @@ export declare class UxChipInput implements Themable {
     editChip(value: string): void;
     removeChip(value: string): void;
     chipsChanged(): void;
-    valueChanged(): void;
+    valueChanged(newValue: string): void;
     disabledChanged(newValue: any): void;
     readonlyChanged(newValue: any): void;
     themeChanged(newValue: any): void;

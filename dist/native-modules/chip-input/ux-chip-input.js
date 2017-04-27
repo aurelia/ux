@@ -18,6 +18,7 @@ var UxChipInput = (function () {
         this.disabled = false;
         this.readonly = false;
         this.theme = null;
+        this.separator = ', ';
         this.value = undefined;
         this.chips = new Array();
     }
@@ -34,6 +35,9 @@ var UxChipInput = (function () {
                 this.textbox.setAttribute('placeholder', attributeValue);
                 this.element.removeAttribute('placeholder');
             }
+        }
+        if (this.value) {
+            this.chips = this.value.split(this.separator);
         }
         if (this.disabled || this.disabled === '') {
             this.textbox.setAttribute('disabled', '');
@@ -76,7 +80,7 @@ var UxChipInput = (function () {
             this.addChip();
         }
         if (key === 37) {
-            if (this.chips) {
+            if (this.chips && this.textbox.value === '') {
                 var chip = this.chips.pop();
                 if (chip !== undefined) {
                     this.textbox.value = chip;
@@ -109,21 +113,18 @@ var UxChipInput = (function () {
         }
     };
     UxChipInput.prototype.chipsChanged = function () {
-        var seperator = ', ';
-        if (this.separator) {
-            seperator = this.separator;
+        var chipValue = this.chips.join(this.separator);
+        if (chipValue === '') {
+            chipValue = null;
         }
-        this.value = this.chips.join(seperator);
+        if (chipValue !== this.value) {
+            this.value = chipValue;
+        }
     };
-    UxChipInput.prototype.valueChanged = function () {
-        if (this.value === null) {
-            return;
+    UxChipInput.prototype.valueChanged = function (newValue) {
+        if (newValue && newValue !== this.chips.join(this.separator)) {
+            this.chips = newValue.split(this.separator);
         }
-        var seperator = ', ';
-        if (this.separator) {
-            seperator = this.separator;
-        }
-        this.chips = this.value.split(seperator);
     };
     UxChipInput.prototype.disabledChanged = function (newValue) {
         if (newValue === true || newValue === '') {

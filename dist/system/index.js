@@ -1,18 +1,19 @@
-System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./chip-input/ux-chip-input-theme", "./chip-input/ux-tag-theme", "./chip-input/ux-chip-theme", "./styles/decorators", "./ux-configuration"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./chip-input/ux-chip-input-theme", "./chip-input/ux-tag-theme", "./chip-input/ux-chip-theme", "./checkbox/ux-checkbox-theme", "./styles/decorators", "./ux-configuration"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function configure(config, callback) {
         config.globalResources([
-            './button/ux-button',
-            './input/ux-input',
-            './input-info/ux-input-info',
-            './textarea/ux-textarea',
-            './form/ux-form',
-            './form/ux-field',
-            './form/ux-submit-attribute',
-            './chip-input/ux-chip-input',
-            './chip-input/ux-chip',
-            './chip-input/ux-tag'
+            aurelia_framework_1.PLATFORM.moduleName('./button/ux-button'),
+            aurelia_framework_1.PLATFORM.moduleName('./input/ux-input'),
+            aurelia_framework_1.PLATFORM.moduleName('./input-info/ux-input-info'),
+            aurelia_framework_1.PLATFORM.moduleName('./textarea/ux-textarea'),
+            aurelia_framework_1.PLATFORM.moduleName('./form/ux-form'),
+            aurelia_framework_1.PLATFORM.moduleName('./form/ux-field'),
+            aurelia_framework_1.PLATFORM.moduleName('./form/ux-submit-attribute'),
+            aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-chip-input'),
+            aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-chip'),
+            aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-tag'),
+            aurelia_framework_1.PLATFORM.moduleName('./checkbox/ux-checkbox')
         ]);
         var ux = config.container.get(aurelia_ux_1.AureliaUX);
         if (typeof callback === 'function') {
@@ -25,7 +26,7 @@ System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./but
         }
     }
     exports_1("configure", configure);
-    var aurelia_ux_1;
+    var aurelia_framework_1, aurelia_ux_1;
     var exportedNames_1 = {
         "configure": true,
         "swatches": true,
@@ -39,6 +40,7 @@ System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./but
         "UxChipInputTheme": true,
         "UxTagTheme": true,
         "UxChipTheme": true,
+        "UxCheckboxTheme": true,
         "AureliaUX": true,
         "UXConfiguration": true
     };
@@ -51,6 +53,9 @@ System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./but
     }
     return {
         setters: [
+            function (aurelia_framework_1_1) {
+                aurelia_framework_1 = aurelia_framework_1_1;
+            },
             function (aurelia_ux_1_1) {
                 aurelia_ux_1 = aurelia_ux_1_1;
                 exports_1({
@@ -110,6 +115,11 @@ System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./but
             function (ux_chip_theme_1_1) {
                 exports_1({
                     "UxChipTheme": ux_chip_theme_1_1["UxChipTheme"]
+                });
+            },
+            function (ux_checkbox_theme_1_1) {
+                exports_1({
+                    "UxCheckboxTheme": ux_checkbox_theme_1_1["UxCheckboxTheme"]
                 });
             },
             function (decorators_1_1) {

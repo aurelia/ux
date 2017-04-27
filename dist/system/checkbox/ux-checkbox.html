@@ -1,0 +1,17 @@
+<template styles.checkbox role="checkbox" tabindex.bind="tabindex" keyup.delegate="onKeyup($event)">
+  <require from="../effects/paper-ripple.css"></require>
+  <require from="./ux-checkbox-theme"></require>
+  
+  <div class="ripplecontainer">
+    <span class="ripple"></span>
+  </div>
+  <div class="checkbox ${effect !== null ? effect : $uxCheckboxTheme.effect}"
+       mousedown.trigger="onMouseDown($event)"
+       mouseup.trigger="onMouseUp($event)"
+       ref="checkbox">
+       <div class="background-box"></div>
+  </div>
+
+  <!-- Leave Inline, uses :not(:empty) selector to determine margin -->
+  <label><slot>${label}</slot></label>
+</template>

@@ -1,3 +1,4 @@
+import { PLATFORM } from 'aurelia-framework';
 import { AureliaUX } from './aurelia-ux';
 export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
@@ -10,21 +11,23 @@ export { UxFieldTheme } from './form/ux-field-theme';
 export { UxChipInputTheme } from './chip-input/ux-chip-input-theme';
 export { UxTagTheme } from './chip-input/ux-tag-theme';
 export { UxChipTheme } from './chip-input/ux-chip-theme';
+export { UxCheckboxTheme } from './checkbox/ux-checkbox-theme';
 export * from './styles/decorators';
 export { AureliaUX } from './aurelia-ux';
 export { UXConfiguration } from './ux-configuration';
 export function configure(config, callback) {
     config.globalResources([
-        './button/ux-button',
-        './input/ux-input',
-        './input-info/ux-input-info',
-        './textarea/ux-textarea',
-        './form/ux-form',
-        './form/ux-field',
-        './form/ux-submit-attribute',
-        './chip-input/ux-chip-input',
-        './chip-input/ux-chip',
-        './chip-input/ux-tag'
+        PLATFORM.moduleName('./button/ux-button'),
+        PLATFORM.moduleName('./input/ux-input'),
+        PLATFORM.moduleName('./input-info/ux-input-info'),
+        PLATFORM.moduleName('./textarea/ux-textarea'),
+        PLATFORM.moduleName('./form/ux-form'),
+        PLATFORM.moduleName('./form/ux-field'),
+        PLATFORM.moduleName('./form/ux-submit-attribute'),
+        PLATFORM.moduleName('./chip-input/ux-chip-input'),
+        PLATFORM.moduleName('./chip-input/ux-chip'),
+        PLATFORM.moduleName('./chip-input/ux-tag'),
+        PLATFORM.moduleName('./checkbox/ux-checkbox')
     ]);
     var ux = config.container.get(AureliaUX);
     if (typeof callback === 'function') {

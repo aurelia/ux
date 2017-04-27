@@ -14,6 +14,7 @@ styles.chipinput {
 
   styles.chipinput>input {
     align-self: stretch;
+    background: transparent;
     border: none;
     flex-grow: 1;
     min-width: 180px;

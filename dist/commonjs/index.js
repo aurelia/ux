@@ -3,6 +3,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
+var aurelia_framework_1 = require("aurelia-framework");
 var aurelia_ux_1 = require("./aurelia-ux");
 var swatches_1 = require("./colors/swatches");
 exports.swatches = swatches_1.swatches;
@@ -26,6 +27,8 @@ var ux_tag_theme_1 = require("./chip-input/ux-tag-theme");
 exports.UxTagTheme = ux_tag_theme_1.UxTagTheme;
 var ux_chip_theme_1 = require("./chip-input/ux-chip-theme");
 exports.UxChipTheme = ux_chip_theme_1.UxChipTheme;
+var ux_checkbox_theme_1 = require("./checkbox/ux-checkbox-theme");
+exports.UxCheckboxTheme = ux_checkbox_theme_1.UxCheckboxTheme;
 __export(require("./styles/decorators"));
 var aurelia_ux_2 = require("./aurelia-ux");
 exports.AureliaUX = aurelia_ux_2.AureliaUX;
@@ -33,16 +36,17 @@ var ux_configuration_1 = require("./ux-configuration");
 exports.UXConfiguration = ux_configuration_1.UXConfiguration;
 function configure(config, callback) {
     config.globalResources([
-        './button/ux-button',
-        './input/ux-input',
-        './input-info/ux-input-info',
-        './textarea/ux-textarea',
-        './form/ux-form',
-        './form/ux-field',
-        './form/ux-submit-attribute',
-        './chip-input/ux-chip-input',
-        './chip-input/ux-chip',
-        './chip-input/ux-tag'
+        aurelia_framework_1.PLATFORM.moduleName('./button/ux-button'),
+        aurelia_framework_1.PLATFORM.moduleName('./input/ux-input'),
+        aurelia_framework_1.PLATFORM.moduleName('./input-info/ux-input-info'),
+        aurelia_framework_1.PLATFORM.moduleName('./textarea/ux-textarea'),
+        aurelia_framework_1.PLATFORM.moduleName('./form/ux-form'),
+        aurelia_framework_1.PLATFORM.moduleName('./form/ux-field'),
+        aurelia_framework_1.PLATFORM.moduleName('./form/ux-submit-attribute'),
+        aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-chip-input'),
+        aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-chip'),
+        aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-tag'),
+        aurelia_framework_1.PLATFORM.moduleName('./checkbox/ux-checkbox')
     ]);
     var ux = config.container.get(aurelia_ux_1.AureliaUX);
     if (typeof callback === 'function') {
