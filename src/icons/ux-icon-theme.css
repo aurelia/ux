@@ -1,4 +1,6 @@
 styles.icon {
+    display: inline-block;
+    align-self: center;
     width: ${size || '16px'};
     height: ${size || '16px'};
 }
@@ -6,5 +8,5 @@ styles.icon {
 styles.icon > svg {
     width: ${size || '16px'};
     height: ${size || '16px'};
-    fill: ${foreground || 'blue'};
+    fill: ${foreground || '$swatches.grey.p700'};
 }
