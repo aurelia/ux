@@ -14,6 +14,7 @@ export { UxChipInputTheme } from './chip-input/ux-chip-input-theme';
 export { UxTagTheme } from './chip-input/ux-tag-theme';
 export { UxChipTheme } from './chip-input/ux-chip-theme';
 export { UxCheckboxTheme } from './checkbox/ux-checkbox-theme';
+export { UxIconTheme } from './icons/ux-icon-theme';
 
 export * from './styles/decorators';
 
@@ -32,7 +33,8 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
     PLATFORM.moduleName('./chip-input/ux-chip-input'),
     PLATFORM.moduleName('./chip-input/ux-chip'),
     PLATFORM.moduleName('./chip-input/ux-tag'),
-    PLATFORM.moduleName('./checkbox/ux-checkbox')
+    PLATFORM.moduleName('./checkbox/ux-checkbox'),
+    PLATFORM.moduleName('./icons/ux-icon')
   ]);
 
   const ux = config.container.get(AureliaUX) as AureliaUX;
