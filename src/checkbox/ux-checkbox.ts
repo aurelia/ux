@@ -19,10 +19,10 @@ export class UxCheckbox implements Themable {
   @bindable public theme = null;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
-  @bindable public checked = false;
+  @bindable public checked: any = false;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
-  @bindable public value: any = false;
+  @bindable public value: any = null;
 
   public view: View;
   private checkbox: Element;
@@ -86,9 +86,9 @@ export class UxCheckbox implements Themable {
       }
 
       this.checkedChanged();
-    } else if (typeof elementValue !== 'boolean') {
+    } else if (elementValue != null && typeof elementValue !== 'boolean') {
       if (this.checked) {
-        delete this.checked;
+        this.checked = null;
       } else {
         this.checked = elementValue;
       }
