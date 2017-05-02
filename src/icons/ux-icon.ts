@@ -8,7 +8,7 @@ import { processDesignAttributes } from '../designs/design-attributes';
 import { UxIconTheme } from './ux-icon-theme';
 import IconMap from './ux-icon-map';
 
-@inject(Element, ViewResources, StyleEngine)
+@inject(Element, ViewResources, StyleEngine, Logger)
 @customElement('ux-icon')
 @processAttributes(processDesignAttributes)
 
@@ -62,7 +62,7 @@ export class UxIcon implements Themable {
       // after adding icon sets for said languages such as ios
       this.element.innerHTML = iconSet.material;
     } else {
-      this.logger.debug('ux-icon: no matching icon', this.element);
+      this.logger.error('ux-icon: no matching icon found', this.element);
     }
   }
 }
