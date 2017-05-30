@@ -18,19 +18,25 @@ styles.button.raised, styles.button.flat {
   border-radius: 2px;
 }
 
-styles.button.raised.small, styles.button.flat.small {
+styles.button.icon {
+  display: inline-flex;
+  min-width: inherit;
+  padding: 0 8px;
+}
+
+styles.button.raised.small, styles.button.flat.small, styles.button.icon.small {
   font-size: 13px;
   height: 32px;
   line-height: 32px;
 }
 
-styles.button.raised.medium, styles.button.flat.medium {
+styles.button.raised.medium, styles.button.flat.medium, styles.button.icon.medium {
   font-size: 14px;
   height: 36px;
   line-height: 36px;
 }
 
-styles.button.raised.large, styles.button.flat.large {
+styles.button.raised.large, styles.button.flat.large, styles.button.icon.large {
   font-size: 16px;
   height: 42px;
   line-height: 42px;
@@ -63,7 +69,7 @@ styles.button.raised:focus {
 }
 
 
-styles.button.flat {
+styles.button.flat, styles.button.icon {
   background-color: transparent;
   color: ${foreground || $design.accent};
 }

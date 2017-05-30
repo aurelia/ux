@@ -12,7 +12,7 @@ export declare class UxCheckbox implements Themable {
     model: any;
     tabindex: number;
     theme: null;
-    checked: boolean;
+    checked: any;
     value: any;
     view: View;
     private checkbox;

@@ -29,6 +29,8 @@ var ux_chip_theme_1 = require("./chip-input/ux-chip-theme");
 exports.UxChipTheme = ux_chip_theme_1.UxChipTheme;
 var ux_checkbox_theme_1 = require("./checkbox/ux-checkbox-theme");
 exports.UxCheckboxTheme = ux_checkbox_theme_1.UxCheckboxTheme;
+var ux_icon_theme_1 = require("./icons/ux-icon-theme");
+exports.UxIconTheme = ux_icon_theme_1.UxIconTheme;
 __export(require("./styles/decorators"));
 var aurelia_ux_2 = require("./aurelia-ux");
 exports.AureliaUX = aurelia_ux_2.AureliaUX;
@@ -46,7 +48,8 @@ function configure(config, callback) {
         aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-chip-input'),
         aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-chip'),
         aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-tag'),
-        aurelia_framework_1.PLATFORM.moduleName('./checkbox/ux-checkbox')
+        aurelia_framework_1.PLATFORM.moduleName('./checkbox/ux-checkbox'),
+        aurelia_framework_1.PLATFORM.moduleName('./icons/ux-icon')
     ]);
     var ux = config.container.get(aurelia_ux_1.AureliaUX);
     if (typeof callback === 'function') {

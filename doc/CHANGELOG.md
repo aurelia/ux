@@ -1,3 +1,14 @@
+<a name="0.2.0"></a>
+# 0.2.0 (2017-05-30)
+
+* fix(checkbox): fix delete this.checked issue ([007627d](https://github.com/aurelia/ux/commit/007627d))
+* fix(icons): prepare for pr and fix logging ([2dd51b5](https://github.com/aurelia/ux/commit/2dd51b5))
+* feat(button): icon button type ([cf0fea8](https://github.com/aurelia/ux/commit/cf0fea8)), closes [#25](https://github.com/aurelia/ux/issues/25)
+* feat(icon): add material icon set ([4da8ecf](https://github.com/aurelia/ux/commit/4da8ecf))
+* feat(icon): add ux-icon component ([09ff549](https://github.com/aurelia/ux/commit/09ff549))
+
+
+
 <a name="0.1.19"></a>
 ## 0.1.19 (2017-04-27)
 

@@ -12,6 +12,7 @@ export { UxChipInputTheme } from './chip-input/ux-chip-input-theme';
 export { UxTagTheme } from './chip-input/ux-tag-theme';
 export { UxChipTheme } from './chip-input/ux-chip-theme';
 export { UxCheckboxTheme } from './checkbox/ux-checkbox-theme';
+export { UxIconTheme } from './icons/ux-icon-theme';
 export * from './styles/decorators';
 export { AureliaUX } from './aurelia-ux';
 export { UXConfiguration } from './ux-configuration';

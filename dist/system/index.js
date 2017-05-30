@@ -1,4 +1,4 @@
-System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./chip-input/ux-chip-input-theme", "./chip-input/ux-tag-theme", "./chip-input/ux-chip-theme", "./checkbox/ux-checkbox-theme", "./styles/decorators", "./ux-configuration"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./chip-input/ux-chip-input-theme", "./chip-input/ux-tag-theme", "./chip-input/ux-chip-theme", "./checkbox/ux-checkbox-theme", "./icons/ux-icon-theme", "./styles/decorators", "./ux-configuration"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function configure(config, callback) {
@@ -13,7 +13,8 @@ System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./co
             aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-chip-input'),
             aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-chip'),
             aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-tag'),
-            aurelia_framework_1.PLATFORM.moduleName('./checkbox/ux-checkbox')
+            aurelia_framework_1.PLATFORM.moduleName('./checkbox/ux-checkbox'),
+            aurelia_framework_1.PLATFORM.moduleName('./icons/ux-icon')
         ]);
         var ux = config.container.get(aurelia_ux_1.AureliaUX);
         if (typeof callback === 'function') {
@@ -41,6 +42,7 @@ System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./co
         "UxTagTheme": true,
         "UxChipTheme": true,
         "UxCheckboxTheme": true,
+        "UxIconTheme": true,
         "AureliaUX": true,
         "UXConfiguration": true
     };
@@ -120,6 +122,11 @@ System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./co
             function (ux_checkbox_theme_1_1) {
                 exports_1({
                     "UxCheckboxTheme": ux_checkbox_theme_1_1["UxCheckboxTheme"]
+                });
+            },
+            function (ux_icon_theme_1_1) {
+                exports_1({
+                    "UxIconTheme": ux_icon_theme_1_1["UxIconTheme"]
                 });
             },
             function (decorators_1_1) {

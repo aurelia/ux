@@ -21,7 +21,7 @@ let UxCheckbox = class UxCheckbox {
         this.tabindex = 0;
         this.theme = null;
         this.checked = false;
-        this.value = false;
+        this.value = null;
         this.ripple = null;
     }
     get isDisabled() {
@@ -71,9 +71,9 @@ let UxCheckbox = class UxCheckbox {
             }
             this.checkedChanged();
         }
-        else if (typeof elementValue !== 'boolean') {
+        else if (elementValue != null && typeof elementValue !== 'boolean') {
             if (this.checked) {
-                delete this.checked;
+                this.checked = null;
             }
             else {
                 this.checked = elementValue;

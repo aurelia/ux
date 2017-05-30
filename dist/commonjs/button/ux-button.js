@@ -39,7 +39,7 @@ var UxButton = (function () {
                 this.ripple = new paper_ripple_1.PaperRipple();
                 this.button.appendChild(this.ripple.$);
             }
-            if (this.button.classList.contains('fab')) {
+            if (this.button.classList.contains('fab') || this.button.classList.contains('icon')) {
                 this.ripple.center = true;
                 this.ripple.round = true;
             }
