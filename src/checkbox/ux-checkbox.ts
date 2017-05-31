@@ -24,6 +24,9 @@ export class UxCheckbox implements Themable {
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   @bindable public value: any = null;
 
+  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  @bindable public uncheckedValue: any = null;
+
   public view: View;
   private checkbox: Element;
   private ripple: PaperRipple | null = null;
@@ -54,13 +57,14 @@ export class UxCheckbox implements Themable {
 
   public checkedChanged() {
     const elementValue = this.model ? this.model : this.value;
+
     let isChecked = this.checked;
 
     if (Array.isArray(this.checked)) {
       isChecked = this.checked.some(item => this.matcher(item, elementValue));
     }
 
-    if (isChecked) {
+    if (isChecked && isChecked !== this.uncheckedValue) {
       this.element.classList.add('checked');
       this.element.setAttribute('aria-checked', 'true');
     } else {
@@ -87,8 +91,12 @@ export class UxCheckbox implements Themable {
 
       this.checkedChanged();
     } else if (elementValue != null && typeof elementValue !== 'boolean') {
-      if (this.checked) {
-        this.checked = null;
+      if (this.checked && this.checked !== this.uncheckedValue) {
+        if (this.uncheckedValue != null) {
+          this.checked = this.uncheckedValue;
+        } else {
+          this.checked = null;
+        }
       } else {
         this.checked = elementValue;
       }
