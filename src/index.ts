@@ -29,6 +29,9 @@ export { UxCheckbox } from './checkbox/ux-checkbox';
 export { UxIcon } from './icons/ux-icon';
 export { UxSubmitCustomAttribute } from './form/ux-submit-attribute';
 
+export { Themable } from './styles/themable';
+export { StyleEngine } from './styles/style-engine';
+
 export * from './styles/decorators';
 
 export { AureliaUX } from './aurelia-ux';
