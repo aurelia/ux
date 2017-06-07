@@ -19,6 +19,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             this.theme = null;
             this.checked = false;
             this.value = null;
+            this.uncheckedValue = null;
             this.ripple = null;
         }
         Object.defineProperty(UxCheckbox.prototype, "isDisabled", {
@@ -49,7 +50,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             if (Array.isArray(this.checked)) {
                 isChecked = this.checked.some(function (item) { return _this.matcher(item, elementValue); });
             }
-            if (isChecked) {
+            if (isChecked && isChecked !== this.uncheckedValue) {
                 this.element.classList.add('checked');
                 this.element.setAttribute('aria-checked', 'true');
             }
@@ -75,8 +76,13 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                 this.checkedChanged();
             }
             else if (elementValue != null && typeof elementValue !== 'boolean') {
-                if (this.checked) {
-                    this.checked = null;
+                if (this.checked && this.checked !== this.uncheckedValue) {
+                    if (this.uncheckedValue != null) {
+                        this.checked = this.uncheckedValue;
+                    }
+                    else {
+                        this.checked = null;
+                    }
                 }
                 else {
                     this.checked = elementValue;
@@ -150,6 +156,10 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
         aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay }),
         aurelia_templating_1.bindable
     ], UxCheckbox.prototype, "value", void 0);
+    __decorate([
+        aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay }),
+        aurelia_templating_1.bindable
+    ], UxCheckbox.prototype, "uncheckedValue", void 0);
     UxCheckbox = __decorate([
         aurelia_dependency_injection_1.inject(Element, aurelia_templating_1.ViewResources, style_engine_1.StyleEngine),
         aurelia_templating_1.customElement('ux-checkbox'),

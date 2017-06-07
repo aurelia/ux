@@ -1,4 +1,4 @@
-System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./chip-input/ux-chip-input-theme", "./chip-input/ux-tag-theme", "./chip-input/ux-chip-theme", "./checkbox/ux-checkbox-theme", "./icons/ux-icon-theme", "./styles/decorators", "./ux-configuration"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./chip-input/ux-chip-input-theme", "./chip-input/ux-tag-theme", "./chip-input/ux-chip-theme", "./checkbox/ux-checkbox-theme", "./icons/ux-icon-theme", "./button/ux-button", "./input/ux-input", "./input-info/ux-input-info", "./textarea/ux-textarea", "./form/ux-form", "./form/ux-field", "./chip-input/ux-chip-input", "./chip-input/ux-tag", "./chip-input/ux-chip", "./checkbox/ux-checkbox", "./icons/ux-icon", "./form/ux-submit-attribute", "./styles/style-engine", "./styles/decorators", "./ux-configuration"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function configure(config, callback) {
@@ -43,6 +43,19 @@ System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./co
         "UxChipTheme": true,
         "UxCheckboxTheme": true,
         "UxIconTheme": true,
+        "UxButton": true,
+        "UxInput": true,
+        "UxInputInfo": true,
+        "UxTextarea": true,
+        "UxForm": true,
+        "UxField": true,
+        "UxChipInput": true,
+        "UxTag": true,
+        "UxChip": true,
+        "UxCheckbox": true,
+        "UxIcon": true,
+        "UxSubmitCustomAttribute": true,
+        "StyleEngine": true,
         "AureliaUX": true,
         "UXConfiguration": true
     };
@@ -127,6 +140,71 @@ System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./co
             function (ux_icon_theme_1_1) {
                 exports_1({
                     "UxIconTheme": ux_icon_theme_1_1["UxIconTheme"]
+                });
+            },
+            function (ux_button_1_1) {
+                exports_1({
+                    "UxButton": ux_button_1_1["UxButton"]
+                });
+            },
+            function (ux_input_1_1) {
+                exports_1({
+                    "UxInput": ux_input_1_1["UxInput"]
+                });
+            },
+            function (ux_input_info_1_1) {
+                exports_1({
+                    "UxInputInfo": ux_input_info_1_1["UxInputInfo"]
+                });
+            },
+            function (ux_textarea_1_1) {
+                exports_1({
+                    "UxTextarea": ux_textarea_1_1["UxTextarea"]
+                });
+            },
+            function (ux_form_1_1) {
+                exports_1({
+                    "UxForm": ux_form_1_1["UxForm"]
+                });
+            },
+            function (ux_field_1_1) {
+                exports_1({
+                    "UxField": ux_field_1_1["UxField"]
+                });
+            },
+            function (ux_chip_input_1_1) {
+                exports_1({
+                    "UxChipInput": ux_chip_input_1_1["UxChipInput"]
+                });
+            },
+            function (ux_tag_1_1) {
+                exports_1({
+                    "UxTag": ux_tag_1_1["UxTag"]
+                });
+            },
+            function (ux_chip_1_1) {
+                exports_1({
+                    "UxChip": ux_chip_1_1["UxChip"]
+                });
+            },
+            function (ux_checkbox_1_1) {
+                exports_1({
+                    "UxCheckbox": ux_checkbox_1_1["UxCheckbox"]
+                });
+            },
+            function (ux_icon_1_1) {
+                exports_1({
+                    "UxIcon": ux_icon_1_1["UxIcon"]
+                });
+            },
+            function (ux_submit_attribute_1_1) {
+                exports_1({
+                    "UxSubmitCustomAttribute": ux_submit_attribute_1_1["UxSubmitCustomAttribute"]
+                });
+            },
+            function (style_engine_1_1) {
+                exports_1({
+                    "StyleEngine": style_engine_1_1["StyleEngine"]
                 });
             },
             function (decorators_1_1) {

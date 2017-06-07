@@ -1,4 +1,4 @@
-define(["require", "exports", "aurelia-framework", "./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./chip-input/ux-chip-input-theme", "./chip-input/ux-tag-theme", "./chip-input/ux-chip-theme", "./checkbox/ux-checkbox-theme", "./icons/ux-icon-theme", "./styles/decorators", "./aurelia-ux", "./ux-configuration"], function (require, exports, aurelia_framework_1, aurelia_ux_1, swatches_1, shadows_1, ux_button_theme_1, ux_input_theme_1, ux_input_info_theme_1, ux_textarea_theme_1, ux_form_theme_1, ux_field_theme_1, ux_chip_input_theme_1, ux_tag_theme_1, ux_chip_theme_1, ux_checkbox_theme_1, ux_icon_theme_1, decorators_1, aurelia_ux_2, ux_configuration_1) {
+define(["require", "exports", "aurelia-framework", "./aurelia-ux", "./colors/swatches", "./colors/shadows", "./button/ux-button-theme", "./input/ux-input-theme", "./input-info/ux-input-info-theme", "./textarea/ux-textarea-theme", "./form/ux-form-theme", "./form/ux-field-theme", "./chip-input/ux-chip-input-theme", "./chip-input/ux-tag-theme", "./chip-input/ux-chip-theme", "./checkbox/ux-checkbox-theme", "./icons/ux-icon-theme", "./button/ux-button", "./input/ux-input", "./input-info/ux-input-info", "./textarea/ux-textarea", "./form/ux-form", "./form/ux-field", "./chip-input/ux-chip-input", "./chip-input/ux-tag", "./chip-input/ux-chip", "./checkbox/ux-checkbox", "./icons/ux-icon", "./form/ux-submit-attribute", "./styles/style-engine", "./styles/decorators", "./aurelia-ux", "./ux-configuration"], function (require, exports, aurelia_framework_1, aurelia_ux_1, swatches_1, shadows_1, ux_button_theme_1, ux_input_theme_1, ux_input_info_theme_1, ux_textarea_theme_1, ux_form_theme_1, ux_field_theme_1, ux_chip_input_theme_1, ux_tag_theme_1, ux_chip_theme_1, ux_checkbox_theme_1, ux_icon_theme_1, ux_button_1, ux_input_1, ux_input_info_1, ux_textarea_1, ux_form_1, ux_field_1, ux_chip_input_1, ux_tag_1, ux_chip_1, ux_checkbox_1, ux_icon_1, ux_submit_attribute_1, style_engine_1, decorators_1, aurelia_ux_2, ux_configuration_1) {
     "use strict";
     function __export(m) {
         for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
@@ -17,6 +17,19 @@ define(["require", "exports", "aurelia-framework", "./aurelia-ux", "./colors/swa
     exports.UxChipTheme = ux_chip_theme_1.UxChipTheme;
     exports.UxCheckboxTheme = ux_checkbox_theme_1.UxCheckboxTheme;
     exports.UxIconTheme = ux_icon_theme_1.UxIconTheme;
+    exports.UxButton = ux_button_1.UxButton;
+    exports.UxInput = ux_input_1.UxInput;
+    exports.UxInputInfo = ux_input_info_1.UxInputInfo;
+    exports.UxTextarea = ux_textarea_1.UxTextarea;
+    exports.UxForm = ux_form_1.UxForm;
+    exports.UxField = ux_field_1.UxField;
+    exports.UxChipInput = ux_chip_input_1.UxChipInput;
+    exports.UxTag = ux_tag_1.UxTag;
+    exports.UxChip = ux_chip_1.UxChip;
+    exports.UxCheckbox = ux_checkbox_1.UxCheckbox;
+    exports.UxIcon = ux_icon_1.UxIcon;
+    exports.UxSubmitCustomAttribute = ux_submit_attribute_1.UxSubmitCustomAttribute;
+    exports.StyleEngine = style_engine_1.StyleEngine;
     __export(decorators_1);
     exports.AureliaUX = aurelia_ux_2.AureliaUX;
     exports.UXConfiguration = ux_configuration_1.UXConfiguration;

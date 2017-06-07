@@ -22,6 +22,7 @@ var UxCheckbox = (function () {
         this.theme = null;
         this.checked = false;
         this.value = null;
+        this.uncheckedValue = null;
         this.ripple = null;
     }
     Object.defineProperty(UxCheckbox.prototype, "isDisabled", {
@@ -52,7 +53,7 @@ var UxCheckbox = (function () {
         if (Array.isArray(this.checked)) {
             isChecked = this.checked.some(function (item) { return _this.matcher(item, elementValue); });
         }
-        if (isChecked) {
+        if (isChecked && isChecked !== this.uncheckedValue) {
             this.element.classList.add('checked');
             this.element.setAttribute('aria-checked', 'true');
         }
@@ -78,8 +79,13 @@ var UxCheckbox = (function () {
             this.checkedChanged();
         }
         else if (elementValue != null && typeof elementValue !== 'boolean') {
-            if (this.checked) {
-                this.checked = null;
+            if (this.checked && this.checked !== this.uncheckedValue) {
+                if (this.uncheckedValue != null) {
+                    this.checked = this.uncheckedValue;
+                }
+                else {
+                    this.checked = null;
+                }
             }
             else {
                 this.checked = elementValue;
@@ -153,6 +159,10 @@ __decorate([
     bindable({ defaultBindingMode: bindingMode.twoWay }),
     bindable
 ], UxCheckbox.prototype, "value", void 0);
+__decorate([
+    bindable({ defaultBindingMode: bindingMode.twoWay }),
+    bindable
+], UxCheckbox.prototype, "uncheckedValue", void 0);
 UxCheckbox = __decorate([
     inject(Element, ViewResources, StyleEngine),
     customElement('ux-checkbox'),

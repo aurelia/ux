@@ -91,7 +91,8 @@
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^7.0.11",
+    "@types/jasmine": "^2.5.51",
+    "@types/node": "^7.0.28",
     "aurelia-bootstrapper": "^2.1.1",
     "aurelia-pal-browser": "^1.2.0",
     "aurelia-pal-nodejs": "^1.0.0-beta.1.0.0",
@@ -112,7 +113,7 @@
     "rimraf": "^2.6.1",
     "tslint": "^4.4.2",
     "typedoc": "^0.5.9",
-    "typescript": "^2.2.1"
+    "typescript": "^2.3.4"
   },
   "aurelia": {
     "build": {
