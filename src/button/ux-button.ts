@@ -47,7 +47,7 @@ export class UxButton implements Themable {
 
   public disabledChanged(newValue: boolean | string) {
     // ensure we cast empty string as true
-    if (typeof this.disabled === 'string' && this.disabled === '') {
+    if (typeof newValue === 'string' && newValue === '') {
       newValue = true;
     }
 
