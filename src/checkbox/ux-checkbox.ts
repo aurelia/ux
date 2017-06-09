@@ -32,7 +32,13 @@ export class UxCheckbox implements Themable {
   private ripple: PaperRipple | null = null;
 
   public get isDisabled() {
-    return this.disabled === true || this.disabled === '' || this.disabled === 'disabled';
+    let ret: boolean = this.disabled;
+    if (typeof this.disabled === 'string' &&
+        (this.disabled === '' || this.disabled.toString().toLocaleLowerCase() === 'disabled')) {
+      ret = true;
+    }
+
+    return ret;
   }
 
   constructor(public element: HTMLElement, public resources: ViewResources, private styleEngine: StyleEngine) { }
@@ -49,10 +55,34 @@ export class UxCheckbox implements Themable {
     if (this.checked) {
       this.checkedChanged();
     }
+
+    // ensure we cast empty string as true
+    if (typeof this.disabled === 'string' && this.disabled === '') {
+      this.disabled = true;
+    }
+
+    if (this.disabled && !this.element.classList.contains('disabled')) {
+      this.element.classList.add('disabled');
+    } else if (this.element.classList.contains('disabled')) {
+      this.element.classList.remove('disabled');
+    }
   }
 
   public themeChanged(newValue: any) {
     this.styleEngine.applyTheme(this, newValue);
+  }
+
+  public disabledChanged(newValue: boolean | string) {
+    // ensure we cast empty string as true
+    if (typeof newValue === 'string' && newValue === '') {
+      newValue = true;
+    }
+
+    if (newValue && !this.element.classList.contains('disabled')) {
+      this.element.classList.add('disabled');
+    } else if (this.element.classList.contains('disabled')) {
+      this.element.classList.remove('disabled');
+    }
   }
 
   public checkedChanged() {
