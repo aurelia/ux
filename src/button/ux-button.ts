@@ -12,7 +12,7 @@ export class UxButton implements Themable {
   @bindable public type = null;
   @bindable public size = null;
   @bindable public effect = null;
-  @bindable public disabled = false;
+  @bindable public disabled: boolean | string = false;
   @bindable public theme = null;
 
   public view: View;
@@ -29,10 +29,33 @@ export class UxButton implements Themable {
     if (this.theme) {
       this.styleEngine.applyTheme(this, this.theme);
     }
+
+    // ensure we cast empty string as true
+    if (typeof this.disabled === 'string' && this.disabled === '') {
+      this.disabled = true;
+    }
+
+    if (this.disabled) {
+      this.button.setAttribute('disabled', '');
+    }
+
   }
 
   public themeChanged(newValue: any) {
     this.styleEngine.applyTheme(this, newValue);
+  }
+
+  public disabledChanged(newValue: boolean | string) {
+    // ensure we cast empty string as true
+    if (typeof newValue === 'string' && newValue === '') {
+      newValue = true;
+    }
+
+    if (newValue) {
+      this.button.setAttribute('disabled', '');
+    } else {
+      this.button.removeAttribute('disabled');
+    }
   }
 
   public onMouseDown(e: MouseEvent) {
