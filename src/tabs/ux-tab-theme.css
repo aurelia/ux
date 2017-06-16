@@ -1,0 +1,29 @@
+styles.tab {
+  display: inline-block;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 14px 12px 20px 12px;
+  text-align: center;
+  color: ${foreground || $design.accentForeground};
+  background-color: ${background || $design.primary};
+}
+
+styles.tab.disabled {
+  cursor: not-allowed;
+}
+
+styles.tab:hover:not(.disabled),
+styles.tab.selected:not(.disabled) {
+  opacity: 1;
+}
+
+styles.tab>.icon>svg {
+  width: ${iconSize || '24px'};
+  height: ${iconSize || '24px'};
+  fill: ${foreground || $design.accentForeground};
+}
+
+styles.tab>.text {
+  display: block;
+}
