@@ -1,0 +1,10 @@
+styles.list {
+  display: block;
+}
+
+styles.list>ux-list-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  font-size: 16px;
+}
