@@ -90,3 +90,14 @@ styles.list[type="two-line"]>ux-list-item>.list-content>.secondary {
   text-overflow: ellipsis; 
   white-space: nowrap;
 }
+
+styles.list[type="three-line"]>ux-list-item {
+  align-items: flex-start;
+}
+
+styles.list[type="three-line"]>ux-list-item>.list-content>.secondary {
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  height: 2.4em;
+}
