@@ -26,8 +26,7 @@ styles.list>ux-list-item>ux-icon:first-child {
   margin-right: 16px;
 }
 
-styles.list>ux-list-item>.list-avatar,
-styles.list>ux-list-item>[list-avatar] {
+styles.list>ux-list-item>.list-avatar {
   color: ${foreground || $swatches.grey.p700};
   width: 40px;
   height: 40px;
@@ -50,7 +49,44 @@ styles.list>ux-list-item>.action-item:first-child {
   padding-left: 0px;
 }
 
+styles.list>ux-list-item>a.action-item {
+  padding: 16px;
+  margin: -16px;
+}
+
 styles.list>ux-list-item>.action-item:first-child {
     padding-right: 16px;
     padding-left: 0;
+}
+
+styles.list>ux-list-item>.list-content {
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: ${foreground || $swatches.grey.p700};
+}
+
+styles.list>ux-list-item>a.list-content {
+    margin: -16px;
+    padding: 16px;
+    text-decoration: none;
+}
+
+styles.list>ux-list-item>.list-content>.secondary {
+  font-size: 14px;
+  color: ${foregroundSecondary || $swatches.grey.p500};
+}
+
+styles.list[type="two-line"]>ux-list-item>.list-content {
+  overflow: inherit;
+  text-overflow: inherit;
+  white-space: inherit;
+}
+
+styles.list[type="two-line"]>ux-list-item>.list-content>.secondary {
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap;
 }
