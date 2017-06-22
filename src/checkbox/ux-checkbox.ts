@@ -1,4 +1,5 @@
 import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { computedFrom } from 'aurelia-framework';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
@@ -31,6 +32,7 @@ export class UxCheckbox implements Themable {
   private checkbox: Element;
   private ripple: PaperRipple | null = null;
 
+  @computedFrom('disabled')
   public get isDisabled() {
     let ret: boolean = this.disabled;
     if (typeof this.disabled === 'string' &&
