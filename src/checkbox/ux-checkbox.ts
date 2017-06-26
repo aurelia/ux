@@ -1,6 +1,5 @@
 import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
-import { computedFrom } from 'aurelia-framework';
-import { bindingMode } from 'aurelia-binding';
+import { computedFrom, bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { Themable } from '../styles/themable';
