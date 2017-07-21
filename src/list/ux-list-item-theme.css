@@ -94,6 +94,7 @@ ux-list[type="three-line"]>styles.listitem {
 ux-list[type="three-line"]>styles.listitem>.list-content>.secondary {
   overflow: hidden; 
   text-overflow: ellipsis;
+  white-space: normal;
   line-height: 1.2;
   height: 2.4em;
 }
