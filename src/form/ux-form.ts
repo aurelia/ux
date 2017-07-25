@@ -35,7 +35,13 @@ export class UxForm implements Themable {
     public attached() {
         if (this.bindSubmitToEnter) {
             this.element.addEventListener('keyup', (e: KeyboardEvent) => {
-                if (e.keyCode === 13) {
+                let canSubmit = true;
+
+                if (e.srcElement != null && e.srcElement.tagName === 'TEXTAREA') {
+                    canSubmit = false;
+                }
+
+                if (e.keyCode === 13 && canSubmit) {
                     this.submitForm();
                 }
             });
