@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { customElement, bindable, ViewResources, processAttributes } from 'aurelia-templating';
-import { bindingMode } from 'aurelia-binding';
+import { computedFrom, bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { PaperRipple } from '../effects/paper-ripple';
@@ -22,11 +22,17 @@ var UxCheckbox = (function () {
         this.theme = null;
         this.checked = false;
         this.value = null;
+        this.uncheckedValue = null;
         this.ripple = null;
     }
     Object.defineProperty(UxCheckbox.prototype, "isDisabled", {
         get: function () {
-            return this.disabled === true || this.disabled === '' || this.disabled === 'disabled';
+            var ret = this.disabled;
+            if (typeof this.disabled === 'string' &&
+                (this.disabled === '' || this.disabled.toString().toLocaleLowerCase() === 'disabled')) {
+                ret = true;
+            }
+            return ret;
         },
         enumerable: true,
         configurable: true
@@ -41,9 +47,31 @@ var UxCheckbox = (function () {
         if (this.checked) {
             this.checkedChanged();
         }
+        // ensure we cast empty string as true
+        if (typeof this.disabled === 'string' && this.disabled === '') {
+            this.disabled = true;
+        }
+        if (this.disabled && !this.element.classList.contains('disabled')) {
+            this.element.classList.add('disabled');
+        }
+        else if (this.element.classList.contains('disabled')) {
+            this.element.classList.remove('disabled');
+        }
     };
     UxCheckbox.prototype.themeChanged = function (newValue) {
         this.styleEngine.applyTheme(this, newValue);
+    };
+    UxCheckbox.prototype.disabledChanged = function (newValue) {
+        // ensure we cast empty string as true
+        if (typeof newValue === 'string' && newValue === '') {
+            newValue = true;
+        }
+        if (newValue && !this.element.classList.contains('disabled')) {
+            this.element.classList.add('disabled');
+        }
+        else if (this.element.classList.contains('disabled')) {
+            this.element.classList.remove('disabled');
+        }
     };
     UxCheckbox.prototype.checkedChanged = function () {
         var _this = this;
@@ -52,7 +80,7 @@ var UxCheckbox = (function () {
         if (Array.isArray(this.checked)) {
             isChecked = this.checked.some(function (item) { return _this.matcher(item, elementValue); });
         }
-        if (isChecked) {
+        if (isChecked && isChecked !== this.uncheckedValue) {
             this.element.classList.add('checked');
             this.element.setAttribute('aria-checked', 'true');
         }
@@ -78,8 +106,13 @@ var UxCheckbox = (function () {
             this.checkedChanged();
         }
         else if (elementValue != null && typeof elementValue !== 'boolean') {
-            if (this.checked) {
-                this.checked = null;
+            if (this.checked && this.checked !== this.uncheckedValue) {
+                if (this.uncheckedValue != null) {
+                    this.checked = this.uncheckedValue;
+                }
+                else {
+                    this.checked = null;
+                }
             }
             else {
                 this.checked = elementValue;
@@ -153,6 +186,13 @@ __decorate([
     bindable({ defaultBindingMode: bindingMode.twoWay }),
     bindable
 ], UxCheckbox.prototype, "value", void 0);
+__decorate([
+    bindable({ defaultBindingMode: bindingMode.twoWay }),
+    bindable
+], UxCheckbox.prototype, "uncheckedValue", void 0);
+__decorate([
+    computedFrom('disabled')
+], UxCheckbox.prototype, "isDisabled", null);
 UxCheckbox = __decorate([
     inject(Element, ViewResources, StyleEngine),
     customElement('ux-checkbox'),

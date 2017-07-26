@@ -7,7 +7,7 @@ export declare class UxButton implements Themable {
     type: null;
     size: null;
     effect: null;
-    disabled: boolean;
+    disabled: boolean | string;
     theme: null;
     view: View;
     private ripple;
@@ -16,6 +16,7 @@ export declare class UxButton implements Themable {
     created(_: any, myView: View): void;
     bind(): void;
     themeChanged(newValue: any): void;
+    disabledChanged(newValue: boolean | string): void;
     onMouseDown(e: MouseEvent): boolean;
     onMouseUp(): boolean;
 }

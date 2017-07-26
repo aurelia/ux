@@ -1,0 +1,100 @@
+ux-list>styles.listitem {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  font-size: 16px;
+}
+
+ux-list>styles.listitem>ux-icon,
+ux-list>styles.listitem>ux-icon>svg {
+  width: 40px;
+  height: 32px;
+  fill: ${foreground || $swatches.grey.p700};
+}
+
+ux-list>styles.listitem>ux-icon {
+  margin-left: 16px;
+  margin-right: 0;
+}
+
+ux-list>styles.listitem>ux-icon:first-child {
+  margin-left: 0px;
+  margin-right: 16px;
+}
+
+ux-list>styles.listitem>.list-avatar {
+  color: ${foreground || $swatches.grey.p700};
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+ux-list>styles.listitem>.action-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  padding-right: 0;
+  padding-left: 16px;
+}
+
+ux-list>styles.listitem>.action-item:first-child {
+  padding-right: 16px;
+  padding-left: 0px;
+}
+
+ux-list>styles.listitem>a.action-item {
+  padding: 16px;
+  margin: -16px;
+}
+
+ux-list>styles.listitem>.action-item:first-child {
+    padding-right: 16px;
+    padding-left: 0;
+}
+
+ux-list>styles.listitem>.list-content {
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: ${foreground || $swatches.grey.p700};
+}
+
+ux-list>styles.listitem>a.list-content {
+    margin: -16px;
+    padding: 16px;
+    text-decoration: none;
+}
+
+ux-list>styles.listitem>.list-content>.secondary {
+  font-size: 14px;
+  color: ${foregroundSecondary || $swatches.grey.p500};
+}
+
+ux-list[type="two-line"]>styles.listitem>.list-content {
+  overflow: inherit;
+  text-overflow: inherit;
+  white-space: inherit;
+}
+
+ux-list[type="two-line"]>styles.listitem>.list-content>.secondary {
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+}
+
+ux-list[type="three-line"]>styles.listitem {
+  align-items: flex-start;
+}
+
+ux-list[type="three-line"]>styles.listitem>.list-content>.secondary {
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.2;
+  height: 2.4em;
+}

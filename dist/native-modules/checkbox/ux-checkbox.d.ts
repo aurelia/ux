@@ -14,6 +14,7 @@ export declare class UxCheckbox implements Themable {
     theme: null;
     checked: any;
     value: any;
+    uncheckedValue: any;
     view: View;
     private checkbox;
     private ripple;
@@ -22,6 +23,7 @@ export declare class UxCheckbox implements Themable {
     created(_: any, myView: View): void;
     bind(): void;
     themeChanged(newValue: any): void;
+    disabledChanged(newValue: boolean | string): void;
     checkedChanged(): void;
     toggleCheckbox(): void;
     onKeyup(e: KeyboardEvent): void;

@@ -42,11 +42,17 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                     this.theme = null;
                     this.checked = false;
                     this.value = null;
+                    this.uncheckedValue = null;
                     this.ripple = null;
                 }
                 Object.defineProperty(UxCheckbox.prototype, "isDisabled", {
                     get: function () {
-                        return this.disabled === true || this.disabled === '' || this.disabled === 'disabled';
+                        var ret = this.disabled;
+                        if (typeof this.disabled === 'string' &&
+                            (this.disabled === '' || this.disabled.toString().toLocaleLowerCase() === 'disabled')) {
+                            ret = true;
+                        }
+                        return ret;
                     },
                     enumerable: true,
                     configurable: true
@@ -61,9 +67,31 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                     if (this.checked) {
                         this.checkedChanged();
                     }
+                    // ensure we cast empty string as true
+                    if (typeof this.disabled === 'string' && this.disabled === '') {
+                        this.disabled = true;
+                    }
+                    if (this.disabled && !this.element.classList.contains('disabled')) {
+                        this.element.classList.add('disabled');
+                    }
+                    else if (this.element.classList.contains('disabled')) {
+                        this.element.classList.remove('disabled');
+                    }
                 };
                 UxCheckbox.prototype.themeChanged = function (newValue) {
                     this.styleEngine.applyTheme(this, newValue);
+                };
+                UxCheckbox.prototype.disabledChanged = function (newValue) {
+                    // ensure we cast empty string as true
+                    if (typeof newValue === 'string' && newValue === '') {
+                        newValue = true;
+                    }
+                    if (newValue && !this.element.classList.contains('disabled')) {
+                        this.element.classList.add('disabled');
+                    }
+                    else if (this.element.classList.contains('disabled')) {
+                        this.element.classList.remove('disabled');
+                    }
                 };
                 UxCheckbox.prototype.checkedChanged = function () {
                     var _this = this;
@@ -72,7 +100,7 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                     if (Array.isArray(this.checked)) {
                         isChecked = this.checked.some(function (item) { return _this.matcher(item, elementValue); });
                     }
-                    if (isChecked) {
+                    if (isChecked && isChecked !== this.uncheckedValue) {
                         this.element.classList.add('checked');
                         this.element.setAttribute('aria-checked', 'true');
                     }
@@ -98,8 +126,13 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                         this.checkedChanged();
                     }
                     else if (elementValue != null && typeof elementValue !== 'boolean') {
-                        if (this.checked) {
-                            this.checked = null;
+                        if (this.checked && this.checked !== this.uncheckedValue) {
+                            if (this.uncheckedValue != null) {
+                                this.checked = this.uncheckedValue;
+                            }
+                            else {
+                                this.checked = null;
+                            }
                         }
                         else {
                             this.checked = elementValue;
@@ -173,6 +206,13 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                 aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay }),
                 aurelia_templating_1.bindable
             ], UxCheckbox.prototype, "value", void 0);
+            __decorate([
+                aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay }),
+                aurelia_templating_1.bindable
+            ], UxCheckbox.prototype, "uncheckedValue", void 0);
+            __decorate([
+                aurelia_binding_1.computedFrom('disabled')
+            ], UxCheckbox.prototype, "isDisabled", null);
             UxCheckbox = __decorate([
                 aurelia_dependency_injection_1.inject(Element, aurelia_templating_1.ViewResources, style_engine_1.StyleEngine),
                 aurelia_templating_1.customElement('ux-checkbox'),
