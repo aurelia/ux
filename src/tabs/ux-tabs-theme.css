@@ -4,6 +4,8 @@ styles.tabs {
 }
 
 styles.tabs .indicator {
+  position: absolute;
+  bottom: 0;
   height: 2px;
-  background-color: ${indicatorColor || $design.accent};
+  background-color: ${indicator || $design.accent};
 }

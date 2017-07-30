@@ -10,7 +10,7 @@ import { processDesignAttributes } from '../designs/design-attributes';
 import { UxTab } from './ux-tab';
 import { AutoSelectionStrategy, autoSelectionStrategies } from './selection/auto-selection-strategy';
 import { SelectionManager } from './selection/selection-manager';
-import { Indicator } from './indicator';
+import { SelectionAnimator } from './selection/animator';
 
 @inject(DOM.Element, ViewResources, StyleEngine, BindingEngine)
 @customElement('ux-tabs')
@@ -24,7 +24,7 @@ export class UxTabs implements Themable {
 
   public view: View;
   private selection: SelectionManager;
-  private indicator: Indicator|null;
+  private animator = new SelectionAnimator(this.element);
 
   constructor(
     private readonly element: Element,
@@ -41,23 +41,12 @@ export class UxTabs implements Themable {
     if (this.theme) {
       this.styleEngine.applyTheme(this, this.theme);
     }
-    this.selection = new SelectionManager(this.bindingEngine, (_: UxTab|null, newTab: UxTab|null) => {
-      if (this.indicator) {
-        if (newTab) {
-          this.indicator.select(newTab.element);
-        } else {
-          this.indicator.unselect();
-        }
+    this.selection = new SelectionManager(this.bindingEngine, (oldTab: UxTab|null, newTab: UxTab|null) => {
+      if (oldTab && newTab) {
+        this.animator.transition(oldTab.element, newTab.element);
       }
     });
     this.autoSelectUsingChanged();
-  }
-
-  public attached() {
-    this.indicator = new Indicator(this.element);
-    if (this.selection.selectedTab) {
-      this.indicator.select(this.selection.selectedTab.element);
-    }
   }
 
   public themeChanged(newValue: any) {
@@ -77,13 +66,6 @@ export class UxTabs implements Themable {
 
   public tabsChanged() {
     this.selection.setTabs(this.tabs);
-  }
-
-  public detached() {
-    if (this.indicator) {
-      this.indicator.dispose();
-      this.indicator = null;
-    }
   }
 
   public unbind() {

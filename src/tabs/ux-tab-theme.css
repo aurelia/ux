@@ -13,9 +13,14 @@ styles.tab.disabled {
   cursor: not-allowed;
 }
 
-styles.tab:hover:not(.disabled),
-styles.tab.selected:not(.disabled) {
+styles.tab:hover:not(.disabled) {
   opacity: 1;
+}
+
+styles.tab.selected:not(.disabled):not(.transitioning) {
+  opacity: 1;
+  padding-bottom: 18px;
+  border-bottom: ${indicator || $design.accent} solid 2px;
 }
 
 styles.tab>.icon>svg {
