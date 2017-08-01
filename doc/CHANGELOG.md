@@ -1,3 +1,16 @@
+<a name="0.3.0"></a>
+# 0.3.0 (2017-07-26)
+
+* fix(checkbox) disabled checkbox behavior (#80) ([32eb94c](https://github.com/aurelia/ux/commit/32eb94c))
+* feat(checkbox): add unchecked value ([88505d9](https://github.com/aurelia/ux/commit/88505d9)), closes [#69](https://github.com/aurelia/ux/issues/69)
+* feat(list): add ux-list control (#82) ([ee64238](https://github.com/aurelia/ux/commit/ee64238))
+* feat(ux): expose style engine ([f623c70](https://github.com/aurelia/ux/commit/f623c70)), closes [#73](https://github.com/aurelia/ux/issues/73)
+* fix(all): bundle all files with aurelia-cli ([c69c1ff](https://github.com/aurelia/ux/commit/c69c1ff)), closes [#17](https://github.com/aurelia/ux/issues/17)
+* fix(button): add disable button behavior (#76) ([a16f47f](https://github.com/aurelia/ux/commit/a16f47f))
+* fix(icon): remove quotes ([66966e4](https://github.com/aurelia/ux/commit/66966e4))
+
+
+
 <a name="0.2.0"></a>
 # 0.2.0 (2017-05-30)
 

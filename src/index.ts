@@ -15,6 +15,10 @@ export { UxTagTheme } from './chip-input/ux-tag-theme';
 export { UxChipTheme } from './chip-input/ux-chip-theme';
 export { UxCheckboxTheme } from './checkbox/ux-checkbox-theme';
 export { UxIconTheme } from './icons/ux-icon-theme';
+export { UxListTheme } from './list/ux-list-theme';
+export { UxListItemTheme } from './list/ux-list-item-theme';
+export { UxTabTheme } from './tabs/ux-tab-theme';
+export { UxTabsTheme } from './tabs/ux-tabs-theme';
 
 export { UxButton } from './button/ux-button';
 export { UxInput } from './input/ux-input';
@@ -28,6 +32,10 @@ export { UxChip } from './chip-input/ux-chip';
 export { UxCheckbox } from './checkbox/ux-checkbox';
 export { UxIcon } from './icons/ux-icon';
 export { UxSubmitCustomAttribute } from './form/ux-submit-attribute';
+export { UxList } from './list/ux-list';
+export { UxListItem } from './list/ux-list-item';
+export { UxTab } from './tabs/ux-tab';
+export { UxTabs } from './tabs/ux-tabs';
 
 export { Themable } from './styles/themable';
 export { StyleEngine } from './styles/style-engine';
@@ -50,7 +58,11 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
     PLATFORM.moduleName('./chip-input/ux-chip'),
     PLATFORM.moduleName('./chip-input/ux-tag'),
     PLATFORM.moduleName('./checkbox/ux-checkbox'),
-    PLATFORM.moduleName('./icons/ux-icon')
+    PLATFORM.moduleName('./icons/ux-icon'),
+    PLATFORM.moduleName('./list/ux-list'),
+    PLATFORM.moduleName('./list/ux-list-item'),
+    PLATFORM.moduleName('./tabs/ux-tab'),
+    PLATFORM.moduleName('./tabs/ux-tabs')
   ]);
 
   const ux = config.container.get(AureliaUX) as AureliaUX;

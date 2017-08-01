@@ -56,26 +56,22 @@ styles.checkbox.checked>.checkbox>.background-box {
   border-radius: 0;
 }
 
-styles.checkbox[disabled=""],
-styles.checkbox[disabled="true"] {
+styles.checkbox.disabled {
   pointer-events: none;
   cursor: default;
 }
 
-styles.checkbox[disabled=""]>.checkbox:hover,
-styles.checkbox[disabled="true"]>.checkbox:hover {
+styles.checkbox.disabled>.checkbox:hover {
   border: ${disabledBorder || $swatches.grey.p400} solid 2px;
   border-radius: 3px;
 }
 
-styles.checkbox.checked[disabled=""]>.checkbox,
-styles.checkbox.checked[disabled="true"]>.checkbox {
+styles.checkbox.checked.disabled>.checkbox {
   background-color: ${disabledBackground || $swatches.grey.p500};
   border: ${disabledBackground || $swatches.grey.p500} solid 2px;
 }
 
-styles.checkbox[disabled=""]>.checkbox>.background-box::after,
-styles.checkbox[disabled="true"]>.checkbox>.background-box::after {
+styles.checkbox.disabled>.checkbox>.background-box::after {
   border-color: ${disabledForeground || $swatches.white};
 }
 
@@ -110,4 +106,8 @@ styles.checkbox .ripplecontainer>.paper-ripple {
 
 styles.checkbox:focus>.ripplecontainer>.ripple{
   transform:scale3d(1, 1, 1);
+}
+
+styles.checkbox.disabled:focus>.ripplecontainer>.ripple{
+  transform:scale3d(0, 0, 0);
 } 

@@ -31,6 +31,10 @@ var ux_checkbox_theme_1 = require("./checkbox/ux-checkbox-theme");
 exports.UxCheckboxTheme = ux_checkbox_theme_1.UxCheckboxTheme;
 var ux_icon_theme_1 = require("./icons/ux-icon-theme");
 exports.UxIconTheme = ux_icon_theme_1.UxIconTheme;
+var ux_list_theme_1 = require("./list/ux-list-theme");
+exports.UxListTheme = ux_list_theme_1.UxListTheme;
+var ux_list_item_theme_1 = require("./list/ux-list-item-theme");
+exports.UxListItemTheme = ux_list_item_theme_1.UxListItemTheme;
 var ux_button_1 = require("./button/ux-button");
 exports.UxButton = ux_button_1.UxButton;
 var ux_input_1 = require("./input/ux-input");
@@ -55,6 +59,10 @@ var ux_icon_1 = require("./icons/ux-icon");
 exports.UxIcon = ux_icon_1.UxIcon;
 var ux_submit_attribute_1 = require("./form/ux-submit-attribute");
 exports.UxSubmitCustomAttribute = ux_submit_attribute_1.UxSubmitCustomAttribute;
+var ux_list_1 = require("./list/ux-list");
+exports.UxList = ux_list_1.UxList;
+var ux_list_item_1 = require("./list/ux-list-item");
+exports.UxListItem = ux_list_item_1.UxListItem;
 var style_engine_1 = require("./styles/style-engine");
 exports.StyleEngine = style_engine_1.StyleEngine;
 __export(require("./styles/decorators"));
@@ -75,7 +83,9 @@ function configure(config, callback) {
         aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-chip'),
         aurelia_framework_1.PLATFORM.moduleName('./chip-input/ux-tag'),
         aurelia_framework_1.PLATFORM.moduleName('./checkbox/ux-checkbox'),
-        aurelia_framework_1.PLATFORM.moduleName('./icons/ux-icon')
+        aurelia_framework_1.PLATFORM.moduleName('./icons/ux-icon'),
+        aurelia_framework_1.PLATFORM.moduleName('./list/ux-list'),
+        aurelia_framework_1.PLATFORM.moduleName('./list/ux-list-item')
     ]);
     var ux = config.container.get(aurelia_ux_1.AureliaUX);
     if (typeof callback === 'function') {

@@ -53,7 +53,7 @@ styles.button.raised {
   box-shadow: ${$design.elevation2dp};
 }
 
-styles.button.raised.disabled, styles.button.fab.disabled {
+styles.button.raised:disabled, styles.button.fab:disabled {
   background-color: ${backgroundDisabled || $design.accentLight};
   color: ${foregroundDisabled || $design.accentLightForeground};
 }
@@ -63,8 +63,18 @@ styles.button.raised:active {
   transition-delay: 0s;
 }
 
+styles.button.raised:disabled:active, styles.button.fab:disabled:active {
+  box-shadow: ${$design.elevation2dp};
+  transition-delay: 0s;
+}
+
 styles.button.raised:focus {
   box-shadow: ${$design.elevationFocus};
+  transition-delay: 0s;
+}
+
+styles.button.raised:disabled:focus, styles.button.fab:disabled:focus {
+  box-shadow: ${$design.elevation2dp};
   transition-delay: 0s;
 }
 

@@ -27,9 +27,28 @@ let UxButton = class UxButton {
         if (this.theme) {
             this.styleEngine.applyTheme(this, this.theme);
         }
+        // ensure we cast empty string as true
+        if (typeof this.disabled === 'string' && this.disabled === '') {
+            this.disabled = true;
+        }
+        if (this.disabled) {
+            this.button.setAttribute('disabled', '');
+        }
     }
     themeChanged(newValue) {
         this.styleEngine.applyTheme(this, newValue);
+    }
+    disabledChanged(newValue) {
+        // ensure we cast empty string as true
+        if (typeof newValue === 'string' && newValue === '') {
+            newValue = true;
+        }
+        if (newValue) {
+            this.button.setAttribute('disabled', '');
+        }
+        else {
+            this.button.removeAttribute('disabled');
+        }
     }
     onMouseDown(e) {
         if (this.button.classList.contains('ripple')) {

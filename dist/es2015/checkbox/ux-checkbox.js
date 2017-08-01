@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { customElement, bindable, ViewResources, processAttributes } from 'aurelia-templating';
-import { bindingMode } from 'aurelia-binding';
+import { computedFrom, bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { PaperRipple } from '../effects/paper-ripple';
@@ -26,7 +26,12 @@ let UxCheckbox = class UxCheckbox {
         this.ripple = null;
     }
     get isDisabled() {
-        return this.disabled === true || this.disabled === '' || this.disabled === 'disabled';
+        let ret = this.disabled;
+        if (typeof this.disabled === 'string' &&
+            (this.disabled === '' || this.disabled.toString().toLocaleLowerCase() === 'disabled')) {
+            ret = true;
+        }
+        return ret;
     }
     created(_, myView) {
         this.view = myView;
@@ -38,9 +43,31 @@ let UxCheckbox = class UxCheckbox {
         if (this.checked) {
             this.checkedChanged();
         }
+        // ensure we cast empty string as true
+        if (typeof this.disabled === 'string' && this.disabled === '') {
+            this.disabled = true;
+        }
+        if (this.disabled && !this.element.classList.contains('disabled')) {
+            this.element.classList.add('disabled');
+        }
+        else if (this.element.classList.contains('disabled')) {
+            this.element.classList.remove('disabled');
+        }
     }
     themeChanged(newValue) {
         this.styleEngine.applyTheme(this, newValue);
+    }
+    disabledChanged(newValue) {
+        // ensure we cast empty string as true
+        if (typeof newValue === 'string' && newValue === '') {
+            newValue = true;
+        }
+        if (newValue && !this.element.classList.contains('disabled')) {
+            this.element.classList.add('disabled');
+        }
+        else if (this.element.classList.contains('disabled')) {
+            this.element.classList.remove('disabled');
+        }
     }
     checkedChanged() {
         const elementValue = this.model ? this.model : this.value;
@@ -156,6 +183,9 @@ __decorate([
     bindable({ defaultBindingMode: bindingMode.twoWay }),
     bindable
 ], UxCheckbox.prototype, "uncheckedValue", void 0);
+__decorate([
+    computedFrom('disabled')
+], UxCheckbox.prototype, "isDisabled", null);
 UxCheckbox = __decorate([
     inject(Element, ViewResources, StyleEngine),
     customElement('ux-checkbox'),
