@@ -1,0 +1,6 @@
+<template role="tab" styles.tab class="${selected ? 'selected' : ''} ${disabled ? 'disabled' : ''}">
+  <require from="./ux-tab-theme"></require>
+
+  <ux-icon if.bind="icon" class="icon" icon.bind="icon"></ux-icon>
+  <span class="text"><slot>${text}</slot></span>
+</template>

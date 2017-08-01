@@ -1,0 +1,11 @@
+styles.tabs {
+  display: block;
+  position: relative;
+}
+
+styles.tabs .indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: ${indicator || $design.accent};
+}
