@@ -10,7 +10,7 @@ import { processDesignAttributes } from '../designs/design-attributes';
 @customElement('ux-checkbox')
 @processAttributes(processDesignAttributes)
 export class UxCheckbox implements Themable {
-  @bindable public disabled: any = null;
+  @bindable public disabled: boolean | string = false;
   @bindable public effect = null;
   @bindable public label: string;
   @bindable public matcher = (a: any, b: any) => a === b;
@@ -33,7 +33,7 @@ export class UxCheckbox implements Themable {
 
   @computedFrom('disabled')
   public get isDisabled() {
-    let ret: boolean = this.disabled;
+    let ret: string | boolean = this.disabled;
     if (typeof this.disabled === 'string' &&
         (this.disabled === '' || this.disabled.toString().toLocaleLowerCase() === 'disabled')) {
       ret = true;
@@ -57,8 +57,8 @@ export class UxCheckbox implements Themable {
       this.checkedChanged();
     }
 
-    // ensure we cast empty string as true
-    if (typeof this.disabled === 'string' && this.disabled === '') {
+    // ensure we cast empty string or 'disabled' as true
+    if (typeof this.disabled === 'string' && (this.disabled === '' || this.disabled === 'disabled')) {
       this.disabled = true;
     }
 
@@ -74,8 +74,8 @@ export class UxCheckbox implements Themable {
   }
 
   public disabledChanged(newValue: boolean | string) {
-    // ensure we cast empty string as true
-    if (typeof newValue === 'string' && newValue === '') {
+    // ensure we cast empty string or 'disabled' as true
+    if (typeof newValue === 'string' && (newValue === '' || newValue === 'disabled')) {
       newValue = true;
     }
 
