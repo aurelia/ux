@@ -35,7 +35,7 @@ export class UxCheckbox implements Themable {
   public get isDisabled() {
     let ret: string | boolean = this.disabled;
     if (typeof this.disabled === 'string' &&
-        (this.disabled === '' || this.disabled.toString().toLocaleLowerCase() === 'disabled')) {
+        (this.disabled === '' || this.disabled.toLocaleLowerCase() === 'disabled')) {
       ret = true;
     }
 
@@ -58,7 +58,8 @@ export class UxCheckbox implements Themable {
     }
 
     // ensure we cast empty string or 'disabled' as true
-    if (typeof this.disabled === 'string' && (this.disabled === '' || this.disabled === 'disabled')) {
+    if (typeof this.disabled === 'string' &&
+       (this.disabled === '' || this.disabled.toLocaleLowerCase() === 'disabled')) {
       this.disabled = true;
     }
 
@@ -75,7 +76,7 @@ export class UxCheckbox implements Themable {
 
   public disabledChanged(newValue: boolean | string) {
     // ensure we cast empty string or 'disabled' as true
-    if (typeof newValue === 'string' && (newValue === '' || newValue === 'disabled')) {
+    if (typeof newValue === 'string' && (newValue === '' || newValue.toLocaleLowerCase() === 'disabled')) {
       newValue = true;
     }
 
