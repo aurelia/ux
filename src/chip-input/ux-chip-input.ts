@@ -11,8 +11,8 @@ import { processDesignAttributes } from '../designs/design-attributes';
 @processAttributes(processDesignAttributes)
 
 export class UxChipInput implements Themable {
-  @bindable public disabled: any = false;
-  @bindable public readonly: any = false;
+  @bindable public disabled: boolean | string = false;
+  @bindable public readonly: boolean | string = false;
   @bindable public theme = null;
   @bindable public type: any;
   @bindable public separator: string = ', ';
@@ -52,13 +52,23 @@ export class UxChipInput implements Themable {
       this.chips = this.value.split(this.separator);
     }
 
-    if (this.disabled || this.disabled === '') {
+    // ensure we cast empty string or 'disabled' as true
+    if (typeof this.disabled === 'string' && (this.disabled === '' || this.disabled === 'disabled')) {
+      this.disabled = true;
+    }
+
+    if (this.disabled) {
       this.textbox.setAttribute('disabled', '');
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
     }
 
-    if (this.readonly || this.readonly === '') {
+    // ensure we cast empty string or 'readonly' as true
+    if (typeof this.readonly === 'string' && (this.readonly === '' || this.readonly === 'readonly')) {
+      this.readonly = true;
+    }
+
+    if (this.readonly) {
       this.textbox.setAttribute('readonly', '');
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
@@ -158,9 +168,14 @@ export class UxChipInput implements Themable {
     }
   }
 
-  public disabledChanged(newValue: any) {
-    if (newValue === true || newValue === '') {
-      this.textbox.setAttribute('disabled', 'true');
+  public disabledChanged(newValue: boolean | string) {
+    // ensure we cast empty string or 'disabled' as true
+    if (typeof newValue === 'string' && (newValue === '' || newValue === 'disabled')) {
+      newValue = true;
+    }
+
+    if (newValue) {
+      this.textbox.setAttribute('disabled', '');
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
     } else {
@@ -170,9 +185,14 @@ export class UxChipInput implements Themable {
     }
   }
 
-  public readonlyChanged(newValue: any) {
-    if (newValue === true || newValue === '') {
-      this.textbox.setAttribute('readonly', 'true');
+  public readonlyChanged(newValue: boolean | string) {
+    // ensure we cast empty string or 'readonly' as true
+    if (typeof newValue === 'string' && (newValue === '' || newValue === 'readonly')) {
+      newValue = true;
+    }
+
+    if (newValue) {
+      this.textbox.setAttribute('readonly', '');
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
     } else {
