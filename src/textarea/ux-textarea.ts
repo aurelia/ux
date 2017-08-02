@@ -81,7 +81,8 @@ export class UxTextarea implements Themable {
     }
 
     // ensure we cast empty string or 'disabled' as true
-    if (typeof this.disabled === 'string' && (this.disabled === '' || this.disabled === 'disabled')) {
+    if (typeof this.disabled === 'string' &&
+       (this.disabled === '' || this.disabled.toLocaleLowerCase() === 'disabled')) {
       this.disabled = true;
     }
     if (this.disabled) {
@@ -89,7 +90,8 @@ export class UxTextarea implements Themable {
     }
 
     // ensure we cast empty string or 'readonly' as true
-    if (typeof this.readonly === 'string' && (this.readonly === '' || this.readonly === 'readonly')) {
+    if (typeof this.readonly === 'string' &&
+       (this.readonly === '' || this.readonly.toLocaleLowerCase() === 'readonly')) {
       this.readonly = true;
     }
     if (this.readonly) {
@@ -125,7 +127,7 @@ export class UxTextarea implements Themable {
 
   public disabledChanged(newValue: boolean | string) {
     // ensure we cast empty string or 'disabled' as true
-    if (typeof newValue === 'string' && (newValue === '' || newValue === 'disabled')) {
+    if (typeof newValue === 'string' && (newValue === '' || newValue.toLocaleLowerCase() === 'disabled')) {
       newValue = true;
     }
 
@@ -138,7 +140,7 @@ export class UxTextarea implements Themable {
 
   public readonlyChanged(newValue: boolean | string) {
     // ensure we cast empty string or 'readonly' as true
-    if (typeof newValue === 'string' && (newValue === '' || newValue === 'readonly')) {
+    if (typeof newValue === 'string' && (newValue === '' || newValue.toLocaleLowerCase() === 'readonly')) {
       newValue = true;
     }
 
