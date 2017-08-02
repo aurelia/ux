@@ -14,10 +14,10 @@ export class UxTextarea implements Themable {
   @bindable public autofocus = null;
   @bindable public autoResize = null;
   @bindable public cols: number;
-  @bindable public disabled: any = false;
+  @bindable public disabled: boolean | string = false;
   @bindable public maxlength: number;
   @bindable public minlength: number;
-  @bindable public readonly: any = false;
+  @bindable public readonly: boolean | string = false;
   @bindable public rows: number;
   @bindable public theme = null;
 
@@ -80,11 +80,19 @@ export class UxTextarea implements Themable {
       this.textbox.setAttribute('maxlength', this.maxlength.toString());
     }
 
-    if (this.disabled || this.disabled === '') {
+    // ensure we cast empty string or 'disabled' as true
+    if (typeof this.disabled === 'string' && (this.disabled === '' || this.disabled === 'disabled')) {
+      this.disabled = true;
+    }
+    if (this.disabled) {
       this.textbox.setAttribute('disabled', '');
     }
 
-    if (this.readonly || this.readonly === '') {
+    // ensure we cast empty string or 'readonly' as true
+    if (typeof this.readonly === 'string' && (this.readonly === '' || this.readonly === 'readonly')) {
+      this.readonly = true;
+    }
+    if (this.readonly) {
       this.textbox.setAttribute('readonly', '');
     }
   }
@@ -115,17 +123,27 @@ export class UxTextarea implements Themable {
     });
   }
 
-  public disabledChanged(newValue: any) {
-    if (newValue === true || newValue === '') {
-      this.textbox.setAttribute('disabled', 'true');
+  public disabledChanged(newValue: boolean | string) {
+    // ensure we cast empty string or 'disabled' as true
+    if (typeof newValue === 'string' && (newValue === '' || newValue === 'disabled')) {
+      newValue = true;
+    }
+
+    if (newValue) {
+      this.textbox.setAttribute('disabled', '');
     } else {
       this.textbox.removeAttribute('disabled');
     }
   }
 
-  public readonlyChanged(newValue: any) {
-    if (newValue === true || newValue === '') {
-      this.textbox.setAttribute('readonly', 'true');
+  public readonlyChanged(newValue: boolean | string) {
+    // ensure we cast empty string or 'readonly' as true
+    if (typeof newValue === 'string' && (newValue === '' || newValue === 'readonly')) {
+      newValue = true;
+    }
+
+    if (newValue) {
+      this.textbox.setAttribute('readonly', '');
     } else {
       this.textbox.removeAttribute('readonly');
     }
