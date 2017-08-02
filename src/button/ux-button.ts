@@ -30,8 +30,8 @@ export class UxButton implements Themable {
       this.styleEngine.applyTheme(this, this.theme);
     }
 
-    // ensure we cast empty string as true
-    if (typeof this.disabled === 'string' && this.disabled === '') {
+    // ensure we cast empty string or 'disabled' as true
+    if (typeof this.disabled === 'string' && (this.disabled === '' || this.disabled === 'disabled')) {
       this.disabled = true;
     }
 
@@ -46,8 +46,8 @@ export class UxButton implements Themable {
   }
 
   public disabledChanged(newValue: boolean | string) {
-    // ensure we cast empty string as true
-    if (typeof newValue === 'string' && newValue === '') {
+    // ensure we cast empty string or 'disabled' as true
+    if (typeof newValue === 'string' && (newValue === '' || newValue === 'disabled') {
       newValue = true;
     }
 
