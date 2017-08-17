@@ -12,6 +12,7 @@ import { processDesignAttributes } from '../designs/design-attributes';
 export class UxCheckbox implements Themable {
   @bindable public disabled: boolean | string = false;
   @bindable public effect = null;
+  @bindable public id: string;
   @bindable public label: string;
   @bindable public matcher = (a: any, b: any) => a === b;
   @bindable public model: any;
@@ -67,6 +68,30 @@ export class UxCheckbox implements Themable {
       this.element.classList.add('disabled');
     } else if (this.element.classList.contains('disabled')) {
       this.element.classList.remove('disabled');
+    }
+  }
+
+  public attached() {
+    if (this.id) {
+      const labelElement = document.querySelector(`label[for=${this.id}]`);
+
+      if (labelElement != null) {
+        labelElement.addEventListener('click', () => {
+          this.toggleCheckbox();
+        });
+      }
+    }
+  }
+
+  public detached() {
+    if (this.id) {
+      const labelElement = document.querySelector(`label[for=${this.id}]`);
+
+      if (labelElement != null) {
+        labelElement.removeEventListener('click', () => {
+          this.toggleCheckbox();
+        });
+      }
     }
   }
 
