@@ -13,5 +13,5 @@
   </div>
 
   <!-- Leave Inline, uses :not(:empty) selector to determine margin -->
-  <label><slot>${label}</slot></label>
+  <label mousedown.trigger="onMouseDown($event)" mouseup.trigger="onMouseUp($event)"><slot>${label}</slot></label>
 </template>
