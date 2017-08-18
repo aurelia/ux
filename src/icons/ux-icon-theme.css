@@ -8,5 +8,5 @@ styles.icon {
 styles.icon > svg {
     width: ${size || '16px'};
     height: ${size || '16px'};
-    fill: ${foreground || $swatches.grey.p700};
+    fill: currentColor;
 }
