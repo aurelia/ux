@@ -5,13 +5,6 @@ ux-list>styles.listitem {
   font-size: 16px;
 }
 
-ux-list>styles.listitem>ux-icon,
-ux-list>styles.listitem>ux-icon>svg {
-  width: 40px;
-  height: 32px;
-  fill: ${foreground || $swatches.grey.p700};
-}
-
 ux-list>styles.listitem>ux-icon {
   margin-left: 16px;
   margin-right: 0;
@@ -19,7 +12,7 @@ ux-list>styles.listitem>ux-icon {
 
 ux-list>styles.listitem>ux-icon:first-child {
   margin-left: 0px;
-  margin-right: 16px;
+  margin-right: 32px;
 }
 
 ux-list>styles.listitem>.list-avatar {
