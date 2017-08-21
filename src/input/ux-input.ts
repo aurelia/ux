@@ -5,6 +5,7 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { Themable } from '../styles/themable';
 import { processDesignAttributes } from '../designs/design-attributes';
+import { normalizeBooleanAttribute } from '../resources/html-attributes';
 
 @inject(Element, ViewResources, StyleEngine)
 @customElement('ux-input')
@@ -95,23 +96,11 @@ export class UxInput implements Themable {
       this.textbox.setAttribute('maxlength', this.maxlength.toString());
     }
 
-    // ensure we cast empty string as true
-    if (typeof this.disabled === 'string' &&
-       (this.disabled === '' || this.disabled.toLocaleLowerCase() === 'disabled')) {
-      this.disabled = true;
-    }
-
-    if (this.disabled) {
+    if (normalizeBooleanAttribute('disabled', this.disabled)) {
       this.textbox.setAttribute('disabled', '');
     }
 
-    // ensure we cast empty string as true
-    if (typeof this.readonly === 'string' &&
-       (this.readonly === '' || this.readonly.toLocaleLowerCase() === 'readonly')) {
-      this.readonly = true;
-    }
-
-    if (this.readonly) {
+    if (normalizeBooleanAttribute('readonly', this.readonly)) {
       this.textbox.setAttribute('readonly', '');
     }
   }
@@ -143,12 +132,7 @@ export class UxInput implements Themable {
   }
 
   public disabledChanged(newValue: boolean | string) {
-    // ensure we cast empty string or 'disabled' as true
-    if (typeof newValue === 'string' && (newValue === '' || newValue.toLocaleLowerCase() === 'disabled')) {
-      newValue = true;
-    }
-
-    if (newValue) {
+    if (normalizeBooleanAttribute('disabled', newValue)) {
       this.textbox.setAttribute('disabled', '');
     } else {
       this.textbox.removeAttribute('disabled');
@@ -156,12 +140,7 @@ export class UxInput implements Themable {
   }
 
   public readonlyChanged(newValue: boolean | string) {
-    // ensure we cast empty string or 'readonly' as true
-    if (typeof newValue === 'string' && (newValue === '' || newValue.toLocaleLowerCase() === 'readonly')) {
-      newValue = true;
-    }
-
-    if (newValue) {
+    if (normalizeBooleanAttribute('readonly', newValue)) {
       this.textbox.setAttribute('readonly', '');
     } else {
       this.textbox.removeAttribute('readonly');
