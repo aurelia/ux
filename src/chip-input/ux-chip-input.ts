@@ -5,14 +5,15 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { Themable } from '../styles/themable';
 import { processDesignAttributes } from '../designs/design-attributes';
+import { normalizeBooleanAttribute } from '../resources/html-attributes';
 
 @inject(Element, ViewResources, StyleEngine)
 @customElement('ux-chip-input')
 @processAttributes(processDesignAttributes)
 
 export class UxChipInput implements Themable {
-  @bindable public disabled: any = false;
-  @bindable public readonly: any = false;
+  @bindable public disabled: boolean | string = false;
+  @bindable public readonly: boolean | string = false;
   @bindable public theme = null;
   @bindable public type: any;
   @bindable public separator: string = ', ';
@@ -52,13 +53,13 @@ export class UxChipInput implements Themable {
       this.chips = this.value.split(this.separator);
     }
 
-    if (this.disabled || this.disabled === '') {
+    if (normalizeBooleanAttribute('disabled', this.disabled)) {
       this.textbox.setAttribute('disabled', '');
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
     }
 
-    if (this.readonly || this.readonly === '') {
+    if (normalizeBooleanAttribute('readonly', this.readonly)) {
       this.textbox.setAttribute('readonly', '');
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
@@ -158,9 +159,9 @@ export class UxChipInput implements Themable {
     }
   }
 
-  public disabledChanged(newValue: any) {
-    if (newValue === true || newValue === '') {
-      this.textbox.setAttribute('disabled', 'true');
+  public disabledChanged(newValue: boolean | string) {
+    if (normalizeBooleanAttribute('disabled', newValue)) {
+      this.textbox.setAttribute('disabled', '');
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
     } else {
@@ -170,9 +171,9 @@ export class UxChipInput implements Themable {
     }
   }
 
-  public readonlyChanged(newValue: any) {
-    if (newValue === true || newValue === '') {
-      this.textbox.setAttribute('readonly', 'true');
+  public readonlyChanged(newValue: boolean | string) {
+    if (normalizeBooleanAttribute('readonly', newValue)) {
+      this.textbox.setAttribute('readonly', '');
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
     } else {

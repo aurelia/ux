@@ -5,6 +5,7 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '../styles/style-engine';
 import { Themable } from '../styles/themable';
 import { processDesignAttributes } from '../designs/design-attributes';
+import { normalizeBooleanAttribute } from '../resources/html-attributes';
 
 @inject(Element, StyleEngine, ViewResources)
 @customElement('ux-textarea')
@@ -14,10 +15,10 @@ export class UxTextarea implements Themable {
   @bindable public autofocus = null;
   @bindable public autoResize = null;
   @bindable public cols: number;
-  @bindable public disabled: any = false;
+  @bindable public disabled: boolean | string = false;
   @bindable public maxlength: number;
   @bindable public minlength: number;
-  @bindable public readonly: any = false;
+  @bindable public readonly: boolean | string = false;
   @bindable public rows: number;
   @bindable public theme = null;
 
@@ -80,11 +81,11 @@ export class UxTextarea implements Themable {
       this.textbox.setAttribute('maxlength', this.maxlength.toString());
     }
 
-    if (this.disabled || this.disabled === '') {
+    if (normalizeBooleanAttribute('disabled', this.disabled)) {
       this.textbox.setAttribute('disabled', '');
     }
 
-    if (this.readonly || this.readonly === '') {
+    if (normalizeBooleanAttribute('readonly', this.readonly)) {
       this.textbox.setAttribute('readonly', '');
     }
   }
@@ -115,17 +116,17 @@ export class UxTextarea implements Themable {
     });
   }
 
-  public disabledChanged(newValue: any) {
-    if (newValue === true || newValue === '') {
-      this.textbox.setAttribute('disabled', 'true');
+  public disabledChanged(newValue: boolean | string) {
+    if (normalizeBooleanAttribute('disabled', newValue)) {
+      this.textbox.setAttribute('disabled', '');
     } else {
       this.textbox.removeAttribute('disabled');
     }
   }
 
-  public readonlyChanged(newValue: any) {
-    if (newValue === true || newValue === '') {
-      this.textbox.setAttribute('readonly', 'true');
+  public readonlyChanged(newValue: boolean | string) {
+    if (normalizeBooleanAttribute('readonly', newValue)) {
+      this.textbox.setAttribute('readonly', '');
     } else {
       this.textbox.removeAttribute('readonly');
     }

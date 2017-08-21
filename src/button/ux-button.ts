@@ -4,6 +4,7 @@ import {StyleEngine} from '../styles/style-engine';
 import {Themable} from '../styles/themable';
 import {processDesignAttributes} from '../designs/design-attributes';
 import {PaperRipple} from '../effects/paper-ripple';
+import {normalizeBooleanAttribute} from '../resources/html-attributes';
 
 @inject(ViewResources, StyleEngine)
 @customElement('ux-button')
@@ -30,12 +31,7 @@ export class UxButton implements Themable {
       this.styleEngine.applyTheme(this, this.theme);
     }
 
-    // ensure we cast empty string as true
-    if (typeof this.disabled === 'string' && this.disabled === '') {
-      this.disabled = true;
-    }
-
-    if (this.disabled) {
+    if (normalizeBooleanAttribute('disabled', this.disabled)) {
       this.button.setAttribute('disabled', '');
     }
 
@@ -46,12 +42,7 @@ export class UxButton implements Themable {
   }
 
   public disabledChanged(newValue: boolean | string) {
-    // ensure we cast empty string as true
-    if (typeof newValue === 'string' && newValue === '') {
-      newValue = true;
-    }
-
-    if (newValue) {
+    if (normalizeBooleanAttribute('disabled', newValue)) {
       this.button.setAttribute('disabled', '');
     } else {
       this.button.removeAttribute('disabled');
