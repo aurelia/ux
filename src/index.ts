@@ -37,7 +37,6 @@ export { UxListItem } from './list/ux-list-item';
 export { UxTab } from './tabs/ux-tab';
 export { UxTabs } from './tabs/ux-tabs';
 
-export { Design } from './designs/design';
 export { Themable } from './styles/themable';
 export { StyleEngine } from './styles/style-engine';
 
