@@ -1,4 +1,10 @@
 export interface Palette {
+  appBackground: string;
+  appForeground: string;
+
+  controlBackground: string;
+  controlForeground: string;
+
   primary: string;
   primaryForeground: string;
 

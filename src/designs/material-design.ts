@@ -5,6 +5,12 @@ import {shadows} from '../colors/shadows';
 export class MaterialDesign implements Design {
   public type = 'material';
 
+  public appBackground = swatches.grey.p50;
+  public appForeground = swatches.grey.p900;
+
+  public controlBackground = swatches.white;
+  public controlForeground = swatches.grey.p900;
+
   public primary = swatches.indigo.p500;
   public primaryForeground = swatches.white;
 
