@@ -1,0 +1,40 @@
+styles.uxtimeselector {
+  height: 240px;
+  display: flex;
+}
+
+styles.uxtimeselector .time-holder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  text-align: center;
+  font-size: 2em;
+}
+
+styles.uxtimeselector .time-holder .unit-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+styles.uxtimeselector .time-holder.am-pm {
+  justify-content: space-around;
+}
+
+styles.uxtimeselector .time-holder * {
+  cursor: pointer;
+}
+
+styles.uxtimeselector .time-holder *.oor {
+  cursor: default;
+  color: ${ weekdayForeground || '#777' };
+}
+
+
+
+styles.uxtimeselector .time-holder .selected {
+  cursor: default;
+  color: ${ $design.accent };
+}

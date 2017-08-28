@@ -1,0 +1,49 @@
+styles.calendar {
+  display: block;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+styles.calendar div.calendar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 2em;
+}
+
+styles.calendar .calendar-row.weekdays {
+  color: ${ weekdayForeground || '#777' };
+}
+
+styles.calendar .calendar-row .day {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+styles.calendar div.day-highlight {
+  width: 1.9em;
+  height: 1.9em;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+styles.calendar div.day-highlight.selected {
+  color: ${ dateSelectionForeground || $design.accentForeground };
+  background-color: ${ dateSelectionBackground || $design.accent };
+}
+
+styles.calendar div.day-highlight.out-of-range {
+  color: ${ outOfRangeForeground || '#777' };
+  cursor: default;
+}
+
+styles.calendar div.month-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

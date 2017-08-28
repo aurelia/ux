@@ -1,0 +1,43 @@
+<template styles.uxtimeselector>
+  <require from="./ux-time-selector-theme"></require>
+
+  <div class="time-holder" wheel.delegate="hourScroll($event)">
+    <div class="unit-container">
+      
+      <span repeat.for="hour of hoursBelow" class="${isValidTime(hour) === false ? 'oor' : ''}" click.delegate="selectHour(hour)">
+        ${hour12 ? hour.format('h') : hour.format('HH')}
+      </span>
+
+    </div>
+
+    <span class="selected">${hour12 ? value.format('h') : value.format('HH')}</span>
+
+    <div class="unit-container">
+
+      <span repeat.for="hour of hoursAbove" class="${isValidTime(hour) === false ? 'oor' : ''}" click.delegate="selectHour(hour)">
+        ${hour12 ? hour.format('h') : hour.format('HH')}
+      </span>
+
+    </div>
+  </div>
+  <div class="time-holder" wheel.delegate="minuteScroll($event)">
+    <div class="unit-container">
+      <span repeat.for="minute of minutesBelow" class="${isValidTime(minute) === false ? 'oor' : ''}" click.delegate="selectHour(minute)">
+        ${minute.format('mm')}
+      </span>
+
+    </div>
+
+    <span class="selected">${value.format('mm')}</span>
+
+    <div class="unit-container">
+      <span repeat.for="minute of minutesAbove" class="${isValidTime(minute) === false ? 'oor' : ''}" click.delegate="selectHour(minute)">
+          ${minute.format('mm')}
+        </span>
+    </div>
+  </div>
+  <div class="time-holder am-pm" if.bind="hour12">
+    <span click.delegate="changeAmPm('pm')" if.bind="hour12 && value.hour() <  12" class="selected">AM</span>
+    <span click.delegate="changeAmPm('am')" if.bind="hour12 && value.hour() >= 12" class="selected">PM</span>
+  </div>
+</template>

@@ -1,0 +1,9 @@
+<template styles.uxyearlist>
+  <require from="./ux-year-list-theme"></require>
+
+  <template repeat.for="year of yearList">
+    <div class="years ${year == value.year() ? 'selected' : ''}" click.delegate="selectYear(year)">
+      ${year}
+    </div>
+  </template>
+</template>
