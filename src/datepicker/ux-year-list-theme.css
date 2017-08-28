@@ -1,0 +1,17 @@
+styles.uxyearlist {
+  display: block;
+  height: 260px;
+  overflow-y: auto;
+  text-align: center;
+}
+
+styles.uxyearlist>.years {
+  font-size: 1em;
+  cursor: pointer;
+  margin: 24px 0;
+}
+
+styles.uxyearlist>.years.selected {
+  font-size: 1.75em;
+  color: ${ $design.accent };
+}

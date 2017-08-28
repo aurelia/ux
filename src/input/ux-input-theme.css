@@ -5,6 +5,7 @@ ux-input {
 
   styles.input {
     width: 100%;
+    box-sizing: border-box;
     padding: 6px 0 4px 0;
     margin-bottom: 4px;
     border: 0;

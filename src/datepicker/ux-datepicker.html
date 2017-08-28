@@ -1,0 +1,28 @@
+<template styles.datepicker>
+  <require from="./ux-datepicker-theme"></require>
+
+  <ux-input ref="textbox"
+         value.bind="textboxValue"
+         blur.trigger="changeTextboxValue()"
+         placeholder.bind="placeholder"></ux-input>
+
+  <ux-button type="icon" click.delegate="toggleDialog('month')" if.bind="type !== 'time'">
+    <ux-icon icon="date_range"></ux-icon>
+  </ux-button>
+  <ux-button type="icon" click.delegate="toggleDialog('time')" if.bind="type !== 'date'">
+    <ux-icon icon="access_time"></ux-icon>
+  </ux-button>
+
+  <div class="overlay" if.bind="showDialog">
+    <ux-picker-dialog display.bind="display"
+                    config.bind="config"
+                    type.bind="type"
+                    initial-date.bind="initialDate"
+                    close-dialog.call="showDialog = false"
+                    min-date.bind="minDate"
+                    max-date.bind="maxDate"
+                    min-time.bind="minTime"
+                    max-time.bind="maxTime"
+                    value.two-way="value"></ux-picker-dialog>
+  </div>
+</template>

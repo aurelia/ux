@@ -1,0 +1,45 @@
+<template styles.uxpickerdialog role="dialog">
+  <require from="./ux-picker-dialog-theme"></require>
+
+  <header>
+    <template if.bind="type !== 'time'">
+      <div class="year ${display === 'year' ? 'active':''}" click.trigger="display = 'year'">
+        ${selectedDate.format('YYYY')}
+      </div>
+      <div class="date ${display === 'month' ? 'active':''}" click.trigger="display = 'month'">
+        ${selectedDate.format('ddd, MMM D')}
+      </div>
+    </template>
+    <template if.bind="type !== 'date'">
+      <div class="date ${display === 'time' ? 'active':''}" click.trigger="display = 'time'">
+        ${selectedDate.format('LT')}
+      </div>
+    </template>
+  </header>
+
+  <ux-year-list if.bind="display === 'year'"
+                config.bind="config"
+                min-date.bind="minDate"
+                max-date.bind="maxDate"
+                value.two-way="selectedDate">
+                </ux-year-list>
+
+  <ux-calendar if.bind="display === 'month'" 
+               config.bind="config"
+               value.two-way="selectedDate"
+               min-date.bind="minDate"
+               max-date.bind="maxDate">
+               </ux-calendar>
+
+  <ux-time-selector if.bind="display === 'time'"
+                    value.two-way="selectedDate"
+                    config.bind="config"
+                    min-time.bind="minTime"
+                    max-time.bind="maxTime">
+                    </ux-time-selector>
+
+  <footer>
+    <ux-button type="flat" click.delegate="closeDialog()">Cancel</ux-button>
+    <ux-button type="flat" click.delegate="selectDate()">OK</ux-button>
+  </footer>
+</template>
