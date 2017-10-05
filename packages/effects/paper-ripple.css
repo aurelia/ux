@@ -1,0 +1,59 @@
+.paper-ripple {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.paper-ripple .paper-ripple__background,
+.paper-ripple .paper-ripple__waves,
+.paper-ripple .paper-ripple__wave-container,
+.paper-ripple .paper-ripple__wave {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.paper-ripple .paper-ripple__background,
+.paper-ripple .paper-ripple__wave {
+    opacity: 0;
+}
+
+.paper-ripple .paper-ripple__waves,
+.paper-ripple .paper-ripple__wave {
+    overflow: hidden;
+}
+
+.paper-ripple .paper-ripple__wave-container,
+.paper-ripple .paper-ripple__wave {
+    border-radius: 50%;
+}
+
+.paper-ripple .paper-ripple__background {
+    will-change: opacity, background-color;
+}
+
+.paper-ripple .paper-ripple__wave {
+    will-change: opacity, transform;
+}
+
+.paper-ripple .paper-ripple__wave-container {
+    will-change: transform;
+}
+
+.paper-ripple--round .paper-ripple__background,
+.paper-ripple--round .paper-ripple__waves {
+    border-radius: 50%;
+}
+
+.paper-ripple--round .paper-ripple__wave-container {
+    overflow: hidden;
+}

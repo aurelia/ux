@@ -1,0 +1,69 @@
+ux-textarea {
+  display: block;
+  width: 100%;
+}
+  styles.textarea {
+    width: 100%;
+    height: 100%;
+    padding: 6px 0 4px 0;
+    margin-bottom: 4px;
+    border: 0;
+    outline: none;
+    resize: none;
+    padding-left:0;
+    padding-right:0;
+    transition: border-color 250ms ease;
+    background-color: ${background};
+    border-bottom: 1px solid ${foreground || $design.primaryLightForeground};
+  }
+
+    styles.textarea:hover,
+    styles.textarea:focus {
+      border-bottom-color: ${$design.accent};
+    }
+
+    styles.textarea:focus {
+      border-bottom-width: 2px;
+      padding-bottom: 3px;
+    }
+
+    styles.textarea[disabled],
+    styles.textarea[disabled]:hover,
+    styles.textarea[disabled]:focus,
+    styles.textarea[readonly],
+    styles.textarea[readonly]:hover,
+    styles.textarea[readonly]:focus {
+      color: ${foregroundDisabled || $swatches.grey.p500};
+      border-bottom: 1px dashed ${foregroundDisabled || $swatches.grey.p300};
+    }
+    
+  ux-textarea.show-grip > styles.textarea {
+    resize: both;
+  }
+
+  ux-textarea.full-width > styles.textarea {
+    padding: 20px 8px;
+    margin-bottom: 0;
+    font-size: 16px;
+    border: 1px solid ${$swatches.grey.p200};
+    background-color: ${$swatches.white};
+  }
+
+    ux-textarea.full-width > styles.textarea[disabled]
+    ux-textarea.full-width > styles.textarea[disabled]:hover,
+    ux-textarea.full-width > styles.textarea[disabled]:focus,
+    ux-textarea.full-width > styles.textarea[readonly],
+    ux-textarea.full-width > styles.textarea[readonly]:hover,
+    ux-textarea.full-width > styles.textarea[readonly]:focus  {
+      background-color: ${backgroundDisabled || $swatches.grey.p200};
+      border: 1px solid ${foregroundDisabled || $swatches.grey.p300};
+      color: ${foregroundDisabled || $swatches.grey.p500}
+    }
+  
+  ux-textarea.has-error styles.textarea {
+    border-bottom-color: ${errorAccent || $swatches.red.p500};
+  }
+
+  ux-textarea.full-width.has-error styles.textarea {
+    border-color: ${errorAccent || $swatches.red.p500};
+  }

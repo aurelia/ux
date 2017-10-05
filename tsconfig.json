@@ -8,7 +8,7 @@
       "dom"
     ],
     "outDir": "dist/test",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
@@ -22,6 +22,7 @@
     ".vscode",
     "dist",
     "doc",
-    "node_modules"
+    "node_modules",
+    "packages"
   ]
 }

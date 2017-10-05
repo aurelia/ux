@@ -1,0 +1,31 @@
+<template styles.calendar>
+  <require from="./ux-calendar-theme"></require>
+
+    <div class="month-display">
+      <ux-button type="icon" click.delegate="previousMonth()">
+        <ux-icon icon="navigate_before"></ux-icon>
+      </ux-button>
+      <span>
+      ${displayMonth.format('MMMM YYYY')}
+    </span>
+      <ux-button type="icon" click.delegate="nextMonth()">
+        <ux-icon icon="navigate_next"></ux-icon>
+      </ux-button>
+
+    </div>
+    <div class="calendar-row weekdays">
+      <div class="day" repeat.for="weekday of weekdays">
+        ${weekday[0]}
+      </div>
+    </div>
+    <div class="calendar-row" repeat.for="week of calendarRows">
+      <div class="day" repeat.for="day of week">
+        <div click.delegate="changeCalendarSelection(day)" if.bind="day" class="day-highlight 
+             ${day.isSame(value, 'day') ? 'selected' : ''}
+             ${isValidDate(day) ? 'out-of-range' : '' }">
+          ${day.date()}
+        </div>
+      </div>
+    </div>
+
+</template>

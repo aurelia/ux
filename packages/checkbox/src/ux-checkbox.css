@@ -1,0 +1,113 @@
+styles.checkbox {
+  display: inline-flex;
+  align-items: center;
+  margin: auto;
+  cursor: pointer;
+  outline: none;
+}
+
+styles.checkbox>.checkbox {
+  width: 20px;
+  height: 20px;
+  border: ${border || $swatches.grey.p700} solid 2px;
+  border-radius: 3px;
+}
+
+styles.checkbox>.checkbox+label:not(:empty) {
+  margin-left: 8px;
+}
+
+styles.checkbox>.checkbox:hover {
+  width: 20px;
+  height: 20px;
+  border: ${background || $design.accent} solid 2px;
+  border-radius: 3px;
+}
+
+styles.checkbox.checked>.checkbox {
+  background-color: ${background || $design.accent};
+  border: ${background || $design.accent} solid 2px;
+}
+
+styles.checkbox>.checkbox>.background-box {
+  width: 100%;
+  height: 100%;
+  transform: scale3d(0, 0, 0);
+  border-radius: 50%;
+  transition: 100ms;
+}
+
+styles.checkbox>.checkbox>.background-box::after {
+  margin: auto;
+  display: block;
+  width: 6px;
+  height: 12px;
+  border: ${foreground || $design.accentForeground} solid 2px;
+  border-top: none;
+  border-left: none;
+  -webkit-transform-origin: 6px 6px;
+  transform-origin: 6px 6px;
+  transform: rotate(45deg);
+  content: ' ';
+}
+
+styles.checkbox.checked>.checkbox>.background-box {
+  transform: scale3d(1, 1, 1);
+  border-radius: 0;
+}
+
+styles.checkbox.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+styles.checkbox.disabled>.checkbox:hover {
+  border: ${disabledBorder || $swatches.grey.p400} solid 2px;
+  border-radius: 3px;
+}
+
+styles.checkbox.checked.disabled>.checkbox {
+  background-color: ${disabledBackground || $swatches.grey.p500};
+  border: ${disabledBackground || $swatches.grey.p500} solid 2px;
+}
+
+styles.checkbox.disabled>.checkbox>.background-box::after {
+  border-color: ${disabledForeground || $swatches.white};
+}
+
+styles.checkbox .ripplecontainer {
+  position: relative; 
+  width: 0; 
+  height: 0
+}
+
+styles.checkbox .ripplecontainer>.paper-ripple {
+    top: auto;
+    left: auto;
+    right: -35px;
+    bottom: -25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.ripplecontainer>.ripple {
+  position: absolute;
+  right: -35px;
+  bottom: -25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.22);
+  transition: transform 100ms ease-in-out;
+  transform:scale3d(0, 0, 0);
+}
+
+styles.checkbox:focus>.ripplecontainer>.ripple{
+  transform:scale3d(1, 1, 1);
+}
+
+styles.checkbox.disabled:focus>.ripplecontainer>.ripple{
+  transform:scale3d(0, 0, 0);
+} 

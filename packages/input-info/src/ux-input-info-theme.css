@@ -1,0 +1,39 @@
+styles.inputinfo {
+  display: flex;
+  font-size: 14px;
+  width: 100%;
+  color: ${hintText || $design.primaryLightForeground};
+}
+
+  styles.inputinfo>.hint-text,
+  styles.inputinfo>.error-text {
+    flex-grow: 1;
+  }
+  styles.inputinfo>.hint-text:first-child,
+  styles.inputinfo>.error-text:first-child {
+    display: block;
+  }
+
+  styles.inputinfo>.hint-text,
+  styles.inputinfo>.error-text {
+    display: none;
+  }
+
+  styles.inputinfo>.counter {
+    transition: 250ms;
+    flex-wrap: nowrap;
+    display: flex;
+  }
+
+  ux-input.focused+styles.inputinfo>.counter {
+    color: ${$design.accent};
+  }
+
+  ux-input>styles.input[disabled]+styles.inputinfo {
+    display: none;
+  }
+
+  .has-error+styles.inputinfo {
+    color: ${errorAccent || $swatches.red.p500};
+  }
+

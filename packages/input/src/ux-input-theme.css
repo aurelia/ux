@@ -1,0 +1,65 @@
+ux-input {
+  display: block;
+  width: 100%;
+}
+
+  styles.input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 0 4px 0;
+    margin-bottom: 4px;
+    border: 0;
+    outline: none;
+    padding-left:0;
+    padding-right:0;
+    transition: border-color 250ms ease;
+    background-color: ${background};
+    border-bottom: 1px solid ${foreground || $design.primaryLightForeground};
+  }
+
+    styles.input:hover,
+    styles.input:focus {
+      border-bottom-color: ${$design.accent};
+    }
+
+    styles.input:focus {
+      border-bottom-width: 2px;
+      padding-bottom: 3px;
+    }
+
+    styles.input[disabled],
+    styles.input[disabled]:hover,
+    styles.input[disabled]:focus,
+    styles.input[readonly],
+    styles.input[readonly]:hover,
+    styles.input[readonly]:focus {
+      color: ${foregroundDisabled || $swatches.grey.p500};
+      border-bottom: 1px dashed ${foregroundDisabled || $swatches.grey.p300};
+    }
+
+  ux-input.full-width > styles.input {
+    padding: 20px 8px;
+    font-size: 16px;
+    margin-bottom: 0;
+    border: 1px solid ${$swatches.grey.p200};
+    background-color: ${$swatches.white};
+  }
+
+    ux-input.full-width > styles.input[disabled]
+    ux-input.full-width > styles.input[disabled]:hover,
+    ux-input.full-width > styles.input[disabled]:focus,
+    ux-input.full-width > styles.input[readonly],
+    ux-input.full-width > styles.input[readonly]:hover,
+    ux-input.full-width > styles.input[readonly]:focus  {
+      background-color: ${backgroundDisabled || $swatches.grey.p200};
+      border: 1px solid ${foregroundDisabled || $swatches.grey.p300};
+      color: ${foregroundDisabled || $swatches.grey.p500}
+    }
+  
+  ux-input.has-error styles.input {
+    border-bottom-color: ${errorAccent || $swatches.red.p500};
+  }
+
+  ux-input.full-width.has-error styles.input {
+    border-color: ${errorAccent || $swatches.red.p500};
+  }

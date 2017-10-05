@@ -1,0 +1,61 @@
+styles.uxpickerdialog {
+  color: ${ $design.controlForeground };
+  background-color: ${ $design.controlBackground };
+  width: 300px;
+  
+  user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+
+  animation-duration: 250ms;
+  animation-name: datepicker-dialog-grow;
+}
+
+styles.uxpickerdialog header {
+  width: auto;
+  height: 124px;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  color: ${ foreground || $design.primaryForeground };
+  background: ${ background || $design.primary };
+}
+
+styles.uxpickerdialog header > div.year,
+styles.uxpickerdialog header > div.date {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+styles.uxpickerdialog header div.year {
+  font-size: 1.1em;
+}
+
+  styles.uxpickerdialog header div.year.active {
+    opacity: 1;
+  }
+
+styles.uxpickerdialog header div.date {
+  font-size: 2em;
+  font-weight: 400;
+}
+
+  styles.uxpickerdialog header div.date.active {
+    opacity: 1;
+  }
+
+styles.uxpickerdialog footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@keyframes datepicker-dialog-grow {
+  from {
+    transform: scale3d(0, 0, 0);
+  }
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}

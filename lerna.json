@@ -1,0 +1,18 @@
+{
+  "lerna": "2.1.2",
+  "packages": [
+    "",
+    "packages/button",
+    "packages/checkbox",
+    "packages/chip-input",
+    "packages/datepicker",
+    "packages/form",
+    "packages/icons",
+    "packages/input",
+    "packages/input-info",
+    "packages/list",
+    "packages/tabs",
+    "packages/textarea"
+  ],
+  "version": "0.0.1"
+}
