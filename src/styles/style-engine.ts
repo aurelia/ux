@@ -1,94 +1,44 @@
-import {View} from 'aurelia-templating';
-import {Origin} from 'aurelia-metadata';
-import {inject, Container} from 'aurelia-dependency-injection';
-import {StyleController} from './style-controller';
-import {DOM} from 'aurelia-pal';
-import {StyleFactory} from './style-factory';
-import {Themable} from './themable';
-import {camelCase} from 'aurelia-binding';
+import { inject } from 'aurelia-dependency-injection';
+import { StyleController } from './style-controller';
+import { UxTheme } from './ux-theme';
 
-@inject(Container)
+@inject(StyleController)
 export class StyleEngine {
-  private controllers: Map<any, StyleController> = new Map();
 
-  constructor(private container: Container) { }
+  constructor(public styleController: StyleController) { }
 
-  public getThemeKeyForComponent(obj: any) {
-    return camelCase(Origin.get(obj.constructor).moduleMember + 'Theme');
-  }
-
-  public applyTheme(themable: Themable, theme: string | object | null) {
-    const themeKey = this.getThemeKeyForComponent(themable);
-    const currentController = (themable.view as any)[themeKey];
-    let bindingContext: any;
-    let newController: StyleController | undefined;
-
-    if (!theme) {
-      if (currentController !== currentController.factory.defaultController) {
-        currentController.unbind();
-        newController = currentController.factory.defaultController as StyleController;
-        (themable.view as any)[themeKey] = newController;
-        newController.bind(themable.view);
-      }
-
+  /**
+   * Processes a UxTheme into the corresponding CSS Variables
+   * and applies them to the provided element.
+   *
+   * @param element Element to apply the processed UxTheme to.
+   * @param theme UxTheme to process.
+   */
+  public applyTheme(element: HTMLElement, theme: UxTheme) {
+    if (UxTheme == null) {
       return;
     }
 
-    if (typeof theme === 'string') {
-      bindingContext = themable.resources.getValue(theme) || themable.view.container.get(theme);
-    } else {
-      bindingContext = theme;
-    }
+    const baseTheme = new UxTheme();
 
-    if (this.getShadowDOMRoot(themable.view) !== null) {
-      currentController.unbind();
-      currentController.bindingContext = bindingContext;
-      currentController.bind(themable.view);
-    } else {
-      newController = this.controllers.get(bindingContext);
+    baseTheme.themeKey = 'theme-base';
 
-      if (!newController) {
-        newController = currentController.factory.create(
-          this.container,
-          null,
-          bindingContext
-        ) as StyleController;
-      }
+    for (const key in theme) {
 
-      currentController.unbind();
-      (themable.view as any)[themeKey] = newController;
-      newController.bind(themable.view);
-      this.controllers.set(bindingContext, newController);
-
-      newController.onRemove = () => {
-        this.controllers.delete(bindingContext);
-      };
-    }
-  }
-
-  public getOrCreateStyleController(view: View, factory: StyleFactory): StyleController {
-    let controller = (view as any)[factory.themeKey];
-
-    if (controller === undefined) {
-      const shadowDOMRoot = this.getShadowDOMRoot(view);
-
-      if (shadowDOMRoot === null) {
-        (view as any)[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
-      } else {
-        (view as any)[factory.themeKey] = controller = factory.create(view.container, shadowDOMRoot);
+      if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
+        if (theme[key] != null) {
+          element.style.setProperty(`--ux-theme--${theme.themeKey}-${kebabCase(key)}`, theme[key]);
+        }
       }
     }
-
-    return controller;
   }
 
-  private getShadowDOMRoot(view: View) {
-    const root = view.container.get(DOM.boundary);
-
-    if (root && root.host instanceof Element) {
-      return root;
-    }
-
-    return null;
+  public ensureDefaultTheme(theme: UxTheme) {
+    this.styleController.EnsureBaseThemeCreated(theme);
   }
+}
+
+function kebabCase(value: string) {
+  value = value.charAt(0).toLowerCase() + value.slice(1);
+  return value.replace(/([A-Z])/g, (match) => `-${match[0].toLowerCase()}`);
 }

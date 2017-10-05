@@ -1,64 +1,79 @@
-import {View} from 'aurelia-templating';
-import {DOM, PLATFORM} from 'aurelia-pal';
+import { inject } from 'aurelia-dependency-injection';
+import { DOM } from 'aurelia-pal';
+import { ObserverLocator } from 'aurelia-binding';
+import { UxTheme } from './ux-theme';
 
+@inject(ObserverLocator, )
 export class StyleController {
-  public isDefault = false;
-  private styleElementParent: Node;
-  private styleElement: HTMLStyleElement;
-  private bindingInstance: any = null;
-  private count = 0;
+  public styleElements: any = {};
 
-  public onRemove = PLATFORM.noop;
+  constructor(public observerLocator: ObserverLocator) { }
 
-  constructor(
-    public factory: any,
-    public bindingContext: any,
-    public overrideContext: any,
-    private expression: any,
-    private destination?: Element
-    ) {
+  /**
+   * Checks to see if a base theme has been registered.
+   * If no base theme is found, the theme is registered,
+   * bindings are set up, and a new style element is added
+   * with the processed theme to the document head.
+   *
+   * @param theme A theme derived from the UxTheme base class.
+   */
+  public EnsureBaseThemeCreated(theme: UxTheme) {
+    let baseTheme = this.styleElements[theme.themeKey] as UxTheme | null;
+
+    if (baseTheme != null) {
+      return;
+    }
+
+    baseTheme = theme;
+
+    const styleElement = this.createStyleElement(theme);
+    this.setWatches(theme, styleElement);
+
+    DOM.appendNode(styleElement, window.document.head);
+
+    this.styleElements[theme.themeKey] = theme;
   }
 
-  public bind(view: View) {
-    const overrideContext: any = view.overrideContext;
-    const $styles = overrideContext['$styles'] || {};
+  private createStyleElement(theme: UxTheme) {
+    const styleElement = DOM.createElement('style') as HTMLStyleElement;
 
-    overrideContext['$' + this.factory.themeKey] = this.bindingContext;
-    overrideContext['$design'] = this.overrideContext.$design;
-    overrideContext['$styles'] = Object.assign(
-      $styles, this.overrideContext.$styles
-    );
+    styleElement.type = 'text/css';
+    styleElement.innerHTML = this.processInnerHtml(theme);
 
-    if (this.count === 0) {
-      this.ensureStyleElementIsAddedToDocument();
-      this.count = 1;
-      this.bindingInstance.bind(this);
-    } else {
-      this.count++;
+    return styleElement;
+  }
+
+  private setWatches(theme: UxTheme, styleElement: HTMLStyleElement) {
+    const baseTheme = new UxTheme();
+
+    for (const key in theme) {
+      if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
+        this.observerLocator.getObserver(theme, key).subscribe(() => {
+          styleElement.innerHTML = this.processInnerHtml(theme);
+        });
+      }
     }
   }
 
-  public unbind() {
-    this.count--;
+  private processInnerHtml(theme: UxTheme) {
+    const baseTheme = new UxTheme();
+    let designInnerHtml = ':root {\r\n';
 
-    if (this.count === 0) {
-      this.removeStyleElement();
-      this.bindingInstance.unbind();
+    baseTheme.themeKey = 'theme-base';
+
+    for (const key in theme) {
+      if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
+        designInnerHtml += `  --ux-theme--${theme.themeKey}-${kebabCase(key)}: ${theme[key]};\r\n`;
+      }
     }
-  }
 
-  private ensureStyleElementIsAddedToDocument() {
-    if (this.styleElement === undefined) {
-      this.styleElement = DOM.injectStyles('', this.destination) as HTMLStyleElement;
-      this.bindingInstance = this.expression.createBinding(this.styleElement);
-    } else if (!this.styleElement.parentNode) {
-      this.styleElementParent.appendChild(this.styleElement);
-    }
-  }
+    designInnerHtml += '}';
 
-  private removeStyleElement() {
-    this.styleElementParent = this.styleElement.parentNode as Node;
-    DOM.removeNode(this.styleElement);
-    this.onRemove();
+    return designInnerHtml;
   }
+}
+
+function kebabCase(value: string) {
+  value = value.charAt(0).toLowerCase() + value.slice(1);
+  return value.replace(/([A-Z])/g, (match) => `-${match[0].toLowerCase()}`);
 }
