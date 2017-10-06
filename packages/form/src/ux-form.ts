@@ -1,30 +1,25 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from 'aurelia-ux';
+import { UxFormTheme } from './ux-form-theme';
 
-@inject(Element, ViewResources, StyleEngine)
+@inject(Element, StyleEngine)
 @customElement('ux-form')
-@processAttributes(processDesignAttributes)
 
-export class UxForm implements Themable {
-  @bindable public theme = null;
+export class UxForm implements UxComponent {
+  @bindable public theme: UxFormTheme;
   @bindable public submitOnEnter: any;
 
-  public view: View;
   private bindSubmitToEnter: boolean = false;
 
-  constructor(private element: Element, public resources: ViewResources, private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
+  constructor(private element: HTMLElement, private styleEngine: StyleEngine) {
+    styleEngine.ensureDefaultTheme(new UxFormTheme());
   }
 
   public bind() {
-    if (this.theme) {
-      this.styleEngine.applyTheme(this, this.theme);
+    if (this.theme != null) {
+      this.themeChanged(this.theme);
     }
 
     if (this.submitOnEnter !== undefined) {
@@ -59,7 +54,7 @@ export class UxForm implements Themable {
   }
 
   public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this, newValue);
+    this.styleEngine.applyTheme(this.element, newValue);
   }
 
   public submitForm() {

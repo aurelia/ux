@@ -1,32 +1,24 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from 'aurelia-ux';
 import { UxChipTheme } from './ux-chip-theme';
 
-@inject(Element, ViewResources, StyleEngine)
+@inject(Element, StyleEngine)
 @customElement('ux-chip')
-@processAttributes(processDesignAttributes)
 
-export class UxChip implements Themable {
+export class UxChip implements UxComponent {
   @bindable public theme: UxChipTheme;
   @bindable public type: any;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
 
-  public view: View;
-
   constructor(
     private element: HTMLInputElement,
-    public resources: ViewResources,
-    private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
+    private styleEngine: StyleEngine) {
+    styleEngine.ensureDefaultTheme(new UxChipTheme());
   }
 
   public bind() {
@@ -34,14 +26,7 @@ export class UxChip implements Themable {
   }
 
   public themeChanged(newValue: UxChipTheme) {
-    if (!newValue) {
-      newValue = {
-        background: '#e0e0e0',
-        foreground: '#757575'
-      };
-    }
-
-    this.styleEngine.applyTheme(this, newValue);
+    this.styleEngine.applyTheme(this.element, newValue);
   }
 
   public closeChip() {

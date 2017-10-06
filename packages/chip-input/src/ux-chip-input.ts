@@ -1,21 +1,18 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from 'aurelia-ux';
 import { UxChipInputTheme } from './ux-chip-input-theme';
-import { normalizeBooleanAttribute } from '../../resources/html-attributes';
+import { normalizeBooleanAttribute } from './html-attributes';
 
-@inject(Element, ViewResources, StyleEngine)
+@inject(Element, StyleEngine)
 @customElement('ux-chip-input')
-@processAttributes(processDesignAttributes)
 
-export class UxChipInput implements Themable {
+export class UxChipInput implements UxComponent {
   @bindable public disabled: boolean | string = false;
   @bindable public readonly: boolean | string = false;
-  @bindable public theme = null;
+  @bindable public theme: UxChipInputTheme;
   @bindable public type: any;
   @bindable public separator: string = ', ';
 
@@ -23,17 +20,14 @@ export class UxChipInput implements Themable {
   public value: any = undefined;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public chips: Array<string> = new Array<string>();
+  public chips: string[] = new Array<string>();
 
-  public view: View;
   private textbox: HTMLInputElement;
   private chiprepeat: Element;
   private tagrepeat: Element;
 
-  constructor(private element: HTMLInputElement, public resources: ViewResources, private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
+  constructor(private element: HTMLElement, private styleEngine: StyleEngine) {
+    styleEngine.ensureDefaultTheme(new UxChipInputTheme());
   }
 
   public bind() {
@@ -183,12 +177,6 @@ export class UxChipInput implements Themable {
   }
 
   public themeChanged(newValue: UxChipInputTheme) {
-    if( !newValue ) {
-      newValue = {
-        background: 'transparent'
-      };
-    }
-
-    this.styleEngine.applyTheme(this, newValue);
+    this.styleEngine.applyTheme(this.element, newValue);
   }
 }

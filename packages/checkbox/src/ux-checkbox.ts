@@ -1,26 +1,25 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from 'aurelia-ux';
 import { UxCheckboxTheme } from './ux-checkbox-theme';
-import { PaperRipple } from '../../effects/paper-ripple';
-import { normalizeBooleanAttribute } from '../../resources/html-attributes';
+import { PaperRipple } from './effects/paper-ripple';
+import { normalizeBooleanAttribute } from './html-attributes';
 
-@inject(Element, ViewResources, StyleEngine)
+@inject(Element, StyleEngine)
 @customElement('ux-checkbox')
-@processAttributes(processDesignAttributes)
 
-export class UxCheckbox implements Themable {
+export class UxCheckbox implements UxComponent {
   @bindable public disabled: boolean | string = false;
   @bindable public effect = null;
   @bindable public id: string;
   @bindable public label: string;
-  @bindable public matcher = (a: any, b: any) => a === b;
   @bindable public model: any;
   @bindable public tabindex = 0;
   @bindable public theme: UxCheckboxTheme;
+  // tslint:disable
+  @bindable public matcher = (a: any, b: any) => a === b;
+  // tslint: enable
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   @bindable public checked: any = false;
@@ -31,19 +30,17 @@ export class UxCheckbox implements Themable {
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   @bindable public uncheckedValue: any = null;
 
-  public view: View;
   private checkbox: Element;
   private ripple: PaperRipple | null = null;
+
 
   @computedFrom('disabled')
   public get isDisabled() {
     return normalizeBooleanAttribute('disabled', this.disabled);
   }
 
-  constructor(public element: HTMLElement, public resources: ViewResources, private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
+  constructor(public element: HTMLElement, private styleEngine: StyleEngine) {
+    styleEngine.ensureDefaultTheme(new UxCheckboxTheme());
   }
 
   public bind() {
@@ -85,13 +82,7 @@ export class UxCheckbox implements Themable {
   }
 
   public themeChanged(newValue: UxCheckboxTheme) {
-    if (newValue == null) {
-      newValue = {
-        effect: 'ripple'
-      };
-    }
-
-    this.styleEngine.applyTheme(this, newValue);
+    this.styleEngine.applyTheme(this.element, newValue);
   }
 
   public disabledChanged(newValue: boolean | string) {

@@ -1,31 +1,35 @@
 <template styles.calendar>
-  <require from="./ux-calendar-theme"></require>
+  <require from="./ux-calendar.css"></require>
 
-    <div class="month-display">
-      <ux-button type="icon" click.delegate="previousMonth()">
-        <ux-icon icon="navigate_before"></ux-icon>
-      </ux-button>
-      <span>
+  <div class="month-display">
+    <ux-button type="icon" click.delegate="previousMonth()">
+      <svg viewBox="0 0 24 24">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+      </svg>
+    </ux-button>
+    <span>
       ${displayMonth.format('MMMM YYYY')}
     </span>
-      <ux-button type="icon" click.delegate="nextMonth()">
-        <ux-icon icon="navigate_next"></ux-icon>
-      </ux-button>
+    <ux-button type="icon" click.delegate="nextMonth()">
+      <svg viewBox="0 0 24 24">
+        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+      </svg>
+    </ux-button>
 
+  </div>
+  <div class="calendar-row weekdays">
+    <div class="day" repeat.for="weekday of weekdays">
+      ${weekday[0]}
     </div>
-    <div class="calendar-row weekdays">
-      <div class="day" repeat.for="weekday of weekdays">
-        ${weekday[0]}
-      </div>
-    </div>
-    <div class="calendar-row" repeat.for="week of calendarRows">
-      <div class="day" repeat.for="day of week">
-        <div click.delegate="changeCalendarSelection(day)" if.bind="day" class="day-highlight 
+  </div>
+  <div class="calendar-row" repeat.for="week of calendarRows">
+    <div class="day" repeat.for="day of week">
+      <div click.delegate="changeCalendarSelection(day)" if.bind="day" class="day-highlight 
              ${day.isSame(value, 'day') ? 'selected' : ''}
              ${isValidDate(day) ? 'out-of-range' : '' }">
-          ${day.date()}
-        </div>
+        ${day.date()}
       </div>
     </div>
+  </div>
 
 </template>

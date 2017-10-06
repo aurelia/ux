@@ -1,31 +1,27 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
+import { UxComponent, StyleEngine, UxTheme } from 'aurelia-ux';
+import { UxListTheme } from './ux-list-theme';
 
-@inject(ViewResources, StyleEngine)
+@inject(Element, StyleEngine)
 @customElement('ux-list')
-@processAttributes(processDesignAttributes)
 
-export class UxList implements Themable {
-  @bindable public theme = null;
+export class UxList implements UxComponent {
+  @bindable public theme: UxListTheme;
 
-  public view: View;
-
-  constructor(public resources: ViewResources, private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
-  }
+  constructor(
+    public element: HTMLElement,
+    private styleEngine: StyleEngine) {
+      styleEngine.ensureDefaultTheme(new UxListTheme());
+    }
 
   public bind() {
-    if (this.theme) {
-      this.styleEngine.applyTheme(this, this.theme);
+    if (this.theme != null) {
+      this.themeChanged(this.theme);
     }
   }
 
-  public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this, newValue);
+  public themeChanged(newTheme: UxTheme) {
+    this.styleEngine.applyTheme(this.element, newTheme);
   }
 }

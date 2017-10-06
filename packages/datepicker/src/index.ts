@@ -1,12 +1,10 @@
 import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
 
-import { configure as buttonConfig } from '@aurelia-ux-components/button';
-
 export { DatepickerSettings } from './resources/datepicker-settings';
 
-export function configure(config: FrameworkConfiguration) {
-  buttonConfig(config);
+export { UxDatepickerTheme } from './ux-datepicker-theme';
 
+export function configure(config: FrameworkConfiguration) {
   config.globalResources([
     PLATFORM.moduleName('./ux-calendar'),
     PLATFORM.moduleName('./ux-datepicker'),

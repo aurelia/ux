@@ -1,43 +1,33 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
-import { normalizeBooleanAttribute } from '../../resources/html-attributes';
+import { UxInputTheme } from './ux-input-theme';
 
-@inject(Element, ViewResources, StyleEngine)
+@inject(Element, StyleEngine)
 @customElement('ux-input')
-@processAttributes(processDesignAttributes)
-
-export class UxInput implements Themable {
+export class UxInput {
   @bindable public autofocus = null;
-  @bindable public disabled: boolean | string = false;
+  @bindable public disabled: any = false;
   @bindable public maxlength: number;
   @bindable public minlength: number;
   @bindable public min: number;
   @bindable public max: number;
-  @bindable public readonly: boolean | string = false;
-  @bindable public theme = null;
+  @bindable public readonly: any = false;
+  @bindable public theme: UxInputTheme | null;
   @bindable public type: any;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
 
-  public view: View;
   private textbox: HTMLInputElement;
 
-  constructor(private element: HTMLInputElement, public resources: ViewResources, private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
+  constructor(private element: HTMLInputElement, public styleEngine: StyleEngine) {
+    styleEngine.ensureDefaultTheme(new UxInputTheme());
   }
 
   public bind() {
-    if (this.theme) {
-      this.styleEngine.applyTheme(this, this.theme);
-    }
 
     if (this.autofocus || this.autofocus === '') {
       setTimeout(() => {
@@ -96,13 +86,15 @@ export class UxInput implements Themable {
       this.textbox.setAttribute('maxlength', this.maxlength.toString());
     }
 
-    if (normalizeBooleanAttribute('disabled', this.disabled)) {
+    if (this.disabled || this.disabled === '') {
       this.textbox.setAttribute('disabled', '');
     }
 
-    if (normalizeBooleanAttribute('readonly', this.readonly)) {
+    if (this.readonly || this.readonly === '') {
       this.textbox.setAttribute('readonly', '');
     }
+
+    this.themeChanged(this.theme);
   }
 
   public attached() {
@@ -131,24 +123,24 @@ export class UxInput implements Themable {
     });
   }
 
-  public disabledChanged(newValue: boolean | string) {
-    if (normalizeBooleanAttribute('disabled', newValue)) {
-      this.textbox.setAttribute('disabled', '');
+  public themeChanged(newValue: any) {
+    this.styleEngine.applyTheme(this.element, newValue);
+  }
+
+  public disabledChanged(newValue: any) {
+    if (newValue === true || newValue === '') {
+      this.textbox.setAttribute('disabled', 'true');
     } else {
       this.textbox.removeAttribute('disabled');
     }
   }
 
-  public readonlyChanged(newValue: boolean | string) {
-    if (normalizeBooleanAttribute('readonly', newValue)) {
-      this.textbox.setAttribute('readonly', '');
+  public readonlyChanged(newValue: any) {
+    if (newValue === true || newValue === '') {
+      this.textbox.setAttribute('readonly', 'true');
     } else {
       this.textbox.removeAttribute('readonly');
     }
-  }
-
-  public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this, newValue);
   }
 
   public typeChanged(newValue: any) {

@@ -1,46 +1,38 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from 'aurelia-ux';
 import { UxTagTheme } from './ux-tag-theme';
 
-@inject(Element, ViewResources, StyleEngine)
+@inject(Element, StyleEngine)
 @customElement('ux-tag')
-@processAttributes(processDesignAttributes)
 
-export class UxTag implements Themable {
-    @bindable public theme: UxTagTheme;
-    @bindable public type: any;
-    @bindable({ defaultBindingMode: bindingMode.twoWay })
-    public value: any = undefined;
+export class UxTag implements UxComponent {
+  @bindable public theme: UxTagTheme;
+  @bindable public type: any;
+  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  public value: any = undefined;
 
-    public view: View;
+  constructor(
+    private element: HTMLInputElement,
+    private styleEngine: StyleEngine) {
+    styleEngine.ensureDefaultTheme(new UxTagTheme());
+  }
 
-    constructor(
-        private element: HTMLInputElement,
-        public resources: ViewResources,
-        private styleEngine: StyleEngine) { }
-
-    public created(_: any, myView: View) {
-        this.view = myView;
+  public bind() {
+    if (this.theme) {
+      this.styleEngine.applyTheme(this.element, this.theme);
     }
+  }
 
-    public bind() {
-        if (this.theme) {
-            this.styleEngine.applyTheme(this, this.theme);
-        }
-    }
+  public themeChanged(newValue: any) {
+    this.styleEngine.applyTheme(this.element, newValue);
+  }
 
-    public themeChanged(newValue: any) {
-        this.styleEngine.applyTheme(this, newValue);
-    }
+  public closeTag() {
+    const closeEvent = DOM.createCustomEvent('close', { bubbles: false });
 
-    public closeTag() {
-        const closeEvent = DOM.createCustomEvent('close', { bubbles: false });
-
-        this.element.dispatchEvent(closeEvent);
-    }
+    this.element.dispatchEvent(closeEvent);
+  }
 }

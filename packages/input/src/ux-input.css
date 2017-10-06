@@ -1,0 +1,66 @@
+ux-input {
+  display: block;
+  width: 100%;
+  color: var(--ux-theme--input-foreground);
+}
+
+  ux-input > input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 0 4px 0;
+    margin-bottom: 4px;
+    border: 0;
+    outline: none;
+    padding-left:0;
+    padding-right:0;
+    transition: border-color 250ms ease;
+    background-color: var(--ux-theme--input-background);
+    border-bottom: var(--ux-theme--input-border-bottom);
+  }
+
+    ux-input > input:hover,
+    ux-input > input:focus {
+      border-bottom: var(--ux-theme--input-border-bottom-hover);
+    }
+
+    ux-input > input:focus {
+      border-bottom-width: 2px;
+      padding-bottom: 3px;
+    }
+
+    ux-input > input[disabled],
+    ux-input > input[disabled]:hover,
+    ux-input > input[disabled]:focus,
+    ux-input > input[readonly],
+    ux-input > input[readonly]:hover,
+    ux-input > input[readonly]:focus {
+      color: var(--ux-theme--input-disabled-foreground);
+      border-bottom: var(--ux-theme--input-disabled-border-bottom);
+    }
+
+  ux-input.full-width > input {
+    padding: 20px 8px;
+    font-size: 16px;
+    margin-bottom: 0;
+    border: var(--ux-theme--input-full-width-border);
+    background-color: var(--ux-theme--input-full-width-background);
+  }
+
+    ux-input.full-width > input[disabled]
+    ux-input.full-width > input[disabled]:hover,
+    ux-input.full-width > input[disabled]:focus,
+    ux-input.full-width > input[readonly],
+    ux-input.full-width > input[readonly]:hover,
+    ux-input.full-width > input[readonly]:focus  {
+      background-color: var(--ux-theme--input-full-width-background-disabled);
+      border: 1px solid var(--ux-theme--input-disabled-border-bottom);
+      color: var(--ux-theme--input-disabled-foreground);
+    }
+  
+  ux-input.has-error input {
+    border-bottom-color: var(--ux-theme--input-error);
+  }
+
+  ux-input.full-width.has-error input {
+    border-color: var(--ux-theme--input-error);
+  }

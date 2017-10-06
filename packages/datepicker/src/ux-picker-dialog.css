@@ -1,6 +1,6 @@
-styles.uxpickerdialog {
-  color: ${ $design.controlForeground };
-  background-color: ${ $design.controlBackground };
+ux-picker-dialog {
+  color: var(--design-control-foreground, var(--swatch-grey-p900));
+  background-color: var(--design-control-background, var(--swatch-white));
   width: 300px;
   
   user-select: none;
@@ -14,39 +14,39 @@ styles.uxpickerdialog {
   animation-name: datepicker-dialog-grow;
 }
 
-styles.uxpickerdialog header {
+ux-picker-dialog header {
   width: auto;
   height: 124px;
   padding: 16px 24px;
   box-sizing: border-box;
-  color: ${ foreground || $design.primaryForeground };
-  background: ${ background || $design.primary };
+  color: var(--ux-theme--datepicker-header-foreground);
+  background: var(--ux-theme--datepicker-header-background);
 }
 
-styles.uxpickerdialog header > div.year,
-styles.uxpickerdialog header > div.date {
+ux-picker-dialog header > div.year,
+ux-picker-dialog header > div.date {
   opacity: 0.7;
   cursor: pointer;
 }
 
-styles.uxpickerdialog header div.year {
+ux-picker-dialog header div.year {
   font-size: 1.1em;
 }
 
-  styles.uxpickerdialog header div.year.active {
+  ux-picker-dialog header div.year.active {
     opacity: 1;
   }
 
-styles.uxpickerdialog header div.date {
+ux-picker-dialog header div.date {
   font-size: 2em;
   font-weight: 400;
 }
 
-  styles.uxpickerdialog header div.date.active {
+  ux-picker-dialog header div.date.active {
     opacity: 1;
   }
 
-styles.uxpickerdialog footer {
+ux-picker-dialog footer {
   display: flex;
   justify-content: flex-end;
 }

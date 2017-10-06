@@ -1,18 +1,12 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable, ViewResources } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { computedFrom } from 'aurelia-binding';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
 import { Moment } from 'moment';
 
-@inject(Element, ViewResources, StyleEngine)
+@inject(Element, ViewResources)
 @customElement('ux-year-list')
-@processAttributes(processDesignAttributes)
-export class UxYearList implements Themable {
+export class UxYearList {
   @bindable public theme = null;
-
-  public view: View;
 
   @bindable public minDate: Moment;
   @bindable public maxDate: Moment;
@@ -21,25 +15,12 @@ export class UxYearList implements Themable {
 
   private today = new Date();
 
-  constructor(public element: Element, public resources: ViewResources, private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
+  constructor(public element: Element, public resources: ViewResources) {
     this.today.setHours(0, 0, 0, 0);
-    this.view = myView;
-  }
-
-  public bind() {
-    if (this.theme) {
-      this.styleEngine.applyTheme(this, this.theme);
-    }
   }
 
   public attached() {
     this.scrollToActive();
-  }
-
-  public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this, newValue);
   }
 
   public selectYear(year: number) {
@@ -48,7 +29,7 @@ export class UxYearList implements Themable {
 
   @computedFrom('minDate', 'maxDate')
   public get yearList() {
-    const yearList: Array<number> = [];
+    const yearList: number[] = [];
     let min = 1900;
     let max = 2100;
 

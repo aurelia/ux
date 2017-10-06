@@ -1,4 +1,4 @@
-styles.tag {
+ux-tag {
   display: inline-flex;
   align-items: center;
 
@@ -8,23 +8,23 @@ styles.tag {
 
   border-radius: 2px;
 
-  background-color: var(--background, --design-accent);
-  color: var(--foreground, --design-accentForeground);
+  background-color: var(--ux-theme--tag-background);
+  color: var(--ux-theme--tag-foreground);
 }
 
-styles.tag > span {
+ux-tag > span {
     margin: 0 8px;
   }
 
-    styles.tag > span.close {
+    ux-tag > span.close {
       display:none;
     }
 
-  styles.tag[deletable] > span {
+  ux-tag[deletable] > span {
     margin-right: 0;
   }
 
-    styles.tag[deletable] > span.close {
+    ux-tag[deletable] > span.close {
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -32,7 +32,7 @@ styles.tag > span {
       cursor: pointer;
     }
 
-      styles.tag[deletable] > span.close::before {
+      ux-tag[deletable] > span.close::before {
         content: '+';    
         font-size: 24px;
         transform: rotate(45deg);

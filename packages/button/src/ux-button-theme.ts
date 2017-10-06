@@ -1,11 +1,11 @@
-export interface UxButtonTheme {
-  type?: string;   // = 'raised'; // flat, raised or fab
-  size?: string;   // = 'medium'; // small, medium or large
-  effect?: string; // = 'ripple'; // ripple or none
+import { UxTheme } from 'aurelia-ux';
 
-  background?: string;
-  foreground?: string;
+export class UxButtonTheme implements UxTheme {
+  public themeKey = 'button';
 
-  backgroundDisabled?: string;
-  foregroundDisabled?: string;
+  public background: string;
+  public foreground: string;
+
+  public backgroundDisabled: string;
+  public foregroundDisabled: string;
 }

@@ -1,30 +1,13 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
 
-@inject(Element, ViewResources, StyleEngine)
+@inject(Element)
 @customElement('ux-field')
-@processAttributes(processDesignAttributes)
 
-export class UxField implements Themable {
-  @bindable public theme = null;
+export class UxField {
   @bindable public label: string;
 
-  public view: View;
-
-  constructor(private element: Element, public resources: ViewResources, private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
-  }
-
-  public bind() {
-    if (this.theme) {
-      this.styleEngine.applyTheme(this, this.theme);
-    }
-  }
+  constructor(private element: Element) { }
 
   public attached() {
     if (this.label && !this.element.querySelector('label')) {
@@ -34,9 +17,5 @@ export class UxField implements Themable {
 
       this.element.insertBefore(newLabel, this.element.firstChild);
     }
-  }
-
-  public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this, newValue);
   }
 }

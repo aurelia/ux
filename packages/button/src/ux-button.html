@@ -2,12 +2,7 @@
   <require from="../effects/paper-ripple.css"></require>
   <require from="./ux-button.css"></require>
 
-  <button ref="button" styles.button class="
-    ${size !== null ? size : $uxButtonTheme.size}
-    ${type !== null ? type : $uxButtonTheme.type}  
-    ${effect !== null ? effect : $uxButtonTheme.effect}
-    ${disabled ? 'disabled' : ''}
-    "
+  <button ref="button" styles.button class="${disabled ? 'disabled' : ''}"
     mousedown.trigger="onMouseDown($event)"
     mouseup.trigger="onMouseUp()">
     <slot></slot>

@@ -1,13 +1,13 @@
-styles.datepicker {
+ux-datepicker {
   display: flex;
   position: relative;
 }
 
-    styles.datepicker > ux-button > button.icon {
-      color: ${ foreground || '#333' };
+    ux-datepicker > ux-button > button.icon {
+      color: var(--ux-theme-datepicker-foreground);
     }
 
-  styles.datepicker > .overlay:not(:empty) {
+  ux-datepicker > .overlay:not(:empty) {
     position: fixed;
     left: 0;
     top: 0;
@@ -21,14 +21,22 @@ styles.datepicker {
     animation-name: datepicker-background-fade-in;
     animation-duration: 250ms;
     
-    background-color: ${ background || 'rgba(0, 0, 0, 0.25)'};
+    background-color: var(--ux-theme--datepicker-overlay);
   }
+
+
+ux-datepicker > ux-button svg {
+  fill: var(--ux-theme--datepicker-calendar-icon);
+  width: 24px;
+  height: 24px;
+}
+
 
 @keyframes datepicker-background-fade-in {
   from {
     background-color: rgba(0, 0, 0, 0);
   }
   to {
-    background-color: ${ background || 'rgba(0, 0, 0, 0.25)' };
+    background-color: var(--ux-theme--datepicker-overlay);
   }
 }

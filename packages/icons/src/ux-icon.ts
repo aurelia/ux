@@ -1,36 +1,28 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable, processAttributes } from 'aurelia-templating';
 import { Logger } from 'aurelia-logging';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
 import { processDesignAttributes } from 'aurelia-ux';
 import { UxIconTheme } from './ux-icon-theme';
 import IconMap from './ux-icon-map';
 
-@inject(Element, ViewResources, StyleEngine, Logger)
+@inject(Element, StyleEngine, Logger)
 @customElement('ux-icon')
 @processAttributes(processDesignAttributes)
 
-export class UxIcon implements Themable {
+export class UxIcon {
   @bindable public size: string;
   @bindable public theme: UxIconTheme;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public icon: any = undefined;
 
-  public view: View;
-
   constructor(
     private element: HTMLElement,
-    public resources: ViewResources,
     private styleEngine: StyleEngine,
     private logger: Logger
   ) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
-  }
 
   public bind() {
     if (this.size) {
@@ -38,7 +30,7 @@ export class UxIcon implements Themable {
     }
 
     if (this.theme) {
-      this.styleEngine.applyTheme(this, this.theme);
+      this.styleEngine.applyTheme(this.element, this.theme);
     }
 
     if (this.icon) {
@@ -47,7 +39,7 @@ export class UxIcon implements Themable {
   }
 
   public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this, newValue);
+    this.styleEngine.applyTheme(this.element, newValue);
   }
 
   public iconChanged(newValue: any) {

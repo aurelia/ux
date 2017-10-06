@@ -1,103 +1,88 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable, ViewResources } from 'aurelia-templating';
 import { observable } from 'aurelia-binding';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
 import { inject } from 'aurelia-dependency-injection';
-import { Moment } from 'moment';
-import * as moment from 'moment';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
+import * as moment from 'moment';
 
-@inject(ViewResources, StyleEngine)
+@inject(ViewResources)
 @customElement('ux-calendar')
-@processAttributes(processDesignAttributes)
-export class UxCalendar implements Themable {
-  @bindable public theme = null;
+export class UxCalendar {
+    @bindable public theme = null;
 
-  @bindable public weekdays = moment.weekdays();
+    @bindable public weekdays = moment.weekdays();
 
-  @bindable public minDate: Moment;
-  @bindable public maxDate: Moment;
+    @bindable public minDate: moment.Moment;
+    @bindable public maxDate: moment.Moment;
 
-  @bindable public value: Moment;
-  @bindable public config: DatepickerSettings;
+    @bindable public value: moment.Moment;
+    @bindable public config: DatepickerSettings;
 
-  public view: View;
+    private calendarRows = new Array<any>();
 
-  private calendarRows = new Array<any>();
+    @observable private displayMonth: moment.Moment;
 
-  @observable private displayMonth: Moment;
+    constructor(public resources: ViewResources) { }
 
-  constructor(public resources: ViewResources, private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
-  }
-
-  public bind() {
-    if (this.theme) {
-      this.styleEngine.applyTheme(this, this.theme);
+    public bind() {
+        this.displayMonth = this.value.clone();
     }
 
-    this.displayMonth = this.value.clone();
-  }
-
-  public previousMonth() {
-    this.displayMonth = this.displayMonth.clone().subtract(1, 'month');
-  }
-
-  public nextMonth() {
-    this.displayMonth = this.displayMonth.clone().add(1, 'month');
-  }
-
-  public changeCalendarSelection(newDate: Moment) {
-    const modifiedDate = this.value.clone()
-      .set('date', newDate.date())
-      .set('month', newDate.month())
-      .set('year', newDate.year());
-
-    if (this.isValidDate(modifiedDate)) {
-      return;
+    public previousMonth() {
+        this.displayMonth = this.displayMonth.clone().subtract(1, 'month');
     }
 
-    this.value = modifiedDate;
-  }
-
-  public displayMonthChanged(newDate: Moment) {
-    this.calendarRows = new Array<any>();
-
-    const clonedDate = newDate.clone();
-
-    const firstDay = clonedDate.startOf('month').weekday();
-    const daysInMonth = newDate.daysInMonth();
-
-    let currentWeek = new Array<any>();
-
-    while (currentWeek.length < firstDay) {
-      currentWeek.push(null);
+    public nextMonth() {
+        this.displayMonth = this.displayMonth.clone().add(1, 'month');
     }
 
-    for (let index = 0; index < daysInMonth; index++) {
-      currentWeek.push(clonedDate.clone().add(index, 'days'));
+    public changeCalendarSelection(newDate: moment.Moment) {
+        const modifiedDate = this.value.clone()
+            .set('date', newDate.date())
+            .set('month', newDate.month())
+            .set('year', newDate.year());
 
-      if (currentWeek.length === 7) {
-        this.calendarRows.push(currentWeek);
+        if (this.isValidDate(modifiedDate)) {
+            return;
+        }
 
-        currentWeek = new Array<any>();
-      }
+        this.value = modifiedDate;
     }
 
-    if (currentWeek.length > 0) {
-      while (currentWeek.length < 7) {
-        currentWeek.push(null);
-      }
+    public displayMonthChanged(newDate: moment.Moment) {
+        this.calendarRows = new Array<any>();
 
-      this.calendarRows.push(currentWeek);
+        const clonedDate = newDate.clone();
+
+        const firstDay = clonedDate.startOf('month').weekday();
+        const daysInMonth = newDate.daysInMonth();
+
+        let currentWeek = new Array<any>();
+
+        while (currentWeek.length < firstDay) {
+            currentWeek.push(null);
+        }
+
+        for (let index = 0; index < daysInMonth; index++) {
+            currentWeek.push(clonedDate.clone().add(index, 'days'));
+
+            if (currentWeek.length === 7) {
+                this.calendarRows.push(currentWeek);
+
+                currentWeek = new Array<any>();
+            }
+        }
+
+        if (currentWeek.length > 0) {
+            while (currentWeek.length < 7) {
+                currentWeek.push(null);
+            }
+
+            this.calendarRows.push(currentWeek);
+        }
     }
-  }
 
-  private isValidDate(date: Moment) {
-    return DatetimeUtility.dateOutOfRange(date, this.minDate, this.maxDate, this.config);
-  }
+    private isValidDate(date: moment.Moment) {
+        return DatetimeUtility.dateOutOfRange(date, this.minDate, this.maxDate, this.config);
+    }
 }

@@ -1,39 +1,31 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
+import { UxInputInfoTheme } from './ux-input-info-theme';
 import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
 
-@inject(Element, ViewResources, StyleEngine)
+@inject(Element, StyleEngine)
 @customElement('ux-input-info')
-@processAttributes(processDesignAttributes)
-
-export class UxInputInfo implements Themable {
+export class UxInputInfo {
   @bindable public target: Element;
   @bindable public uxInputCounter = null;
-  @bindable public theme = null;
+  @bindable public theme: UxInputInfoTheme;
 
   public inputElementModel: any;
-  public view: View;
 
-  constructor(private element: Element, public resources: ViewResources, private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
+  constructor(private element: HTMLElement, public styleEngine: StyleEngine) {
+    styleEngine.ensureDefaultTheme(new UxInputInfoTheme());
   }
 
   public bind() {
-    if (this.theme) {
-      this.styleEngine.applyTheme(this, this.theme);
-    }
-
     if (this.target === undefined) {
       this.findAndSetTarget(this.element);
     }
+
+    this.themeChanged(this.theme);
   }
 
-  public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this, newValue);
+  public themeChanged(theme: UxInputInfoTheme) {
+    this.styleEngine.applyTheme(this.element, theme);
   }
 
   private findAndSetTarget(element: any) {

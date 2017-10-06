@@ -1,8 +1,10 @@
-import {styles} from 'aurelia-ux';
+import { swatches, UxTheme } from 'aurelia-ux';
 
-@styles()
-export class UxListTheme {
-  public background: string;
-  public foreground: string;
-  public foregroundSecondary: string;
+export class UxListTheme extends UxTheme {
+  public themeKey = 'list';
+
+  public listForeground: string = swatches.grey.p900;
+  public listSecondaryForeground: string = swatches.grey.p700;
+
+  public listBackground: string = swatches.white;
 }

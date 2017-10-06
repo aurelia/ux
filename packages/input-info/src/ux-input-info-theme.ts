@@ -1,7 +1,8 @@
-import { styles } from 'aurelia-ux';
+import { swatches, UxTheme } from 'aurelia-ux';
 
-@styles()
-export class UxInputInfoTheme {
-  public hintText: string;
-  public errorAccent: string;
+export class UxInputInfoTheme implements UxTheme {
+  public themeKey = 'input-info';
+
+  public foreground: string = swatches.grey.p600;
+  public error: string = swatches.red.p500;
 }

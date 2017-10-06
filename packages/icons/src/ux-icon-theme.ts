@@ -1,7 +1,8 @@
-import { styles } from 'aurelia-ux';
+import { UxTheme } from 'aurelia-ux';
 
-@styles()
-export class UxIconTheme {
+export class UxIconTheme implements UxTheme {
+  public themeKey = 'icon';
+
   public size = '24px';
 
   public foreground: string;

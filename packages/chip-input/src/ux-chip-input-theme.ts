@@ -1,15 +1,7 @@
-import { UxChipTheme } from './ux-chip-theme';
-import { UxTagTheme } from './ux-tag-theme';
+import {  UxTheme } from 'aurelia-ux';
 
-export interface UxChipInputTheme {
-  background?: string;
-  foreground?: string;
+export class UxChipInputTheme implements UxTheme {
+  public themeKey: string = 'chip-input';
 
-  backgroundDisabled?: string;
-  foregroundDisabled?: string;
-
-  errorAccent?: string;
-
-  chipTheme?: UxChipTheme;
-  tagTheme?: UxTagTheme;
+  public foreground: string = 'var(--design-primary-light-foreground)';
 }

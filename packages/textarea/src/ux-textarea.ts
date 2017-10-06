@@ -1,17 +1,15 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
-import { normalizeBooleanAttribute } from '../../resources/html-attributes';
+import { StyleEngine, UxComponent } from 'aurelia-ux';
+import { normalizeBooleanAttribute } from './html-attributes';
+import { UxTextareaTheme } from './ux-textarea-theme';
 
-@inject(Element, StyleEngine, ViewResources)
+@inject(Element, StyleEngine)
 @customElement('ux-textarea')
-@processAttributes(processDesignAttributes)
 
-export class UxTextarea implements Themable {
+export class UxTextarea implements UxComponent {
   @bindable public autofocus = null;
   @bindable public autoResize = null;
   @bindable public cols: number;
@@ -20,27 +18,21 @@ export class UxTextarea implements Themable {
   @bindable public minlength: number;
   @bindable public readonly: boolean | string = false;
   @bindable public rows: number;
-  @bindable public theme = null;
+  @bindable public theme: UxTextareaTheme;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
 
   public textbox: HTMLTextAreaElement;
-  public view: View;
 
-  constructor(
-    private element: HTMLTextAreaElement,
-    private styleEngine: StyleEngine,
-    public  resources: ViewResources) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
+  constructor(private element: HTMLElement, private styleEngine: StyleEngine) {
+    styleEngine.ensureDefaultTheme(new UxTextareaTheme());
   }
 
   public bind() {
 
-    if (this.theme) {
-      this.styleEngine.applyTheme(this, this.theme);
+    if (this.theme != null) {
+      this.themeChanged(this.theme);
     }
 
     if (this.autofocus || this.autofocus === '') {
@@ -133,7 +125,7 @@ export class UxTextarea implements Themable {
   }
 
   public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this, newValue);
+    this.styleEngine.applyTheme(this.element, newValue);
   }
 
   public valueChanged() {

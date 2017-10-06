@@ -1,9 +1,8 @@
-import { styles } from 'aurelia-ux';
+import { swatches, UxTheme } from 'aurelia-ux';
 
-@styles()
-export class UxFormTheme {
-  public background: string = 'transparent';
-  public foreground: string;
+export class UxFormTheme implements UxTheme {
+  public themeKey = 'form';
 
-  public formPadding: 8;
+  public labelFontSize: string = '14px';
+  public labelColor: string = swatches.grey.p500;
 }

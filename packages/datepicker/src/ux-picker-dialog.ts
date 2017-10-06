@@ -1,42 +1,27 @@
-import { customElement, bindable, ViewResources, View, processAttributes } from 'aurelia-templating';
-import { StyleEngine } from 'aurelia-ux';
-import { Themable } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
+import { customElement, bindable, ViewResources } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
-import { Moment } from 'moment';
-import * as moment from 'moment';
 import { DatepickerSettings } from './resources/datepicker-settings';
+import * as moment from 'moment';
 
-@inject(ViewResources, StyleEngine)
+@inject(ViewResources)
 @customElement('ux-picker-dialog')
-@processAttributes(processDesignAttributes)
-export class UxPickerDialog implements Themable {
+export class UxPickerDialog {
   @bindable public theme = null;
   @bindable public type = 'datetime';
   @bindable public display = 'month';
   @bindable public weekdays: any;
   @bindable public config: DatepickerSettings;
   @bindable public initialDate: any;
-  @bindable public minDate: Moment;
-  @bindable public maxDate: Moment;
+  @bindable public minDate: moment.Moment;
+  @bindable public maxDate: moment.Moment;
   @bindable public value: Date | null;
   @bindable public closeDialog: () => {};
 
-  public view: View;
+  private selectedDate: moment.Moment;
 
-  private selectedDate: Moment;
-
-  constructor(public resources: ViewResources, private styleEngine: StyleEngine) { }
-
-  public created(_: any, myView: View) {
-    this.view = myView;
-  }
+  constructor(public resources: ViewResources) { }
 
   public bind() {
-    if (this.theme) {
-      this.styleEngine.applyTheme(this, this.theme);
-    }
-
     if (this.value != null) {
       this.selectedDate = moment(this.value);
     } else {
