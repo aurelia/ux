@@ -14,31 +14,48 @@ export class StyleEngine {
    * @param element Element to apply the processed UxTheme to.
    * @param theme UxTheme to process.
    */
-  public applyTheme(element: HTMLElement, theme: UxTheme) {
-    if (UxTheme == null) {
-      return;
-    }
-
-    const baseTheme = new UxTheme();
-
-    baseTheme.themeKey = 'theme-base';
-
-    for (const key in theme) {
-
-      if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
+  public applyTheme(theme: UxTheme, element?: HTMLElement) {
+    if (element != null) {
+      for (const key in this.styleController.getThemeKeys(theme)) {
         if (theme[key] != null) {
-          element.style.setProperty(`--ux-theme--${theme.themeKey}-${kebabCase(key)}`, theme[key]);
+          element.style.setProperty(`this.generateCssVariable(theme.themeKey, key, theme[key])`, theme[key]);
         }
       }
+    } else {
+      this.styleController.updateTheme(theme);
     }
   }
 
-  public ensureDefaultTheme(theme: UxTheme) {
-    this.styleController.EnsureBaseThemeCreated(theme);
+  /**
+   * Applies an array of themes. This is to enable the creation of
+   * large theme sets that can be easily applied with one call.
+   *
+   * @param themes Array of UxThemes to be applied.
+   */
+  public applyThemeGroup(themes: UxTheme[]) {
+    for (const theme of themes) {
+      this.applyTheme(theme);
+    }
   }
-}
 
-function kebabCase(value: string) {
-  value = value.charAt(0).toLowerCase() + value.slice(1);
-  return value.replace(/([A-Z])/g, (match) => `-${match[0].toLowerCase()}`);
+  /**
+   * Checks to see if a base theme has been registered.
+   * If no base theme is found, the theme is registered,
+   * bindings are set up, and a new style element is added
+   * with the processed theme to the document head.
+   *
+   * @param theme A theme derived from the UxTheme base class.
+   */
+  public ensureDefaultTheme(theme: UxTheme) {
+    this.styleController.ensureBaseThemeCreated(theme);
+  }
+
+  /**
+   * Retrieves the default theme object for the provided key that can then be updated.
+   *
+   * @param key Key of the theme to be retrieved.
+   */
+  public getDefaultTheme(key: string) {
+    return this.styleController.themes[key];
+  }
 }

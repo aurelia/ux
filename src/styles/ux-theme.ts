@@ -1,3 +1,3 @@
-export class UxTheme {
-  public themeKey: string;
+export interface UxTheme {
+  themeKey: string;
 }

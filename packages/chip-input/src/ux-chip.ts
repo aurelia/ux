@@ -26,7 +26,7 @@ export class UxChip implements UxComponent {
   }
 
   public themeChanged(newValue: UxChipTheme) {
-    this.styleEngine.applyTheme(this.element, newValue);
+    this.styleEngine.applyTheme(newValue, this.element);
   }
 
   public closeChip() {

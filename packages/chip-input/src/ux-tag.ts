@@ -22,12 +22,12 @@ export class UxTag implements UxComponent {
 
   public bind() {
     if (this.theme) {
-      this.styleEngine.applyTheme(this.element, this.theme);
+      this.styleEngine.applyTheme(this.theme, this.element);
     }
   }
 
   public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this.element, newValue);
+    this.styleEngine.applyTheme(newValue, this.element);
   }
 
   public closeTag() {

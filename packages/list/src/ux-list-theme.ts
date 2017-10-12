@@ -1,6 +1,6 @@
 import { swatches, UxTheme } from 'aurelia-ux';
 
-export class UxListTheme extends UxTheme {
+export class UxListTheme implements UxTheme {
   public themeKey = 'list';
 
   public listForeground: string = swatches.grey.p900;

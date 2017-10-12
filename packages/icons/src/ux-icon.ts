@@ -30,7 +30,7 @@ export class UxIcon {
     }
 
     if (this.theme) {
-      this.styleEngine.applyTheme(this.element, this.theme);
+      this.styleEngine.applyTheme(this.theme, this.element);
     }
 
     if (this.icon) {
@@ -39,7 +39,7 @@ export class UxIcon {
   }
 
   public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this.element, newValue);
+    this.styleEngine.applyTheme(newValue, this.element);
   }
 
   public iconChanged(newValue: any) {

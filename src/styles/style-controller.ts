@@ -5,7 +5,7 @@ import { UxTheme } from './ux-theme';
 
 @inject(ObserverLocator, )
 export class StyleController {
-  public styleElements: any = {};
+  public themes: UxTheme[] = [];
 
   constructor(public observerLocator: ObserverLocator) { }
 
@@ -17,8 +17,8 @@ export class StyleController {
    *
    * @param theme A theme derived from the UxTheme base class.
    */
-  public EnsureBaseThemeCreated(theme: UxTheme) {
-    let baseTheme = this.styleElements[theme.themeKey] as UxTheme | null;
+  public ensureBaseThemeCreated(theme: UxTheme) {
+    let baseTheme = this.themes[theme.themeKey] as UxTheme | null;
 
     if (baseTheme != null) {
       return;
@@ -31,7 +31,35 @@ export class StyleController {
 
     DOM.appendNode(styleElement, window.document.head);
 
-    this.styleElements[theme.themeKey] = theme;
+    this.themes[theme.themeKey] = theme;
+  }
+
+  public updateTheme(theme: UxTheme) {
+    const baseTheme: UxTheme = { themeKey: 'base-theme' };
+    const defaultTheme = this.themes[theme.themeKey];
+
+    for (const key in theme) {
+      if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
+        defaultTheme[key] = theme[key];
+      }
+    }
+  }
+
+  public getThemeKeys(theme: UxTheme): string[] {
+    const baseTheme: UxTheme = { themeKey: 'base-theme' };
+    const themeKeys: string[] = [];
+
+    for (const key in theme) {
+      if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
+        themeKeys.push(key);
+      }
+    }
+
+    return themeKeys;
+  }
+
+  public generateCssVariable(themeKey: string, propertyKey: string, value: string | number) {
+    return `--ux-theme--${themeKey}-${kebabCase(propertyKey)}: ${value};`;
   }
 
   private createStyleElement(theme: UxTheme) {
@@ -44,27 +72,18 @@ export class StyleController {
   }
 
   private setWatches(theme: UxTheme, styleElement: HTMLStyleElement) {
-    const baseTheme = new UxTheme();
-
-    for (const key in theme) {
-      if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
-        this.observerLocator.getObserver(theme, key).subscribe(() => {
-          styleElement.innerHTML = this.processInnerHtml(theme);
-        });
-      }
+    for (const key of this.getThemeKeys(theme)) {
+      this.observerLocator.getObserver(theme, key).subscribe(() => {
+        styleElement.innerHTML = this.processInnerHtml(theme);
+      });
     }
   }
 
   private processInnerHtml(theme: UxTheme) {
-    const baseTheme = new UxTheme();
     let designInnerHtml = ':root {\r\n';
 
-    baseTheme.themeKey = 'theme-base';
-
-    for (const key in theme) {
-      if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
-        designInnerHtml += `  --ux-theme--${theme.themeKey}-${kebabCase(key)}: ${theme[key]};\r\n`;
-      }
+    for (const key of this.getThemeKeys(theme)) {
+      designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, theme[key])}\r\n`;
     }
 
     designInnerHtml += '}';

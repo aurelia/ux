@@ -177,6 +177,6 @@ export class UxChipInput implements UxComponent {
   }
 
   public themeChanged(newValue: UxChipInputTheme) {
-    this.styleEngine.applyTheme(this.element, newValue);
+    this.styleEngine.applyTheme(newValue, this.element);
   }
 }

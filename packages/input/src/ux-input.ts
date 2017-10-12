@@ -124,7 +124,7 @@ export class UxInput {
   }
 
   public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this.element, newValue);
+    this.styleEngine.applyTheme(newValue, this.element);
   }
 
   public disabledChanged(newValue: any) {

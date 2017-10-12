@@ -73,7 +73,7 @@ export class UxButton implements UxComponent {
   }
 
   public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(this.element, newValue);
+    this.styleEngine.applyTheme(newValue, this.element);
   }
 
   public disabledChanged(newValue: boolean | string) {

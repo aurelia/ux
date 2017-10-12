@@ -82,7 +82,7 @@ export class UxCheckbox implements UxComponent {
   }
 
   public themeChanged(newValue: UxCheckboxTheme) {
-    this.styleEngine.applyTheme(this.element, newValue);
+    this.styleEngine.applyTheme(newValue, this.element);
   }
 
   public disabledChanged(newValue: boolean | string) {
