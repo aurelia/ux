@@ -13,7 +13,7 @@ ux-chip {
 
   ux-chip:focus {
     outline: none;
-    box-shadow: var(--design-elevation4dp);
+    box-shadow: var(--ux-design--elevation4dp);
   }
 
   ux-chip > span {

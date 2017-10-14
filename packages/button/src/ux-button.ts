@@ -1,9 +1,9 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from 'aurelia-ux';
-import { PaperRipple } from './effects/paper-ripple';
-import { normalizeBooleanAttribute } from './html-attributes';
+import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from 'aurelia-ux';
 import { UxButtonTheme } from './ux-button-theme';
+
+const theme = new UxButtonTheme();
 
 @inject(Element, StyleEngine)
 @customElement('ux-button')
@@ -22,7 +22,7 @@ export class UxButton implements UxComponent {
   constructor(
     public element: HTMLElement,
     private styleEngine: StyleEngine) {
-      styleEngine.ensureDefaultTheme(new UxButtonTheme());
+      styleEngine.ensureDefaultTheme(theme);
     }
 
   public bind() {

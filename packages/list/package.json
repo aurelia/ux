@@ -1,13 +1,13 @@
 {
   "name": "@aurelia-ux-components/list",
   "version": "0.0.1",
-  "description": "Checkbox component for Aurelia UX",
+  "description": "List component for Aurelia UX",
   "keywords": [
     "aurelia",
     "styles",
     "components",
     "ux",
-    "checkbox"
+    "list"
   ],
   "homepage": "http://aurelia.io",
   "bugs": {
@@ -25,7 +25,6 @@
     "url": "https://github.com/aurelia/ux-components"
   },
   "scripts": {
-    "postinstall": "npm uninstall @types/fs-extra @types/handlebars @types/highlight.js @types/lodash @types/marked @types/minimatch @types/shelljs",
     "lint": "cross-env tslint --project tsconfig.json",
     "pretest": "cross-env npm run lint",
     "test": "cross-env rimraf dist && tsc && karma start --single-run",

@@ -7,8 +7,8 @@ export class UxTextareaTheme implements UxTheme {
   public background: string = 'transparent';
 
   public borderBottom: string = `1px solid ${swatches.grey.p500}`;
-  public borderBottomHover: string = '1px solid var(--design-accent)';
-  public borderBottomFocus: string = 'var(--design-accent)';
+  public borderBottomHover: string = '1px solid var(--ux-design--accent)';
+  public borderBottomFocus: string = 'var(--ux-design--accent)';
 
   public diabledForeground: string = swatches.grey.p500;
   public disabledBorderBottom: string = `1px dashed ${swatches.grey.p300}`;

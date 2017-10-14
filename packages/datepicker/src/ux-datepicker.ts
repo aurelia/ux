@@ -1,16 +1,18 @@
 import { customElement, bindable, ViewResources } from 'aurelia-templating';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from 'aurelia-ux';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
 import * as moment from 'moment';
 
+const theme = new UxDatepickerTheme();
+
 @inject(Element, ViewResources, StyleEngine)
 @customElement('ux-datepicker')
-export class UxDatepicker {
-  @bindable public theme: UxDatepickerTheme | null;
+export class UxDatepicker implements UxComponent {
+  @bindable public theme: UxDatepickerTheme;
 
   @bindable public type = 'datetime';
   @bindable public initialDate: any;
@@ -39,7 +41,7 @@ export class UxDatepicker {
   private display = 'month';
 
   constructor(public element: HTMLElement, public resources: ViewResources, public styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(new UxDatepickerTheme());
+    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

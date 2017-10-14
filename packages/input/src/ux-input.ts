@@ -2,12 +2,14 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from 'aurelia-ux';
 import { UxInputTheme } from './ux-input-theme';
+
+const theme = new UxInputTheme();
 
 @inject(Element, StyleEngine)
 @customElement('ux-input')
-export class UxInput {
+export class UxInput implements UxComponent {
   @bindable public autofocus = null;
   @bindable public disabled: any = false;
   @bindable public maxlength: number;
@@ -15,7 +17,7 @@ export class UxInput {
   @bindable public min: number;
   @bindable public max: number;
   @bindable public readonly: any = false;
-  @bindable public theme: UxInputTheme | null;
+  @bindable public theme: UxInputTheme;
   @bindable public type: any;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
@@ -24,7 +26,7 @@ export class UxInput {
   private textbox: HTMLInputElement;
 
   constructor(private element: HTMLInputElement, public styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(new UxInputTheme());
+    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

@@ -2,9 +2,10 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from 'aurelia-ux';
-import { normalizeBooleanAttribute } from './html-attributes';
+import { StyleEngine, UxComponent, normalizeBooleanAttribute } from 'aurelia-ux';
 import { UxTextareaTheme } from './ux-textarea-theme';
+
+const theme = new UxTextareaTheme();
 
 @inject(Element, StyleEngine)
 @customElement('ux-textarea')
@@ -26,7 +27,7 @@ export class UxTextarea implements UxComponent {
   public textbox: HTMLTextAreaElement;
 
   constructor(private element: HTMLElement, private styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(new UxTextareaTheme());
+    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

@@ -36,7 +36,7 @@ ux-chip-input {
 
     ux-chip-input:hover>div.bottom-border,
     ux-chip-input>input:focus+div.bottom-border {
-      background-color: var(--design-accent);
+      background-color: var(--ux-design--accent);
     }
 
     ux-chip-input > input:focus+div.bottom-border {

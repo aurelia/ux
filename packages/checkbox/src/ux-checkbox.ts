@@ -1,10 +1,10 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from 'aurelia-ux';
+import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from 'aurelia-ux';
 import { UxCheckboxTheme } from './ux-checkbox-theme';
-import { PaperRipple } from './effects/paper-ripple';
-import { normalizeBooleanAttribute } from './html-attributes';
+
+const theme = new UxCheckboxTheme();
 
 @inject(Element, StyleEngine)
 @customElement('ux-checkbox')
@@ -40,7 +40,7 @@ export class UxCheckbox implements UxComponent {
   }
 
   constructor(public element: HTMLElement, private styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(new UxCheckboxTheme());
+    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

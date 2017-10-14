@@ -25,7 +25,6 @@
     "url": "https://github.com/aurelia/ux-components"
   },
   "scripts": {
-    "postinstall": "npm uninstall @types/fs-extra @types/handlebars @types/highlight.js @types/lodash @types/marked @types/minimatch @types/shelljs",
     "lint": "cross-env tslint --project tsconfig.json",
     "pretest": "cross-env npm run lint",
     "test": "cross-env rimraf dist && tsc && karma start --single-run",
@@ -53,7 +52,6 @@
     "changelog": "cross-env conventional-changelog -p ux -i doc/CHANGELOG.md -s",
     "bump-version": "npm --no-git-tag-version version",
     "preprepare-release": "cross-env npm run test",
-    "get-ux": "cross-env copyfiles --up 4 ux/dist/**/*.js node_modules/aurelia-ux/dist",
     "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
   },
   "jspm": {

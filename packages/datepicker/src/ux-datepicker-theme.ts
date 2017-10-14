@@ -8,12 +8,12 @@ export class UxDatepickerTheme implements UxTheme {
   public calendarIcon: string = 'currentColor';
 
   // datepicker modal
-  public headerForeground: string = 'var(--design-primary-foreground)';
-  public headerBackground: string = 'var(--design-primary)';
+  public headerForeground: string = 'var(--ux-design--primary-foreground)';
+  public headerBackground: string = 'var(--ux-design--primary)';
 
   // calendar properties
   public weekdayForeground: string = swatches.grey.p600;
-  public selectedDayForeground: string = 'var(--design-accent-foreground)';
-  public selectedDayBackground: string = 'var(--design-accent)';
+  public selectedDayForeground: string = 'var(--ux-design--accent-foreground)';
+  public selectedDayBackground: string = 'var(--ux-design--accent)';
   public outOfRangeForeground: string = swatches.grey.p600;
 }

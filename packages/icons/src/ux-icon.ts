@@ -2,16 +2,18 @@ import { customElement, bindable, processAttributes } from 'aurelia-templating';
 import { Logger } from 'aurelia-logging';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from 'aurelia-ux';
 import { processDesignAttributes } from 'aurelia-ux';
 import { UxIconTheme } from './ux-icon-theme';
 import IconMap from './ux-icon-map';
+
+const theme = new UxIconTheme();
 
 @inject(Element, StyleEngine, Logger)
 @customElement('ux-icon')
 @processAttributes(processDesignAttributes)
 
-export class UxIcon {
+export class UxIcon implements UxComponent {
   @bindable public size: string;
   @bindable public theme: UxIconTheme;
 
@@ -22,7 +24,9 @@ export class UxIcon {
     private element: HTMLElement,
     private styleEngine: StyleEngine,
     private logger: Logger
-  ) { }
+  )  {
+    styleEngine.ensureDefaultTheme(theme);
+  }
 
   public bind() {
     if (this.size) {

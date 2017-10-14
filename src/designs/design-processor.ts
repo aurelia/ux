@@ -16,13 +16,13 @@ export class DesignProcessor {
     for (const swatch in swatches) {
       if (swatches.hasOwnProperty(swatch)) {
         if (typeof swatches[swatch] === 'string') {
-          swatchClasses += `  --swatch-${kebabCase(swatch)}: ${swatches[swatch]};\r\n`;
+          swatchClasses += `  --ux-swatch--${kebabCase(swatch)}: ${swatches[swatch]};\r\n`;
           continue;
         }
 
         for (const key in swatches[swatch]) {
           if (swatches[swatch].hasOwnProperty(key)) {
-            swatchClasses += `  --swatch-${kebabCase(swatch)}-${kebabCase(key)}: ${swatches[swatch][key]};\r\n`;
+            swatchClasses += `  --ux-swatch--${kebabCase(swatch)}-${kebabCase(key)}: ${swatches[swatch][key]};\r\n`;
           }
         }
       }
@@ -58,7 +58,7 @@ export class DesignProcessor {
 
     for (const key in design) {
       if (design.hasOwnProperty(key)) {
-        designInnerHtml += `  --design-${kebabCase(key)}: ${design[key]};\r\n`;
+        designInnerHtml += `  --ux-design--${kebabCase(key)}: ${design[key]};\r\n`;
       }
     }
 

@@ -27,10 +27,10 @@ ux-input-info>.counter {
 }
 
 ux-input.focused+ux-input-info>.counter {
-  color: var(--design-accent);
+  color: var(--ux-design--accent);
 }
 
-ux-input>styles.input[disabled]+ux-input-info {
+ux-input>input[disabled]+ux-input-info {
   display: none;
 }
 

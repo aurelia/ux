@@ -4,6 +4,8 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from 'aurelia-ux';
 import { UxFormTheme } from './ux-form-theme';
 
+const theme = new UxFormTheme();
+
 @inject(Element, StyleEngine)
 @customElement('ux-form')
 
@@ -14,7 +16,7 @@ export class UxForm implements UxComponent {
   private bindSubmitToEnter: boolean = false;
 
   constructor(private element: HTMLElement, private styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(new UxFormTheme());
+    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

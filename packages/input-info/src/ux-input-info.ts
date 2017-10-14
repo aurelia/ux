@@ -1,11 +1,13 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { UxInputInfoTheme } from './ux-input-info-theme';
-import { StyleEngine } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from 'aurelia-ux';
+
+const theme = new UxInputInfoTheme();
 
 @inject(Element, StyleEngine)
 @customElement('ux-input-info')
-export class UxInputInfo {
+export class UxInputInfo implements UxComponent {
   @bindable public target: Element;
   @bindable public uxInputCounter = null;
   @bindable public theme: UxInputInfoTheme;
@@ -13,7 +15,7 @@ export class UxInputInfo {
   public inputElementModel: any;
 
   constructor(private element: HTMLElement, public styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(new UxInputInfoTheme());
+    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {
@@ -25,7 +27,7 @@ export class UxInputInfo {
   }
 
   public themeChanged(theme: UxInputInfoTheme) {
-    this.styleEngine.applyTheme(this.element, theme);
+    this.styleEngine.applyTheme(theme, this.element );
   }
 
   private findAndSetTarget(element: any) {

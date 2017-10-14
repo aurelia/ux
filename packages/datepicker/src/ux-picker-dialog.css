@@ -1,6 +1,6 @@
 ux-picker-dialog {
-  color: var(--design-control-foreground, var(--swatch-grey-p900));
-  background-color: var(--design-control-background, var(--swatch-white));
+  color: var(--ux-design--control-foreground, var(--ux-swatch--grey-p900));
+  background-color: var(--ux-design--control-background, var(--ux-swatch--white));
   width: 300px;
   
   user-select: none;

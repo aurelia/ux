@@ -7,15 +7,23 @@ import { inject } from 'aurelia-dependency-injection';
 export class UxField {
   @bindable public label: string;
 
+  private labelElement: HTMLLabelElement;
+
   constructor(private element: Element) { }
 
   public attached() {
     if (this.label && !this.element.querySelector('label')) {
-      const newLabel = document.createElement('label');
+      this.labelElement = document.createElement('label');
 
-      newLabel.textContent = this.label;
+      this.labelElement.textContent = this.label;
 
-      this.element.insertBefore(newLabel, this.element.firstChild);
+      this.element.insertBefore(this.labelElement, this.element.firstChild);
+    }
+  }
+
+  public labelChanged(newValue: string) {
+    if (this.labelElement != null) {
+      this.labelElement.textContent = newValue;
     }
   }
 }

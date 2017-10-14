@@ -5,6 +5,9 @@ export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
 export { processDesignAttributes } from './designs/design-attributes';
 
+export { PaperRipple } from './effects/paper-ripple';
+
+export { normalizeBooleanAttribute } from './components/html-attributes';
 export { UxComponent } from './components/ux-component';
 
 export { UxTheme } from './styles/ux-theme';

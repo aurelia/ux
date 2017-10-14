@@ -13,7 +13,7 @@ ux-calendar div.calendar-row {
 }
 
 ux-calendar .calendar-row.weekdays {
-  color: var(--ux-theme--datepicker-weekday-foreground, var(--swatch-grey-p600));
+  color: var(--ux-theme--datepicker-weekday-foreground, var(--ux-swatch--grey-p600));
 }
 
 ux-calendar .calendar-row .day {
