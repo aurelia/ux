@@ -12,7 +12,7 @@
   ],
   "homepage": "http://aurelia.io",
   "bugs": {
-    "url": "https://github.com/aurelia/ux-components/issues"
+    "url": "https://github.com/aurelia/ux/issues"
   },
   "license": "MIT",
   "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
@@ -23,7 +23,7 @@
   "typings": "dist/commonjs/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aurelia/ux-components"
+    "url": "https://github.com/aurelia/ux"
   },
   "scripts": {
     "lint": "cross-env tslint --project tsconfig.json",
