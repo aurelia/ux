@@ -3,7 +3,7 @@ import { DOM } from 'aurelia-pal';
 import { ObserverLocator } from 'aurelia-binding';
 import { UxTheme } from './ux-theme';
 
-@inject(ObserverLocator, )
+@inject(ObserverLocator)
 export class StyleController {
   public themes: UxTheme[] = [];
 
@@ -56,6 +56,10 @@ export class StyleController {
     }
 
     return themeKeys;
+  }
+
+  public generateCssVariableName(themeKey: string, propertyKey: string) {
+    return `--ux-theme--${themeKey}-${kebabCase(propertyKey)}`;
   }
 
   public generateCssVariable(themeKey: string, propertyKey: string, value: string | number) {

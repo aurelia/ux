@@ -1,26 +1,30 @@
 import { inject } from 'aurelia-dependency-injection';
 import { StyleController } from './style-controller';
+import { ThemeInstanceController } from './theme-instance-controller';
 import { UxTheme } from './ux-theme';
 
-@inject(StyleController)
+@inject(StyleController, ThemeInstanceController)
 export class StyleEngine {
-
-  constructor(public styleController: StyleController) { }
+  constructor(
+    public styleController: StyleController,
+    public themeInstanceController: ThemeInstanceController) { }
 
   /**
    * Processes a UxTheme into the corresponding CSS Variables
-   * and applies them to the provided element.
+   * and applies them to the provided element. If no theme is
+   * provided then the theme will be setup as a default theme
+   * and set CSS Variables in the document head.
    *
    * @param element Element to apply the processed UxTheme to.
    * @param theme UxTheme to process.
    */
   public applyTheme(theme: UxTheme, element?: HTMLElement) {
+    if (theme == null) {
+      return;
+    }
+
     if (element != null) {
-      for (const key in this.styleController.getThemeKeys(theme)) {
-        if (theme[key] != null) {
-          element.style.setProperty(`this.generateCssVariable(theme.themeKey, key, theme[key])`, theme[key]);
-        }
-      }
+      this.themeInstanceController.registerThemedElement(theme, element);
     } else {
       this.styleController.updateTheme(theme);
     }

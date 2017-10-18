@@ -23,9 +23,7 @@ export class UxTag implements UxComponent {
   }
 
   public bind() {
-    if (this.theme) {
-      this.styleEngine.applyTheme(this.theme, this.element);
-    }
+    this.themeChanged(this.theme);
   }
 
   public themeChanged(newValue: any) {

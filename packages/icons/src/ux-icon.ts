@@ -33,13 +33,11 @@ export class UxIcon implements UxComponent {
       this.theme.size = this.size;
     }
 
-    if (this.theme) {
-      this.styleEngine.applyTheme(this.theme, this.element);
-    }
-
     if (this.icon) {
       this.changeIcon(this.icon);
     }
+
+    this.themeChanged(this.theme);
   }
 
   public themeChanged(newValue: any) {
