@@ -1,14 +1,14 @@
-import {Container, inject} from 'aurelia-dependency-injection';
-import {Design} from './designs/design';
-import {Host} from './hosts/host';
-import {Platform} from './platforms/platform';
-import {Cordova} from './hosts/cordova';
-import {Web} from './hosts/web';
-import {Electron} from './hosts/electron';
-import {UXConfiguration} from './ux-configuration';
-import {FrameworkConfiguration} from 'aurelia-framework';
+import { Container, inject } from 'aurelia-dependency-injection';
+import { FrameworkConfiguration } from 'aurelia-framework';
+import { Design } from './designs/design';
+import { Host } from './hosts/host';
+import { Platform } from './platforms/platform';
+import { Cordova } from './hosts/cordova';
+import { Web } from './hosts/web';
+import { Electron } from './hosts/electron';
+import { DesignProcessor } from './designs/design-processor';
 
-@inject(UXConfiguration, Container)
+@inject(Container, DesignProcessor)
 export class AureliaUX {
   private availableHosts: Host[];
 
@@ -16,7 +16,7 @@ export class AureliaUX {
   public platform: Platform;
   public design: Design;
 
-  constructor(public use: UXConfiguration, container: Container) {
+  constructor(container: Container, private designProcessor: DesignProcessor) {
     this.availableHosts = [
       container.get(Cordova),
       container.get(Electron),
@@ -36,6 +36,10 @@ export class AureliaUX {
     return this.host.start(config).then(platform => {
       this.platform = platform;
       this.design = platform.design;
+
+      this.designProcessor.setSwatchVariables();
+      this.designProcessor.setDesignVariables(platform.design);
+      this.designProcessor.setDesignWatches(platform.design);
     });
   }
 }

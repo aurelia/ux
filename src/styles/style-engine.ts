@@ -1,94 +1,65 @@
-import {View} from 'aurelia-templating';
-import {Origin} from 'aurelia-metadata';
-import {inject, Container} from 'aurelia-dependency-injection';
-import {StyleController} from './style-controller';
-import {DOM} from 'aurelia-pal';
-import {StyleFactory} from './style-factory';
-import {Themable} from './themable';
-import {camelCase} from 'aurelia-binding';
+import { inject } from 'aurelia-dependency-injection';
+import { StyleController } from './style-controller';
+import { ThemeInstanceController } from './theme-instance-controller';
+import { UxTheme } from './ux-theme';
 
-@inject(Container)
+@inject(StyleController, ThemeInstanceController)
 export class StyleEngine {
-  private controllers: Map<any, StyleController> = new Map();
+  constructor(
+    public styleController: StyleController,
+    public themeInstanceController: ThemeInstanceController) { }
 
-  constructor(private container: Container) { }
-
-  public getThemeKeyForComponent(obj: any) {
-    return camelCase(Origin.get(obj.constructor).moduleMember + 'Theme');
-  }
-
-  public applyTheme(themable: Themable, theme: string | object | null) {
-    const themeKey = this.getThemeKeyForComponent(themable);
-    const currentController = (themable.view as any)[themeKey];
-    let bindingContext: any;
-    let newController: StyleController | undefined;
-
-    if (!theme) {
-      if (currentController !== currentController.factory.defaultController) {
-        currentController.unbind();
-        newController = currentController.factory.defaultController as StyleController;
-        (themable.view as any)[themeKey] = newController;
-        newController.bind(themable.view);
-      }
-
+  /**
+   * Processes a UxTheme into the corresponding CSS Variables
+   * and applies them to the provided element. If no theme is
+   * provided then the theme will be setup as a default theme
+   * and set CSS Variables in the document head.
+   *
+   * @param element Element to apply the processed UxTheme to.
+   * @param theme UxTheme to process.
+   */
+  public applyTheme(theme: UxTheme, element?: HTMLElement) {
+    if (theme == null) {
       return;
     }
 
-    if (typeof theme === 'string') {
-      bindingContext = themable.resources.getValue(theme) || themable.view.container.get(theme);
+    if (element != null) {
+      this.themeInstanceController.registerThemedElement(theme, element);
     } else {
-      bindingContext = theme;
-    }
-
-    if (this.getShadowDOMRoot(themable.view) !== null) {
-      currentController.unbind();
-      currentController.bindingContext = bindingContext;
-      currentController.bind(themable.view);
-    } else {
-      newController = this.controllers.get(bindingContext);
-
-      if (!newController) {
-        newController = currentController.factory.create(
-          this.container,
-          null,
-          bindingContext
-        ) as StyleController;
-      }
-
-      currentController.unbind();
-      (themable.view as any)[themeKey] = newController;
-      newController.bind(themable.view);
-      this.controllers.set(bindingContext, newController);
-
-      newController.onRemove = () => {
-        this.controllers.delete(bindingContext);
-      };
+      this.styleController.updateTheme(theme);
     }
   }
 
-  public getOrCreateStyleController(view: View, factory: StyleFactory): StyleController {
-    let controller = (view as any)[factory.themeKey];
-
-    if (controller === undefined) {
-      const shadowDOMRoot = this.getShadowDOMRoot(view);
-
-      if (shadowDOMRoot === null) {
-        (view as any)[factory.themeKey] = controller = factory.getOrCreateDefault(this.container);
-      } else {
-        (view as any)[factory.themeKey] = controller = factory.create(view.container, shadowDOMRoot);
-      }
+  /**
+   * Applies an array of themes. This is to enable the creation of
+   * large theme sets that can be easily applied with one call.
+   *
+   * @param themes Array of UxThemes to be applied.
+   */
+  public applyThemeGroup(themes: UxTheme[]) {
+    for (const theme of themes) {
+      this.applyTheme(theme);
     }
-
-    return controller;
   }
 
-  private getShadowDOMRoot(view: View) {
-    const root = view.container.get(DOM.boundary);
+  /**
+   * Checks to see if a base theme has been registered.
+   * If no base theme is found, the theme is registered,
+   * bindings are set up, and a new style element is added
+   * with the processed theme to the document head.
+   *
+   * @param theme A theme derived from the UxTheme base class.
+   */
+  public ensureDefaultTheme(theme: UxTheme) {
+    this.styleController.ensureBaseThemeCreated(theme);
+  }
 
-    if (root && root.host instanceof Element) {
-      return root;
-    }
-
-    return null;
+  /**
+   * Retrieves the default theme object for the provided key that can then be updated.
+   *
+   * @param key Key of the theme to be retrieved.
+   */
+  public getDefaultTheme(key: string) {
+    return this.styleController.themes[key];
   }
 }

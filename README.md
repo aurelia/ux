@@ -14,9 +14,14 @@ Check out the [showcase application](https://github.com/aurelia/app-ux-showcase)
 
 ## Building
 
-```shell
-npm run build
-```
+**Before The First Build**
+
+`npm run build` at the base project to build Aurelia UX
+
+`lerna bootstrap`: sets up a symlink between all of the packages in the monorepo
+`lerna run build`: builds all of the mono repo projects.
+
+>Note: `lerna run build` is very CPU intensive and takes a small period of time on most machines. If you are working within a single component, you might try `npm run build` instead at the component level.
 
 ## Tests
 

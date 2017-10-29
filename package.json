@@ -14,6 +14,9 @@
   },
   "license": "MIT",
   "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
+  "contributors": [
+    "Zach Hollingshead <zach.hollingshead@gmail.com>"
+  ],
   "main": "dist/commonjs/index.js",
   "typings": "dist/commonjs/index.d.ts",
   "repository": {
@@ -108,6 +111,7 @@
     "karma-ie-launcher": "^1.0.0",
     "karma-jasmine": "^1.1.0",
     "karma-requirejs": "^1.1.0",
+    "lerna": "^2.3.1",
     "requirejs": "^2.3.3",
     "requirejs-text": "^2.0.15",
     "rimraf": "^2.6.1",
