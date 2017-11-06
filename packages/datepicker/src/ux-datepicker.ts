@@ -14,6 +14,7 @@ const theme = new UxDatepickerTheme();
 export class UxDatepicker implements UxComponent {
   @bindable public theme: UxDatepickerTheme;
 
+  @bindable public display = 'month';
   @bindable public type = 'datetime';
   @bindable public initialDate: any;
   @bindable public minTime: any;
@@ -38,7 +39,6 @@ export class UxDatepicker implements UxComponent {
 
   private textboxValue: string;
   private showDialog = false;
-  private display = 'month';
 
   constructor(public element: HTMLElement, public resources: ViewResources, public styleEngine: StyleEngine) {
     styleEngine.ensureDefaultTheme(theme);
