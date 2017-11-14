@@ -1,7 +1,7 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from 'aurelia-ux';
+import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxCheckboxTheme } from './ux-checkbox-theme';
 
 const theme = new UxCheckboxTheme();

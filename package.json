@@ -1,5 +1,5 @@
 {
-  "name": "aurelia-ux",
+  "name": "@aurelia-ux/core",
   "version": "0.3.0",
   "description": "A user experience framework for Aurelia.",
   "keywords": [

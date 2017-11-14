@@ -1,0 +1,69 @@
+System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-chip-theme"], function (exports_1, context_1) {
+    "use strict";
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __moduleName = context_1 && context_1.id;
+    var aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_chip_theme_1, theme, UxChip;
+    return {
+        setters: [
+            function (aurelia_templating_1_1) {
+                aurelia_templating_1 = aurelia_templating_1_1;
+            },
+            function (aurelia_pal_1_1) {
+                aurelia_pal_1 = aurelia_pal_1_1;
+            },
+            function (aurelia_binding_1_1) {
+                aurelia_binding_1 = aurelia_binding_1_1;
+            },
+            function (aurelia_dependency_injection_1_1) {
+                aurelia_dependency_injection_1 = aurelia_dependency_injection_1_1;
+            },
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (ux_chip_theme_1_1) {
+                ux_chip_theme_1 = ux_chip_theme_1_1;
+            }
+        ],
+        execute: function () {
+            theme = new ux_chip_theme_1.UxChipTheme();
+            UxChip = /** @class */ (function () {
+                function UxChip(element, styleEngine) {
+                    this.element = element;
+                    this.styleEngine = styleEngine;
+                    this.value = undefined;
+                    styleEngine.ensureDefaultTheme(theme);
+                }
+                UxChip.prototype.bind = function () {
+                    this.themeChanged(this.theme);
+                };
+                UxChip.prototype.themeChanged = function (newValue) {
+                    this.styleEngine.applyTheme(newValue, this.element);
+                };
+                UxChip.prototype.closeChip = function () {
+                    var closeEvent = aurelia_pal_1.DOM.createCustomEvent('close', { bubbles: false });
+                    this.element.dispatchEvent(closeEvent);
+                };
+                __decorate([
+                    aurelia_templating_1.bindable
+                ], UxChip.prototype, "theme", void 0);
+                __decorate([
+                    aurelia_templating_1.bindable
+                ], UxChip.prototype, "type", void 0);
+                __decorate([
+                    aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
+                ], UxChip.prototype, "value", void 0);
+                UxChip = __decorate([
+                    aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
+                    aurelia_templating_1.customElement('ux-chip')
+                ], UxChip);
+                return UxChip;
+            }());
+            exports_1("UxChip", UxChip);
+        }
+    };
+});

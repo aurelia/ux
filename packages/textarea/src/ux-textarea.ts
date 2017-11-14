@@ -2,7 +2,7 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute } from 'aurelia-ux';
+import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxTextareaTheme } from './ux-textarea-theme';
 
 const theme = new UxTextareaTheme();

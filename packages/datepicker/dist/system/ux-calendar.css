@@ -1,0 +1,55 @@
+ux-calendar {
+  display: block;
+  height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+ux-calendar div.calendar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 2em;
+}
+
+ux-calendar .calendar-row.weekdays {
+  color: var(--ux-theme--datepicker-weekday-foreground, var(--ux-swatch--grey-p600));
+}
+
+ux-calendar .calendar-row .day {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+ux-calendar div.day-highlight {
+  width: 1.9em;
+  height: 1.9em;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+ux-calendar div.day-highlight.selected {
+  color: var(--ux-theme--datepicker-selected-day-foreground);
+  background-color: var(--ux-theme--datepicker-selected-day-background);
+}
+
+ux-calendar div.day-highlight.out-of-range {
+  color: var(--ux-theme--datepicker-out-of-range-foreground);
+  cursor: default;
+}
+
+ux-calendar div.month-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ux-calendar div.month-display svg {
+  fill: currentColor;
+  width: 24px;
+  height: 24px;
+}

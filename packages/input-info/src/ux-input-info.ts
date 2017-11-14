@@ -1,7 +1,7 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { UxInputInfoTheme } from './ux-input-info-theme';
-import { StyleEngine, UxComponent } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 
 const theme = new UxInputInfoTheme();
 

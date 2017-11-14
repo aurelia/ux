@@ -1,6 +1,6 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from 'aurelia-ux';
+import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxButtonTheme } from './ux-button-theme';
 
 const theme = new UxButtonTheme();

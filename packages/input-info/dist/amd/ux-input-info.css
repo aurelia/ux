@@ -1,0 +1,39 @@
+ux-input-info {
+  display: flex;
+  font-size: 14px;
+  width: 100%;
+  color: var(--ux-theme--input-info-foreground);
+}
+
+ux-input-info>.hint-text,
+ux-input-info>.error-text {
+  flex-grow: 1;
+}
+
+ux-input-info>.hint-text:first-child,
+ux-input-info>.error-text:first-child {
+  display: block;
+}
+
+ux-input-info>.hint-text,
+ux-input-info>.error-text {
+  display: none;
+}
+
+ux-input-info>.counter {
+  transition: 250ms;
+  flex-wrap: nowrap;
+  display: flex;
+}
+
+ux-input.focused+ux-input-info>.counter {
+  color: var(--ux-design--accent);
+}
+
+ux-input>input[disabled]+ux-input-info {
+  display: none;
+}
+
+.has-error+ux-input-info {
+  color: var(--ux-theme--input-info-error);
+}

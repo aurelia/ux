@@ -1,7 +1,7 @@
 import { customElement, bindable, ViewResources } from 'aurelia-templating';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';

@@ -2,8 +2,7 @@ import { customElement, bindable, processAttributes } from 'aurelia-templating';
 import { Logger } from 'aurelia-logging';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from 'aurelia-ux';
-import { processDesignAttributes } from 'aurelia-ux';
+import { StyleEngine, UxComponent, processDesignAttributes } from '@aurelia-ux/core';
 import { UxIconTheme } from './ux-icon-theme';
 import IconMap from './ux-icon-map';
 

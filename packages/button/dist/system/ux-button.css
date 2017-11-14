@@ -1,0 +1,135 @@
+ux-button > button {
+  display: inline-block;
+  position: relative;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  font-family: var(--ux-theme--button-font-family);
+  font-weight: var(--ux-theme--button-font-weight);
+  text-align: center;
+  text-transform: var(--ux-theme--button-text-transform);
+  letter-spacing: var(--ux-theme--button-letter-spacing);
+}
+
+ux-button > button::-moz-focus-inner {
+  border: none;
+}
+
+ux-button > button.raised, ux-button > button.flat {
+  min-width: 88px;
+  margin: 6px 0px;
+  padding: 0 16px 0 16px;  
+  border-radius: 2px;
+}
+
+ux-button > button.icon {
+  display: inline-flex;
+  min-width: inherit;
+  padding: 0 8px;
+}
+
+ux-button > button.raised.small, ux-button > button.flat.small, ux-button > button.icon.small {
+  font-size: 13px;
+  height: 32px;
+  line-height: 32px;
+}
+
+ux-button > button.raised.medium, ux-button > button.flat.medium, ux-button > button.icon.medium {
+  font-size: 14px;
+  height: 36px;
+  line-height: 36px;
+}
+
+ux-button > button.raised.large, ux-button > button.flat.large, ux-button > button.icon.large {
+  font-size: 16px;
+  height: 42px;
+  line-height: 42px;
+}
+
+ux-button > button.raised, ux-button > button.fab {
+  background-color: var(--ux-theme--button-background);
+  color: var(--ux-theme--button-foreground);
+}
+
+ux-button.accent > button.raised, ux-button.accent > button.fab {
+  background-color: var(--ux-theme--button-accent-background);
+  color: var(--ux-theme--button-accent-foreground);
+}
+
+ux-button > button.raised {
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.2s;
+  box-shadow: var(--ux-design--elevation2dp);
+}
+
+ux-button > button.raised:disabled, ux-button > button.fab:disabled {
+  background-color: var(--ux-theme--button-background-disabled);
+  color: var(--ux-theme--button-foreground-disabled);
+}
+
+ux-button > button.raised:active {
+  box-shadow: var(--ux-design--elevation4dp);
+  transition-delay: 0s;
+}
+
+ux-button > button.raised:disabled:active, ux-button > button.fab:disabled:active {
+  box-shadow: var(--ux-design--elevation2dp);
+  transition-delay: 0s;
+}
+
+ux-button > button.raised:focus {
+  box-shadow: var(--ux-design--elevationFocus);
+  transition-delay: 0s;
+}
+
+ux-button > button.raised:disabled:focus, ux-button > button.fab:disabled:focus {
+  box-shadow: var(--ux-design--elevation2dp);
+  transition-delay: 0s;
+}
+
+ux-button > button.flat, ux-button > button.icon {
+  background-color: var(--ux-theme--button-flat-background);
+  color: var(--ux-theme--button-flat-foreground);
+}
+
+ux-button.accent > button.flat, ux-button.accent > button.icon {
+  background-color: var(--ux-theme--button-accent-flat-background);
+  color: var(--ux-theme--button-accent-flat-foreground);
+}
+
+ux-button > button.flat.disabled {
+  opacity: .74;
+}
+
+ux-button > button.fab {
+  border-radius: 50%;
+  overflow: hidden;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.2s;
+  box-shadow: var(--ux-design--elevation2dp);
+}
+
+ux-button > button.fab.small {
+  width: 40px;
+  height: 40px;
+}
+
+ux-button > button.fab.medium {
+  width: 56px;
+  height: 56px;
+}
+
+ux-button > button.fab.large {
+  width: 64px;
+  height: 64px;
+}
+
+ux-button > button.fab:active {
+  box-shadow: var(--ux-design--elevation4dp);
+  transition-delay: 0s;
+}
+
+ux-button > button.fab:focus {
+  box-shadow: var(--ux-design--elevation-focus);
+  transition-delay: 0s;
+}

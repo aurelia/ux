@@ -2,7 +2,7 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxChipTheme } from './ux-chip-theme';
 
 const theme = new UxChipTheme();

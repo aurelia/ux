@@ -1,0 +1,48 @@
+ux-chip {
+  display: inline-flex;
+  align-items: center;
+
+  font-size: 14px;
+
+  height: 32px;
+  border-radius: 100px;
+
+  background-color: var(--ux-theme--chip-background);
+  color: var(--ux-theme--chip-foreground);
+}
+
+  ux-chip:focus {
+    outline: none;
+    box-shadow: var(--ux-design--elevation4dp);
+  }
+
+  ux-chip > span {
+    margin: 0 12px;
+  }
+
+    ux-chip > span.close {
+      display:none;
+    }
+
+  ux-chip[deletable] > span {
+    margin-right: 0;
+  }
+
+    ux-chip[deletable] > span.close {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 4px;
+      color: var(--ux-theme--chip-delete-foreground);
+      background-color: var(--ux-theme--chip-delete-background);
+      height: 24px;
+      width: 24px;
+      border-radius: 24px;
+      cursor: pointer;
+    }
+
+      ux-chip[deletable] > span.close::before {
+        content: '+';    
+        font-size: 24px;
+        transform: rotate(45deg);
+      }

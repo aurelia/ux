@@ -1,4 +1,4 @@
-import { swatches, UxTheme } from 'aurelia-ux';
+import { swatches, UxTheme } from '@aurelia-ux/core';
 
 export class UxInputInfoTheme implements UxTheme {
   public themeKey = 'input-info';

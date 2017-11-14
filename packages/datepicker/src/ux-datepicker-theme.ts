@@ -1,4 +1,4 @@
-import { swatches, UxTheme } from 'aurelia-ux';
+import { swatches, UxTheme } from '@aurelia-ux/core';
 
 export class UxDatepickerTheme implements UxTheme {
   public themeKey = 'datepicker';

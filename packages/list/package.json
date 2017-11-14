@@ -1,5 +1,5 @@
 {
-  "name": "@aurelia-ux-components/list",
+  "name": "@aurelia-ux/list",
   "version": "0.0.1",
   "description": "List component for Aurelia UX",
   "keywords": [
@@ -73,7 +73,8 @@
       "aurelia-templating-binding": "^1.0.0",
       "aurelia-framework": "^1.0.0",
       "aurelia-metadata": "^1.0.0",
-      "aurelia-path": "^1.0.0"
+      "aurelia-path": "^1.0.0",
+      "@aurelia-ux/core": "^0.3.0"
     },
     "dependencies": {
       "aurelia-binding": "^1.0.0",
@@ -86,13 +87,14 @@
       "aurelia-templating-binding": "^1.0.0",
       "aurelia-framework": "^1.0.0",
       "aurelia-metadata": "^1.0.0",
-      "aurelia-path": "^1.0.0"
+      "aurelia-path": "^1.0.0",
+      "@aurelia-ux/core": "^0.3.0"
     },
     "devDependencies": {}
   },
   "dependencies": {
     "aurelia-framework": "^1.0.0",
-    "aurelia-ux": "^0.3.0",
+    "@aurelia-ux/core": "^0.3.0",
     "moment": "^2.18.1"
   },
   "devDependencies": {

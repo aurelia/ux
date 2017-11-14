@@ -1,4 +1,4 @@
-import { swatches, UxTheme } from 'aurelia-ux';
+import { swatches, UxTheme } from '@aurelia-ux/core';
 
 export class UxButtonTheme implements UxTheme {
   public themeKey = 'button';

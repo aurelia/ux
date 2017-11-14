@@ -1,4 +1,4 @@
-import { UxTheme } from 'aurelia-ux';
+import { UxTheme } from '@aurelia-ux/core';
 
 export class UxTagTheme implements UxTheme {
   public themeKey: string = 'tag';

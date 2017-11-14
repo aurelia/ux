@@ -1,5 +1,5 @@
 {
-  "name": "@aurelia-ux-components/input",
+  "name": "@aurelia-ux/input",
   "version": "0.0.1",
   "description": "Input component for Aurelia UX",
   "keywords": [
@@ -74,7 +74,8 @@
       "aurelia-templating-binding": "^1.0.0",
       "aurelia-framework": "^1.0.0",
       "aurelia-metadata": "^1.0.0",
-      "aurelia-path": "^1.0.0"
+      "aurelia-path": "^1.0.0",
+      "@aurelia-ux/core": "^0.3.0"
     },
     "dependencies": {
       "aurelia-binding": "^1.0.0",
@@ -87,13 +88,14 @@
       "aurelia-templating-binding": "^1.0.0",
       "aurelia-framework": "^1.0.0",
       "aurelia-metadata": "^1.0.0",
-      "aurelia-path": "^1.0.0"
+      "aurelia-path": "^1.0.0",
+      "@aurelia-ux/core": "^0.3.0"
     },
     "devDependencies": {}
   },
   "dependencies": {
     "aurelia-framework": "^1.0.0",
-    "aurelia-ux": "^0.3.0"
+    "@aurelia-ux/core": "^0.3.0"
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.53",

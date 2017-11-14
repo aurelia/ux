@@ -1,7 +1,7 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from 'aurelia-ux';
+import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxFormTheme } from './ux-form-theme';
 
 const theme = new UxFormTheme();

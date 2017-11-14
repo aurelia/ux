@@ -1,0 +1,265 @@
+0 silly input [ 'build' ]
+1 silly flags { _: [ 'run' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   script: 'build',
+1 silly flags   args: [] }
+2 verbose rootPath /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux
+3 info version 2.5.1
+4 silly existsSync /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/VERSION
+5 silly initialize attempt
+6 silly initialize success
+7 silly execute attempt
+8 silly runScriptInDir build [] ux
+9 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux' }
+10 silly runScriptInDir build [] button
+11 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/button' }
+12 silly runScriptInDir build [] checkbox
+13 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/checkbox' }
+14 silly runScriptInDir build [] chip-input
+15 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input' }
+16 error build Errored while running script in '@aurelia-ux/chip-input'
+17 error execute callback with error
+18 error Error: Command failed: npm run build
+18 error
+18 error npm ERR! Darwin 16.7.0
+18 error npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build"
+18 error npm ERR! node v6.8.0
+18 error npm ERR! npm  v4.2.0
+18 error npm ERR! code ELIFECYCLE
+18 error npm ERR! errno 1
+18 error npm ERR! @aurelia-ux/chip-input@0.0.1 build: `concurrently "npm run build:amd" "npm run build:commonjs" "npm run build:es2015" "npm run build:native-modules" "npm run build:system"`
+18 error npm ERR! Exit status 1
+18 error npm ERR!
+18 error npm ERR! Failed at the @aurelia-ux/chip-input@0.0.1 build script 'concurrently "npm run build:amd" "npm run build:commonjs" "npm run build:es2015" "npm run build:native-modules" "npm run build:system"'.
+18 error npm ERR! Make sure you have the latest version of node.js and npm installed.
+18 error npm ERR! If you do, this is most likely a problem with the @aurelia-ux/chip-input package,
+18 error npm ERR! not with npm itself.
+18 error npm ERR! Tell the author that this fails on your system:
+18 error npm ERR!     concurrently "npm run build:amd" "npm run build:commonjs" "npm run build:es2015" "npm run build:native-modules" "npm run build:system"
+18 error npm ERR! You can get information on how to open an issue for this project with:
+18 error npm ERR!     npm bugs @aurelia-ux/chip-input
+18 error npm ERR! Or if that isn't available, you can get their info via:
+18 error npm ERR!     npm owner ls @aurelia-ux/chip-input
+18 error npm ERR! There is likely additional logging output above.
+18 error
+18 error npm ERR! Please include the following file with any support request:
+18 error npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-11-06T04_37_07_471Z-debug.log
+18 error
+18 error > @aurelia-ux/chip-input@0.0.1 prebuild /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error > cross-env rimraf dist
+18 error
+18 error
+18 error > @aurelia-ux/chip-input@0.0.1 build /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error > concurrently "npm run build:amd" "npm run build:commonjs" "npm run build:es2015" "npm run build:native-modules" "npm run build:system"
+18 error
+18 error [2]
+18 error [2] > @aurelia-ux/chip-input@0.0.1 prebuild:es2015 /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error [2] > cross-env rimraf dist/es2015
+18 error [2]
+18 error [1]
+18 error [1] > @aurelia-ux/chip-input@0.0.1 prebuild:commonjs /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error [1] > cross-env rimraf dist/commonjs
+18 error [1]
+18 error [0]
+18 error [0] > @aurelia-ux/chip-input@0.0.1 prebuild:amd /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error [0] > cross-env rimraf dist/amd
+18 error [0]
+18 error [3]
+18 error [3] > @aurelia-ux/chip-input@0.0.1 prebuild:native-modules /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error [3] > cross-env rimraf dist/native-modules
+18 error [3]
+18 error [4]
+18 error [4] > @aurelia-ux/chip-input@0.0.1 prebuild:system /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error [4] > cross-env rimraf dist/system
+18 error [4]
+18 error [3]
+18 error [3] > @aurelia-ux/chip-input@0.0.1 build:native-modules /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error [3] > cross-env tsc --project tsconfig.json --outDir dist/native-modules --module es2015
+18 error [3]
+18 error [1]
+18 error [1] > @aurelia-ux/chip-input@0.0.1 build:commonjs /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error [1] > cross-env tsc --project tsconfig.json --outDir dist/commonjs --module commonjs
+18 error [1]
+18 error [2]
+18 error [2] > @aurelia-ux/chip-input@0.0.1 build:es2015 /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error [2] > cross-env tsc --project tsconfig.json --outDir dist/es2015 --module es2015 --target es2015
+18 error [2]
+18 error [0]
+18 error [0] > @aurelia-ux/chip-input@0.0.1 build:amd /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error [0] > cross-env tsc --project tsconfig.json --outDir dist/amd --module amd
+18 error [0]
+18 error [4]
+18 error [4] > @aurelia-ux/chip-input@0.0.1 build:system /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input
+18 error [4] > cross-env tsc --project tsconfig.json --outDir dist/system --module system
+18 error [4]
+18 error [2] src/ux-chip-input-theme.ts(1,26): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [2] src/ux-chip-input.ts(5,69): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [2] src/ux-chip-theme.ts(1,35): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [2] src/ux-chip.ts(5,42): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [2] src/ux-tag-theme.ts(1,25): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [2] src/ux-tag.ts(5,42): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [3] src/ux-chip-input-theme.ts(1,26): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [3] src/ux-chip-input.ts(5,69): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [3] src/ux-chip-theme.ts(1,35): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [3] src/ux-chip.ts(5,42): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [3] src/ux-tag-theme.ts(1,25): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [3] src/ux-tag.ts(5,42): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [2]
+18 error [2] npm ERR! Darwin 16.7.0
+18 error [2] npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build:es2015"
+18 error [2] npm ERR! node v6.8.0
+18 error [2] npm ERR! npm  v4.2.0
+18 error [2] npm ERR! code ELIFECYCLE
+18 error [2] npm ERR! errno 2
+18 error [2] npm ERR! @aurelia-ux/chip-input@0.0.1 build:es2015: `cross-env tsc --project tsconfig.json --outDir dist/es2015 --module es2015 --target es2015`
+18 error [2] npm ERR! Exit status 2
+18 error [2] npm ERR!
+18 error [2] npm ERR! Failed at the @aurelia-ux/chip-input@0.0.1 build:es2015 script 'cross-env tsc --project tsconfig.json --outDir dist/es2015 --module es2015 --target es2015'.
+18 error [2] npm ERR! Make sure you have the latest version of node.js and npm installed.
+18 error [2] npm ERR! If you do, this is most likely a problem with the @aurelia-ux/chip-input package,
+18 error [2] npm ERR! not with npm itself.
+18 error [2] npm ERR! Tell the author that this fails on your system:
+18 error [2] npm ERR!     cross-env tsc --project tsconfig.json --outDir dist/es2015 --module es2015 --target es2015
+18 error [2] npm ERR! You can get information on how to open an issue for this project with:
+18 error [2] npm ERR!     npm bugs @aurelia-ux/chip-input
+18 error [2] npm ERR! Or if that isn't available, you can get their info via:
+18 error [2] npm ERR!     npm owner ls @aurelia-ux/chip-input
+18 error [2] npm ERR! There is likely additional logging output above.
+18 error [2]
+18 error [2] npm ERR! Please include the following file with any support request:
+18 error [2] npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-11-06T04_37_06_724Z-debug.log
+18 error [2] npm run build:es2015 exited with code 2
+18 error [3]
+18 error [3] npm
+18 error [3]  ERR! Darwin 16.7.0
+18 error [3] npm
+18 error [3]  ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build:native-modules"
+18 error [3] npm ERR! node v6.8.0
+18 error [3] npm ERR! npm  v4.2.0
+18 error [3] npm ERR! code ELIFECYCLE
+18 error [3] npm ERR!
+18 error [3]  errno 2
+18 error [3] npm ERR! @aurelia-ux/chip-input@0.0.1 build:native-modules: `cross-env tsc --project tsconfig.json --outDir dist/native-modules --module es2015`
+18 error [3] npm ERR! Exit status 2
+18 error [3] npm ERR!
+18 error [3] npm ERR! Failed at the @aurelia-ux/chip-input@0.0.1 build:native-modules script 'cross-env tsc --project tsconfig.json --outDir dist/native-modules --module es2015'.
+18 error [3] npm ERR! Make sure you have the latest version of node.js and npm installed.
+18 error [3] npm ERR! If you do, this is most likely a problem with the @aurelia-ux/chip-input package,
+18 error [3] npm ERR! not with npm itself.
+18 error [3] npm ERR! Tell the author that this fails on your system:
+18 error [3] npm ERR!     cross-env tsc --project tsconfig.json --outDir dist/native-modules --module es2015
+18 error [3] npm ERR! You can get information on how to open an issue for this project with:
+18 error [3] npm ERR!     npm bugs @aurelia-ux/chip-input
+18 error [3] npm ERR! Or if that isn't available, you can get their info via:
+18 error [3] npm ERR!     npm owner ls @aurelia-ux/chip-input
+18 error [3] npm ERR! There is likely additional logging output above.
+18 error [3]
+18 error [3] npm ERR! Please include the following file with any support request:
+18 error [3] npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-11-06T04_37_06_773Z-debug.log
+18 error [3] npm run build:native-modules exited with code 2
+18 error [1] src/ux-chip-input-theme.ts(1,26): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [1] src/ux-chip-input.ts(5,69): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [1] src/ux-chip-theme.ts(1,35): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [1] src/ux-chip.ts(5,42): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [1] src/ux-tag-theme.ts(1,25): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [1] src/ux-tag.ts(5,42): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [1]
+18 error [1] npm ERR! Darwin 16.7.0
+18 error [1] npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build:commonjs"
+18 error [1] npm ERR! node v6.8.0
+18 error [1] npm ERR!
+18 error [1]  npm  v4.2.0
+18 error [1] npm ERR! code ELIFECYCLE
+18 error [1] npm ERR! errno 2
+18 error [1] npm ERR! @aurelia-ux/chip-input@0.0.1 build:commonjs: `cross-env tsc --project tsconfig.json --outDir dist/commonjs --module commonjs`
+18 error [1] npm ERR! Exit status 2
+18 error [1] npm ERR!
+18 error [1] npm ERR! Failed at the @aurelia-ux/chip-input@0.0.1 build:commonjs script 'cross-env tsc --project tsconfig.json --outDir dist/commonjs --module commonjs'.
+18 error [1] npm
+18 error [1] ERR! Make sure you have the latest version of node.js and npm installed.
+18 error [1] npm ERR! If you do, this is most likely a problem with the @aurelia-ux/chip-input package,
+18 error [1] npm ERR! not with npm itself.
+18 error [1] npm
+18 error [1] ERR! Tell the author that this fails on your system:
+18 error [1] npm ERR!     cross-env tsc --project tsconfig.json --outDir dist/commonjs --module commonjs
+18 error [1] npm ERR! You can get information on how to open an issue for this project with:
+18 error [1] npm ERR!     npm bugs @aurelia-ux/chip-input
+18 error [1] npm ERR! Or if that isn't available, you can get their info via:
+18 error [1] npm ERR!     npm owner ls @aurelia-ux/chip-input
+18 error [1] npm ERR! There is likely additional logging output above.
+18 error [1]
+18 error [1] npm ERR! Please include the following file with any support request:
+18 error [1] npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-11-06T04_37_07_079Z-debug.log
+18 error [1] npm run build:commonjs exited with code 2
+18 error [0] src/ux-chip-input-theme.ts(1,26): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [0] src/ux-chip-input.ts(5,69): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [0] src/ux-chip-theme.ts(1,35): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [0] src/ux-chip.ts(5,42): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [0] src/ux-tag-theme.ts(1,25): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [0] src/ux-tag.ts(5,42): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [0]
+18 error [0] npm
+18 error [0] ERR! Darwin 16.7.0
+18 error [0] npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build:amd"
+18 error [0] npm ERR! node v6.8.0
+18 error [0] npm ERR! npm  v4.2.0
+18 error [0] npm ERR! code ELIFECYCLE
+18 error [0] npm ERR! errno 2
+18 error [0] npm ERR! @aurelia-ux/chip-input@0.0.1 build:amd: `cross-env tsc --project tsconfig.json --outDir dist/amd --module amd`
+18 error [0] npm ERR! Exit status 2
+18 error [0] npm ERR!
+18 error [0] npm ERR! Failed at the @aurelia-ux/chip-input@0.0.1 build:amd script 'cross-env tsc --project tsconfig.json --outDir dist/amd --module amd'.
+18 error [0] npm ERR! Make sure you have the latest version of node.js and npm installed.
+18 error [0] npm ERR! If you do, this is most likely a problem with the @aurelia-ux/chip-input package,
+18 error [0] npm ERR! not with npm itself.
+18 error [0] npm ERR! Tell the author that this fails on your system:
+18 error [0] npm ERR!     cross-env tsc --project tsconfig.json --outDir dist/amd --module amd
+18 error [0] npm ERR! You can get information on how to open an issue for this project with:
+18 error [0] npm ERR!
+18 error [0]      npm bugs @aurelia-ux/chip-input
+18 error [0] npm ERR! Or if that isn't available, you can get their info via:
+18 error [0] npm
+18 error [0]  ERR!     npm owner ls @aurelia-ux/chip-input
+18 error [0] npm ERR! There is likely additional logging output above.
+18 error [0]
+18 error [0] npm ERR! Please include the following file with any support request:
+18 error [0] npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-11-06T04_37_07_281Z-debug.log
+18 error [0] npm run build:amd exited with code 2
+18 error [4] src/ux-chip-input-theme.ts(1,26): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [4] src/ux-chip-input.ts(5,69): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [4] src/ux-chip-theme.ts(1,35): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [4] src/ux-chip.ts(5,42): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [4] src/ux-tag-theme.ts(1,25): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [4] src/ux-tag.ts(5,42): error TS2307: Cannot find module 'aurelia-ux'.
+18 error [4]
+18 error [4] npm
+18 error [4]  ERR! Darwin 16.7.0
+18 error [4] npm ERR!
+18 error [4] argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build:system"
+18 error [4] npm ERR! node v6.8.0
+18 error [4] npm ERR! npm  v4.2.0
+18 error [4] npm ERR! code ELIFECYCLE
+18 error [4] npm ERR! errno 2
+18 error [4] npm ERR! @aurelia-ux/chip-input@0.0.1 build:system: `cross-env tsc --project tsconfig.json --outDir dist/system --module system`
+18 error [4] npm ERR! Exit status 2
+18 error [4] npm ERR!
+18 error [4] npm ERR! Failed at the @aurelia-ux/chip-input@0.0.1 build:system script 'cross-env tsc --project tsconfig.json --outDir dist/system --module system'.
+18 error [4] npm ERR! Make sure you have the latest version of node.js and npm installed.
+18 error [4] npm ERR! If you do, this is most likely a problem with the @aurelia-ux/chip-input package,
+18 error [4] npm ERR! not with npm itself.
+18 error [4] npm ERR! Tell the author that this fails on your system:
+18 error [4] npm ERR!     cross-env tsc --project tsconfig.json --outDir dist/system --module system
+18 error [4] npm ERR! You can get information on how to open an issue for this project with:
+18 error [4] npm ERR!     npm bugs @aurelia-ux/chip-input
+18 error [4] npm ERR! Or if that isn't available, you can get their info via:
+18 error [4] npm
+18 error [4]  ERR!     npm owner ls @aurelia-ux/chip-input
+18 error [4] npm ERR! There is likely additional logging output above.
+18 error [4]
+18 error [4] npm ERR! Please include the following file with any support request:
+18 error [4] npm ERR!
+18 error [4]      /Users/EisenbergEffect/.npm/_logs/2017-11-06T04_37_07_407Z-debug.log
+18 error [4] npm run build:system exited with code 2
+18 error
+18 error     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)

@@ -1,0 +1,18 @@
+define(["require", "exports", "@aurelia-ux/core"], function (require, exports, core_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var UxCheckboxTheme = /** @class */ (function () {
+        function UxCheckboxTheme() {
+            this.themeKey = 'checkbox';
+            this.border = "solid 2px " + core_1.swatches.grey.p700;
+            this.hoverBorder = 'solid 2px var(--ux-design--accent)';
+            this.checkedBackground = 'var(--ux-design--accent)';
+            this.checkmarkColor = core_1.swatches.white;
+            this.disabledBorder = "solid 2px " + core_1.swatches.grey.p500;
+            this.disabledBackground = core_1.swatches.grey.p500;
+            this.disabledForeground = core_1.swatches.grey.p300;
+        }
+        return UxCheckboxTheme;
+    }());
+    exports.UxCheckboxTheme = UxCheckboxTheme;
+});

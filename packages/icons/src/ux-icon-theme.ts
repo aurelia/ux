@@ -1,4 +1,4 @@
-import { UxTheme } from 'aurelia-ux';
+import { UxTheme } from '@aurelia-ux/core';
 
 export class UxIconTheme implements UxTheme {
   public themeKey = 'icon';
