@@ -1,12 +1,16 @@
-ux-button>button {
+ux-button {
   display: inline-block;
   position: relative;
+}
+
+ux-button>button {
+  width: 100%;
   border: 0;
   outline: none;
   cursor: pointer;
+  text-align: center;
   font-family: var(--ux-theme--button-font-family);
   font-weight: var(--ux-theme--button-font-weight);
-  text-align: center;
   text-transform: var(--ux-theme--button-text-transform);
   letter-spacing: var(--ux-theme--button-letter-spacing);
 }
@@ -18,7 +22,6 @@ ux-button>button::-moz-focus-inner {
 ux-button>button.raised,
 ux-button>button.flat {
   min-width: 88px;
-  margin: 6px 0px;
   padding: 0 16px 0 16px;
   border-radius: 2px;
 }
