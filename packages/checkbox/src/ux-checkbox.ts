@@ -143,10 +143,12 @@ export class UxCheckbox implements UxComponent {
     }
   }
 
-  public onKeyup(e: KeyboardEvent) {
+  public onKeydown(e: KeyboardEvent) {
     const key = e.which || e.keyCode;
 
-    if (key === 13) {
+    if (key === 13 || key === 32) {
+      e.preventDefault();
+
       this.toggleCheckbox();
     }
   }
