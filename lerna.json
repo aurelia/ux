@@ -5,6 +5,7 @@
     "packages/button",
     "packages/checkbox",
     "packages/chip-input",
+    "packages/components",
     "packages/datepicker",
     "packages/form",
     "packages/icons",
