@@ -1,7 +1,13 @@
 {
-  "name": "aurelia-ux",
+  "name": "@aurelia-ux/core",
   "version": "0.4.0",
-  "private": true,
+  "description": "A user experience framework for Aurelia.",
+  "keywords": [
+    "aurelia",
+    "styles",
+    "components",
+    "ux"
+  ],
   "homepage": "http://aurelia.io",
   "bugs": {
     "url": "https://github.com/aurelia/ux/issues"
@@ -23,29 +29,65 @@
     "test": "cross-env rimraf dist && tsc && karma start --single-run",
     "develop": "concurrently \"./node_modules/.bin/tsc --watch\" \"./node_modules/.bin/karma start\"",
     "prebuild:amd": "cross-env rimraf dist/amd",
-    "build:amd": "cross-env tsc --project tsconfig.build.json --outDir dist/amd --module amd",
+    "build:amd": "cross-env tsc --project tsconfig.json --outDir dist/amd --module amd",
     "postbuild:amd": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/amd",
     "prebuild:commonjs": "cross-env rimraf dist/commonjs",
-    "build:commonjs": "cross-env tsc --project tsconfig.build.json --outDir dist/commonjs --module commonjs",
+    "build:commonjs": "cross-env tsc --project tsconfig.json --outDir dist/commonjs --module commonjs",
     "postbuild:commonjs": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/commonjs",
     "prebuild:es2015": "cross-env rimraf dist/es2015",
-    "build:es2015": "cross-env tsc --project tsconfig.build.json --outDir dist/es2015 --module es2015 --target es2015",
+    "build:es2015": "cross-env tsc --project tsconfig.json --outDir dist/es2015 --module es2015 --target es2015",
     "postbuild:es2015": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/es2015",
     "prebuild:native-modules": "cross-env rimraf dist/native-modules",
-    "build:native-modules": "cross-env tsc --project tsconfig.build.json --outDir dist/native-modules --module es2015",
+    "build:native-modules": "cross-env tsc --project tsconfig.json --outDir dist/native-modules --module es2015",
     "postbuild:native-modules": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/native-modules",
     "prebuild:system": "cross-env rimraf dist/system",
-    "build:system": "cross-env tsc --project tsconfig.build.json --outDir dist/system --module system",
+    "build:system": "cross-env tsc --project tsconfig.json --outDir dist/system --module system",
     "postbuild:system": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/system",
     "prebuild": "cross-env rimraf dist",
     "build": "concurrently \"npm run build:amd\" \"npm run build:commonjs\" \"npm run build:es2015\" \"npm run build:native-modules\" \"npm run build:system\"",
-    "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.build.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
+    "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
     "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
     "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",
     "changelog": "cross-env conventional-changelog -p ux -i doc/CHANGELOG.md -s",
     "bump-version": "npm --no-git-tag-version version",
     "preprepare-release": "cross-env npm run test",
     "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
+  },
+  "jspm": {
+    "registry": "npm",
+    "jspmPackage": true,
+    "main": "index",
+    "format": "amd",
+    "directories": {
+      "dist": "dist/amd"
+    },
+    "peerDependencies": {
+      "aurelia-binding": "^1.0.0",
+      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-logging": "^1.0.0",
+      "aurelia-pal": "^1.0.0",
+      "aurelia-task-queue": "^1.0.0",
+      "aurelia-templating": "^1.0.0",
+      "aurelia-loader": "^1.0.0",
+      "aurelia-templating-binding": "^1.0.0",
+      "aurelia-framework": "^1.0.0",
+      "aurelia-metadata": "^1.0.0",
+      "aurelia-path": "^1.0.0"
+    },
+    "dependencies": {
+      "aurelia-binding": "^1.0.0",
+      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-logging": "^1.0.0",
+      "aurelia-pal": "^1.0.0",
+      "aurelia-task-queue": "^1.0.0",
+      "aurelia-templating": "^1.0.0",
+      "aurelia-loader": "^1.0.0",
+      "aurelia-templating-binding": "^1.0.0",
+      "aurelia-framework": "^1.0.0",
+      "aurelia-metadata": "^1.0.0",
+      "aurelia-path": "^1.0.0"
+    },
+    "devDependencies": {}
   },
   "dependencies": {
     "aurelia-framework": "^1.0.0"
@@ -68,12 +110,19 @@
     "karma-ie-launcher": "^1.0.0",
     "karma-jasmine": "^1.1.0",
     "karma-requirejs": "^1.1.0",
-    "lerna": "^2.5.1",
     "requirejs": "^2.3.3",
     "requirejs-text": "^2.0.15",
     "rimraf": "^2.6.1",
     "tslint": "^4.4.2",
     "typedoc": "^0.5.9",
     "typescript": "^2.2.1"
+  },
+  "aurelia": {
+    "build": {
+      "resources": []
+    },
+    "documentation": {
+      "articles": []
+    }
   }
 }

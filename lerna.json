@@ -1,7 +1,7 @@
 {
   "lerna": "2.1.2",
   "packages": [
-    ".",
+    "packages/core",
     "packages/button",
     "packages/checkbox",
     "packages/chip-input",
