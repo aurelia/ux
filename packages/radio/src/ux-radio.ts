@@ -77,6 +77,10 @@ export class UxRadio implements UxComponent {
   }
 
   public themeChanged(newValue: UxRadioTheme) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'radio';
+    }
+
     this.styleEngine.applyTheme(newValue, this.element);
   }
 

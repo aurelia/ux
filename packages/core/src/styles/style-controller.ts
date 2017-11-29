@@ -34,13 +34,17 @@ export class StyleController {
     this.themes[theme.themeKey as any] = theme;
   }
 
-  public updateTheme(theme: UxTheme) {
+  public updateTheme(theme: UxTheme, element?: HTMLElement) {
     const baseTheme: UxTheme = { themeKey: 'base-theme' };
-    const defaultTheme = this.themes[theme.themeKey as any];
+    const defaultTheme: any = this.themes[theme.themeKey as any];
 
     for (const key in theme) {
-      if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
-        defaultTheme[key] = theme[key];
+      if (element == null) {
+        if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
+          defaultTheme[key] = (theme as any)[key];
+        }
+      } else {
+        element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), (theme as any)[key]);
       }
     }
   }
@@ -87,7 +91,7 @@ export class StyleController {
     let designInnerHtml = ':root {\r\n';
 
     for (const key of this.getThemeKeys(theme)) {
-      designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, theme[key])}\r\n`;
+      designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, (theme as any)[key])}\r\n`;
     }
 
     designInnerHtml += '}';

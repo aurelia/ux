@@ -56,6 +56,10 @@ export class UxForm implements UxComponent {
   }
 
   public themeChanged(newValue: any) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'form';
+    }
+
     this.styleEngine.applyTheme(newValue, this.element);
   }
 

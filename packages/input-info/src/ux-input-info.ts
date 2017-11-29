@@ -26,8 +26,12 @@ export class UxInputInfo implements UxComponent {
     this.themeChanged(this.theme);
   }
 
-  public themeChanged(theme: UxInputInfoTheme) {
-    this.styleEngine.applyTheme(theme, this.element );
+  public themeChanged(newValue: UxInputInfoTheme) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'input-info';
+    }
+
+    this.styleEngine.applyTheme(newValue, this.element );
   }
 
   private findAndSetTarget(element: any) {

@@ -58,7 +58,7 @@ export class DesignProcessor {
 
     for (const key in design) {
       if (design.hasOwnProperty(key)) {
-        designInnerHtml += `  --ux-design--${kebabCase(key)}: ${(design: any) => design[key]};\r\n`;
+        designInnerHtml += `  --ux-design--${kebabCase(key)}: ${(design as any)[key]};\r\n`;
       }
     }
 

@@ -23,7 +23,11 @@ export class UxList implements UxComponent {
     }
   }
 
-  public themeChanged(newTheme: UxTheme) {
-    this.styleEngine.applyTheme(newTheme, this.element);
+  public themeChanged(newValue: UxListTheme) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'list';
+    }
+
+    this.styleEngine.applyTheme(newValue, this.element);
   }
 }

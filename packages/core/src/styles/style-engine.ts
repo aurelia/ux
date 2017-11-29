@@ -1,13 +1,10 @@
 import { inject } from 'aurelia-dependency-injection';
 import { StyleController } from './style-controller';
-import { ThemeInstanceController } from './theme-instance-controller';
 import { UxTheme } from './ux-theme';
 
-@inject(StyleController, ThemeInstanceController)
+@inject(StyleController)
 export class StyleEngine {
-  constructor(
-    public styleController: StyleController,
-    public themeInstanceController: ThemeInstanceController) { }
+  constructor(public styleController: StyleController) { }
 
   /**
    * Processes a UxTheme into the corresponding CSS Variables
@@ -24,7 +21,7 @@ export class StyleEngine {
     }
 
     if (element != null) {
-      this.themeInstanceController.registerThemedElement(theme, element);
+      this.styleController.updateTheme(theme, element);
     } else {
       this.styleController.updateTheme(theme);
     }

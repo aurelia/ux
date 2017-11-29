@@ -27,6 +27,10 @@ export class UxTag implements UxComponent {
   }
 
   public themeChanged(newValue: any) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'tag';
+    }
+
     this.styleEngine.applyTheme(newValue, this.element);
   }
 

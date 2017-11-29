@@ -28,6 +28,10 @@ export class UxChip implements UxComponent {
   }
 
   public themeChanged(newValue: UxChipTheme) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'chip';
+    }
+
     this.styleEngine.applyTheme(newValue, this.element);
   }
 

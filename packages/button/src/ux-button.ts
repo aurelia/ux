@@ -73,6 +73,10 @@ export class UxButton implements UxComponent {
   }
 
   public themeChanged(newValue: any) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'button';
+    }
+
     this.styleEngine.applyTheme(newValue, this.element);
   }
 

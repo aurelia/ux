@@ -166,6 +166,10 @@ export class UxDatepicker implements UxComponent {
   }
 
   public themeChanged(newValue: any) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'datepicker';
+    }
+
     this.styleEngine.applyTheme(newValue, this.element);
   }
 }

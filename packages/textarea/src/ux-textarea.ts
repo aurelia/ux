@@ -126,6 +126,10 @@ export class UxTextarea implements UxComponent {
   }
 
   public themeChanged(newValue: any) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'textarea';
+    }
+
     this.styleEngine.applyTheme(newValue, this.element);
   }
 

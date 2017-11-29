@@ -126,6 +126,10 @@ export class UxInput implements UxComponent {
   }
 
   public themeChanged(newValue: any) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'input';
+    }
+
     this.styleEngine.applyTheme(newValue, this.element);
   }
 

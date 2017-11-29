@@ -178,6 +178,10 @@ export class UxChipInput implements UxComponent {
   }
 
   public themeChanged(newValue: UxChipInputTheme) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'chip-input';
+    }
+
     this.styleEngine.applyTheme(newValue, this.element);
   }
 }
