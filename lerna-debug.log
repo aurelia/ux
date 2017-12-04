@@ -1,0 +1,255 @@
+0 silly input [ 'build' ]
+1 silly flags { _: [ 'run' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   script: 'build',
+1 silly flags   args: [] }
+2 verbose rootPath /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux
+3 info version 2.5.1
+4 silly existsSync /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/VERSION
+5 silly initialize attempt
+6 silly initialize success
+7 silly execute attempt
+8 silly runScriptInDir build [] core
+9 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/core' }
+10 silly runScriptInDir build [] button
+11 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/button' }
+12 silly runScriptInDir build [] checkbox
+13 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/checkbox' }
+14 silly runScriptInDir build [] chip-input
+15 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/chip-input' }
+16 silly runScriptInDir build [] datepicker
+17 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/datepicker' }
+18 silly runScriptInDir build [] form
+19 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/form' }
+20 silly runScriptInDir build [] icons
+21 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/icons' }
+22 silly runScriptInDir build [] input
+23 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/input' }
+24 silly runScriptInDir build [] input-info
+25 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/input-info' }
+26 silly runScriptInDir build [] list
+27 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list' }
+28 silly runScriptInDir build [] radio
+29 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/radio' }
+30 silly runScriptInDir build [] textarea
+31 silly getExecOpts { cwd: '/Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/textarea' }
+32 error build Errored while running script in '@aurelia-ux/list'
+33 error execute callback with error
+34 error Error: Command failed: npm run build
+34 error
+34 error npm ERR! Darwin 16.7.0
+34 error npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build"
+34 error npm ERR! node v6.8.0
+34 error npm ERR! npm  v4.2.0
+34 error npm ERR! code ELIFECYCLE
+34 error npm ERR! errno 1
+34 error npm ERR! @aurelia-ux/list@0.4.0 build: `concurrently "npm run build:amd" "npm run build:commonjs" "npm run build:es2015" "npm run build:native-modules" "npm run build:system"`
+34 error npm ERR! Exit status 1
+34 error npm ERR!
+34 error npm ERR! Failed at the @aurelia-ux/list@0.4.0 build script 'concurrently "npm run build:amd" "npm run build:commonjs" "npm run build:es2015" "npm run build:native-modules" "npm run build:system"'.
+34 error npm ERR! Make sure you have the latest version of node.js and npm installed.
+34 error npm ERR! If you do, this is most likely a problem with the @aurelia-ux/list package,
+34 error npm ERR! not with npm itself.
+34 error npm ERR! Tell the author that this fails on your system:
+34 error npm ERR!     concurrently "npm run build:amd" "npm run build:commonjs" "npm run build:es2015" "npm run build:native-modules" "npm run build:system"
+34 error npm ERR! You can get information on how to open an issue for this project with:
+34 error npm ERR!     npm bugs @aurelia-ux/list
+34 error npm ERR! Or if that isn't available, you can get their info via:
+34 error npm ERR!     npm owner ls @aurelia-ux/list
+34 error npm ERR! There is likely additional logging output above.
+34 error
+34 error npm ERR! Please include the following file with any support request:
+34 error npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-12-04T04_30_28_579Z-debug.log
+34 error
+34 error > @aurelia-ux/list@0.4.0 prebuild /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error > cross-env rimraf dist
+34 error
+34 error
+34 error > @aurelia-ux/list@0.4.0 build /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error > concurrently "npm run build:amd" "npm run build:commonjs" "npm run build:es2015" "npm run build:native-modules" "npm run build:system"
+34 error
+34 error [1]
+34 error [1] > @aurelia-ux/list@0.4.0 prebuild:commonjs /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error [1] > cross-env rimraf dist/commonjs
+34 error [1]
+34 error [0]
+34 error [0] > @aurelia-ux/list@0.4.0 prebuild:amd /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error [0] > cross-env rimraf dist/amd
+34 error [0]
+34 error [3]
+34 error [3] > @aurelia-ux/list@0.4.0 prebuild:native-modules /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error [3] > cross-env rimraf dist/native-modules
+34 error [3]
+34 error [2]
+34 error [2] > @aurelia-ux/list@0.4.0 prebuild:es2015 /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error [2] > cross-env rimraf dist/es2015
+34 error [2]
+34 error [4]
+34 error [4] > @aurelia-ux/list@0.4.0 prebuild:system /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error [4] > cross-env rimraf dist/system
+34 error [4]
+34 error [2]
+34 error [2] > @aurelia-ux/list@0.4.0 build:es2015 /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error [2] > cross-env tsc --project tsconfig.json --outDir dist/es2015 --module es2015 --target es2015
+34 error [2]
+34 error [1]
+34 error [1] > @aurelia-ux/list@0.4.0 build:commonjs /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error [1] > cross-env tsc --project tsconfig.json --outDir dist/commonjs --module commonjs
+34 error [1]
+34 error [3]
+34 error [3] > @aurelia-ux/list@0.4.0 build:native-modules /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error [3] > cross-env tsc --project tsconfig.json --outDir dist/native-modules --module es2015
+34 error [3]
+34 error [0]
+34 error [0] > @aurelia-ux/list@0.4.0 build:amd /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error [0] > cross-env tsc --project tsconfig.json --outDir dist/amd --module amd
+34 error [0]
+34 error [4]
+34 error [4] > @aurelia-ux/list@0.4.0 build:system /Users/EisenbergEffect/Documents/GitHub/The Durandal Project/aurelia/ux/packages/list
+34 error [4] > cross-env tsc --project tsconfig.json --outDir dist/system --module system
+34 error [4]
+34 error [2] src/ux-list.ts(3,36): error TS6133: 'UxTheme' is declared but its value is never read.
+34 error [2]
+34 error [2] npm
+34 error [2]  ERR! Darwin 16.7.0
+34 error [2] npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build:es2015"
+34 error [2] npm
+34 error [2] ERR! node v6.8.0
+34 error [2] npm ERR! npm  v4.2.0
+34 error [2] npm ERR!
+34 error [2] code ELIFECYCLE
+34 error [2] npm ERR! errno 2
+34 error [2] npm ERR!
+34 error [2]  @aurelia-ux/list@0.4.0 build:es2015: `cross-env tsc --project tsconfig.json --outDir dist/es2015 --module es2015 --target es2015`
+34 error [2] npm ERR! Exit status 2
+34 error [2] npm ERR!
+34 error [2] npm
+34 error [2]  ERR! Failed at the @aurelia-ux/list@0.4.0 build:es2015 script 'cross-env tsc --project tsconfig.json --outDir dist/es2015 --module es2015 --target es2015'.
+34 error [2] npm ERR! Make sure you have the latest version of node.js and npm installed.
+34 error [2] npm ERR!
+34 error [2]  If you do, this is most likely a problem with the @aurelia-ux/list package,
+34 error [2] npm ERR! not with npm itself.
+34 error [2] npm ERR! Tell the author that this fails on your system:
+34 error [2] npm ERR!     cross-env tsc --project tsconfig.json --outDir dist/es2015 --module es2015 --target es2015
+34 error [2] npm ERR! You can get information on how to open an issue for this project with:
+34 error [2] npm ERR!     npm bugs @aurelia-ux/list
+34 error [2] npm ERR! Or if that isn't available, you can get their info via:
+34 error [2] npm ERR!     npm owner ls @aurelia-ux/list
+34 error [2] npm ERR! There is likely additional logging output above.
+34 error [2]
+34 error [2] npm ERR! Please include the following file with any support request:
+34 error [2] npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-12-04T04_30_28_096Z-debug.log
+34 error [2] npm run build:es2015 exited with code 2
+34 error [3] src/ux-list.ts(3,36): error TS6133: 'UxTheme' is declared but its value is never read.
+34 error [3]
+34 error [3] npm ERR! Darwin 16.7.0
+34 error [3] npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build:native-modules"
+34 error [3] npm ERR! node v6.8.0
+34 error [3] npm ERR! npm  v4.2.0
+34 error [3] npm ERR! code ELIFECYCLE
+34 error [3] npm ERR! errno 2
+34 error [3] npm ERR! @aurelia-ux/list@0.4.0 build:native-modules: `cross-env tsc --project tsconfig.json --outDir dist/native-modules --module es2015`
+34 error [3] npm ERR! Exit status 2
+34 error [3] npm ERR!
+34 error [3] npm ERR! Failed at the @aurelia-ux/list@0.4.0 build:native-modules script 'cross-env tsc --project tsconfig.json --outDir dist/native-modules --module es2015'.
+34 error [3] npm ERR! Make sure you have the latest version of node.js and npm installed.
+34 error [3] npm ERR! If you do, this is most likely a problem with the @aurelia-ux/list package,
+34 error [3] npm ERR! not with npm itself.
+34 error [3] npm ERR! Tell the author that this fails on your system:
+34 error [3] npm ERR!     cross-env tsc --project tsconfig.json --outDir dist/native-modules --module es2015
+34 error [3] npm ERR! You can get information on how to open an issue for this project with:
+34 error [3] npm ERR!     npm bugs @aurelia-ux/list
+34 error [3] npm ERR! Or if that isn't available, you can get their info via:
+34 error [3] npm ERR!     npm owner ls @aurelia-ux/list
+34 error [3] npm ERR! There is likely additional logging output above.
+34 error [0] src/ux-list.ts(3,36): error TS6133: 'UxTheme' is declared but its value is never read.
+34 error [1] src/ux-list.ts(3,36): error TS6133: 'UxTheme' is declared but its value is never read.
+34 error [3]
+34 error [3] npm ERR! Please include the following file with any support request:
+34 error [3] npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-12-04T04_30_28_251Z-debug.log
+34 error [3] npm run build:native-modules exited with code 2
+34 error [0]
+34 error [0] npm
+34 error [0] ERR! Darwin 16.7.0
+34 error [0] npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build:amd"
+34 error [0] npm ERR! node v6.8.0
+34 error [0] npm ERR! npm  v4.2.0
+34 error [0] npm ERR! code ELIFECYCLE
+34 error [0] npm ERR! errno 2
+34 error [0] npm ERR! @aurelia-ux/list@0.4.0 build:amd: `cross-env tsc --project tsconfig.json --outDir dist/amd --module amd`
+34 error [0] npm ERR! Exit status 2
+34 error [0] npm ERR!
+34 error [0] npm ERR! Failed at the @aurelia-ux/list@0.4.0 build:amd script 'cross-env tsc --project tsconfig.json --outDir dist/amd --module amd'.
+34 error [0] npm ERR! Make sure you have the latest version of node.js and npm installed.
+34 error [0] npm ERR! If you do, this is most likely a problem with the @aurelia-ux/list package,
+34 error [0] npm
+34 error [0] ERR! not with npm itself.
+34 error [0] npm ERR! Tell the author that this fails on your system:
+34 error [0] npm ERR!     cross-env tsc --project tsconfig.json --outDir dist/amd --module amd
+34 error [0] npm ERR! You can get information on how to open an issue for this project with:
+34 error [0] npm ERR!     npm bugs @aurelia-ux/list
+34 error [0] npm
+34 error [0] ERR! Or if that isn't available, you can get their info via:
+34 error [0] npm ERR!     npm owner ls @aurelia-ux/list
+34 error [0] npm ERR! There is likely additional logging output above.
+34 error [0]
+34 error [0] npm ERR! Please include the following file with any support request:
+34 error [0] npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-12-04T04_30_28_306Z-debug.log
+34 error [1]
+34 error [1] npm ERR! Darwin 16.7.0
+34 error [1] npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build:commonjs"
+34 error [1] npm ERR! node v6.8.0
+34 error [1] npm ERR! npm
+34 error [1]  v4.2.0
+34 error [1] npm ERR! code ELIFECYCLE
+34 error [1] npm ERR! errno 2
+34 error [1] npm ERR! @aurelia-ux/list@0.4.0 build:commonjs: `cross-env tsc --project tsconfig.json --outDir dist/commonjs --module commonjs`
+34 error [1] npm ERR! Exit status 2
+34 error [1] npm ERR!
+34 error [1] npm ERR! Failed at the @aurelia-ux/list@0.4.0 build:commonjs script 'cross-env tsc --project tsconfig.json --outDir dist/commonjs --module commonjs'.
+34 error [1] npm ERR! Make sure you have the latest version of node.js and npm installed.
+34 error [1] npm ERR! If you do, this is most likely a problem with the @aurelia-ux/list package,
+34 error [1] npm ERR! not with npm itself.
+34 error [1] npm ERR! Tell the author that this fails on your system:
+34 error [1] npm ERR!     cross-env tsc --project tsconfig.json --outDir dist/commonjs --module commonjs
+34 error [1] npm ERR! You can get information on how to open an issue for this project with:
+34 error [1] npm ERR!     npm bugs @aurelia-ux/list
+34 error [1] npm ERR! Or if that isn't available, you can get their info via:
+34 error [1] npm ERR!     npm owner ls @aurelia-ux/list
+34 error [1] npm ERR! There is likely additional logging output above.
+34 error [0] npm run build:amd exited with code 2
+34 error [1]
+34 error [1] npm ERR! Please include the following file with any support request:
+34 error [1] npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-12-04T04_30_28_326Z-debug.log
+34 error [1] npm run build:commonjs exited with code 2
+34 error [4] src/ux-list.ts(3,36): error TS6133: 'UxTheme' is declared but its value is never read.
+34 error [4]
+34 error [4] npm
+34 error [4]  ERR! Darwin 16.7.0
+34 error [4] npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build:system"
+34 error [4] npm ERR! node
+34 error [4]  v6.8.0
+34 error [4] npm ERR! npm  v4.2.0
+34 error [4] npm ERR! code ELIFECYCLE
+34 error [4] npm ERR! errno 2
+34 error [4] npm ERR! @aurelia-ux/list@0.4.0 build:system: `cross-env tsc --project tsconfig.json --outDir dist/system --module system`
+34 error [4] npm ERR! Exit status 2
+34 error [4] npm ERR!
+34 error [4] npm ERR! Failed at the @aurelia-ux/list@0.4.0 build:system script 'cross-env tsc --project tsconfig.json --outDir dist/system --module system'.
+34 error [4] npm ERR! Make sure you have the latest version of node.js and npm installed.
+34 error [4] npm ERR! If you do, this is most likely a problem with the @aurelia-ux/list package,
+34 error [4] npm ERR! not with npm itself.
+34 error [4] npm ERR! Tell the author that this fails on your system:
+34 error [4] npm ERR!     cross-env tsc --project tsconfig.json --outDir dist/system --module system
+34 error [4] npm ERR! You can get information on how to open an issue for this project with:
+34 error [4] npm ERR!     npm bugs @aurelia-ux/list
+34 error [4] npm ERR! Or if that isn't available, you can get their info via:
+34 error [4] npm ERR!     npm owner ls @aurelia-ux/list
+34 error [4] npm ERR! There is likely additional logging output above.
+34 error [4]
+34 error [4] npm ERR! Please include the following file with any support request:
+34 error [4] npm ERR!     /Users/EisenbergEffect/.npm/_logs/2017-12-04T04_30_28_537Z-debug.log
+34 error [4] npm run build:system exited with code 2
+34 error
+34 error     at Promise.all.then.arr (/usr/local/lib/node_modules/lerna/node_modules/execa/index.js:236:11)

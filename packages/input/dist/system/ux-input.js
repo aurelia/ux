@@ -120,6 +120,9 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                     });
                 };
                 UxInput.prototype.themeChanged = function (newValue) {
+                    if (newValue != null && newValue.themeKey == null) {
+                        newValue.themeKey = 'input';
+                    }
                     this.styleEngine.applyTheme(newValue, this.element);
                 };
                 UxInput.prototype.disabledChanged = function (newValue) {

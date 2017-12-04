@@ -56,6 +56,9 @@ var UxButton = /** @class */ (function () {
         var _a;
     };
     UxButton.prototype.themeChanged = function (newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'button';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     };
     UxButton.prototype.disabledChanged = function (newValue) {

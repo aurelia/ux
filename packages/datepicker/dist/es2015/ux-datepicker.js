@@ -122,6 +122,9 @@ let UxDatepicker = class UxDatepicker {
         }
     }
     themeChanged(newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'datepicker';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     }
 };

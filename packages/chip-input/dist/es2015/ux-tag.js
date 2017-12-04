@@ -22,6 +22,9 @@ let UxTag = class UxTag {
         this.themeChanged(this.theme);
     }
     themeChanged(newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'tag';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     }
     closeTag() {

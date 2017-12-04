@@ -124,6 +124,9 @@ var UxDatepicker = /** @class */ (function () {
         }
     };
     UxDatepicker.prototype.themeChanged = function (newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'datepicker';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     };
     __decorate([

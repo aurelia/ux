@@ -22,6 +22,9 @@ let UxChip = class UxChip {
         this.themeChanged(this.theme);
     }
     themeChanged(newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'chip';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     }
     closeChip() {

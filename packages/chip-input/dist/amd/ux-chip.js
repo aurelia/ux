@@ -19,6 +19,9 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
             this.themeChanged(this.theme);
         };
         UxChip.prototype.themeChanged = function (newValue) {
+            if (newValue != null && newValue.themeKey == null) {
+                newValue.themeKey = 'chip';
+            }
             this.styleEngine.applyTheme(newValue, this.element);
         };
         UxChip.prototype.closeChip = function () {

@@ -1,0 +1,32 @@
+import { ViewResources } from 'aurelia-templating';
+import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { UxRadioTheme } from './ux-radio-theme';
+export declare class UxRadio implements UxComponent {
+    element: HTMLElement;
+    resources: ViewResources;
+    private styleEngine;
+    disabled: boolean | string;
+    effect: null;
+    id: string;
+    label: string;
+    model: any;
+    tabindex: number;
+    theme: UxRadioTheme;
+    matcher: (a: any, b: any) => boolean;
+    checked: any;
+    value: any;
+    private radio;
+    private ripple;
+    readonly isDisabled: boolean;
+    constructor(element: HTMLElement, resources: ViewResources, styleEngine: StyleEngine);
+    bind(): void;
+    attached(): void;
+    detached(): void;
+    themeChanged(newValue: UxRadioTheme): void;
+    disabledChanged(newValue: boolean | string): void;
+    checkedChanged(): void;
+    toggleRadio(): void;
+    onKeydown(e: KeyboardEvent): boolean;
+    onMouseDown(e: MouseEvent): void;
+    onMouseUp(e: MouseEvent): void;
+}

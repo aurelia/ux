@@ -19,8 +19,11 @@ define(["require", "exports", "aurelia-templating", "aurelia-dependency-injectio
                 this.themeChanged(this.theme);
             }
         };
-        UxList.prototype.themeChanged = function (newTheme) {
-            this.styleEngine.applyTheme(newTheme, this.element);
+        UxList.prototype.themeChanged = function (newValue) {
+            if (newValue != null && newValue.themeKey == null) {
+                newValue.themeKey = 'list';
+            }
+            this.styleEngine.applyTheme(newValue, this.element);
         };
         __decorate([
             aurelia_templating_1.bindable

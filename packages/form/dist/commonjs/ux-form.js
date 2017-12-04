@@ -52,6 +52,9 @@ var UxForm = /** @class */ (function () {
         }
     };
     UxForm.prototype.themeChanged = function (newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'form';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     };
     UxForm.prototype.submitForm = function () {

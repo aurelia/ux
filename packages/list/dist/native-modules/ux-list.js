@@ -20,8 +20,11 @@ var UxList = /** @class */ (function () {
             this.themeChanged(this.theme);
         }
     };
-    UxList.prototype.themeChanged = function (newTheme) {
-        this.styleEngine.applyTheme(newTheme, this.element);
+    UxList.prototype.themeChanged = function (newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'list';
+        }
+        this.styleEngine.applyTheme(newValue, this.element);
     };
     __decorate([
         bindable

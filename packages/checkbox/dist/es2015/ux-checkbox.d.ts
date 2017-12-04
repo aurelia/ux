@@ -25,7 +25,7 @@ export declare class UxCheckbox implements UxComponent {
     disabledChanged(newValue: boolean | string): void;
     checkedChanged(): void;
     toggleCheckbox(): void;
-    onKeyup(e: KeyboardEvent): void;
+    onKeydown(e: KeyboardEvent): void;
     onMouseDown(e: MouseEvent): void;
     onMouseUp(e: MouseEvent): void;
 }

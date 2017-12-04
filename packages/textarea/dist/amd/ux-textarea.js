@@ -100,6 +100,9 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
             }
         };
         UxTextarea.prototype.themeChanged = function (newValue) {
+            if (newValue != null && newValue.themeKey == null) {
+                newValue.themeKey = 'textarea';
+            }
             this.styleEngine.applyTheme(newValue, this.element);
         };
         UxTextarea.prototype.valueChanged = function () {

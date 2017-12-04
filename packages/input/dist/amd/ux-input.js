@@ -97,6 +97,9 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
             });
         };
         UxInput.prototype.themeChanged = function (newValue) {
+            if (newValue != null && newValue.themeKey == null) {
+                newValue.themeKey = 'input';
+            }
             this.styleEngine.applyTheme(newValue, this.element);
         };
         UxInput.prototype.disabledChanged = function (newValue) {

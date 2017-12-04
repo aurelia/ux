@@ -62,6 +62,9 @@ let UxCheckbox = class UxCheckbox {
         }
     }
     themeChanged(newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'checkbox';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     }
     disabledChanged(newValue) {
@@ -119,9 +122,10 @@ let UxCheckbox = class UxCheckbox {
             this.checked = !this.checked;
         }
     }
-    onKeyup(e) {
+    onKeydown(e) {
         const key = e.which || e.keyCode;
-        if (key === 13) {
+        if (key === 13 || key === 32) {
+            e.preventDefault();
             this.toggleCheckbox();
         }
     }

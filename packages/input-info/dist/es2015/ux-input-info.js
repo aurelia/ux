@@ -22,8 +22,11 @@ let UxInputInfo = class UxInputInfo {
         }
         this.themeChanged(this.theme);
     }
-    themeChanged(theme) {
-        this.styleEngine.applyTheme(theme, this.element);
+    themeChanged(newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'input-info';
+        }
+        this.styleEngine.applyTheme(newValue, this.element);
     }
     findAndSetTarget(element) {
         const inputElement = element.previousElementSibling;

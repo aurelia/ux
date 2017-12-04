@@ -100,6 +100,9 @@ let UxTextarea = class UxTextarea {
         }
     }
     themeChanged(newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'textarea';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     }
     valueChanged() {

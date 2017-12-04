@@ -148,6 +148,9 @@ var UxChipInput = /** @class */ (function () {
         }
     };
     UxChipInput.prototype.themeChanged = function (newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'chip-input';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     };
     __decorate([

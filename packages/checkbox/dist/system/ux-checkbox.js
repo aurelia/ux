@@ -86,6 +86,9 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                     }
                 };
                 UxCheckbox.prototype.themeChanged = function (newValue) {
+                    if (newValue != null && newValue.themeKey == null) {
+                        newValue.themeKey = 'checkbox';
+                    }
                     this.styleEngine.applyTheme(newValue, this.element);
                 };
                 UxCheckbox.prototype.disabledChanged = function (newValue) {
@@ -145,9 +148,10 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                         this.checked = !this.checked;
                     }
                 };
-                UxCheckbox.prototype.onKeyup = function (e) {
+                UxCheckbox.prototype.onKeydown = function (e) {
                     var key = e.which || e.keyCode;
-                    if (key === 13) {
+                    if (key === 13 || key === 32) {
+                        e.preventDefault();
                         this.toggleCheckbox();
                     }
                 };

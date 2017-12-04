@@ -68,6 +68,9 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-dependency-inject
                     }
                 };
                 UxForm.prototype.themeChanged = function (newValue) {
+                    if (newValue != null && newValue.themeKey == null) {
+                        newValue.themeKey = 'form';
+                    }
                     this.styleEngine.applyTheme(newValue, this.element);
                 };
                 UxForm.prototype.submitForm = function () {

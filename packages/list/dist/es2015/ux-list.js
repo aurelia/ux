@@ -20,8 +20,11 @@ let UxList = class UxList {
             this.themeChanged(this.theme);
         }
     }
-    themeChanged(newTheme) {
-        this.styleEngine.applyTheme(newTheme, this.element);
+    themeChanged(newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'list';
+        }
+        this.styleEngine.applyTheme(newValue, this.element);
     }
 };
 __decorate([

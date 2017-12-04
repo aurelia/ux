@@ -97,6 +97,9 @@ let UxInput = class UxInput {
         });
     }
     themeChanged(newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'input';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     }
     disabledChanged(newValue) {

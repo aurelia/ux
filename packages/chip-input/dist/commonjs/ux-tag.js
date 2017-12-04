@@ -24,6 +24,9 @@ var UxTag = /** @class */ (function () {
         this.themeChanged(this.theme);
     };
     UxTag.prototype.themeChanged = function (newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'tag';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     };
     UxTag.prototype.closeTag = function () {

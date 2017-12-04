@@ -24,8 +24,11 @@ var UxInputInfo = /** @class */ (function () {
         }
         this.themeChanged(this.theme);
     };
-    UxInputInfo.prototype.themeChanged = function (theme) {
-        this.styleEngine.applyTheme(theme, this.element);
+    UxInputInfo.prototype.themeChanged = function (newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'input-info';
+        }
+        this.styleEngine.applyTheme(newValue, this.element);
     };
     UxInputInfo.prototype.findAndSetTarget = function (element) {
         var inputElement = element.previousElementSibling;

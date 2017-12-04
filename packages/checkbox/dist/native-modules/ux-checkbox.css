@@ -35,26 +35,16 @@ ux-checkbox>.checkbox>.background-box {
   transform: scale3d(0, 0, 0);
   border-radius: 50%;
   transition: 100ms;
-}
-
-ux-checkbox>.checkbox>.background-box::after {
-  margin: auto;
-  display: block;
-  width: 6px;
-  height: 12px;
-  border: solid 2px var(--ux-theme--checkbox-checkmark-color);
-  border-top: none;
-  border-left: none;
-  -webkit-transform-origin: 6px 6px;
-  transform-origin: 6px 6px;
-  transform: rotate(45deg);
-  content: ' ';
+  background-color: var(--ux-theme--checkbox-checked-background);
 }
 
 ux-checkbox.checked>.checkbox>.background-box {
   transform: scale3d(1, 1, 1);
   border-radius: 0;
-  background-color: var(--ux-theme--checkbox-checked-background);
+}
+
+ux-checkbox>.checkbox>.background-box>svg {
+  fill: var(--ux-theme--checkbox-checkmark-color);
 }
 
 ux-checkbox.disabled {

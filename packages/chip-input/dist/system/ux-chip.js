@@ -42,6 +42,9 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                     this.themeChanged(this.theme);
                 };
                 UxChip.prototype.themeChanged = function (newValue) {
+                    if (newValue != null && newValue.themeKey == null) {
+                        newValue.themeKey = 'chip';
+                    }
                     this.styleEngine.applyTheme(newValue, this.element);
                 };
                 UxChip.prototype.closeChip = function () {

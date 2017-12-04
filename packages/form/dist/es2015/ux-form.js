@@ -48,6 +48,9 @@ let UxForm = class UxForm {
         }
     }
     themeChanged(newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'form';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     }
     submitForm() {

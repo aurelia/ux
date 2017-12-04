@@ -51,6 +51,9 @@ let UxButton = class UxButton {
         this.button.classList.add(newValue);
     }
     themeChanged(newValue) {
+        if (newValue != null && newValue.themeKey == null) {
+            newValue.themeKey = 'button';
+        }
         this.styleEngine.applyTheme(newValue, this.element);
     }
     disabledChanged(newValue) {

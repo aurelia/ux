@@ -123,6 +123,9 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                     }
                 };
                 UxTextarea.prototype.themeChanged = function (newValue) {
+                    if (newValue != null && newValue.themeKey == null) {
+                        newValue.themeKey = 'textarea';
+                    }
                     this.styleEngine.applyTheme(newValue, this.element);
                 };
                 UxTextarea.prototype.valueChanged = function () {

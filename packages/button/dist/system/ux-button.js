@@ -70,6 +70,9 @@ System.register(["aurelia-templating", "aurelia-dependency-injection", "@aurelia
                     var _a;
                 };
                 UxButton.prototype.themeChanged = function (newValue) {
+                    if (newValue != null && newValue.themeKey == null) {
+                        newValue.themeKey = 'button';
+                    }
                     this.styleEngine.applyTheme(newValue, this.element);
                 };
                 UxButton.prototype.disabledChanged = function (newValue) {
