@@ -1,6 +1,6 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
-import { UxComponent, StyleEngine, UxTheme } from '@aurelia-ux/core';
+import { UxComponent, StyleEngine } from '@aurelia-ux/core';
 import { UxListTheme } from './ux-list-theme';
 
 const theme = new UxListTheme();
