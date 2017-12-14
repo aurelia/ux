@@ -1,4 +1,4 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, ElementEvents } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
@@ -23,7 +23,7 @@ export class UxInput implements UxComponent {
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
 
-  private textbox: HTMLInputElement;
+  public textbox: HTMLInputElement;
 
   constructor(private element: HTMLInputElement, public styleEngine: StyleEngine) {
     styleEngine.ensureDefaultTheme(theme);
@@ -99,32 +99,6 @@ export class UxInput implements UxComponent {
     this.themeChanged(this.theme);
   }
 
-  public attached() {
-    const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-
-    this.textbox.addEventListener('focus', () => {
-      this.element.classList.add('focused');
-    });
-
-    this.textbox.addEventListener('blur', () => {
-      this.element.classList.remove('focused');
-      this.element.dispatchEvent(blurEvent);
-    });
-  }
-
-  public detached() {
-    const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-
-    this.textbox.removeEventListener('focus', () => {
-      this.element.classList.add('focused');
-    });
-
-    this.textbox.removeEventListener('blur', () => {
-      this.element.classList.remove('focused');
-      this.element.dispatchEvent(blurEvent);
-    });
-  }
-
   public themeChanged(newValue: any) {
     if (newValue != null && newValue.themeKey == null) {
       newValue.themeKey = 'input';
@@ -169,6 +143,15 @@ export class UxInput implements UxComponent {
         this.value = '';
       }
     }
+  }
 
+  public onFieldBlur() {
+    this.element.classList.remove('focused');
+    this.element.dispatchEvent(DOM.createCustomEvent('blur', { bubbles: true }));
+  }
+
+  public onFieldFocus() {
+    this.element.classList.add('focused');
+    this.element.dispatchEvent(DOM.createCustomEvent('focus', { bubbles: true }));
   }
 }
