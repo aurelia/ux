@@ -1,12 +1,12 @@
 ux-icon {
     display: inline-block;
     align-self: center;
-    width: 16px;
-    height: 16px;
+    width: var(--ux-theme--icon-size);
+    height: var(--ux-theme--icon-size);
 }
 
 ux-icon > svg {
-    width: 16px;
-    height: 16px;
+    width: var(--ux-theme--icon-size);
+    height: var(--ux-theme--icon-size);
     fill: currentColor;
 }
