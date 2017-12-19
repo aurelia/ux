@@ -66,7 +66,7 @@ export class UxSwitch implements UxComponent {
 
   public themeChanged(newValue: UxSwitchTheme) {
     if (newValue != null && newValue.themeKey == null) {
-      newValue.themeKey = 'radio';
+      newValue.themeKey = 'switch';
     }
 
     this.styleEngine.applyTheme(newValue, this.element);
