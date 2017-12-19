@@ -13,6 +13,7 @@
     "packages/input-info",
     "packages/list",
     "packages/radio",
+    "packages/switch",
     "packages/tabs",
     "packages/textarea"
   ],

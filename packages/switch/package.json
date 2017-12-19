@@ -1,12 +1,13 @@
 {
-  "name": "@aurelia-ux/components",
+  "name": "@aurelia-ux/switch",
   "version": "0.5.1",
-  "description": "Official components made with Aurelia UX",
+  "description": "Switch component for Aurelia UX",
   "keywords": [
     "aurelia",
     "styles",
     "components",
-    "ux"
+    "ux",
+    "switch"
   ],
   "homepage": "http://aurelia.io",
   "bugs": {
@@ -51,7 +52,8 @@
     "changelog": "cross-env conventional-changelog -p ux -i doc/CHANGELOG.md -s",
     "bump-version": "npm --no-git-tag-version version",
     "preprepare-release": "cross-env npm run test",
-    "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
+    "prepare-release": "cross-env npm run changelog && npm run build && npm run doc",
+    "update-ux": "cross-env rimraf node_modules/aurelia-ux/dist && cross-env copyfiles --up 3 ux/dist/**/*.ts node_modules/aurelia-ux/dist"
   },
   "jspm": {
     "registry": "npm",
@@ -87,33 +89,12 @@
       "aurelia-framework": "^1.0.0",
       "aurelia-metadata": "^1.0.0",
       "aurelia-path": "^1.0.0",
-      "@aurelia-ux/button": "^0.5.0",
-      "@aurelia-ux/checkbox": "^0.5.0",
-      "@aurelia-ux/chip-input": "^0.5.0",
-      "@aurelia-ux/core": "^0.5.0",
-      "@aurelia-ux/datepicker": "^0.5.0",
-      "@aurelia-ux/form": "^0.5.0",
-      "@aurelia-ux/input": "^0.5.0",
-      "@aurelia-ux/input-info": "^0.5.0",
-      "@aurelia-ux/list": "^0.5.1",
-      "@aurelia-ux/textarea": "^0.5.0",
-      "@aurelia-ux/radio": "^0.5.1"
+      "@aurelia-ux/core": "^0.4.0"
     },
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/button": "^0.5.0",
-    "@aurelia-ux/checkbox": "^0.5.0",
-    "@aurelia-ux/chip-input": "^0.5.0",
     "@aurelia-ux/core": "^0.5.0",
-    "@aurelia-ux/datepicker": "^0.5.0",
-    "@aurelia-ux/form": "^0.5.0",
-    "@aurelia-ux/input": "^0.5.0",
-    "@aurelia-ux/input-info": "^0.5.0",
-    "@aurelia-ux/list": "^0.5.1",
-    "@aurelia-ux/textarea": "^0.5.0",
-    "@aurelia-ux/radio": "^0.5.1",
-    "@aurelia-ux/switch": "^0.5.1",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
@@ -143,7 +124,9 @@
   },
   "aurelia": {
     "build": {
-      "resources": []
+      "resources": [
+        "@aurelia-ux/switch/ux-switch"
+      ]
     },
     "documentation": {
       "articles": []
