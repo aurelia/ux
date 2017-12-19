@@ -95,8 +95,7 @@
   },
   "dependencies": {
     "@aurelia-ux/core": "^0.5.0",
-    "aurelia-framework": "^1.0.0",
-    "moment": "^2.18.1"
+    "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.53",
@@ -125,7 +124,9 @@
   },
   "aurelia": {
     "build": {
-      "resources": []
+      "resources": [
+        "@aurelia-ux/checkbox/ux-checkbox"
+      ]
     },
     "documentation": {
       "articles": []

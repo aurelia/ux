@@ -123,7 +123,7 @@
   },
   "aurelia": {
     "build": {
-      "resources": []
+      "resources": ["@aurelia-ux/button/ux-button"]
     },
     "documentation": {
       "articles": []

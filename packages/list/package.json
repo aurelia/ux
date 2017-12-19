@@ -124,7 +124,10 @@
   },
   "aurelia": {
     "build": {
-      "resources": []
+      "resources": [
+        "@aurelia-ux/list/ux-list",
+        "@aurelia-ux/list/ux-list-item"
+      ]
     },
     "documentation": {
       "articles": []

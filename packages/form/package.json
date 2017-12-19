@@ -123,7 +123,10 @@
   },
   "aurelia": {
     "build": {
-      "resources": []
+      "resources": [
+        "@aurelia-ux/form/ux-form",
+        "@aurelia-ux/form/ux-field"
+      ]
     },
     "documentation": {
       "articles": []

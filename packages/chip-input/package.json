@@ -126,7 +126,11 @@
   },
   "aurelia": {
     "build": {
-      "resources": []
+      "resources": [
+        "@aurelia-ux/chip-input/ux-chip-input",
+        "@aurelia-ux/chip-input/ux-chip",
+        "@aurelia-ux/chip-input/ux-tag"
+      ]
     },
     "documentation": {
       "articles": []

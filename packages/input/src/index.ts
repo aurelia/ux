@@ -4,6 +4,6 @@ export { UxInputTheme } from './ux-input-theme';
 
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([
-    PLATFORM.moduleName('./ux-input')
+    PLATFORM.moduleName('@aurelia-ux/input/ux-input')
   ]);
 }

@@ -124,7 +124,12 @@
   },
   "aurelia": {
     "build": {
-      "resources": []
+      "resources": [
+        "@aurelia-ux/datepicker/ux-calendar",
+        "@aurelia-ux/datepicker/ux-datepicker",
+        "@aurelia-ux/datepicker/ux-picker-dialog",
+        "@aurelia-ux/datepicker/ux-year-list"
+      ]
     },
     "documentation": {
       "articles": []

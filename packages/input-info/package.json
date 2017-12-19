@@ -123,7 +123,9 @@
   },
   "aurelia": {
     "build": {
-      "resources": []
+      "resources": [
+        "@aurelia-ux/input-info/ux-input-info"
+      ]
     },
     "documentation": {
       "articles": []

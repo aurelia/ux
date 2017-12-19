@@ -4,6 +4,6 @@ export { UxIconTheme } from './ux-icon-theme';
 
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([
-    PLATFORM.moduleName('./ux-icon')
+    PLATFORM.moduleName('@aurelia-ux/icons/ux-icon')
   ]);
 }

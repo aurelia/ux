@@ -87,16 +87,17 @@
       "aurelia-framework": "^1.0.0",
       "aurelia-metadata": "^1.0.0",
       "aurelia-path": "^1.0.0",
-      "@aurelia-ux/core": "^0.4.0",
-      "@aurelia-ux/button": "^0.4.0",
-      "@aurelia-ux/checkbox": "^0.4.0",
-      "@aurelia-ux/chip-input": "^0.4.0",
-      "@aurelia-ux/datepicker": "^0.4.0",
-      "@aurelia-ux/form": "^0.4.0",
-      "@aurelia-ux/input": "^0.4.0",
-      "@aurelia-ux/input-info": "^0.4.0",
-      "@aurelia-ux/list": "^0.4.0",
-      "@aurelia-ux/textarea": "^0.4.0"
+      "@aurelia-ux/button": "^0.5.0",
+      "@aurelia-ux/checkbox": "^0.5.0",
+      "@aurelia-ux/chip-input": "^0.5.0",
+      "@aurelia-ux/core": "^0.5.0",
+      "@aurelia-ux/datepicker": "^0.5.0",
+      "@aurelia-ux/form": "^0.5.0",
+      "@aurelia-ux/input": "^0.5.0",
+      "@aurelia-ux/input-info": "^0.5.0",
+      "@aurelia-ux/list": "^0.5.1",
+      "@aurelia-ux/textarea": "^0.5.0",
+      "@aurelia-ux/radio": "^0.5.1"
     },
     "devDependencies": {}
   },
@@ -111,6 +112,7 @@
     "@aurelia-ux/input-info": "^0.5.0",
     "@aurelia-ux/list": "^0.5.1",
     "@aurelia-ux/textarea": "^0.5.0",
+    "@aurelia-ux/radio": "^0.5.1",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {

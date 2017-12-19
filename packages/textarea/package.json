@@ -124,7 +124,9 @@
   },
   "aurelia": {
     "build": {
-      "resources": []
+      "resources": [
+        "@aurelia-ux/textarea/ux-textarea"
+      ]
     },
     "documentation": {
       "articles": []

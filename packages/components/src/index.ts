@@ -8,6 +8,7 @@ import { configure as configureFormComponent } from '@aurelia-ux/form';
 import { configure as configureInputComponent } from '@aurelia-ux/input';
 import { configure as configureInputInfoComponent } from '@aurelia-ux/input-info';
 import { configure as configureListComponent } from '@aurelia-ux/list';
+import { configure as configureRadioComponent } from '@aurelia-ux/radio';
 import { configure as configureTextareaComponent } from '@aurelia-ux/textarea';
 
 export function configure(config: FrameworkConfiguration) {
@@ -19,5 +20,6 @@ export function configure(config: FrameworkConfiguration) {
   configureInputComponent(config);
   configureInputInfoComponent(config);
   configureListComponent(config);
+  configureRadioComponent(config);
   configureTextareaComponent(config);
 }
