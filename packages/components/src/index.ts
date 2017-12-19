@@ -10,6 +10,7 @@ import { configure as configureInputInfoComponent } from '@aurelia-ux/input-info
 import { configure as configureListComponent } from '@aurelia-ux/list';
 import { configure as configureRadioComponent } from '@aurelia-ux/radio';
 import { configure as configureTextareaComponent } from '@aurelia-ux/textarea';
+import { configure as configureSwitchComponent } from '@aurelia-ux/switch';
 
 export function configure(config: FrameworkConfiguration) {
   configureButtonComponent(config);
@@ -22,4 +23,5 @@ export function configure(config: FrameworkConfiguration) {
   configureListComponent(config);
   configureRadioComponent(config);
   configureTextareaComponent(config);
+  configureSwitchComponent(config);
 }
