@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/input",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Input component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -94,7 +94,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.5.0",
+    "@aurelia-ux/core": "^0.6.0",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
