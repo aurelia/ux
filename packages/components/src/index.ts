@@ -1,5 +1,17 @@
 import { FrameworkConfiguration } from 'aurelia-framework';
 
+export { UxButtonTheme } from '@aurelia-ux/button';
+export { UxCheckboxTheme } from '@aurelia-ux/checkbox';
+export { UxChipInputTheme, UxChipTheme, UxTagTheme } from '@aurelia-ux/chip-input';
+export { UxDatepickerTheme } from '@aurelia-ux/datepicker';
+export { UxFormTheme } from '@aurelia-ux/form';
+export { UxInputTheme } from '@aurelia-ux/input';
+export { UxInputInfoTheme } from '@aurelia-ux/input-info';
+export { UxListTheme } from '@aurelia-ux/list';
+export { UxRadioTheme } from '@aurelia-ux/radio';
+export { UxTextareaTheme } from '@aurelia-ux/textarea';
+export { UxSwitchTheme } from '@aurelia-ux/switch';
+
 import { configure as configureButtonComponent } from '@aurelia-ux/button';
 import { configure as configureCheckboxComponent } from '@aurelia-ux/checkbox';
 import { configure as configureChipComponent } from '@aurelia-ux/chip-input';
