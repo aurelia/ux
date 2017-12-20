@@ -34,6 +34,9 @@ let StyleController = class StyleController {
     updateTheme(theme, element) {
         const baseTheme = { themeKey: 'base-theme' };
         const defaultTheme = this.themes[theme.themeKey];
+        if (defaultTheme == null) {
+            this.ensureBaseThemeCreated(theme);
+        }
         for (const key in theme) {
             if (element == null) {
                 if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {

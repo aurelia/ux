@@ -3,8 +3,8 @@ System.register(["aurelia-framework", "./ux-list-theme"], function (exports_1, c
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-list'),
-            aurelia_framework_1.PLATFORM.moduleName('./ux-list-item')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/list/ux-list'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/list/ux-list-item')
         ]);
     }
     exports_1("configure", configure);

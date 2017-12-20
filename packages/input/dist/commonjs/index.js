@@ -5,7 +5,7 @@ var ux_input_theme_1 = require("./ux-input-theme");
 exports.UxInputTheme = ux_input_theme_1.UxInputTheme;
 function configure(config) {
     config.globalResources([
-        aurelia_framework_1.PLATFORM.moduleName('./ux-input')
+        aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/input/ux-input')
     ]);
 }
 exports.configure = configure;

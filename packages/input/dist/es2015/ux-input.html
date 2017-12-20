@@ -1,6 +1,6 @@
 <template role="textbox">
   <require from="./ux-input.css"></require>
 
-  <input ref="textbox" value.bind="value" />
+  <input ref="textbox" value.bind="value" blur.trigger="onFieldBlur()" focus.trigger="onFieldFocus()" />
 
 </template>

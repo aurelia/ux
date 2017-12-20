@@ -3,7 +3,7 @@ System.register(["aurelia-framework", "./ux-input-theme"], function (exports_1, 
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-input')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/input/ux-input')
         ]);
     }
     exports_1("configure", configure);

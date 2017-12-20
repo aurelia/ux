@@ -1,0 +1,49 @@
+ux-switch {
+  display: inline-flex;
+  position: relative;
+  border: none;
+  border-radius: 6px;
+  height: 12px;
+  width: 32px;
+  background-color: var(--ux-theme--switch-track);
+  padding: 0;
+  cursor: pointer;
+  transition: background-color .1s ease-in-out;
+}
+
+ux-switch[disabled],
+ux-switch[disabled].on {
+  background-color: var(--ux-theme--switch-track-disabled);
+}
+
+ux-switch[disabled] .indicator,
+ux-switch[disabled].on .indicator {
+  background-color: var(--ux-theme--switch-indicator-disabled);
+}
+
+ux-switch.on {
+  background-color: var(--ux-theme--switch-track-active);
+}
+
+ux-switch:focus {
+  outline: none;
+}
+
+ux-switch .indicator {
+  position: absolute;
+  left: 0;
+  top: -3px;
+  height: 18px;
+  width: 18px;
+  margin: 0 -1px;
+  background-color: var(--ux-theme--switch-indicator);
+  border-radius: 50%;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.6);
+  transition: left .1s ease-in-out, background-color .1s ease-in-out;
+}
+
+ux-switch.on .indicator {
+  left: calc(100% - 16px);
+  background-color: var(--ux-theme--switch-indicator-active);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
+}

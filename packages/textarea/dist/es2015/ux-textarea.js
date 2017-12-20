@@ -63,26 +63,6 @@ let UxTextarea = class UxTextarea {
             this.textbox.setAttribute('readonly', '');
         }
     }
-    attached() {
-        const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-        this.textbox.addEventListener('focus', () => {
-            this.element.classList.add('focused');
-        });
-        this.textbox.addEventListener('blur', () => {
-            this.element.classList.remove('focused');
-            this.element.dispatchEvent(blurEvent);
-        });
-    }
-    detached() {
-        const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-        this.textbox.removeEventListener('focus', () => {
-            this.element.classList.add('focused');
-        });
-        this.textbox.removeEventListener('blur', () => {
-            this.element.classList.remove('focused');
-            this.element.dispatchEvent(blurEvent);
-        });
-    }
     disabledChanged(newValue) {
         if (normalizeBooleanAttribute('disabled', newValue)) {
             this.textbox.setAttribute('disabled', '');
@@ -110,6 +90,14 @@ let UxTextarea = class UxTextarea {
             this.textbox.style.height = 'auto';
             this.textbox.style.height = `${this.textbox.scrollHeight + 2}px`;
         }
+    }
+    onFieldBlur() {
+        this.element.classList.remove('focused');
+        this.element.dispatchEvent(DOM.createCustomEvent('blur', { bubbles: true }));
+    }
+    onFieldFocus() {
+        this.element.classList.add('focused');
+        this.element.dispatchEvent(DOM.createCustomEvent('focus', { bubbles: true }));
     }
 };
 __decorate([

@@ -3,7 +3,7 @@ System.register(["aurelia-framework", "./ux-checkbox-theme"], function (exports_
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-checkbox')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/checkbox/ux-checkbox')
         ]);
     }
     exports_1("configure", configure);

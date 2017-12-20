@@ -34,6 +34,9 @@ var StyleController = /** @class */ (function () {
     StyleController.prototype.updateTheme = function (theme, element) {
         var baseTheme = { themeKey: 'base-theme' };
         var defaultTheme = this.themes[theme.themeKey];
+        if (defaultTheme == null) {
+            this.ensureBaseThemeCreated(theme);
+        }
         for (var key in theme) {
             if (element == null) {
                 if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {

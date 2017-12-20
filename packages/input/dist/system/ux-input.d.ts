@@ -13,14 +13,14 @@ export declare class UxInput implements UxComponent {
     theme: UxInputTheme;
     type: any;
     value: any;
-    private textbox;
+    textbox: HTMLInputElement;
     constructor(element: HTMLInputElement, styleEngine: StyleEngine);
     bind(): void;
-    attached(): void;
-    detached(): void;
     themeChanged(newValue: any): void;
     disabledChanged(newValue: any): void;
     readonlyChanged(newValue: any): void;
     typeChanged(newValue: any): void;
     valueChanged(newValue: any): void;
+    onFieldBlur(): void;
+    onFieldFocus(): void;
 }

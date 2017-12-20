@@ -4,7 +4,7 @@ define(["require", "exports", "aurelia-framework", "./ux-checkbox-theme"], funct
     exports.UxCheckboxTheme = ux_checkbox_theme_1.UxCheckboxTheme;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-checkbox')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/checkbox/ux-checkbox')
         ]);
     }
     exports.configure = configure;
