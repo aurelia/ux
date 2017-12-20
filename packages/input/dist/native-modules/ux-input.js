@@ -77,28 +77,6 @@ var UxInput = /** @class */ (function () {
         }
         this.themeChanged(this.theme);
     };
-    UxInput.prototype.attached = function () {
-        var _this = this;
-        var blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-        this.textbox.addEventListener('focus', function () {
-            _this.element.classList.add('focused');
-        });
-        this.textbox.addEventListener('blur', function () {
-            _this.element.classList.remove('focused');
-            _this.element.dispatchEvent(blurEvent);
-        });
-    };
-    UxInput.prototype.detached = function () {
-        var _this = this;
-        var blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-        this.textbox.removeEventListener('focus', function () {
-            _this.element.classList.add('focused');
-        });
-        this.textbox.removeEventListener('blur', function () {
-            _this.element.classList.remove('focused');
-            _this.element.dispatchEvent(blurEvent);
-        });
-    };
     UxInput.prototype.themeChanged = function (newValue) {
         if (newValue != null && newValue.themeKey == null) {
             newValue.themeKey = 'input';
@@ -138,6 +116,14 @@ var UxInput = /** @class */ (function () {
                 this.value = '';
             }
         }
+    };
+    UxInput.prototype.onFieldBlur = function () {
+        this.element.classList.remove('focused');
+        this.element.dispatchEvent(DOM.createCustomEvent('blur', { bubbles: true }));
+    };
+    UxInput.prototype.onFieldFocus = function () {
+        this.element.classList.add('focused');
+        this.element.dispatchEvent(DOM.createCustomEvent('focus', { bubbles: true }));
     };
     __decorate([
         bindable

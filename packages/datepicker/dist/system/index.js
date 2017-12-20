@@ -3,10 +3,10 @@ System.register(["aurelia-framework", "./ux-datepicker-theme"], function (export
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-calendar'),
-            aurelia_framework_1.PLATFORM.moduleName('./ux-datepicker'),
-            aurelia_framework_1.PLATFORM.moduleName('./ux-picker-dialog'),
-            aurelia_framework_1.PLATFORM.moduleName('./ux-year-list')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/datepicker/ux-calendar'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/datepicker/ux-datepicker'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/datepicker/ux-picker-dialog'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/datepicker/ux-year-list')
         ]);
     }
     exports_1("configure", configure);

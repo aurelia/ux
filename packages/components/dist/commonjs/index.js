@@ -8,7 +8,9 @@ var form_1 = require("@aurelia-ux/form");
 var input_1 = require("@aurelia-ux/input");
 var input_info_1 = require("@aurelia-ux/input-info");
 var list_1 = require("@aurelia-ux/list");
+var radio_1 = require("@aurelia-ux/radio");
 var textarea_1 = require("@aurelia-ux/textarea");
+var switch_1 = require("@aurelia-ux/switch");
 function configure(config) {
     button_1.configure(config);
     checkbox_1.configure(config);
@@ -18,6 +20,8 @@ function configure(config) {
     input_1.configure(config);
     input_info_1.configure(config);
     list_1.configure(config);
+    radio_1.configure(config);
     textarea_1.configure(config);
+    switch_1.configure(config);
 }
 exports.configure = configure;

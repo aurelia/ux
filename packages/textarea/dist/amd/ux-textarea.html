@@ -1,7 +1,7 @@
 <template role="textbox">
   <require from="./ux-textarea.css"></require>
 
-  <textarea ref="textbox" value.bind="value">
+  <textarea ref="textbox" value.bind="value" focus.trigger="onFieldFocus()" blur.trigger="onFieldBlur()">
   </textarea>
 
 </template>

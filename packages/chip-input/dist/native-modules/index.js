@@ -4,8 +4,8 @@ export { UxTagTheme } from './ux-tag-theme';
 export { UxChipTheme } from './ux-chip-theme';
 export function configure(config) {
     config.globalResources([
-        PLATFORM.moduleName('./ux-chip-input'),
-        PLATFORM.moduleName('./ux-chip'),
-        PLATFORM.moduleName('./ux-tag')
+        PLATFORM.moduleName('@aurelia-ux/chip-input/ux-chip-input'),
+        PLATFORM.moduleName('@aurelia-ux/chip-input/ux-chip'),
+        PLATFORM.moduleName('@aurelia-ux/chip-input/ux-tag')
     ]);
 }

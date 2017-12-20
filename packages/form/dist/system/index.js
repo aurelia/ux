@@ -3,9 +3,9 @@ System.register(["aurelia-framework", "./ux-form-theme"], function (exports_1, c
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-field'),
-            aurelia_framework_1.PLATFORM.moduleName('./ux-form'),
-            aurelia_framework_1.PLATFORM.moduleName('./ux-submit-attribute')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/form/ux-field'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/form/ux-form'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/form/ux-submit-attribute')
         ]);
     }
     exports_1("configure", configure);

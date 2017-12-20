@@ -4,8 +4,8 @@ define(["require", "exports", "aurelia-framework", "./ux-list-theme"], function 
     exports.UxListTheme = ux_list_theme_1.UxListTheme;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-list'),
-            aurelia_framework_1.PLATFORM.moduleName('./ux-list-item')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/list/ux-list'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/list/ux-list-item')
         ]);
     }
     exports.configure = configure;

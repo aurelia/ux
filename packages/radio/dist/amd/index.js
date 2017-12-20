@@ -4,7 +4,7 @@ define(["require", "exports", "aurelia-framework", "./ux-radio-theme"], function
     exports.UxRadioTheme = ux_radio_theme_1.UxRadioTheme;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-radio')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/radio/ux-radio')
         ]);
     }
     exports.configure = configure;

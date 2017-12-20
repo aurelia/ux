@@ -16,10 +16,10 @@ export declare class UxTextarea implements UxComponent {
     textbox: HTMLTextAreaElement;
     constructor(element: HTMLElement, styleEngine: StyleEngine);
     bind(): void;
-    attached(): void;
-    detached(): void;
     disabledChanged(newValue: boolean | string): void;
     readonlyChanged(newValue: boolean | string): void;
     themeChanged(newValue: any): void;
     valueChanged(): void;
+    onFieldBlur(): void;
+    onFieldFocus(): void;
 }

@@ -4,7 +4,7 @@ define(["require", "exports", "aurelia-framework", "./ux-textarea-theme"], funct
     exports.UxTextareaTheme = ux_textarea_theme_1.UxTextareaTheme;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-textarea')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/textarea/ux-textarea')
         ]);
     }
     exports.configure = configure;

@@ -3,7 +3,7 @@ System.register(["aurelia-framework", "./ux-radio-theme"], function (exports_1, 
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-radio')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/radio/ux-radio')
         ]);
     }
     exports_1("configure", configure);
