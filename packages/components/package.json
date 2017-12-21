@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/components",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Official components made with Aurelia UX",
   "keywords": [
     "aurelia",
@@ -103,7 +103,7 @@
   },
   "dependencies": {
     "@aurelia-ux/button": "^0.6.0",
-    "@aurelia-ux/checkbox": "^0.6.0",
+    "@aurelia-ux/checkbox": "^0.6.1",
     "@aurelia-ux/chip-input": "^0.6.0",
     "@aurelia-ux/core": "^0.6.0",
     "@aurelia-ux/datepicker": "^0.6.0",
