@@ -1,13 +1,13 @@
 import { inject } from 'aurelia-dependency-injection';
 import { getLogger } from 'aurelia-logging';
 import { Loader } from 'aurelia-loader';
-import { DOM } from 'aurelia-pal';
+import { GlobalStyleEngine } from './styles/global-style-engine';
 
-@inject(Loader)
+@inject(Loader, GlobalStyleEngine)
 export class UXConfiguration {
   private logger = getLogger('aurelia-ux');
 
-  constructor(private loader: Loader) { }
+  constructor(private loader: Loader, private globalStyleEngine: GlobalStyleEngine) { }
 
   public defaultConfiguration() {
     this.cssReset();
@@ -21,7 +21,7 @@ export class UXConfiguration {
       })
       .then(text => {
         if (text) {
-          DOM.injectStyles(text);
+          this.globalStyleEngine.addOrUpdateGlobalStyle('@aurelia-ux/core/reset.css', text);
         }
       });
 

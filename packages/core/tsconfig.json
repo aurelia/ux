@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
-    "module": "amd",
-    "moduleResolution": "node",
     "target": "es5",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "module": "amd",
     "rootDir": "src",
     "outDir": "dist/test",
     "noImplicitAny": true,
@@ -17,12 +12,22 @@
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "noEmitHelpers": false
+    "noEmitHelpers": false,
+    "moduleResolution": "node",
+    "lib": ["es2017", "dom"]
   },
   "exclude": [
     ".vscode",
     "dist",
     "doc",
     "node_modules"
-  ]
+  ],
+  "filesGlob": [
+    "./src/**/*.ts",
+    "./test/**/*.ts",
+    "./custom_typings/**/*.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }

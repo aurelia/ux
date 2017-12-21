@@ -1,13 +1,13 @@
 import { inject } from 'aurelia-dependency-injection';
-import { DOM } from 'aurelia-pal';
 import { ObserverLocator } from 'aurelia-binding';
 import { UxTheme } from './ux-theme';
+import { GlobalStyleEngine } from './global-style-engine';
 
-@inject(ObserverLocator)
+@inject(ObserverLocator, GlobalStyleEngine)
 export class StyleController {
   public themes: UxTheme[] = [];
 
-  constructor(public observerLocator: ObserverLocator) { }
+  constructor(public observerLocator: ObserverLocator, private globalStyleEngine: GlobalStyleEngine) { }
 
   /**
    * Checks to see if a base theme has been registered.
@@ -26,10 +26,11 @@ export class StyleController {
 
     baseTheme = theme;
 
-    const styleElement = this.createStyleElement(theme);
-    this.setWatches(theme, styleElement);
-
-    DOM.appendNode(styleElement, window.document.head);
+    this.globalStyleEngine.addOrUpdateGlobalStyle(
+      `aurelia-ux theme ${theme.themeKey}`,
+      this.processInnerHtml(theme),
+      ':root');
+    this.setWatches(theme);
 
     this.themes[theme.themeKey as any] = theme;
   }
@@ -74,31 +75,23 @@ export class StyleController {
     return `--ux-theme--${themeKey}-${kebabCase(propertyKey)}: ${value};`;
   }
 
-  private createStyleElement(theme: UxTheme) {
-    const styleElement = DOM.createElement('style') as HTMLStyleElement;
-
-    styleElement.type = 'text/css';
-    styleElement.innerHTML = this.processInnerHtml(theme);
-
-    return styleElement;
-  }
-
-  private setWatches(theme: UxTheme, styleElement: HTMLStyleElement) {
+  private setWatches(theme: UxTheme) {
     for (const key of this.getThemeKeys(theme)) {
       this.observerLocator.getObserver(theme, key).subscribe(() => {
-        styleElement.innerHTML = this.processInnerHtml(theme);
+        this.globalStyleEngine.addOrUpdateGlobalStyle(
+          `aurelia-ux theme ${theme.themeKey}`,
+          this.processInnerHtml(theme),
+          ':root');
       });
     }
   }
 
   private processInnerHtml(theme: UxTheme) {
-    let designInnerHtml = ':root {\r\n';
+    let designInnerHtml = '';
 
     for (const key of this.getThemeKeys(theme)) {
       designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, (theme as any)[key])}\r\n`;
     }
-
-    designInnerHtml += '}';
 
     return designInnerHtml;
   }

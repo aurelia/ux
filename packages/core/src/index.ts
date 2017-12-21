@@ -13,6 +13,8 @@ export { UxComponent } from './components/ux-component';
 
 export { UxTheme } from './styles/ux-theme';
 export { StyleEngine } from './styles/style-engine';
+export { GlobalStyle } from './styles/global-style';
+export { GlobalStyleEngine } from './styles/global-style-engine';
 
 export { AureliaUX } from './aurelia-ux';
 export { UXConfiguration } from './ux-configuration';

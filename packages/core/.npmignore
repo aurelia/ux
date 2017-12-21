@@ -1,4 +1,5 @@
 src
+karma.conf.js
 tsconfig.json
 package-lock.json
 test

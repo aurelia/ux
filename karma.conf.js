@@ -17,7 +17,6 @@ module.exports = function(config) {
     files: [
       'dist/test/test/main.js',
       { pattern: 'dist/test/**/*.js', included: false, watched: true },
-      //{ pattern: 'dist/test/**/*.html', included: false, watched: true },
       { pattern: 'node_modules/**/*.js', included: false, watched: false },
     ],
 

@@ -48,7 +48,8 @@
     "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
   },
   "dependencies": {
-    "aurelia-framework": "^1.0.0"
+    "aurelia-framework": "^1.0.0",
+    "@aurelia-ux/core": "^0.6.0"
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.53",

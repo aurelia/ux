@@ -1,17 +1,15 @@
-import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { ObserverLocator } from 'aurelia-binding';
 import { Design } from '../designs/design';
 import { swatches } from '../colors/swatches';
+import { GlobalStyleEngine } from '../styles/global-style-engine';
 
-@inject(ObserverLocator)
+@inject(ObserverLocator, GlobalStyleEngine)
 export class DesignProcessor {
-  private designStyleElement: HTMLStyleElement;
-
-  constructor(private observerLocator: ObserverLocator) { }
+  constructor(private observerLocator: ObserverLocator, private globalStyleEngine: GlobalStyleEngine) { }
 
   public setSwatchVariables() {
-    let swatchClasses = `:root {\r\n`;
+    let swatchClasses = '';
 
     for (const swatch in swatches) {
       if (swatches.hasOwnProperty(swatch)) {
@@ -28,18 +26,17 @@ export class DesignProcessor {
       }
     }
 
-    swatchClasses += '}';
-    DOM.injectStyles(swatchClasses);
+    this.globalStyleEngine.addOrUpdateGlobalStyle(
+      `aurelia-ux swatches`,
+      swatchClasses,
+      ':root');
   }
 
   public setDesignVariables(design: Design) {
-    this.designStyleElement = DOM.createElement('style') as HTMLStyleElement;
-
-    this.designStyleElement.type = 'text/css';
-
-    this.designStyleElement.innerHTML = this.buildInnerHTML(design);
-
-    DOM.appendNode(this.designStyleElement, window.document.head);
+    this.globalStyleEngine.addOrUpdateGlobalStyle(
+      `aurelia-ux design styles`,
+      this.buildInnerHTML(design),
+      ':root');
   }
 
   public setDesignWatches(design: Design) {
@@ -47,22 +44,23 @@ export class DesignProcessor {
       if (design.hasOwnProperty(key)) {
         this.observerLocator.getObserver(design, key)
           .subscribe(() => {
-            this.designStyleElement.innerHTML = this.buildInnerHTML(design);
+            this.globalStyleEngine.addOrUpdateGlobalStyle(
+              `aurelia-ux design styles`,
+              this.buildInnerHTML(design),
+              ':root');
           });
       }
     }
   }
 
   private buildInnerHTML(design: Design) {
-    let designInnerHtml = ':root {\r\n';
+    let designInnerHtml = '';
 
     for (const key in design) {
       if (design.hasOwnProperty(key)) {
         designInnerHtml += `  --ux-design--${kebabCase(key)}: ${(design as any)[key]};\r\n`;
       }
     }
-
-    designInnerHtml += '}';
 
     return designInnerHtml;
   }
