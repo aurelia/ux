@@ -1,6 +1,5 @@
 import { FrameworkConfiguration } from 'aurelia-framework';
 import { AureliaUX } from './aurelia-ux';
-import { PLATFORM } from 'aurelia-pal';
 
 export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
@@ -21,10 +20,6 @@ export { UXConfiguration } from './ux-configuration';
 
 export function configure(config: FrameworkConfiguration, callback?: (config: AureliaUX) => Promise<any>) {
   const ux = config.container.get(AureliaUX) as AureliaUX;
-
-  config.globalResources([
-    PLATFORM.moduleName('./reset.css')
-  ]);
 
   if (typeof callback === 'function') {
     return Promise.resolve(callback(ux))
