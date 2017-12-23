@@ -14,12 +14,14 @@ ux-select > .container > .ux-select-trigger {
   position: relative;
   display: flex;
   justify-content: center;
+  width: 100%;
   border: 0;
   border-bottom: var(--ux-theme--select-trigger-border);
   padding: 6px 4px 6px 12px;
   background-color: transparent;
   cursor: pointer;
   outline: none;
+  text-align: left;
 }
 
 ux-select > .container > .ux-select-trigger:focus {
