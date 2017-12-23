@@ -1,6 +1,8 @@
 <template
   multiple.bind="multiple & booleanAttr"
-  disabled.bind="disabled & booleanAttr">
+  disabled.bind="disabled & booleanAttr"
+  aria-multiselectable.bind="isMultiple"
+  aria-disabled.bind="isDisabled">
 
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-select.css"></require>
@@ -8,20 +10,22 @@
 
   <div class="container">
     <button class="ux-select-trigger ${listIsOpen ? 'open' : ''}"
+      role="button"
       focus.trigger="onBtnFocus()"
       blur.trigger="onBtnBlur() & debounce:1"
       click.delegate="expand()"
       keydown.delegate="onBtnKeydown($event.keyCode)"
+      disabled.bind='isDisabled'
       ref="button">
-      <div class="ux-select-value" with.bind="selectedItem">
-        <span replaceable part='selected-item'>${$this}</span>
+      <div class="ux-select-value">
+        <span replaceable part='selected-item'
+            textcontent.bind="hasValue ? selectedItem : placeholder"></span>
       </div>
     </button>
 
-    <div></div>
-
     <div if.bind="listIsOpen" class="options-container">
       <div role="listbox"
+          aria-expanded.bind="listIsOpen"
           class="options"
           tabindex="-1"
           css="min-width: ${button.offsetWidth & oneTime}px; top: ${listAnchor.y}px; left: ${listAnchor.x}px;"
@@ -33,6 +37,8 @@
           ref="optionsCt">
         <ux-option repeat.for="item of items"
             role="option"
+            aria-selected.bind="$this.uxOptionSelected"
+            aria-disabled.bind="item.disabled"
             context.bind='$this'
             value.bind='item'
             class.bind="($this.uxOptionSelected || $index === focusedIndex ? 'selected' : '') + ' ripple'"

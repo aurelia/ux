@@ -4,22 +4,16 @@ ux-select {
   box-sizing: border-box;
 }
 
-ux-select .select-listbox {
-  position: fixed;
-  padding: 10px 0;
-  background-color: var(--ux-theme-select-listbox-background);
-  box-shadow: 0px 1px 6px var(--ux-theme-select-listbox-shadow), 0px 1px 4px var(--ux-theme-select-listbox-shadow);
-  border-radius: 2px;
-  transform-origin: left top 0px;
-  outline: none;
-}
-
 ux-select > .container {
   position: relative;
+  display: inline-block;
+  width: 100%;
 }
 
 ux-select > .container > .ux-select-trigger {
-  display: inline-block;
+  position: relative;
+  display: flex;
+  justify-content: center;
   border: 0;
   border-bottom: var(--ux-theme--select-trigger-border);
   padding: 6px 4px 6px 12px;
@@ -28,15 +22,29 @@ ux-select > .container > .ux-select-trigger {
   outline: none;
 }
 
+ux-select > .container > .ux-select-trigger:focus {
+  border-bottom: var(--ux-theme--select-trigger-border-focused);
+}
+
+ux-select > .container > .ux-select-trigger:disabled {
+  opacity: 0.8;
+  cursor: default;
+  pointer-events: none;
+  border-bottom: var(--ux-theme--select-trigger-border-disabled);
+}
+
 ux-select > .container > .ux-select-trigger > .ux-select-value {
   display: inline-block;
+  flex-grow: 1;
   min-width: var(--ux-theme--select-value-ct-min-width);
   margin-right: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 ux-select > .container > .ux-select-trigger:after {
   content: '▾';
-  display: inline-block;
   color: black;
   position: relative;
 }
@@ -49,7 +57,6 @@ ux-select > .container > .options-container > .options {
   position: fixed;
   max-width: var(--ux-theme--select-list-max-width-px);
   max-height: var(--ux-theme--select-list-max-height-px);
-  padding: 16px 0;
   border: 1px solid #cccccc;
   border-top: 0;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
@@ -68,13 +75,25 @@ ux-select > .container > .options-container > .options.open {
   transform: scaleY(1);
 }
 
-ux-select > .container > .options-container > .options > ux-option {
+ux-option {
   position: relative;
   display: block;
   padding: 6px 24px;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-ux-select > .container > .options-container > .options > ux-option.selected {
-  background-color: var(--ux-theme--select-selected);
+ux-option:hover {
+  background-color: var(--ux-theme--select-option-hover);
+}
+
+ux-option.selected {
+  background-color: var(--ux-theme--select-option-selected);
+}
+
+ux-option[disabled] {
+  opacity: 0.8;
+  pointer-events: none;
 }

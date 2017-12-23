@@ -2,6 +2,7 @@ import {
   customElement,
   bindable,
   autoinject,
+  computedFrom,
   bindingMode,
   ViewResources,
   ViewCompiler,
@@ -9,10 +10,9 @@ import {
   DOM,
   processContent,
   observable,
-  ElementEvents,
-  ObserverLocator
+  ElementEvents
 } from 'aurelia-framework';
-import { getLogger } from 'aurelia-logging'
+import { getLogger } from 'aurelia-logging';
 import { StyleEngine, UxComponent, PaperRipple } from '@aurelia-ux/core';
 import { UxSelectTheme } from './ux-select-theme';
 
@@ -20,9 +20,7 @@ let uxSelectId = 1;
 const theme = new UxSelectTheme();
 
 const UP = 38;
-const RIGHT = 39;
 const DOWN = 40;
-const LEFT = 37;
 const ESC = 27;
 const ENTER = 13;
 const SPACE = 32;
@@ -30,29 +28,29 @@ const logger = getLogger('ux-select');
 const invalidMultipleValueMsg = 'Only null or Array instances can be bound to a multi-select';
 
 export interface UxSelectElement extends HTMLElement {
-  matcher(a, b): boolean
+  matcher(a: any, b: any): boolean;
 }
 
 export interface UxOptionContext<T> {
   // Need unique name to avoid parent context leak
-  uxOptionSelected?: boolean
-  $index: number
-  item: T
+  uxOptionSelected?: boolean;
+  $index: number;
+  item: T;
 }
 
 export interface UxOptionElement<T = any> extends HTMLElement {
-  context: UxOptionContext<T>
-  ripple: PaperRipple
-  value: T
+  context: UxOptionContext<T>;
+  ripple: PaperRipple;
+  value: T;
 }
 
 export interface UxOptionContainer<T = any> extends HTMLElement {
-  children: HTMLCollectionOf<UxOptionElement<T>>
+  children: HTMLCollectionOf<UxOptionElement<T>>;
 }
 
 export interface UxOptionContainerAnchor {
-  x: number
-  y: number
+  x: number;
+  y: number;
 }
 
 export function defaultMatcher<T = any>(a: T, b: T) {
@@ -65,66 +63,69 @@ export function defaultMatcher<T = any>(a: T, b: T) {
 export class UxSelect<T = any> implements UxComponent {
 
   private element: UxSelectElement;
+
   @observable({ initializer: () => 0 })
   private selectedIndex: number;
-  private selectedItem: T
+
+  private selectedItem?: T | T[];
   /**
    * Flag to set selecedItem to undefined, when value coming is not in items
    */
-  private ignoreSelectedIndex: boolean
+  private ignoreSelectedIndex: boolean;
 
   /**
    * Temporarily used to store <ux-option/> reference in interaction
    */
-  private focusedUxOption: UxOptionElement<T>
+  private focusedUxOption: UxOptionElement<T>;
 
   /**
    * Observe window events
    */
-  private winEvents: ElementEvents
+  private winEvents: ElementEvents;
 
-  private optionsCtRect: ClientRect
+  private optionsCtRect: ClientRect | null;
 
   @bindable()
-  public theme: UxSelectTheme
+  public theme: UxSelectTheme;
 
   @bindable()
   public autofocus: boolean | string;
 
   @bindable({ defaultValue: false })
-  public disabled: boolean;
+  public disabled: boolean | string;
 
   @bindable({ defaultValue: false })
-  public multiple: boolean | string
+  public multiple: boolean | string;
 
   @bindable()
-  public items: T[]
+  public placeholder: string;
+
+  @bindable()
+  public items: T[];
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: T | T[];
 
   public readonly id: number;
-  public readonly button: HTMLButtonElement
-  public readonly optionsCt: UxOptionContainer<T>
-  public listIsOpen: boolean
-  public focusedIndex: number
-  public listAnchor: UxOptionContainerAnchor
+  public readonly button: HTMLButtonElement;
+  public readonly optionsCt: UxOptionContainer<T>;
+  public listIsOpen: boolean;
+  public focusedIndex: number;
+  public listAnchor: UxOptionContainerAnchor;
 
   constructor(
     element: Element,
-    private styleEngine: StyleEngine,
-    private observerLocator: ObserverLocator
+    private styleEngine: StyleEngine
   ) {
     this.theme = theme;
     this.element = element as UxSelectElement;
     this.id = uxSelectId++;
     styleEngine.ensureDefaultTheme(theme);
-    window['uxSelect'] = this;
   }
 
   public bind() {
     if (this.autofocus || this.autofocus === '') {
-      setTimeout(focusEl, 0, this.button)
+      setTimeout(focusEl, 0, this.button);
     }
     if (this.isMultiple) {
       if (!this.value) {
@@ -144,17 +145,17 @@ export class UxSelect<T = any> implements UxComponent {
   }
 
   private synchronizeOptions() {
-    let value = this.value;
-    let isArray = Array.isArray(value);
+    const value = this.value;
+    const isArray = Array.isArray(value);
 
-    let options = this.options;
+    const options = this.options;
     let i = options.length;
-    let matcher = this.element.matcher || defaultMatcher;
+    const matcher = this.element.matcher || defaultMatcher;
     while (i--) {
-      let option = options[i];
-      let optionValue = option.value;
+      const option = options[i];
+      const optionValue = option.value;
       if (isArray) {
-        option.context.uxOptionSelected = (value as T[]).findIndex(item => !!matcher(optionValue, item)) !== -1; // eslint-disable-line no-loop-func
+        option.context.uxOptionSelected = (value as T[]).findIndex(item => !!matcher(optionValue, item)) !== -1;
         continue;
       }
       option.context.uxOptionSelected = !!matcher(optionValue, value);
@@ -166,26 +167,25 @@ export class UxSelect<T = any> implements UxComponent {
       logger.warn('Unnecessary synchronization called for single <ux-select/>');
       return;
     }
-    let options = this.options;
-    let count = 0;
-    let value: T | T[] = [];
+    const options = this.options;
+    const value: T[] = [];
+    const ii = options.length;
 
-    for (let i = 0, ii = options.length; i < ii; i++) {
-      let option = options[i];
+    for (let i = 0; i < ii; i++) {
+      const option = options[i];
       if (!option.context.uxOptionSelected) {
         continue;
       }
       value.push(option.value);
-      count++;
     }
 
     // multi-select
     if (Array.isArray(this.value)) {
-      let matcher = this.element.matcher || defaultMatcher;
+      const matcher = this.element.matcher || defaultMatcher;
       // remove items that are no longer selected.
       let i = 0;
       while (i < this.value.length) {
-        let a = this.value[i];
+        const a = this.value[i];
         if (value.findIndex(b => matcher(a, b)) === -1) { // eslint-disable-line no-loop-func
           this.value.splice(i, 1);
         } else {
@@ -195,7 +195,7 @@ export class UxSelect<T = any> implements UxComponent {
       // add items that have been selected.
       i = 0;
       while (i < value.length) {
-        let a = value[i];
+        const a = value[i];
         if (this.value.findIndex(b => matcher(a, b)) === -1) { // eslint-disable-line no-loop-func
           this.value.push(a);
         }
@@ -226,23 +226,25 @@ export class UxSelect<T = any> implements UxComponent {
   }
 
   private calcAnchorPosition() {
-    const { listMaxWidth, listMaxHeight } = this.theme;
-    const { top, left, width, height } = this.element.getBoundingClientRect();
+    const { top, left } = this.element.getBoundingClientRect();
 
-    const { innerWidth: maxWidth, innerHeight: maxHeight } = window;
-    let anchorX: number;
-    let anchorY: number;
-    if (left + listMaxWidth > maxWidth) {
-      anchorX = maxWidth - listMaxWidth;
-    } else {
-      anchorX = left;
+    let anchorX: number = left;
+    let anchorY: number = top;
+
+    if (this.optionsCtRect) {
+      const { width: ctWidth, height: ctHeight } = this.optionsCtRect;
+      const { innerWidth: maxWidth, innerHeight: maxHeight } = window;
+      if (left + ctWidth > maxWidth) {
+        anchorX = maxWidth - ctWidth;
+        if (anchorX < 0) {
+          anchorX = 0;
+        }
+      }
+      if (top + ctHeight > maxHeight) {
+        anchorY = maxHeight - ctHeight;
+      }
     }
-    if (top + listMaxHeight > maxHeight) {
-      anchorY = maxHeight - listMaxHeight;
-    } else {
-      anchorY = top;
-    }
-    this.listAnchor = { x: anchorX, y: anchorY }
+    this.listAnchor = { x: anchorX, y: anchorY };
   }
 
   public expand() {
@@ -260,7 +262,7 @@ export class UxSelect<T = any> implements UxComponent {
 
   public select(index: number) {
     if (this.isMultiple) {
-      let option = this.options[index];
+      const option = this.options[index];
       option.context.uxOptionSelected = !option.context.uxOptionSelected;
       this.synchronizeValue();
     } else {
@@ -295,6 +297,8 @@ export class UxSelect<T = any> implements UxComponent {
   public onBtnFocus() {
     if (this.listIsOpen) {
       this.optionsCt.focus();
+    } else {
+      this.element.dispatchEvent(DOM.createCustomEvent('focus', {}));
     }
   }
 
@@ -305,6 +309,7 @@ export class UxSelect<T = any> implements UxComponent {
   }
 
   public onBtnKeydown(key: number) {
+    // tslint:disable-next-line:switch-default
     switch (key) {
       case UP: case DOWN:
         this.moveSelectedIndex(key === UP ? -1 : 1);
@@ -330,6 +335,7 @@ export class UxSelect<T = any> implements UxComponent {
   }
 
   public onListKeydown(key: number) {
+    // tslint:disable-next-line:switch-default
     switch (key) {
       case UP: case DOWN:
         this.moveFocusedIndex(key === UP ? -1 : 1);
@@ -346,6 +352,7 @@ export class UxSelect<T = any> implements UxComponent {
   }
 
   public onListTransitioned() {
+    this.optionsCtRect = this.optionsCt.getBoundingClientRect();
     if (this.isMultiple) {
       this.synchronizeOptions();
     }
@@ -369,7 +376,7 @@ export class UxSelect<T = any> implements UxComponent {
   public itemsChanged(items: T[]) {
     if (items) {
       if (this.isMultiple) {
-
+        // Should not do anything
       } else {
         if (this.selectedIndex !== undefined) {
           this.selectedItem = items[this.selectedIndex];
@@ -386,6 +393,7 @@ export class UxSelect<T = any> implements UxComponent {
       } else {
         this.selectedIndex = -1;
         this.synchronizeOptions();
+        this.selectedItem = value;
       }
     } else {
       if (this.selectedItem !== value) {
@@ -415,10 +423,9 @@ export class UxSelect<T = any> implements UxComponent {
   }
 
   /**
-   * 
    * @param autoEnd Internal flag to distinguish between keyboard navigation and mouse
    */
-  public addWave(target: UxOptionElement, e?: MouseEvent, autoEnd?: boolean) {
+  public addWave(target: UxOptionElement, e?: MouseEvent | null, autoEnd?: boolean) {
     if (target.classList.contains('ripple')) {
       if (target.ripple === null || target.ripple === undefined) {
         target.ripple = new PaperRipple();
@@ -437,7 +444,7 @@ export class UxSelect<T = any> implements UxComponent {
 
   public handleEvent(e: Event) {
     if (e.type === 'mouseup') {
-      const target = this.focusedUxOption.ripple.upAction();
+      this.focusedUxOption.ripple.upAction();
       document.removeEventListener('mouseup', this);
     }
   }
@@ -446,15 +453,36 @@ export class UxSelect<T = any> implements UxComponent {
     return this.optionsCt ? Array.from(this.optionsCt.children) : [];
   }
 
+  @computedFrom('multiple')
   public get isMultiple() {
-    return this.multiple || this.multiple === '';
+    return !!this.multiple || this.multiple === '';
+  }
+
+  @computedFrom('disabled')
+  public get isDisabled() {
+    return !!this.disabled || this.disabled === '';
+  }
+
+  @computedFrom('selectedItem', 'selectedItem.length', 'multiple')
+  public get hasValue() {
+    const isMulitple = this.isMultiple;
+    return isMulitple
+        && Array.isArray(this.selectedItem)
+        && this.selectedItem.length
+      || !isMulitple
+        && this.selectedItem !== undefined;
   }
 }
 
-function extractUxOption(compiler: ViewCompiler, resources: ViewResources, node: HTMLElement, instruction: BehaviorInstruction) {
+function extractUxOption(
+  compiler: ViewCompiler,
+  resources: ViewResources,
+  node: HTMLElement,
+  instruction: BehaviorInstruction
+) {
   let currentChild = node.firstChild;
-  let template: HTMLTemplateElement;
-  let selectedTemplate: HTMLTemplateElement;
+  let template: HTMLTemplateElement | undefined;
+  let selectedTemplate: HTMLTemplateElement | undefined;
   while (currentChild) {
     // only get the first <ux-option></ux-option>
     if (currentChild.nodeType === 1) {
@@ -465,7 +493,7 @@ function extractUxOption(compiler: ViewCompiler, resources: ViewResources, node:
         }
         template.setAttribute('replace-part', 'ux-option');
       } else if (!selectedTemplate && currentChild.nodeName === 'TEMPLATE') {
-        let temp = currentChild as HTMLTemplateElement;
+        const temp = currentChild as HTMLTemplateElement;
         if (temp.getAttribute('replace-part') === 'selected-item') {
           selectedTemplate = temp;
         }
