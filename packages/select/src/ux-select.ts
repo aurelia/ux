@@ -12,7 +12,7 @@ import {
   observable,
   ElementEvents
 } from 'aurelia-framework';
-import { getLogger } from 'aurelia-logging';
+import { getLogger } from 'aurelia-logging'
 import { StyleEngine, UxComponent, PaperRipple } from '@aurelia-ux/core';
 import { UxSelectTheme } from './ux-select-theme';
 
@@ -168,7 +168,7 @@ export class UxSelect<T = any> implements UxComponent {
       return;
     }
     const options = this.options;
-    const value: T[] = [];
+    const value: T | T[] = [];
     const ii = options.length;
 
     for (let i = 0; i < ii; i++) {
@@ -376,7 +376,7 @@ export class UxSelect<T = any> implements UxComponent {
   public itemsChanged(items: T[]) {
     if (items) {
       if (this.isMultiple) {
-        // Should not do anything
+        // Do nothing
       } else {
         if (this.selectedIndex !== undefined) {
           this.selectedItem = items[this.selectedIndex];
@@ -463,14 +463,10 @@ export class UxSelect<T = any> implements UxComponent {
     return !!this.disabled || this.disabled === '';
   }
 
-  @computedFrom('selectedItem', 'selectedItem.length', 'multiple')
-  public get hasValue() {
-    const isMulitple = this.isMultiple;
-    return isMulitple
-        && Array.isArray(this.selectedItem)
-        && this.selectedItem.length
-      || !isMulitple
-        && this.selectedItem !== undefined;
+  @computedFrom('selectedItem')
+  public get displayValue() {
+    const item = this.selectedItem;
+    return Array.isArray(item) ? item.slice().sort().join(', ') : item;
   }
 }
 

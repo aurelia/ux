@@ -19,7 +19,7 @@
       ref="button">
       <div class="ux-select-value">
         <span replaceable part='selected-item'
-            textcontent.bind="hasValue ? selectedItem : placeholder"></span>
+            textcontent.bind="isMultiple && selectedItem.length || !isMultiple && selectedItem !== undefined ? displayValue : placeholder"></span>
       </div>
     </button>
 

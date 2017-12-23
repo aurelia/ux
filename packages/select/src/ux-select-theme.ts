@@ -15,8 +15,8 @@ export class UxSelectTheme implements UxTheme {
   public listMaxHeight: number = 400;
   public listMaxHeightPx: string = '400px';
   public listBackground: string = swatches.white;
-  public listTransition: number = 200;
-  public listTransitionS: string = '0.2s';
+  public listTransition: number = 125;
+  public listTransitionS: string = '0.125s';
 
   public optionHover: string = swatches.grey.p300;
   public optionSelected: string = swatches.grey.p400;
