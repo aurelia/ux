@@ -35,3 +35,9 @@ npm run test
 ```shell
 npm run develop
 ```
+
+## Online playground
+
+1. Go to [https://gist.run/?id=f543dce545b7139e4019fd51c0bcbd4d](https://gist.run/?id=f543dce545b7139e4019fd51c0bcbd4d)
+2. Select Fork Gist (near top right button)
+3. Add new files and play around
