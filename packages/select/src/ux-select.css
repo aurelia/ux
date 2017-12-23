@@ -1,0 +1,80 @@
+ux-select {
+  display: inline-block;
+  color: var(--ux-theme-select-foreground);
+  box-sizing: border-box;
+}
+
+ux-select .select-listbox {
+  position: fixed;
+  padding: 10px 0;
+  background-color: var(--ux-theme-select-listbox-background);
+  box-shadow: 0px 1px 6px var(--ux-theme-select-listbox-shadow), 0px 1px 4px var(--ux-theme-select-listbox-shadow);
+  border-radius: 2px;
+  transform-origin: left top 0px;
+  outline: none;
+}
+
+ux-select > .container {
+  position: relative;
+}
+
+ux-select > .container > .ux-select-trigger {
+  display: inline-block;
+  border: 0;
+  border-bottom: var(--ux-theme--select-trigger-border);
+  padding: 6px 4px 6px 12px;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+ux-select > .container > .ux-select-trigger > .ux-select-value {
+  display: inline-block;
+  min-width: var(--ux-theme--select-value-ct-min-width);
+  margin-right: 4px;
+}
+
+ux-select > .container > .ux-select-trigger:after {
+  content: '▾';
+  display: inline-block;
+  color: black;
+  position: relative;
+}
+
+ux-select > .container > .options-container {
+  position: relative;
+}
+
+ux-select > .container > .options-container > .options {
+  position: fixed;
+  max-width: var(--ux-theme--select-list-max-width-px);
+  max-height: var(--ux-theme--select-list-max-height-px);
+  padding: 16px 0;
+  border: 1px solid #cccccc;
+  border-top: 0;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: var(--ux-theme--select-list-background);
+  z-index: 10000;
+  outline: none;
+  user-select: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transform-origin: top left 0px;
+  transform: scaleY(0);
+  transition: transform var(--ux-theme--select-list-transition-s) ease-out;
+}
+
+ux-select > .container > .options-container > .options.open {
+  transform: scaleY(1);
+}
+
+ux-select > .container > .options-container > .options > ux-option {
+  position: relative;
+  display: block;
+  padding: 6px 24px;
+  cursor: pointer;
+}
+
+ux-select > .container > .options-container > .options > ux-option.selected {
+  background-color: var(--ux-theme--select-selected);
+}

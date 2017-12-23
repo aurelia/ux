@@ -1,0 +1,47 @@
+<template
+  multiple.bind="multiple & booleanAttr"
+  disabled.bind="disabled & booleanAttr">
+
+  <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
+  <require from="./ux-select.css"></require>
+  <require from="./boolean"></require>
+
+  <div class="container">
+    <button class="ux-select-trigger ${listIsOpen ? 'open' : ''}"
+      focus.trigger="onBtnFocus()"
+      blur.trigger="onBtnBlur() & debounce:1"
+      click.delegate="expand()"
+      keydown.delegate="onBtnKeydown($event.keyCode)"
+      ref="button">
+      <div class="ux-select-value" with.bind="selectedItem">
+        <span replaceable part='selected-item'>${$this}</span>
+      </div>
+    </button>
+
+    <div></div>
+
+    <div if.bind="listIsOpen" class="options-container">
+      <div role="listbox"
+          class="options"
+          tabindex="-1"
+          css="min-width: ${button.offsetWidth & oneTime}px; top: ${listAnchor.y}px; left: ${listAnchor.x}px;"
+          focus.one-time="listIsOpen"
+          focus.trigger="onListFocus()"
+          blur.trigger="onListBlur() & debounce:1"
+          keydown.delegate="onListKeydown($event.keyCode)"
+          transitionend.delegate="onListTransitioned($event) & self"
+          ref="optionsCt">
+        <ux-option repeat.for="item of items"
+            role="option"
+            context.bind='$this'
+            value.bind='item'
+            class.bind="($this.uxOptionSelected || $index === focusedIndex ? 'selected' : '') + ' ripple'"
+            mousedown.delegate="onUxOptionMousedown($event)"
+            click.trigger="select($index)">
+          <span replaceable part="ux-option"
+                textcontent.bind="item"></span>
+        </ux-option>
+      </div>
+    </div>
+  </div>
+</template>
