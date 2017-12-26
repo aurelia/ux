@@ -6,9 +6,10 @@ import { Platform } from './platforms/platform';
 import { Cordova } from './hosts/cordova';
 import { Web } from './hosts/web';
 import { Electron } from './hosts/electron';
+import { UXConfiguration } from './ux-configuration';
 import { DesignProcessor } from './designs/design-processor';
 
-@inject(Container, DesignProcessor)
+@inject(UXConfiguration, Container, DesignProcessor)
 export class AureliaUX {
   private availableHosts: Host[];
 
@@ -16,7 +17,7 @@ export class AureliaUX {
   public platform: Platform;
   public design: Design;
 
-  constructor(container: Container, private designProcessor: DesignProcessor) {
+  constructor(public use: UXConfiguration, container: Container, private designProcessor: DesignProcessor) {
     this.availableHosts = [
       container.get(Cordova),
       container.get(Electron),

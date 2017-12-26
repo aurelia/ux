@@ -7,7 +7,6 @@
       "es2017",
       "dom"
     ],
-    "rootDir": "src",
     "outDir": "dist/test",
     "noImplicitAny": true,
     "noUnusedLocals": true,
