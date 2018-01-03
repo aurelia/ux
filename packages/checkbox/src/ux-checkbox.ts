@@ -48,6 +48,14 @@ export class UxCheckbox implements UxComponent {
       }
     }
 
+    if (this.element.hasAttribute('checked')) {
+      const attributeValue = this.element.getAttribute('checked');
+
+      if (attributeValue === 'true') {
+        this.checked = true;
+      }
+    }
+
     this.themeChanged(this.theme);
     this.disabledChanged(this.disabled);
   }
