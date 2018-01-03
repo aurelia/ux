@@ -7,6 +7,7 @@
     "packages/chip-input",
     "packages/components",
     "packages/datepicker",
+    "packages/grid",
     "packages/form",
     "packages/icons",
     "packages/input",

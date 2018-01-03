@@ -1,8 +1,8 @@
-import { swatches, UxTheme } from '@aurelia-ux/core';
+import { UxTheme } from '@aurelia-ux/core';
 
 export class UxGridTheme implements UxTheme {
   public themeKey = 'grid';
 
-  public foreground: string = swatches.white;
-  public background: string = swatches.grey.p700;
+  public outerPadding: string = '16px';
+  public gutterSpacing: string = '16px';
 }

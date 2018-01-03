@@ -1,12 +1,15 @@
 {
-  "name": "@aurelia-ux/COMPONENT_NAME_HERE",
-  "version": "0.4.0",
-  "description": "COMPONENT_DESCRIPTION_HERE",
+  "name": "@aurelia-ux/grid",
+  "version": "0.6.1",
+  "description": "Responsive grid and utilities for Aurelia UX",
   "keywords": [
     "aurelia",
     "styles",
     "components",
-    "ux"
+    "ux",
+    "layout",
+    "grid",
+    "responsive"
   ],
   "homepage": "http://aurelia.io",
   "bugs": {
@@ -92,7 +95,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.4.0",
+    "@aurelia-ux/core": "^0.6.0",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {

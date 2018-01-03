@@ -1,9 +1,10 @@
 import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
 
-export { UxBoilerplateTheme } from './ux-boilerplate-theme';
+export { UxResponsiveUtilities } from './ux-responsive-utilities';
+export { UxGridTheme } from './ux-grid-theme';
 
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([
-    PLATFORM.moduleName('@aurelia-ux/boilerplate/ux-boilerplate')
+    PLATFORM.moduleName('@aurelia-ux/grid/ux-grid')
   ]);
 }

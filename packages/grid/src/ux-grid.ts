@@ -1,19 +1,19 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
-import { UxBoilerplateTheme } from './ux-boilerplate-theme';
+import { UxGridTheme } from './ux-grid-theme';
 
-const theme = new UxBoilerplateTheme();
+const gridTheme = new UxGridTheme();
 
 @inject(Element, StyleEngine)
 @customElement('ux-button')
 export class UxButton implements UxComponent {
-  @bindable public theme: UxBoilerplateTheme;
+  @bindable public theme: UxGridTheme;
 
   constructor(
     public element: HTMLElement,
     private styleEngine: StyleEngine) {
-      styleEngine.ensureDefaultTheme(theme);
+      styleEngine.ensureDefaultTheme(gridTheme);
     }
 
   public bind() {
