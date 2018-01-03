@@ -13,11 +13,11 @@ export class UxCheckbox implements UxComponent {
   @bindable public effect = 'ripple';
   @bindable public id: string;
   @bindable public theme: UxCheckboxTheme;
-  @bindable public matcher: any = undefined;
-  @bindable public model: any = undefined;
+  @bindable public matcher: any;
+  @bindable public model: any;
 
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) public checked: any = undefined;
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: any = undefined;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) public checked: any;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: any;
 
   private checkbox: HTMLInputElement;
   private ripple: PaperRipple | null = null;
