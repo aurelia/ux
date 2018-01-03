@@ -1,6 +1,6 @@
 ux-picker-dialog {
-  color: var(--ux-design--control-foreground, var(--ux-swatch--grey-p900));
-  background-color: var(--ux-design--control-background, var(--ux-swatch--white));
+  color: var(--ux-design--control-foreground, var(--ux-swatch--grey-p900, #262626));
+  background-color: var(--ux-design--control-background, var(--ux-swatch--white, #FFF));
   width: 300px;
   
   user-select: none;
@@ -19,8 +19,8 @@ ux-picker-dialog header {
   height: 124px;
   padding: 16px 24px;
   box-sizing: border-box;
-  color: var(--ux-theme--datepicker-header-foreground);
-  background: var(--ux-theme--datepicker-header-background);
+  color: var(--ux-theme--datepicker-header-foreground, var(--ux-design--primary-foreground, #FFF));
+  background: var(--ux-theme--datepicker-header-background, var(--ux-design--primary, #3F51B5));
 }
 
 ux-picker-dialog header > div.year,

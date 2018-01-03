@@ -27,22 +27,22 @@ ux-switch .track {
   width: 32px;
   border: none;
   border-radius: 6px;
-  background-color: var(--ux-theme--switch-track);
+  background-color: var(--ux-theme--switch-track, #E0E0E0);
   transition: background-color 150ms ease-in-out;
   position: relative;
 }
 
 ux-switch input:disabled ~ .track,
 ux-switch input:disabled:checked ~ .track {
-  background-color: var(--ux-theme--switch-track-disabled);
+  background-color: var(--ux-theme--switch-track-disabled, #9E9E9E);
 }
 
 ux-switch input:disabled ~ .track .indicator, ux-switch input:disabled:checked ~ .track .indicator {
-  background-color: var(--ux-theme--switch-indicator-disabled);
+  background-color: var(--ux-theme--switch-indicator-disabled, #E0E0E0);
 }
 
 ux-switch input:checked ~ .track {
-  background-color: var(--ux-theme--switch-track-active);
+  background-color: var(--ux-theme--switch-track-active, #FF80AB);
 }
 
 ux-switch:focus {
@@ -55,7 +55,7 @@ ux-switch .track .indicator {
   top: -3px;
   height: 18px;
   width: 18px;
-  background-color: var(--ux-theme--switch-indicator);
+  background-color: var(--ux-theme--switch-indicator, #FFF);
   border-radius: 50%;
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.6);
   transition: left .1s ease-in-out, background-color .1s ease-in-out;
@@ -63,7 +63,7 @@ ux-switch .track .indicator {
 
 ux-switch input:checked ~ .track .indicator {
   left: calc(100% - 14px);
-  background-color: var(--ux-theme--switch-indicator-active);
+  background-color: var(--ux-theme--switch-indicator-active, #FF80AB);
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
 }
 

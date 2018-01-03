@@ -27,7 +27,7 @@ ux-radio>input:disabled {
 ux-radio>.radio {
   width: 24px;
   height: 24px;
-  border: var(--ux-theme--checkbox-border);
+  border: var(--ux-theme--checkbox-border, solid 2px #455A64);
   border-radius: 50%;
   display: inline-flex;
   box-sizing: border-box;
@@ -37,18 +37,18 @@ ux-radio>.radio {
 }
 
 ux-radio input:hover:not(:disabled) ~ .radio {
-  border: var(--ux-theme--radio-hover-border);
+  border: var(--ux-theme--radio-hover-border, solid 2px var(--ux-design--accent, #FF4081));
 }
 
 ux-radio input:checked ~.radio {
-  border: var(--ux-theme--radio-checked-background);
-  border: var(--ux-theme--radio-hover-border);
+  border: var(--ux-theme--radio-checked-background, var(--ux-design--accent, #FF4081));
+  border: var(--ux-theme--radio-hover-border, solid 2px var(--ux-design--accent, #FF4081));
 }
 
 ux-radio>.radio>.background-box {
   width: 100%;
   height: 100%;
-  background-color: var(--ux-theme--radio-checked-background);
+  background-color: var(--ux-theme--radio-checked-background, var(--ux-design--accent, #FF4081));
   border-radius: 50%;
   transform: scale3d(0, 0, 0);
   transition: 150ms;
@@ -59,7 +59,7 @@ ux-radio input:checked ~.radio>.background-box {
 }
 
 ux-radio>.radio>.background-box>svg {
-  fill: var(--ux-theme--radio-checkmark-color);
+  fill: var(--ux-theme--radio-checkmark-color, #FFF);
 }
 
 ux-radio.disabled {
@@ -68,19 +68,19 @@ ux-radio.disabled {
 }
 
 ux-radio input:disabled ~ .radio:hover {
-  border: var(--ux-theme--radio-disabled-border);
+  border: var(--ux-theme--radio-disabled-border, solid 2px #9E9E9E);
 }
 
 ux-radio input:disabled ~ .radio {
-  border: var(--ux-theme--radio-disabled-border);
+  border: var(--ux-theme--radio-disabled-border, solid 2px #9E9E9E);
 }
 
 ux-radio input:checked:disabled ~ .radio>.background-box {
-  background-color: var(--ux-theme--radio-disabled-background);
+  background-color: var(--ux-theme--radio-disabled-background, #9E9E9E);
 }
 
 ux-radio input:disabled ~ .radio>.background-box::after {
-  border-color: var(--ux-theme--radio-disabled-foreground);
+  border-color: var(--ux-theme--radio-disabled-foreground, #E0E0E0);
 }
 
 ux-radio .ripplecontainer {

@@ -3,17 +3,17 @@ import { swatches, UxTheme } from '@aurelia-ux/core';
 export class UxButtonTheme implements UxTheme {
   public themeKey = 'button';
 
-  public background: string = 'var(--ux-design--primary)';
-  public foreground: string = 'var(--ux-design--primary-foreground)';
+  public background: string = 'var(--ux-design--primary, #3F51B5)';
+  public foreground: string = 'var(--ux-design--primary-foreground, #fff)';
 
   public flatBackground: string = 'transparent';
-  public flatForeground: string = 'var(--ux-design--primary)';
+  public flatForeground: string = 'var(--ux-design--primary, #3F51B5)';
 
-  public accentBackground: string = 'var(--ux-design--accent)';
-  public accentForeground: string = 'var(--ux-design--accent-foreground)';
+  public accentBackground: string = 'var(--ux-design--accent, #FF4081)';
+  public accentForeground: string = 'var(--ux-design--accent-foreground, #fff)';
 
   public accentFlatBackground: string = 'transparent';
-  public accentFlatForeground: string = 'var(--ux-design--accent)';
+  public accentFlatForeground: string = 'var(--ux-design--accent, #FF4081)';
 
   public backgroundDisabled: string = swatches.grey.p500;
   public foregroundDisabled: string = swatches.grey.p100;

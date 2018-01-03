@@ -1,6 +1,6 @@
 ux-list {
   display: block;
-  background-color: var(--ux-theme--list-list-background);
+  background-color: var(--ux-theme--list-list-background, #FFF);
 }
 
 ux-list>.ux-list-item {
@@ -8,7 +8,7 @@ ux-list>.ux-list-item {
   align-items: center;
   padding: 16px;
   font-size: 16px;
-  color: var(--ux-theme--list-list-foreground);
+  color: var(--ux-theme--list-list-foreground, #616161);
 }
 
 ux-list>.ux-list-item>.detail {
@@ -51,7 +51,7 @@ ux-list>.ux-list-item>a.list-content {
 
 ux-list>.ux-list-item>.list-content>.secondary {
   font-size: 14px;
-  color: var(--ux-theme--list-list-secondary-foreground);
+  color: var(--ux-theme--list-list-secondary-foreground, #455A64);
 }
 
 ux-list[type="two-line"]>.ux-list-item>.list-content {
