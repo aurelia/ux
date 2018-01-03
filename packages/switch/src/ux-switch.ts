@@ -1,67 +1,63 @@
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
 
-@inject(Element, ViewResources, StyleEngine)
-@customElement('ux-switch')
+const theme = new UxSwitchTheme();
 
+@inject(Element, StyleEngine)
+@customElement('ux-switch')
 export class UxSwitch implements UxComponent {
   @bindable public disabled: boolean | string = false;
-  @bindable public effect = null;
+  @bindable public effect = 'ripple';
   @bindable public id: string;
-  @bindable public tabindex = 0;
   @bindable public theme: UxSwitchTheme;
+  @bindable public matcher: any;
+  @bindable public model: any;
 
-  @bindable({ defaultBindingMode: bindingMode.twoWay })
-  @bindable public checked: boolean = false;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) public checked: any;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: any;
+
+  private checkbox: HTMLInputElement;
+  private ripple: PaperRipple | null = null;
 
   @computedFrom('disabled')
   public get isDisabled() {
     return normalizeBooleanAttribute('disabled', this.disabled);
   }
 
-  constructor(public element: HTMLElement, public resources: ViewResources, private styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(new UxSwitchTheme());
+  constructor(public element: HTMLElement, private styleEngine: StyleEngine) {
+    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {
+    if (this.element.hasAttribute('id')) {
+      const attributeValue = this.element.getAttribute('id');
+
+      if (attributeValue != null) {
+        this.checkbox.setAttribute('id', attributeValue);
+      }
+    }
+
+    if (this.element.hasAttribute('tabindex')) {
+      const attributeValue = this.element.getAttribute('tabindex');
+
+      if (attributeValue != null) {
+        this.checkbox.setAttribute('tabindex', attributeValue);
+      }
+    }
+
+    if (this.element.hasAttribute('checked')) {
+      const attributeValue = this.element.getAttribute('checked');
+
+      if (attributeValue === 'true') {
+        this.checked = true;
+      }
+    }
+
     this.themeChanged(this.theme);
-
-    if (this.checked) {
-      this.checkedChanged();
-    }
-
-    if (normalizeBooleanAttribute('disabled', this.disabled) && !this.element.classList.contains('disabled')) {
-      this.element.classList.add('disabled');
-    } else if (this.element.classList.contains('disabled')) {
-      this.element.classList.remove('disabled');
-    }
-  }
-
-  public attached() {
-    if (this.id) {
-      const labelElement = document.querySelector(`label[for=${this.id}]`);
-
-      if (labelElement != null) {
-        labelElement.addEventListener('click', () => {
-          this.toggleSwitch();
-        });
-      }
-    }
-  }
-
-  public detached() {
-    if (this.id) {
-      const labelElement = document.querySelector(`label[for=${this.id}]`);
-
-      if (labelElement != null) {
-        labelElement.removeEventListener('click', () => {
-          this.toggleSwitch();
-        });
-      }
-    }
+    this.disabledChanged(this.disabled);
   }
 
   public themeChanged(newValue: UxSwitchTheme) {
@@ -74,39 +70,43 @@ export class UxSwitch implements UxComponent {
 
   public disabledChanged(newValue: boolean | string) {
     if (normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-      this.element.classList.add('disabled');
+      this.checkbox.setAttribute('disabled', '');
     } else if (this.element.classList.contains('disabled')) {
-      this.element.classList.remove('disabled');
+      this.checkbox.removeAttribute('disabled');
     }
   }
 
-  public checkedChanged() {
-    if (this.checked) {
-      this.element.classList.add('on');
-      this.element.setAttribute('aria-checked', 'true');
-    } else {
-      this.element.classList.remove('on');
-      this.element.setAttribute('aria-checked', 'false');
-    }
-  }
-
-  public toggleSwitch() {
-    if (this.isDisabled) {
+  public onMouseDown(e: MouseEvent) {
+    if (e.button !== 0 || this.isDisabled) {
       return;
     }
 
-    this.checked = !this.checked;
-  }
+    if (this.element.classList.contains('ripple')) {
+      if (this.ripple === null) {
+        this.ripple = new PaperRipple();
+        const container = this.element.querySelector('.ripplecontainer');
 
-  public onKeydown(e: KeyboardEvent) {
-    const key = e.which || e.keyCode;
+        if (container != null) {
+          container.appendChild(this.ripple.$);
+        }
+      }
 
-    if (key === 13 || key === 32) {
-      e.preventDefault();
+      this.ripple.center = true;
+      this.ripple.round = true;
 
-      this.toggleSwitch();
+      this.ripple.downAction(e);
     }
 
-    return true;
+    e.preventDefault();
+  }
+
+  public onMouseUp(e: MouseEvent) {
+    if (e.button !== 0 || this.isDisabled) {
+      return;
+    }
+
+    if (this.element.classList.contains('ripple') && this.ripple !== null) {
+      this.ripple.upAction();
+    }
   }
 }
