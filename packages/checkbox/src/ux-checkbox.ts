@@ -32,8 +32,6 @@ export class UxCheckbox implements UxComponent {
   }
 
   public bind() {
-    this.themeChanged(this.theme);
-
     if (this.element.hasAttribute('id')) {
       const attributeValue = this.element.getAttribute('id');
 
@@ -50,11 +48,8 @@ export class UxCheckbox implements UxComponent {
       }
     }
 
-    if (normalizeBooleanAttribute('disabled', this.disabled) && !this.element.classList.contains('disabled')) {
-      this.element.classList.add('disabled');
-    } else if (this.element.classList.contains('disabled')) {
-      this.element.classList.remove('disabled');
-    }
+    this.themeChanged(this.theme);
+    this.disabledChanged(this.disabled);
   }
 
   public themeChanged(newValue: UxCheckboxTheme) {
@@ -67,9 +62,9 @@ export class UxCheckbox implements UxComponent {
 
   public disabledChanged(newValue: boolean | string) {
     if (normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-      this.element.classList.add('disabled');
+      this.checkbox.setAttribute('disabled', '');
     } else if (this.element.classList.contains('disabled')) {
-      this.element.classList.remove('disabled');
+      this.checkbox.removeAttribute('disabled');
     }
   }
 

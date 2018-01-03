@@ -3,10 +3,10 @@
   <require from="./ux-checkbox.css"></require>
 
   <input type="checkbox" ref="checkbox"
-    checked.two-way="checked"
-    model.two-way="model"
-    matcher.two-way="matcher"
-    value.two-way="value"
+    checked.bind="checked"
+    model.bind="model"
+    matcher.bind="matcher"
+    value.bind="value"
     mousedown.trigger="onMouseDown($event)"
     mouseup.trigger="onMouseUp($event)">
 
