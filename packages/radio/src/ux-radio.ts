@@ -1,79 +1,57 @@
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxRadioTheme } from './ux-radio-theme';
 
-@inject(Element, ViewResources, StyleEngine)
-@customElement('ux-radio')
+const theme = new UxRadioTheme();
 
+@inject(Element, StyleEngine)
+@customElement('ux-radio')
 export class UxRadio implements UxComponent {
   @bindable public disabled: boolean | string = false;
-  @bindable public effect = null;
+  @bindable public effect = 'ripple';
   @bindable public id: string;
-  @bindable public label: string;
-  @bindable public model: any;
-  @bindable public tabindex = 0;
   @bindable public theme: UxRadioTheme;
-  // tslint:disable
-  @bindable public matcher = (a: any, b: any) => a === b;
-  // tslint: enable
+  @bindable public matcher: any;
+  @bindable public model: any;
 
-  @bindable({ defaultBindingMode: bindingMode.twoWay })
-  @bindable public checked: any = false;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) public checked: any;
+  @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: any;
 
-  @bindable({ defaultBindingMode: bindingMode.twoWay })
-  @bindable public value: any = null;
-
-  private radio: Element;
+  private radio: HTMLInputElement;
   private ripple: PaperRipple | null = null;
-
 
   @computedFrom('disabled')
   public get isDisabled() {
     return normalizeBooleanAttribute('disabled', this.disabled);
   }
 
-  constructor(public element: HTMLElement, public resources: ViewResources, private styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(new UxRadioTheme());
+  constructor(public element: HTMLElement, private styleEngine: StyleEngine) {
+    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {
+    if (this.element.hasAttribute('id')) {
+      const attributeValue = this.element.getAttribute('id');
+
+      if (attributeValue != null) {
+        this.radio.setAttribute('id', attributeValue);
+        this.element.removeAttribute('id');
+      }
+    }
+
+    if (this.element.hasAttribute('tabindex')) {
+      const attributeValue = this.element.getAttribute('tabindex');
+
+      if (attributeValue != null) {
+        this.radio.setAttribute('tabindex', attributeValue);
+        this.element.removeAttribute('tabindex');
+      }
+    }
+
     this.themeChanged(this.theme);
-
-    if (this.checked) {
-      this.checkedChanged();
-    }
-
-    if (normalizeBooleanAttribute('disabled', this.disabled) && !this.element.classList.contains('disabled')) {
-      this.element.classList.add('disabled');
-    } else if (this.element.classList.contains('disabled')) {
-      this.element.classList.remove('disabled');
-    }
-  }
-
-  public attached() {
-    if (this.id) {
-      const labelElement = document.querySelector(`label[for=${this.id}]`);
-
-      if (labelElement != null) {
-        labelElement.addEventListener('click', () => {
-          this.toggleRadio();
-        });
-      }
-    }
-  }
-
-  public detached() {
-    if (this.id) {
-      const labelElement = document.querySelector(`label[for=${this.id}]`);
-
-      if (labelElement != null) {
-        labelElement.removeEventListener('click', () => {
-          this.toggleRadio();
-        });
-      }
-    }
+    this.disabledChanged(this.disabled);
   }
 
   public themeChanged(newValue: UxRadioTheme) {
@@ -86,50 +64,10 @@ export class UxRadio implements UxComponent {
 
   public disabledChanged(newValue: boolean | string) {
     if (normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-      this.element.classList.add('disabled');
+      this.radio.setAttribute('disabled', '');
     } else if (this.element.classList.contains('disabled')) {
-      this.element.classList.remove('disabled');
+      this.radio.removeAttribute('disabled');
     }
-  }
-
-  public checkedChanged() {
-    const elementValue = this.model ? this.model : this.value;
-
-    let isChecked = this.checked;
-
-    if (isChecked && isChecked === elementValue) {
-      this.element.classList.add('checked');
-      this.element.setAttribute('aria-checked', 'true');
-    } else {
-      this.element.classList.remove('checked');
-      this.element.setAttribute('aria-checked', 'false');
-    }
-  }
-
-  public toggleRadio() {
-    if (this.isDisabled) {
-      return;
-    }
-
-    const elementValue = this.model ? this.model : this.value;
-
-    if (elementValue != null && typeof elementValue !== 'boolean') {
-      this.checked = elementValue;
-    } else {
-      this.checked = !this.checked;
-    }
-  }
-
-  public onKeydown(e: KeyboardEvent) {
-    const key = e.which || e.keyCode;
-
-    if (key === 13 || key === 32) {
-      e.preventDefault();
-
-      this.toggleRadio();
-    }
-    
-    return true;
   }
 
   public onMouseDown(e: MouseEvent) {
@@ -137,7 +75,7 @@ export class UxRadio implements UxComponent {
       return;
     }
 
-    if (this.radio.classList.contains('ripple')) {
+    if (this.element.classList.contains('ripple')) {
       if (this.ripple === null) {
         this.ripple = new PaperRipple();
         const container = this.element.querySelector('.ripplecontainer');
@@ -153,7 +91,6 @@ export class UxRadio implements UxComponent {
       this.ripple.downAction(e);
     }
 
-    this.toggleRadio();
     e.preventDefault();
   }
 
@@ -162,7 +99,7 @@ export class UxRadio implements UxComponent {
       return;
     }
 
-    if (this.radio.classList.contains('ripple') && this.ripple !== null) {
+    if (this.element.classList.contains('ripple') && this.ripple !== null) {
       this.ripple.upAction();
     }
   }

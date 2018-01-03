@@ -1,12 +1,20 @@
-<template role="radio" tabindex.bind="tabindex" keydown.delegate="onKeydown($event)">
+<template class="${effect !== null ? effect : ''}">
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-radio.css"></require>
+
+  <input type="radio" ref="radio"
+    checked.bind="checked"
+    model.bind="model"
+    matcher.bind="matcher"
+    value.bind="value"
+    mousedown.trigger="onMouseDown($event)"
+    mouseup.trigger="onMouseUp($event)">
 
   <div class="ripplecontainer">
     <span class="ripple"></span>
   </div>
 
-  <div class="radio ${effect !== null ? effect : $uxRadioTheme.effect}" mousedown.trigger="onMouseDown($event)" mouseup.trigger="onMouseUp($event)" ref="radio">
+  <div class="radio">
     <div class="background-box">
     </div>
   </div>
