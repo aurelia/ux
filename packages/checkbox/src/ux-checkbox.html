@@ -1,22 +1,25 @@
-<template role="checkbox" tabindex.bind="tabindex" keydown.delegate="onKeydown($event)">
+<template class="${effect !== null ? effect : ''}">
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-checkbox.css"></require>
-  
+
+  <input type="checkbox" ref="checkbox"
+    checked.two-way="checked"
+    model.two-way="model"
+    matcher.two-way="matcher"
+    value.two-way="value"
+    mousedown.trigger="onMouseDown($event)"
+    mouseup.trigger="onMouseUp($event)">
+
   <div class="ripplecontainer">
     <span class="ripple"></span>
   </div>
-  <div class="checkbox ${effect !== null ? effect : $uxCheckboxTheme.effect}"
-       mousedown.trigger="onMouseDown($event)"
-       mouseup.trigger="onMouseUp($event)"
-       ref="checkbox">
-       <div class="background-box">
-        <svg viewBox="0 0 24 24">
-          <path d="M0 0h24v24H0z" fill="none"/>
-          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-        </svg>
-      </div>
-  </div>
 
-  <!-- Leave Inline, uses :not(:empty) selector to determine margin -->
-  <label mousedown.trigger="onMouseDown($event)" mouseup.trigger="onMouseUp($event)"><slot>${label}</slot></label>
+  <div class="checkbox">
+    <div class="background-box">
+      <svg viewBox="0 0 24 24">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+      </svg>
+    </div>
+  </div>
 </template>
