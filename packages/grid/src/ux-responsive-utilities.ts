@@ -2,7 +2,7 @@ import { PLATFORM } from 'aurelia-pal';
 import { Disposable } from 'aurelia-binding';
 
 /** Utility class that assists with designing a responsive site. */
-export class UxResponsiveUtilities implements Disposable  {
+export class UxResponsiveUtilities implements Disposable {
 
   /** Current screen height that can be used to set custom breakpoints. */
   public height: number;
@@ -25,21 +25,31 @@ export class UxResponsiveUtilities implements Disposable  {
   /** Visible on screens larger than 1925px. */
   public xl: boolean = false;
 
-  private recentlyUpdated = false;
+  private updating = false;
 
   constructor() {
-    window.addEventListener('resize', () => this.calculateResponsiveValues());
+    window.addEventListener('resize', () => this.onResize());
 
     this.calculateResponsiveValues();
   }
 
-  private calculateResponsiveValues() {
-    if (this.recentlyUpdated) {
+  private onResize() {
+    if (this.updating) {
       return;
     }
 
-    this.recentlyUpdated = true;
+    this.updating = true;
 
+    if (PLATFORM.global.requestAnimationFrame) {
+      PLATFORM.global.requestAnimationFrame(() => {
+        this.calculateResponsiveValues();
+      });
+    } else {
+      setTimeout(() => this.calculateResponsiveValues(), 100);
+    }
+  }
+
+  private calculateResponsiveValues() {
     this.height = PLATFORM.global.innerHeight;
     this.width = PLATFORM.global.innerWidth;
 
@@ -49,7 +59,7 @@ export class UxResponsiveUtilities implements Disposable  {
     this.lg = this.width > 1280 && this.width <= 1925;
     this.xl = this.width > 1925;
 
-    setTimeout(() => this.recentlyUpdated = false, 250);
+    this.updating = false;
   }
 
   public dispose() {
