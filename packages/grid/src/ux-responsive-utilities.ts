@@ -28,7 +28,7 @@ export class UxResponsiveUtilities implements Disposable {
   private updating = false;
 
   constructor() {
-    window.addEventListener('resize', () => this.onResize());
+    PLATFORM.global.addEventListener('resize', () => this.onResize());
 
     this.calculateResponsiveValues();
   }
@@ -41,15 +41,13 @@ export class UxResponsiveUtilities implements Disposable {
     this.updating = true;
 
     if (PLATFORM.global.requestAnimationFrame) {
-      PLATFORM.global.requestAnimationFrame(() => {
-        this.calculateResponsiveValues();
-      });
+      PLATFORM.global.requestAnimationFrame(this.calculateResponsiveValues);
     } else {
-      setTimeout(() => this.calculateResponsiveValues(), 100);
+      setTimeout(this.calculateResponsiveValues, 100);
     }
   }
 
-  private calculateResponsiveValues() {
+  private calculateResponsiveValues = () => {
     this.height = PLATFORM.global.innerHeight;
     this.width = PLATFORM.global.innerWidth;
 
@@ -63,6 +61,6 @@ export class UxResponsiveUtilities implements Disposable {
   }
 
   public dispose() {
-    window.removeEventListener('resize', this.calculateResponsiveValues);
+    PLATFORM.global.removeEventListener('resize', this.calculateResponsiveValues);
   }
 }
