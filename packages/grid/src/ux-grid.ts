@@ -6,8 +6,8 @@ import { UxGridTheme } from './ux-grid-theme';
 const gridTheme = new UxGridTheme();
 
 @inject(Element, StyleEngine)
-@customElement('ux-button')
-export class UxButton implements UxComponent {
+@customElement('ux-grid')
+export class UxGrid implements UxComponent {
   @bindable public theme: UxGridTheme;
 
   constructor(
@@ -22,7 +22,7 @@ export class UxButton implements UxComponent {
 
   public themeChanged(newValue: any) {
     if (newValue != null && newValue.themeKey == null) {
-      newValue.themeKey = 'boilerplate';
+      newValue.themeKey = 'grid';
     }
 
     this.styleEngine.applyTheme(newValue, this.element);
