@@ -1,5 +1,5 @@
 import { customElement, bindable } from 'aurelia-templating';
-import { computedFrom, bindingMode } from 'aurelia-binding';
+import { computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
@@ -13,11 +13,7 @@ export class UxSwitch implements UxComponent {
   @bindable public effect = 'ripple';
   @bindable public id: string;
   @bindable public theme: UxSwitchTheme;
-  @bindable public matcher: any;
-  @bindable public model: any;
-
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) public checked: any;
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: any;
+  @bindable public checked: any;
 
   private checkbox: HTMLInputElement;
   private ripple: PaperRipple | null = null;
