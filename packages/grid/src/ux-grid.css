@@ -42,8 +42,8 @@ ux-grid[align-cells-bottom] {
   align-items: flex-end;
 }
 
-ux-grid>ux-grid-cell.align-self-start,
-ux-grid>ux-grid-cell[align-self-start] {
+ux-grid>ux-grid-cell.align-self-top,
+ux-grid>ux-grid-cell[align-self-top] {
   align-self: flex-start;
 }
 
