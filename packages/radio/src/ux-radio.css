@@ -7,23 +7,6 @@ ux-radio {
   position: relative;
 }
 
-ux-radio>input {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  z-index: 1;
-}
-
-ux-radio>input:disabled {
- cursor: default;
-}
-
 ux-radio>.radio {
   width: 24px;
   height: 24px;
@@ -36,30 +19,34 @@ ux-radio>.radio {
   justify-content: center;
 }
 
-ux-radio input:hover:not(:disabled) ~ .radio {
-  border: var(--ux-theme--radio-hover-border, solid 2px var(--ux-design--accent, #FF4081));
+ux-radio>.radio+label:not(:empty) {
+  margin-left: 8px;
 }
 
-ux-radio input:checked ~.radio {
-  border: var(--ux-theme--radio-checked-background, var(--ux-design--accent, #FF4081));
-  border: var(--ux-theme--radio-hover-border, solid 2px var(--ux-design--accent, #FF4081));
+ux-radio>.radio:hover {
+  border: var(--ux-theme--radio-hover-border);
+}
+
+ux-radio.checked>.radio {
+  border: var(--ux-theme--radio-checked-background);
+  border: var(--ux-theme--radio-hover-border);
 }
 
 ux-radio>.radio>.background-box {
   width: 100%;
   height: 100%;
-  background-color: var(--ux-theme--radio-checked-background, var(--ux-design--accent, #FF4081));
+  background-color: var(--ux-theme--radio-checked-background);
   border-radius: 50%;
   transform: scale3d(0, 0, 0);
   transition: 150ms;
 }
 
-ux-radio input:checked ~.radio>.background-box {
+ux-radio.checked>.radio>.background-box {
   transform: scale3d(.75, .75, .75);
 }
 
 ux-radio>.radio>.background-box>svg {
-  fill: var(--ux-theme--radio-checkmark-color, #FFF);
+  fill: var(--ux-theme--radio-checkmark-color);
 }
 
 ux-radio.disabled {
@@ -67,20 +54,20 @@ ux-radio.disabled {
   cursor: default;
 }
 
-ux-radio input:disabled ~ .radio:hover {
-  border: var(--ux-theme--radio-disabled-border, solid 2px #9E9E9E);
+ux-radio.disabled>.radio:hover {
+  border: var(--ux-theme--radio-disabled-border);
 }
 
-ux-radio input:disabled ~ .radio {
-  border: var(--ux-theme--radio-disabled-border, solid 2px #9E9E9E);
+ux-radio.checked.disabled>.radio {
+  border: var(--ux-theme--radio-disabled-border);
 }
 
-ux-radio input:checked:disabled ~ .radio>.background-box {
-  background-color: var(--ux-theme--radio-disabled-background, #9E9E9E);
+ux-radio.checked.disabled>.radio>.background-box {
+  background-color: var(--ux-theme--radio-disabled-background);
 }
 
-ux-radio input:disabled ~ .radio>.background-box::after {
-  border-color: var(--ux-theme--radio-disabled-foreground, #E0E0E0);
+ux-radio.disabled>.radio>.background-box::after {
+  border-color: var(--ux-theme--radio-disabled-foreground);
 }
 
 ux-radio .ripplecontainer {
@@ -112,10 +99,10 @@ ux-radio .ripplecontainer>.ripple {
   transform: scale3d(0, 0, 0);
 }
 
-ux-radio input:focus ~ .ripplecontainer>.ripple {
+ux-radio:focus .ripplecontainer>.ripple {
   transform: scale3d(1, 1, 1);
 }
 
-ux-radio input:disabled:focus ~ .ripplecontainer>.ripple {
+ux-radio.disabled:focus:focus .ripplecontainer>.ripple {
   transform: scale3d(0, 0, 0);
 }
