@@ -1,5 +1,5 @@
 import { customElement, bindable } from 'aurelia-templating';
-import { computedFrom, bindingMode } from 'aurelia-binding';
+import { computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxCheckboxTheme } from './ux-checkbox-theme';
@@ -15,9 +15,8 @@ export class UxCheckbox implements UxComponent {
   @bindable public theme: UxCheckboxTheme;
   @bindable public matcher: any;
   @bindable public model: any;
-
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) public checked: any;
-  @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: any;
+  @bindable public checked: any;
+  @bindable public value: any;
 
   private checkbox: HTMLInputElement;
   private ripple: PaperRipple | null = null;
@@ -31,7 +30,9 @@ export class UxCheckbox implements UxComponent {
     styleEngine.ensureDefaultTheme(theme);
   }
 
-  public bind() {
+  public attached() {
+    this.checkbox = this.element.querySelector('input') as HTMLInputElement;
+
     if (this.element.hasAttribute('id')) {
       const attributeValue = this.element.getAttribute('id');
 
@@ -69,6 +70,10 @@ export class UxCheckbox implements UxComponent {
   }
 
   public disabledChanged(newValue: boolean | string) {
+    if(this.checkbox == null) {
+      return;
+    }
+
     if (normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
       this.checkbox.setAttribute('disabled', '');
     } else if (this.element.classList.contains('disabled')) {
