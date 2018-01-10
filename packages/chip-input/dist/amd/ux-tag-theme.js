@@ -4,8 +4,8 @@ define(["require", "exports"], function (require, exports) {
     var UxTagTheme = /** @class */ (function () {
         function UxTagTheme() {
             this.themeKey = 'tag';
-            this.background = 'var(--ux-design--accent)';
-            this.foreground = 'var(--ux-design--accent-foreground)';
+            this.background = 'var(--ux-design--accent, #FF4081)';
+            this.foreground = 'var(--ux-design--accent-foreground, #FFFFFF)';
         }
         return UxTagTheme;
     }());

@@ -1,4 +1,4 @@
-System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/datepicker", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch"], function (exports_1, context_1) {
+System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/grid", "@aurelia-ux/datepicker", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
@@ -6,6 +6,7 @@ System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip
         checkbox_1.configure(config);
         chip_input_1.configure(config);
         datepicker_1.configure(config);
+        grid_1.configure(config);
         form_1.configure(config);
         input_1.configure(config);
         input_info_1.configure(config);
@@ -15,7 +16,7 @@ System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip
         switch_1.configure(config);
     }
     exports_1("configure", configure);
-    var button_1, checkbox_1, chip_input_1, datepicker_1, form_1, input_1, input_info_1, list_1, radio_1, textarea_1, switch_1;
+    var button_1, checkbox_1, chip_input_1, datepicker_1, grid_1, form_1, input_1, input_info_1, list_1, radio_1, textarea_1, switch_1;
     return {
         setters: [
             function (button_2_1) {
@@ -37,6 +38,13 @@ System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip
                     "UxTagTheme": chip_input_2_1["UxTagTheme"]
                 });
                 chip_input_1 = chip_input_2_1;
+            },
+            function (grid_2_1) {
+                exports_1({
+                    "UxGridTheme": grid_2_1["UxGridTheme"],
+                    "UxResponsiveUtilities": grid_2_1["UxResponsiveUtilities"]
+                });
+                grid_1 = grid_2_1;
             },
             function (datepicker_2_1) {
                 exports_1({

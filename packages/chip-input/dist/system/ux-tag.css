@@ -8,8 +8,8 @@ ux-tag {
 
   border-radius: 2px;
 
-  background-color: var(--ux-theme--tag-background);
-  color: var(--ux-theme--tag-foreground);
+  background-color: var(--ux-theme--tag-background, var(--ux-design--accent, #FF4081));
+  color: var(--ux-theme--tag-foreground, var(--ux-design--accent-foreground, #FFF));
 }
 
 ux-tag > span {

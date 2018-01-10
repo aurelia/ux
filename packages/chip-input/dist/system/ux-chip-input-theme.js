@@ -8,7 +8,7 @@ System.register([], function (exports_1, context_1) {
             UxChipInputTheme = /** @class */ (function () {
                 function UxChipInputTheme() {
                     this.themeKey = 'chip-input';
-                    this.foreground = 'var(--ux-design--primary-light-foreground)';
+                    this.foreground = 'var(--ux-design--primary-light-foreground, #9E9E9E)';
                 }
                 return UxChipInputTheme;
             }());

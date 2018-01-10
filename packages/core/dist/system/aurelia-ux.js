@@ -1,4 +1,4 @@
-System.register(["aurelia-dependency-injection", "./hosts/cordova", "./hosts/web", "./hosts/electron", "./designs/design-processor"], function (exports_1, context_1) {
+System.register(["aurelia-dependency-injection", "./hosts/cordova", "./hosts/web", "./hosts/electron", "./ux-configuration", "./designs/design-processor"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["aurelia-dependency-injection", "./hosts/cordova", "./hosts/web
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var aurelia_dependency_injection_1, cordova_1, web_1, electron_1, design_processor_1, AureliaUX;
+    var aurelia_dependency_injection_1, cordova_1, web_1, electron_1, ux_configuration_1, design_processor_1, AureliaUX;
     return {
         setters: [
             function (aurelia_dependency_injection_1_1) {
@@ -22,13 +22,17 @@ System.register(["aurelia-dependency-injection", "./hosts/cordova", "./hosts/web
             function (electron_1_1) {
                 electron_1 = electron_1_1;
             },
+            function (ux_configuration_1_1) {
+                ux_configuration_1 = ux_configuration_1_1;
+            },
             function (design_processor_1_1) {
                 design_processor_1 = design_processor_1_1;
             }
         ],
         execute: function () {
             AureliaUX = /** @class */ (function () {
-                function AureliaUX(container, designProcessor) {
+                function AureliaUX(use, container, designProcessor) {
+                    this.use = use;
                     this.designProcessor = designProcessor;
                     this.availableHosts = [
                         container.get(cordova_1.Cordova),
@@ -52,7 +56,7 @@ System.register(["aurelia-dependency-injection", "./hosts/cordova", "./hosts/web
                     });
                 };
                 AureliaUX = __decorate([
-                    aurelia_dependency_injection_1.inject(aurelia_dependency_injection_1.Container, design_processor_1.DesignProcessor)
+                    aurelia_dependency_injection_1.inject(ux_configuration_1.UXConfiguration, aurelia_dependency_injection_1.Container, design_processor_1.DesignProcessor)
                 ], AureliaUX);
                 return AureliaUX;
             }());

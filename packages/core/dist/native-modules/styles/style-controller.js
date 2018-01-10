@@ -5,11 +5,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { inject } from 'aurelia-dependency-injection';
-import { DOM } from 'aurelia-pal';
 import { ObserverLocator } from 'aurelia-binding';
+import { GlobalStyleEngine } from './global-style-engine';
 var StyleController = /** @class */ (function () {
-    function StyleController(observerLocator) {
+    function StyleController(observerLocator, globalStyleEngine) {
         this.observerLocator = observerLocator;
+        this.globalStyleEngine = globalStyleEngine;
         this.themes = [];
     }
     /**
@@ -26,9 +27,8 @@ var StyleController = /** @class */ (function () {
             return;
         }
         baseTheme = theme;
-        var styleElement = this.createStyleElement(theme);
-        this.setWatches(theme, styleElement);
-        DOM.appendNode(styleElement, window.document.head);
+        this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux theme " + theme.themeKey, this.processInnerHtml(theme), ':root');
+        this.setWatches(theme);
         this.themes[theme.themeKey] = theme;
     };
     StyleController.prototype.updateTheme = function (theme, element) {
@@ -64,32 +64,25 @@ var StyleController = /** @class */ (function () {
     StyleController.prototype.generateCssVariable = function (themeKey, propertyKey, value) {
         return "--ux-theme--" + themeKey + "-" + kebabCase(propertyKey) + ": " + value + ";";
     };
-    StyleController.prototype.createStyleElement = function (theme) {
-        var styleElement = DOM.createElement('style');
-        styleElement.type = 'text/css';
-        styleElement.innerHTML = this.processInnerHtml(theme);
-        return styleElement;
-    };
-    StyleController.prototype.setWatches = function (theme, styleElement) {
+    StyleController.prototype.setWatches = function (theme) {
         var _this = this;
         for (var _i = 0, _a = this.getThemeKeys(theme); _i < _a.length; _i++) {
             var key = _a[_i];
             this.observerLocator.getObserver(theme, key).subscribe(function () {
-                styleElement.innerHTML = _this.processInnerHtml(theme);
+                _this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux theme " + theme.themeKey, _this.processInnerHtml(theme), ':root');
             });
         }
     };
     StyleController.prototype.processInnerHtml = function (theme) {
-        var designInnerHtml = ':root {\r\n';
+        var designInnerHtml = '';
         for (var _i = 0, _a = this.getThemeKeys(theme); _i < _a.length; _i++) {
             var key = _a[_i];
             designInnerHtml += "  " + this.generateCssVariable(theme.themeKey, key, theme[key]) + "\r\n";
         }
-        designInnerHtml += '}';
         return designInnerHtml;
     };
     StyleController = __decorate([
-        inject(ObserverLocator)
+        inject(ObserverLocator, GlobalStyleEngine)
     ], StyleController);
     return StyleController;
 }());

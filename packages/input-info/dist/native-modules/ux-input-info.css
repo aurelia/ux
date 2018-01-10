@@ -2,7 +2,7 @@ ux-input-info {
   display: flex;
   font-size: 14px;
   width: 100%;
-  color: var(--ux-theme--input-info-foreground);
+  color: var(--ux-theme--input-info-foreground, #757575);
 }
 
 ux-input-info>.hint-text,
@@ -27,7 +27,7 @@ ux-input-info>.counter {
 }
 
 ux-input.focused+ux-input-info>.counter {
-  color: var(--ux-design--accent);
+  color: var(--ux-design--accent, #FF4081);
 }
 
 ux-input>input[disabled]+ux-input-info {
@@ -35,5 +35,5 @@ ux-input>input[disabled]+ux-input-info {
 }
 
 .has-error+ux-input-info {
-  color: var(--ux-theme--input-info-error);
+  color: var(--ux-theme--input-info-error, #F44336);
 }

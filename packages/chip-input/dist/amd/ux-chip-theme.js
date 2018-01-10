@@ -4,8 +4,8 @@ define(["require", "exports", "@aurelia-ux/core"], function (require, exports, c
     var UxChipTheme = /** @class */ (function () {
         function UxChipTheme() {
             this.themeKey = 'chip';
-            this.background = 'var(--ux-design--accent)';
-            this.foreground = 'var(--ux-design--accent-foreground)';
+            this.background = 'var(--ux-design--accent, #FF4081)';
+            this.foreground = 'var(--ux-design--accent-foreground, #FFFFFF)';
             this.deleteBackground = core_1.swatches.grey.p500;
             this.deleteForeground = core_1.swatches.grey.p200;
         }

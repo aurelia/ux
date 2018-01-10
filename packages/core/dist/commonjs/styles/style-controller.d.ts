@@ -1,9 +1,11 @@
 import { ObserverLocator } from 'aurelia-binding';
 import { UxTheme } from './ux-theme';
+import { GlobalStyleEngine } from './global-style-engine';
 export declare class StyleController {
     observerLocator: ObserverLocator;
+    private globalStyleEngine;
     themes: UxTheme[];
-    constructor(observerLocator: ObserverLocator);
+    constructor(observerLocator: ObserverLocator, globalStyleEngine: GlobalStyleEngine);
     /**
      * Checks to see if a base theme has been registered.
      * If no base theme is found, the theme is registered,
@@ -17,7 +19,6 @@ export declare class StyleController {
     getThemeKeys(theme: UxTheme): string[];
     generateCssVariableName(themeKey: string, propertyKey: string): string;
     generateCssVariable(themeKey: string, propertyKey: string, value: string | number): string;
-    private createStyleElement(theme);
-    private setWatches(theme, styleElement);
+    private setWatches(theme);
     private processInnerHtml(theme);
 }

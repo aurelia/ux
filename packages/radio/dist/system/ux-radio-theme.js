@@ -13,8 +13,8 @@ System.register(["@aurelia-ux/core"], function (exports_1, context_1) {
                 function UxRadioTheme() {
                     this.themeKey = 'radio';
                     this.border = "solid 2px " + core_1.swatches.grey.p700;
-                    this.hoverBorder = 'solid 2px var(--ux-design--accent)';
-                    this.checkedBackground = 'var(--ux-design--accent)';
+                    this.hoverBorder = 'solid 2px var(--ux-design--accent, #FF4081)';
+                    this.checkedBackground = 'var(--ux-design--accent, #FF4081)';
                     this.checkmarkColor = core_1.swatches.white;
                     this.disabledBorder = "solid 2px " + core_1.swatches.grey.p500;
                     this.disabledBackground = core_1.swatches.grey.p500;

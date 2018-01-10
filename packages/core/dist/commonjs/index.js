@@ -13,8 +13,12 @@ var html_attributes_1 = require("./components/html-attributes");
 exports.normalizeBooleanAttribute = html_attributes_1.normalizeBooleanAttribute;
 var style_engine_1 = require("./styles/style-engine");
 exports.StyleEngine = style_engine_1.StyleEngine;
+var global_style_engine_1 = require("./styles/global-style-engine");
+exports.GlobalStyleEngine = global_style_engine_1.GlobalStyleEngine;
 var aurelia_ux_2 = require("./aurelia-ux");
 exports.AureliaUX = aurelia_ux_2.AureliaUX;
+var ux_configuration_1 = require("./ux-configuration");
+exports.UXConfiguration = ux_configuration_1.UXConfiguration;
 function configure(config, callback) {
     var ux = config.container.get(aurelia_ux_1.AureliaUX);
     if (typeof callback === 'function') {
@@ -22,6 +26,7 @@ function configure(config, callback) {
             .then(function () { return ux.start(config); });
     }
     else {
+        ux.use.defaultConfiguration();
         return ux.start(config);
     }
 }

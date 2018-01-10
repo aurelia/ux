@@ -4,16 +4,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { ObserverLocator } from 'aurelia-binding';
 import { swatches } from '../colors/swatches';
+import { GlobalStyleEngine } from '../styles/global-style-engine';
 var DesignProcessor = /** @class */ (function () {
-    function DesignProcessor(observerLocator) {
+    function DesignProcessor(observerLocator, globalStyleEngine) {
         this.observerLocator = observerLocator;
+        this.globalStyleEngine = globalStyleEngine;
     }
     DesignProcessor.prototype.setSwatchVariables = function () {
-        var swatchClasses = ":root {\r\n";
+        var swatchClasses = '';
         for (var swatch in swatches) {
             if (swatches.hasOwnProperty(swatch)) {
                 if (typeof swatches[swatch] === 'string') {
@@ -27,14 +28,10 @@ var DesignProcessor = /** @class */ (function () {
                 }
             }
         }
-        swatchClasses += '}';
-        DOM.injectStyles(swatchClasses);
+        this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux swatches", swatchClasses, ':root');
     };
     DesignProcessor.prototype.setDesignVariables = function (design) {
-        this.designStyleElement = DOM.createElement('style');
-        this.designStyleElement.type = 'text/css';
-        this.designStyleElement.innerHTML = this.buildInnerHTML(design);
-        DOM.appendNode(this.designStyleElement, window.document.head);
+        this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux design styles", this.buildInnerHTML(design), ':root');
     };
     DesignProcessor.prototype.setDesignWatches = function (design) {
         var _this = this;
@@ -42,23 +39,22 @@ var DesignProcessor = /** @class */ (function () {
             if (design.hasOwnProperty(key)) {
                 this.observerLocator.getObserver(design, key)
                     .subscribe(function () {
-                    _this.designStyleElement.innerHTML = _this.buildInnerHTML(design);
+                    _this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux design styles", _this.buildInnerHTML(design), ':root');
                 });
             }
         }
     };
     DesignProcessor.prototype.buildInnerHTML = function (design) {
-        var designInnerHtml = ':root {\r\n';
+        var designInnerHtml = '';
         for (var key in design) {
             if (design.hasOwnProperty(key)) {
                 designInnerHtml += "  --ux-design--" + kebabCase(key) + ": " + design[key] + ";\r\n";
             }
         }
-        designInnerHtml += '}';
         return designInnerHtml;
     };
     DesignProcessor = __decorate([
-        inject(ObserverLocator)
+        inject(ObserverLocator, GlobalStyleEngine)
     ], DesignProcessor);
     return DesignProcessor;
 }());

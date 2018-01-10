@@ -7,7 +7,7 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_switch_theme_1, UxSwitch;
+    var aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_switch_theme_1, theme, UxSwitch;
     return {
         setters: [
             function (aurelia_templating_1_1) {
@@ -27,16 +27,15 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
             }
         ],
         execute: function () {
+            theme = new ux_switch_theme_1.UxSwitchTheme();
             UxSwitch = /** @class */ (function () {
-                function UxSwitch(element, resources, styleEngine) {
+                function UxSwitch(element, styleEngine) {
                     this.element = element;
-                    this.resources = resources;
                     this.styleEngine = styleEngine;
                     this.disabled = false;
-                    this.effect = null;
-                    this.tabindex = 0;
-                    this.checked = false;
-                    styleEngine.ensureDefaultTheme(new ux_switch_theme_1.UxSwitchTheme());
+                    this.effect = 'ripple';
+                    this.ripple = null;
+                    styleEngine.ensureDefaultTheme(theme);
                 }
                 Object.defineProperty(UxSwitch.prototype, "isDisabled", {
                     get: function () {
@@ -46,38 +45,26 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                     configurable: true
                 });
                 UxSwitch.prototype.bind = function () {
+                    if (this.element.hasAttribute('id')) {
+                        var attributeValue = this.element.getAttribute('id');
+                        if (attributeValue != null) {
+                            this.checkbox.setAttribute('id', attributeValue);
+                        }
+                    }
+                    if (this.element.hasAttribute('tabindex')) {
+                        var attributeValue = this.element.getAttribute('tabindex');
+                        if (attributeValue != null) {
+                            this.checkbox.setAttribute('tabindex', attributeValue);
+                        }
+                    }
+                    if (this.element.hasAttribute('checked')) {
+                        var attributeValue = this.element.getAttribute('checked');
+                        if (attributeValue === 'true') {
+                            this.checked = true;
+                        }
+                    }
                     this.themeChanged(this.theme);
-                    if (this.checked) {
-                        this.checkedChanged();
-                    }
-                    if (core_1.normalizeBooleanAttribute('disabled', this.disabled) && !this.element.classList.contains('disabled')) {
-                        this.element.classList.add('disabled');
-                    }
-                    else if (this.element.classList.contains('disabled')) {
-                        this.element.classList.remove('disabled');
-                    }
-                };
-                UxSwitch.prototype.attached = function () {
-                    var _this = this;
-                    if (this.id) {
-                        var labelElement = document.querySelector("label[for=" + this.id + "]");
-                        if (labelElement != null) {
-                            labelElement.addEventListener('click', function () {
-                                _this.toggleSwitch();
-                            });
-                        }
-                    }
-                };
-                UxSwitch.prototype.detached = function () {
-                    var _this = this;
-                    if (this.id) {
-                        var labelElement = document.querySelector("label[for=" + this.id + "]");
-                        if (labelElement != null) {
-                            labelElement.removeEventListener('click', function () {
-                                _this.toggleSwitch();
-                            });
-                        }
-                    }
+                    this.disabledChanged(this.disabled);
                 };
                 UxSwitch.prototype.themeChanged = function (newValue) {
                     if (newValue != null && newValue.themeKey == null) {
@@ -87,35 +74,37 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                 };
                 UxSwitch.prototype.disabledChanged = function (newValue) {
                     if (core_1.normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-                        this.element.classList.add('disabled');
+                        this.checkbox.setAttribute('disabled', '');
                     }
                     else if (this.element.classList.contains('disabled')) {
-                        this.element.classList.remove('disabled');
+                        this.checkbox.removeAttribute('disabled');
                     }
                 };
-                UxSwitch.prototype.checkedChanged = function () {
-                    if (this.checked) {
-                        this.element.classList.add('on');
-                        this.element.setAttribute('aria-checked', 'true');
-                    }
-                    else {
-                        this.element.classList.remove('on');
-                        this.element.setAttribute('aria-checked', 'false');
-                    }
-                };
-                UxSwitch.prototype.toggleSwitch = function () {
-                    if (this.isDisabled) {
+                UxSwitch.prototype.onMouseDown = function (e) {
+                    if (e.button !== 0 || this.isDisabled) {
                         return;
                     }
-                    this.checked = !this.checked;
-                };
-                UxSwitch.prototype.onKeydown = function (e) {
-                    var key = e.which || e.keyCode;
-                    if (key === 13 || key === 32) {
-                        e.preventDefault();
-                        this.toggleSwitch();
+                    if (this.element.classList.contains('ripple')) {
+                        if (this.ripple === null) {
+                            this.ripple = new core_1.PaperRipple();
+                            var container = this.element.querySelector('.ripplecontainer');
+                            if (container != null) {
+                                container.appendChild(this.ripple.$);
+                            }
+                        }
+                        this.ripple.center = true;
+                        this.ripple.round = true;
+                        this.ripple.downAction(e);
                     }
-                    return true;
+                    e.preventDefault();
+                };
+                UxSwitch.prototype.onMouseUp = function (e) {
+                    if (e.button !== 0 || this.isDisabled) {
+                        return;
+                    }
+                    if (this.element.classList.contains('ripple') && this.ripple !== null) {
+                        this.ripple.upAction();
+                    }
                 };
                 __decorate([
                     aurelia_templating_1.bindable
@@ -128,19 +117,15 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                 ], UxSwitch.prototype, "id", void 0);
                 __decorate([
                     aurelia_templating_1.bindable
-                ], UxSwitch.prototype, "tabindex", void 0);
-                __decorate([
-                    aurelia_templating_1.bindable
                 ], UxSwitch.prototype, "theme", void 0);
                 __decorate([
-                    aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay }),
                     aurelia_templating_1.bindable
                 ], UxSwitch.prototype, "checked", void 0);
                 __decorate([
                     aurelia_binding_1.computedFrom('disabled')
                 ], UxSwitch.prototype, "isDisabled", null);
                 UxSwitch = __decorate([
-                    aurelia_dependency_injection_1.inject(Element, aurelia_templating_1.ViewResources, core_1.StyleEngine),
+                    aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
                     aurelia_templating_1.customElement('ux-switch')
                 ], UxSwitch);
                 return UxSwitch;

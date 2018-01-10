@@ -15,7 +15,7 @@ System.register(["@aurelia-ux/core"], function (exports_1, context_1) {
                     this.foreground = core_1.swatches.grey.p900;
                     this.background = 'transparent';
                     this.borderBottom = "1px solid " + core_1.swatches.grey.p500;
-                    this.borderBottomHover = '1px solid var(--ux-design--accent)';
+                    this.borderBottomHover = '1px solid var(--ux-design--accent, #FF4081)';
                     this.borderBottomSelected = '';
                     this.diabledForeground = core_1.swatches.grey.p500;
                     this.disabledBorderBottom = "1px dashed " + core_1.swatches.grey.p300;

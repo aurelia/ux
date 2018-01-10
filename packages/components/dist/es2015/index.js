@@ -1,6 +1,7 @@
 export { UxButtonTheme } from '@aurelia-ux/button';
 export { UxCheckboxTheme } from '@aurelia-ux/checkbox';
 export { UxChipInputTheme, UxChipTheme, UxTagTheme } from '@aurelia-ux/chip-input';
+export { UxGridTheme, UxResponsiveUtilities } from '@aurelia-ux/grid';
 export { UxDatepickerTheme } from '@aurelia-ux/datepicker';
 export { UxFormTheme } from '@aurelia-ux/form';
 export { UxInputTheme } from '@aurelia-ux/input';
@@ -13,6 +14,7 @@ import { configure as configureButtonComponent } from '@aurelia-ux/button';
 import { configure as configureCheckboxComponent } from '@aurelia-ux/checkbox';
 import { configure as configureChipComponent } from '@aurelia-ux/chip-input';
 import { configure as configureDatepickerComponent } from '@aurelia-ux/datepicker';
+import { configure as configureGridComponent } from '@aurelia-ux/grid';
 import { configure as configureFormComponent } from '@aurelia-ux/form';
 import { configure as configureInputComponent } from '@aurelia-ux/input';
 import { configure as configureInputInfoComponent } from '@aurelia-ux/input-info';
@@ -25,6 +27,7 @@ export function configure(config) {
     configureCheckboxComponent(config);
     configureChipComponent(config);
     configureDatepickerComponent(config);
+    configureGridComponent(config);
     configureFormComponent(config);
     configureInputComponent(config);
     configureInputInfoComponent(config);

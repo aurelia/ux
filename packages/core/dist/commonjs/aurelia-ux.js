@@ -10,9 +10,11 @@ var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var cordova_1 = require("./hosts/cordova");
 var web_1 = require("./hosts/web");
 var electron_1 = require("./hosts/electron");
+var ux_configuration_1 = require("./ux-configuration");
 var design_processor_1 = require("./designs/design-processor");
 var AureliaUX = /** @class */ (function () {
-    function AureliaUX(container, designProcessor) {
+    function AureliaUX(use, container, designProcessor) {
+        this.use = use;
         this.designProcessor = designProcessor;
         this.availableHosts = [
             container.get(cordova_1.Cordova),
@@ -36,7 +38,7 @@ var AureliaUX = /** @class */ (function () {
         });
     };
     AureliaUX = __decorate([
-        aurelia_dependency_injection_1.inject(aurelia_dependency_injection_1.Container, design_processor_1.DesignProcessor)
+        aurelia_dependency_injection_1.inject(ux_configuration_1.UXConfiguration, aurelia_dependency_injection_1.Container, design_processor_1.DesignProcessor)
     ], AureliaUX);
     return AureliaUX;
 }());

@@ -4,15 +4,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxRadioTheme } from './ux-radio-theme';
+const theme = new UxRadioTheme();
 let UxRadio = class UxRadio {
-    constructor(element, resources, styleEngine) {
+    constructor(element, styleEngine) {
         this.element = element;
-        this.resources = resources;
         this.styleEngine = styleEngine;
         this.disabled = false;
         this.effect = null;
@@ -23,7 +23,7 @@ let UxRadio = class UxRadio {
         this.checked = false;
         this.value = null;
         this.ripple = null;
-        styleEngine.ensureDefaultTheme(new UxRadioTheme());
+        styleEngine.ensureDefaultTheme(theme);
     }
     get isDisabled() {
         return normalizeBooleanAttribute('disabled', this.disabled);
@@ -170,7 +170,7 @@ __decorate([
     computedFrom('disabled')
 ], UxRadio.prototype, "isDisabled", null);
 UxRadio = __decorate([
-    inject(Element, ViewResources, StyleEngine),
+    inject(Element, StyleEngine),
     customElement('ux-radio')
 ], UxRadio);
 export { UxRadio };

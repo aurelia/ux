@@ -4,56 +4,45 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
-import { computedFrom, bindingMode } from 'aurelia-binding';
+import { customElement, bindable } from 'aurelia-templating';
+import { computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
+const theme = new UxSwitchTheme();
 let UxSwitch = class UxSwitch {
-    constructor(element, resources, styleEngine) {
+    constructor(element, styleEngine) {
         this.element = element;
-        this.resources = resources;
         this.styleEngine = styleEngine;
         this.disabled = false;
-        this.effect = null;
-        this.tabindex = 0;
-        this.checked = false;
-        styleEngine.ensureDefaultTheme(new UxSwitchTheme());
+        this.effect = 'ripple';
+        this.ripple = null;
+        styleEngine.ensureDefaultTheme(theme);
     }
     get isDisabled() {
         return normalizeBooleanAttribute('disabled', this.disabled);
     }
     bind() {
+        if (this.element.hasAttribute('id')) {
+            const attributeValue = this.element.getAttribute('id');
+            if (attributeValue != null) {
+                this.checkbox.setAttribute('id', attributeValue);
+            }
+        }
+        if (this.element.hasAttribute('tabindex')) {
+            const attributeValue = this.element.getAttribute('tabindex');
+            if (attributeValue != null) {
+                this.checkbox.setAttribute('tabindex', attributeValue);
+            }
+        }
+        if (this.element.hasAttribute('checked')) {
+            const attributeValue = this.element.getAttribute('checked');
+            if (attributeValue === 'true') {
+                this.checked = true;
+            }
+        }
         this.themeChanged(this.theme);
-        if (this.checked) {
-            this.checkedChanged();
-        }
-        if (normalizeBooleanAttribute('disabled', this.disabled) && !this.element.classList.contains('disabled')) {
-            this.element.classList.add('disabled');
-        }
-        else if (this.element.classList.contains('disabled')) {
-            this.element.classList.remove('disabled');
-        }
-    }
-    attached() {
-        if (this.id) {
-            const labelElement = document.querySelector(`label[for=${this.id}]`);
-            if (labelElement != null) {
-                labelElement.addEventListener('click', () => {
-                    this.toggleSwitch();
-                });
-            }
-        }
-    }
-    detached() {
-        if (this.id) {
-            const labelElement = document.querySelector(`label[for=${this.id}]`);
-            if (labelElement != null) {
-                labelElement.removeEventListener('click', () => {
-                    this.toggleSwitch();
-                });
-            }
-        }
+        this.disabledChanged(this.disabled);
     }
     themeChanged(newValue) {
         if (newValue != null && newValue.themeKey == null) {
@@ -63,35 +52,37 @@ let UxSwitch = class UxSwitch {
     }
     disabledChanged(newValue) {
         if (normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-            this.element.classList.add('disabled');
+            this.checkbox.setAttribute('disabled', '');
         }
         else if (this.element.classList.contains('disabled')) {
-            this.element.classList.remove('disabled');
+            this.checkbox.removeAttribute('disabled');
         }
     }
-    checkedChanged() {
-        if (this.checked) {
-            this.element.classList.add('on');
-            this.element.setAttribute('aria-checked', 'true');
-        }
-        else {
-            this.element.classList.remove('on');
-            this.element.setAttribute('aria-checked', 'false');
-        }
-    }
-    toggleSwitch() {
-        if (this.isDisabled) {
+    onMouseDown(e) {
+        if (e.button !== 0 || this.isDisabled) {
             return;
         }
-        this.checked = !this.checked;
-    }
-    onKeydown(e) {
-        const key = e.which || e.keyCode;
-        if (key === 13 || key === 32) {
-            e.preventDefault();
-            this.toggleSwitch();
+        if (this.element.classList.contains('ripple')) {
+            if (this.ripple === null) {
+                this.ripple = new PaperRipple();
+                const container = this.element.querySelector('.ripplecontainer');
+                if (container != null) {
+                    container.appendChild(this.ripple.$);
+                }
+            }
+            this.ripple.center = true;
+            this.ripple.round = true;
+            this.ripple.downAction(e);
         }
-        return true;
+        e.preventDefault();
+    }
+    onMouseUp(e) {
+        if (e.button !== 0 || this.isDisabled) {
+            return;
+        }
+        if (this.element.classList.contains('ripple') && this.ripple !== null) {
+            this.ripple.upAction();
+        }
     }
 };
 __decorate([
@@ -105,19 +96,15 @@ __decorate([
 ], UxSwitch.prototype, "id", void 0);
 __decorate([
     bindable
-], UxSwitch.prototype, "tabindex", void 0);
-__decorate([
-    bindable
 ], UxSwitch.prototype, "theme", void 0);
 __decorate([
-    bindable({ defaultBindingMode: bindingMode.twoWay }),
     bindable
 ], UxSwitch.prototype, "checked", void 0);
 __decorate([
     computedFrom('disabled')
 ], UxSwitch.prototype, "isDisabled", null);
 UxSwitch = __decorate([
-    inject(Element, ViewResources, StyleEngine),
+    inject(Element, StyleEngine),
     customElement('ux-switch')
 ], UxSwitch);
 export { UxSwitch };

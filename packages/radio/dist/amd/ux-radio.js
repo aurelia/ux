@@ -7,10 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-radio-theme"], function (require, exports, aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_radio_theme_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    var theme = new ux_radio_theme_1.UxRadioTheme();
     var UxRadio = /** @class */ (function () {
-        function UxRadio(element, resources, styleEngine) {
+        function UxRadio(element, styleEngine) {
             this.element = element;
-            this.resources = resources;
             this.styleEngine = styleEngine;
             this.disabled = false;
             this.effect = null;
@@ -21,7 +21,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             this.checked = false;
             this.value = null;
             this.ripple = null;
-            styleEngine.ensureDefaultTheme(new ux_radio_theme_1.UxRadioTheme());
+            styleEngine.ensureDefaultTheme(theme);
         }
         Object.defineProperty(UxRadio.prototype, "isDisabled", {
             get: function () {
@@ -173,7 +173,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             aurelia_binding_1.computedFrom('disabled')
         ], UxRadio.prototype, "isDisabled", null);
         UxRadio = __decorate([
-            aurelia_dependency_injection_1.inject(Element, aurelia_templating_1.ViewResources, core_1.StyleEngine),
+            aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
             aurelia_templating_1.customElement('ux-radio')
         ], UxRadio);
         return UxRadio;

@@ -6,16 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_binding_1 = require("aurelia-binding");
 var swatches_1 = require("../colors/swatches");
+var global_style_engine_1 = require("../styles/global-style-engine");
 var DesignProcessor = /** @class */ (function () {
-    function DesignProcessor(observerLocator) {
+    function DesignProcessor(observerLocator, globalStyleEngine) {
         this.observerLocator = observerLocator;
+        this.globalStyleEngine = globalStyleEngine;
     }
     DesignProcessor.prototype.setSwatchVariables = function () {
-        var swatchClasses = ":root {\r\n";
+        var swatchClasses = '';
         for (var swatch in swatches_1.swatches) {
             if (swatches_1.swatches.hasOwnProperty(swatch)) {
                 if (typeof swatches_1.swatches[swatch] === 'string') {
@@ -29,14 +30,10 @@ var DesignProcessor = /** @class */ (function () {
                 }
             }
         }
-        swatchClasses += '}';
-        aurelia_pal_1.DOM.injectStyles(swatchClasses);
+        this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux swatches", swatchClasses, ':root');
     };
     DesignProcessor.prototype.setDesignVariables = function (design) {
-        this.designStyleElement = aurelia_pal_1.DOM.createElement('style');
-        this.designStyleElement.type = 'text/css';
-        this.designStyleElement.innerHTML = this.buildInnerHTML(design);
-        aurelia_pal_1.DOM.appendNode(this.designStyleElement, window.document.head);
+        this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux design styles", this.buildInnerHTML(design), ':root');
     };
     DesignProcessor.prototype.setDesignWatches = function (design) {
         var _this = this;
@@ -44,23 +41,22 @@ var DesignProcessor = /** @class */ (function () {
             if (design.hasOwnProperty(key)) {
                 this.observerLocator.getObserver(design, key)
                     .subscribe(function () {
-                    _this.designStyleElement.innerHTML = _this.buildInnerHTML(design);
+                    _this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux design styles", _this.buildInnerHTML(design), ':root');
                 });
             }
         }
     };
     DesignProcessor.prototype.buildInnerHTML = function (design) {
-        var designInnerHtml = ':root {\r\n';
+        var designInnerHtml = '';
         for (var key in design) {
             if (design.hasOwnProperty(key)) {
                 designInnerHtml += "  --ux-design--" + kebabCase(key) + ": " + design[key] + ";\r\n";
             }
         }
-        designInnerHtml += '}';
         return designInnerHtml;
     };
     DesignProcessor = __decorate([
-        aurelia_dependency_injection_1.inject(aurelia_binding_1.ObserverLocator)
+        aurelia_dependency_injection_1.inject(aurelia_binding_1.ObserverLocator, global_style_engine_1.GlobalStyleEngine)
     ], DesignProcessor);
     return DesignProcessor;
 }());

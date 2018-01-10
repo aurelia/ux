@@ -7,7 +7,7 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_radio_theme_1, UxRadio;
+    var aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_radio_theme_1, theme, UxRadio;
     return {
         setters: [
             function (aurelia_templating_1_1) {
@@ -27,10 +27,10 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
             }
         ],
         execute: function () {
+            theme = new ux_radio_theme_1.UxRadioTheme();
             UxRadio = /** @class */ (function () {
-                function UxRadio(element, resources, styleEngine) {
+                function UxRadio(element, styleEngine) {
                     this.element = element;
-                    this.resources = resources;
                     this.styleEngine = styleEngine;
                     this.disabled = false;
                     this.effect = null;
@@ -41,7 +41,7 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                     this.checked = false;
                     this.value = null;
                     this.ripple = null;
-                    styleEngine.ensureDefaultTheme(new ux_radio_theme_1.UxRadioTheme());
+                    styleEngine.ensureDefaultTheme(theme);
                 }
                 Object.defineProperty(UxRadio.prototype, "isDisabled", {
                     get: function () {
@@ -193,7 +193,7 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                     aurelia_binding_1.computedFrom('disabled')
                 ], UxRadio.prototype, "isDisabled", null);
                 UxRadio = __decorate([
-                    aurelia_dependency_injection_1.inject(Element, aurelia_templating_1.ViewResources, core_1.StyleEngine),
+                    aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
                     aurelia_templating_1.customElement('ux-radio')
                 ], UxRadio);
                 return UxRadio;

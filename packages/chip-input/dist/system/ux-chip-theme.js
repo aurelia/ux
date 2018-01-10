@@ -12,8 +12,8 @@ System.register(["@aurelia-ux/core"], function (exports_1, context_1) {
             UxChipTheme = /** @class */ (function () {
                 function UxChipTheme() {
                     this.themeKey = 'chip';
-                    this.background = 'var(--ux-design--accent)';
-                    this.foreground = 'var(--ux-design--accent-foreground)';
+                    this.background = 'var(--ux-design--accent, #FF4081)';
+                    this.foreground = 'var(--ux-design--accent-foreground, #FFFFFF)';
                     this.deleteBackground = core_1.swatches.grey.p500;
                     this.deleteForeground = core_1.swatches.grey.p200;
                 }

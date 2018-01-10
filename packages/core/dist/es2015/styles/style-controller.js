@@ -5,11 +5,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { inject } from 'aurelia-dependency-injection';
-import { DOM } from 'aurelia-pal';
 import { ObserverLocator } from 'aurelia-binding';
+import { GlobalStyleEngine } from './global-style-engine';
 let StyleController = class StyleController {
-    constructor(observerLocator) {
+    constructor(observerLocator, globalStyleEngine) {
         this.observerLocator = observerLocator;
+        this.globalStyleEngine = globalStyleEngine;
         this.themes = [];
     }
     /**
@@ -26,9 +27,8 @@ let StyleController = class StyleController {
             return;
         }
         baseTheme = theme;
-        const styleElement = this.createStyleElement(theme);
-        this.setWatches(theme, styleElement);
-        DOM.appendNode(styleElement, window.document.head);
+        this.globalStyleEngine.addOrUpdateGlobalStyle(`aurelia-ux theme ${theme.themeKey}`, this.processInnerHtml(theme), ':root');
+        this.setWatches(theme);
         this.themes[theme.themeKey] = theme;
     }
     updateTheme(theme, element) {
@@ -64,30 +64,23 @@ let StyleController = class StyleController {
     generateCssVariable(themeKey, propertyKey, value) {
         return `--ux-theme--${themeKey}-${kebabCase(propertyKey)}: ${value};`;
     }
-    createStyleElement(theme) {
-        const styleElement = DOM.createElement('style');
-        styleElement.type = 'text/css';
-        styleElement.innerHTML = this.processInnerHtml(theme);
-        return styleElement;
-    }
-    setWatches(theme, styleElement) {
+    setWatches(theme) {
         for (const key of this.getThemeKeys(theme)) {
             this.observerLocator.getObserver(theme, key).subscribe(() => {
-                styleElement.innerHTML = this.processInnerHtml(theme);
+                this.globalStyleEngine.addOrUpdateGlobalStyle(`aurelia-ux theme ${theme.themeKey}`, this.processInnerHtml(theme), ':root');
             });
         }
     }
     processInnerHtml(theme) {
-        let designInnerHtml = ':root {\r\n';
+        let designInnerHtml = '';
         for (const key of this.getThemeKeys(theme)) {
             designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, theme[key])}\r\n`;
         }
-        designInnerHtml += '}';
         return designInnerHtml;
     }
 };
 StyleController = __decorate([
-    inject(ObserverLocator)
+    inject(ObserverLocator, GlobalStyleEngine)
 ], StyleController);
 export { StyleController };
 function kebabCase(value) {

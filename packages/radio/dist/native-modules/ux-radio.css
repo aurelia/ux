@@ -1,15 +1,16 @@
 ux-radio {
-  display: inline-flex;
-  align-items: center;
-  margin: auto;
-  cursor: pointer;
+  display: inline-block;
   outline: none;
+  height: 24px;
+  width: 24px;
+  box-sizing: border-box;
+  position: relative;
 }
 
 ux-radio>.radio {
   width: 24px;
   height: 24px;
-  border: var(--ux-theme--checkbox-border);
+  border: var(--ux-theme--checkbox-border, solid 2px #455A64);
   border-radius: 50%;
   display: inline-flex;
   box-sizing: border-box;
@@ -72,23 +73,23 @@ ux-radio.disabled>.radio>.background-box::after {
 ux-radio .ripplecontainer {
   position: relative;
   width: 0;
-  height: 0
+  height: 0;
 }
 
 ux-radio .ripplecontainer>.paper-ripple {
   top: auto;
   left: auto;
-  right: -35px;
-  bottom: -25px;
+  right: -36px;
+  bottom: -36px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-.ripplecontainer>.ripple {
+ux-radio .ripplecontainer>.ripple {
   position: absolute;
-  right: -35px;
-  bottom: -25px;
+  right: -36px;
+  bottom: -36px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -98,10 +99,10 @@ ux-radio .ripplecontainer>.paper-ripple {
   transform: scale3d(0, 0, 0);
 }
 
-ux-radio:focus>.ripplecontainer>.ripple {
+ux-radio:focus .ripplecontainer>.ripple {
   transform: scale3d(1, 1, 1);
 }
 
-ux-radio.disabled:focus>.ripplecontainer>.ripple {
+ux-radio.disabled:focus:focus .ripplecontainer>.ripple {
   transform: scale3d(0, 0, 0);
 }

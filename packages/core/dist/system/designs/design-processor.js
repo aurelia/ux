@@ -1,4 +1,4 @@
-System.register(["aurelia-pal", "aurelia-dependency-injection", "aurelia-binding", "../colors/swatches"], function (exports_1, context_1) {
+System.register(["aurelia-dependency-injection", "aurelia-binding", "../colors/swatches", "../styles/global-style-engine"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -11,12 +11,9 @@ System.register(["aurelia-pal", "aurelia-dependency-injection", "aurelia-binding
         value = value.charAt(0).toLowerCase() + value.slice(1);
         return value.replace(/([A-Z])/g, function (match) { return "-" + match[0].toLowerCase(); });
     }
-    var aurelia_pal_1, aurelia_dependency_injection_1, aurelia_binding_1, swatches_1, DesignProcessor;
+    var aurelia_dependency_injection_1, aurelia_binding_1, swatches_1, global_style_engine_1, DesignProcessor;
     return {
         setters: [
-            function (aurelia_pal_1_1) {
-                aurelia_pal_1 = aurelia_pal_1_1;
-            },
             function (aurelia_dependency_injection_1_1) {
                 aurelia_dependency_injection_1 = aurelia_dependency_injection_1_1;
             },
@@ -25,15 +22,19 @@ System.register(["aurelia-pal", "aurelia-dependency-injection", "aurelia-binding
             },
             function (swatches_1_1) {
                 swatches_1 = swatches_1_1;
+            },
+            function (global_style_engine_1_1) {
+                global_style_engine_1 = global_style_engine_1_1;
             }
         ],
         execute: function () {
             DesignProcessor = /** @class */ (function () {
-                function DesignProcessor(observerLocator) {
+                function DesignProcessor(observerLocator, globalStyleEngine) {
                     this.observerLocator = observerLocator;
+                    this.globalStyleEngine = globalStyleEngine;
                 }
                 DesignProcessor.prototype.setSwatchVariables = function () {
-                    var swatchClasses = ":root {\r\n";
+                    var swatchClasses = '';
                     for (var swatch in swatches_1.swatches) {
                         if (swatches_1.swatches.hasOwnProperty(swatch)) {
                             if (typeof swatches_1.swatches[swatch] === 'string') {
@@ -47,14 +48,10 @@ System.register(["aurelia-pal", "aurelia-dependency-injection", "aurelia-binding
                             }
                         }
                     }
-                    swatchClasses += '}';
-                    aurelia_pal_1.DOM.injectStyles(swatchClasses);
+                    this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux swatches", swatchClasses, ':root');
                 };
                 DesignProcessor.prototype.setDesignVariables = function (design) {
-                    this.designStyleElement = aurelia_pal_1.DOM.createElement('style');
-                    this.designStyleElement.type = 'text/css';
-                    this.designStyleElement.innerHTML = this.buildInnerHTML(design);
-                    aurelia_pal_1.DOM.appendNode(this.designStyleElement, window.document.head);
+                    this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux design styles", this.buildInnerHTML(design), ':root');
                 };
                 DesignProcessor.prototype.setDesignWatches = function (design) {
                     var _this = this;
@@ -62,23 +59,22 @@ System.register(["aurelia-pal", "aurelia-dependency-injection", "aurelia-binding
                         if (design.hasOwnProperty(key)) {
                             this.observerLocator.getObserver(design, key)
                                 .subscribe(function () {
-                                _this.designStyleElement.innerHTML = _this.buildInnerHTML(design);
+                                _this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux design styles", _this.buildInnerHTML(design), ':root');
                             });
                         }
                     }
                 };
                 DesignProcessor.prototype.buildInnerHTML = function (design) {
-                    var designInnerHtml = ':root {\r\n';
+                    var designInnerHtml = '';
                     for (var key in design) {
                         if (design.hasOwnProperty(key)) {
                             designInnerHtml += "  --ux-design--" + kebabCase(key) + ": " + design[key] + ";\r\n";
                         }
                     }
-                    designInnerHtml += '}';
                     return designInnerHtml;
                 };
                 DesignProcessor = __decorate([
-                    aurelia_dependency_injection_1.inject(aurelia_binding_1.ObserverLocator)
+                    aurelia_dependency_injection_1.inject(aurelia_binding_1.ObserverLocator, global_style_engine_1.GlobalStyleEngine)
                 ], DesignProcessor);
                 return DesignProcessor;
             }());

@@ -1,9 +1,7 @@
-import { ViewResources } from 'aurelia-templating';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxRadioTheme } from './ux-radio-theme';
 export declare class UxRadio implements UxComponent {
     element: HTMLElement;
-    resources: ViewResources;
     private styleEngine;
     disabled: boolean | string;
     effect: null;
@@ -18,7 +16,7 @@ export declare class UxRadio implements UxComponent {
     private radio;
     private ripple;
     readonly isDisabled: boolean;
-    constructor(element: HTMLElement, resources: ViewResources, styleEngine: StyleEngine);
+    constructor(element: HTMLElement, styleEngine: StyleEngine);
     bind(): void;
     attached(): void;
     detached(): void;

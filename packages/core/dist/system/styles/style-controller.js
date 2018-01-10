@@ -1,4 +1,4 @@
-System.register(["aurelia-dependency-injection", "aurelia-pal", "aurelia-binding"], function (exports_1, context_1) {
+System.register(["aurelia-dependency-injection", "aurelia-binding", "./global-style-engine"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -11,23 +11,24 @@ System.register(["aurelia-dependency-injection", "aurelia-pal", "aurelia-binding
         value = value.charAt(0).toLowerCase() + value.slice(1);
         return value.replace(/([A-Z])/g, function (match) { return "-" + match[0].toLowerCase(); });
     }
-    var aurelia_dependency_injection_1, aurelia_pal_1, aurelia_binding_1, StyleController;
+    var aurelia_dependency_injection_1, aurelia_binding_1, global_style_engine_1, StyleController;
     return {
         setters: [
             function (aurelia_dependency_injection_1_1) {
                 aurelia_dependency_injection_1 = aurelia_dependency_injection_1_1;
             },
-            function (aurelia_pal_1_1) {
-                aurelia_pal_1 = aurelia_pal_1_1;
-            },
             function (aurelia_binding_1_1) {
                 aurelia_binding_1 = aurelia_binding_1_1;
+            },
+            function (global_style_engine_1_1) {
+                global_style_engine_1 = global_style_engine_1_1;
             }
         ],
         execute: function () {
             StyleController = /** @class */ (function () {
-                function StyleController(observerLocator) {
+                function StyleController(observerLocator, globalStyleEngine) {
                     this.observerLocator = observerLocator;
+                    this.globalStyleEngine = globalStyleEngine;
                     this.themes = [];
                 }
                 /**
@@ -44,9 +45,8 @@ System.register(["aurelia-dependency-injection", "aurelia-pal", "aurelia-binding
                         return;
                     }
                     baseTheme = theme;
-                    var styleElement = this.createStyleElement(theme);
-                    this.setWatches(theme, styleElement);
-                    aurelia_pal_1.DOM.appendNode(styleElement, window.document.head);
+                    this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux theme " + theme.themeKey, this.processInnerHtml(theme), ':root');
+                    this.setWatches(theme);
                     this.themes[theme.themeKey] = theme;
                 };
                 StyleController.prototype.updateTheme = function (theme, element) {
@@ -82,32 +82,25 @@ System.register(["aurelia-dependency-injection", "aurelia-pal", "aurelia-binding
                 StyleController.prototype.generateCssVariable = function (themeKey, propertyKey, value) {
                     return "--ux-theme--" + themeKey + "-" + kebabCase(propertyKey) + ": " + value + ";";
                 };
-                StyleController.prototype.createStyleElement = function (theme) {
-                    var styleElement = aurelia_pal_1.DOM.createElement('style');
-                    styleElement.type = 'text/css';
-                    styleElement.innerHTML = this.processInnerHtml(theme);
-                    return styleElement;
-                };
-                StyleController.prototype.setWatches = function (theme, styleElement) {
+                StyleController.prototype.setWatches = function (theme) {
                     var _this = this;
                     for (var _i = 0, _a = this.getThemeKeys(theme); _i < _a.length; _i++) {
                         var key = _a[_i];
                         this.observerLocator.getObserver(theme, key).subscribe(function () {
-                            styleElement.innerHTML = _this.processInnerHtml(theme);
+                            _this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux theme " + theme.themeKey, _this.processInnerHtml(theme), ':root');
                         });
                     }
                 };
                 StyleController.prototype.processInnerHtml = function (theme) {
-                    var designInnerHtml = ':root {\r\n';
+                    var designInnerHtml = '';
                     for (var _i = 0, _a = this.getThemeKeys(theme); _i < _a.length; _i++) {
                         var key = _a[_i];
                         designInnerHtml += "  " + this.generateCssVariable(theme.themeKey, key, theme[key]) + "\r\n";
                     }
-                    designInnerHtml += '}';
                     return designInnerHtml;
                 };
                 StyleController = __decorate([
-                    aurelia_dependency_injection_1.inject(aurelia_binding_1.ObserverLocator)
+                    aurelia_dependency_injection_1.inject(aurelia_binding_1.ObserverLocator, global_style_engine_1.GlobalStyleEngine)
                 ], StyleController);
                 return StyleController;
             }());

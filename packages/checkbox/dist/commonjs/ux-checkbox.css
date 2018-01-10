@@ -1,51 +1,63 @@
 ux-checkbox {
-  display: inline-flex;
-  align-items: center;
-  margin: auto;
-  cursor: pointer;
+  display: inline-block;
   outline: none;
+  height: 24px;
+  width: 24px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+ux-checkbox>input {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+ux-checkbox>input:disabled {
+ cursor: default;
 }
 
 ux-checkbox>.checkbox {
-  width: 20px;
-  height: 20px;
-  border: var(--ux-theme--checkbox-border);
+  border: var(--ux-theme--checkbox-border, solid 2px #616161);
+  border-radius: 3px;
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+ux-checkbox input:hover:not(:disabled) ~ .checkbox {
+  border: var(--ux-theme--checkbox-hover-border, solid 2px var(--ux-design--accent, #FF4081));
   border-radius: 3px;
 }
 
-ux-checkbox>.checkbox+label:not(:empty) {
-  margin-left: 8px;
-}
-
-ux-checkbox>.checkbox:hover {
-  width: 20px;
-  height: 20px;
-  border: var(--ux-theme--checkbox-hover-border);
-  border-radius: 3px;
-}
-
-ux-checkbox.checked>.checkbox {
-  border: var(--ux-theme--checkbox-checked-background);
-  border: var(--ux-theme--checkbox-hover-border);
+ux-checkbox input:checked ~.checkbox {
+  border: var(--ux-theme--checkbox-checked-background, var(--ux-design--accent, #FF4081));
+  border: var(--ux-theme--checkbox-hover-border, var(--ux-design--accent, #FF4081));
 }
 
 ux-checkbox>.checkbox>.background-box {
-  width: 20px;
-  height: 20px;
-  margin: -2px;
   transform: scale3d(0, 0, 0);
-  border-radius: 50%;
   transition: 100ms;
-  background-color: var(--ux-theme--checkbox-checked-background);
+  background-color: var(--ux-theme--checkbox-checked-background, var(--ux-design--accent, #FF4081));
+  height: inherit;
+  width: inherit;
 }
 
-ux-checkbox.checked>.checkbox>.background-box {
-  transform: scale3d(1, 1, 1);
-  border-radius: 3px;
+ux-checkbox input:checked ~.checkbox>.background-box {
+  transform: none;
 }
 
 ux-checkbox>.checkbox>.background-box>svg {
-  fill: var(--ux-theme--checkbox-checkmark-color);
+  fill: var(--ux-theme--checkbox-checkmark-color, #fff);
   width: 20px;
   height: 20px;
 }
@@ -56,42 +68,42 @@ ux-checkbox.disabled {
 }
 
 ux-checkbox.disabled>.checkbox:hover {
-  border: var(--ux-theme--checkbox-disabled-border);
+  border: var(--ux-theme--checkbox-disabled-border, solid 2px #607D8B);
   border-radius: 3px;
 }
 
-ux-checkbox.checked.disabled>.checkbox {
-  border: var(--ux-theme--checkbox-disabled-border);
+ux-checkbox input:disabled ~ .checkbox {
+  border: var(--ux-theme--checkbox-disabled-border, solid 2px #607D8B);
 }
 
-ux-checkbox.checked.disabled>.checkbox>.background-box {
-  background-color: var(--ux-theme--checkbox-disabled-background);
+ux-checkbox input:checked:disabled ~ .checkbox>.background-box {
+  background-color: var(--ux-theme--checkbox-disabled-background, #9E9E9E);
 }
 
-ux-checkbox.disabled>.checkbox>.background-box::after {
-  border-color: var(--ux-theme--checkbox-disabled-foreground);
+ux-checkbox input:disabled ~ .checkbox>.background-box::after {
+  border-color: var(--ux-theme--checkbox-disabled-foreground, #E0E0E0);
 }
 
 ux-checkbox .ripplecontainer {
   position: relative;
   width: 0;
-  height: 0
+  height: 0;
 }
 
 ux-checkbox .ripplecontainer>.paper-ripple {
   top: auto;
   left: auto;
-  right: -35px;
-  bottom: -25px;
+  right: -36px;
+  bottom: -36px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-.ripplecontainer>.ripple {
+ux-checkbox .ripplecontainer>.ripple {
   position: absolute;
-  right: -35px;
-  bottom: -25px;
+  right: -36px;
+  bottom: -36px;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -101,10 +113,10 @@ ux-checkbox .ripplecontainer>.paper-ripple {
   transform: scale3d(0, 0, 0);
 }
 
-ux-checkbox:focus>.ripplecontainer>.ripple {
+ux-checkbox input:focus ~ .ripplecontainer>.ripple {
   transform: scale3d(1, 1, 1);
 }
 
-ux-checkbox.disabled:focus>.ripplecontainer>.ripple {
+ux-checkbox input:disabled:focus ~ .ripplecontainer>.ripple {
   transform: scale3d(0, 0, 0);
 }

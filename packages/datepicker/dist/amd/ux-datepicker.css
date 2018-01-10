@@ -4,7 +4,7 @@ ux-datepicker {
 }
 
     ux-datepicker > ux-button > button.icon {
-      color: var(--ux-theme-datepicker-foreground);
+      color: var(--ux-theme-datepicker-foreground, #333);
     }
 
   ux-datepicker > .overlay:not(:empty) {
@@ -21,12 +21,12 @@ ux-datepicker {
     animation-name: datepicker-background-fade-in;
     animation-duration: 250ms;
     
-    background-color: var(--ux-theme--datepicker-overlay);
+    background-color: var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25));
   }
 
 
 ux-datepicker > ux-button svg {
-  fill: var(--ux-theme--datepicker-calendar-icon);
+  fill: var(--ux-theme--datepicker-calendar-icon, currentColor);
   width: 24px;
   height: 24px;
 }
@@ -37,6 +37,6 @@ ux-datepicker > ux-button svg {
     background-color: rgba(0, 0, 0, 0);
   }
   to {
-    background-color: var(--ux-theme--datepicker-overlay);
+    background-color: var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25));
   }
 }

@@ -8,9 +8,11 @@ import { Container, inject } from 'aurelia-dependency-injection';
 import { Cordova } from './hosts/cordova';
 import { Web } from './hosts/web';
 import { Electron } from './hosts/electron';
+import { UXConfiguration } from './ux-configuration';
 import { DesignProcessor } from './designs/design-processor';
 let AureliaUX = class AureliaUX {
-    constructor(container, designProcessor) {
+    constructor(use, container, designProcessor) {
+        this.use = use;
         this.designProcessor = designProcessor;
         this.availableHosts = [
             container.get(Cordova),
@@ -34,6 +36,6 @@ let AureliaUX = class AureliaUX {
     }
 };
 AureliaUX = __decorate([
-    inject(Container, DesignProcessor)
+    inject(UXConfiguration, Container, DesignProcessor)
 ], AureliaUX);
 export { AureliaUX };
