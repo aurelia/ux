@@ -1,22 +1,41 @@
-import { customElement, bindable } from 'aurelia-templating';
-import { computedFrom } from 'aurelia-binding';
+import { customElement, bindable, ElementEvents } from 'aurelia-templating';
+import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
+
+import {
+  StyleEngine,
+  UxComponent,
+  PaperRipple,
+  normalizeBooleanAttribute,
+  linkProperty
+} from '@aurelia-ux/core';
+
 import { UxCheckboxTheme } from './ux-checkbox-theme';
+import { DOM } from 'aurelia-pal';
+
+export interface IUxCheckboxElement extends HTMLElement {
+  type: 'checkbox';
+  checked: boolean;
+}
 
 const theme = new UxCheckboxTheme();
 
 @inject(Element, StyleEngine)
 @customElement('ux-checkbox')
 export class UxCheckbox implements UxComponent {
+  private ignoreValueChanges: boolean = false;
+
   @bindable public disabled: boolean | string = false;
   @bindable public effect = 'ripple';
   @bindable public id: string;
   @bindable public theme: UxCheckboxTheme;
-  @bindable public matcher: any;
-  @bindable public model: any;
-  @bindable public checked: any;
-  @bindable public value: any;
+
+  public checked: boolean;
+
+  @observable({ initializer: () => false })
+  public value: boolean;
+
+  private indeterminate: boolean;
 
   private checkbox: HTMLInputElement;
   private ripple: PaperRipple | null = null;
@@ -26,39 +45,78 @@ export class UxCheckbox implements UxComponent {
     return normalizeBooleanAttribute('disabled', this.disabled);
   }
 
-  constructor(public element: HTMLElement, private styleEngine: StyleEngine) {
+  constructor(
+    public element: IUxCheckboxElement,
+    private styleEngine: StyleEngine
+  ) {
+    linkProperty(element, ['checked', 'indeterminate']);
+    element.type = 'checkbox';
+
     styleEngine.ensureDefaultTheme(theme);
   }
 
-  public attached() {
-    this.checkbox = this.element.querySelector('input') as HTMLInputElement;
+  public bind() {
 
-    if (this.element.hasAttribute('id')) {
-      const attributeValue = this.element.getAttribute('id');
+    const element = this.element;
+    const checkbox = this.checkbox;
+
+    checkbox.addEventListener('change', stopEvent);
+
+    if (element.hasAttribute('id')) {
+      const attributeValue = element.getAttribute('id');
 
       if (attributeValue != null) {
-        this.checkbox.setAttribute('id', attributeValue);
+        checkbox.setAttribute('id', attributeValue);
       }
     }
 
-    if (this.element.hasAttribute('tabindex')) {
-      const attributeValue = this.element.getAttribute('tabindex');
+    if (element.hasAttribute('tabindex')) {
+      const attributeValue = element.getAttribute('tabindex');
 
       if (attributeValue != null) {
-        this.checkbox.setAttribute('tabindex', attributeValue);
+        checkbox.setAttribute('tabindex', attributeValue);
       }
     }
 
-    if (this.element.hasAttribute('checked')) {
-      const attributeValue = this.element.getAttribute('checked');
+    if (element.hasAttribute('checked')) {
+      const attributeValue = element.getAttribute('checked');
 
-      if (attributeValue === 'true') {
-        this.checked = true;
+      if (attributeValue || attributeValue === 'true') {
+        element.checked = true;
       }
     }
 
     this.themeChanged(this.theme);
     this.disabledChanged(this.disabled);
+  }
+
+  public unbind() {
+    this.checkbox.removeEventListener('change', stopEvent);
+  }
+
+  public getChecked() {
+    return this.checked;
+  }
+
+  public setChecked(value: any) {
+    const oldValue = this.checked;
+    const newValue = !!value;
+
+    if (newValue !== oldValue) {
+      this.checked = newValue;
+      this.ignoreValueChanges = true;
+      this.value = newValue;
+      this.ignoreValueChanges = false;
+      this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
+    }
+  }
+
+  public getIndeterminate() {
+    return this.indeterminate;
+  }
+
+  public setIndeterminate(value: any) {
+    this.indeterminate = !!value;
   }
 
   public themeChanged(newValue: UxCheckboxTheme) {
@@ -70,15 +128,18 @@ export class UxCheckbox implements UxComponent {
   }
 
   public disabledChanged(newValue: boolean | string) {
-    if(this.checkbox == null) {
-      return;
-    }
-
     if (normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
       this.checkbox.setAttribute('disabled', '');
     } else if (this.element.classList.contains('disabled')) {
       this.checkbox.removeAttribute('disabled');
     }
+  }
+
+  public valueChanged(newValue: boolean) {
+    if (this.ignoreValueChanges) {
+      return;
+    }
+    this.setChecked(newValue);
   }
 
   public onMouseDown(e: MouseEvent) {
@@ -100,18 +161,19 @@ export class UxCheckbox implements UxComponent {
       this.ripple.round = true;
 
       this.ripple.downAction(e);
+      const winEvents = new ElementEvents(window);
+      const upAction = () => {
+        this.ripple!.upAction();
+        winEvents.disposeAll();
+      };
+      winEvents.subscribe('blur', upAction);
+      winEvents.subscribe('mouseup', upAction, true);
     }
 
     e.preventDefault();
   }
+}
 
-  public onMouseUp(e: MouseEvent) {
-    if (e.button !== 0 || this.isDisabled) {
-      return;
-    }
-
-    if (this.element.classList.contains('ripple') && this.ripple !== null) {
-      this.ripple.upAction();
-    }
-  }
+function stopEvent(e: Event) {
+  e.stopPropagation();
 }

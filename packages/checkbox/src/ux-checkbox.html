@@ -2,21 +2,10 @@
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-checkbox.css"></require>
 
-  <template if.bind="model != null">
-    <input type="checkbox"
-      checked.bind="checked"
-      model.bind="model"
-      matcher.bind="matcher"
-      mousedown.trigger="onMouseDown($event)"
-      mouseup.trigger="onMouseUp($event)">
-  </template>
-  <template else>
-    <input type="checkbox"
-      checked.bind="checked"
-      value.bind="value"
-      mousedown.trigger="onMouseDown($event)"
-      mouseup.trigger="onMouseUp($event)">
-  </template>
+  <input type="checkbox" ref="checkbox"
+    checked.bind="value"
+    indeterminate.bind="indeterminate"
+    mousedown.trigger="onMouseDown($event)">
 
   <div class="ripplecontainer">
     <span class="ripple"></span>

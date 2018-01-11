@@ -1,5 +1,13 @@
 import { Container, inject } from 'aurelia-dependency-injection';
-import { FrameworkConfiguration, EventManager, bindingMode } from 'aurelia-framework';
+import {
+  FrameworkConfiguration,
+  bindingMode,
+  ObserverLocator,
+  InternalPropertyObserver
+} from 'aurelia-framework';
+import { SyntaxInterpreter } from 'aurelia-templating-binding';
+
+import { isUxElement } from './components/ux-component';
 import { Design } from './designs/design';
 import { Host } from './hosts/host';
 import { Platform } from './platforms/platform';
@@ -8,20 +16,29 @@ import { Web } from './hosts/web';
 import { Electron } from './hosts/electron';
 import { UXConfiguration } from './ux-configuration';
 import { DesignProcessor } from './designs/design-processor';
-import { SyntaxInterpreter } from 'aurelia-templating-binding';
 
-export interface UxElementDefaultBindingModeConfig {
+export type GetElementObserver =
+  (obj: Element,
+    propertyName: string,
+    observerLocator: ObserverLocator,
+    descriptor?: PropertyDescriptor | null) => InternalPropertyObserver | null;
+
+export interface UxElementObserverAdapter {
   tagName: string;
-  propertyName: string;
-  mode: bindingMode;
-  event: string;
+  properties: Record<string, UxElementPropertyObserver>;
 }
 
-@inject(UXConfiguration, Container, DesignProcessor)
+export interface UxElementPropertyObserver {
+  defaultBindingMode: bindingMode;
+  getObserver: GetElementObserver;
+}
+
+@inject(UXConfiguration, Container, DesignProcessor, ObserverLocator)
 export class AureliaUX {
   private availableHosts: Host[];
+  private adapterCreated: boolean = false;
+  private adapters: Record<string, UxElementObserverAdapter> = {};
   private bindingModeIntercepted: boolean;
-  private uxDefaultBindingModes: { [uxElement: string]: UxElementDefaultBindingModeConfig } = {};
 
   public host: Host;
   public platform: Platform;
@@ -31,14 +48,48 @@ export class AureliaUX {
     public use: UXConfiguration,
     container: Container,
     private designProcessor: DesignProcessor,
-    private eventManager: EventManager
+    private observerLocator: ObserverLocator
   ) {
     this.availableHosts = [
       container.get(Cordova),
       container.get(Electron),
       container.get(Web)
     ];
-    this.interceptDetermineDefaultBindingMode(container.get(SyntaxInterpreter));
+  }
+
+  private createAdapter() {
+    this.observerLocator.addAdapter({
+      getObserver: (obj: Element, propertyName: string, descriptor: PropertyDescriptor) => {
+        if (isUxElement(obj)) {
+          const tagName = obj.getAttribute('as-element') || obj.tagName;
+          const elAdapters = this.adapters[tagName];
+          if (!elAdapters) {
+            return null;
+          }
+          const propertyAdapter = elAdapters.properties[propertyName];
+          if (propertyAdapter) {
+            const observer = propertyAdapter.getObserver(obj, propertyName, this.observerLocator, descriptor);
+            if (observer) {
+              return observer;
+            }
+          }
+        }
+        return null as any;
+      }
+    });
+  }
+
+  private getOrCreateUxElementAdapters(tagName: string): UxElementObserverAdapter {
+    if (!this.adapterCreated) {
+      this.createAdapter();
+      this.adapterCreated = true;
+    }
+    const adapters = this.adapters;
+    let elementAdapters = adapters[tagName] || adapters[tagName.toLowerCase()];
+    if (!elementAdapters) {
+      elementAdapters = adapters[tagName] = adapters[tagName.toLowerCase()] = {} as any;
+    }
+    return elementAdapters;
   }
 
   public start(config: FrameworkConfiguration) {
@@ -60,40 +111,42 @@ export class AureliaUX {
     });
   }
 
-  public registerUxElementConfig(bindingModeConfig: UxElementDefaultBindingModeConfig) {
-    const tagName = bindingModeConfig.tagName;
-    const lowerTagName = tagName.toLowerCase();
-    const upperTagName = tagName.toUpperCase();
-    const configProperties = {
-      [bindingModeConfig.propertyName]: bindingModeConfig.event
-    };
-
-    this.uxDefaultBindingModes[lowerTagName] = bindingModeConfig;
-    this.uxDefaultBindingModes[upperTagName] = bindingModeConfig;
-    this.eventManager.registerElementConfig({
-      tagName: lowerTagName,
-      properties: configProperties
-    } as any);
-    this.eventManager.registerElementConfig({
-      tagName: upperTagName,
-      properties: configProperties
-    } as any);
+  public addUxElementObserverAdapter(tagName: string, properties: Record<string, UxElementPropertyObserver>): void {
+    if (!this.adapterCreated) {
+      this.createAdapter();
+      this.adapterCreated = true;
+    }
+    const elementAdapters = this.getOrCreateUxElementAdapters(tagName);
+    elementAdapters.properties = properties;
   }
 
-  private interceptDetermineDefaultBindingMode(syntaxInterpreter: SyntaxInterpreter) {
+  public registerUxElementConfig(observerAdapter: UxElementObserverAdapter) {
     if (!this.bindingModeIntercepted) {
-      const uxDefaultBindingModes = this.uxDefaultBindingModes;
-      const originalFn = SyntaxInterpreter.prototype.determineDefaultBindingMode;
-
-      syntaxInterpreter.determineDefaultBindingMode = function(element: Element, attrName: string, context?: any) {
-        const tagName = element.getAttribute('as-element') || element.tagName;
-        const bindingModeConfig = uxDefaultBindingModes[tagName];
-        if (bindingModeConfig) {
-          return bindingModeConfig.mode;
-        } else {
-          return originalFn.call(this, element, attrName, context);
-        }
-      };
+      this.interceptDetermineDefaultBindingMode();
+      this.bindingModeIntercepted = true;
     }
+    this.addUxElementObserverAdapter(observerAdapter.tagName.toUpperCase(), observerAdapter.properties);
+  }
+
+  private interceptDetermineDefaultBindingMode(): void {
+    const ux = this;
+    const originalFn = SyntaxInterpreter.prototype.determineDefaultBindingMode;
+
+    SyntaxInterpreter.prototype.determineDefaultBindingMode = function(
+      this: SyntaxInterpreter,
+      element: Element,
+      attrName: string,
+      context?: any
+    ) {
+      const tagName = element.getAttribute('as-element') || element.tagName;
+      const elAdapters = ux.adapters[tagName];
+      if (elAdapters) {
+        const propertyAdapter = elAdapters.properties[attrName];
+        if (propertyAdapter) {
+          return propertyAdapter.defaultBindingMode;
+        }
+      }
+      return originalFn.call(this, element, attrName, context);
+    };
   }
 }

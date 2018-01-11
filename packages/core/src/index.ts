@@ -1,6 +1,7 @@
-import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
-import { AureliaUX } from './aurelia-ux';
+import { FrameworkConfiguration } from 'aurelia-framework';
 import { PLATFORM } from 'aurelia-pal';
+
+import { AureliaUX } from './aurelia-ux';
 
 export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
@@ -9,8 +10,8 @@ export { processDesignAttributes } from './designs/design-attributes';
 export { PaperRipple } from './effects/paper-ripple';
 
 export { normalizeBooleanAttribute } from './components/html-attributes';
-export { UxComponent } from './components/ux-component';
-export { defineValueProperty } from './components/define-value-property';
+export { UxComponent, markAsUxElement, isUxElement } from './components/ux-component';
+export { linkProperty } from './components/link-property';
 
 export { UxTheme } from './styles/ux-theme';
 export { StyleEngine } from './styles/style-engine';
