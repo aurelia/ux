@@ -7,7 +7,6 @@ import {
 } from 'aurelia-framework';
 import { SyntaxInterpreter } from 'aurelia-templating-binding';
 
-import { isUxElement } from './components/ux-component';
 import { Design } from './designs/design';
 import { Host } from './hosts/host';
 import { Platform } from './platforms/platform';
@@ -60,7 +59,7 @@ export class AureliaUX {
   private createAdapter() {
     this.observerLocator.addAdapter({
       getObserver: (obj: Element, propertyName: string, descriptor: PropertyDescriptor) => {
-        if (isUxElement(obj)) {
+        if (obj instanceof Element) {
           const tagName = obj.getAttribute('as-element') || obj.tagName;
           const elAdapters = this.adapters[tagName];
           if (!elAdapters) {

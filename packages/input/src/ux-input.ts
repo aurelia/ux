@@ -2,7 +2,7 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, markAsUxElement, linkProperty } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, linkProperty } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
 
 const theme = new UxInputTheme();
@@ -33,7 +33,6 @@ export class UxInput implements UxComponent {
 
   constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
     linkProperty(element, 'value');
-    markAsUxElement(element);
     styleEngine.ensureDefaultTheme(theme);
   }
 
