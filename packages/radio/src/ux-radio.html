@@ -1,11 +1,13 @@
-<template class="${effect !== null ? effect : ''}"
-  aria-checked="indeterminate ? 'mixed' : checked ? 'true' : false">
+<template class="${effect !== null ? effect : ''}">
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-radio.css"></require>
 
   <input type="radio" ref="radio"
     change.trigger="value = $event.target.checked"
-    mousedown.trigger="onMouseDown($event)">
+    mousedown.trigger="onMouseDown($event)"
+    disabled.bind="disabled & booleanAttr"
+    aria-checked.bind="indeterminate ? 'mixed' : checked ? true : false"
+    aria-disabled.bind="disabled & booleanAttr">
 
   <div class="ripplecontainer">
     <span class="ripple"></span>
@@ -16,3 +18,4 @@
     </div>
   </div>
 </template>
+  

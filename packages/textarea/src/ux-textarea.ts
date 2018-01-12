@@ -14,7 +14,7 @@ export class UxTextarea implements UxComponent {
   private ignoreRawChanges: boolean;
   private isAttached: boolean;
 
-  @bindable public autofocus = null;
+  @bindable public autofocus: boolean | string | null = null;
   @bindable public autoResize: boolean | string = false;
   @bindable public cols: number;
   @bindable public disabled: boolean | string = false;

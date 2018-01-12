@@ -28,10 +28,6 @@ export class UxRadio implements UxComponent {
   @bindable public id: string;
   @bindable public theme: UxRadioTheme;
 
-  public matcher: any;
-
-  public model: any;
-
   public checked: boolean = false;
 
   @observable({ initializer: () => false })
@@ -84,7 +80,6 @@ export class UxRadio implements UxComponent {
     }
 
     this.themeChanged(this.theme);
-    this.disabledChanged(this.disabled);
   }
 
   public unbind() {
@@ -124,14 +119,6 @@ export class UxRadio implements UxComponent {
       return;
     }
     this.setChecked(value);
-  }
-
-  public disabledChanged(newValue: boolean | string) {
-    if (normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-      this.radio.setAttribute('disabled', '');
-    } else if (this.element.classList.contains('disabled')) {
-      this.radio.removeAttribute('disabled');
-    }
   }
 
   public onMouseDown(e: MouseEvent) {

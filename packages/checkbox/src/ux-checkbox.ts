@@ -87,7 +87,6 @@ export class UxCheckbox implements UxComponent {
     }
 
     this.themeChanged(this.theme);
-    this.disabledChanged(this.disabled);
   }
 
   public unbind() {
@@ -125,14 +124,6 @@ export class UxCheckbox implements UxComponent {
     }
 
     this.styleEngine.applyTheme(newValue, this.element);
-  }
-
-  public disabledChanged(newValue: boolean | string) {
-    if (normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-      this.checkbox.setAttribute('disabled', '');
-    } else if (this.element.classList.contains('disabled')) {
-      this.checkbox.removeAttribute('disabled');
-    }
   }
 
   public valueChanged(newValue: boolean) {

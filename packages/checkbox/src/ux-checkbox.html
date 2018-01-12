@@ -1,11 +1,15 @@
 <template class="${effect !== null ? effect : ''}">
+
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-checkbox.css"></require>
 
   <input type="checkbox" ref="checkbox"
     checked.bind="value"
     indeterminate.bind="indeterminate"
-    mousedown.trigger="onMouseDown($event)">
+    mousedown.trigger="onMouseDown($event)"
+    disabled.bind="disabled & booleanAttr"
+    aria-checked="indeterminate ? 'mixed' : value ? true : false"
+    aria-disabled.bind="disabled & booleanAttr">
 
   <div class="ripplecontainer">
     <span class="ripple"></span>

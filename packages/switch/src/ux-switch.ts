@@ -8,6 +8,7 @@ import { DOM, ElementEvents } from 'aurelia-framework';
 const theme = new UxSwitchTheme();
 
 export interface UxSwitchElement extends HTMLElement {
+  type: 'checkbox';
   checked: boolean;
 }
 
@@ -20,13 +21,11 @@ export class UxSwitch implements UxComponent {
   @bindable public effect = 'ripple';
   @bindable public id: string;
   @bindable public theme: UxSwitchTheme;
-  @bindable public matcher: any;
-  @bindable public model: any;
 
   public checked: any;
 
   @observable({ initializer: () => false })
-  public value: any;
+  public value: boolean;
 
   private checkbox: HTMLInputElement;
   private ripple: PaperRipple | null = null;
@@ -37,6 +36,7 @@ export class UxSwitch implements UxComponent {
   }
 
   constructor(public element: UxSwitchElement, private styleEngine: StyleEngine) {
+    element.type = 'checkbox';
     linkProperty(element, 'checked');
     styleEngine.ensureDefaultTheme(theme);
   }

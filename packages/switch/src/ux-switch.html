@@ -1,12 +1,15 @@
 <template class="${effect !== null ? effect : ''}">
+
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-switch.css"></require>
 
   <input type="checkbox" ref="checkbox"
     checked.bind="value"
     indeterminate.bind="indeterminate"
-    mousedown.trigger="onMouseDown($event)">
-    
+    mousedown.trigger="onMouseDown($event)"
+    disabled.bind="disabled & booleanAttr"
+    aria-checked.bind="value & booleanAttr"
+    aria-disabledb.bind="disabled & booleanAttr">
 
   <div class="track">
     <div class="indicator">
