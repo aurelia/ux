@@ -1,6 +1,7 @@
 node_modules
 jspm_packages
 bower_components
+.lerna-debug.log
 .idea
 .DS_STORE
 *.swp
