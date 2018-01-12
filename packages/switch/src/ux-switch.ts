@@ -42,27 +42,30 @@ export class UxSwitch implements UxComponent {
   }
 
   public bind() {
-    if (this.element.hasAttribute('id')) {
-      const attributeValue = this.element.getAttribute('id');
+    const element = this.element;
+    const checkbox = this.checkbox;
+
+    if (element.hasAttribute('id')) {
+      const attributeValue = element.getAttribute('id');
 
       if (attributeValue != null) {
-        this.checkbox.setAttribute('id', attributeValue);
+        checkbox.setAttribute('id', attributeValue);
       }
     }
 
-    if (this.element.hasAttribute('tabindex')) {
-      const attributeValue = this.element.getAttribute('tabindex');
+    if (element.hasAttribute('tabindex')) {
+      const attributeValue = element.getAttribute('tabindex');
 
       if (attributeValue != null) {
-        this.checkbox.setAttribute('tabindex', attributeValue);
+        checkbox.setAttribute('tabindex', attributeValue);
       }
     }
 
-    if (this.element.hasAttribute('checked')) {
-      const attributeValue = this.element.getAttribute('checked');
+    if (element.hasAttribute('checked')) {
+      const attributeValue = element.getAttribute('checked');
 
       if (attributeValue || attributeValue === '') {
-        this.element.checked = true;
+        element.checked = true;
       }
     }
 

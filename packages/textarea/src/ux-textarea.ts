@@ -1,9 +1,9 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
-import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute, linkProperty } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, linkProperty } from '@aurelia-ux/core';
 import { UxTextareaTheme } from './ux-textarea-theme';
+import { observable } from 'aurelia-framework';
 
 const theme = new UxTextareaTheme();
 
@@ -11,17 +11,23 @@ const theme = new UxTextareaTheme();
 @customElement('ux-textarea')
 
 export class UxTextarea implements UxComponent {
+  private ignoreRawChanges: boolean;
+  private isAttached: boolean;
+
   @bindable public autofocus = null;
-  @bindable public autoResize = null;
+  @bindable public autoResize: boolean | string = false;
   @bindable public cols: number;
   @bindable public disabled: boolean | string = false;
+  @bindable public focus: boolean | string = false;
   @bindable public maxlength: number;
   @bindable public minlength: number;
   @bindable public readonly: boolean | string = false;
   @bindable public rows: number;
   @bindable public theme: UxTextareaTheme;
 
-  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  @observable({ initializer: () => '' })
+  public rawValue: string;
+
   public value: any = undefined;
 
   public textbox: HTMLTextAreaElement;
@@ -33,71 +39,85 @@ export class UxTextarea implements UxComponent {
 
   public bind() {
 
+    const element = this.element;
+    const textbox = this.textbox;
+
+    textbox.addEventListener('change', stopEvent);
+    textbox.addEventListener('input', stopEvent);
+
     if (this.theme != null) {
       this.themeChanged(this.theme);
     }
 
     if (this.autofocus || this.autofocus === '') {
-      setTimeout(() => {
-        this.textbox.focus();
-      }, 0);
+      this.focus = true;
     }
 
-    if (this.element.hasAttribute('placeholder')) {
-      const attributeValue = this.element.getAttribute('placeholder');
+    if (element.hasAttribute('placeholder')) {
+      const attributeValue = element.getAttribute('placeholder');
 
       if (attributeValue) {
-        this.textbox.setAttribute('placeholder', attributeValue);
-        this.element.removeAttribute('placeholder');
+        textbox.setAttribute('placeholder', attributeValue);
+        element.removeAttribute('placeholder');
       }
     }
 
-    if (this.element.hasAttribute('required')) {
-      this.textbox.setAttribute('required', '');
-      this.element.removeAttribute('required');
-    }
-
     if (this.cols) {
-      this.textbox.setAttribute('cols', this.cols.toString());
-      this.element.removeAttribute('cols');
+      textbox.setAttribute('cols', this.cols.toString());
+      element.removeAttribute('cols');
     }
 
     if (this.rows) {
-      this.textbox.setAttribute('rows', this.rows.toString());
-      this.element.removeAttribute('rows');
+      textbox.setAttribute('rows', this.rows.toString());
+      element.removeAttribute('rows');
     }
 
     if (this.minlength) {
-      this.textbox.setAttribute('minlength', this.minlength.toString());
+      textbox.setAttribute('minlength', this.minlength.toString());
     }
 
     if (this.maxlength) {
-      this.textbox.setAttribute('maxlength', this.maxlength.toString());
-    }
-
-    if (normalizeBooleanAttribute('disabled', this.disabled)) {
-      this.textbox.setAttribute('disabled', '');
-    }
-
-    if (normalizeBooleanAttribute('readonly', this.readonly)) {
-      this.textbox.setAttribute('readonly', '');
+      textbox.setAttribute('maxlength', this.maxlength.toString());
     }
   }
 
-  public disabledChanged(newValue: boolean | string) {
-    if (normalizeBooleanAttribute('disabled', newValue)) {
-      this.textbox.setAttribute('disabled', '');
-    } else {
-      this.textbox.removeAttribute('disabled');
+  public attached() {
+    this.isAttached = true;
+    this.fitTextContent();
+  }
+
+  public detached() {
+    this.isAttached = false;
+  }
+
+  public unbind() {
+    this.textbox.removeEventListener('change', stopEvent);
+    this.textbox.removeEventListener('input', stopEvent);
+  }
+
+  public getValue() {
+    return this.value;
+  }
+
+  public setValue(value: any) {
+    const oldValue = this.value;
+    const newValue = value === null || value === undefined ? null : value.toString();
+
+    if (oldValue !== newValue) {
+      this.value = newValue;
+      this.ignoreRawChanges = true;
+      this.rawValue = newValue === null ? '' : newValue.toString();
+      this.fitTextContent();
+      this.ignoreRawChanges = false;
+      this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
     }
   }
 
-  public readonlyChanged(newValue: boolean | string) {
-    if (normalizeBooleanAttribute('readonly', newValue)) {
-      this.textbox.setAttribute('readonly', '');
-    } else {
-      this.textbox.removeAttribute('readonly');
+  public rawValueChanged(rawValue: string) {
+    if (this.ignoreRawChanges) {
+      return;
     }
+    this.setValue(rawValue);
   }
 
   public themeChanged(newValue: any) {
@@ -108,20 +128,19 @@ export class UxTextarea implements UxComponent {
     this.styleEngine.applyTheme(newValue, this.element);
   }
 
-  public valueChanged() {
-    if (this.autoResize !== null) {
+  public fitTextContent() {
+    if (this.isAttached && (this.autoResize || this.autoResize === '')) {
       this.textbox.style.height = 'auto';
       this.textbox.style.height = `${this.textbox.scrollHeight + 2}px`;
     }
   }
 
-  public onFieldBlur() {
-    this.element.classList.remove('focused');
-    this.element.dispatchEvent(DOM.createCustomEvent('blur', { bubbles: true }));
+  public focusChanged(focus: boolean | string) {
+    focus = focus || focus === '' ? true : false;
+    this.element.dispatchEvent(DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
   }
+}
 
-  public onFieldFocus() {
-    this.element.classList.add('focused');
-    this.element.dispatchEvent(DOM.createCustomEvent('focus', { bubbles: true }));
-  }
+function stopEvent(e: Event) {
+  e.stopPropagation();
 }
