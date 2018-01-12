@@ -2,7 +2,7 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, normalizeBooleanAttribute, linkProperty } from '@aurelia-ux/core';
 import { UxTextareaTheme } from './ux-textarea-theme';
 
 const theme = new UxTextareaTheme();
@@ -27,6 +27,7 @@ export class UxTextarea implements UxComponent {
   public textbox: HTMLTextAreaElement;
 
   constructor(private element: HTMLElement, private styleEngine: StyleEngine) {
+    linkProperty(element, 'value');
     styleEngine.ensureDefaultTheme(theme);
   }
 

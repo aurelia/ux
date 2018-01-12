@@ -1,19 +1,32 @@
 import { customElement, bindable } from 'aurelia-templating';
-import { computedFrom } from 'aurelia-binding';
+import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute, linkProperty } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
+import { DOM, ElementEvents } from 'aurelia-framework';
 
 const theme = new UxSwitchTheme();
+
+export interface UxSwitchElement extends HTMLElement {
+  checked: boolean;
+}
 
 @inject(Element, StyleEngine)
 @customElement('ux-switch')
 export class UxSwitch implements UxComponent {
+  private ignoreValueChanges: boolean;
+
   @bindable public disabled: boolean | string = false;
   @bindable public effect = 'ripple';
   @bindable public id: string;
   @bindable public theme: UxSwitchTheme;
-  @bindable public checked: any;
+  @bindable public matcher: any;
+  @bindable public model: any;
+
+  public checked: any;
+
+  @observable({ initializer: () => false })
+  public value: any;
 
   private checkbox: HTMLInputElement;
   private ripple: PaperRipple | null = null;
@@ -23,7 +36,8 @@ export class UxSwitch implements UxComponent {
     return normalizeBooleanAttribute('disabled', this.disabled);
   }
 
-  constructor(public element: HTMLElement, private styleEngine: StyleEngine) {
+  constructor(public element: UxSwitchElement, private styleEngine: StyleEngine) {
+    linkProperty(element, 'checked');
     styleEngine.ensureDefaultTheme(theme);
   }
 
@@ -47,13 +61,37 @@ export class UxSwitch implements UxComponent {
     if (this.element.hasAttribute('checked')) {
       const attributeValue = this.element.getAttribute('checked');
 
-      if (attributeValue === 'true') {
-        this.checked = true;
+      if (attributeValue || attributeValue === '') {
+        this.element.checked = true;
       }
     }
 
     this.themeChanged(this.theme);
     this.disabledChanged(this.disabled);
+  }
+
+  public getChecked() {
+    return this.checked;
+  }
+
+  public setChecked(value: any) {
+    const oldValue = this.checked;
+    const newValue = !!value;
+
+    if (newValue !== oldValue) {
+      this.checked = newValue;
+      this.ignoreValueChanges = true;
+      this.value = newValue;
+      this.ignoreValueChanges = false;
+      this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
+    }
+  }
+
+  public valueChanged(newValue: boolean) {
+    if (this.ignoreValueChanges) {
+      return;
+    }
+    this.setChecked(newValue);
   }
 
   public themeChanged(newValue: UxSwitchTheme) {
@@ -91,18 +129,15 @@ export class UxSwitch implements UxComponent {
       this.ripple.round = true;
 
       this.ripple.downAction(e);
+      const winEvents = new ElementEvents(window);
+      const upAction = () => {
+        this.ripple!.upAction();
+        winEvents.disposeAll();
+      };
+      winEvents.subscribe('blur', upAction);
+      winEvents.subscribe('mouseup', upAction, true);
     }
 
     e.preventDefault();
-  }
-
-  public onMouseUp(e: MouseEvent) {
-    if (e.button !== 0 || this.isDisabled) {
-      return;
-    }
-
-    if (this.element.classList.contains('ripple') && this.ripple !== null) {
-      this.ripple.upAction();
-    }
   }
 }

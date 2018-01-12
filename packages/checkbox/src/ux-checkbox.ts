@@ -13,7 +13,7 @@ import {
 import { UxCheckboxTheme } from './ux-checkbox-theme';
 import { DOM } from 'aurelia-pal';
 
-export interface IUxCheckboxElement extends HTMLElement {
+export interface UxCheckboxElement extends HTMLElement {
   type: 'checkbox';
   checked: boolean;
 }
@@ -46,7 +46,7 @@ export class UxCheckbox implements UxComponent {
   }
 
   constructor(
-    public element: IUxCheckboxElement,
+    public element: UxCheckboxElement,
     private styleEngine: StyleEngine
   ) {
     linkProperty(element, ['checked', 'indeterminate']);
@@ -81,7 +81,7 @@ export class UxCheckbox implements UxComponent {
     if (element.hasAttribute('checked')) {
       const attributeValue = element.getAttribute('checked');
 
-      if (attributeValue || attributeValue === 'true') {
+      if (attributeValue || attributeValue === '') {
         element.checked = true;
       }
     }
