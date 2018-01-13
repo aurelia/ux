@@ -14,13 +14,13 @@ export class BooleanBB {
 
 class BooleanAttributeObserver {
 
-  private useTrueString: boolean;
+  private useString: boolean;
 
   constructor(
     public element: HTMLElement,
     public attr: string
   ) {
-    this.useTrueString = /(?:^data-)|(?:^aria-)|:/.test(attr);
+    this.useString = /(?:^data-)|(?:^aria-)|:/.test(attr);
   }
 
   public getValue() {
@@ -30,9 +30,9 @@ class BooleanAttributeObserver {
 
   public setValue(newValue: boolean | string) {
     if (newValue || newValue === '') {
-      return this.element.setAttribute(this.attr, this.useTrueString ? 'true' : '');
+      return this.element.setAttribute(this.attr, this.useString ? 'true' : '');
     }
-    return this.element.removeAttribute(this.attr);
+    return this.useString ? this.element.setAttribute(this.attr, 'false') : this.element.removeAttribute(this.attr);
   }
 
   public subscribe() {

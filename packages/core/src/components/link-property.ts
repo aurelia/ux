@@ -19,10 +19,10 @@ function getPropertyDescriptor(propertyName: string) {
 
 export function linkProperty(el: Element, propertyNames: string | string[]): void {
   if (typeof propertyNames === 'string') {
-    Object.defineProperty(el, propertyNames, getPropertyDescriptor(propertyNames));
+    Reflect.defineProperty(el, propertyNames, getPropertyDescriptor(propertyNames));
   } else {
     for (const propertyName of propertyNames) {
-      Object.defineProperty(el, propertyName, getPropertyDescriptor(propertyName));
+      Reflect.defineProperty(el, propertyName, getPropertyDescriptor(propertyName));
     }
   }
 }
