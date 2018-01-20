@@ -2,6 +2,7 @@ import { FrameworkConfiguration, PLATFORM, ValueAttributeObserver, bindingMode }
 import { AureliaUX } from '@aurelia-ux/core';
 
 export { UxInputTheme } from './ux-input-theme';
+export { UxInput, UxInputElement } from './ux-input';
 
 export function configure(config: FrameworkConfiguration) {
   config.container.get(AureliaUX).registerUxElementConfig(uxInputConfig);

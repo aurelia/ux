@@ -1,7 +1,8 @@
 import { FrameworkConfiguration, PLATFORM, bindingMode, ValueAttributeObserver } from 'aurelia-framework';
 import { AureliaUX } from '@aurelia-ux/core';
 
-export { UxTextareaTheme } from './ux-textarea-theme';
+export { UxTextAreaTheme } from './ux-textarea-theme';
+export { UxTextArea, UxTextAreaElement } from './ux-textarea';
 
 export function configure(config: FrameworkConfiguration) {
   config.container.get(AureliaUX).registerUxElementConfig(uxTextAreaConfig);

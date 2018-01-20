@@ -2,15 +2,16 @@ import { FrameworkConfiguration, PLATFORM, bindingMode, ObserverLocator, Checked
 import { AureliaUX } from '@aurelia-ux/core';
 
 export { UxSwitchTheme } from './ux-switch-theme';
+export { UxSwitch, UxSwitchElement } from './ux-switch';
 
 export function configure(config: FrameworkConfiguration) {
-  config.container.get(AureliaUX).registerUxElementConfig(uxCheckBoxConfig);
+  config.container.get(AureliaUX).registerUxElementConfig(uxSwitchConfig);
   config.globalResources([
     PLATFORM.moduleName('@aurelia-ux/switch/ux-switch')
   ]);
 }
 
-const uxCheckBoxConfig = {
+const uxSwitchConfig = {
   tagName: 'ux-switch',
   properties: {
     checked: {

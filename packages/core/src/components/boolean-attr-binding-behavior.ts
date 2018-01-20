@@ -20,7 +20,7 @@ class BooleanAttributeObserver {
     public element: HTMLElement,
     public attr: string
   ) {
-    this.useString = /(?:^data-)|(?:^aria-)|:/.test(attr);
+    this.useString = /(?:^data-)|(?:^aria-)|\w+:/.test(attr);
   }
 
   public getValue() {

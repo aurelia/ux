@@ -2,15 +2,19 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, linkProperty } from '@aurelia-ux/core';
-import { UxTextareaTheme } from './ux-textarea-theme';
+import { UxTextAreaTheme } from './ux-textarea-theme';
 import { observable } from 'aurelia-framework';
 
-const theme = new UxTextareaTheme();
+const theme = new UxTextAreaTheme();
+
+export interface UxTextAreaElement extends HTMLElement {
+  value: string;
+}
 
 @inject(Element, StyleEngine)
 @customElement('ux-textarea')
 
-export class UxTextarea implements UxComponent {
+export class UxTextArea implements UxComponent {
   private ignoreRawChanges: boolean;
   private isAttached: boolean;
 
@@ -23,7 +27,7 @@ export class UxTextarea implements UxComponent {
   @bindable public minlength: number;
   @bindable public readonly: boolean | string = false;
   @bindable public rows: number;
-  @bindable public theme: UxTextareaTheme;
+  @bindable public theme: UxTextAreaTheme;
 
   @observable({ initializer: () => '' })
   public rawValue: string;
@@ -32,7 +36,7 @@ export class UxTextarea implements UxComponent {
 
   public textbox: HTMLTextAreaElement;
 
-  constructor(private element: HTMLElement, private styleEngine: StyleEngine) {
+  constructor(private element: UxTextAreaElement, private styleEngine: StyleEngine) {
     linkProperty(element, 'value');
     styleEngine.ensureDefaultTheme(theme);
   }

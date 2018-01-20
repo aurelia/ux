@@ -2,27 +2,28 @@ import { FrameworkConfiguration, PLATFORM, bindingMode, ObserverLocator, Checked
 import { AureliaUX } from '@aurelia-ux/core';
 
 export { UxRadioTheme } from './ux-radio-theme';
+export { UxRadio, UxRadioElement } from './ux-radio';
 
 export function configure(config: FrameworkConfiguration) {
-  config.container.get(AureliaUX).registerUxElementConfig(uxCheckBoxConfig);
+  config.container.get(AureliaUX).registerUxElementConfig(uxRadioConfig);
   config.globalResources([
     PLATFORM.moduleName('@aurelia-ux/radio/ux-radio')
   ]);
 }
 
-const uxCheckBoxConfig = {
+const uxRadioConfig = {
   tagName: 'ux-radio',
   properties: {
     checked: {
       defaultBindingMode: bindingMode.twoWay,
       getObserver(element: Element, _: string, observerLocator: ObserverLocator) {
-        return new CheckedObserver(element, uxCheckboxChangeHandler, observerLocator);
+        return new CheckedObserver(element, uxRadioChangeHandler, observerLocator);
       }
     }
   }
 };
 
-const uxCheckboxChangeHandler = {
+const uxRadioChangeHandler = {
   subscribe(target: Element, callbackOrListener: EventListenerOrEventListenerObject) {
     target.addEventListener('change', callbackOrListener, false);
 

@@ -7,6 +7,10 @@ import { UxInputTheme } from './ux-input-theme';
 
 const theme = new UxInputTheme();
 
+export interface UxInputElement extends HTMLElement {
+  value: any;
+}
+
 @inject(Element, StyleEngine)
 @customElement('ux-input')
 export class UxInput implements UxComponent {
@@ -160,10 +164,6 @@ export class UxInput implements UxComponent {
     }
     this.setValue(newValue);
   }
-}
-
-export interface UxInputElement extends HTMLElement {
-  value: any;
 }
 
 function stopEvent(e: Event) {
