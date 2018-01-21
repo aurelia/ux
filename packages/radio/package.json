@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/radio",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Radio button component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -94,7 +94,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.7.0",
+    "@aurelia-ux/core": "^0.7.1",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
