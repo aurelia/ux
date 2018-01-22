@@ -1,0 +1,53 @@
+<template
+  multiple.bind="multiple & booleanAttr"
+  disabled.bind="disabled & booleanAttr"
+  aria-multiselectable.bind="isMultiple"
+  aria-disabled.bind="isDisabled">
+
+  <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
+  <require from="./ux-select.css"></require>
+  <require from="./boolean"></require>
+
+  <div class="container">
+    <button class="ux-select-trigger ${listIsOpen ? 'open' : ''}"
+      role="button"
+      focus.trigger="onBtnFocus()"
+      blur.trigger="onBtnBlur() & debounce:1"
+      click.delegate="expand()"
+      keydown.delegate="onBtnKeydown($event.keyCode)"
+      disabled.bind='isDisabled'
+      ref="button">
+      <div class="ux-select-value">
+        <span replaceable part='selected-item'
+            textcontent.bind="isMultiple && selectedItem.length || !isMultiple && selectedItem !== undefined ? displayValue : placeholder"></span>
+      </div>
+    </button>
+
+    <div if.bind="listIsOpen" class="options-container">
+      <div role="listbox"
+          aria-expanded.bind="listIsOpen"
+          class="options"
+          tabindex="-1"
+          css="min-width: ${button.offsetWidth & oneTime}px; top: ${listAnchor.y}px; left: ${listAnchor.x}px;"
+          focus.one-time="listIsOpen"
+          focus.trigger="onListFocus()"
+          blur.trigger="onListBlur() & debounce:1"
+          keydown.delegate="onListKeydown($event.keyCode)"
+          transitionend.delegate="onListTransitioned($event) & self"
+          ref="optionsCt">
+        <ux-option repeat.for="item of items"
+            role="option"
+            aria-selected.bind="$this.uxOptionSelected"
+            aria-disabled.bind="item.disabled"
+            context.bind='$this'
+            value.bind='item'
+            class.bind="($this.uxOptionSelected || $index === focusedIndex ? 'selected' : '') + ' ripple'"
+            mousedown.delegate="onUxOptionMousedown($event)"
+            click.trigger="select($index)">
+          <span replaceable part="ux-option"
+                textcontent.bind="item"></span>
+        </ux-option>
+      </div>
+    </div>
+  </div>
+</template>
