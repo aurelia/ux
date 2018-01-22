@@ -1,15 +1,21 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
-import { bindingMode } from 'aurelia-binding';
+import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, linkProperty } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
 
 const theme = new UxInputTheme();
 
+export interface UxInputElement extends HTMLElement {
+  value: any;
+}
+
 @inject(Element, StyleEngine)
 @customElement('ux-input')
 export class UxInput implements UxComponent {
+  private ignoreRawChanges: boolean;
+
   @bindable public autofocus = null;
   @bindable public disabled: any = false;
   @bindable public maxlength: number;
@@ -20,43 +26,46 @@ export class UxInput implements UxComponent {
   @bindable public theme: UxInputTheme;
   @bindable public type: any;
 
-  @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public value: any = undefined;
+  @observable
+  public rawValue: string = '';
 
+  @observable
+  public focused: boolean = false;
+
+  public value: any = undefined;
   public textbox: HTMLInputElement;
 
-  constructor(private element: HTMLInputElement, public styleEngine: StyleEngine) {
+  constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
+    linkProperty(element, 'value');
     styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {
+    const element = this.element;
+    const textbox = this.textbox;
+
+    textbox.addEventListener('change', stopEvent);
+    textbox.addEventListener('input', stopEvent);
 
     if (this.autofocus || this.autofocus === '') {
-      setTimeout(() => {
-        this.textbox.focus();
-      }, 0);
+      this.focused = true;
     }
 
-    if (this.element.hasAttribute('required')) {
-      this.textbox.setAttribute('required', '');
-      this.element.removeAttribute('required');
-    }
-
-    if (this.element.hasAttribute('placeholder')) {
-      const attributeValue = this.element.getAttribute('placeholder');
+    if (element.hasAttribute('placeholder')) {
+      const attributeValue = element.getAttribute('placeholder');
 
       if (attributeValue) {
-        this.textbox.setAttribute('placeholder', attributeValue);
-        this.element.removeAttribute('placeholder');
+        textbox.setAttribute('placeholder', attributeValue);
+        element.removeAttribute('placeholder');
       }
     }
 
-    if (this.element.hasAttribute('step')) {
-      const attributeValue = this.element.getAttribute('step');
+    if (element.hasAttribute('step')) {
+      const attributeValue = element.getAttribute('step');
 
       if (attributeValue) {
-        this.textbox.setAttribute('step', attributeValue);
-        this.element.removeAttribute('step');
+        textbox.setAttribute('step', attributeValue);
+        element.removeAttribute('step');
       }
     }
 
@@ -69,34 +78,66 @@ export class UxInput implements UxComponent {
       'tel',
       'search'
     ].includes(this.type)) {
-      this.textbox.setAttribute('type', this.type);
+      textbox.setAttribute('type', this.type);
     }
 
     if (this.min) {
-      this.textbox.setAttribute('min', this.min.toString());
+      textbox.setAttribute('min', this.min.toString());
     }
 
     if (this.max) {
-      this.textbox.setAttribute('max', this.max.toString());
+      textbox.setAttribute('max', this.max.toString());
     }
 
     if (this.minlength) {
-      this.textbox.setAttribute('minlength', this.minlength.toString());
+      textbox.setAttribute('minlength', this.minlength.toString());
     }
 
     if (this.maxlength) {
-      this.textbox.setAttribute('maxlength', this.maxlength.toString());
-    }
-
-    if (this.disabled || this.disabled === '') {
-      this.textbox.setAttribute('disabled', '');
-    }
-
-    if (this.readonly || this.readonly === '') {
-      this.textbox.setAttribute('readonly', '');
+      textbox.setAttribute('maxlength', this.maxlength.toString());
     }
 
     this.themeChanged(this.theme);
+  }
+
+  public unbind() {
+    this.textbox.removeEventListener('change', stopEvent);
+    this.textbox.removeEventListener('input', stopEvent);
+  }
+
+  public getValue() {
+    return this.value;
+  }
+
+  public setValue(value: any) {
+    const oldValue = this.value;
+    const newValue = this.processRawValue(value);
+
+    if (oldValue !== newValue) {
+      this.value = newValue;
+      this.ignoreRawChanges = true;
+      this.rawValue = newValue === null || newValue === undefined ? '' : newValue.toString();
+      this.ignoreRawChanges = false;
+      this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
+    }
+  }
+
+  private processRawValue(rawValue: string): any {
+    let newValue: any = rawValue;
+    if (this.type === 'number') {
+      newValue = rawValue === '' ? NaN : Number(rawValue);
+      if (isNaN(newValue)) {
+        newValue = null;
+      } else {
+        if (this.min !== undefined && this.min > newValue) {
+          newValue = this.min;
+        }
+        if (this.max !== undefined && newValue > this.max) {
+          newValue = this.max;
+        }
+      }
+    }
+    return newValue;
   }
 
   public themeChanged(newValue: any) {
@@ -107,20 +148,8 @@ export class UxInput implements UxComponent {
     this.styleEngine.applyTheme(newValue, this.element);
   }
 
-  public disabledChanged(newValue: any) {
-    if (newValue === true || newValue === '') {
-      this.textbox.setAttribute('disabled', 'true');
-    } else {
-      this.textbox.removeAttribute('disabled');
-    }
-  }
-
-  public readonlyChanged(newValue: any) {
-    if (newValue === true || newValue === '') {
-      this.textbox.setAttribute('readonly', 'true');
-    } else {
-      this.textbox.removeAttribute('readonly');
-    }
+  public focusedChanged(focused: boolean) {
+    this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
   }
 
   public typeChanged(newValue: any) {
@@ -129,29 +158,14 @@ export class UxInput implements UxComponent {
     }
   }
 
-  public valueChanged(newValue: any) {
-    if (this.type === 'number' && !isNaN(newValue) && newValue !== '') {
-      if (this.min && newValue < this.min) {
-        this.value = this.min;
-      }
-
-      if (this.max && newValue > this.max) {
-        this.value = this.max;
-      }
-
-      if (isNaN(newValue)) {
-        this.value = '';
-      }
+  public rawValueChanged(newValue: string) {
+    if (this.ignoreRawChanges) {
+      return;
     }
+    this.setValue(newValue);
   }
+}
 
-  public onFieldBlur() {
-    this.element.classList.remove('focused');
-    this.element.dispatchEvent(DOM.createCustomEvent('blur', { bubbles: true }));
-  }
-
-  public onFieldFocus() {
-    this.element.classList.add('focused');
-    this.element.dispatchEvent(DOM.createCustomEvent('focus', { bubbles: true }));
-  }
+function stopEvent(e: Event) {
+  e.stopPropagation();
 }

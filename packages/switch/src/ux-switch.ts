@@ -1,19 +1,31 @@
 import { customElement, bindable } from 'aurelia-templating';
-import { computedFrom } from 'aurelia-binding';
+import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute, linkProperty } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
+import { DOM, ElementEvents } from 'aurelia-framework';
 
 const theme = new UxSwitchTheme();
+
+export interface UxSwitchElement extends HTMLElement {
+  type: 'checkbox';
+  checked: boolean;
+}
 
 @inject(Element, StyleEngine)
 @customElement('ux-switch')
 export class UxSwitch implements UxComponent {
+  private ignoreValueChanges: boolean;
+
   @bindable public disabled: boolean | string = false;
   @bindable public effect = 'ripple';
   @bindable public id: string;
   @bindable public theme: UxSwitchTheme;
-  @bindable public checked: any;
+
+  public checked: any;
+
+  @observable({ initializer: () => false })
+  public value: boolean;
 
   private checkbox: HTMLInputElement;
   private ripple: PaperRipple | null = null;
@@ -23,37 +35,66 @@ export class UxSwitch implements UxComponent {
     return normalizeBooleanAttribute('disabled', this.disabled);
   }
 
-  constructor(public element: HTMLElement, private styleEngine: StyleEngine) {
+  constructor(public element: UxSwitchElement, private styleEngine: StyleEngine) {
+    element.type = 'checkbox';
+    linkProperty(element, 'checked');
     styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {
-    if (this.element.hasAttribute('id')) {
-      const attributeValue = this.element.getAttribute('id');
+    const element = this.element;
+    const checkbox = this.checkbox;
+
+    if (element.hasAttribute('id')) {
+      const attributeValue = element.getAttribute('id');
 
       if (attributeValue != null) {
-        this.checkbox.setAttribute('id', attributeValue);
+        checkbox.setAttribute('id', attributeValue);
       }
     }
 
-    if (this.element.hasAttribute('tabindex')) {
-      const attributeValue = this.element.getAttribute('tabindex');
+    if (element.hasAttribute('tabindex')) {
+      const attributeValue = element.getAttribute('tabindex');
 
       if (attributeValue != null) {
-        this.checkbox.setAttribute('tabindex', attributeValue);
+        checkbox.setAttribute('tabindex', attributeValue);
       }
     }
 
-    if (this.element.hasAttribute('checked')) {
-      const attributeValue = this.element.getAttribute('checked');
+    if (element.hasAttribute('checked')) {
+      const attributeValue = element.getAttribute('checked');
 
-      if (attributeValue === 'true') {
-        this.checked = true;
+      if (attributeValue || attributeValue === '') {
+        element.checked = true;
       }
     }
 
     this.themeChanged(this.theme);
     this.disabledChanged(this.disabled);
+  }
+
+  public getChecked() {
+    return this.checked;
+  }
+
+  public setChecked(value: any) {
+    const oldValue = this.checked;
+    const newValue = !!value;
+
+    if (newValue !== oldValue) {
+      this.checked = newValue;
+      this.ignoreValueChanges = true;
+      this.value = newValue;
+      this.ignoreValueChanges = false;
+      this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
+    }
+  }
+
+  public valueChanged(newValue: boolean) {
+    if (this.ignoreValueChanges) {
+      return;
+    }
+    this.setChecked(newValue);
   }
 
   public themeChanged(newValue: UxSwitchTheme) {
@@ -91,18 +132,15 @@ export class UxSwitch implements UxComponent {
       this.ripple.round = true;
 
       this.ripple.downAction(e);
+      const winEvents = new ElementEvents(window);
+      const upAction = () => {
+        this.ripple!.upAction();
+        winEvents.disposeAll();
+      };
+      winEvents.subscribe('blur', upAction);
+      winEvents.subscribe('mouseup', upAction, true);
     }
 
     e.preventDefault();
-  }
-
-  public onMouseUp(e: MouseEvent) {
-    if (e.button !== 0 || this.isDisabled) {
-      return;
-    }
-
-    if (this.element.classList.contains('ripple') && this.ripple !== null) {
-      this.ripple.upAction();
-    }
   }
 }

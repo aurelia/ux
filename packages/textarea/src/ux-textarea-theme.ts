@@ -1,6 +1,6 @@
 import { swatches, UxTheme } from '@aurelia-ux/core';
 
-export class UxTextareaTheme implements UxTheme {
+export class UxTextAreaTheme implements UxTheme {
   public themeKey = 'textarea';
 
   public foreground: string = swatches.grey.p900;

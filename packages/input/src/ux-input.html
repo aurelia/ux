@@ -1,6 +1,17 @@
-<template role="textbox">
+<template role="textbox"
+  class.bind="focused ? 'focused' : ''"
+  disabled.bind="disabled & booleanAttr"
+  readonly.bind="readonly & booleanAttr"
+  aria-disabled.bind="disabled & booleanAttr"
+  aria-readonly.bind="readonly & booleanAttr">
   <require from="./ux-input.css"></require>
 
-  <input ref="textbox" value.bind="value" blur.trigger="onFieldBlur()" focus.trigger="onFieldFocus()" />
+  <input  
+    ref="textbox"
+    value.bind="rawValue"
+    focus.bind="focused"
+    disabled.bind="disabled & booleanAttr"
+    readonly.bind="readonly & booleanAttr"
+    required.bind="required & booleanAttr" />
 
 </template>

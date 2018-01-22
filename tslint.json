@@ -1,6 +1,7 @@
 {
   "extends": "tslint:latest",
   "rules": {
+    "only-arrow-functions": false,
     "quotemark": [true, "single"],
     "object-literal-sort-keys": false,
     "ordered-imports": [false],
