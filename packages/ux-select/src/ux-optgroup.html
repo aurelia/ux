@@ -1,0 +1,7 @@
+<template class="ux-optgroup"
+  class.bind="disabled || disabled === '' ? 'disabled' : ''"
+  disabled.bind="disabled & booleanAttr"
+  aria-disabled.bind="disabled & booleanAttr">
+  <div class="ux-optgroup-label" textcontent.bind="label"></div>
+  <div class="ux-optgroup-options-ct" ref="optionsCt"><slot></slot></div>
+</template>

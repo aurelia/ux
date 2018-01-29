@@ -1,0 +1,11 @@
+<template
+  class="ux-option ripple ${selected ? 'selected' : ''} ${focused ? 'focused' : ''}"
+  click.trigger="onClick()"
+  mousedown.delegate="onMouseDown($event)"
+  disabled.bind="disabled & booleanAttr"
+  aria-disabled.bind="disabled & booleanAttr">
+  <div class="ux-option-icon" ref="iconEl">
+    <ux-checkbox if.bind="isMultiple" checked.to-view="selected" disabled.bind="parentDisabled || disabled" />
+  </div>
+  <div class="ux-option-text" ref="textEl"><slot></slot></div>
+</template>
