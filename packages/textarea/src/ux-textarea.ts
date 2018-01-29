@@ -46,9 +46,6 @@ export class UxTextArea implements UxComponent {
     const element = this.element;
     const textbox = this.textbox;
 
-    textbox.addEventListener('change', stopEvent);
-    textbox.addEventListener('input', stopEvent);
-
     if (this.theme != null) {
       this.themeChanged(this.theme);
     }
@@ -87,14 +84,13 @@ export class UxTextArea implements UxComponent {
 
   public attached() {
     this.isAttached = true;
+    this.textbox.addEventListener('change', stopEvent);
+    this.textbox.addEventListener('input', stopEvent);
     this.fitTextContent();
   }
 
   public detached() {
     this.isAttached = false;
-  }
-
-  public unbind() {
     this.textbox.removeEventListener('change', stopEvent);
     this.textbox.removeEventListener('input', stopEvent);
   }
