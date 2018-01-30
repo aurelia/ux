@@ -60,8 +60,6 @@ export class UxCheckbox implements UxComponent {
     const element = this.element;
     const checkbox = this.checkbox;
 
-    checkbox.addEventListener('change', stopEvent);
-
     if (element.hasAttribute('id')) {
       const attributeValue = element.getAttribute('id');
 
@@ -89,7 +87,11 @@ export class UxCheckbox implements UxComponent {
     this.themeChanged(this.theme);
   }
 
-  public unbind() {
+  public attached() {
+    this.checkbox.addEventListener('change', stopEvent);
+  }
+
+  public detached() {
     this.checkbox.removeEventListener('change', stopEvent);
   }
 

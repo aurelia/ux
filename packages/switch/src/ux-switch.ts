@@ -73,6 +73,14 @@ export class UxSwitch implements UxComponent {
     this.disabledChanged(this.disabled);
   }
 
+  public attached() {
+    this.checkbox.addEventListener('change', stopEvent);
+  }
+
+  public detached() {
+    this.checkbox.removeEventListener('change', stopEvent);
+  }
+
   public getChecked() {
     return this.checked;
   }
@@ -143,4 +151,8 @@ export class UxSwitch implements UxComponent {
 
     e.preventDefault();
   }
+}
+
+function stopEvent(e: Event) {
+  e.stopPropagation();
 }

@@ -51,8 +51,6 @@ export class UxRadio implements UxComponent {
     const element = this.element;
     const radio = this.radio;
 
-    radio.addEventListener('change', stopEvent);
-
     if (element.hasAttribute('id')) {
       const id = element.id;
 
@@ -82,7 +80,11 @@ export class UxRadio implements UxComponent {
     this.themeChanged(this.theme);
   }
 
-  public unbind() {
+  public attached() {
+    this.radio.addEventListener('change', stopEvent);
+  }
+
+  public detached() {
     this.radio.removeEventListener('change', stopEvent);
   }
 

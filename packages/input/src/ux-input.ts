@@ -44,9 +44,6 @@ export class UxInput implements UxComponent {
     const element = this.element;
     const textbox = this.textbox;
 
-    textbox.addEventListener('change', stopEvent);
-    textbox.addEventListener('input', stopEvent);
-
     if (this.autofocus || this.autofocus === '') {
       this.focused = true;
     }
@@ -100,7 +97,12 @@ export class UxInput implements UxComponent {
     this.themeChanged(this.theme);
   }
 
-  public unbind() {
+  public attached() {
+    this.textbox.addEventListener('change', stopEvent);
+    this.textbox.addEventListener('input', stopEvent);
+  }
+
+  public detached() {
     this.textbox.removeEventListener('change', stopEvent);
     this.textbox.removeEventListener('input', stopEvent);
   }
