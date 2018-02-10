@@ -1,6 +1,7 @@
 .ux-select {
   display: inline-block;
   min-width: 50px;
+  max-width: 100%;
   color: var(--ux-theme-select-foreground);
   box-sizing: border-box;
   outline: 0;
@@ -68,6 +69,8 @@
 }
 
 .ux-select .ux-select-list-ct {
+  max-height: 400px;
+  overflow-y: auto;
   background-color: rgba(0, 0, 0, 0);
   opacity: 0;
   transform: scale(0.7, 0.7);
@@ -129,17 +132,18 @@
   background-color: var(--ux-theme--select-option-selected);
 }
 
-.ux-option[aria-disabled="true"] {
+.ux-option.disabled {
   color: #c0c0c0;
   pointer-events: none;
 }
 
-.ux-option ux-checkbox {
+.ux-option .ux-checkbox {
+  width: 20px;
+  height: 20px;
+  flex-basis: 20px;
+  flex-shrink: 0;
   margin-right: 8px;
-}
-
-.ux-option ux-checkbox input {
-  pointer-events: none;
+  border: 2px solid rgba(0, 0, 0, 0.5);
 }
 
 .ux-option .ux-option-text {
@@ -155,7 +159,7 @@
   padding-left: 32px;
 }
 
-.ux-selec.multiple .ux-option.selected {
+.ux-select.multiple .ux-option.selected {
   background-color: transparent;
   color: blue;
 }

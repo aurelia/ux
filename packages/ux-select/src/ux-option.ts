@@ -1,24 +1,24 @@
 import {
   inject,
+  bindable,
   DOM,
   ElementEvents,
   PLATFORM,
   ViewCompiler,
   ViewResources,
-  processContent,
   customElement,
   Disposable,
-  BindingEngine
+  BindingEngine,
+  inlineView,
+  processAttributes,
 } from 'aurelia-framework';
 
 import {
-  // linkProperty,
   PaperRipple
 } from '@aurelia-ux/core';
 
 import { getAuViewModel } from './util';
-
-const document: Document = PLATFORM.global.document;
+import * as UX_OPTION_VIEW from './ux-option.html';
 
 export interface UxOptionElement extends HTMLElement {
   disabled: boolean;
@@ -36,27 +36,33 @@ export interface UxOptionSelectEvent extends Event {
 
 @inject(DOM.Element, BindingEngine)
 @customElement('ux-option')
-@processContent(ensureUxOptionTextOnly)
+@processAttributes(convertTextToAttr)
+@inlineView(UX_OPTION_VIEW)
 export class UxOption {
 
   private selected: boolean = false;
-  private value: any;
 
-  private selectSubscriptions: Disposable[];
+  private subscriptions: Disposable[];
 
-  public disabled: boolean = false;
-  public parentDisabled: boolean = false;
+  public disabled: boolean;
+  public parentDisabled: boolean;
+  public isDisabled: boolean;
   public focused: boolean = false;
 
   public isMultiple: boolean;
 
   // populated by aurelia
   public readonly textEl: HTMLElement;
-  public readonly iconEl: HTMLElement;
+
+  @bindable()
+  public text: string;
+
+  @bindable()
+  public value: any;
 
   constructor(
     public readonly element: UxOptionElement,
-    public readonly bindingEngine: BindingEngine
+    private bindingEngine: BindingEngine
   ) {
     Object.setPrototypeOf(element, UxOptionElementProto);
   }
@@ -68,61 +74,45 @@ export class UxOption {
       this.value = element.getAttribute('value');
     }
 
-    if (element.hasAttribute('disabled')) {
-      this.disabled = true;
-      element.removeAttribute('disabled');
-    }
+    this.setDisabled(element.hasAttribute('disabled'));
+    element.removeAttribute('disabled');
+    element.removeAttribute('text');
   }
 
   public bind() {
-    const element = this.element;
-    const group = this.group = this.getOptGroup();
-    const uxSelect = this.uxSelect = this.getUxSelect();
-    const bindingEngine = this.bindingEngine;
-
-    if (element.hasAttribute('no-ripple')) {
-      element.classList.remove('ripple');
+    if (this.value === undefined) {
+      this.value = this.text;
     }
-
-    const subs = this.selectSubscriptions = [
-      bindingEngine.propertyObserver(uxSelect, 'isMultiple').subscribe(this.uxMultipleChanged.bind(this)),
-      bindingEngine.propertyObserver(uxSelect, 'isDisabled').subscribe(this.setParentDisabled.bind(this))
-    ];
-
-    this.parentDisabled = uxSelect.isDisabled;
-    this.isMultiple = this.uxSelect.isMultiple;
-
-    if (group) {
-      subs.push(
-        bindingEngine.propertyObserver(group, 'disabled').subscribe(this.setParentDisabled.bind(this))
-      );
-      if (!this.parentDisabled) {
-        this.parentDisabled = group.isDisabled;
-      }
-    }
-
   }
 
   public attached() {
-    if (this.value === undefined) {
-      this.value = this.primaryText;
+    const optGroup = this.optGroup = this.getOptGroup();
+    const uxSelect = this.uxSelect = this.getUxSelect();
+    const bindingEngine = this.bindingEngine;
+    this.setParentDisabled(optGroup ? optGroup.isDisabled : uxSelect.isDisabled);
+    this.isMultiple = uxSelect.isMultiple;
+    this.subscriptions = [
+      bindingEngine.propertyObserver(uxSelect, 'isMultiple').subscribe(this.uxMultipleChanged.bind(this)),
+      optGroup
+        // ux-opt group will also subscribe to ux-select to know if it's disabled
+        ? bindingEngine.propertyObserver(optGroup, 'isDisabled').subscribe(this.setParentDisabled.bind(this))
+        // If ux-option is not a member of a group, then subscribe to disabled state of ux-select
+        : bindingEngine.propertyObserver(uxSelect, 'isDisabled').subscribe(this.setParentDisabled.bind(this))
+    ];
+  }
+
+  public detached() {
+    for (const s of this.subscriptions) {
+      s.dispose();
     }
-  }
-
-  public unbind() {
-    this.selectSubscriptions.forEach(s => s.dispose());
-    this.selectSubscriptions.length = 0;
-  }
-
-  private get primaryText() {
-    return this.textEl ? this.textEl.textContent : undefined;
+    this.subscriptions.length = 0;
   }
 
   private getOptGroup() {
     let el: HTMLElement | null = this.element;
     while (el) {
       if (el.tagName === 'UX-OPTGROUP') {
-        return getAuViewModel<UxOption['group']>(el);
+        return getAuViewModel<UxOption['optGroup']>(el);
       }
       el = el.parentElement;
     }
@@ -146,6 +136,7 @@ export class UxOption {
 
   private setParentDisabled(disabled: boolean) {
     this.parentDisabled = !!disabled;
+    this.isDisabled = this.disabled || this.parentDisabled;
   }
 
   private notify() {
@@ -173,21 +164,13 @@ export class UxOption {
     }
   }
 
-  public getValue() {
-    const value = this.value;
-    return value === undefined ? this.primaryText : value;
-  }
-
-  public setValue(value: any) {
-    this.value = value;
-  }
-
   public getDisabled() {
     return this.disabled || this.parentDisabled;
   }
 
   public setDisabled(disabled: boolean) {
     this.disabled = !!disabled;
+    this.isDisabled = this.disabled || this.parentDisabled;
   }
 
   public onClick() {
@@ -219,26 +202,35 @@ export class UxOption {
       }
 
       target.ripple.downAction(e!);
-      // this.focusedUxOption = target;
       if (autoEnd) {
         setTimeout(removeWave, 125, target);
       } else {
-        new ElementEvents(document).subscribeOnce('mouseup', () => {
+        new ElementEvents(PLATFORM.global).subscribeOnce('mouseup', () => {
           target.ripple.upAction();
         }, true);
       }
     }
   }
-
 }
 
 function removeWave(el: UxOptionElement) {
   el.ripple.upAction();
 }
 
-function ensureUxOptionTextOnly(_: ViewCompiler, __: ViewResources, node: UxOptionElement) {
-  node.textContent = node.textContent;
-  return true;
+function convertTextToAttr(_: ViewCompiler, __: ViewResources, node: UxOptionElement, attributes: NamedNodeMap) {
+  const ii = attributes.length;
+  for (let i = 0; ii > i; ++i) {
+    const attr = attributes[i];
+    if (attr.nodeName === 'text') {
+      return;
+    }
+    const parts = attr.nodeName.split('.');
+    if (parts[0] === 'text') {
+      return;
+    }
+  }
+  node.setAttribute('text', node.textContent || '');
+  node.textContent = '';
 }
 
 const UxOptionElementProto = Object.create(HTMLElement.prototype, {
@@ -268,10 +260,10 @@ const UxOptionElementProto = Object.create(HTMLElement.prototype, {
   },
   value: {
     get() {
-      return getAuViewModel<UxOption>(this).getValue();
+      return getAuViewModel<UxOption>(this).value;
     },
     set(value: any) {
-      getAuViewModel<UxOption>(this).setValue(value);
+      getAuViewModel<UxOption>(this).value = value;
     }
   },
   wave: {

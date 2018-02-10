@@ -11,6 +11,7 @@
   <require from="./ux-select.css"></require>
 
   <div class="ux-select-container"
+    ref="container"
     click.trigger="onTriggerClick()">
     <div class="ux-select-trigger">
       <div class="ux-select-value">${displayValue}</div>
@@ -20,7 +21,7 @@
   
   <div ref="optionWrapperEl"
     class="ux-select-list-wrapper"
-    css="transform: translate3d(${listAnchor ? listAnchor.x : 0}px, ${listAnchor ? listAnchor.y : 0}px, 0);">
+    css="top: ${listAnchor.y}px; left: ${listAnchor.x}px;">
     <div ref="optionCtEl"
       class="ux-select-list-ct"
       select.trigger="onSelect($event)"

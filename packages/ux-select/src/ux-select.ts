@@ -12,6 +12,7 @@ import {
   InternalCollectionObserver,
   ObserverLocator,
   TaskQueue,
+  inlineView,
 } from 'aurelia-framework';
 
 import { getLogger } from 'aurelia-logging';
@@ -19,11 +20,18 @@ import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 
 import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
-import { UxOptionElement, UxOption } from './ux-option';
+import { UxOptionElement } from './ux-option';
 import { getAuViewModel, bool } from './util';
+import * as UX_SELECT_VIEW from './ux-select.html';
 
 declare module './ux-option' {
   interface UxOption {
+    uxSelect: UxSelect;
+  }
+}
+
+declare module './ux-optgroup' {
+  interface UxOptGroup {
     uxSelect: UxSelect;
   }
 }
@@ -53,25 +61,16 @@ export interface UxOptionContainer extends HTMLElement {
 @inject(Element, StyleEngine, ObserverLocator, TaskQueue)
 @processContent(extractUxOption)
 @customElement('ux-select')
+@inlineView(UX_SELECT_VIEW)
 export class UxSelect implements UxComponent {
 
   private selectedOption: UxOptionElement | null = null;
 
-  // private selectedItem?: T | T[];
-  /**
-   * Flag to set selecedItem to undefined, when value coming is not in items
-   */
-  // private ignoreSelectedIndex: boolean;
-
-  /**
-   * Temporarily used to store <ux-option/> reference in interaction
-   */
+  // Temporarily used to store <ux-option/> reference in interaction
   private focusedUxOption: UxOptionElement | null;
 
   // Observe window events
   private winEvents: ElementEvents;
-
-  // private optionsCtRect: ClientRect | null;
 
   @bindable()
   public theme: UxSelectTheme;
@@ -93,6 +92,7 @@ export class UxSelect implements UxComponent {
   public expanded: boolean;
 
   // Populated by Aurelia
+  public readonly container: HTMLElement;
   public readonly optionWrapperEl: HTMLElement;
   public readonly optionCtEl: UxOptionContainer;
 
@@ -222,7 +222,7 @@ export class UxSelect implements UxComponent {
     this.calcAnchorPosition();
     this.winEvents.subscribe('wheel', (e: WheelEvent) => {
       if (this.expanded) {
-        if (e.target === PLATFORM.global || !this.element.contains(e.target as HTMLElement)) {
+        if (e.target === PLATFORM.global || !this.optionWrapperEl.contains(e.target as HTMLElement)) {
           this.collapse();
         }
       }
@@ -236,27 +236,9 @@ export class UxSelect implements UxComponent {
 
   public listAnchor: { x: number | string, y: number | string } | null;
   private calcAnchorPosition() {
-    const elDim = this.element.getBoundingClientRect();
-    let { top, left } = this.optionWrapperEl.getBoundingClientRect();
-    const options = this.options;
-    const selectedOption = this.selectedOption;
-    const uxOption = selectedOption ? getAuViewModel<UxOption>(selectedOption) : null;
-    const firstOptionIndex = selectedOption ? options.indexOf(selectedOption) : -1;
-
-    // tslint:disable-next-line:prefer-conditional-expression
-    if (firstOptionIndex <= 0) {
-      top = -48 + (elDim.height - 18) / 2;
-    } else {
-      top = 0;
-    }
-    /**
-     * 16px padding left of ux option, plus 32px of checkbox or 16 of group
-     */
-    left = left - 16 - (this.isMultiple ? 32 : uxOption && uxOption.group ? 16 : 0);
-    if (elDim.left + left < 0) {
-      left = -elDim.left;
-    }
-    this.listAnchor = { x: left, y: top };
+    const elDim = this.container.getBoundingClientRect();
+    const offsetY = (48 - elDim.height) / 2;
+    this.listAnchor = { x: elDim.left, y: elDim.top - offsetY };
   }
 
   private onKeyboardSelect() {
@@ -354,6 +336,7 @@ export class UxSelect implements UxComponent {
       if (focusedOption) {
         focusedOption.focused = true;
         focusedOption.wave();
+        focusedOption.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       }
       this.focusedUxOption = focusedOption;
     }
@@ -445,6 +428,10 @@ export class UxSelect implements UxComponent {
   }
 
   public onKeyDown(key: number) {
+    if (this.isDisabled) {
+      return;
+    }
+    // tslint:disable-next-line:switch-default
     switch (key) {
       case UP: case DOWN:
         this.moveSelectedIndex(key === UP ? -1 : 1);
@@ -452,7 +439,6 @@ export class UxSelect implements UxComponent {
       case ENTER: case SPACE:
         this.onKeyboardSelect();
         break;
-      default: break;
     }
     return true;
   }
@@ -506,8 +492,6 @@ export class UxSelect implements UxComponent {
     return result;
   }
 
-  // tslint:disable-next-line:no-empty
-  public setOptions() {}
   public getOptions() {
     return this.options;
   }
