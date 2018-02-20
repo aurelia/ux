@@ -152,7 +152,7 @@ export class UxCheckbox implements UxComponent {
       this.ripple.round = true;
 
       this.ripple.downAction(e);
-      const winEvents = new ElementEvents(window);
+      const winEvents = new ElementEvents(window as any);
       const upAction = () => {
         this.ripple!.upAction();
         winEvents.disposeAll();
