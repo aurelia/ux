@@ -1,4 +1,5 @@
-import { FrameworkConfiguration, PLATFORM, bindingMode, ValueAttributeObserver } from 'aurelia-framework';
+import { FrameworkConfiguration, PLATFORM, bindingMode } from 'aurelia-framework';
+import * as AuBinding from 'aurelia-binding';
 import { AureliaUX } from '@aurelia-ux/core';
 
 export { UxTextAreaTheme } from './ux-textarea-theme';
@@ -17,7 +18,7 @@ const uxTextAreaConfig = {
     value: {
       defaultBindingMode: bindingMode.twoWay,
       getObserver(element: Element) {
-        return new ValueAttributeObserver(element, 'value', uxTextareaChangeHandler);
+        return new (AuBinding as any).ValueAttributeObserver(element, 'value', uxTextareaChangeHandler);
       }
     }
   }

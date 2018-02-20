@@ -2,8 +2,9 @@ import {
   FrameworkConfiguration,
   PLATFORM,
   bindingMode,
-  ValueAttributeObserver,
 } from 'aurelia-framework';
+
+import * as AuBinding from 'aurelia-binding';
 
 import { AureliaUX } from '@aurelia-ux/core';
 
@@ -27,7 +28,7 @@ const uxSelectConfig = {
     value: {
       defaultBindingMode: bindingMode.twoWay,
       getObserver(element: Element, _: string) {
-        return new ValueAttributeObserver(element, 'value', uxSelectChangeHandler);
+        return new (AuBinding as any).ValueAttributeObserver(element, 'value', uxSelectChangeHandler);
       }
     }
   }

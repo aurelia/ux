@@ -1,8 +1,6 @@
 import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
 
 import { AureliaUX } from './aurelia-ux';
-import './extension';
-
 export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
 export { processDesignAttributes } from './designs/design-attributes';
