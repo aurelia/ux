@@ -1,7 +1,7 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute, linkProperty } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
 import { DOM, ElementEvents } from 'aurelia-framework';
 
@@ -36,8 +36,7 @@ export class UxSwitch implements UxComponent {
   }
 
   constructor(public element: UxSwitchElement, private styleEngine: StyleEngine) {
-    element.type = 'checkbox';
-    linkProperty(element, 'checked');
+    Object.setPrototypeOf(element, uxSwitchElementProto);
     styleEngine.ensureDefaultTheme(theme);
   }
 
@@ -71,6 +70,14 @@ export class UxSwitch implements UxComponent {
 
     this.themeChanged(this.theme);
     this.disabledChanged(this.disabled);
+  }
+
+  public attached() {
+    this.checkbox.addEventListener('change', stopEvent);
+  }
+
+  public detached() {
+    this.checkbox.removeEventListener('change', stopEvent);
   }
 
   public getChecked() {
@@ -144,3 +151,23 @@ export class UxSwitch implements UxComponent {
     e.preventDefault();
   }
 }
+
+function stopEvent(e: Event) {
+  e.stopPropagation();
+}
+
+const getVm = <T>(_: any) => _.au.controller.viewModel as T;
+const uxSwitchElementProto = Object.create(HTMLElement.prototype, {
+  type: {
+    value: 'checkbox',
+  },
+  checked: {
+    get() {
+      return getVm<UxSwitch>(this).getChecked();
+    },
+    set(value: boolean) {
+      getVm<UxSwitch>(this).setChecked(value);
+    }
+  }
+});
+

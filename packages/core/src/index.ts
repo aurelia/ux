@@ -9,7 +9,6 @@ export { PaperRipple } from './effects/paper-ripple';
 
 export { normalizeBooleanAttribute } from './components/html-attributes';
 export { UxComponent } from './components/ux-component';
-export { linkProperty } from './components/link-property';
 
 export { UxTheme } from './styles/ux-theme';
 export { StyleEngine } from './styles/style-engine';
