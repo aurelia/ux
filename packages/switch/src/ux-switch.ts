@@ -170,4 +170,3 @@ const uxSwitchElementProto = Object.create(HTMLElement.prototype, {
     }
   }
 });
-

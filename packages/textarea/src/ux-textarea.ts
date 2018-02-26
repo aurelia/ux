@@ -85,6 +85,8 @@ export class UxTextArea implements UxComponent {
   public attached() {
     const textbox = this.textbox;
     this.isAttached = true;
+    this.textbox.addEventListener('change', stopEvent);
+    this.textbox.addEventListener('input', stopEvent);
     this.fitTextContent();
 
     textbox.addEventListener('change', stopEvent);
@@ -94,14 +96,9 @@ export class UxTextArea implements UxComponent {
   public detached() {
     const textbox = this.textbox;
     this.isAttached = false;
-    
+
     textbox.removeEventListener('change', stopEvent);
     textbox.removeEventListener('input', stopEvent);
-  }
-
-  public unbind() {
-    this.textbox.removeEventListener('change', stopEvent);
-    this.textbox.removeEventListener('input', stopEvent);
   }
 
   public getValue() {
