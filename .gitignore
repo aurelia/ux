@@ -9,3 +9,4 @@ npm-debug.log*
 .test
 dist/doc-temp
 dist/test
+/coverage
