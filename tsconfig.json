@@ -16,6 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "noEmitHelpers": false,
+    "skipLibCheck": true,
     "sourceMap": true
   },
   "exclude": [

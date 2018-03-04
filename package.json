@@ -18,9 +18,8 @@
   },
   "scripts": {
     "lint": "cross-env tslint --project tsconfig.json",
-    "pretest": "cross-env npm run lint",
-    "test": "cross-env TS_NODE_PROJECT=\"tsconfig-tsnode.json\" karma start --single-run",
-    "develop": "cross-env TS_NODE_PROJECT=\"tsconfig-tsnode.json\" karma start",
+    "test": "cross-env TS_NODE_PROJECT=\"tsconfig-tsnode.json\" karma start --single-run --package=core",
+    "develop": "cross-env TS_NODE_PROJECT=\"tsconfig-tsnode.json\" karma start --package=core",
     "prebuild:amd": "cross-env rimraf dist/amd",
     "build:amd": "cross-env tsc --project tsconfig.json --outDir dist/amd --module amd",
     "postbuild:amd": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/amd",
@@ -53,7 +52,7 @@
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
     "@types/karma": "^1.7.3",
-    "@types/node": "^7.0.55",
+    "@types/node": "^7.0.11",
     "@types/webpack": "^3.8.8",
     "aurelia-bootstrapper": "^2.1.1",
     "aurelia-pal-browser": "^1.2.0",
@@ -77,13 +76,16 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.13",
     "lerna": "^2.5.1",
+    "path": "^0.12.7",
+    "requirejs": "^2.3.3",
+    "requirejs-text": "^2.0.15",
     "rimraf": "^2.6.1",
     "ts-loader": "^4.0.1",
     "ts-node": "^5.0.1",
     "tsconfig-paths": "^3.1.1",
     "tslint": "^4.4.2",
     "typedoc": "^0.9.0",
-    "typescript": "^2.7.2",
+    "typescript": "^2.2.1",
     "webpack": "^4.0.1"
   }
 }

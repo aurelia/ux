@@ -17,12 +17,15 @@
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "noEmitHelpers": false
+    "noEmitHelpers": false,
+    "skipLibCheck": true
   },
   "exclude": [
     ".vscode",
     "dist",
     "doc",
-    "node_modules"
+    "node_modules",
+    "test",
+    "karma.conf.ts"
   ]
 }

@@ -1,5 +1,5 @@
 
-import { GlobalStyleEngine } from '../../packages/core/src/styles/global-style-engine';
+import { GlobalStyleEngine } from '../../src/styles/global-style-engine';
 
 // tslint:disable
 const testStyle =
