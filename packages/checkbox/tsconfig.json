@@ -13,10 +13,9 @@
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noImplicitReturns": true,
-    "noUnusedLocals": false, // until this false positive problem is fixed: https://github.com/Microsoft/TypeScript/issues/19700
+    "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "dist/test",
-    "preserveConstEnums": true,
     "rootDir": "src",
     "skipLibCheck": true,
     "strictNullChecks": true,
