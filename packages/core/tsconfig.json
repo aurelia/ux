@@ -1,33 +1,31 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "amd",
-    "rootDir": "src",
-    "outDir": "dist/test",
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "strictNullChecks": true,
     "declaration": true,
-    "forceConsistentCasingInFileNames": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noEmitHelpers": false,
+    "forceConsistentCasingInFileNames": true,
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "module": "amd",
     "moduleResolution": "node",
-    "lib": ["es2017", "dom"]
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": false, // until this false positive problem is fixed: https://github.com/Microsoft/TypeScript/issues/19700
+    "noUnusedParameters": true,
+    "outDir": "dist/test",
+    "preserveConstEnums": true,
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "target": "es5"
   },
   "exclude": [
     ".vscode",
     "dist",
     "doc",
     "node_modules"
-  ],
-  "filesGlob": [
-    "./src/**/*.ts",
-    "./test/**/*.ts",
-    "./custom_typings/**/*.d.ts"
-  ],
-  "atom": {
-    "rewriteTsconfig": false
-  }
+  ]
 }

@@ -1,23 +1,26 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "module": "amd",
-    "moduleResolution": "node",
-    "target": "es5",
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
     "lib": [
       "es2017",
       "dom"
     ],
-    "rootDir": "src",
-    "outDir": "dist/test",
+    "module": "amd",
+    "moduleResolution": "node",
     "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "noImplicitReturns": true,
+    "noUnusedLocals": false, // until this false positive problem is fixed: https://github.com/Microsoft/TypeScript/issues/19700
+    "noUnusedParameters": true,
+    "outDir": "dist/test",
+    "preserveConstEnums": true,
+    "rootDir": "src",
+    "skipLibCheck": true,
     "strictNullChecks": true,
-    "declaration": true,
-    "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "noEmitHelpers": false
+    "target": "es5"
   },
   "exclude": [
     ".vscode",
