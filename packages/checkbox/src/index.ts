@@ -2,6 +2,7 @@ import { FrameworkConfiguration, PLATFORM, bindingMode, ObserverLocator, Checked
 import { AureliaUX } from '@aurelia-ux/core';
 
 export { UxCheckboxTheme } from './ux-checkbox-theme';
+export { UxCheckbox, UxCheckboxElement } from './ux-checkbox';
 
 export function configure(config: FrameworkConfiguration) {
   config.container.get(AureliaUX).registerUxElementConfig(uxCheckBoxConfig);

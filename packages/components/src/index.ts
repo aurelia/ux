@@ -1,14 +1,14 @@
 import { FrameworkConfiguration } from 'aurelia-framework';
 
-export { UxButtonTheme } from '@aurelia-ux/button';
+export { UxButtonTheme, UxButton } from '@aurelia-ux/button';
 export { UxCheckboxTheme, UxCheckbox, UxCheckboxElement } from '@aurelia-ux/checkbox';
-export { UxChipInputTheme, UxChipTheme, UxTagTheme } from '@aurelia-ux/chip-input';
+export { UxChipInputTheme, UxChipTheme, UxTagTheme, UxChipInput, UxChip, UxTag } from '@aurelia-ux/chip-input';
 export { UxGridTheme, UxResponsiveUtilities } from '@aurelia-ux/grid';
-export { UxDatepickerTheme } from '@aurelia-ux/datepicker';
-export { UxFormTheme } from '@aurelia-ux/form';
+export { UxDatepickerTheme, UxCalendar, DatepickerSettings, UxPickerDialog, UxYearList } from '@aurelia-ux/datepicker';
+export { UxFormTheme, UxField, UxForm, UxSubmitCustomAttribute } from '@aurelia-ux/form';
 export { UxInputTheme, UxInput, UxInputElement } from '@aurelia-ux/input';
-export { UxInputInfoTheme } from '@aurelia-ux/input-info';
-export { UxListTheme } from '@aurelia-ux/list';
+export { UxInputInfoTheme, UxInputInfo } from '@aurelia-ux/input-info';
+export { UxListTheme, UxList, UxListItem } from '@aurelia-ux/list';
 export { UxRadioTheme, UxRadio, UxRadioElement } from '@aurelia-ux/radio';
 export { UxTextAreaTheme, UxTextArea, UxTextAreaElement } from '@aurelia-ux/textarea';
 export { UxSwitchTheme, UxSwitch, UxSwitchElement } from '@aurelia-ux/switch';
