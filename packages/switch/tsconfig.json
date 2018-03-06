@@ -1,29 +1,26 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "module": "amd",
-    "moduleResolution": "node",
-    "target": "es5",
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
     "lib": [
       "es2017",
       "dom"
     ],
-    "rootDir": "src",
-    "outDir": "dist/test",
+    "module": "amd",
+    "moduleResolution": "node",
     "noImplicitAny": true,
+    "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
+    "outDir": "dist/test",
+    "rootDir": "src",
+    "skipLibCheck": true,
     "strictNullChecks": true,
-    "declaration": true,
-    "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "noEmitHelpers": false
+    "target": "es5"
   },
-  "filesGlob": [
-    "./src/**/*.ts",
-    "./test/**/*.ts",
-    "./custom_typings/**/*.d.ts"
-  ],
   "exclude": [
     ".vscode",
     "dist",
