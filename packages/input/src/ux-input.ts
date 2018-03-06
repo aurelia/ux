@@ -2,7 +2,7 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, linkProperty } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
 
 const theme = new UxInputTheme();
@@ -36,7 +36,7 @@ export class UxInput implements UxComponent {
   public textbox: HTMLInputElement;
 
   constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
-    linkProperty(element, 'value');
+    Object.setPrototypeOf(element, uxInputElementProto);
     styleEngine.ensureDefaultTheme(theme);
   }
 
@@ -171,3 +171,15 @@ export class UxInput implements UxComponent {
 function stopEvent(e: Event) {
   e.stopPropagation();
 }
+
+const getVm = <T>(_: any) => _.au.controller.viewModel as T;
+const uxInputElementProto = Object.create(HTMLElement.prototype, {
+  value: {
+    get() {
+      return getVm<UxInput>(this).getValue();
+    },
+    set(value: any) {
+      getVm<UxInput>(this).setValue(value);
+    }
+  }
+});

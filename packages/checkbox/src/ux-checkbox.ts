@@ -7,7 +7,6 @@ import {
   UxComponent,
   PaperRipple,
   normalizeBooleanAttribute,
-  linkProperty
 } from '@aurelia-ux/core';
 
 import { UxCheckboxTheme } from './ux-checkbox-theme';
@@ -32,7 +31,7 @@ export class UxCheckbox implements UxComponent {
 
   public checked: boolean;
 
-  @observable({ initializer: () => false })
+  @observable()
   public value: boolean;
 
   private indeterminate: boolean;
@@ -49,14 +48,11 @@ export class UxCheckbox implements UxComponent {
     public element: UxCheckboxElement,
     private styleEngine: StyleEngine
   ) {
-    linkProperty(element, ['checked', 'indeterminate']);
-    element.type = 'checkbox';
-
+    Object.setPrototypeOf(element, uxCheckboxElementProto);
     styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {
-
     const element = this.element;
     const checkbox = this.checkbox;
 
@@ -154,7 +150,7 @@ export class UxCheckbox implements UxComponent {
       this.ripple.round = true;
 
       this.ripple.downAction(e);
-      const winEvents = new ElementEvents(window);
+      const winEvents = new ElementEvents(window as any);
       const upAction = () => {
         this.ripple!.upAction();
         winEvents.disposeAll();
@@ -170,3 +166,26 @@ export class UxCheckbox implements UxComponent {
 function stopEvent(e: Event) {
   e.stopPropagation();
 }
+
+const getVm = <T>(_: any) => _.au.controller.viewModel as T;
+const uxCheckboxElementProto = Object.create(HTMLElement.prototype, {
+  type: {
+    value: 'checkbox',
+  },
+  checked: {
+    get() {
+      return getVm<UxCheckbox>(this).getChecked();
+    },
+    set(value: boolean) {
+      getVm<UxCheckbox>(this).setChecked(value);
+    }
+  },
+  indeterminate: {
+    get() {
+      return getVm<UxCheckbox>(this).getIndeterminate();
+    },
+    set(value: boolean) {
+      getVm<UxCheckbox>(this).setIndeterminate(value);
+    }
+  }
+});

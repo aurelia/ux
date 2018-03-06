@@ -1,4 +1,5 @@
-import { FrameworkConfiguration, PLATFORM, bindingMode, ObserverLocator, CheckedObserver } from 'aurelia-framework';
+import { FrameworkConfiguration, PLATFORM, bindingMode, ObserverLocator } from 'aurelia-framework';
+import * as AuBinding from 'aurelia-binding';
 import { AureliaUX } from '@aurelia-ux/core';
 
 export { UxCheckboxTheme } from './ux-checkbox-theme';
@@ -17,7 +18,7 @@ const uxCheckBoxConfig = {
     value: {
       defaultBindingMode: bindingMode.twoWay,
       getObserver(element: Element, _: string, observerLocator: ObserverLocator) {
-        return new CheckedObserver(element, uxCheckboxChangeHandler, observerLocator);
+        return new (AuBinding as any).CheckedObserver(element, uxCheckboxChangeHandler, observerLocator);
       }
     }
   }
