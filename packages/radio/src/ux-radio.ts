@@ -5,8 +5,7 @@ import {
   StyleEngine,
   UxComponent,
   PaperRipple,
-  normalizeBooleanAttribute,
-  linkProperty
+  normalizeBooleanAttribute
 } from '@aurelia-ux/core';
 import { UxRadioTheme } from './ux-radio-theme';
 import { ElementEvents, DOM } from 'aurelia-framework';
@@ -42,8 +41,7 @@ export class UxRadio implements UxComponent {
   }
 
   constructor(public element: UxRadioElement, private styleEngine: StyleEngine) {
-    element.type = 'radio';
-    linkProperty(element, 'checked');
+    Object.setPrototypeOf(element, uxRadioElementProto);
     styleEngine.ensureDefaultTheme(theme);
   }
 
@@ -70,7 +68,7 @@ export class UxRadio implements UxComponent {
     }
 
     if (element.hasAttribute('checked')) {
-      this.element.checked = true;
+      element.checked = true;
     }
 
     if (this.checked) {
@@ -142,7 +140,7 @@ export class UxRadio implements UxComponent {
       this.ripple.round = true;
 
       this.ripple.downAction(e);
-      const winEvents = new ElementEvents(window);
+      const winEvents = new ElementEvents(window as any);
       const upAction = () => {
         this.ripple!.upAction();
         winEvents.disposeAll();
@@ -158,3 +156,19 @@ export class UxRadio implements UxComponent {
 function stopEvent(e: Event) {
   e.stopPropagation();
 }
+
+
+const getVm = <T>(_: any) => _.au.controller.viewModel as T;
+const uxRadioElementProto = Object.create(HTMLElement.prototype, {
+  type: {
+    value: 'radio',
+  },
+  checked: {
+    get() {
+      return getVm<UxRadio>(this).getChecked();
+    },
+    set(value: boolean) {
+      getVm<UxRadio>(this).setChecked(value);
+    }
+  }
+});

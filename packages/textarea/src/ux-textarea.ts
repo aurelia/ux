@@ -1,7 +1,7 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, linkProperty } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxTextAreaTheme } from './ux-textarea-theme';
 import { observable } from 'aurelia-framework';
 
@@ -37,7 +37,7 @@ export class UxTextArea implements UxComponent {
   public textbox: HTMLTextAreaElement;
 
   constructor(private element: UxTextAreaElement, private styleEngine: StyleEngine) {
-    linkProperty(element, 'value');
+    Object.setPrototypeOf(element, uxTextAreaElementProto);
     styleEngine.ensureDefaultTheme(theme);
   }
 
@@ -83,16 +83,22 @@ export class UxTextArea implements UxComponent {
   }
 
   public attached() {
+    const textbox = this.textbox;
     this.isAttached = true;
     this.textbox.addEventListener('change', stopEvent);
     this.textbox.addEventListener('input', stopEvent);
     this.fitTextContent();
+
+    textbox.addEventListener('change', stopEvent);
+    textbox.addEventListener('input', stopEvent);
   }
 
   public detached() {
+    const textbox = this.textbox;
     this.isAttached = false;
-    this.textbox.removeEventListener('change', stopEvent);
-    this.textbox.removeEventListener('input', stopEvent);
+
+    textbox.removeEventListener('change', stopEvent);
+    textbox.removeEventListener('input', stopEvent);
   }
 
   public getValue() {
@@ -144,3 +150,17 @@ export class UxTextArea implements UxComponent {
 function stopEvent(e: Event) {
   e.stopPropagation();
 }
+
+
+const getVm = <T>(_: any) => _.au.controller.viewModel as T;
+const uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
+  value: {
+    get() {
+      return getVm<UxTextArea>(this).getValue();
+    },
+    set(value: any) {
+      getVm<UxTextArea>(this).setValue(value);
+    }
+  }
+});
+
