@@ -1,19 +1,23 @@
 {
   "extends": "tslint:latest",
   "rules": {
-    "only-arrow-functions": false,
-    "quotemark": [true, "single"],
-    "object-literal-sort-keys": false,
-    "ordered-imports": [false],
-    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-module", "check-separator", "check-type"],
+    "array-type": [true, "array-simple"],
+    "arrow-parens": false,
     "interface-name": [true, "never-prefix"],
+    "max-classes-per-file": [false],
+    "member-access": true,
+    "member-ordering": [true, "fields-first"],
+    "no-floating-promises": true,
     "no-shadowed-variable": false,
     "no-string-literal": false,
+    "object-literal-sort-keys": false,
+    "only-arrow-functions": false,
+    "ordered-imports": [false],
+    "prefer-for-of": false,
+    "prefer-object-spread": true,
+    "quotemark": [true, "single"],
     "trailing-comma": [false],
-    "member-ordering": ["fields-first"],
-    "array-type": ["array-simple"],
-    "arrow-parens": false,
-    "max-classes-per-file": [false],
-    "prefer-for-of": false
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
+    "whitespace": [true, "check-branch", "check-decl", "check-operator", "check-module", "check-separator", "check-type"]
   }
 }
