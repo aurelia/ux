@@ -106,7 +106,6 @@ export class UxSelect implements UxComponent {
     Object.setPrototypeOf(element, UxSelectElementProto);
     this.theme = theme;
     styleEngine.ensureDefaultTheme(theme);
-    (window as any).uxSelect = this;
   }
 
   public bind() {
