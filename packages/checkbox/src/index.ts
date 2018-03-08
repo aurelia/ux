@@ -15,7 +15,7 @@ export function configure(config: FrameworkConfiguration) {
 const uxCheckBoxConfig = {
   tagName: 'ux-checkbox',
   properties: {
-    value: {
+    checked: {
       defaultBindingMode: bindingMode.twoWay,
       getObserver(element: Element, _: string, observerLocator: ObserverLocator) {
         return new (AuBinding as any).CheckedObserver(element, uxCheckboxChangeHandler, observerLocator);
