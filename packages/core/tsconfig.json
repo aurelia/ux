@@ -5,7 +5,7 @@
     "rootDir": "src",
     "outDir": "dist/test",
     "noImplicitAny": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "strictNullChecks": true,
@@ -13,6 +13,7 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "noEmitHelpers": false,
+    "skipLibCheck": true,
     "moduleResolution": "node",
     "lib": ["es2017", "dom"]
   },
@@ -20,7 +21,9 @@
     ".vscode",
     "dist",
     "doc",
-    "node_modules"
+    "node_modules",
+    "karma.conf.ts",
+    "test"
   ],
   "filesGlob": [
     "./src/**/*.ts",

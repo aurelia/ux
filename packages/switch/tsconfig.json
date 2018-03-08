@@ -17,7 +17,8 @@
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "noEmitHelpers": false
+    "noEmitHelpers": false,
+    "skipLibCheck": true
   },
   "filesGlob": [
     "./src/**/*.ts",
@@ -28,6 +29,8 @@
     ".vscode",
     "dist",
     "doc",
-    "node_modules"
+    "node_modules",
+    "test",
+    "karma.conf.ts"
   ]
 }
