@@ -7,14 +7,9 @@ export interface KarmaConfig extends karma.Config, KarmaConfigOptions {
 }
 
 export interface KarmaConfigOptions extends karma.ConfigOptions {
-  webpack: WebpackConfiguration;
+  webpack: webpack.Configuration;
   coverageIstanbulReporter: any;
   webpackServer: any;
-}
-
-// remove this when @types/webpack is updated to reflect this webpack 4.0 change
-export interface WebpackConfiguration extends webpack.Configuration {
-  mode: 'development' | 'production';
 }
 
 const defaultOptions: KarmaConfigOptions = {
