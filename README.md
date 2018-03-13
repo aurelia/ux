@@ -26,15 +26,25 @@ Check out the [showcase application](https://github.com/aurelia/app-ux-showcase)
 
 ## Tests
 
-```shell
-npm run test
-```
+### From the project's root directory
+
+`npm run test -- --package=name` runs the tests for the specified package (defaults to `-- --package=core` when omitted)
+
+`lerna run test` runs the tests for all packages (will start multiple chrome instances simultaneously)
+
+### From a package's own directory
+
+`npm run test` runs the tests for that package
 
 ## Developing
 
-```shell
-npm run develop
-```
+### From the project's root directory
+
+`npm run develop -- --package=name` runs the tests for the specified package in `watch` mode  (defaults to `-- --package=core` when omitted)
+
+### From a package's own directory
+
+`npm run develop` runs the tests for that package in `watch` mode
 
 ## Online playground
 
