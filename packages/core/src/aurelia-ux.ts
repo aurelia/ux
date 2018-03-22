@@ -86,45 +86,9 @@ export class AureliaUX {
     const adapters = this.adapters;
     let elementAdapters = adapters[tagName] || adapters[tagName.toLowerCase()];
     if (!elementAdapters) {
-      elementAdapters = adapters[tagName] = adapters[tagName.toLowerCase()] = {} as any;
+      elementAdapters = adapters[tagName] = adapters[tagName.toLowerCase()] = { tagName: tagName, properties: {} };
     }
     return elementAdapters;
-  }
-
-  public start(config: FrameworkConfiguration) {
-    const found = this.availableHosts.find(x => x.isAvailable);
-
-    if (found === undefined) {
-      throw new Error('Could not determine host environment');
-    }
-
-    this.host = found;
-
-    return this.host.start(config).then(platform => {
-      this.platform = platform;
-      this.design = platform.design;
-
-      this.designProcessor.setSwatchVariables();
-      this.designProcessor.setDesignVariables(platform.design);
-      this.designProcessor.setDesignWatches(platform.design);
-    });
-  }
-
-  public addUxElementObserverAdapter(tagName: string, properties: Record<string, UxElementPropertyObserver>): void {
-    if (!this.adapterCreated) {
-      this.createAdapter();
-      this.adapterCreated = true;
-    }
-    const elementAdapters = this.getOrCreateUxElementAdapters(tagName);
-    elementAdapters.properties = properties;
-  }
-
-  public registerUxElementConfig(observerAdapter: UxElementObserverAdapter) {
-    if (!this.bindingModeIntercepted) {
-      this.interceptDetermineDefaultBindingMode();
-      this.bindingModeIntercepted = true;
-    }
-    this.addUxElementObserverAdapter(observerAdapter.tagName.toUpperCase(), observerAdapter.properties);
   }
 
   private interceptDetermineDefaultBindingMode(): void {
@@ -147,5 +111,42 @@ export class AureliaUX {
       }
       return originalFn.call(this, element, attrName, context);
     };
+  }
+
+  public start(config: FrameworkConfiguration) {
+    const found = this.availableHosts.find(x => x.isAvailable);
+
+    if (found === undefined) {
+      throw new Error('Could not determine host environment');
+    }
+
+    this.host = found;
+
+    return this.host.start(config).then(platform => {
+      this.platform = platform;
+      this.design = platform.design;
+
+      this.designProcessor.setSwatchVariables();
+      this.designProcessor.setDesignVariables(platform.design);
+      this.designProcessor.setDesignWatches(platform.design);
+      return this;
+    });
+  }
+
+  public addUxElementObserverAdapter(tagName: string, properties: Record<string, UxElementPropertyObserver>): void {
+    if (!this.adapterCreated) {
+      this.createAdapter();
+      this.adapterCreated = true;
+    }
+    const elementAdapters = this.getOrCreateUxElementAdapters(tagName);
+    Object.assign(elementAdapters.properties, properties);
+  }
+
+  public registerUxElementConfig(observerAdapter: UxElementObserverAdapter) {
+    if (!this.bindingModeIntercepted) {
+      this.interceptDetermineDefaultBindingMode();
+      this.bindingModeIntercepted = true;
+    }
+    this.addUxElementObserverAdapter(observerAdapter.tagName.toUpperCase(), observerAdapter.properties);
   }
 }

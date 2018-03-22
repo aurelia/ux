@@ -1,5 +1,7 @@
 src
+test
+rollup.config.js
 karma.conf.js
 tsconfig.json
 package-lock.json
-test
+.npmignore
