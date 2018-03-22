@@ -8,7 +8,9 @@ ux-tag {
 
   border-radius: 2px;
 
+  background-color: #FF4081;
   background-color: var(--ux-theme--tag-background, var(--ux-design--accent, #FF4081));
+  color: #FFF;
   color: var(--ux-theme--tag-foreground, var(--ux-design--accent-foreground, #FFF));
 }
 
