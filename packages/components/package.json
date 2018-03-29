@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/components",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Official components made with Aurelia UX",
   "keywords": [
     "aurelia",
@@ -103,20 +103,20 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/button": "^0.7.1",
-    "@aurelia-ux/checkbox": "^0.7.1",
-    "@aurelia-ux/chip-input": "^0.7.1",
-    "@aurelia-ux/core": "^0.7.1",
-    "@aurelia-ux/datepicker": "^0.7.1",
-    "@aurelia-ux/form": "^0.7.1",
-    "@aurelia-ux/grid": "^0.7.1",
-    "@aurelia-ux/input": "^0.7.1",
-    "@aurelia-ux/input-info": "^0.7.1",
-    "@aurelia-ux/list": "^0.7.1",
-    "@aurelia-ux/radio": "^0.7.1",
-    "@aurelia-ux/switch": "^0.7.1",
-    "@aurelia-ux/textarea": "^0.7.1",
-    "@aurelia-ux/select": "^0.7.1",
+    "@aurelia-ux/button": "^0.8.0",
+    "@aurelia-ux/checkbox": "^0.8.0",
+    "@aurelia-ux/chip-input": "^0.8.0",
+    "@aurelia-ux/core": "^0.8.0",
+    "@aurelia-ux/datepicker": "^0.8.0",
+    "@aurelia-ux/form": "^0.8.0",
+    "@aurelia-ux/grid": "^0.8.0",
+    "@aurelia-ux/input": "^0.8.0",
+    "@aurelia-ux/input-info": "^0.8.0",
+    "@aurelia-ux/list": "^0.8.0",
+    "@aurelia-ux/radio": "^0.8.0",
+    "@aurelia-ux/select": "^0.8.0",
+    "@aurelia-ux/switch": "^0.8.0",
+    "@aurelia-ux/textarea": "^0.8.0",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
