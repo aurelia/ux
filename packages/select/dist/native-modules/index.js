@@ -8,9 +8,9 @@ export { UxSelectTheme } from './ux-select-theme';
 export function configure(config) {
     config.container.get(AureliaUX).registerUxElementConfig(uxSelectConfig);
     config.globalResources([
-        PLATFORM.moduleName('./ux-select'),
-        PLATFORM.moduleName('./ux-optgroup'),
-        PLATFORM.moduleName('./ux-option')
+        PLATFORM.moduleName('@aurelia-ux/select/ux-select'),
+        PLATFORM.moduleName('@aurelia-ux/select/ux-optgroup'),
+        PLATFORM.moduleName('@aurelia-ux/select/ux-option')
     ]);
 }
 var uxSelectConfig = {

@@ -4,9 +4,9 @@ System.register(["aurelia-framework", "aurelia-binding", "@aurelia-ux/core", "./
     function configure(config) {
         config.container.get(core_1.AureliaUX).registerUxElementConfig(uxSelectConfig);
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('./ux-select'),
-            aurelia_framework_1.PLATFORM.moduleName('./ux-optgroup'),
-            aurelia_framework_1.PLATFORM.moduleName('./ux-option')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/select/ux-select'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/select/ux-optgroup'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/select/ux-option')
         ]);
     }
     exports_1("configure", configure);
