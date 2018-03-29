@@ -1,8 +1,11 @@
-System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./designs/design-attributes", "./effects/paper-ripple", "./components/html-attributes", "./styles/style-engine", "./styles/global-style-engine", "./ux-configuration"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "./aurelia-ux", "./colors/swatches", "./colors/shadows", "./designs/design-attributes", "./effects/paper-ripple", "./components/html-attributes", "./styles/style-engine", "./styles/global-style-engine", "./ux-configuration"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function configure(config, callback) {
         var ux = config.container.get(aurelia_ux_1.AureliaUX);
+        config.globalResources([
+            aurelia_framework_1.PLATFORM.moduleName('./components/boolean-attr-binding-behavior')
+        ]);
         if (typeof callback === 'function') {
             return Promise.resolve(callback(ux))
                 .then(function () { return ux.start(config); });
@@ -13,9 +16,12 @@ System.register(["./aurelia-ux", "./colors/swatches", "./colors/shadows", "./des
         }
     }
     exports_1("configure", configure);
-    var aurelia_ux_1;
+    var aurelia_framework_1, aurelia_ux_1;
     return {
         setters: [
+            function (aurelia_framework_1_1) {
+                aurelia_framework_1 = aurelia_framework_1_1;
+            },
             function (aurelia_ux_1_1) {
                 aurelia_ux_1 = aurelia_ux_1_1;
                 exports_1({

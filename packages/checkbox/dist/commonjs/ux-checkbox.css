@@ -25,6 +25,7 @@ ux-checkbox>input:disabled {
 }
 
 ux-checkbox>.checkbox {
+  border: solid 2px #616161;
   border: var(--ux-theme--checkbox-border, solid 2px #616161);
   border-radius: 3px;
   display: block;
@@ -35,11 +36,13 @@ ux-checkbox>.checkbox {
 }
 
 ux-checkbox input:hover:not(:disabled) ~ .checkbox {
+  border: solid 2px #FF4081;
   border: var(--ux-theme--checkbox-hover-border, solid 2px var(--ux-design--accent, #FF4081));
   border-radius: 3px;
 }
 
 ux-checkbox input:checked ~.checkbox {
+  border: solid 2px #FF4081;
   border: var(--ux-theme--checkbox-checked-background, var(--ux-design--accent, #FF4081));
   border: var(--ux-theme--checkbox-hover-border, var(--ux-design--accent, #FF4081));
 }
@@ -47,6 +50,7 @@ ux-checkbox input:checked ~.checkbox {
 ux-checkbox>.checkbox>.background-box {
   transform: scale3d(0, 0, 0);
   transition: 100ms;
+  background-color: #FF4081;
   background-color: var(--ux-theme--checkbox-checked-background, var(--ux-design--accent, #FF4081));
   height: inherit;
   width: inherit;
@@ -57,6 +61,7 @@ ux-checkbox input:checked ~.checkbox>.background-box {
 }
 
 ux-checkbox>.checkbox>.background-box>svg {
+  fill: #fff;
   fill: var(--ux-theme--checkbox-checkmark-color, #fff);
   width: 20px;
   height: 20px;
@@ -68,19 +73,23 @@ ux-checkbox.disabled {
 }
 
 ux-checkbox.disabled>.checkbox:hover {
+  border: solid 2px #607D8B;
   border: var(--ux-theme--checkbox-disabled-border, solid 2px #607D8B);
   border-radius: 3px;
 }
 
 ux-checkbox input:disabled ~ .checkbox {
+  border: solid 2px #607D8B;
   border: var(--ux-theme--checkbox-disabled-border, solid 2px #607D8B);
 }
 
 ux-checkbox input:checked:disabled ~ .checkbox>.background-box {
+  background-color: #9E9E9E;
   background-color: var(--ux-theme--checkbox-disabled-background, #9E9E9E);
 }
 
 ux-checkbox input:disabled ~ .checkbox>.background-box::after {
+  border-color: #E0E0E0;
   border-color: var(--ux-theme--checkbox-disabled-foreground, #E0E0E0);
 }
 

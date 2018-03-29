@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
-import { bindingMode } from 'aurelia-binding';
+import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
@@ -18,31 +18,30 @@ let UxInput = class UxInput {
         this.autofocus = null;
         this.disabled = false;
         this.readonly = false;
+        this.rawValue = '';
+        this.focused = false;
         this.value = undefined;
+        Object.setPrototypeOf(element, uxInputElementProto);
         styleEngine.ensureDefaultTheme(theme);
     }
     bind() {
+        const element = this.element;
+        const textbox = this.textbox;
         if (this.autofocus || this.autofocus === '') {
-            setTimeout(() => {
-                this.textbox.focus();
-            }, 0);
+            this.focused = true;
         }
-        if (this.element.hasAttribute('required')) {
-            this.textbox.setAttribute('required', '');
-            this.element.removeAttribute('required');
-        }
-        if (this.element.hasAttribute('placeholder')) {
-            const attributeValue = this.element.getAttribute('placeholder');
+        if (element.hasAttribute('placeholder')) {
+            const attributeValue = element.getAttribute('placeholder');
             if (attributeValue) {
-                this.textbox.setAttribute('placeholder', attributeValue);
-                this.element.removeAttribute('placeholder');
+                textbox.setAttribute('placeholder', attributeValue);
+                element.removeAttribute('placeholder');
             }
         }
-        if (this.element.hasAttribute('step')) {
-            const attributeValue = this.element.getAttribute('step');
+        if (element.hasAttribute('step')) {
+            const attributeValue = element.getAttribute('step');
             if (attributeValue) {
-                this.textbox.setAttribute('step', attributeValue);
-                this.element.removeAttribute('step');
+                textbox.setAttribute('step', attributeValue);
+                element.removeAttribute('step');
             }
         }
         if ([
@@ -54,27 +53,61 @@ let UxInput = class UxInput {
             'tel',
             'search'
         ].includes(this.type)) {
-            this.textbox.setAttribute('type', this.type);
+            textbox.setAttribute('type', this.type);
         }
         if (this.min) {
-            this.textbox.setAttribute('min', this.min.toString());
+            textbox.setAttribute('min', this.min.toString());
         }
         if (this.max) {
-            this.textbox.setAttribute('max', this.max.toString());
+            textbox.setAttribute('max', this.max.toString());
         }
         if (this.minlength) {
-            this.textbox.setAttribute('minlength', this.minlength.toString());
+            textbox.setAttribute('minlength', this.minlength.toString());
         }
         if (this.maxlength) {
-            this.textbox.setAttribute('maxlength', this.maxlength.toString());
-        }
-        if (this.disabled || this.disabled === '') {
-            this.textbox.setAttribute('disabled', '');
-        }
-        if (this.readonly || this.readonly === '') {
-            this.textbox.setAttribute('readonly', '');
+            textbox.setAttribute('maxlength', this.maxlength.toString());
         }
         this.themeChanged(this.theme);
+    }
+    attached() {
+        this.textbox.addEventListener('change', stopEvent);
+        this.textbox.addEventListener('input', stopEvent);
+    }
+    detached() {
+        this.textbox.removeEventListener('change', stopEvent);
+        this.textbox.removeEventListener('input', stopEvent);
+    }
+    getValue() {
+        return this.value;
+    }
+    setValue(value) {
+        const oldValue = this.value;
+        const newValue = this.processRawValue(value);
+        if (oldValue !== newValue) {
+            this.value = newValue;
+            this.ignoreRawChanges = true;
+            this.rawValue = newValue === null || newValue === undefined ? '' : newValue.toString();
+            this.ignoreRawChanges = false;
+            this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
+        }
+    }
+    processRawValue(rawValue) {
+        let newValue = rawValue;
+        if (this.type === 'number') {
+            newValue = rawValue === '' ? NaN : Number(rawValue);
+            if (isNaN(newValue)) {
+                newValue = null;
+            }
+            else {
+                if (this.min !== undefined && this.min > newValue) {
+                    newValue = this.min;
+                }
+                if (this.max !== undefined && newValue > this.max) {
+                    newValue = this.max;
+                }
+            }
+        }
+        return newValue;
     }
     themeChanged(newValue) {
         if (newValue != null && newValue.themeKey == null) {
@@ -82,47 +115,19 @@ let UxInput = class UxInput {
         }
         this.styleEngine.applyTheme(newValue, this.element);
     }
-    disabledChanged(newValue) {
-        if (newValue === true || newValue === '') {
-            this.textbox.setAttribute('disabled', 'true');
-        }
-        else {
-            this.textbox.removeAttribute('disabled');
-        }
-    }
-    readonlyChanged(newValue) {
-        if (newValue === true || newValue === '') {
-            this.textbox.setAttribute('readonly', 'true');
-        }
-        else {
-            this.textbox.removeAttribute('readonly');
-        }
+    focusedChanged(focused) {
+        this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
     }
     typeChanged(newValue) {
         if (newValue !== 'text' && newValue !== 'password' && newValue !== 'number') {
             this.type = 'text';
         }
     }
-    valueChanged(newValue) {
-        if (this.type === 'number' && !isNaN(newValue) && newValue !== '') {
-            if (this.min && newValue < this.min) {
-                this.value = this.min;
-            }
-            if (this.max && newValue > this.max) {
-                this.value = this.max;
-            }
-            if (isNaN(newValue)) {
-                this.value = '';
-            }
+    rawValueChanged(newValue) {
+        if (this.ignoreRawChanges) {
+            return;
         }
-    }
-    onFieldBlur() {
-        this.element.classList.remove('focused');
-        this.element.dispatchEvent(DOM.createCustomEvent('blur', { bubbles: true }));
-    }
-    onFieldFocus() {
-        this.element.classList.add('focused');
-        this.element.dispatchEvent(DOM.createCustomEvent('focus', { bubbles: true }));
+        this.setValue(newValue);
     }
 };
 __decorate([
@@ -153,10 +158,27 @@ __decorate([
     bindable
 ], UxInput.prototype, "type", void 0);
 __decorate([
-    bindable({ defaultBindingMode: bindingMode.twoWay })
-], UxInput.prototype, "value", void 0);
+    observable
+], UxInput.prototype, "rawValue", void 0);
+__decorate([
+    observable
+], UxInput.prototype, "focused", void 0);
 UxInput = __decorate([
     inject(Element, StyleEngine),
     customElement('ux-input')
 ], UxInput);
 export { UxInput };
+function stopEvent(e) {
+    e.stopPropagation();
+}
+const getVm = (_) => _.au.controller.viewModel;
+const uxInputElementProto = Object.create(HTMLElement.prototype, {
+    value: {
+        get() {
+            return getVm(this).getValue();
+        },
+        set(value) {
+            getVm(this).setValue(value);
+        }
+    }
+});

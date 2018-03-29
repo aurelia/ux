@@ -1,4 +1,4 @@
-System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/grid", "@aurelia-ux/datepicker", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch"], function (exports_1, context_1) {
+System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/grid", "@aurelia-ux/datepicker", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
@@ -14,9 +14,10 @@ System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip
         radio_1.configure(config);
         textarea_1.configure(config);
         switch_1.configure(config);
+        select_1.configure(config);
     }
     exports_1("configure", configure);
-    var button_1, checkbox_1, chip_input_1, datepicker_1, grid_1, form_1, input_1, input_info_1, list_1, radio_1, textarea_1, switch_1;
+    var button_1, checkbox_1, chip_input_1, datepicker_1, grid_1, form_1, input_1, input_info_1, list_1, radio_1, textarea_1, switch_1, select_1;
     return {
         setters: [
             function (button_2_1) {
@@ -27,7 +28,8 @@ System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip
             },
             function (checkbox_2_1) {
                 exports_1({
-                    "UxCheckboxTheme": checkbox_2_1["UxCheckboxTheme"]
+                    "UxCheckboxTheme": checkbox_2_1["UxCheckboxTheme"],
+                    "UxCheckbox": checkbox_2_1["UxCheckbox"]
                 });
                 checkbox_1 = checkbox_2_1;
             },
@@ -60,7 +62,8 @@ System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip
             },
             function (input_2_1) {
                 exports_1({
-                    "UxInputTheme": input_2_1["UxInputTheme"]
+                    "UxInputTheme": input_2_1["UxInputTheme"],
+                    "UxInput": input_2_1["UxInput"]
                 });
                 input_1 = input_2_1;
             },
@@ -78,21 +81,33 @@ System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip
             },
             function (radio_2_1) {
                 exports_1({
-                    "UxRadioTheme": radio_2_1["UxRadioTheme"]
+                    "UxRadioTheme": radio_2_1["UxRadioTheme"],
+                    "UxRadio": radio_2_1["UxRadio"]
                 });
                 radio_1 = radio_2_1;
             },
             function (textarea_2_1) {
                 exports_1({
-                    "UxTextareaTheme": textarea_2_1["UxTextareaTheme"]
+                    "UxTextAreaTheme": textarea_2_1["UxTextAreaTheme"],
+                    "UxTextArea": textarea_2_1["UxTextArea"]
                 });
                 textarea_1 = textarea_2_1;
             },
             function (switch_2_1) {
                 exports_1({
-                    "UxSwitchTheme": switch_2_1["UxSwitchTheme"]
+                    "UxSwitchTheme": switch_2_1["UxSwitchTheme"],
+                    "UxSwitch": switch_2_1["UxSwitch"]
                 });
                 switch_1 = switch_2_1;
+            },
+            function (select_2_1) {
+                exports_1({
+                    "UxOption": select_2_1["UxOption"],
+                    "UxOptGroup": select_2_1["UxOptGroup"],
+                    "UxSelect": select_2_1["UxSelect"],
+                    "UxSelectTheme": select_2_1["UxSelectTheme"]
+                });
+                select_1 = select_2_1;
             }
         ],
         execute: function () {

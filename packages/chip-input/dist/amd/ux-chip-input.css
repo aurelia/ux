@@ -26,6 +26,7 @@ ux-chip-input {
 
   ux-chip-input>input+div.bottom-border {
     align-self: flex-end;
+    background-color: #9E9E9E;
     background-color: var(--ux-theme--chip-input-foreground, var(--ux-design--primary-light-foreground, #9E9E9E));
     height: 1px;
     margin-top: 2px;
@@ -36,6 +37,7 @@ ux-chip-input {
 
     ux-chip-input:hover>div.bottom-border,
     ux-chip-input>input:focus+div.bottom-border {
+      background-color: #FF4081;
       background-color: var(--ux-design--accent, #FF4081);
     }
 

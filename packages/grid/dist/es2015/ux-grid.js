@@ -17,6 +17,9 @@ let UxGrid = class UxGrid {
     }
     bind() {
         this.themeChanged(this.theme);
+        if (this.columns != null) {
+            this.columnsChanged(this.columns);
+        }
     }
     themeChanged(newValue) {
         if (newValue != null && newValue.themeKey == null) {
@@ -24,10 +27,18 @@ let UxGrid = class UxGrid {
         }
         this.styleEngine.applyTheme(newValue, this.element);
     }
+    columnsChanged(newValue) {
+        if (newValue != null) {
+            this.element.style.setProperty('grid-template-columns', `repeat(${newValue}, 1fr)`);
+        }
+    }
 };
 __decorate([
     bindable
 ], UxGrid.prototype, "theme", void 0);
+__decorate([
+    bindable
+], UxGrid.prototype, "columns", void 0);
 UxGrid = __decorate([
     inject(Element, StyleEngine),
     customElement('ux-grid')

@@ -1,7 +1,7 @@
 System.register(["@aurelia-ux/core"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var core_1, UxTextareaTheme;
+    var core_1, UxTextAreaTheme;
     return {
         setters: [
             function (core_1_1) {
@@ -9,8 +9,8 @@ System.register(["@aurelia-ux/core"], function (exports_1, context_1) {
             }
         ],
         execute: function () {
-            UxTextareaTheme = /** @class */ (function () {
-                function UxTextareaTheme() {
+            UxTextAreaTheme = /** @class */ (function () {
+                function UxTextAreaTheme() {
                     this.themeKey = 'textarea';
                     this.foreground = core_1.swatches.grey.p900;
                     this.background = 'transparent';
@@ -24,9 +24,9 @@ System.register(["@aurelia-ux/core"], function (exports_1, context_1) {
                     this.fullWidthBackgroundDisabled = core_1.swatches.grey.p200;
                     this.error = core_1.swatches.red.p500;
                 }
-                return UxTextareaTheme;
+                return UxTextAreaTheme;
             }());
-            exports_1("UxTextareaTheme", UxTextareaTheme);
+            exports_1("UxTextAreaTheme", UxTextAreaTheme);
         }
     };
 });

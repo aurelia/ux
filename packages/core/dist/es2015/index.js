@@ -1,3 +1,4 @@
+import { PLATFORM } from 'aurelia-framework';
 import { AureliaUX } from './aurelia-ux';
 export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
@@ -10,6 +11,9 @@ export { AureliaUX } from './aurelia-ux';
 export { UXConfiguration } from './ux-configuration';
 export function configure(config, callback) {
     const ux = config.container.get(AureliaUX);
+    config.globalResources([
+        PLATFORM.moduleName('./components/boolean-attr-binding-behavior')
+    ]);
     if (typeof callback === 'function') {
         return Promise.resolve(callback(ux))
             .then(() => ux.start(config));

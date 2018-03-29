@@ -13,5 +13,6 @@ ux-year-list>.years {
 
 ux-year-list>.years.selected {
   font-size: 1.75em;
+  color: #FF4081;
   color: var(--ux-design--accent, #FF4081);
 }

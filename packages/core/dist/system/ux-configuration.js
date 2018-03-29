@@ -39,14 +39,14 @@ System.register(["aurelia-dependency-injection", "aurelia-logging", "aurelia-loa
                 };
                 UXConfiguration.prototype.cssReset = function () {
                     var _this = this;
-                    aurelia_pal_1.PLATFORM.moduleName('./reset.css');
-                    this.loader.loadText('@aurelia-ux/core/reset.css')
+                    aurelia_pal_1.PLATFORM.moduleName('./styles/reset.css');
+                    this.loader.loadText('@aurelia-ux/core/styles/reset.css')
                         .catch(function (err) {
                         _this.logger.warn('Aurelia-UX Core failed to load reset.css, some visual errors may appear.', err);
                     })
                         .then(function (text) {
                         if (text) {
-                            _this.globalStyleEngine.addOrUpdateGlobalStyle('@aurelia-ux/core/reset.css', text);
+                            _this.globalStyleEngine.addOrUpdateGlobalStyle('@aurelia-ux/core/styles/reset.css', text);
                         }
                     });
                     return this;

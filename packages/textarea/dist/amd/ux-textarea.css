@@ -1,6 +1,7 @@
 ux-textarea {
   display: block;
   width: 100%;
+  color: #212121;
   color: var(--ux-theme--textarea-foreground, #212121);
 }
   ux-textarea > textarea {
@@ -13,13 +14,16 @@ ux-textarea {
     padding-left:0;
     padding-right:0;
     transition: border-color 250ms ease;
+    background-color: transparent;
     background-color: var(--ux-theme--textarea-background, transparent);
+    border-bottom: 1px solid #9E9E9E;
     border-bottom: var(--ux-theme--textarea-border-bottom, 1px solid #9E9E9E);
   }
 
     ux-textarea > textarea:hover,
     ux-textarea > textarea:focus {
-      border-bottom-color: var(--ux-theme--textarea-border-bottom-focus, 1px solid var(--ux-design--accent, #FF4081));
+      border-bottom: 1px solid #FF4081;
+      border-bottom: var(--ux-theme--textarea-border-bottom-focus, 1px solid var(--ux-design--accent, #FF4081));
     }
 
     ux-textarea > textarea:focus {
@@ -33,7 +37,9 @@ ux-textarea {
     ux-textarea > textarea[readonly],
     ux-textarea > textarea[readonly]:hover,
     ux-textarea > textarea[readonly]:focus {
+      color: #E0E0E0;
       color: var(--ux-theme--textarea-disabled-foreground, #E0E0E0);
+      border-bottom: 1px dashed #E0E0E0;
       border-bottom: var(--ux-theme--textarea-disabled-border-bottom, 1px dashed #E0E0E0);
     }
     
@@ -45,7 +51,9 @@ ux-textarea {
     padding: 20px 8px;
     margin-bottom: 0;
     font-size: 16px;
+    border: 1px solid #EEEEEE;
     border: var(--ux-theme--textarea-full-width-border, 1px solid #EEEEEE);
+    background-color: #FFF;
     background-color: var(--ux-theme--textarea-full-width-background, #FFF);
   }
 
@@ -55,15 +63,20 @@ ux-textarea {
     ux-textarea.full-width > ux-textarea > textarea[readonly],
     ux-textarea.full-width > ux-textarea > textarea[readonly]:hover,
     ux-textarea.full-width > ux-textarea > textarea[readonly]:focus  {
+      background-color: #EEEEEE;
       background-color: var(--ux-theme--textarea-full-width-background-disabled, #EEEEEE);
-      border: 1px solid var(--ux-theme--textarea-disabled-border-bottom, 1px dashed #E0E0E0);
+      border: 1px dashed #E0E0E0;
+      border: var(--ux-theme--textarea-disabled-border-bottom, 1px dashed #E0E0E0);
+      color: #E0E0E0;
       color: var(--ux-theme--textarea-disabled-foreground, #E0E0E0);
     }
   
   ux-textarea.has-error ux-textarea > textarea {
+    border-bottom-color: #F44336;
     border-bottom-color: var(--ux-theme--textarea-error, #F44336);
   }
 
   ux-textarea.full-width.has-error ux-textarea > textarea {
+    border-color: #F44336;
     border-color: var(--ux-theme--textarea-error, #F44336);
   }

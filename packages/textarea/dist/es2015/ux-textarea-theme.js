@@ -1,5 +1,5 @@
 import { swatches } from '@aurelia-ux/core';
-export class UxTextareaTheme {
+export class UxTextAreaTheme {
     constructor() {
         this.themeKey = 'textarea';
         this.foreground = swatches.grey.p900;

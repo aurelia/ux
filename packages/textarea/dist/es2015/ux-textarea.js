@@ -6,78 +6,90 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
-import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, normalizeBooleanAttribute } from '@aurelia-ux/core';
-import { UxTextareaTheme } from './ux-textarea-theme';
-const theme = new UxTextareaTheme();
-let UxTextarea = class UxTextarea {
+import { StyleEngine } from '@aurelia-ux/core';
+import { UxTextAreaTheme } from './ux-textarea-theme';
+import { observable } from 'aurelia-framework';
+const theme = new UxTextAreaTheme();
+let UxTextArea = class UxTextArea {
     constructor(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.autofocus = null;
-        this.autoResize = null;
+        this.autoResize = false;
         this.disabled = false;
+        this.focus = false;
         this.readonly = false;
         this.value = undefined;
+        Object.setPrototypeOf(element, uxTextAreaElementProto);
         styleEngine.ensureDefaultTheme(theme);
     }
     bind() {
+        const element = this.element;
+        const textbox = this.textbox;
         if (this.theme != null) {
             this.themeChanged(this.theme);
         }
         if (this.autofocus || this.autofocus === '') {
-            setTimeout(() => {
-                this.textbox.focus();
-            }, 0);
+            this.focus = true;
         }
-        if (this.element.hasAttribute('placeholder')) {
-            const attributeValue = this.element.getAttribute('placeholder');
+        if (element.hasAttribute('placeholder')) {
+            const attributeValue = element.getAttribute('placeholder');
             if (attributeValue) {
-                this.textbox.setAttribute('placeholder', attributeValue);
-                this.element.removeAttribute('placeholder');
+                textbox.setAttribute('placeholder', attributeValue);
+                element.removeAttribute('placeholder');
             }
         }
-        if (this.element.hasAttribute('required')) {
-            this.textbox.setAttribute('required', '');
-            this.element.removeAttribute('required');
-        }
         if (this.cols) {
-            this.textbox.setAttribute('cols', this.cols.toString());
-            this.element.removeAttribute('cols');
+            textbox.setAttribute('cols', this.cols.toString());
+            element.removeAttribute('cols');
         }
         if (this.rows) {
-            this.textbox.setAttribute('rows', this.rows.toString());
-            this.element.removeAttribute('rows');
+            textbox.setAttribute('rows', this.rows.toString());
+            element.removeAttribute('rows');
         }
         if (this.minlength) {
-            this.textbox.setAttribute('minlength', this.minlength.toString());
+            textbox.setAttribute('minlength', this.minlength.toString());
         }
         if (this.maxlength) {
-            this.textbox.setAttribute('maxlength', this.maxlength.toString());
-        }
-        if (normalizeBooleanAttribute('disabled', this.disabled)) {
-            this.textbox.setAttribute('disabled', '');
-        }
-        if (normalizeBooleanAttribute('readonly', this.readonly)) {
-            this.textbox.setAttribute('readonly', '');
+            textbox.setAttribute('maxlength', this.maxlength.toString());
         }
     }
-    disabledChanged(newValue) {
-        if (normalizeBooleanAttribute('disabled', newValue)) {
-            this.textbox.setAttribute('disabled', '');
-        }
-        else {
-            this.textbox.removeAttribute('disabled');
+    attached() {
+        const textbox = this.textbox;
+        this.isAttached = true;
+        this.textbox.addEventListener('change', stopEvent);
+        this.textbox.addEventListener('input', stopEvent);
+        this.fitTextContent();
+        textbox.addEventListener('change', stopEvent);
+        textbox.addEventListener('input', stopEvent);
+    }
+    detached() {
+        const textbox = this.textbox;
+        this.isAttached = false;
+        textbox.removeEventListener('change', stopEvent);
+        textbox.removeEventListener('input', stopEvent);
+    }
+    getValue() {
+        return this.value;
+    }
+    setValue(value) {
+        const oldValue = this.value;
+        const newValue = value === null || value === undefined ? null : value.toString();
+        if (oldValue !== newValue) {
+            this.value = newValue;
+            this.ignoreRawChanges = true;
+            this.rawValue = newValue === null ? '' : newValue.toString();
+            this.fitTextContent();
+            this.ignoreRawChanges = false;
+            this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
         }
     }
-    readonlyChanged(newValue) {
-        if (normalizeBooleanAttribute('readonly', newValue)) {
-            this.textbox.setAttribute('readonly', '');
+    rawValueChanged(rawValue) {
+        if (this.ignoreRawChanges) {
+            return;
         }
-        else {
-            this.textbox.removeAttribute('readonly');
-        }
+        this.setValue(rawValue);
     }
     themeChanged(newValue) {
         if (newValue != null && newValue.themeKey == null) {
@@ -85,53 +97,66 @@ let UxTextarea = class UxTextarea {
         }
         this.styleEngine.applyTheme(newValue, this.element);
     }
-    valueChanged() {
-        if (this.autoResize !== null) {
+    fitTextContent() {
+        if (this.isAttached && (this.autoResize || this.autoResize === '')) {
             this.textbox.style.height = 'auto';
             this.textbox.style.height = `${this.textbox.scrollHeight + 2}px`;
         }
     }
-    onFieldBlur() {
-        this.element.classList.remove('focused');
-        this.element.dispatchEvent(DOM.createCustomEvent('blur', { bubbles: true }));
-    }
-    onFieldFocus() {
-        this.element.classList.add('focused');
-        this.element.dispatchEvent(DOM.createCustomEvent('focus', { bubbles: true }));
+    focusChanged(focus) {
+        focus = focus || focus === '' ? true : false;
+        this.element.dispatchEvent(DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
     }
 };
 __decorate([
     bindable
-], UxTextarea.prototype, "autofocus", void 0);
+], UxTextArea.prototype, "autofocus", void 0);
 __decorate([
     bindable
-], UxTextarea.prototype, "autoResize", void 0);
+], UxTextArea.prototype, "autoResize", void 0);
 __decorate([
     bindable
-], UxTextarea.prototype, "cols", void 0);
+], UxTextArea.prototype, "cols", void 0);
 __decorate([
     bindable
-], UxTextarea.prototype, "disabled", void 0);
+], UxTextArea.prototype, "disabled", void 0);
 __decorate([
     bindable
-], UxTextarea.prototype, "maxlength", void 0);
+], UxTextArea.prototype, "focus", void 0);
 __decorate([
     bindable
-], UxTextarea.prototype, "minlength", void 0);
+], UxTextArea.prototype, "maxlength", void 0);
 __decorate([
     bindable
-], UxTextarea.prototype, "readonly", void 0);
+], UxTextArea.prototype, "minlength", void 0);
 __decorate([
     bindable
-], UxTextarea.prototype, "rows", void 0);
+], UxTextArea.prototype, "readonly", void 0);
 __decorate([
     bindable
-], UxTextarea.prototype, "theme", void 0);
+], UxTextArea.prototype, "rows", void 0);
 __decorate([
-    bindable({ defaultBindingMode: bindingMode.twoWay })
-], UxTextarea.prototype, "value", void 0);
-UxTextarea = __decorate([
+    bindable
+], UxTextArea.prototype, "theme", void 0);
+__decorate([
+    observable({ initializer: () => '' })
+], UxTextArea.prototype, "rawValue", void 0);
+UxTextArea = __decorate([
     inject(Element, StyleEngine),
     customElement('ux-textarea')
-], UxTextarea);
-export { UxTextarea };
+], UxTextArea);
+export { UxTextArea };
+function stopEvent(e) {
+    e.stopPropagation();
+}
+const getVm = (_) => _.au.controller.viewModel;
+const uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
+    value: {
+        get() {
+            return getVm(this).getValue();
+        },
+        set(value) {
+            getVm(this).setValue(value);
+        }
+    }
+});

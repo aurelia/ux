@@ -8,134 +8,158 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_pal_1 = require("aurelia-pal");
-var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
 var ux_textarea_theme_1 = require("./ux-textarea-theme");
-var theme = new ux_textarea_theme_1.UxTextareaTheme();
-var UxTextarea = /** @class */ (function () {
-    function UxTextarea(element, styleEngine) {
+var aurelia_framework_1 = require("aurelia-framework");
+var theme = new ux_textarea_theme_1.UxTextAreaTheme();
+var UxTextArea = /** @class */ (function () {
+    function UxTextArea(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.autofocus = null;
-        this.autoResize = null;
+        this.autoResize = false;
         this.disabled = false;
+        this.focus = false;
         this.readonly = false;
         this.value = undefined;
+        Object.setPrototypeOf(element, uxTextAreaElementProto);
         styleEngine.ensureDefaultTheme(theme);
     }
-    UxTextarea.prototype.bind = function () {
-        var _this = this;
+    UxTextArea.prototype.bind = function () {
+        var element = this.element;
+        var textbox = this.textbox;
         if (this.theme != null) {
             this.themeChanged(this.theme);
         }
         if (this.autofocus || this.autofocus === '') {
-            setTimeout(function () {
-                _this.textbox.focus();
-            }, 0);
+            this.focus = true;
         }
-        if (this.element.hasAttribute('placeholder')) {
-            var attributeValue = this.element.getAttribute('placeholder');
+        if (element.hasAttribute('placeholder')) {
+            var attributeValue = element.getAttribute('placeholder');
             if (attributeValue) {
-                this.textbox.setAttribute('placeholder', attributeValue);
-                this.element.removeAttribute('placeholder');
+                textbox.setAttribute('placeholder', attributeValue);
+                element.removeAttribute('placeholder');
             }
         }
-        if (this.element.hasAttribute('required')) {
-            this.textbox.setAttribute('required', '');
-            this.element.removeAttribute('required');
-        }
         if (this.cols) {
-            this.textbox.setAttribute('cols', this.cols.toString());
-            this.element.removeAttribute('cols');
+            textbox.setAttribute('cols', this.cols.toString());
+            element.removeAttribute('cols');
         }
         if (this.rows) {
-            this.textbox.setAttribute('rows', this.rows.toString());
-            this.element.removeAttribute('rows');
+            textbox.setAttribute('rows', this.rows.toString());
+            element.removeAttribute('rows');
         }
         if (this.minlength) {
-            this.textbox.setAttribute('minlength', this.minlength.toString());
+            textbox.setAttribute('minlength', this.minlength.toString());
         }
         if (this.maxlength) {
-            this.textbox.setAttribute('maxlength', this.maxlength.toString());
-        }
-        if (core_1.normalizeBooleanAttribute('disabled', this.disabled)) {
-            this.textbox.setAttribute('disabled', '');
-        }
-        if (core_1.normalizeBooleanAttribute('readonly', this.readonly)) {
-            this.textbox.setAttribute('readonly', '');
+            textbox.setAttribute('maxlength', this.maxlength.toString());
         }
     };
-    UxTextarea.prototype.disabledChanged = function (newValue) {
-        if (core_1.normalizeBooleanAttribute('disabled', newValue)) {
-            this.textbox.setAttribute('disabled', '');
-        }
-        else {
-            this.textbox.removeAttribute('disabled');
+    UxTextArea.prototype.attached = function () {
+        var textbox = this.textbox;
+        this.isAttached = true;
+        this.textbox.addEventListener('change', stopEvent);
+        this.textbox.addEventListener('input', stopEvent);
+        this.fitTextContent();
+        textbox.addEventListener('change', stopEvent);
+        textbox.addEventListener('input', stopEvent);
+    };
+    UxTextArea.prototype.detached = function () {
+        var textbox = this.textbox;
+        this.isAttached = false;
+        textbox.removeEventListener('change', stopEvent);
+        textbox.removeEventListener('input', stopEvent);
+    };
+    UxTextArea.prototype.getValue = function () {
+        return this.value;
+    };
+    UxTextArea.prototype.setValue = function (value) {
+        var oldValue = this.value;
+        var newValue = value === null || value === undefined ? null : value.toString();
+        if (oldValue !== newValue) {
+            this.value = newValue;
+            this.ignoreRawChanges = true;
+            this.rawValue = newValue === null ? '' : newValue.toString();
+            this.fitTextContent();
+            this.ignoreRawChanges = false;
+            this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent('change', { bubbles: true }));
         }
     };
-    UxTextarea.prototype.readonlyChanged = function (newValue) {
-        if (core_1.normalizeBooleanAttribute('readonly', newValue)) {
-            this.textbox.setAttribute('readonly', '');
+    UxTextArea.prototype.rawValueChanged = function (rawValue) {
+        if (this.ignoreRawChanges) {
+            return;
         }
-        else {
-            this.textbox.removeAttribute('readonly');
-        }
+        this.setValue(rawValue);
     };
-    UxTextarea.prototype.themeChanged = function (newValue) {
+    UxTextArea.prototype.themeChanged = function (newValue) {
         if (newValue != null && newValue.themeKey == null) {
             newValue.themeKey = 'textarea';
         }
         this.styleEngine.applyTheme(newValue, this.element);
     };
-    UxTextarea.prototype.valueChanged = function () {
-        if (this.autoResize !== null) {
+    UxTextArea.prototype.fitTextContent = function () {
+        if (this.isAttached && (this.autoResize || this.autoResize === '')) {
             this.textbox.style.height = 'auto';
             this.textbox.style.height = this.textbox.scrollHeight + 2 + "px";
         }
     };
-    UxTextarea.prototype.onFieldBlur = function () {
-        this.element.classList.remove('focused');
-        this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent('blur', { bubbles: true }));
-    };
-    UxTextarea.prototype.onFieldFocus = function () {
-        this.element.classList.add('focused');
-        this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent('focus', { bubbles: true }));
+    UxTextArea.prototype.focusChanged = function (focus) {
+        focus = focus || focus === '' ? true : false;
+        this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
     };
     __decorate([
         aurelia_templating_1.bindable
-    ], UxTextarea.prototype, "autofocus", void 0);
+    ], UxTextArea.prototype, "autofocus", void 0);
     __decorate([
         aurelia_templating_1.bindable
-    ], UxTextarea.prototype, "autoResize", void 0);
+    ], UxTextArea.prototype, "autoResize", void 0);
     __decorate([
         aurelia_templating_1.bindable
-    ], UxTextarea.prototype, "cols", void 0);
+    ], UxTextArea.prototype, "cols", void 0);
     __decorate([
         aurelia_templating_1.bindable
-    ], UxTextarea.prototype, "disabled", void 0);
+    ], UxTextArea.prototype, "disabled", void 0);
     __decorate([
         aurelia_templating_1.bindable
-    ], UxTextarea.prototype, "maxlength", void 0);
+    ], UxTextArea.prototype, "focus", void 0);
     __decorate([
         aurelia_templating_1.bindable
-    ], UxTextarea.prototype, "minlength", void 0);
+    ], UxTextArea.prototype, "maxlength", void 0);
     __decorate([
         aurelia_templating_1.bindable
-    ], UxTextarea.prototype, "readonly", void 0);
+    ], UxTextArea.prototype, "minlength", void 0);
     __decorate([
         aurelia_templating_1.bindable
-    ], UxTextarea.prototype, "rows", void 0);
+    ], UxTextArea.prototype, "readonly", void 0);
     __decorate([
         aurelia_templating_1.bindable
-    ], UxTextarea.prototype, "theme", void 0);
+    ], UxTextArea.prototype, "rows", void 0);
     __decorate([
-        aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
-    ], UxTextarea.prototype, "value", void 0);
-    UxTextarea = __decorate([
+        aurelia_templating_1.bindable
+    ], UxTextArea.prototype, "theme", void 0);
+    __decorate([
+        aurelia_framework_1.observable({ initializer: function () { return ''; } })
+    ], UxTextArea.prototype, "rawValue", void 0);
+    UxTextArea = __decorate([
         aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
         aurelia_templating_1.customElement('ux-textarea')
-    ], UxTextarea);
-    return UxTextarea;
+    ], UxTextArea);
+    return UxTextArea;
 }());
-exports.UxTextarea = UxTextarea;
+exports.UxTextArea = UxTextArea;
+function stopEvent(e) {
+    e.stopPropagation();
+}
+var getVm = function (_) { return _.au.controller.viewModel; };
+var uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
+    value: {
+        get: function () {
+            return getVm(this).getValue();
+        },
+        set: function (value) {
+            getVm(this).setValue(value);
+        }
+    }
+});

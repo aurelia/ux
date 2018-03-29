@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@aurelia-ux/core");
-var UxTextareaTheme = /** @class */ (function () {
-    function UxTextareaTheme() {
+var UxTextAreaTheme = /** @class */ (function () {
+    function UxTextAreaTheme() {
         this.themeKey = 'textarea';
         this.foreground = core_1.swatches.grey.p900;
         this.background = 'transparent';
@@ -16,6 +16,6 @@ var UxTextareaTheme = /** @class */ (function () {
         this.fullWidthBackgroundDisabled = core_1.swatches.grey.p200;
         this.error = core_1.swatches.red.p500;
     }
-    return UxTextareaTheme;
+    return UxTextAreaTheme;
 }());
-exports.UxTextareaTheme = UxTextareaTheme;
+exports.UxTextAreaTheme = UxTextAreaTheme;

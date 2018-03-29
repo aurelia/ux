@@ -1,20 +1,30 @@
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
+export interface UxSwitchElement extends HTMLElement {
+    type: 'checkbox';
+    checked: boolean;
+}
 export declare class UxSwitch implements UxComponent {
-    element: HTMLElement;
+    element: UxSwitchElement;
     private styleEngine;
+    private ignoreValueChanges;
     disabled: boolean | string;
     effect: string;
     id: string;
     theme: UxSwitchTheme;
     checked: any;
+    value: boolean;
     private checkbox;
     private ripple;
     readonly isDisabled: boolean;
-    constructor(element: HTMLElement, styleEngine: StyleEngine);
+    constructor(element: UxSwitchElement, styleEngine: StyleEngine);
     bind(): void;
+    attached(): void;
+    detached(): void;
+    getChecked(): any;
+    setChecked(value: any): void;
+    valueChanged(newValue: boolean): void;
     themeChanged(newValue: UxSwitchTheme): void;
     disabledChanged(newValue: boolean | string): void;
     onMouseDown(e: MouseEvent): void;
-    onMouseUp(e: MouseEvent): void;
 }

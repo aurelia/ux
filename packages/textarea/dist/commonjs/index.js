@@ -1,11 +1,35 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
+var AuBinding = require("aurelia-binding");
+var core_1 = require("@aurelia-ux/core");
 var ux_textarea_theme_1 = require("./ux-textarea-theme");
-exports.UxTextareaTheme = ux_textarea_theme_1.UxTextareaTheme;
+exports.UxTextAreaTheme = ux_textarea_theme_1.UxTextAreaTheme;
+var ux_textarea_1 = require("./ux-textarea");
+exports.UxTextArea = ux_textarea_1.UxTextArea;
 function configure(config) {
+    config.container.get(core_1.AureliaUX).registerUxElementConfig(uxTextAreaConfig);
     config.globalResources([
         aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/textarea/ux-textarea')
     ]);
 }
 exports.configure = configure;
+var uxTextAreaConfig = {
+    tagName: 'ux-textarea',
+    properties: {
+        value: {
+            defaultBindingMode: aurelia_framework_1.bindingMode.twoWay,
+            getObserver: function (element) {
+                return new AuBinding.ValueAttributeObserver(element, 'value', uxTextareaChangeHandler);
+            }
+        }
+    }
+};
+var uxTextareaChangeHandler = {
+    subscribe: function (target, callbackOrListener) {
+        target.addEventListener('change', callbackOrListener, false);
+        return function () {
+            target.removeEventListener('change', callbackOrListener, false);
+        };
+    }
+};

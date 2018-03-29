@@ -11,20 +11,17 @@ var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
 var ux_radio_theme_1 = require("./ux-radio-theme");
+var aurelia_framework_1 = require("aurelia-framework");
 var theme = new ux_radio_theme_1.UxRadioTheme();
 var UxRadio = /** @class */ (function () {
     function UxRadio(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.disabled = false;
-        this.effect = null;
-        this.tabindex = 0;
-        // tslint:disable
-        this.matcher = function (a, b) { return a === b; };
-        // tslint: enable
+        this.effect = 'ripple';
         this.checked = false;
-        this.value = null;
         this.ripple = null;
+        Object.setPrototypeOf(element, uxRadioElementProto);
         styleEngine.ensureDefaultTheme(theme);
     }
     Object.defineProperty(UxRadio.prototype, "isDisabled", {
@@ -35,37 +32,51 @@ var UxRadio = /** @class */ (function () {
         configurable: true
     });
     UxRadio.prototype.bind = function () {
-        this.themeChanged(this.theme);
+        var element = this.element;
+        var radio = this.radio;
+        if (element.hasAttribute('id')) {
+            var id = element.id;
+            if (id != null) {
+                radio.setAttribute('id', id);
+                element.removeAttribute('id');
+            }
+        }
+        if (element.hasAttribute('tabindex')) {
+            var tabIndex = element.getAttribute('tabindex');
+            if (tabIndex != null) {
+                radio.setAttribute('tabindex', tabIndex);
+                element.removeAttribute('tabindex');
+            }
+        }
+        if (element.hasAttribute('checked')) {
+            element.checked = true;
+        }
         if (this.checked) {
-            this.checkedChanged();
+            radio.checked = true;
         }
-        if (core_1.normalizeBooleanAttribute('disabled', this.disabled) && !this.element.classList.contains('disabled')) {
-            this.element.classList.add('disabled');
-        }
-        else if (this.element.classList.contains('disabled')) {
-            this.element.classList.remove('disabled');
-        }
+        this.themeChanged(this.theme);
     };
     UxRadio.prototype.attached = function () {
-        var _this = this;
-        if (this.id) {
-            var labelElement = document.querySelector("label[for=" + this.id + "]");
-            if (labelElement != null) {
-                labelElement.addEventListener('click', function () {
-                    _this.toggleRadio();
-                });
-            }
-        }
+        this.radio.addEventListener('change', stopEvent);
     };
     UxRadio.prototype.detached = function () {
-        var _this = this;
-        if (this.id) {
-            var labelElement = document.querySelector("label[for=" + this.id + "]");
-            if (labelElement != null) {
-                labelElement.removeEventListener('click', function () {
-                    _this.toggleRadio();
-                });
+        this.radio.removeEventListener('change', stopEvent);
+    };
+    UxRadio.prototype.getChecked = function () {
+        return this.checked;
+    };
+    UxRadio.prototype.setChecked = function (value) {
+        var oldValue = this.checked;
+        var newValue = value;
+        if (newValue !== oldValue) {
+            this.checked = newValue;
+            this.ignoreValueChanges = true;
+            this.value = newValue;
+            if (this.radio) {
+                this.radio.checked = !!newValue;
             }
+            this.ignoreValueChanges = false;
+            this.element.dispatchEvent(aurelia_framework_1.DOM.createCustomEvent('change', { bubbles: true }));
         }
     };
     UxRadio.prototype.themeChanged = function (newValue) {
@@ -74,51 +85,18 @@ var UxRadio = /** @class */ (function () {
         }
         this.styleEngine.applyTheme(newValue, this.element);
     };
-    UxRadio.prototype.disabledChanged = function (newValue) {
-        if (core_1.normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-            this.element.classList.add('disabled');
-        }
-        else if (this.element.classList.contains('disabled')) {
-            this.element.classList.remove('disabled');
-        }
-    };
-    UxRadio.prototype.checkedChanged = function () {
-        var elementValue = this.model ? this.model : this.value;
-        var isChecked = this.checked;
-        if (isChecked && isChecked === elementValue) {
-            this.element.classList.add('checked');
-            this.element.setAttribute('aria-checked', 'true');
-        }
-        else {
-            this.element.classList.remove('checked');
-            this.element.setAttribute('aria-checked', 'false');
-        }
-    };
-    UxRadio.prototype.toggleRadio = function () {
-        if (this.isDisabled) {
+    UxRadio.prototype.valueChanged = function (value) {
+        if (this.ignoreValueChanges) {
             return;
         }
-        var elementValue = this.model ? this.model : this.value;
-        if (elementValue != null && typeof elementValue !== 'boolean') {
-            this.checked = elementValue;
-        }
-        else {
-            this.checked = !this.checked;
-        }
-    };
-    UxRadio.prototype.onKeydown = function (e) {
-        var key = e.which || e.keyCode;
-        if (key === 13 || key === 32) {
-            e.preventDefault();
-            this.toggleRadio();
-        }
-        return true;
+        this.setChecked(value);
     };
     UxRadio.prototype.onMouseDown = function (e) {
+        var _this = this;
         if (e.button !== 0 || this.isDisabled) {
             return;
         }
-        if (this.radio.classList.contains('ripple')) {
+        if (this.element.classList.contains('ripple')) {
             if (this.ripple === null) {
                 this.ripple = new core_1.PaperRipple();
                 var container = this.element.querySelector('.ripplecontainer');
@@ -129,17 +107,15 @@ var UxRadio = /** @class */ (function () {
             this.ripple.center = true;
             this.ripple.round = true;
             this.ripple.downAction(e);
+            var winEvents_1 = new aurelia_framework_1.ElementEvents(window);
+            var upAction = function () {
+                _this.ripple.upAction();
+                winEvents_1.disposeAll();
+            };
+            winEvents_1.subscribe('blur', upAction);
+            winEvents_1.subscribe('mouseup', upAction, true);
         }
-        this.toggleRadio();
         e.preventDefault();
-    };
-    UxRadio.prototype.onMouseUp = function (e) {
-        if (e.button !== 0 || this.isDisabled) {
-            return;
-        }
-        if (this.radio.classList.contains('ripple') && this.ripple !== null) {
-            this.ripple.upAction();
-        }
     };
     __decorate([
         aurelia_templating_1.bindable
@@ -152,26 +128,9 @@ var UxRadio = /** @class */ (function () {
     ], UxRadio.prototype, "id", void 0);
     __decorate([
         aurelia_templating_1.bindable
-    ], UxRadio.prototype, "label", void 0);
-    __decorate([
-        aurelia_templating_1.bindable
-    ], UxRadio.prototype, "model", void 0);
-    __decorate([
-        aurelia_templating_1.bindable
-    ], UxRadio.prototype, "tabindex", void 0);
-    __decorate([
-        aurelia_templating_1.bindable
     ], UxRadio.prototype, "theme", void 0);
     __decorate([
-        aurelia_templating_1.bindable
-    ], UxRadio.prototype, "matcher", void 0);
-    __decorate([
-        aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay }),
-        aurelia_templating_1.bindable
-    ], UxRadio.prototype, "checked", void 0);
-    __decorate([
-        aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay }),
-        aurelia_templating_1.bindable
+        aurelia_binding_1.observable({ initializer: function () { return false; } })
     ], UxRadio.prototype, "value", void 0);
     __decorate([
         aurelia_binding_1.computedFrom('disabled')
@@ -183,3 +142,20 @@ var UxRadio = /** @class */ (function () {
     return UxRadio;
 }());
 exports.UxRadio = UxRadio;
+function stopEvent(e) {
+    e.stopPropagation();
+}
+var getVm = function (_) { return _.au.controller.viewModel; };
+var uxRadioElementProto = Object.create(HTMLElement.prototype, {
+    type: {
+        value: 'radio',
+    },
+    checked: {
+        get: function () {
+            return getVm(this).getChecked();
+        },
+        set: function (value) {
+            getVm(this).setChecked(value);
+        }
+    }
+});

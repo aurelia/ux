@@ -27,7 +27,7 @@ export declare class ElementRect {
     /**
      * Returns the size of the current element and its position relative to the viewport.
      */
-    readonly boundingRect: ClientRect;
+    readonly boundingRect: ClientRect | DOMRect;
     /**
      * Calculates euclidean distance between two points.
      * @param point1 - Start point

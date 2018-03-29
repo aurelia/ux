@@ -1,3 +1,4 @@
 import { FrameworkConfiguration } from 'aurelia-framework';
-export { UxTextareaTheme } from './ux-textarea-theme';
+export { UxTextAreaTheme } from './ux-textarea-theme';
+export { UxTextArea, UxTextAreaElement } from './ux-textarea';
 export declare function configure(config: FrameworkConfiguration): void;

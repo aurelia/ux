@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var aurelia_framework_1 = require("aurelia-framework");
 var aurelia_ux_1 = require("./aurelia-ux");
 var swatches_1 = require("./colors/swatches");
 exports.swatches = swatches_1.swatches;
@@ -21,6 +22,9 @@ var ux_configuration_1 = require("./ux-configuration");
 exports.UXConfiguration = ux_configuration_1.UXConfiguration;
 function configure(config, callback) {
     var ux = config.container.get(aurelia_ux_1.AureliaUX);
+    config.globalResources([
+        aurelia_framework_1.PLATFORM.moduleName('./components/boolean-attr-binding-behavior')
+    ]);
     if (typeof callback === 'function') {
         return Promise.resolve(callback(ux))
             .then(function () { return ux.start(config); });

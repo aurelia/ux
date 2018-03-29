@@ -1,15 +1,16 @@
 export { UxButtonTheme } from '@aurelia-ux/button';
-export { UxCheckboxTheme } from '@aurelia-ux/checkbox';
+export { UxCheckboxTheme, UxCheckbox } from '@aurelia-ux/checkbox';
 export { UxChipInputTheme, UxChipTheme, UxTagTheme } from '@aurelia-ux/chip-input';
 export { UxGridTheme, UxResponsiveUtilities } from '@aurelia-ux/grid';
 export { UxDatepickerTheme } from '@aurelia-ux/datepicker';
 export { UxFormTheme } from '@aurelia-ux/form';
-export { UxInputTheme } from '@aurelia-ux/input';
+export { UxInputTheme, UxInput } from '@aurelia-ux/input';
 export { UxInputInfoTheme } from '@aurelia-ux/input-info';
 export { UxListTheme } from '@aurelia-ux/list';
-export { UxRadioTheme } from '@aurelia-ux/radio';
-export { UxTextareaTheme } from '@aurelia-ux/textarea';
-export { UxSwitchTheme } from '@aurelia-ux/switch';
+export { UxRadioTheme, UxRadio } from '@aurelia-ux/radio';
+export { UxTextAreaTheme, UxTextArea } from '@aurelia-ux/textarea';
+export { UxSwitchTheme, UxSwitch } from '@aurelia-ux/switch';
+export { UxOption, UxOptGroup, UxSelect, UxSelectTheme } from '@aurelia-ux/select';
 import { configure as configureButtonComponent } from '@aurelia-ux/button';
 import { configure as configureCheckboxComponent } from '@aurelia-ux/checkbox';
 import { configure as configureChipComponent } from '@aurelia-ux/chip-input';
@@ -22,6 +23,7 @@ import { configure as configureListComponent } from '@aurelia-ux/list';
 import { configure as configureRadioComponent } from '@aurelia-ux/radio';
 import { configure as configureTextareaComponent } from '@aurelia-ux/textarea';
 import { configure as configureSwitchComponent } from '@aurelia-ux/switch';
+import { configure as configureSelectComponent } from '@aurelia-ux/select';
 export function configure(config) {
     configureButtonComponent(config);
     configureCheckboxComponent(config);
@@ -35,4 +37,5 @@ export function configure(config) {
     configureRadioComponent(config);
     configureTextareaComponent(config);
     configureSwitchComponent(config);
+    configureSelectComponent(config);
 }

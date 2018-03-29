@@ -17,6 +17,9 @@ var UxGrid = /** @class */ (function () {
     }
     UxGrid.prototype.bind = function () {
         this.themeChanged(this.theme);
+        if (this.columns != null) {
+            this.columnsChanged(this.columns);
+        }
     };
     UxGrid.prototype.themeChanged = function (newValue) {
         if (newValue != null && newValue.themeKey == null) {
@@ -24,9 +27,17 @@ var UxGrid = /** @class */ (function () {
         }
         this.styleEngine.applyTheme(newValue, this.element);
     };
+    UxGrid.prototype.columnsChanged = function (newValue) {
+        if (newValue != null) {
+            this.element.style.setProperty('grid-template-columns', "repeat(" + newValue + ", 1fr)");
+        }
+    };
     __decorate([
         bindable
     ], UxGrid.prototype, "theme", void 0);
+    __decorate([
+        bindable
+    ], UxGrid.prototype, "columns", void 0);
     UxGrid = __decorate([
         inject(Element, StyleEngine),
         customElement('ux-grid')

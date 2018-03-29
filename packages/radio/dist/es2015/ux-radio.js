@@ -5,59 +5,72 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { customElement, bindable } from 'aurelia-templating';
-import { computedFrom, bindingMode } from 'aurelia-binding';
+import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxRadioTheme } from './ux-radio-theme';
+import { ElementEvents, DOM } from 'aurelia-framework';
 const theme = new UxRadioTheme();
 let UxRadio = class UxRadio {
     constructor(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.disabled = false;
-        this.effect = null;
-        this.tabindex = 0;
-        // tslint:disable
-        this.matcher = (a, b) => a === b;
-        // tslint: enable
+        this.effect = 'ripple';
         this.checked = false;
-        this.value = null;
         this.ripple = null;
+        Object.setPrototypeOf(element, uxRadioElementProto);
         styleEngine.ensureDefaultTheme(theme);
     }
     get isDisabled() {
         return normalizeBooleanAttribute('disabled', this.disabled);
     }
     bind() {
-        this.themeChanged(this.theme);
+        const element = this.element;
+        const radio = this.radio;
+        if (element.hasAttribute('id')) {
+            const id = element.id;
+            if (id != null) {
+                radio.setAttribute('id', id);
+                element.removeAttribute('id');
+            }
+        }
+        if (element.hasAttribute('tabindex')) {
+            const tabIndex = element.getAttribute('tabindex');
+            if (tabIndex != null) {
+                radio.setAttribute('tabindex', tabIndex);
+                element.removeAttribute('tabindex');
+            }
+        }
+        if (element.hasAttribute('checked')) {
+            element.checked = true;
+        }
         if (this.checked) {
-            this.checkedChanged();
+            radio.checked = true;
         }
-        if (normalizeBooleanAttribute('disabled', this.disabled) && !this.element.classList.contains('disabled')) {
-            this.element.classList.add('disabled');
-        }
-        else if (this.element.classList.contains('disabled')) {
-            this.element.classList.remove('disabled');
-        }
+        this.themeChanged(this.theme);
     }
     attached() {
-        if (this.id) {
-            const labelElement = document.querySelector(`label[for=${this.id}]`);
-            if (labelElement != null) {
-                labelElement.addEventListener('click', () => {
-                    this.toggleRadio();
-                });
-            }
-        }
+        this.radio.addEventListener('change', stopEvent);
     }
     detached() {
-        if (this.id) {
-            const labelElement = document.querySelector(`label[for=${this.id}]`);
-            if (labelElement != null) {
-                labelElement.removeEventListener('click', () => {
-                    this.toggleRadio();
-                });
+        this.radio.removeEventListener('change', stopEvent);
+    }
+    getChecked() {
+        return this.checked;
+    }
+    setChecked(value) {
+        const oldValue = this.checked;
+        const newValue = value;
+        if (newValue !== oldValue) {
+            this.checked = newValue;
+            this.ignoreValueChanges = true;
+            this.value = newValue;
+            if (this.radio) {
+                this.radio.checked = !!newValue;
             }
+            this.ignoreValueChanges = false;
+            this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
         }
     }
     themeChanged(newValue) {
@@ -66,51 +79,17 @@ let UxRadio = class UxRadio {
         }
         this.styleEngine.applyTheme(newValue, this.element);
     }
-    disabledChanged(newValue) {
-        if (normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-            this.element.classList.add('disabled');
-        }
-        else if (this.element.classList.contains('disabled')) {
-            this.element.classList.remove('disabled');
-        }
-    }
-    checkedChanged() {
-        const elementValue = this.model ? this.model : this.value;
-        let isChecked = this.checked;
-        if (isChecked && isChecked === elementValue) {
-            this.element.classList.add('checked');
-            this.element.setAttribute('aria-checked', 'true');
-        }
-        else {
-            this.element.classList.remove('checked');
-            this.element.setAttribute('aria-checked', 'false');
-        }
-    }
-    toggleRadio() {
-        if (this.isDisabled) {
+    valueChanged(value) {
+        if (this.ignoreValueChanges) {
             return;
         }
-        const elementValue = this.model ? this.model : this.value;
-        if (elementValue != null && typeof elementValue !== 'boolean') {
-            this.checked = elementValue;
-        }
-        else {
-            this.checked = !this.checked;
-        }
-    }
-    onKeydown(e) {
-        const key = e.which || e.keyCode;
-        if (key === 13 || key === 32) {
-            e.preventDefault();
-            this.toggleRadio();
-        }
-        return true;
+        this.setChecked(value);
     }
     onMouseDown(e) {
         if (e.button !== 0 || this.isDisabled) {
             return;
         }
-        if (this.radio.classList.contains('ripple')) {
+        if (this.element.classList.contains('ripple')) {
             if (this.ripple === null) {
                 this.ripple = new PaperRipple();
                 const container = this.element.querySelector('.ripplecontainer');
@@ -121,17 +100,15 @@ let UxRadio = class UxRadio {
             this.ripple.center = true;
             this.ripple.round = true;
             this.ripple.downAction(e);
+            const winEvents = new ElementEvents(window);
+            const upAction = () => {
+                this.ripple.upAction();
+                winEvents.disposeAll();
+            };
+            winEvents.subscribe('blur', upAction);
+            winEvents.subscribe('mouseup', upAction, true);
         }
-        this.toggleRadio();
         e.preventDefault();
-    }
-    onMouseUp(e) {
-        if (e.button !== 0 || this.isDisabled) {
-            return;
-        }
-        if (this.radio.classList.contains('ripple') && this.ripple !== null) {
-            this.ripple.upAction();
-        }
     }
 };
 __decorate([
@@ -145,26 +122,9 @@ __decorate([
 ], UxRadio.prototype, "id", void 0);
 __decorate([
     bindable
-], UxRadio.prototype, "label", void 0);
-__decorate([
-    bindable
-], UxRadio.prototype, "model", void 0);
-__decorate([
-    bindable
-], UxRadio.prototype, "tabindex", void 0);
-__decorate([
-    bindable
 ], UxRadio.prototype, "theme", void 0);
 __decorate([
-    bindable
-], UxRadio.prototype, "matcher", void 0);
-__decorate([
-    bindable({ defaultBindingMode: bindingMode.twoWay }),
-    bindable
-], UxRadio.prototype, "checked", void 0);
-__decorate([
-    bindable({ defaultBindingMode: bindingMode.twoWay }),
-    bindable
+    observable({ initializer: () => false })
 ], UxRadio.prototype, "value", void 0);
 __decorate([
     computedFrom('disabled')
@@ -174,3 +134,20 @@ UxRadio = __decorate([
     customElement('ux-radio')
 ], UxRadio);
 export { UxRadio };
+function stopEvent(e) {
+    e.stopPropagation();
+}
+const getVm = (_) => _.au.controller.viewModel;
+const uxRadioElementProto = Object.create(HTMLElement.prototype, {
+    type: {
+        value: 'radio',
+    },
+    checked: {
+        get() {
+            return getVm(this).getChecked();
+        },
+        set(value) {
+            getVm(this).setChecked(value);
+        }
+    }
+});

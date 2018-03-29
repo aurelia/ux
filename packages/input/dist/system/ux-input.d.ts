@@ -1,8 +1,12 @@
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
+export interface UxInputElement extends HTMLElement {
+    value: any;
+}
 export declare class UxInput implements UxComponent {
     private element;
     styleEngine: StyleEngine;
+    private ignoreRawChanges;
     autofocus: null;
     disabled: any;
     maxlength: number;
@@ -12,15 +16,19 @@ export declare class UxInput implements UxComponent {
     readonly: any;
     theme: UxInputTheme;
     type: any;
+    rawValue: string;
+    focused: boolean;
     value: any;
     textbox: HTMLInputElement;
-    constructor(element: HTMLInputElement, styleEngine: StyleEngine);
+    constructor(element: UxInputElement, styleEngine: StyleEngine);
     bind(): void;
+    attached(): void;
+    detached(): void;
+    getValue(): any;
+    setValue(value: any): void;
+    private processRawValue(rawValue);
     themeChanged(newValue: any): void;
-    disabledChanged(newValue: any): void;
-    readonlyChanged(newValue: any): void;
+    focusedChanged(focused: boolean): void;
     typeChanged(newValue: any): void;
-    valueChanged(newValue: any): void;
-    onFieldBlur(): void;
-    onFieldFocus(): void;
+    rawValueChanged(newValue: string): void;
 }

@@ -5,10 +5,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { customElement, bindable } from 'aurelia-templating';
-import { computedFrom } from 'aurelia-binding';
+import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
+import { DOM, ElementEvents } from 'aurelia-framework';
 var theme = new UxSwitchTheme();
 var UxSwitch = /** @class */ (function () {
     function UxSwitch(element, styleEngine) {
@@ -17,6 +18,7 @@ var UxSwitch = /** @class */ (function () {
         this.disabled = false;
         this.effect = 'ripple';
         this.ripple = null;
+        Object.setPrototypeOf(element, uxSwitchElementProto);
         styleEngine.ensureDefaultTheme(theme);
     }
     Object.defineProperty(UxSwitch.prototype, "isDisabled", {
@@ -27,26 +29,54 @@ var UxSwitch = /** @class */ (function () {
         configurable: true
     });
     UxSwitch.prototype.bind = function () {
-        if (this.element.hasAttribute('id')) {
-            var attributeValue = this.element.getAttribute('id');
+        var element = this.element;
+        var checkbox = this.checkbox;
+        if (element.hasAttribute('id')) {
+            var attributeValue = element.getAttribute('id');
             if (attributeValue != null) {
-                this.checkbox.setAttribute('id', attributeValue);
+                checkbox.setAttribute('id', attributeValue);
             }
         }
-        if (this.element.hasAttribute('tabindex')) {
-            var attributeValue = this.element.getAttribute('tabindex');
+        if (element.hasAttribute('tabindex')) {
+            var attributeValue = element.getAttribute('tabindex');
             if (attributeValue != null) {
-                this.checkbox.setAttribute('tabindex', attributeValue);
+                checkbox.setAttribute('tabindex', attributeValue);
             }
         }
-        if (this.element.hasAttribute('checked')) {
-            var attributeValue = this.element.getAttribute('checked');
-            if (attributeValue === 'true') {
-                this.checked = true;
+        if (element.hasAttribute('checked')) {
+            var attributeValue = element.getAttribute('checked');
+            if (attributeValue || attributeValue === '') {
+                element.checked = true;
             }
         }
         this.themeChanged(this.theme);
         this.disabledChanged(this.disabled);
+    };
+    UxSwitch.prototype.attached = function () {
+        this.checkbox.addEventListener('change', stopEvent);
+    };
+    UxSwitch.prototype.detached = function () {
+        this.checkbox.removeEventListener('change', stopEvent);
+    };
+    UxSwitch.prototype.getChecked = function () {
+        return this.checked;
+    };
+    UxSwitch.prototype.setChecked = function (value) {
+        var oldValue = this.checked;
+        var newValue = !!value;
+        if (newValue !== oldValue) {
+            this.checked = newValue;
+            this.ignoreValueChanges = true;
+            this.value = newValue;
+            this.ignoreValueChanges = false;
+            this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
+        }
+    };
+    UxSwitch.prototype.valueChanged = function (newValue) {
+        if (this.ignoreValueChanges) {
+            return;
+        }
+        this.setChecked(newValue);
     };
     UxSwitch.prototype.themeChanged = function (newValue) {
         if (newValue != null && newValue.themeKey == null) {
@@ -63,6 +93,7 @@ var UxSwitch = /** @class */ (function () {
         }
     };
     UxSwitch.prototype.onMouseDown = function (e) {
+        var _this = this;
         if (e.button !== 0 || this.isDisabled) {
             return;
         }
@@ -77,16 +108,15 @@ var UxSwitch = /** @class */ (function () {
             this.ripple.center = true;
             this.ripple.round = true;
             this.ripple.downAction(e);
+            var winEvents_1 = new ElementEvents(window);
+            var upAction = function () {
+                _this.ripple.upAction();
+                winEvents_1.disposeAll();
+            };
+            winEvents_1.subscribe('blur', upAction);
+            winEvents_1.subscribe('mouseup', upAction, true);
         }
         e.preventDefault();
-    };
-    UxSwitch.prototype.onMouseUp = function (e) {
-        if (e.button !== 0 || this.isDisabled) {
-            return;
-        }
-        if (this.element.classList.contains('ripple') && this.ripple !== null) {
-            this.ripple.upAction();
-        }
     };
     __decorate([
         bindable
@@ -101,8 +131,8 @@ var UxSwitch = /** @class */ (function () {
         bindable
     ], UxSwitch.prototype, "theme", void 0);
     __decorate([
-        bindable
-    ], UxSwitch.prototype, "checked", void 0);
+        observable({ initializer: function () { return false; } })
+    ], UxSwitch.prototype, "value", void 0);
     __decorate([
         computedFrom('disabled')
     ], UxSwitch.prototype, "isDisabled", null);
@@ -113,3 +143,20 @@ var UxSwitch = /** @class */ (function () {
     return UxSwitch;
 }());
 export { UxSwitch };
+function stopEvent(e) {
+    e.stopPropagation();
+}
+var getVm = function (_) { return _.au.controller.viewModel; };
+var uxSwitchElementProto = Object.create(HTMLElement.prototype, {
+    type: {
+        value: 'checkbox',
+    },
+    checked: {
+        get: function () {
+            return getVm(this).getChecked();
+        },
+        set: function (value) {
+            getVm(this).setChecked(value);
+        }
+    }
+});

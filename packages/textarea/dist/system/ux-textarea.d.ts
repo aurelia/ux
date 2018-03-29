@@ -1,25 +1,34 @@
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
-import { UxTextareaTheme } from './ux-textarea-theme';
-export declare class UxTextarea implements UxComponent {
+import { UxTextAreaTheme } from './ux-textarea-theme';
+export interface UxTextAreaElement extends HTMLElement {
+    value: string;
+}
+export declare class UxTextArea implements UxComponent {
     private element;
     private styleEngine;
-    autofocus: null;
-    autoResize: null;
+    private ignoreRawChanges;
+    private isAttached;
+    autofocus: boolean | string | null;
+    autoResize: boolean | string;
     cols: number;
     disabled: boolean | string;
+    focus: boolean | string;
     maxlength: number;
     minlength: number;
     readonly: boolean | string;
     rows: number;
-    theme: UxTextareaTheme;
+    theme: UxTextAreaTheme;
+    rawValue: string;
     value: any;
     textbox: HTMLTextAreaElement;
-    constructor(element: HTMLElement, styleEngine: StyleEngine);
+    constructor(element: UxTextAreaElement, styleEngine: StyleEngine);
     bind(): void;
-    disabledChanged(newValue: boolean | string): void;
-    readonlyChanged(newValue: boolean | string): void;
+    attached(): void;
+    detached(): void;
+    getValue(): any;
+    setValue(value: any): void;
+    rawValueChanged(rawValue: string): void;
     themeChanged(newValue: any): void;
-    valueChanged(): void;
-    onFieldBlur(): void;
-    onFieldFocus(): void;
+    fitTextContent(): void;
+    focusChanged(focus: boolean | string): void;
 }
