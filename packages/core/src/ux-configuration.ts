@@ -17,15 +17,15 @@ export class UXConfiguration {
 
   public cssReset() {
 
-    PLATFORM.moduleName('./reset.css');
+    PLATFORM.moduleName('./styles/reset.css');
 
-    this.loader.loadText('@aurelia-ux/core/reset.css')
+    this.loader.loadText('@aurelia-ux/core/styles/reset.css')
       .catch(err => {
         this.logger.warn('Aurelia-UX Core failed to load reset.css, some visual errors may appear.', err);
       })
       .then(text => {
         if (text) {
-          this.globalStyleEngine.addOrUpdateGlobalStyle('@aurelia-ux/core/reset.css', text);
+          this.globalStyleEngine.addOrUpdateGlobalStyle('@aurelia-ux/core/styles/reset.css', text);
         }
       });
 
