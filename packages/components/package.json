@@ -116,6 +116,7 @@
     "@aurelia-ux/radio": "^0.7.1",
     "@aurelia-ux/switch": "^0.7.1",
     "@aurelia-ux/textarea": "^0.7.1",
+    "@aurelia-ux/select": "^0.7.1",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
