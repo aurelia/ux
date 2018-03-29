@@ -9,6 +9,7 @@ const gridTheme = new UxGridTheme();
 @customElement('ux-grid')
 export class UxGrid implements UxComponent {
   @bindable public theme: UxGridTheme;
+  @bindable public columns: null | number;
 
   constructor(
     public element: HTMLElement,
@@ -18,6 +19,10 @@ export class UxGrid implements UxComponent {
 
   public bind() {
     this.themeChanged(this.theme);
+
+    if (this.columns != null) {
+      this.columnsChanged(this.columns);
+    }
   }
 
   public themeChanged(newValue: any) {
@@ -26,5 +31,11 @@ export class UxGrid implements UxComponent {
     }
 
     this.styleEngine.applyTheme(newValue, this.element);
+  }
+
+  public columnsChanged(newValue: null | number) {
+    if (newValue != null) {
+      this.element.style.setProperty('grid-template-columns', `repeat(${newValue}, 1fr)`);
+    }
   }
 }
