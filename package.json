@@ -40,7 +40,7 @@
     "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
     "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
     "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",
-    "changelog": "cross-env conventional-changelog -p ux -i doc/CHANGELOG.md -s",
+    "changelog": "cross-env conventional-changelog -p angular -i doc/CHANGELOG.md -s",
     "bump-version": "npm --no-git-tag-version version",
     "preprepare-release": "cross-env npm run test",
     "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
@@ -61,7 +61,7 @@
     "aurelia-testing": "^1.0.0-beta.3.0.1",
     "aurelia-webpack-plugin": "^3.0.0-rc.1",
     "concurrently": "^3.4.0",
-    "conventional-changelog-cli": "^1.3.1",
+    "conventional-changelog-cli": "^1.3.5",
     "copyfiles": "^1.2.0",
     "cross-env": "^3.2.4",
     "istanbul-instrumenter-loader": "^3.0.0",
