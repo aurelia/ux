@@ -1,3 +1,20 @@
+### [aurelia-ux 0.8.0](https://github.com/aurelia/ux/compare/v0.7.1...v0.8.0)
+
+### Features
+
+* New Component: ux-select
+* CSS Fallback properties
+* events for two way binding
+* better configuration API, add checkbox
+
+#### Bug Fixes
+
+* use Refelect instead Object
+* add missing exports from aurelia-binding
+* remove old style.inputinfo binding
+* change event surpress timing
+* various issues fixed for select, radio and checkbox
+
 <a name="0.3.0"></a>
 # 0.3.0 (2017-07-26)
 
