@@ -17,7 +17,6 @@ Check out the [showcase application](https://github.com/aurelia/app-ux-showcase)
 **Before The First Build**
 
 `npm install` installs dependencies for the base Aurelia UX project
-`npm run build` at the base project to build Aurelia UX
 
 `lerna bootstrap`: sets up a symlink between all of the packages in the monorepo
 `lerna run build`: builds all of the mono repo projects.

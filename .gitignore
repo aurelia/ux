@@ -10,3 +10,4 @@ npm-debug.log*
 dist/doc-temp
 dist/test
 coverage
+package-lock.json
