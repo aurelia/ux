@@ -7,6 +7,7 @@ lerna-debug.log
 *.swp
 npm-debug.log*
 .test
+.rollupcache
 dist/doc-temp
 dist/test
 coverage

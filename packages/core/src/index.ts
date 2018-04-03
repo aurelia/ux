@@ -1,6 +1,8 @@
-import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
+import { BindingBehaviorResource, FrameworkConfiguration, PLATFORM, ViewResources } from 'aurelia-framework';
 
 import { AureliaUX } from './aurelia-ux';
+import { BooleanBB } from './components/boolean-attr-binding-behavior';
+
 export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
 export { processDesignAttributes } from './designs/design-attributes';
@@ -18,18 +20,22 @@ export { GlobalStyleEngine } from './styles/global-style-engine';
 export { AureliaUX } from './aurelia-ux';
 export { UXConfiguration } from './ux-configuration';
 
-export function configure(config: FrameworkConfiguration, callback?: (config: AureliaUX) => Promise<any>) {
-  const ux = config.container.get(AureliaUX) as AureliaUX;
+let uxCorePromise: Promise<AureliaUX>;
 
-  config.globalResources([
-    PLATFORM.moduleName('./components/boolean-attr-binding-behavior')
-  ]);
+export function configure(config: FrameworkConfiguration, callback?: (config: AureliaUX) => Promise<any>) {
+  if (uxCorePromise) {
+    return uxCorePromise;
+  }
+  const ux: AureliaUX = config.container.get(AureliaUX);
+  const boolAttr = new BindingBehaviorResource('');
+  boolAttr.initialize(config.container, BooleanBB);
+  boolAttr.register(config.aurelia.resources, 'booleanAttr');
 
   if (typeof callback === 'function') {
-    return Promise.resolve(callback(ux))
+    return uxCorePromise = Promise.resolve(callback(ux))
       .then(() => ux.start(config));
   } else {
     ux.use.defaultConfiguration();
-    return ux.start(config);
+    return uxCorePromise = ux.start(config);
   }
 }
