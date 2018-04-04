@@ -8,7 +8,8 @@
   "license": "MIT",
   "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
   "contributors": [
-    "Zach Hollingshead <zach.hollingshead@gmail.com>"
+    "Zach Hollingshead <zach.hollingshead@gmail.com>",
+    "Fred Kleuver <https://github.com/fkleuver>"
   ],
   "main": "dist/commonjs/index.js",
   "typings": "dist/commonjs/index.d.ts",
@@ -46,8 +47,10 @@
     "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
   },
   "dependencies": {
+    "@aurelia-ux/core": "^0.8.1",
+    "aurelia-binding": "^1.7.1",
     "aurelia-framework": "^1.0.0",
-    "@aurelia-ux/core": "^0.6.0"
+    "aurelia-templating-resources": "^1.6.0"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.6",

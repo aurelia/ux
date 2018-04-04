@@ -1,5 +1,5 @@
 import { FrameworkConfiguration, PLATFORM, bindingMode, ObserverLocator } from 'aurelia-framework';
-import * as AuBinding from 'aurelia-binding';
+import { CheckedObserver, EventSubscriber } from 'aurelia-binding';
 import { AureliaUX } from '@aurelia-ux/core';
 
 export { UxRadioTheme } from './ux-radio-theme';
@@ -18,18 +18,8 @@ const uxRadioConfig = {
     checked: {
       defaultBindingMode: bindingMode.twoWay,
       getObserver(element: Element, _: string, observerLocator: ObserverLocator) {
-        return new (AuBinding as any).CheckedObserver(element, uxRadioChangeHandler, observerLocator);
+        return new CheckedObserver(element, new EventSubscriber(['change']), observerLocator);
       }
     }
-  }
-};
-
-const uxRadioChangeHandler = {
-  subscribe(target: Element, callbackOrListener: EventListenerOrEventListenerObject) {
-    target.addEventListener('change', callbackOrListener, false);
-
-    return function() {
-      target.removeEventListener('change', callbackOrListener, false);
-    };
   }
 };

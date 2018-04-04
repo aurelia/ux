@@ -1,5 +1,6 @@
 src
-karma.conf.js
-tsconfig.json
-package-lock.json
 test
+.npmignore
+karma.conf.ts
+tsconfig-test.json
+tsconfig.json
