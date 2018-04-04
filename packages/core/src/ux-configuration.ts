@@ -11,21 +11,21 @@ export class UXConfiguration {
   constructor(private loader: Loader, private globalStyleEngine: GlobalStyleEngine) { }
 
   public defaultConfiguration() {
-    this.cssReset();
+    this.cssNormalize();
     return this;
   }
 
-  public cssReset() {
+  public cssNormalize() {
 
-    PLATFORM.moduleName('./styles/reset.css');
+    PLATFORM.moduleName('./styles/normalize.css');
 
-    this.loader.loadText('@aurelia-ux/core/styles/reset.css')
+    this.loader.loadText('@aurelia-ux/core/styles/normalize.css')
       .catch(err => {
-        this.logger.warn('Aurelia-UX Core failed to load reset.css, some visual errors may appear.', err);
+        this.logger.warn('Aurelia-UX Core failed to load normalize.css, some visual errors may appear.', err);
       })
       .then(text => {
         if (text) {
-          this.globalStyleEngine.addOrUpdateGlobalStyle('@aurelia-ux/core/styles/reset.css', text);
+          this.globalStyleEngine.addOrUpdateGlobalStyle('@aurelia-ux/core/styles/normalize.css', text);
         }
       });
 
