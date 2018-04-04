@@ -77,7 +77,9 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "aurelia-framework": "^1.0.0"
+    "aurelia-framework": "^1.0.0",
+    "aurelia-binding": "^1.7.1",
+    "aurelia-templating-resources": "^1.6.0"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.6",

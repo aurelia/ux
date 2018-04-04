@@ -1,5 +1,5 @@
 import { FrameworkConfiguration, PLATFORM, bindingMode } from 'aurelia-framework';
-import * as AuBinding from 'aurelia-binding';
+import { ValueAttributeObserver, EventSubscriber } from 'aurelia-binding';
 import { AureliaUX } from '@aurelia-ux/core';
 
 export { UxInputTheme } from './ux-input-theme';
@@ -18,18 +18,8 @@ const uxInputConfig = {
     value: {
       defaultBindingMode: bindingMode.twoWay,
       getObserver(element: Element) {
-        return new (AuBinding as any).ValueAttributeObserver(element, 'value', uxInputChangeHandler);
+        return new ValueAttributeObserver(element, 'value', new EventSubscriber(['change']));
       }
     }
-  }
-};
-
-const uxInputChangeHandler = {
-  subscribe(target: Element, callbackOrListener: EventListenerOrEventListenerObject) {
-    target.addEventListener('change', callbackOrListener, false);
-
-    return function() {
-      target.removeEventListener('change', callbackOrListener, false);
-    };
   }
 };
