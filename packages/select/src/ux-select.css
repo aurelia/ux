@@ -2,7 +2,7 @@
   display: inline-block;
   min-width: 50px;
   max-width: 100%;
-  color: var(--ux-theme-select-foreground);
+  color: var(--ux-theme--select-foreground);
   box-sizing: border-box;
   outline: 0;
 }
