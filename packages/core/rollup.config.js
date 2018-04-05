@@ -22,7 +22,7 @@ export default ([
       copy({
         verbose: true,
         files: [
-          { from: 'src/reset.css', to: 'dist/es2015/reset.css' },
+          { from: 'src/styles/normalize.css', to: 'dist/es2015/styles/normalize.css' },
           { from: 'src/effects/paper-ripple.css', to: 'dist/es2015/paper-ripple.css' }
         ]
       })
@@ -50,9 +50,9 @@ export default ([
       copy({
         verbose: true,
         files: [
-          { from: 'src/reset.css', to: 'dist/commonjs/reset.css' },
-          { from: 'src/reset.css', to: 'dist/amd/reset.css' },
-          { from: 'src/reset.css', to: 'dist/native-modules/reset.css' },
+          { from: 'src/styles/normalize.css', to: 'dist/commonjs/styles/normalize.css' },
+          { from: 'src/styles/normalize.css', to: 'dist/amd/styles/normalize.css' },
+          { from: 'src/styles/normalize.css', to: 'dist/native-modules/styles/normalize.css' },
           { from: 'src/effects/paper-ripple.css', to: 'dist/commonjs/paper-ripple.css' },
           { from: 'src/effects/paper-ripple.css', to: 'dist/amd/paper-ripple.css' },
           { from: 'src/effects/paper-ripple.css', to: 'dist/native-modules/paper-ripple.css' }
