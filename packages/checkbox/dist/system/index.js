@@ -8,14 +8,14 @@ System.register(["aurelia-framework", "aurelia-binding", "@aurelia-ux/core", "./
         ]);
     }
     exports_1("configure", configure);
-    var aurelia_framework_1, AuBinding, core_1, uxCheckBoxConfig, uxCheckboxChangeHandler;
+    var aurelia_framework_1, aurelia_binding_1, core_1, uxCheckBoxConfig;
     return {
         setters: [
             function (aurelia_framework_1_1) {
                 aurelia_framework_1 = aurelia_framework_1_1;
             },
-            function (AuBinding_1) {
-                AuBinding = AuBinding_1;
+            function (aurelia_binding_1_1) {
+                aurelia_binding_1 = aurelia_binding_1_1;
             },
             function (core_1_1) {
                 core_1 = core_1_1;
@@ -38,17 +38,9 @@ System.register(["aurelia-framework", "aurelia-binding", "@aurelia-ux/core", "./
                     checked: {
                         defaultBindingMode: aurelia_framework_1.bindingMode.twoWay,
                         getObserver: function (element, _, observerLocator) {
-                            return new AuBinding.CheckedObserver(element, uxCheckboxChangeHandler, observerLocator);
+                            return new aurelia_binding_1.CheckedObserver(element, new aurelia_binding_1.EventSubscriber(['change']), observerLocator);
                         }
                     }
-                }
-            };
-            uxCheckboxChangeHandler = {
-                subscribe: function (target, callbackOrListener) {
-                    target.addEventListener('change', callbackOrListener, false);
-                    return function () {
-                        target.removeEventListener('change', callbackOrListener, false);
-                    };
                 }
             };
         }

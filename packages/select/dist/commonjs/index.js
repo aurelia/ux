@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
-var AuBinding = require("aurelia-binding");
+var aurelia_binding_1 = require("aurelia-binding");
 var core_1 = require("@aurelia-ux/core");
 var ux_option_1 = require("./ux-option");
 exports.UxOption = ux_option_1.UxOption;
@@ -26,16 +26,8 @@ var uxSelectConfig = {
         value: {
             defaultBindingMode: aurelia_framework_1.bindingMode.twoWay,
             getObserver: function (element, _) {
-                return new AuBinding.ValueAttributeObserver(element, 'value', uxSelectChangeHandler);
+                return new aurelia_binding_1.ValueAttributeObserver(element, 'value', new aurelia_binding_1.EventSubscriber(['change']));
             }
         }
-    }
-};
-var uxSelectChangeHandler = {
-    subscribe: function (target, callbackOrListener) {
-        target.addEventListener('change', callbackOrListener, false);
-        return function () {
-            target.removeEventListener('change', callbackOrListener, false);
-        };
     }
 };

@@ -4,7 +4,8 @@
 
   <button ref="button" class="${disabled ? 'disabled' : ''}"
     mousedown.trigger="onMouseDown($event)"
-    mouseup.trigger="onMouseUp()">
+    mouseup.trigger="onMouseUp()"
+    mouseleave.trigger="onMouseUp()">
     <slot></slot>
     <span class="ripple"></span>
   </button>

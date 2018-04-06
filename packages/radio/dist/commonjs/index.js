@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
-var AuBinding = require("aurelia-binding");
+var aurelia_binding_1 = require("aurelia-binding");
 var core_1 = require("@aurelia-ux/core");
 var ux_radio_theme_1 = require("./ux-radio-theme");
 exports.UxRadioTheme = ux_radio_theme_1.UxRadioTheme;
@@ -20,16 +20,8 @@ var uxRadioConfig = {
         checked: {
             defaultBindingMode: aurelia_framework_1.bindingMode.twoWay,
             getObserver: function (element, _, observerLocator) {
-                return new AuBinding.CheckedObserver(element, uxRadioChangeHandler, observerLocator);
+                return new aurelia_binding_1.CheckedObserver(element, new aurelia_binding_1.EventSubscriber(['change']), observerLocator);
             }
         }
-    }
-};
-var uxRadioChangeHandler = {
-    subscribe: function (target, callbackOrListener) {
-        target.addEventListener('change', callbackOrListener, false);
-        return function () {
-            target.removeEventListener('change', callbackOrListener, false);
-        };
     }
 };

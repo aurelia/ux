@@ -1,5 +1,5 @@
 import { PLATFORM, bindingMode } from 'aurelia-framework';
-import * as AuBinding from 'aurelia-binding';
+import { CheckedObserver, EventSubscriber } from 'aurelia-binding';
 import { AureliaUX } from '@aurelia-ux/core';
 export { UxCheckboxTheme } from './ux-checkbox-theme';
 export { UxCheckbox } from './ux-checkbox';
@@ -15,16 +15,8 @@ const uxCheckBoxConfig = {
         checked: {
             defaultBindingMode: bindingMode.twoWay,
             getObserver(element, _, observerLocator) {
-                return new AuBinding.CheckedObserver(element, uxCheckboxChangeHandler, observerLocator);
+                return new CheckedObserver(element, new EventSubscriber(['change']), observerLocator);
             }
         }
-    }
-};
-const uxCheckboxChangeHandler = {
-    subscribe(target, callbackOrListener) {
-        target.addEventListener('change', callbackOrListener, false);
-        return function () {
-            target.removeEventListener('change', callbackOrListener, false);
-        };
     }
 };

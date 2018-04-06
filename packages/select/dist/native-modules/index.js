@@ -1,5 +1,5 @@
 import { PLATFORM, bindingMode, } from 'aurelia-framework';
-import * as AuBinding from 'aurelia-binding';
+import { ValueAttributeObserver, EventSubscriber } from 'aurelia-binding';
 import { AureliaUX } from '@aurelia-ux/core';
 export { UxOption } from './ux-option';
 export { UxOptGroup } from './ux-optgroup';
@@ -19,16 +19,8 @@ var uxSelectConfig = {
         value: {
             defaultBindingMode: bindingMode.twoWay,
             getObserver: function (element, _) {
-                return new AuBinding.ValueAttributeObserver(element, 'value', uxSelectChangeHandler);
+                return new ValueAttributeObserver(element, 'value', new EventSubscriber(['change']));
             }
         }
-    }
-};
-var uxSelectChangeHandler = {
-    subscribe: function (target, callbackOrListener) {
-        target.addEventListener('change', callbackOrListener, false);
-        return function () {
-            target.removeEventListener('change', callbackOrListener, false);
-        };
     }
 };
