@@ -23,7 +23,7 @@ export default ([
         verbose: true,
         files: [
           { from: 'src/styles/normalize.css', to: 'dist/es2015/styles/normalize.css' },
-          { from: 'src/effects/paper-ripple.css', to: 'dist/es2015/paper-ripple.css' }
+          { from: 'src/effects/paper-ripple.css', to: 'dist/es2015/effects/paper-ripple.css' }
         ]
       })
     ]
@@ -53,9 +53,9 @@ export default ([
           { from: 'src/styles/normalize.css', to: 'dist/commonjs/styles/normalize.css' },
           { from: 'src/styles/normalize.css', to: 'dist/amd/styles/normalize.css' },
           { from: 'src/styles/normalize.css', to: 'dist/native-modules/styles/normalize.css' },
-          { from: 'src/effects/paper-ripple.css', to: 'dist/commonjs/paper-ripple.css' },
-          { from: 'src/effects/paper-ripple.css', to: 'dist/amd/paper-ripple.css' },
-          { from: 'src/effects/paper-ripple.css', to: 'dist/native-modules/paper-ripple.css' }
+          { from: 'src/effects/paper-ripple.css', to: 'dist/commonjs/effects/paper-ripple.css' },
+          { from: 'src/effects/paper-ripple.css', to: 'dist/amd/effects/paper-ripple.css' },
+          { from: 'src/effects/paper-ripple.css', to: 'dist/native-modules/effects/paper-ripple.css' }
         ]
       })
     ]
