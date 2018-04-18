@@ -104,6 +104,7 @@
   },
   "dependencies": {
     "@aurelia-ux/button": "^0.9.1",
+    "@aurelia-ux/card": "^0.9.1",
     "@aurelia-ux/checkbox": "^0.9.1",
     "@aurelia-ux/chip-input": "^0.9.1",
     "@aurelia-ux/core": "^0.9.1",
