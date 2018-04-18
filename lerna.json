@@ -3,6 +3,7 @@
   "packages": [
     "packages/core",
     "packages/button",
+    "packages/card",
     "packages/checkbox",
     "packages/chip-input",
     "packages/components",
