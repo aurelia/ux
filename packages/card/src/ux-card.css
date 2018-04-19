@@ -9,8 +9,13 @@ ux-card {
   background-color: var(--ux-theme--card-background, #212121);
   color: #fff;
   color: var(--ux-theme--card-foreground, #fff);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),0 3px 1px -2px rgba(0, 0, 0, 0.2),0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: var(--ux-design--elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14),0 3px 1px -2px rgba(0, 0, 0, 0.2),0 1px 5px 0 rgba(0, 0, 0, 0.12));
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: var(--ux-design--elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
+}
+
+ux-card header,
+ux-card .ux-card__card-content {
+  padding: 16px;
 }
 
 ux-card header {
@@ -18,32 +23,11 @@ ux-card header {
   flex-direction: column;
 }
 
-ux-card.primary-header header {
-  color: #3f51b5;
-  background-color: var(--ux-theme--card-primary-header-background, #3f51b5);
-  color: #fff;
-  color: var(--ux-theme--card-primary-header-foreground, #fff);
-}
-
-ux-card.primary-header header .title .sub-title {
-  color: #fff;
-  color: var(--ux-theme--card-primary-header-foreground, #fff);
-}
-
-ux-card.accent-header header {
-  background-color: var(--ux-theme--card-accent-header-background, #ff4081);
-  color: var(--ux-theme--card-accent-header-foreground, #fff);
-}
-
-ux-card.accent-header header .title .sub-title {
-  color: var(--ux-theme--card-accent-header-foreground, #ff4081);
-}
-
-ux-card header .header-row {
+ux-card header .ux-card__header-row {
   display: flex;
 }
 
-ux-card header .title {
+ux-card header .ux-card__title {
   display: flex;
   flex-direction: column;
   font-family: Roboto, sans-serif;
@@ -56,35 +40,59 @@ ux-card header .title {
   letter-spacing: normal;
   line-height: 24px;
   margin: 0;
+  color: inherit;
+  color: var(--ux-theme--card-title-foreground, inherit);
 }
 
-ux-card header .title .sub-title {
-  padding-top: 8px;
-  font-size: 14px;
-  line-height: 14px;
-  color: #00000088;
-}
-
-ux-card[dense] header .title {
+ux-card header .ux-card__title.ux-card__title--small {
   font-size: 20px;
   line-height: 20px;
 }
 
-ux-card header,
-ux-card .card-content {
-  padding: 16px;
+ux-card header .ux-card__sub-title {
+  padding-top: 8px;
+  font-size: 14px;
+  line-height: 14px;
+  color: inherit;
+  color: var(--ux-theme--card-sub-title-foreground, inherit);
+  opacity: var(--ux-theme--card-sub-title-opacity, 0.8);
 }
 
-ux-card.primary-header header+.card-content,
-ux-card.accent-header header+.card-content {
+ux-card.ux-card--primary-header header {
+  color: #3f51b5;
+  background-color: var(--ux-theme--card-primary-header-background, #3f51b5);
+  color: #fff;
+  color: var(--ux-theme--card-primary-header-foreground, #fff);
+}
+
+ux-card.ux-card--accent-header header {
+  background-color: var(--ux-theme--card-accent-header-background, #ff4081);
+  color: var(--ux-theme--card-accent-header-foreground, #fff);
+}
+
+ux-card.ux-card--primary-header header .ux-card__sub-title {
+  color: #fff;
+  color: var(--ux-theme--card-primary-header-foreground, #fff);
+}
+
+ux-card.ux-card--accent-header header .ux-card__sub-title {
+  color: var(--ux-theme--card-accent-header-foreground, #ff4081);
+}
+
+ux-card.ux-card--primary-header header+.ux-card__card-content,
+ux-card.ux-card--accent-header header+.ux-card__card-content {
   padding-top: 16px;
 }
 
-ux-card header+.card-content {
+ux-card header+.ux-card__card-content {
   padding-top: 0;
 }
 
-ux-card .action-row {
+ux-card .ux-card__card-content:last-child {
+  padding-bottom: 24px;
+}
+
+ux-card .ux-card__action-row {
   display: flex;
   margin: 8px;
   flex-wrap: nowrap;
@@ -92,10 +100,6 @@ ux-card .action-row {
 
 ux-card>img {
   width: 100%;
-}
-
-ux-card .card-content:last-child {
-  padding-bottom: 24px;
 }
 
 ux-card footer {
@@ -110,7 +114,7 @@ ux-card footer.align-end {
   justify-content: flex-end;
 }
 
-ux-card footer .footer-action {
+ux-card footer .ux-card__footer-action {
   font-size: 14px;
   height: 36px;
   line-height: 36px;
@@ -135,21 +139,21 @@ ux-card footer .footer-action {
   -webkit-user-select: none;
 }
 
-ux-card footer .footer-action:first-child {
+ux-card footer .ux-card__footer-action:first-child {
   padding-left: 0;
 }
 
-ux-card footer .footer-action:last-child {
+ux-card footer .ux-card__footer-action:last-child {
   padding-right: 0;
+}
+
+ux-card .ux-card__spacer {
+  flex: 1;
 }
 
 ux-grid>ux-card {
   grid-column: span 12;
   max-width: 100%;
-}
-
-ux-card .spacer {
-  flex: 1;
 }
 
 ux-grid>ux-card[xs="0"] {

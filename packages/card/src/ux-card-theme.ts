@@ -9,4 +9,7 @@ export class UxCardTheme implements UxTheme {
   public accentHeaderBackground: string = 'var(--ux-design--accent, #ff4081)';
   public background: string = 'var(--ux-design--control-background, #fff)';
   public foreground: string = 'var(--ux-design--control-foreground, #212121)';
+  public titleForeground: string = 'inherit';
+  public subTitleForeground: string = 'inherit';
+  public subTitleOpacity: string = '0.8';
 }
