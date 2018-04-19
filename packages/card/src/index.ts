@@ -4,6 +4,6 @@ export { UxCardTheme } from './ux-card-theme';
 
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([
-    PLATFORM.moduleName('@aurelia-ux/card/card')
+    PLATFORM.moduleName('@aurelia-ux/card/ux-card')
   ]);
 }
