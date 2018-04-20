@@ -13,21 +13,21 @@ ux-card {
   box-shadow: var(--ux-design--elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
 }
 
-ux-card header,
-ux-card .ux-card__card-content {
+ux-card ux-card-header,
+ux-card ux-card-content {
   padding: 16px;
 }
 
-ux-card header {
+ux-card ux-card-header {
   display: flex;
   flex-direction: column;
 }
 
-ux-card header .ux-card__header-row {
+ux-card ux-card-header ux-card-header-row {
   display: flex;
 }
 
-ux-card header .ux-card__title {
+ux-card ux-card-header ux-card-title {
   display: flex;
   flex-direction: column;
   font-family: Roboto, sans-serif;
@@ -44,12 +44,12 @@ ux-card header .ux-card__title {
   color: var(--ux-theme--card-title-foreground, inherit);
 }
 
-ux-card header .ux-card__title.ux-card__title--small {
+ux-card ux-card-header ux-card-titleux-card-title--small {
   font-size: 20px;
   line-height: 20px;
 }
 
-ux-card header .ux-card__sub-title {
+ux-card ux-card-header ux-card-sub-title {
   padding-top: 8px;
   font-size: 14px;
   line-height: 14px;
@@ -58,41 +58,41 @@ ux-card header .ux-card__sub-title {
   opacity: var(--ux-theme--card-sub-title-opacity, 0.8);
 }
 
-ux-card.ux-card--primary-header header {
+ux-card[style=primary] ux-card-header {
   color: #3f51b5;
   background-color: var(--ux-theme--card-primary-header-background, #3f51b5);
   color: #fff;
   color: var(--ux-theme--card-primary-header-foreground, #fff);
 }
 
-ux-card.ux-card--accent-header header {
+ux-card[style=accent] ux-card-header {
   background-color: var(--ux-theme--card-accent-header-background, #ff4081);
   color: var(--ux-theme--card-accent-header-foreground, #fff);
 }
 
-ux-card.ux-card--primary-header header .ux-card__sub-title {
+ux-card[style=primary] ux-card-header ux-card-sub-title {
   color: #fff;
   color: var(--ux-theme--card-primary-header-foreground, #fff);
 }
 
-ux-card.ux-card--accent-header header .ux-card__sub-title {
+ux-card[style=accent]  ux-card-header ux-card-sub-title {
   color: var(--ux-theme--card-accent-header-foreground, #ff4081);
 }
 
-ux-card.ux-card--primary-header header+.ux-card__card-content,
-ux-card.ux-card--accent-header header+.ux-card__card-content {
+ux-card[style=primary] ux-card-header+ux-card-content,
+ux-card[style=accent]  ux-card-header+ux-card-content {
   padding-top: 16px;
 }
 
-ux-card header+.ux-card__card-content {
+ux-card ux-card-header+ux-card-content {
   padding-top: 0;
 }
 
-ux-card .ux-card__card-content:last-child {
+ux-card ux-card-content:last-child {
   padding-bottom: 24px;
 }
 
-ux-card .ux-card__action-row {
+ux-card ux-card-action-row {
   display: flex;
   margin: 8px;
   flex-wrap: nowrap;
@@ -102,7 +102,7 @@ ux-card>img {
   width: 100%;
 }
 
-ux-card footer {
+ux-card ux-card-footer {
   padding: 8px;
   display: flex;
   flex-direction: row;
@@ -110,11 +110,11 @@ ux-card footer {
   margin-top: auto;
 }
 
-ux-card footer.align-end {
+ux-card ux-card-footer.align-end {
   justify-content: flex-end;
 }
 
-ux-card footer .ux-card__footer-action {
+ux-card .ux-card__action {
   font-size: 14px;
   height: 36px;
   line-height: 36px;
@@ -139,15 +139,15 @@ ux-card footer .ux-card__footer-action {
   -webkit-user-select: none;
 }
 
-ux-card footer .ux-card__footer-action:first-child {
+ux-card ux-card-footer .ux-card__action:first-child {
   padding-left: 0;
 }
 
-ux-card footer .ux-card__footer-action:last-child {
+ux-card ux-card-footer .ux-card__action:last-child {
   padding-right: 0;
 }
 
-ux-card .ux-card__spacer {
+ux-card ux-card-spacer {
   flex: 1;
 }
 
