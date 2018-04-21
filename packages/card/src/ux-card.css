@@ -58,29 +58,29 @@ ux-card ux-card-header ux-card-sub-title {
   opacity: var(--ux-theme--card-sub-title-opacity, 0.8);
 }
 
-ux-card[style=primary] ux-card-header {
+ux-card.ux-card--primary-header ux-card-header {
   color: #3f51b5;
   background-color: var(--ux-theme--card-primary-header-background, #3f51b5);
   color: #fff;
   color: var(--ux-theme--card-primary-header-foreground, #fff);
 }
 
-ux-card[style=accent] ux-card-header {
+ux-card.ux-card--accent-header ux-card-header {
   background-color: var(--ux-theme--card-accent-header-background, #ff4081);
   color: var(--ux-theme--card-accent-header-foreground, #fff);
 }
 
-ux-card[style=primary] ux-card-header ux-card-sub-title {
+ux-card.ux-card--primary-header ux-card-header ux-card-sub-title {
   color: #fff;
   color: var(--ux-theme--card-primary-header-foreground, #fff);
 }
 
-ux-card[style=accent]  ux-card-header ux-card-sub-title {
+ux-card.ux-card--accent-header  ux-card-header ux-card-sub-title {
   color: var(--ux-theme--card-accent-header-foreground, #ff4081);
 }
 
-ux-card[style=primary] ux-card-header+ux-card-content,
-ux-card[style=accent]  ux-card-header+ux-card-content {
+ux-card.ux-card--primary-header ux-card-header+ux-card-content,
+ux-card.ux-card--accent-header  ux-card-header+ux-card-content {
   padding-top: 16px;
 }
 
