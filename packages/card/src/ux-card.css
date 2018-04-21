@@ -44,7 +44,7 @@ ux-card ux-card-header ux-card-title {
   color: var(--ux-theme--card-title-foreground, inherit);
 }
 
-ux-card ux-card-header ux-card-titleux-card-title--small {
+ux-card ux-card-header ux-card-title[size=small] {
   font-size: 20px;
   line-height: 20px;
 }
