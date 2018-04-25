@@ -1,12 +1,13 @@
 {
-  "name": "@aurelia-ux/components",
+  "name": "@aurelia-ux/card",
   "version": "0.9.1",
-  "description": "Official components made with Aurelia UX",
+  "description": "Card component for Aurelia UX",
   "keywords": [
     "aurelia",
     "styles",
     "components",
-    "ux"
+    "ux",
+    "card"
   ],
   "homepage": "http://aurelia.io",
   "bugs": {
@@ -52,72 +53,8 @@
     "preprepare-release": "cross-env npm run test",
     "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
   },
-  "jspm": {
-    "registry": "npm",
-    "jspmPackage": true,
-    "main": "index",
-    "format": "amd",
-    "directories": {
-      "dist": "dist/amd"
-    },
-    "peerDependencies": {
-      "aurelia-binding": "^1.0.0",
-      "aurelia-dependency-injection": "^1.0.0",
-      "aurelia-logging": "^1.0.0",
-      "aurelia-pal": "^1.0.0",
-      "aurelia-task-queue": "^1.0.0",
-      "aurelia-templating": "^1.0.0",
-      "aurelia-loader": "^1.0.0",
-      "aurelia-templating-binding": "^1.0.0",
-      "aurelia-framework": "^1.0.0",
-      "aurelia-metadata": "^1.0.0",
-      "aurelia-path": "^1.0.0",
-      "@aurelia-ux/core": "^0.4.0"
-    },
-    "dependencies": {
-      "aurelia-binding": "^1.0.0",
-      "aurelia-dependency-injection": "^1.0.0",
-      "aurelia-logging": "^1.0.0",
-      "aurelia-pal": "^1.0.0",
-      "aurelia-task-queue": "^1.0.0",
-      "aurelia-templating": "^1.0.0",
-      "aurelia-loader": "^1.0.0",
-      "aurelia-templating-binding": "^1.0.0",
-      "aurelia-framework": "^1.0.0",
-      "aurelia-metadata": "^1.0.0",
-      "aurelia-path": "^1.0.0",
-      "@aurelia-ux/button": "^0.6.0",
-      "@aurelia-ux/checkbox": "^0.6.1",
-      "@aurelia-ux/chip-input": "^0.6.0",
-      "@aurelia-ux/core": "^0.6.0",
-      "@aurelia-ux/datepicker": "^0.6.0",
-      "@aurelia-ux/grid": "^0.6.1",
-      "@aurelia-ux/form": "^0.6.0",
-      "@aurelia-ux/input": "^0.6.0",
-      "@aurelia-ux/input-info": "^0.6.0",
-      "@aurelia-ux/list": "^0.6.0",
-      "@aurelia-ux/radio": "^0.6.0",
-      "@aurelia-ux/switch": "^0.6.0",
-      "@aurelia-ux/textarea": "^0.6.0"
-    },
-    "devDependencies": {}
-  },
   "dependencies": {
-    "@aurelia-ux/button": "^0.9.1",
-    "@aurelia-ux/card": "^0.9.1",
-    "@aurelia-ux/checkbox": "^0.9.1",
-    "@aurelia-ux/chip-input": "^0.9.1",
     "@aurelia-ux/core": "^0.9.1",
-    "@aurelia-ux/datepicker": "^0.9.1",
-    "@aurelia-ux/form": "^0.9.1",
-    "@aurelia-ux/grid": "^0.9.1",
-    "@aurelia-ux/input": "^0.9.1",
-    "@aurelia-ux/input-info": "^0.9.1",
-    "@aurelia-ux/list": "^0.9.1",
-    "@aurelia-ux/radio": "^0.9.1",
-    "@aurelia-ux/select": "^0.9.1",
-    "@aurelia-ux/switch": "^0.9.1",
-    "@aurelia-ux/textarea": "^0.9.1",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
@@ -157,13 +94,5 @@
     "typedoc": "^0.9.0",
     "typescript": "^2.2.1",
     "webpack": "^4.0.1"
-  },
-  "aurelia": {
-    "build": {
-      "resources": []
-    },
-    "documentation": {
-      "articles": []
-    }
   }
 }

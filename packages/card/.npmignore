@@ -1,0 +1,6 @@
+src
+test
+.npmignore
+karma.conf.ts
+tsconfig-test.json
+tsconfig.json
