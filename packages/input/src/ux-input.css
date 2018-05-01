@@ -1,8 +1,6 @@
 ux-input {
   display: block;
   width: 100%;
-  color: #212121;
-  color: var(--ux-theme--input-foreground, #212121);
 }
 
   ux-input > input {
@@ -14,6 +12,8 @@ ux-input {
     padding-left:0;
     padding-right:0;
     transition: border-color 250ms ease;
+    color: inherit;
+    color: var(--ux-theme--input-foreground, inherit);
     background-color: transparent;
     background-color: var(--ux-theme--input-background, transparent);
     border-bottom: 1px solid #9E9E9E;
@@ -37,16 +37,18 @@ ux-input {
     ux-input > input[readonly],
     ux-input > input[readonly]:hover,
     ux-input > input[readonly]:focus {
-      color: #E0E0E0;
-      color: var(--ux-theme--input-disabled-foreground, #E0E0E0);
-      border-bottom: 1px dashed #E0E0E0;
-      border-bottom: var(--ux-theme--input-disabled-border-bottom, 1px dashed #E0E0E0);
+      color: #A4A4A4;
+      color: var(--ux-theme--input-disabled-foreground, #A4A4A4);
+      border-bottom: 1px dashed #A4A4A4;
+      border-bottom: var(--ux-theme--input-disabled-border-bottom, 1px dashed #A4A4A4);
     }
 
   ux-input.full-width > input {
     padding: 20px 8px;
     font-size: 16px;
     margin-bottom: 0;
+    color: #232323;
+    color: var(--ux-theme--input-full-width-foreground, #232323);
     border: 1px solid #EEEEEE;
     border: var(--ux-theme--input-full-width-border, 1px solid #EEEEEE);
     background-color: #FFF;
@@ -61,13 +63,15 @@ ux-input {
     ux-input.full-width > input[readonly]:focus  {
       background-color: #EEEEEE;
       background-color: var(--ux-theme--input-full-width-background-disabled, #EEEEEE);
-      border: 1px dashed #E0E0E0;
-      border: 1px solid var(--ux-theme--input-disabled-border-bottom, 1px dashed #E0E0E0);
-      color: #E0E0E0;
-      color: var(--ux-theme--input-disabled-foreground, #E0E0E0);
+      border: 1px dashed #A4A4A4;
+      border: 1px solid var(--ux-theme--input-disabled-border-bottom, 1px dashed #A4A4A4);
+      color: #A4A4A4;
+      color: var(--ux-theme--input-disabled-foreground, #A4A4A4);
     }
   
-  ux-input.has-error input {
+  ux-input.has-error input,
+  ux-input input:invalid {
+    box-shadow: none;
     border-bottom-color: #F44336;
     border-bottom-color: var(--ux-theme--input-error, #F44336);
   }

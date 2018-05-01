@@ -18,6 +18,8 @@ ux-chip-input {
     border: none;
     flex-grow: 1;
     min-width: 180px;
+    color: inherit;
+    color: var(--ux-theme--chip-input-foreground, inherit);
   }
 
   ux-chip-input>input:focus {
@@ -27,7 +29,7 @@ ux-chip-input {
   ux-chip-input>input+div.bottom-border {
     align-self: flex-end;
     background-color: #9E9E9E;
-    background-color: var(--ux-theme--chip-input-foreground, var(--ux-design--primary-light-foreground, #9E9E9E));
+    background-color: var(--ux-theme--chip-input-bottom-border, #9E9E9E);
     height: 1px;
     margin-top: 2px;
     margin-bottom: 4px;

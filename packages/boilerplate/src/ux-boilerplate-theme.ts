@@ -1,4 +1,4 @@
-import { swatches, UxTheme } from '@aurelia-ux/core';
+import { UxTheme } from '@aurelia-ux/core';
 
 export class UxBoilerplateTheme implements UxTheme {
   public themeKey = 'boilerplate'; // the key for your components themes
@@ -11,5 +11,5 @@ export class UxBoilerplateTheme implements UxTheme {
    * For example background would become --ux-theme--boilerplate-background
    */
 
-  public background: string = swatches.white;
+  public background: string;
 }

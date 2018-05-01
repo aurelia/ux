@@ -5,10 +5,10 @@ ux-card {
   box-sizing: border-box;
   padding: 0;
   border-radius: 2px;
-  background-color: #212121;
-  background-color: var(--ux-theme--card-background, #212121);
-  color: #fff;
-  color: var(--ux-theme--card-foreground, #fff);
+  background-color: #fff;
+  background-color: var(--ux-theme--card-background, var(--ux-design--control-background, #fff));
+  color: #212121;
+  color: var(--ux-theme--card-foreground, var(--ux-design--control-foreground, #212121));
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   box-shadow: var(--ux-design--elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
 }
@@ -55,32 +55,26 @@ ux-card ux-card-header ux-card-sub-title {
   line-height: 14px;
   color: inherit;
   color: var(--ux-theme--card-sub-title-foreground, inherit);
+  opacity: 0.8;
   opacity: var(--ux-theme--card-sub-title-opacity, 0.8);
 }
 
-ux-card.ux-card--primary-header ux-card-header {
+ux-card ux-card-header[color=primary] {
   color: #3f51b5;
-  background-color: var(--ux-theme--card-primary-header-background, #3f51b5);
+  background-color: var(--ux-theme--card-primary-header-background, var(--ux-design--primary, #3F51B5));
   color: #fff;
-  color: var(--ux-theme--card-primary-header-foreground, #fff);
+  color: var(--ux-theme--card-primary-header-foreground, var(--ux-design--primary-foreground, #fff));
 }
 
-ux-card.ux-card--accent-header ux-card-header {
-  background-color: var(--ux-theme--card-accent-header-background, #ff4081);
-  color: var(--ux-theme--card-accent-header-foreground, #fff);
-}
-
-ux-card.ux-card--primary-header ux-card-header ux-card-sub-title {
+ux-card ux-card-header[color=accent] {
+  background-color: #ff4081;
+  background-color: var(--ux-theme--card-accent-header-background, var(--ux-design--accent, #ff4081));
   color: #fff;
-  color: var(--ux-theme--card-primary-header-foreground, #fff);
+  color: var(--ux-theme--card-accent-header-foreground, var(--ux-design--accent-foreground, #fff));
 }
 
-ux-card.ux-card--accent-header  ux-card-header ux-card-sub-title {
-  color: var(--ux-theme--card-accent-header-foreground, #ff4081);
-}
-
-ux-card.ux-card--primary-header ux-card-header+ux-card-content,
-ux-card.ux-card--accent-header  ux-card-header+ux-card-content {
+ux-card ux-card-header[color=primary]+ux-card-content,
+ux-card ux-card-header[color=accent]+ux-card-content {
   padding-top: 16px;
 }
 

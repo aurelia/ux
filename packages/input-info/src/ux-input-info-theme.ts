@@ -1,8 +1,8 @@
-import { swatches, UxTheme } from '@aurelia-ux/core';
+import { UxTheme } from '@aurelia-ux/core';
 
 export class UxInputInfoTheme implements UxTheme {
   public themeKey = 'input-info';
 
-  public foreground: string = swatches.grey.p600;
-  public error: string = swatches.red.p500;
+  public foreground: string;
+  public error: string;
 }
