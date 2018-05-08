@@ -1,13 +1,9 @@
-define(["require", "exports", "@aurelia-ux/core"], function (require, exports, core_1) {
+define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var UxChipTheme = /** @class */ (function () {
         function UxChipTheme() {
             this.themeKey = 'chip';
-            this.background = 'var(--ux-design--accent, #FF4081)';
-            this.foreground = 'var(--ux-design--accent-foreground, #FFFFFF)';
-            this.deleteBackground = core_1.swatches.grey.p500;
-            this.deleteForeground = core_1.swatches.grey.p200;
         }
         return UxChipTheme;
     }());

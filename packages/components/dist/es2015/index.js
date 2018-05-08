@@ -1,3 +1,4 @@
+export { UxCardTheme } from '@aurelia-ux/card';
 export { UxButtonTheme } from '@aurelia-ux/button';
 export { UxCheckboxTheme, UxCheckbox } from '@aurelia-ux/checkbox';
 export { UxChipInputTheme, UxChipTheme, UxTagTheme } from '@aurelia-ux/chip-input';
@@ -12,6 +13,7 @@ export { UxTextAreaTheme, UxTextArea } from '@aurelia-ux/textarea';
 export { UxSwitchTheme, UxSwitch } from '@aurelia-ux/switch';
 export { UxOption, UxOptGroup, UxSelect, UxSelectTheme } from '@aurelia-ux/select';
 import { configure as configureButtonComponent } from '@aurelia-ux/button';
+import { configure as configureCardComponent } from '@aurelia-ux/card';
 import { configure as configureCheckboxComponent } from '@aurelia-ux/checkbox';
 import { configure as configureChipComponent } from '@aurelia-ux/chip-input';
 import { configure as configureDatepickerComponent } from '@aurelia-ux/datepicker';
@@ -26,6 +28,7 @@ import { configure as configureSwitchComponent } from '@aurelia-ux/switch';
 import { configure as configureSelectComponent } from '@aurelia-ux/select';
 export function configure(config) {
     configureButtonComponent(config);
+    configureCardComponent(config);
     configureCheckboxComponent(config);
     configureChipComponent(config);
     configureDatepickerComponent(config);

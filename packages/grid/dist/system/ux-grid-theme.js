@@ -8,8 +8,6 @@ System.register([], function (exports_1, context_1) {
             UxGridTheme = /** @class */ (function () {
                 function UxGridTheme() {
                     this.themeKey = 'grid';
-                    this.outerPadding = '16px';
-                    this.gutterSpacing = '16px';
                 }
                 return UxGridTheme;
             }());

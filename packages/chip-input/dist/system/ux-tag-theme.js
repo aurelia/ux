@@ -8,8 +8,6 @@ System.register([], function (exports_1, context_1) {
             UxTagTheme = /** @class */ (function () {
                 function UxTagTheme() {
                     this.themeKey = 'tag';
-                    this.background = 'var(--ux-design--accent, #FF4081)';
-                    this.foreground = 'var(--ux-design--accent-foreground, #FFFFFF)';
                 }
                 return UxTagTheme;
             }());

@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
 var util_1 = require("./util");
-var UX_OPTGROUP_VIEW = require("./ux-optgroup.html");
 var UxOptGroup = /** @class */ (function () {
     function UxOptGroup(element, bindingEngine) {
         this.element = element;
@@ -71,8 +70,8 @@ var UxOptGroup = /** @class */ (function () {
     UxOptGroup = __decorate([
         aurelia_framework_1.inject(aurelia_framework_1.DOM.Element, aurelia_framework_1.BindingEngine),
         aurelia_framework_1.processContent(extractUxOptions),
-        aurelia_framework_1.customElement('ux-optgroup'),
-        aurelia_framework_1.inlineView(UX_OPTGROUP_VIEW)
+        aurelia_framework_1.customElement('ux-optgroup')
+        // @inlineView(UX_OPTGROUP_VIEW)
     ], UxOptGroup);
     return UxOptGroup;
 }());

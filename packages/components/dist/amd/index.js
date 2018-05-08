@@ -1,6 +1,7 @@
-define(["require", "exports", "@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/grid", "@aurelia-ux/datepicker", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select", "@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/datepicker", "@aurelia-ux/grid", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select"], function (require, exports, button_1, checkbox_1, chip_input_1, grid_1, datepicker_1, form_1, input_1, input_info_1, list_1, radio_1, textarea_1, switch_1, select_1, button_2, checkbox_2, chip_input_2, datepicker_2, grid_2, form_2, input_2, input_info_2, list_2, radio_2, textarea_2, switch_2, select_2) {
+define(["require", "exports", "@aurelia-ux/card", "@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/grid", "@aurelia-ux/datepicker", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select", "@aurelia-ux/button", "@aurelia-ux/card", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/datepicker", "@aurelia-ux/grid", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select"], function (require, exports, card_1, button_1, checkbox_1, chip_input_1, grid_1, datepicker_1, form_1, input_1, input_info_1, list_1, radio_1, textarea_1, switch_1, select_1, button_2, card_2, checkbox_2, chip_input_2, datepicker_2, grid_2, form_2, input_2, input_info_2, list_2, radio_2, textarea_2, switch_2, select_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxCardTheme = card_1.UxCardTheme;
     exports.UxButtonTheme = button_1.UxButtonTheme;
     exports.UxCheckboxTheme = checkbox_1.UxCheckboxTheme;
     exports.UxCheckbox = checkbox_1.UxCheckbox;
@@ -27,6 +28,7 @@ define(["require", "exports", "@aurelia-ux/button", "@aurelia-ux/checkbox", "@au
     exports.UxSelectTheme = select_1.UxSelectTheme;
     function configure(config) {
         button_2.configure(config);
+        card_2.configure(config);
         checkbox_2.configure(config);
         chip_input_2.configure(config);
         datepicker_2.configure(config);

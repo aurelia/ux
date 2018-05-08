@@ -1,4 +1,4 @@
-System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./ux-select-theme", "./util", "./ux-select.html"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./ux-select-theme", "./util"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -27,7 +27,7 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
     function defaultMatcher(a, b) {
         return a === b;
     }
-    var aurelia_framework_1, aurelia_logging_1, core_1, ux_select_theme_1, util_1, UX_SELECT_VIEW, theme, UP, DOWN, ENTER, SPACE, logger, invalidMultipleValueMsg, selectArrayContext, UxSelect, UxSelectElementProto;
+    var aurelia_framework_1, aurelia_logging_1, core_1, ux_select_theme_1, util_1, theme, UP, DOWN, ENTER, SPACE, logger, invalidMultipleValueMsg, selectArrayContext, UxSelect, UxSelectElementProto;
     return {
         setters: [
             function (aurelia_framework_1_1) {
@@ -44,9 +44,6 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
             },
             function (util_1_1) {
                 util_1 = util_1_1;
-            },
-            function (UX_SELECT_VIEW_1) {
-                UX_SELECT_VIEW = UX_SELECT_VIEW_1;
             }
         ],
         execute: function () {
@@ -491,8 +488,8 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
                 UxSelect = __decorate([
                     aurelia_framework_1.inject(Element, core_1.StyleEngine, aurelia_framework_1.ObserverLocator, aurelia_framework_1.TaskQueue),
                     aurelia_framework_1.processContent(extractUxOption),
-                    aurelia_framework_1.customElement('ux-select'),
-                    aurelia_framework_1.inlineView(UX_SELECT_VIEW)
+                    aurelia_framework_1.customElement('ux-select')
+                    // @inlineView(UX_SELECT_VIEW)
                 ], UxSelect);
                 return UxSelect;
             }());

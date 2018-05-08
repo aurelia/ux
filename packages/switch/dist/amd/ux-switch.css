@@ -46,7 +46,7 @@ ux-switch input:disabled ~ .track .indicator, ux-switch input:disabled:checked ~
 
 ux-switch input:checked ~ .track {
   background-color: #FF80AB;
-  background-color: var(--ux-theme--switch-track-active, #FF80AB);
+  background-color: var(--ux-theme--switch-track-active, var(--ux-design--accent-light, #FF80AB));
 }
 
 ux-switch:focus {
@@ -69,7 +69,7 @@ ux-switch .track .indicator {
 ux-switch input:checked ~ .track .indicator {
   left: calc(100% - 14px);
   background-color: #FF80AB;
-  background-color: var(--ux-theme--switch-indicator-active, #FF80AB);
+  background-color: var(--ux-theme--switch-indicator-active, var(--ux-design--accent, #F48FB1));
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
 }
 

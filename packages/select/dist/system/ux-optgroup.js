@@ -1,4 +1,4 @@
-System.register(["aurelia-framework", "./util", "./ux-optgroup.html"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "./util"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -18,7 +18,7 @@ System.register(["aurelia-framework", "./util", "./ux-optgroup.html"], function 
         }
         return true;
     }
-    var aurelia_framework_1, util_1, UX_OPTGROUP_VIEW, UxOptGroup, UxOptGroupElementProto;
+    var aurelia_framework_1, util_1, UxOptGroup, UxOptGroupElementProto;
     return {
         setters: [
             function (aurelia_framework_1_1) {
@@ -26,9 +26,6 @@ System.register(["aurelia-framework", "./util", "./ux-optgroup.html"], function 
             },
             function (util_1_1) {
                 util_1 = util_1_1;
-            },
-            function (UX_OPTGROUP_VIEW_1) {
-                UX_OPTGROUP_VIEW = UX_OPTGROUP_VIEW_1;
             }
         ],
         execute: function () {
@@ -94,8 +91,8 @@ System.register(["aurelia-framework", "./util", "./ux-optgroup.html"], function 
                 UxOptGroup = __decorate([
                     aurelia_framework_1.inject(aurelia_framework_1.DOM.Element, aurelia_framework_1.BindingEngine),
                     aurelia_framework_1.processContent(extractUxOptions),
-                    aurelia_framework_1.customElement('ux-optgroup'),
-                    aurelia_framework_1.inlineView(UX_OPTGROUP_VIEW)
+                    aurelia_framework_1.customElement('ux-optgroup')
+                    // @inlineView(UX_OPTGROUP_VIEW)
                 ], UxOptGroup);
                 return UxOptGroup;
             }());

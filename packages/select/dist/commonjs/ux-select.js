@@ -11,7 +11,6 @@ var aurelia_logging_1 = require("aurelia-logging");
 var core_1 = require("@aurelia-ux/core");
 var ux_select_theme_1 = require("./ux-select-theme");
 var util_1 = require("./util");
-var UX_SELECT_VIEW = require("./ux-select.html");
 var theme = new ux_select_theme_1.UxSelectTheme();
 var UP = 38;
 // const RIGHT = 39;
@@ -453,8 +452,8 @@ var UxSelect = /** @class */ (function () {
     UxSelect = __decorate([
         aurelia_framework_1.inject(Element, core_1.StyleEngine, aurelia_framework_1.ObserverLocator, aurelia_framework_1.TaskQueue),
         aurelia_framework_1.processContent(extractUxOption),
-        aurelia_framework_1.customElement('ux-select'),
-        aurelia_framework_1.inlineView(UX_SELECT_VIEW)
+        aurelia_framework_1.customElement('ux-select')
+        // @inlineView(UX_SELECT_VIEW)
     ], UxSelect);
     return UxSelect;
 }());

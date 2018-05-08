@@ -4,7 +4,6 @@ define(["require", "exports"], function (require, exports) {
     var UxIconTheme = /** @class */ (function () {
         function UxIconTheme() {
             this.themeKey = 'icon';
-            this.size = '24px';
         }
         return UxIconTheme;
     }());

@@ -5,10 +5,11 @@ export declare class UxTextAreaTheme implements UxTheme {
     background: string;
     borderBottom: string;
     borderBottomHover: string;
-    borderBottomFocus: string;
+    borderBottomSelected: string;
     diabledForeground: string;
     disabledBorderBottom: string;
     fullWidthBorder: string;
+    fullWidthForeground: string;
     fullWidthBackground: string;
     fullWidthBackgroundDisabled: string;
     error: string;

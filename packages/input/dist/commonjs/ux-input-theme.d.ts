@@ -9,6 +9,7 @@ export declare class UxInputTheme implements UxTheme {
     diabledForeground: string;
     disabledBorderBottom: string;
     fullWidthBorder: string;
+    fullWidthForeground: string;
     fullWidthBackground: string;
     fullWidthBackgroundDisabled: string;
     error: string;

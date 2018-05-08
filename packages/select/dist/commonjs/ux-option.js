@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
 var core_1 = require("@aurelia-ux/core");
 var util_1 = require("./util");
-var UX_OPTION_VIEW = require("./ux-option.html");
 var UxOption = /** @class */ (function () {
     function UxOption(element, bindingEngine) {
         this.element = element;
@@ -153,8 +152,8 @@ var UxOption = /** @class */ (function () {
     UxOption = __decorate([
         aurelia_framework_1.inject(aurelia_framework_1.DOM.Element, aurelia_framework_1.BindingEngine),
         aurelia_framework_1.customElement('ux-option'),
-        aurelia_framework_1.processAttributes(convertTextToAttr),
-        aurelia_framework_1.inlineView(UX_OPTION_VIEW)
+        aurelia_framework_1.processAttributes(convertTextToAttr)
+        // @inlineView(UX_OPTION_VIEW)
     ], UxOption);
     return UxOption;
 }());

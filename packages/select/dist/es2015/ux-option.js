@@ -4,11 +4,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { inject, bindable, DOM, ElementEvents, PLATFORM, customElement, BindingEngine, inlineView, processAttributes, } from 'aurelia-framework';
+import { inject, bindable, DOM, ElementEvents, PLATFORM, customElement, BindingEngine, 
+// inlineView,
+processAttributes, } from 'aurelia-framework';
 import { PaperRipple } from '@aurelia-ux/core';
 import { getAuViewModel } from './util';
-import * as UX_OPTION_VIEW from './ux-option.html';
-let UxOption = class UxOption {
+let UxOption = 
+// @inlineView(UX_OPTION_VIEW)
+class UxOption {
     constructor(element, bindingEngine) {
         this.element = element;
         this.bindingEngine = bindingEngine;
@@ -151,8 +154,8 @@ __decorate([
 UxOption = __decorate([
     inject(DOM.Element, BindingEngine),
     customElement('ux-option'),
-    processAttributes(convertTextToAttr),
-    inlineView(UX_OPTION_VIEW)
+    processAttributes(convertTextToAttr)
+    // @inlineView(UX_OPTION_VIEW)
 ], UxOption);
 export { UxOption };
 function removeWave(el) {

@@ -32,6 +32,6 @@ ux-form ux-field {
 ux-form ux-field > label {
     font-size: 14px;
     font-size: var(--ux-theme--form-label-font-size, 14px);
-    color: #9E9E9E;
-    color: var(--ux-theme--form-label-color, #9E9E9E);
+    color: inherit;
+    color: var(--ux-theme--form-label-color, inherit);
 }

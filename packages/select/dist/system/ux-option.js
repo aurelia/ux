@@ -1,4 +1,4 @@
-System.register(["aurelia-framework", "@aurelia-ux/core", "./util", "./ux-option.html"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "@aurelia-ux/core", "./util"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -25,7 +25,7 @@ System.register(["aurelia-framework", "@aurelia-ux/core", "./util", "./ux-option
         node.setAttribute('text', node.textContent || '');
         node.textContent = '';
     }
-    var aurelia_framework_1, core_1, util_1, UX_OPTION_VIEW, UxOption, UxOptionElementProto;
+    var aurelia_framework_1, core_1, util_1, UxOption, UxOptionElementProto;
     return {
         setters: [
             function (aurelia_framework_1_1) {
@@ -36,9 +36,6 @@ System.register(["aurelia-framework", "@aurelia-ux/core", "./util", "./ux-option
             },
             function (util_1_1) {
                 util_1 = util_1_1;
-            },
-            function (UX_OPTION_VIEW_1) {
-                UX_OPTION_VIEW = UX_OPTION_VIEW_1;
             }
         ],
         execute: function () {
@@ -185,8 +182,8 @@ System.register(["aurelia-framework", "@aurelia-ux/core", "./util", "./ux-option
                 UxOption = __decorate([
                     aurelia_framework_1.inject(aurelia_framework_1.DOM.Element, aurelia_framework_1.BindingEngine),
                     aurelia_framework_1.customElement('ux-option'),
-                    aurelia_framework_1.processAttributes(convertTextToAttr),
-                    aurelia_framework_1.inlineView(UX_OPTION_VIEW)
+                    aurelia_framework_1.processAttributes(convertTextToAttr)
+                    // @inlineView(UX_OPTION_VIEW)
                 ], UxOption);
                 return UxOption;
             }());

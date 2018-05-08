@@ -1424,6 +1424,10 @@ var StyleController = /** @class */ (function () {
         if (defaultTheme == null) {
             this.ensureBaseThemeCreated(theme);
         }
+        defaultTheme = this.themes[theme.themeKey];
+        if (defaultTheme == null) {
+            return;
+        }
         for (var key in theme) {
             if (element == null) {
                 if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {

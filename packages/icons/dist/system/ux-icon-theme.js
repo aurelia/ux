@@ -8,7 +8,6 @@ System.register([], function (exports_1, context_1) {
             UxIconTheme = /** @class */ (function () {
                 function UxIconTheme() {
                     this.themeKey = 'icon';
-                    this.size = '24px';
                 }
                 return UxIconTheme;
             }());

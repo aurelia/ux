@@ -1,8 +1,9 @@
-System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/grid", "@aurelia-ux/datepicker", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select"], function (exports_1, context_1) {
+System.register(["@aurelia-ux/card", "@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/grid", "@aurelia-ux/datepicker", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
         button_1.configure(config);
+        card_1.configure(config);
         checkbox_1.configure(config);
         chip_input_1.configure(config);
         datepicker_1.configure(config);
@@ -17,9 +18,15 @@ System.register(["@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip
         select_1.configure(config);
     }
     exports_1("configure", configure);
-    var button_1, checkbox_1, chip_input_1, datepicker_1, grid_1, form_1, input_1, input_info_1, list_1, radio_1, textarea_1, switch_1, select_1;
+    var button_1, card_1, checkbox_1, chip_input_1, datepicker_1, grid_1, form_1, input_1, input_info_1, list_1, radio_1, textarea_1, switch_1, select_1;
     return {
         setters: [
+            function (card_2_1) {
+                exports_1({
+                    "UxCardTheme": card_2_1["UxCardTheme"]
+                });
+                card_1 = card_2_1;
+            },
             function (button_2_1) {
                 exports_1({
                     "UxButtonTheme": button_2_1["UxButtonTheme"]

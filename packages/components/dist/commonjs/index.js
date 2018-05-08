@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var card_1 = require("@aurelia-ux/card");
+exports.UxCardTheme = card_1.UxCardTheme;
 var button_1 = require("@aurelia-ux/button");
 exports.UxButtonTheme = button_1.UxButtonTheme;
 var checkbox_1 = require("@aurelia-ux/checkbox");
@@ -38,6 +40,7 @@ exports.UxOptGroup = select_1.UxOptGroup;
 exports.UxSelect = select_1.UxSelect;
 exports.UxSelectTheme = select_1.UxSelectTheme;
 var button_2 = require("@aurelia-ux/button");
+var card_2 = require("@aurelia-ux/card");
 var checkbox_2 = require("@aurelia-ux/checkbox");
 var chip_input_2 = require("@aurelia-ux/chip-input");
 var datepicker_2 = require("@aurelia-ux/datepicker");
@@ -52,6 +55,7 @@ var switch_2 = require("@aurelia-ux/switch");
 var select_2 = require("@aurelia-ux/select");
 function configure(config) {
     button_2.configure(config);
+    card_2.configure(config);
     checkbox_2.configure(config);
     chip_input_2.configure(config);
     datepicker_2.configure(config);

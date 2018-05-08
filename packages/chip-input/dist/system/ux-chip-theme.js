@@ -1,21 +1,13 @@
-System.register(["@aurelia-ux/core"], function (exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var core_1, UxChipTheme;
+    var UxChipTheme;
     return {
-        setters: [
-            function (core_1_1) {
-                core_1 = core_1_1;
-            }
-        ],
+        setters: [],
         execute: function () {
             UxChipTheme = /** @class */ (function () {
                 function UxChipTheme() {
                     this.themeKey = 'chip';
-                    this.background = 'var(--ux-design--accent, #FF4081)';
-                    this.foreground = 'var(--ux-design--accent-foreground, #FFFFFF)';
-                    this.deleteBackground = core_1.swatches.grey.p500;
-                    this.deleteForeground = core_1.swatches.grey.p200;
                 }
                 return UxChipTheme;
             }());

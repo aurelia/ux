@@ -43,8 +43,7 @@ ux-checkbox input:hover:not(:disabled) ~ .checkbox {
 
 ux-checkbox input:checked ~.checkbox {
   border: solid 2px #FF4081;
-  border: var(--ux-theme--checkbox-checked-background, var(--ux-design--accent, #FF4081));
-  border: var(--ux-theme--checkbox-hover-border, var(--ux-design--accent, #FF4081));
+  border: var(--ux-theme--checkbox-hover-border, solid 2px var(--ux-design--accent, #FF4081));
 }
 
 ux-checkbox>.checkbox>.background-box {

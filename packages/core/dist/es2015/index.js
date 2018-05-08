@@ -1308,9 +1308,13 @@ let StyleController = class StyleController {
     }
     updateTheme(theme, element) {
         const baseTheme = { themeKey: 'base-theme' };
-        const defaultTheme = this.themes[theme.themeKey];
+        let defaultTheme = this.themes[theme.themeKey];
         if (defaultTheme == null) {
             this.ensureBaseThemeCreated(theme);
+        }
+        defaultTheme = this.themes[theme.themeKey];
+        if (defaultTheme == null) {
+            return;
         }
         for (const key in theme) {
             if (element == null) {

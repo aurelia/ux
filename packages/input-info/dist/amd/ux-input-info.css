@@ -2,8 +2,8 @@ ux-input-info {
   display: flex;
   font-size: 14px;
   width: 100%;
-  color: #757575;
-  color: var(--ux-theme--input-info-foreground, #757575);
+  color: #909090;
+  color: var(--ux-theme--input-info-foreground, #909090);
 }
 
 ux-input-info>.hint-text,

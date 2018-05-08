@@ -4,10 +4,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { customElement, bindable, processContent, DOM, inject, inlineView, BindingEngine, } from 'aurelia-framework';
+import { customElement, bindable, processContent, DOM, inject, 
+// inlineView,
+BindingEngine, } from 'aurelia-framework';
 import { getAuViewModel } from './util';
-import * as UX_OPTGROUP_VIEW from './ux-optgroup.html';
-let UxOptGroup = class UxOptGroup {
+let UxOptGroup = 
+// @inlineView(UX_OPTGROUP_VIEW)
+class UxOptGroup {
     constructor(element, bindingEngine) {
         this.element = element;
         this.bindingEngine = bindingEngine;
@@ -69,8 +72,8 @@ __decorate([
 UxOptGroup = __decorate([
     inject(DOM.Element, BindingEngine),
     processContent(extractUxOptions),
-    customElement('ux-optgroup'),
-    inlineView(UX_OPTGROUP_VIEW)
+    customElement('ux-optgroup')
+    // @inlineView(UX_OPTGROUP_VIEW)
 ], UxOptGroup);
 export { UxOptGroup };
 function extractUxOptions(_, __, node) {

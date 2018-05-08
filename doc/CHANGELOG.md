@@ -1,3 +1,21 @@
+### [aurelia-ux 0.10.0](https://github.com/aurelia/ux/compare/v0.9.1...v0.10.0)
+
+#### Features
+
+* New UX Card Component
+
+#### Bug Fixes
+
+* list: set text-decoration to none on ux-list
+* grid: disable max width on sm size
+* button: make icon button flat background with inherited color
+* textarea: bottom border no longer disappears on hover
+* Select: use conventional view strategy (#166)
+* ux-input: remove margin from bottom of input
+* update themes and default styles to facilitate better theming
+* checkbox: fix css from previous conversion for border
+* style-controller: assign default theme after ensuring it is created
+
 ### [aurelia-ux 0.8.0](https://github.com/aurelia/ux/compare/v0.7.1...v0.8.0)
 
 ### Features
