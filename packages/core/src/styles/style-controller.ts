@@ -37,10 +37,16 @@ export class StyleController {
 
   public updateTheme(theme: UxTheme, element?: HTMLElement) {
     const baseTheme: UxTheme = { themeKey: 'base-theme' };
-    const defaultTheme: any = this.themes[theme.themeKey as any];
+    let defaultTheme: any = this.themes[theme.themeKey as any];
 
     if (defaultTheme == null) {
       this.ensureBaseThemeCreated(theme);
+    }
+
+    defaultTheme = this.themes[theme.themeKey as any];
+
+    if (defaultTheme == null) {
+      return;
     }
 
     for (const key in theme) {
