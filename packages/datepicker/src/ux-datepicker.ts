@@ -80,6 +80,7 @@ export class UxDatepicker implements UxComponent {
       this.maxTime = dateParse.isValid() ? dateParse : null;
     }
 
+    this.valueChanged(this.value);
     this.themeChanged(this.theme);
   }
 
