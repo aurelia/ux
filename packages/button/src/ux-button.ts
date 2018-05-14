@@ -37,7 +37,7 @@ export class UxButton implements UxComponent {
   }
 
   public typeChanged(newValue: string | null) {
-    const typeClasses = ['flat', 'raised', 'fab', 'icon'];
+    const typeClasses = ['text', 'flat', 'outline', 'raised', 'fab'];
 
     this.button.classList.remove(...typeClasses);
 
@@ -95,7 +95,7 @@ export class UxButton implements UxComponent {
         this.button.appendChild(this.ripple.$);
       }
 
-      if (this.button.classList.contains('fab') || this.button.classList.contains('icon')) {
+      if (this.button.classList.contains('fab')) {
         this.ripple.center = true;
         this.ripple.round = true;
       }
