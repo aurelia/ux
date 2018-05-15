@@ -56,6 +56,7 @@ var UxDatepicker = /** @class */ (function () {
             var dateParse = moment(this.maxTime, this.parsers.time);
             this.maxTime = dateParse.isValid() ? dateParse : null;
         }
+        this.valueChanged(this.value);
         this.themeChanged(this.theme);
     };
     UxDatepicker.prototype.toggleDialog = function (display) {

@@ -4,6 +4,9 @@ ux-button {
 }
 
 ux-button>button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   border: 0;
   outline: none;
@@ -17,6 +20,8 @@ ux-button>button {
   text-transform: var(--ux-theme--button-text-transform, uppercase);
   letter-spacing: 0.5px;
   letter-spacing: var(--ux-theme--button-letter-spacing, 0.5px);
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 ux-button>button::-moz-focus-inner {
@@ -30,36 +35,48 @@ ux-button>button.flat {
   border-radius: 2px;
 }
 
-ux-button>button.icon {
-  display: inline-flex;
-  min-width: inherit;
-  padding: 0 8px;
+ux-button>button.text {
+  padding: 0 16px 0 16px;
+  border-radius: 2px;
 }
 
 ux-button>button.raised.small,
+ux-button>button.outline.small,
 ux-button>button.flat.small,
-ux-button>button.icon.small {
+ux-button>button.text.small {
   font-size: 13px;
   height: 32px;
   line-height: 32px;
 }
 
 ux-button>button.raised.medium,
+ux-button>button.outline.medium,
 ux-button>button.flat.medium,
-ux-button>button.icon.medium {
+ux-button>button.text.medium {
   font-size: 14px;
   height: 36px;
   line-height: 36px;
 }
 
 ux-button>button.raised.large,
+ux-button>button.outline.large,
 ux-button>button.flat.large,
-ux-button>button.icon.large {
+ux-button>button.text.large {
   font-size: 16px;
   height: 42px;
   line-height: 42px;
 }
 
+ux-button>button.outline {
+  border: 1px solid;
+}
+
+ux-button>button.outline:focus {
+  border: 1px solid #3F51B5;
+  border: 1px solid var(--ux-design--primary, #3F51B5);
+}
+
+ux-button>button.flat,
 ux-button>button.raised,
 ux-button>button.fab {
   background-color: #3F51B5;
@@ -68,6 +85,7 @@ ux-button>button.fab {
   color: var(--ux-theme--button-foreground, var(--ux-design--primary-foreground, #fff));
 }
 
+ux-button.accent>button.flat,
 ux-button.accent>button.raised,
 ux-button.accent>button.fab {
   background-color: #FF4081;
@@ -104,6 +122,7 @@ ux-button>button.fab:disabled:active {
   transition-delay: 0s;
 }
 
+ux-button>button.flat:focus,
 ux-button>button.raised:focus {
   box-shadow: 0 0 8px rgba(0, 0, 0, .18), 0 8px 16px rgba(0, 0, 0, .36);
   box-shadow: var(--ux-design--elevationFocus, 0 0 8px rgba(0, 0, 0, .18), 0 8px 16px rgba(0, 0, 0, .36));
@@ -117,21 +136,22 @@ ux-button>button.fab:disabled:focus {
   transition-delay: 0s;
 }
 
-ux-button>button.flat {
+ux-button>button.text {
   background-color: transparent;
   background-color: var(--ux-theme--button-flat-background, transparent);
   color: #3F51B5;
   color: var(--ux-theme--button-flat-foreground, var(--ux-design--primary, #3F51B5));
 }
 
-ux-button.accent>button.flat {
+ux-button.accent>button.text {
   background-color: transparent;
   background-color: var(--ux-theme--button-accent-flat-background, transparent);
   color: #FF4081;
   color: var(--ux-theme--button-accent-flat-foreground, var(--ux-design--accent, #FF4081));
 }
 
-ux-button>button.icon {
+ux-button>button.text,
+ux-button>button.outline {
   color: inherit;
   background-color: transparent;
 }

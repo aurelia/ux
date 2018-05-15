@@ -27,7 +27,7 @@ var UxButton = /** @class */ (function () {
         this.effectChanged(this.effect);
     };
     UxButton.prototype.typeChanged = function (newValue) {
-        var typeClasses = ['flat', 'raised', 'fab', 'icon'];
+        var typeClasses = ['text', 'flat', 'outline', 'raised', 'fab'];
         (_a = this.button.classList).remove.apply(_a, typeClasses);
         if (newValue == null || typeClasses.includes(newValue) === false) {
             newValue = 'raised';
@@ -73,7 +73,7 @@ var UxButton = /** @class */ (function () {
                 this.ripple = new PaperRipple();
                 this.button.appendChild(this.ripple.$);
             }
-            if (this.button.classList.contains('fab') || this.button.classList.contains('icon')) {
+            if (this.button.classList.contains('fab')) {
                 this.ripple.center = true;
                 this.ripple.round = true;
             }
