@@ -27,7 +27,7 @@ let UxButton = class UxButton {
         this.effectChanged(this.effect);
     }
     typeChanged(newValue) {
-        const typeClasses = ['flat', 'raised', 'fab', 'icon'];
+        const typeClasses = ['text', 'flat', 'outline', 'raised', 'fab'];
         this.button.classList.remove(...typeClasses);
         if (newValue == null || typeClasses.includes(newValue) === false) {
             newValue = 'raised';
@@ -70,7 +70,7 @@ let UxButton = class UxButton {
                 this.ripple = new PaperRipple();
                 this.button.appendChild(this.ripple.$);
             }
-            if (this.button.classList.contains('fab') || this.button.classList.contains('icon')) {
+            if (this.button.classList.contains('fab')) {
                 this.ripple.center = true;
                 this.ripple.round = true;
             }

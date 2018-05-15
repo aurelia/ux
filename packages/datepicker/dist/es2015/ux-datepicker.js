@@ -56,6 +56,7 @@ let UxDatepicker = class UxDatepicker {
             const dateParse = moment(this.maxTime, this.parsers.time);
             this.maxTime = dateParse.isValid() ? dateParse : null;
         }
+        this.valueChanged(this.value);
         this.themeChanged(this.theme);
     }
     toggleDialog(display) {
