@@ -5,8 +5,6 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
 
-const theme = new UxInputTheme();
-
 export interface UxInputElement extends HTMLElement {
   value: any;
 }
@@ -37,7 +35,6 @@ export class UxInput implements UxComponent {
 
   constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
     Object.setPrototypeOf(element, uxInputElementProto);
-    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

@@ -40,9 +40,7 @@ export class UxDatepicker implements UxComponent {
   private textboxValue: string;
   private showDialog = false;
 
-  constructor(public element: HTMLElement, public resources: ViewResources, public styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(theme);
-  }
+  constructor(public element: HTMLElement, public resources: ViewResources, public styleEngine: StyleEngine) { }
 
   public bind() {
 

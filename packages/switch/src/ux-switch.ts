@@ -5,8 +5,6 @@ import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from
 import { UxSwitchTheme } from './ux-switch-theme';
 import { DOM, ElementEvents } from 'aurelia-framework';
 
-const theme = new UxSwitchTheme();
-
 export interface UxSwitchElement extends HTMLElement {
   type: 'checkbox';
   checked: boolean;
@@ -37,7 +35,6 @@ export class UxSwitch implements UxComponent {
 
   constructor(public element: UxSwitchElement, private styleEngine: StyleEngine) {
     Object.setPrototypeOf(element, uxSwitchElementProto);
-    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

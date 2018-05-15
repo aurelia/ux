@@ -36,8 +36,6 @@ declare module './ux-optgroup' {
   }
 }
 
-const theme = new UxSelectTheme();
-
 const UP = 38;
 // const RIGHT = 39;
 const DOWN = 40;
@@ -104,8 +102,6 @@ export class UxSelect implements UxComponent {
   ) {
     // Only chrome persist the element prototype when cloning with clone node
     Object.setPrototypeOf(element, UxSelectElementProto);
-    this.theme = theme;
-    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

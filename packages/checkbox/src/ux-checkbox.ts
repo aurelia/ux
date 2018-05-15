@@ -17,8 +17,6 @@ export interface UxCheckboxElement extends HTMLElement {
   checked: boolean;
 }
 
-const theme = new UxCheckboxTheme();
-
 @inject(Element, StyleEngine)
 @customElement('ux-checkbox')
 export class UxCheckbox implements UxComponent {
@@ -49,7 +47,6 @@ export class UxCheckbox implements UxComponent {
     private styleEngine: StyleEngine
   ) {
     Object.setPrototypeOf(element, uxCheckboxElementProto);
-    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

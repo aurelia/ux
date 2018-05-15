@@ -5,8 +5,6 @@ import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxTextAreaTheme } from './ux-textarea-theme';
 import { observable } from 'aurelia-framework';
 
-const theme = new UxTextAreaTheme();
-
 export interface UxTextAreaElement extends HTMLElement {
   value: string;
 }
@@ -38,7 +36,6 @@ export class UxTextArea implements UxComponent {
 
   constructor(private element: UxTextAreaElement, private styleEngine: StyleEngine) {
     Object.setPrototypeOf(element, uxTextAreaElementProto);
-    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

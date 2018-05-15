@@ -3,8 +3,6 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxBoilerplateTheme } from './ux-boilerplate-theme';
 
-const theme = new UxBoilerplateTheme();
-
 @inject(Element, StyleEngine)
 @customElement('ux-button')
 export class UxButton implements UxComponent {
@@ -12,9 +10,7 @@ export class UxButton implements UxComponent {
 
   constructor(
     public element: HTMLElement,
-    private styleEngine: StyleEngine) {
-      styleEngine.ensureDefaultTheme(theme);
-    }
+    private styleEngine: StyleEngine) { }
 
   public bind() {
     this.themeChanged(this.theme);

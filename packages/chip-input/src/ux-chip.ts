@@ -5,8 +5,6 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxChipTheme } from './ux-chip-theme';
 
-const theme = new UxChipTheme();
-
 @inject(Element, StyleEngine)
 @customElement('ux-chip')
 
@@ -19,9 +17,7 @@ export class UxChip implements UxComponent {
 
   constructor(
     private element: HTMLInputElement,
-    private styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(theme);
-  }
+    private styleEngine: StyleEngine) { }
 
   public bind() {
     this.themeChanged(this.theme);

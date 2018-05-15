@@ -10,8 +10,6 @@ import {
 import { UxRadioTheme } from './ux-radio-theme';
 import { ElementEvents, DOM } from 'aurelia-framework';
 
-const theme = new UxRadioTheme();
-
 export interface UxRadioElement extends HTMLElement {
   type: 'radio';
   checked: boolean;
@@ -42,7 +40,6 @@ export class UxRadio implements UxComponent {
 
   constructor(public element: UxRadioElement, private styleEngine: StyleEngine) {
     Object.setPrototypeOf(element, uxRadioElementProto);
-    styleEngine.ensureDefaultTheme(theme);
   }
 
   public bind() {

@@ -3,8 +3,6 @@ import { inject } from 'aurelia-dependency-injection';
 import { UxComponent, StyleEngine } from '@aurelia-ux/core';
 import { UxListTheme } from './ux-list-theme';
 
-const theme = new UxListTheme();
-
 @inject(Element, StyleEngine)
 @customElement('ux-list')
 
@@ -13,9 +11,7 @@ export class UxList implements UxComponent {
 
   constructor(
     public element: HTMLElement,
-    private styleEngine: StyleEngine) {
-      styleEngine.ensureDefaultTheme(theme);
-    }
+    private styleEngine: StyleEngine) { }
 
   public bind() {
     if (this.theme != null) {

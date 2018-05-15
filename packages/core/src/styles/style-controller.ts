@@ -9,54 +9,34 @@ export class StyleController {
 
   constructor(public observerLocator: ObserverLocator, private globalStyleEngine: GlobalStyleEngine) { }
 
-  /**
-   * Checks to see if a base theme has been registered.
-   * If no base theme is found, the theme is registered,
-   * bindings are set up, and a new style element is added
-   * with the processed theme to the document head.
-   *
-   * @param theme A theme derived from the UxTheme base class.
-   */
-  public ensureBaseThemeCreated(theme: UxTheme) {
-    let baseTheme = this.themes[theme.themeKey as any] as UxTheme | null;
-
-    if (baseTheme != null) {
-      return;
-    }
-
-    baseTheme = theme;
-
-    this.globalStyleEngine.addOrUpdateGlobalStyle(
-      `aurelia-ux theme ${theme.themeKey}`,
-      this.processInnerHtml(theme),
-      ':root');
-    this.setWatches(theme);
-
-    this.themes[theme.themeKey as any] = theme;
-  }
-
   public updateTheme(theme: UxTheme, element?: HTMLElement) {
     const baseTheme: UxTheme = { themeKey: 'base-theme' };
-    let defaultTheme: any = this.themes[theme.themeKey as any];
 
-    if (defaultTheme == null) {
-      this.ensureBaseThemeCreated(theme);
+    if (theme.themeKey == null) {
+      throw new Error('Provided theme has no themeKey property.');
     }
 
-    defaultTheme = this.themes[theme.themeKey as any];
-
-    if (defaultTheme == null) {
-      return;
-    }
-
-    for (const key in theme) {
-      if (element == null) {
+    if (element != null) {
+      for (const key in theme) {
         if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
-          defaultTheme[key] = (theme as any)[key];
+          element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), (theme as any)[key]);
         }
-      } else {
-        element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), (theme as any)[key]);
       }
+    } else {
+      const uxTheme: any = this.themes.splice(this.themes.indexOf(this.themes[theme.themeKey as any]))[0];
+
+      if (uxTheme != null) {
+        this.removeWatches(uxTheme);
+      }
+
+      this.globalStyleEngine.addOrUpdateGlobalStyle(
+        `aurelia-ux theme ${theme.themeKey}`,
+        this.processInnerHtml(theme),
+        ':root');
+
+      this.setWatches(theme);
+
+      this.themes[theme.themeKey as any] = theme;
     }
   }
 
@@ -83,13 +63,21 @@ export class StyleController {
 
   private setWatches(theme: UxTheme) {
     for (const key of this.getThemeKeys(theme)) {
-      this.observerLocator.getObserver(theme, key).subscribe(() => {
-        this.globalStyleEngine.addOrUpdateGlobalStyle(
-          `aurelia-ux theme ${theme.themeKey}`,
-          this.processInnerHtml(theme),
-          ':root');
-      });
+      this.observerLocator.getObserver(theme, key).subscribe(() => this.themePropertyChanged(theme));
     }
+  }
+
+  private removeWatches(theme: UxTheme) {
+    for (const key of this.getThemeKeys(theme)) {
+      this.observerLocator.getObserver(theme, key).unsubscribe(() => this.themePropertyChanged(theme));
+    }
+  }
+
+  private themePropertyChanged(theme: UxTheme) {
+    this.globalStyleEngine.addOrUpdateGlobalStyle(
+      `aurelia-ux theme ${theme.themeKey}`,
+      this.processInnerHtml(theme),
+      ':root');
   }
 
   private processInnerHtml(theme: UxTheme) {

@@ -3,8 +3,6 @@ import { inject } from 'aurelia-dependency-injection';
 import { UxInputInfoTheme } from './ux-input-info-theme';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 
-const theme = new UxInputInfoTheme();
-
 @inject(Element, StyleEngine)
 @customElement('ux-input-info')
 export class UxInputInfo implements UxComponent {
@@ -14,9 +12,7 @@ export class UxInputInfo implements UxComponent {
 
   public inputElementModel: any;
 
-  constructor(private element: HTMLElement, public styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(theme);
-  }
+  constructor(private element: HTMLElement, public styleEngine: StyleEngine) { }
 
   public bind() {
     if (this.target === undefined) {

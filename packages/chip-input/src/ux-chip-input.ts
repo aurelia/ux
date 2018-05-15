@@ -5,8 +5,6 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxChipInputTheme } from './ux-chip-input-theme';
 
-const theme = new UxChipInputTheme();
-
 @inject(Element, StyleEngine)
 @customElement('ux-chip-input')
 
@@ -27,9 +25,7 @@ export class UxChipInput implements UxComponent {
   private chiprepeat: Element;
   private tagrepeat: Element;
 
-  constructor(private element: HTMLElement, private styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(theme);
-  }
+  constructor(private element: HTMLElement, private styleEngine: StyleEngine) { }
 
   public bind() {
     this.themeChanged(this.theme);

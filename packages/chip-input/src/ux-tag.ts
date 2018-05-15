@@ -5,8 +5,6 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxTagTheme } from './ux-tag-theme';
 
-const theme = new UxTagTheme();
-
 @inject(Element, StyleEngine)
 @customElement('ux-tag')
 
@@ -18,9 +16,7 @@ export class UxTag implements UxComponent {
 
   constructor(
     private element: HTMLInputElement,
-    private styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(theme);
-  }
+    private styleEngine: StyleEngine) { }
 
   public bind() {
     this.themeChanged(this.theme);

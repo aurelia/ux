@@ -6,8 +6,6 @@ import { StyleEngine, UxComponent, processDesignAttributes } from '@aurelia-ux/c
 import { UxIconTheme } from './ux-icon-theme';
 import IconMap from './ux-icon-map';
 
-const theme = new UxIconTheme();
-
 @inject(Element, StyleEngine, Logger)
 @customElement('ux-icon')
 @processAttributes(processDesignAttributes)
@@ -23,9 +21,7 @@ export class UxIcon implements UxComponent {
     private element: HTMLElement,
     private styleEngine: StyleEngine,
     private logger: Logger
-  )  {
-    styleEngine.ensureDefaultTheme(theme);
-  }
+  )  { }
 
   public bind() {
     if (this.size) {

@@ -3,8 +3,6 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxButtonTheme } from './ux-button-theme';
 
-const theme = new UxButtonTheme();
-
 @inject(Element, StyleEngine)
 @customElement('ux-button')
 export class UxButton implements UxComponent {
@@ -21,9 +19,7 @@ export class UxButton implements UxComponent {
 
   constructor(
     public element: HTMLElement,
-    private styleEngine: StyleEngine) {
-      styleEngine.ensureDefaultTheme(theme);
-    }
+    private styleEngine: StyleEngine) { }
 
   public bind() {
     if (normalizeBooleanAttribute('disabled', this.disabled)) {
