@@ -22,6 +22,7 @@ export class UxInput implements UxComponent {
   @bindable public max: number;
   @bindable public readonly: any = false;
   @bindable public theme: UxInputTheme;
+  @bindable public label: any;
   @bindable public type: any;
 
   @observable
@@ -45,12 +46,20 @@ export class UxInput implements UxComponent {
       this.focused = true;
     }
 
+    if (element.hasAttribute('id')) {
+      const attributeValue = element.getAttribute('id');
+
+      if (attributeValue) {
+        element.removeAttribute('id');
+        textbox.setAttribute('id', attributeValue);
+      }
+    }
+
     if (element.hasAttribute('placeholder')) {
       const attributeValue = element.getAttribute('placeholder');
 
       if (attributeValue) {
-        textbox.setAttribute('placeholder', attributeValue);
-        element.removeAttribute('placeholder');
+        this.label = attributeValue;
       }
     }
 
@@ -148,6 +157,12 @@ export class UxInput implements UxComponent {
   }
 
   public focusedChanged(focused: boolean) {
+    if (focused === true) {
+      this.element.classList.add('ux-input--focused');
+    } else {
+      this.element.classList.remove('ux-input--focused');
+    }
+
     this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
   }
 
@@ -158,10 +173,20 @@ export class UxInput implements UxComponent {
   }
 
   public rawValueChanged(newValue: string) {
+    if (newValue.length > 0) {
+      this.element.classList.add('ux-input--has-value');
+    } else {
+      this.element.classList.remove('ux-input--has-value');
+    }
+
     if (this.ignoreRawChanges) {
       return;
     }
     this.setValue(newValue);
+  }
+
+  public focusInput() {
+    this.textbox.focus();
   }
 }
 

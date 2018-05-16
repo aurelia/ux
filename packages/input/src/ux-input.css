@@ -1,82 +1,178 @@
 ux-input {
-  display: block;
+  display: flex;
   width: 100%;
+  height: 56px;
+  margin-top: 8px;
+  padding: 0 16px;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  cursor: text;
+  color: #212121;
+  color: var(--ux-theme--input-foreground, #212121);
+  background-color: #f5f5f5;
+  background-color: var(--ux-theme--input-background, #f5f5f5);
 }
 
-  ux-input > input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 6px 0 4px 0;
-    border: 0;
-    outline: none;
-    padding-left:0;
-    padding-right:0;
-    transition: border-color 250ms ease;
-    color: inherit;
-    color: var(--ux-theme--input-foreground, inherit);
-    background-color: transparent;
-    background-color: var(--ux-theme--input-background, transparent);
-    border-bottom: 1px solid #9E9E9E;
-    border-bottom: var(--ux-theme--input-border-bottom, 1px solid #9E9E9E);
-  }
+ux-input:hover {
+  background-color: #ededed;
+  background-color: var(--ux-theme--input-background-hover, #ededed);
+}
 
-    ux-input > input:hover,
-    ux-input > input:focus {
-      border-bottom: 1px solid #FF4081;
-      border-bottom: var(--ux-theme--input-border-bottom-hover, 1px solid var(--ux-design--accent, #FF4081));
-    }
+ux-input>input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 0 4px 0;
+  padding-right: 0px;
+  padding-left: 0px;
+  border: 0;
+  color: inherit;
+  background-color: transparent;
+  outline: none;
+  padding-left: 0;
+  padding-right: 0;
+}
 
-    ux-input > input:focus {
-      border-bottom-width: 2px;
-      padding-bottom: 3px;
-    }
+ux-input label {
+  position: absolute;
+  font-size: 13px;
+  transition: transform ease 100ms;
+}
 
-    ux-input > input[disabled],
-    ux-input > input[disabled]:hover,
-    ux-input > input[disabled]:focus,
-    ux-input > input[readonly],
-    ux-input > input[readonly]:hover,
-    ux-input > input[readonly]:focus {
-      color: #A4A4A4;
-      color: var(--ux-theme--input-disabled-foreground, #A4A4A4);
-      border-bottom: 1px dashed #A4A4A4;
-      border-bottom: var(--ux-theme--input-disabled-border-bottom, 1px dashed #A4A4A4);
-    }
+ux-input.ux-input--has-value label,
+ux-input.ux-input--focused label {
+  transform: translateY(-1.3em);
+}
 
-  ux-input.full-width > input {
-    padding: 20px 8px;
-    font-size: 16px;
-    margin-bottom: 0;
-    color: #232323;
-    color: var(--ux-theme--input-full-width-foreground, #232323);
-    border: 1px solid #EEEEEE;
-    border: var(--ux-theme--input-full-width-border, 1px solid #EEEEEE);
-    background-color: #FFF;
-    background-color: var(--ux-theme--input-full-width-background, #FFF);
-  }
+ux-input [slot="leading-icon"] {
+  margin-left: -8px;
+  margin-right: 8px;
+}
 
-    ux-input.full-width > input[disabled]
-    ux-input.full-width > input[disabled]:hover,
-    ux-input.full-width > input[disabled]:focus,
-    ux-input.full-width > input[readonly],
-    ux-input.full-width > input[readonly]:hover,
-    ux-input.full-width > input[readonly]:focus  {
-      background-color: #EEEEEE;
-      background-color: var(--ux-theme--input-full-width-background-disabled, #EEEEEE);
-      border: 1px dashed #A4A4A4;
-      border: 1px solid var(--ux-theme--input-disabled-border-bottom, 1px dashed #A4A4A4);
-      color: #A4A4A4;
-      color: var(--ux-theme--input-disabled-foreground, #A4A4A4);
-    }
-  
-  ux-input.has-error input,
-  ux-input input:invalid {
-    box-shadow: none;
-    border-bottom-color: #F44336;
-    border-bottom-color: var(--ux-theme--input-error, #F44336);
-  }
+ux-input [slot="trailing-icon"] {
+  margin-left: 8px;
+  margin-right: -8px;
+}
 
-  ux-input.full-width.has-error input {
-    border-color: #F44336;
-    border-color: var(--ux-theme--input-error, #F44336);
-  }
+ux-input.ux-input--has-value>[slot="leading-icon"]~label,
+ux-input.ux-input--focused>[slot="leading-icon"]~label {
+  transform: translateX(24px) translateY(-1.3em);
+}
+
+ux-input [slot="leading-icon"]~label {
+  transform: translateX(24px);
+}
+
+ux-input :not(input) {
+  color: #555;
+  color: var(--ux-theme--input-foreground-label, #555);
+}
+
+.ux-input__border-bottom {
+  height: 1px;
+  background-color: #00000066;
+  background-color: var(--ux-theme--input-border-bottom, #00000066);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: 100ms;
+}
+
+ux-input:hover .ux-input__border-bottom {
+  background-color: #4043ff;
+  background-color: var(--ux-theme--input-background, var(--ux-design--primary, #4043ff));
+}
+
+.ux-input__border-bottom-active {
+  height: 2px;
+  background-color: #4043ff;
+  background-color: var(--ux-theme--input-background, var(--ux-design--primary, #4043ff));
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: scalex(0);
+  transition: transform ease 100ms;
+}
+
+ux-input input:focus~.ux-input__border-bottom-active {
+  transform: scaleX(1);
+}
+
+ux-input.has-error input {
+  box-shadow: none;
+}
+
+ux-input.has-error .ux-input__border-bottom,
+ux-input.has-error .ux-input__border-bottom-active {
+  background-color: #F44336;
+  background-color: var(--ux-theme--input-error, #F44336);
+}
+
+ux-input.has-error> :not(input) {
+  color: #F44336;
+  color: var(--ux-theme--input-error, #F44336);
+}
+
+ux-input[disabled],
+ux-input[disabled] label,
+ux-input[disabled]:hover,
+ux-input[disabled]:focus,
+ux-input[readonly],
+ux-input[readonly] label,
+ux-input[readonly]:hover,
+ux-input[readonly]:focus {
+  color: #A4A4A4;
+  color: var(--ux-theme--input-disabled-foreground, #A4A4A4);
+}
+
+ux-input[disabled] .ux-input__border-bottom,
+ux-input[disabled]:hover .ux-input__border-bottom,
+ux-input[disabled]:focus .ux-input__border-bottom,
+ux-input[readonly] .ux-input__border-bottom,
+ux-input[readonly]:hover .ux-input__border-bottom,
+ux-input[readonly]:focus .ux-input__border-bottom {
+  background-color: #A4A4A4;
+  background-color: var(--ux-theme--input-disabled-border, #A4A4A4);
+}
+
+ux-input.outline {
+  border: 1px solid #00000066;
+  border: 1px solid var(--ux-theme--input-border, #00000066);
+  border-radius: 6px;
+}
+
+ux-input.outline .ux-input__border-bottom,
+ux-input.outline .ux-input__border-bottom-active {
+  display: none;
+}
+
+ux-input.outline:hover {
+  border: 1px solid #00000066;
+  border: 1px solid var(--ux-theme--input-border-hover, #00000066);
+}
+
+ux-input.outline.ux-input--focused {
+  border: 2px solid #4043ff;
+  border: 2px solid var(--ux-theme--input-border-focus, var(--ux-design--primary, #4043ff));
+}
+
+ux-input.outline.ux-input--focused label {
+  color: #4043ff;
+  color: var(--ux-theme--input-border-focus, var(--ux-design--primary, #4043ff));
+}
+
+ux-input.outline.ux-input--has-value label,
+ux-input.outline.ux-input--focused label {
+  transform: translateX(0) translateY(-2.1em);
+  background-color: #f5f5f5;
+  background-color: var(--ux-theme--input-background, #f5f5f5);
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+ux-input.outline.has-error {
+  border-color: #F44336;
+  border-color: var(--ux-theme--input-error, #F44336);
+}

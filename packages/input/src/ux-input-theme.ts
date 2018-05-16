@@ -4,19 +4,21 @@ export class UxInputTheme implements UxTheme {
   public themeKey = 'input';
 
   public foreground: string;
+  public foregroundLabel: string;
   public background: string;
+  public backgroundHover: string;
 
+  public border: string;
+  public borderHover: string;
+  public borderFocus: string;
+  public borderRadius: string;
   public borderBottom: string;
   public borderBottomHover: string;
-  public borderBottomSelected: string;
+  public borderBottomFocus: string;
 
   public diabledForeground: string;
-  public disabledBorderBottom: string;
-
-  public fullWidthBorder: string;
-  public fullWidthForeground: string;
-  public fullWidthBackground: string;
-  public fullWidthBackgroundDisabled: string;
+  public disabledBackground: string;
+  public disabledBorder: string;
 
   public error: string;
 }
