@@ -3,8 +3,6 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxGridTheme } from './ux-grid-theme';
 
-const gridTheme = new UxGridTheme();
-
 @inject(Element, StyleEngine)
 @customElement('ux-grid')
 export class UxGrid implements UxComponent {
@@ -13,9 +11,7 @@ export class UxGrid implements UxComponent {
 
   constructor(
     public element: HTMLElement,
-    private styleEngine: StyleEngine) {
-      styleEngine.ensureDefaultTheme(gridTheme);
-    }
+    private styleEngine: StyleEngine) { }
 
   public bind() {
     this.themeChanged(this.theme);

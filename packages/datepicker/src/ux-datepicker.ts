@@ -7,8 +7,6 @@ import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
 import * as moment from 'moment';
 
-const theme = new UxDatepickerTheme();
-
 @inject(Element, ViewResources, StyleEngine)
 @customElement('ux-datepicker')
 export class UxDatepicker implements UxComponent {

@@ -8,9 +8,7 @@ import { UxCardTheme } from './ux-card-theme';
 export class UxCard implements UxComponent {
   @bindable public theme: UxCardTheme;
 
-  constructor(public element: HTMLElement, private styleEngine: StyleEngine) {
-    styleEngine.ensureDefaultTheme(new UxCardTheme());
-  }
+  constructor(public element: HTMLElement, private styleEngine: StyleEngine) { }
 
   public bind() {
     if (this.theme != null) {
