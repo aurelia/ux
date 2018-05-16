@@ -12,6 +12,7 @@ ux-input {
   color: var(--ux-theme--input-foreground, #212121);
   background-color: #f5f5f5;
   background-color: var(--ux-theme--input-background, #f5f5f5);
+  border-radius: 4px 4px 0 0;
 }
 
 ux-input:hover {
@@ -31,6 +32,7 @@ ux-input>input {
   outline: none;
   padding-left: 0;
   padding-right: 0;
+  
 }
 
 ux-input label {
