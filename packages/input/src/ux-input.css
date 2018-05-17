@@ -13,6 +13,7 @@ ux-input {
   background-color: #f5f5f5;
   background-color: var(--ux-theme--input-background, #f5f5f5);
   border-radius: 4px 4px 0 0;
+  border-radius: var(--ux-theme--input-border-radius, 4px 4px 0 0);
 }
 
 ux-input:hover {
@@ -83,13 +84,13 @@ ux-input :not(input) {
 
 ux-input:hover .ux-input__border-bottom {
   background-color: #4043ff;
-  background-color: var(--ux-theme--input-background, var(--ux-design--primary, #4043ff));
+  background-color: var(--ux-theme--input-border-bottom-hover, var(--ux-design--primary, #4043ff));
 }
 
 .ux-input__border-bottom-active {
   height: 2px;
   background-color: #4043ff;
-  background-color: var(--ux-theme--input-background, var(--ux-design--primary, #4043ff));
+  background-color: var(--ux-theme--input-border-bottom-focus, var(--ux-design--primary, #4043ff));
   position: absolute;
   bottom: 0;
   left: 0;
@@ -125,6 +126,8 @@ ux-input[readonly],
 ux-input[readonly] label,
 ux-input[readonly]:hover,
 ux-input[readonly]:focus {
+  background-color: #A9A9A9;
+  background-color: var(--ux-theme--input-disabled-background, #A9A9A9);
   color: #A4A4A4;
   color: var(--ux-theme--input-disabled-foreground, #A4A4A4);
 }
