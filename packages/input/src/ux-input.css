@@ -8,17 +8,17 @@ ux-input {
   box-sizing: border-box;
   position: relative;
   cursor: text;
-  color: #212121;
-  color: var(--ux-theme--input-foreground, #212121);
-  background-color: #f5f5f5;
-  background-color: var(--ux-theme--input-background, #f5f5f5);
+  color: inherit;
+  color: var(--ux-theme--input-foreground, inherit);
+  background-color: #00000022;
+  background-color: var(--ux-theme--input-background, #00000022);
   border-radius: 4px 4px 0 0;
   border-radius: var(--ux-theme--input-border-radius, 4px 4px 0 0);
 }
 
 ux-input:hover {
-  background-color: #ededed;
-  background-color: var(--ux-theme--input-background-hover, #ededed);
+  background-color: #00000033;
+  background-color: var(--ux-theme--input-background-hover, #00000033);
 }
 
 ux-input>input {
@@ -79,12 +79,11 @@ ux-input :not(input) {
   bottom: 0;
   left: 0;
   right: 0;
-  transition: 100ms;
 }
 
 ux-input:hover .ux-input__border-bottom {
-  background-color: #4043ff;
-  background-color: var(--ux-theme--input-border-bottom-hover, var(--ux-design--primary, #4043ff));
+  background-color: #00000066;
+  background-color: var(--ux-theme--input-border-bottom-hover, #00000066);
 }
 
 .ux-input__border-bottom-active {
