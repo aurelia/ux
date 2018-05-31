@@ -54,16 +54,22 @@ function fixUxGrid(grid: HTMLElement) {
   if (!grid.style) {
     return;
   }
-  grid.style['display'] = '-ms-grid';
+
+  const columnsAttr = grid.getAttribute('columns');
+  const nbColumns = (columnsAttr) ? parseInt(columnsAttr, 10) : 12;
+  const gridStyle: any = grid.style;
+  gridStyle['display'] = '-ms-grid';
   const gap = '16px';
   // It would be nice here to be able to determine the gap defined
   // by the ux-grid component, but it's difficult because the value
   // of (grid as any).currentStyle['grid-gap'] returns the CSS
   // variable string and not the computed value
-  const columns = ['12fr', '12fr', '12fr', '12fr', '12fr', '12fr', '12fr', '12fr', '12fr', '12fr', '12fr', '12fr'];
-  const gridStyle: any = grid.style;
+  const columns: Array<string> = [];
+  for (let k = 0; k < nbColumns; k++) {
+    columns.push(`${nbColumns}fr`);
+  }
   gridStyle['-ms-grid-columns'] = columns.join(` ${gap} `);
-  let rows = ['auto'];
+  const rows = ['auto'];
   gridStyle['-ms-grid-rows'] = rows.join(` ${gap} `);
 
   let count = 1;
@@ -84,7 +90,7 @@ function fixUxGrid(grid: HTMLElement) {
     }
     const originalNbColumns = parseInt(gridColumnStyle.replace('span ', ''), 10);
     const ieNbColumns = originalNbColumns + (originalNbColumns - 1);
-    if (count + ieNbColumns > 24) {
+    if (count + ieNbColumns > nbColumns * 2) {
       rows.push('auto');
       gridStyle['-ms-grid-rows'] = rows.join(` ${gap} `);
       row += 2;
