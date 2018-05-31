@@ -68,17 +68,20 @@ function fixUxGrid(grid: HTMLElement) {
 
   let count = 1;
   let row = 1;
-  const cells = grid.getElementsByTagName('ux-grid-cell');
-  for (let index = 0; index < cells.length; index++) {
-    const cell = (cells[index] as HTMLElement);
-    if (!cell) {
+  const children = grid.children;
+  for (let index = 0; index < children.length; index++) {
+    const child = (children[index] as HTMLElement);
+    if (!child) {
       continue;
     }
-    const style = (cell as any).currentStyle;
+    const style = (child as any).currentStyle;
     if (!style) {
       continue;
     }
     const gridColumnStyle = style['grid-column'];
+    if (!gridColumnStyle) {
+      continue;
+    }
     const originalNbColumns = parseInt(gridColumnStyle.replace('span ', ''), 10);
     const ieNbColumns = originalNbColumns + (originalNbColumns - 1);
     if (count + ieNbColumns > 24) {
@@ -87,10 +90,10 @@ function fixUxGrid(grid: HTMLElement) {
       row += 2;
       count = 1;
     }
-    const cellStyle: any = cell.style;
-    cellStyle['-ms-grid-row'] = row;
-    cellStyle['-ms-grid-column'] = count;
-    cellStyle['-ms-grid-column-span'] = ieNbColumns;
+    const childStyle: any = child.style;
+    childStyle['-ms-grid-row'] = row;
+    childStyle['-ms-grid-column'] = count;
+    childStyle['-ms-grid-column-span'] = ieNbColumns;
     count = count + ieNbColumns + 1;
   }
 }
