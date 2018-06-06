@@ -8,6 +8,11 @@ export class UxInputTheme implements UxTheme {
   public background: string;
   public backgroundHover: string;
 
+  public fontSize: string;
+  public letterSpacing: string;
+  public labelFontSize: string;
+  public labelLetterSpacing: string;
+
   public border: string;
   public borderHover: string;
   public borderFocus: string;
