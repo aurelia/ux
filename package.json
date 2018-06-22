@@ -49,7 +49,7 @@
   "dependencies": {
     "@aurelia-ux/core": "^0.8.1",
     "aurelia-binding": "^2.0.0",
-    "aurelia-framework": "^1.0.0",
+    "aurelia-framework": "^1.3.0",
     "aurelia-templating-resources": "^1.6.0"
   },
   "devDependencies": {

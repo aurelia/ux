@@ -92,7 +92,7 @@
   },
   "dependencies": {
     "@aurelia-ux/core": "^0.4.0",
-    "aurelia-framework": "^1.0.0"
+    "aurelia-framework": "^1.3.0-rc.2"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
