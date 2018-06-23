@@ -1,13 +1,13 @@
 import { ViewResources } from 'aurelia-templating';
 import { DatepickerSettings } from './resources/datepicker-settings';
-import * as moment from 'moment';
+import { Moment } from 'moment';
 export declare class UxCalendar {
     resources: ViewResources;
     theme: null;
     weekdays: string[];
-    minDate: moment.Moment;
-    maxDate: moment.Moment;
-    value: moment.Moment;
+    minDate: Moment;
+    maxDate: Moment;
+    value: Moment;
     config: DatepickerSettings;
     private calendarRows;
     private displayMonth;
@@ -15,7 +15,7 @@ export declare class UxCalendar {
     bind(): void;
     previousMonth(): void;
     nextMonth(): void;
-    changeCalendarSelection(newDate: moment.Moment): void;
-    displayMonthChanged(newDate: moment.Moment): void;
+    changeCalendarSelection(newDate: Moment): void;
+    displayMonthChanged(newDate: Moment): void;
     private isValidDate(date);
 }

@@ -1,6 +1,8 @@
 import { DatepickerSettings } from './datepicker-settings';
 import { Moment } from 'moment';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
+
+const moment = moment_;
 
 export class DatetimeUtility {
 

@@ -19,7 +19,7 @@
     "Zach Hollingshead <zach.hollingshead@gmail.com>"
   ],
   "main": "dist/commonjs/index.js",
-  "typings": "dist/commonjs/index.d.ts",
+  "typings": "dist/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/aurelia/ux"
@@ -93,7 +93,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.10.1",
+    "@aurelia-ux/core": "^0.11.1",
     "aurelia-framework": "^1.3.0"
   },
   "devDependencies": {

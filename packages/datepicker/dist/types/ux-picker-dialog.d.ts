@@ -1,6 +1,6 @@
 import { ViewResources } from 'aurelia-templating';
 import { DatepickerSettings } from './resources/datepicker-settings';
-import * as moment from 'moment';
+import { Moment } from 'moment';
 export declare class UxPickerDialog {
     resources: ViewResources;
     theme: null;
@@ -9,8 +9,8 @@ export declare class UxPickerDialog {
     weekdays: any;
     config: DatepickerSettings;
     initialDate: any;
-    minDate: moment.Moment;
-    maxDate: moment.Moment;
+    minDate: Moment;
+    maxDate: Moment;
     value: Date | null;
     closeDialog: () => {};
     private selectedDate;
