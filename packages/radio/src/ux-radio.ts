@@ -1,4 +1,4 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import {
@@ -9,6 +9,7 @@ import {
 } from '@aurelia-ux/core';
 import { UxRadioTheme } from './ux-radio-theme';
 import { ElementEvents, DOM } from 'aurelia-framework';
+import UX_RADIO_VIEW from './ux-radio.html';
 
 export interface UxRadioElement extends HTMLElement {
   type: 'radio';
@@ -17,6 +18,7 @@ export interface UxRadioElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-radio')
+@inlineView(UX_RADIO_VIEW)
 export class UxRadio implements UxComponent {
   private ignoreValueChanges: boolean;
 
@@ -153,7 +155,6 @@ export class UxRadio implements UxComponent {
 function stopEvent(e: Event) {
   e.stopPropagation();
 }
-
 
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
 const uxRadioElementProto = Object.create(HTMLElement.prototype, {
