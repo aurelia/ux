@@ -24,13 +24,6 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
-/* global Reflect, Promise */
-
-
-
-
-
-
 
 function __decorate(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1539,9 +1532,7 @@ function configure(config, callback) {
         return uxCorePromise;
     }
     var ux = config.container.get(AureliaUX);
-    var boolAttr = new aureliaFramework.BindingBehaviorResource('');
-    boolAttr.initialize(config.container, BooleanBB);
-    boolAttr.register(config.aurelia.resources, 'booleanAttr');
+    config.globalResources(BooleanBB);
     if (typeof callback === 'function') {
         return uxCorePromise = Promise.resolve(callback(ux))
             .then(function () { return ux.start(config); });

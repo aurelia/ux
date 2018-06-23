@@ -3,7 +3,7 @@ import { DOM, PLATFORM } from 'aurelia-pal';
 import { getLogger } from 'aurelia-logging';
 import { Loader } from 'aurelia-loader';
 import { ObserverLocator, bindingBehavior } from 'aurelia-binding';
-import { ObserverLocator as ObserverLocator$1, BindingBehaviorResource } from 'aurelia-framework';
+import { ObserverLocator as ObserverLocator$1 } from 'aurelia-framework';
 import { SyntaxInterpreter } from 'aurelia-templating-binding';
 
 /*! *****************************************************************************
@@ -20,13 +20,6 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
-/* global Reflect, Promise */
-
-
-
-
-
-
 
 function __decorate(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1535,9 +1528,7 @@ function configure(config, callback) {
         return uxCorePromise;
     }
     var ux = config.container.get(AureliaUX);
-    var boolAttr = new BindingBehaviorResource('');
-    boolAttr.initialize(config.container, BooleanBB);
-    boolAttr.register(config.aurelia.resources, 'booleanAttr');
+    config.globalResources(BooleanBB);
     if (typeof callback === 'function') {
         return uxCorePromise = Promise.resolve(callback(ux))
             .then(function () { return ux.start(config); });
