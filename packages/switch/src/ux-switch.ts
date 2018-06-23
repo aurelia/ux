@@ -1,9 +1,10 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
 import { DOM, ElementEvents } from 'aurelia-framework';
+import UX_SWITCH_VIEW from './ux-switch.html';
 
 export interface UxSwitchElement extends HTMLElement {
   type: 'checkbox';
@@ -12,6 +13,7 @@ export interface UxSwitchElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-switch')
+@inlineView(UX_SWITCH_VIEW)
 export class UxSwitch implements UxComponent {
   private ignoreValueChanges: boolean;
 

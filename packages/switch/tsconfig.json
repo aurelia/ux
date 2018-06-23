@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "amd",
+    "module": "es2015",
     "moduleResolution": "node",
     "target": "es5",
     "lib": [
@@ -15,6 +15,7 @@
     "noImplicitReturns": true,
     "strictNullChecks": true,
     "declaration": true,
+    "declarationDir": "dist/types",
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "noEmitHelpers": false,
