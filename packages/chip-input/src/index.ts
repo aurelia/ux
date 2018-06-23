@@ -1,4 +1,7 @@
-import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
+import { FrameworkConfiguration } from 'aurelia-framework';
+import { UxTag } from './ux-tag';
+import { UxChip } from './ux-chip';
+import { UxChipInput } from './ux-chip-input';
 
 export { UxChipInputTheme } from './ux-chip-input-theme';
 export { UxTagTheme } from './ux-tag-theme';
@@ -6,8 +9,10 @@ export { UxChipTheme } from './ux-chip-theme';
 
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([
-    PLATFORM.moduleName('@aurelia-ux/chip-input/ux-chip-input'),
-    PLATFORM.moduleName('@aurelia-ux/chip-input/ux-chip'),
-    PLATFORM.moduleName('@aurelia-ux/chip-input/ux-tag')
+    UxTag,
+    UxChip,
+    UxChipInput,
   ]);
 }
+
+export { UxChip, UxTag, UxChipInput };

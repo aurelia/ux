@@ -4,11 +4,15 @@ import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxChipInputTheme } from './ux-chip-input-theme';
+import UX_CHIP_INPUT_VIEW from './ux-chip-input.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-chip-input')
 
 export class UxChipInput implements UxComponent {
+
+  public static readonly $view = UX_CHIP_INPUT_VIEW;
+
   @bindable public disabled: boolean | string = false;
   @bindable public readonly: boolean | string = false;
   @bindable public theme: UxChipInputTheme;

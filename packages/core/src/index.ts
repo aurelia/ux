@@ -27,9 +27,7 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
     return uxCorePromise;
   }
   const ux: AureliaUX = config.container.get(AureliaUX);
-  const boolAttr = new BindingBehaviorResource('');
-  boolAttr.initialize(config.container, BooleanBB);
-  boolAttr.register(config.aurelia.resources, 'booleanAttr');
+  config.globalResources(BooleanBB);
 
   if (typeof callback === 'function') {
     return uxCorePromise = Promise.resolve(callback(ux))
