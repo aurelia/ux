@@ -1,4 +1,4 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
@@ -33,7 +33,7 @@ function __decorate(decorators, target, key, desc) {
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 }
 
-var UX_TAG_VIEW = "<template role=\"textbox\"> <require from=\"./ux-tag.css\"></require> <span> <slot></slot> </span> <span class=\"close\" click.delegate=\"closeTag()\"> </span> </template> ";
+var UX_TAG_VIEW = "<template role=\"textbox\"> <require from=\"@aurelia-ux/chip-input/ux-tag.css\"></require> <span> <slot></slot> </span> <span class=\"close\" click.delegate=\"closeTag()\"> </span> </template> ";
 
 var UxTag = /** @class */ (function () {
     function UxTag(element, styleEngine) {
@@ -54,7 +54,6 @@ var UxTag = /** @class */ (function () {
         var closeEvent = DOM.createCustomEvent('close', { bubbles: false });
         this.element.dispatchEvent(closeEvent);
     };
-    UxTag.$view = UX_TAG_VIEW;
     __decorate([
         bindable
     ], UxTag.prototype, "theme", void 0);
@@ -66,12 +65,13 @@ var UxTag = /** @class */ (function () {
     ], UxTag.prototype, "value", void 0);
     UxTag = __decorate([
         inject(Element, StyleEngine),
-        customElement('ux-tag')
+        customElement('ux-tag'),
+        inlineView(UX_TAG_VIEW)
     ], UxTag);
     return UxTag;
 }());
 
-var UX_CHIP_VIEW = "<template role=\"textbox\"> <require from=\"./ux-chip.css\"></require> <span> <slot></slot> </span> <span class=\"close\" click.delegate=\"closeChip()\"> </span> </template> ";
+var UX_CHIP_VIEW = "<template role=\"textbox\"> <require from=\"@aurelia-ux/chip-input/ux-chip.css\"></require> <span> <slot></slot> </span> <span class=\"close\" click.delegate=\"closeChip()\"> </span> </template> ";
 
 var UxChip = /** @class */ (function () {
     function UxChip(element, styleEngine) {
@@ -92,7 +92,6 @@ var UxChip = /** @class */ (function () {
         var closeEvent = DOM.createCustomEvent('close', { bubbles: false });
         this.element.dispatchEvent(closeEvent);
     };
-    UxChip.$view = UX_CHIP_VIEW;
     __decorate([
         bindable
     ], UxChip.prototype, "theme", void 0);
@@ -104,12 +103,13 @@ var UxChip = /** @class */ (function () {
     ], UxChip.prototype, "value", void 0);
     UxChip = __decorate([
         inject(Element, StyleEngine),
-        customElement('ux-chip')
+        customElement('ux-chip'),
+        inlineView(UX_CHIP_VIEW)
     ], UxChip);
     return UxChip;
 }());
 
-var UX_CHIP_INPUT_VIEW = "<template role=\"textbox\"> <require from=\"./ux-chip-input.css\"></require> <template if.bind=\"type.toLowerCase() !== 'tag'\"> <ux-chip deletable ref=\"chiprepeat\" close.trigger=\"removeChip(chip)\" dblclick.trigger=\"editChip(chip)\" repeat.for=\"chip of chips\"> ${chip} </ux-chip> </template> <template if.bind=\"type.toLowerCase() === 'tag'\"> <ux-tag deletable ref=\"tagrepeat\" close.trigger=\"removeChip(chip)\" dblclick.trigger=\"editChip(chip)\" repeat.for=\"chip of chips\"> ${chip} </ux-tag> </template> <input ref=\"textbox\" keyup.delegate=\"handleKeyup($event)\"> <div class=\"bottom-border\"></div> </template> ";
+var UX_CHIP_INPUT_VIEW = "<template role=\"textbox\"> <require from=\"@aurelia-ux/chip-input/ux-chip-input.css\"></require> <template if.bind=\"type.toLowerCase() !== 'tag'\"> <ux-chip deletable ref=\"chiprepeat\" close.trigger=\"removeChip(chip)\" dblclick.trigger=\"editChip(chip)\" repeat.for=\"chip of chips\"> ${chip} </ux-chip> </template> <template if.bind=\"type.toLowerCase() === 'tag'\"> <ux-tag deletable ref=\"tagrepeat\" close.trigger=\"removeChip(chip)\" dblclick.trigger=\"editChip(chip)\" repeat.for=\"chip of chips\"> ${chip} </ux-tag> </template> <input ref=\"textbox\" keyup.delegate=\"handleKeyup($event)\"> <div class=\"bottom-border\"></div> </template> ";
 
 var UxChipInput = /** @class */ (function () {
     function UxChipInput(element, styleEngine) {
@@ -250,7 +250,6 @@ var UxChipInput = /** @class */ (function () {
         }
         this.styleEngine.applyTheme(newValue, this.element);
     };
-    UxChipInput.$view = UX_CHIP_INPUT_VIEW;
     __decorate([
         bindable
     ], UxChipInput.prototype, "disabled", void 0);
@@ -274,7 +273,8 @@ var UxChipInput = /** @class */ (function () {
     ], UxChipInput.prototype, "chips", void 0);
     UxChipInput = __decorate([
         inject(Element, StyleEngine),
-        customElement('ux-chip-input')
+        customElement('ux-chip-input'),
+        inlineView(UX_CHIP_INPUT_VIEW)
     ], UxChipInput);
     return UxChipInput;
 }());

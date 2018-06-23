@@ -1,4 +1,4 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
@@ -33,7 +33,7 @@ function __decorate(decorators, target, key, desc) {
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 }
 
-var UX_TAG_VIEW = "<template role=\"textbox\"> <require from=\"./ux-tag.css\"></require> <span> <slot></slot> </span> <span class=\"close\" click.delegate=\"closeTag()\"> </span> </template> ";
+var UX_TAG_VIEW = "<template role=\"textbox\"> <require from=\"@aurelia-ux/chip-input/ux-tag.css\"></require> <span> <slot></slot> </span> <span class=\"close\" click.delegate=\"closeTag()\"> </span> </template> ";
 
 let UxTag = class UxTag {
     constructor(element, styleEngine) {
@@ -55,7 +55,6 @@ let UxTag = class UxTag {
         this.element.dispatchEvent(closeEvent);
     }
 };
-UxTag.$view = UX_TAG_VIEW;
 __decorate([
     bindable
 ], UxTag.prototype, "theme", void 0);
@@ -67,10 +66,11 @@ __decorate([
 ], UxTag.prototype, "value", void 0);
 UxTag = __decorate([
     inject(Element, StyleEngine),
-    customElement('ux-tag')
+    customElement('ux-tag'),
+    inlineView(UX_TAG_VIEW)
 ], UxTag);
 
-var UX_CHIP_VIEW = "<template role=\"textbox\"> <require from=\"./ux-chip.css\"></require> <span> <slot></slot> </span> <span class=\"close\" click.delegate=\"closeChip()\"> </span> </template> ";
+var UX_CHIP_VIEW = "<template role=\"textbox\"> <require from=\"@aurelia-ux/chip-input/ux-chip.css\"></require> <span> <slot></slot> </span> <span class=\"close\" click.delegate=\"closeChip()\"> </span> </template> ";
 
 let UxChip = class UxChip {
     constructor(element, styleEngine) {
@@ -92,7 +92,6 @@ let UxChip = class UxChip {
         this.element.dispatchEvent(closeEvent);
     }
 };
-UxChip.$view = UX_CHIP_VIEW;
 __decorate([
     bindable
 ], UxChip.prototype, "theme", void 0);
@@ -104,10 +103,11 @@ __decorate([
 ], UxChip.prototype, "value", void 0);
 UxChip = __decorate([
     inject(Element, StyleEngine),
-    customElement('ux-chip')
+    customElement('ux-chip'),
+    inlineView(UX_CHIP_VIEW)
 ], UxChip);
 
-var UX_CHIP_INPUT_VIEW = "<template role=\"textbox\"> <require from=\"./ux-chip-input.css\"></require> <template if.bind=\"type.toLowerCase() !== 'tag'\"> <ux-chip deletable ref=\"chiprepeat\" close.trigger=\"removeChip(chip)\" dblclick.trigger=\"editChip(chip)\" repeat.for=\"chip of chips\"> ${chip} </ux-chip> </template> <template if.bind=\"type.toLowerCase() === 'tag'\"> <ux-tag deletable ref=\"tagrepeat\" close.trigger=\"removeChip(chip)\" dblclick.trigger=\"editChip(chip)\" repeat.for=\"chip of chips\"> ${chip} </ux-tag> </template> <input ref=\"textbox\" keyup.delegate=\"handleKeyup($event)\"> <div class=\"bottom-border\"></div> </template> ";
+var UX_CHIP_INPUT_VIEW = "<template role=\"textbox\"> <require from=\"@aurelia-ux/chip-input/ux-chip-input.css\"></require> <template if.bind=\"type.toLowerCase() !== 'tag'\"> <ux-chip deletable ref=\"chiprepeat\" close.trigger=\"removeChip(chip)\" dblclick.trigger=\"editChip(chip)\" repeat.for=\"chip of chips\"> ${chip} </ux-chip> </template> <template if.bind=\"type.toLowerCase() === 'tag'\"> <ux-tag deletable ref=\"tagrepeat\" close.trigger=\"removeChip(chip)\" dblclick.trigger=\"editChip(chip)\" repeat.for=\"chip of chips\"> ${chip} </ux-tag> </template> <input ref=\"textbox\" keyup.delegate=\"handleKeyup($event)\"> <div class=\"bottom-border\"></div> </template> ";
 
 let UxChipInput = class UxChipInput {
     constructor(element, styleEngine) {
@@ -247,7 +247,6 @@ let UxChipInput = class UxChipInput {
         this.styleEngine.applyTheme(newValue, this.element);
     }
 };
-UxChipInput.$view = UX_CHIP_INPUT_VIEW;
 __decorate([
     bindable
 ], UxChipInput.prototype, "disabled", void 0);
@@ -271,7 +270,8 @@ __decorate([
 ], UxChipInput.prototype, "chips", void 0);
 UxChipInput = __decorate([
     inject(Element, StyleEngine),
-    customElement('ux-chip-input')
+    customElement('ux-chip-input'),
+    inlineView(UX_CHIP_INPUT_VIEW)
 ], UxChipInput);
 
 class UxChipInputTheme {
