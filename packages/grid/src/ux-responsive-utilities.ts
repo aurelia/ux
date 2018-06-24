@@ -27,8 +27,10 @@ export class UxResponsiveUtilities implements Disposable {
 
   private updating = false;
 
+  private resizeHandler = () => this.onResize();
+
   constructor() {
-    PLATFORM.global.addEventListener('resize', () => this.onResize());
+    PLATFORM.global.addEventListener('resize', this.resizeHandler);
 
     this.calculateResponsiveValues();
   }
@@ -61,6 +63,6 @@ export class UxResponsiveUtilities implements Disposable {
   }
 
   public dispose() {
-    PLATFORM.global.removeEventListener('resize', this.calculateResponsiveValues);
+    PLATFORM.global.removeEventListener('resize', this.resizeHandler);
   }
 }

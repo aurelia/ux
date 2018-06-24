@@ -16,6 +16,7 @@ export declare class UxResponsiveUtilities implements Disposable {
     /** Visible on screens larger than 1925px. */
     xl: boolean;
     private updating;
+    private resizeHandler;
     constructor();
     private onResize();
     private calculateResponsiveValues;
