@@ -1,10 +1,12 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxButtonTheme } from './ux-button-theme';
+import UX_BUTTON_VIEW from './ux-button.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-button')
+@inlineView(UX_BUTTON_VIEW)
 export class UxButton implements UxComponent {
   @bindable public type: string | null;
   @bindable public size: string | null;
