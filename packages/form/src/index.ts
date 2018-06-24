@@ -1,11 +1,14 @@
-import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
+import { FrameworkConfiguration } from 'aurelia-framework';
+import { UxField } from './ux-field';
+import { UxForm } from './ux-form';
+import { UxSubmitCustomAttribute } from './ux-submit-attribute';
 
 export { UxFormTheme } from './ux-form-theme';
 
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([
-    PLATFORM.moduleName('@aurelia-ux/form/ux-field'),
-    PLATFORM.moduleName('@aurelia-ux/form/ux-form'),
-    PLATFORM.moduleName('@aurelia-ux/form/ux-submit-attribute')
+    UxField,
+    UxForm,
+    UxSubmitCustomAttribute,
   ]);
 }
