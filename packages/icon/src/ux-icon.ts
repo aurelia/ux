@@ -1,15 +1,16 @@
-import { customElement, bindable, processAttributes } from 'aurelia-templating';
+import { customElement, bindable, processAttributes, inlineView } from 'aurelia-templating';
 import { Logger } from 'aurelia-logging';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, processDesignAttributes } from '@aurelia-ux/core';
 import { UxIconTheme } from './ux-icon-theme';
 import IconMap from './ux-icon-map';
+import UX_ICON_VIEW from './ux-icon.html';
 
 @inject(Element, StyleEngine, Logger)
 @customElement('ux-icon')
 @processAttributes(processDesignAttributes)
-
+@inlineView(UX_ICON_VIEW)
 export class UxIcon implements UxComponent {
   @bindable public size: string;
   @bindable public theme: UxIconTheme;

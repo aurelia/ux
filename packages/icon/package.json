@@ -1,6 +1,10 @@
 {
   "name": "@aurelia-ux/icons",
+<<<<<<< HEAD:packages/icons/package.json
   "version": "0.11.1",
+=======
+  "version": "0.10.1",
+>>>>>>> refactor(Icon): rename element folder, use new core APIs, move build to rollup:packages/icon/package.json
   "description": "Icon component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -19,7 +23,11 @@
     "Zach Hollingshead <zach.hollingshead@gmail.com>"
   ],
   "main": "dist/commonjs/index.js",
+<<<<<<< HEAD:packages/icons/package.json
   "typings": "dist/commonjs/index.d.ts",
+=======
+  "typings": "dist/types/index.d.ts",
+>>>>>>> refactor(Icon): rename element folder, use new core APIs, move build to rollup:packages/icon/package.json
   "repository": {
     "type": "git",
     "url": "https://github.com/aurelia/ux"
@@ -28,6 +36,7 @@
     "lint": "cross-env tslint --project tsconfig.json",
     "test": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start --single-run",
     "develop": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start",
+<<<<<<< HEAD:packages/icons/package.json
     "prebuild:amd": "cross-env rimraf dist/amd",
     "build:amd": "cross-env tsc --project tsconfig.json --outDir dist/amd --module amd",
     "postbuild:amd": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/amd",
@@ -45,6 +54,10 @@
     "postbuild:system": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/system",
     "prebuild": "cross-env rimraf dist",
     "build": "concurrently \"npm run build:amd\" \"npm run build:commonjs\" \"npm run build:es2015\" \"npm run build:native-modules\" \"npm run build:system\"",
+=======
+    "prebuild": "cross-env rimraf dist",
+    "build": "rollup -c --environment NODE_ENV:production",
+>>>>>>> refactor(Icon): rename element folder, use new core APIs, move build to rollup:packages/icon/package.json
     "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
     "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
     "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",
@@ -62,7 +75,11 @@
       "dist": "dist/amd"
     },
     "peerDependencies": {
+<<<<<<< HEAD:packages/icons/package.json
       "aurelia-binding": "^2.0.0",
+=======
+      "aurelia-binding": "^1.0.0 || ^2.0.0",
+>>>>>>> refactor(Icon): rename element folder, use new core APIs, move build to rollup:packages/icon/package.json
       "aurelia-dependency-injection": "^1.0.0",
       "aurelia-logging": "^1.0.0",
       "aurelia-pal": "^1.0.0",
@@ -76,7 +93,11 @@
       "@aurelia-ux/core": "^0.3.0"
     },
     "dependencies": {
+<<<<<<< HEAD:packages/icons/package.json
       "aurelia-binding": "^2.0.0",
+=======
+      "aurelia-binding": "^1.0.0 || ^2.0.0",
+>>>>>>> refactor(Icon): rename element folder, use new core APIs, move build to rollup:packages/icon/package.json
       "aurelia-dependency-injection": "^1.0.0",
       "aurelia-logging": "^1.0.0",
       "aurelia-pal": "^1.0.0",
@@ -92,8 +113,13 @@
     "devDependencies": {}
   },
   "dependencies": {
+<<<<<<< HEAD:packages/icons/package.json
     "@aurelia-ux/core": "^0.11.1",
     "aurelia-framework": "^1.0.0",
+=======
+    "@aurelia-ux/core": "^0.10.1",
+    "aurelia-framework": "^1.3.0-rc.2",
+>>>>>>> refactor(Icon): rename element folder, use new core APIs, move build to rollup:packages/icon/package.json
     "moment": "^2.18.1"
   },
   "devDependencies": {

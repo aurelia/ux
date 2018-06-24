@@ -1,4 +1,39 @@
-export default class IconMap {
+import { customElement, bindable, processAttributes, inlineView } from 'aurelia-templating';
+import { Logger } from 'aurelia-logging';
+import { bindingMode } from 'aurelia-binding';
+import { inject } from 'aurelia-dependency-injection';
+import { StyleEngine, processDesignAttributes } from '@aurelia-ux/core';
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+
+
+
+
+
+
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+class IconMap {
     static get Map() {
         // tslint:disable:max-line-length
         return [
@@ -3846,3 +3881,67 @@ export default class IconMap {
         // tslint:enable:max-line-length
     }
 }
+
+var UX_ICON_VIEW = "<template> <require from=\"@aurelia-ux/icon/ux-icon.css\"></require> <slot></slot> </template> ";
+
+let UxIcon = class UxIcon {
+    constructor(element, styleEngine, logger) {
+        this.element = element;
+        this.styleEngine = styleEngine;
+        this.logger = logger;
+        this.icon = undefined;
+    }
+    bind() {
+        if (this.size) {
+            this.theme.size = this.size;
+        }
+        if (this.icon) {
+            this.changeIcon(this.icon);
+        }
+        this.themeChanged(this.theme);
+    }
+    themeChanged(newValue) {
+        this.styleEngine.applyTheme(newValue, this.element);
+    }
+    iconChanged(newValue) {
+        this.changeIcon(newValue);
+    }
+    changeIcon(icon) {
+        const iconSet = IconMap.Map.find(set => set.name === icon);
+        if (iconSet) {
+            // todo: add logic to switch set being used based on design language
+            // after adding icon sets for said languages such as ios
+            this.element.innerHTML = iconSet.material;
+        }
+        else {
+            this.logger.error('ux-icon: no matching icon found', this.element);
+        }
+    }
+};
+__decorate([
+    bindable
+], UxIcon.prototype, "size", void 0);
+__decorate([
+    bindable
+], UxIcon.prototype, "theme", void 0);
+__decorate([
+    bindable({ defaultBindingMode: bindingMode.twoWay })
+], UxIcon.prototype, "icon", void 0);
+UxIcon = __decorate([
+    inject(Element, StyleEngine, Logger),
+    customElement('ux-icon'),
+    processAttributes(processDesignAttributes),
+    inlineView(UX_ICON_VIEW)
+], UxIcon);
+
+class UxIconTheme {
+    constructor() {
+        this.themeKey = 'icon';
+    }
+}
+
+function configure(config) {
+    config.globalResources(UxIcon);
+}
+
+export { configure, UxIconTheme };
