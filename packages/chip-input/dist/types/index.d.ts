@@ -1,0 +1,9 @@
+import { FrameworkConfiguration } from 'aurelia-framework';
+import { UxTag } from './ux-tag';
+import { UxChip } from './ux-chip';
+import { UxChipInput } from './ux-chip-input';
+export { UxChipInputTheme } from './ux-chip-input-theme';
+export { UxTagTheme } from './ux-tag-theme';
+export { UxChipTheme } from './ux-chip-theme';
+export declare function configure(config: FrameworkConfiguration): void;
+export { UxChip, UxTag, UxChipInput };

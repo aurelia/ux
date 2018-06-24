@@ -1,4 +1,4 @@
-define('@aurelia-ux/switch', ['exports', 'moment', 'aurelia-templating', 'aurelia-binding', 'aurelia-dependency-injection', '@aurelia-ux/core'], function (exports, moment_, aureliaTemplating, aureliaBinding, aureliaDependencyInjection, core) { 'use strict';
+define('@aurelia-ux/datepicker', ['exports', 'moment', 'aurelia-templating', 'aurelia-binding', 'aurelia-dependency-injection', '@aurelia-ux/core'], function (exports, moment_, aureliaTemplating, aureliaBinding, aureliaDependencyInjection, core) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
