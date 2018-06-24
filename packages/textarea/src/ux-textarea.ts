@@ -1,9 +1,10 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxTextAreaTheme } from './ux-textarea-theme';
 import { observable } from 'aurelia-framework';
+import UX_TEXTAREA_VIEW from './ux-textarea.html';
 
 export interface UxTextAreaElement extends HTMLElement {
   value: string;
@@ -11,7 +12,7 @@ export interface UxTextAreaElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-textarea')
-
+@inlineView(UX_TEXTAREA_VIEW)
 export class UxTextArea implements UxComponent {
   private ignoreRawChanges: boolean;
   private isAttached: boolean;
@@ -148,7 +149,6 @@ function stopEvent(e: Event) {
   e.stopPropagation();
 }
 
-
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
 const uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
   value: {
@@ -160,4 +160,3 @@ const uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
     }
   }
 });
-
