@@ -1,9 +1,8 @@
-import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
+import { FrameworkConfiguration } from 'aurelia-framework';
+import { UxCard } from './ux-card';
 
 export { UxCardTheme } from './ux-card-theme';
 
 export function configure(config: FrameworkConfiguration) {
-  config.globalResources([
-    PLATFORM.moduleName('@aurelia-ux/card/ux-card')
-  ]);
+  config.globalResources(UxCard);
 }
