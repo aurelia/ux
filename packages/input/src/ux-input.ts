@@ -1,9 +1,10 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
+import UX_INPUT_VIEW from './ux-input.html';
 
 export interface UxInputElement extends HTMLElement {
   value: any;
@@ -11,6 +12,7 @@ export interface UxInputElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-input')
+@inlineView(UX_INPUT_VIEW)
 export class UxInput implements UxComponent {
   private ignoreRawChanges: boolean;
 
