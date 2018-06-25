@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/select",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "description": "Select component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -92,7 +92,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.10.1",
+    "@aurelia-ux/core": "^0.11.0",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
