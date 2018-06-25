@@ -15,6 +15,7 @@ export declare class UxInput implements UxComponent {
     max: number;
     readonly: any;
     theme: UxInputTheme;
+    label: any;
     type: any;
     rawValue: string;
     focused: boolean;
@@ -31,4 +32,5 @@ export declare class UxInput implements UxComponent {
     focusedChanged(focused: boolean): void;
     typeChanged(newValue: any): void;
     rawValueChanged(newValue: string): void;
+    focusInput(): void;
 }

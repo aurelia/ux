@@ -7,13 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
-import { UxGridTheme } from './ux-grid-theme';
-var gridTheme = new UxGridTheme();
 var UxGrid = /** @class */ (function () {
     function UxGrid(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
-        styleEngine.ensureDefaultTheme(gridTheme);
     }
     UxGrid.prototype.bind = function () {
         this.themeChanged(this.theme);

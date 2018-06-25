@@ -1,4 +1,4 @@
-System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./resources/datetime-utility", "./ux-datepicker-theme", "moment"], function (exports_1, context_1) {
+System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./resources/datetime-utility", "moment"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, datetime_utility_1, ux_datepicker_theme_1, moment, theme, UxDatepicker;
+    var aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, datetime_utility_1, moment, UxDatepicker;
     return {
         setters: [
             function (aurelia_templating_1_1) {
@@ -25,15 +25,11 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
             function (datetime_utility_1_1) {
                 datetime_utility_1 = datetime_utility_1_1;
             },
-            function (ux_datepicker_theme_1_1) {
-                ux_datepicker_theme_1 = ux_datepicker_theme_1_1;
-            },
             function (moment_1) {
                 moment = moment_1;
             }
         ],
         execute: function () {
-            theme = new ux_datepicker_theme_1.UxDatepickerTheme();
             UxDatepicker = /** @class */ (function () {
                 function UxDatepicker(element, resources, styleEngine) {
                     this.element = element;
@@ -50,7 +46,6 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                         time: ['h:m a', 'H:m']
                     };
                     this.showDialog = false;
-                    styleEngine.ensureDefaultTheme(theme);
                 }
                 UxDatepicker.prototype.bind = function () {
                     if (this.initialDate != null) {

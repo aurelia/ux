@@ -10,14 +10,11 @@ var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_form_theme_1 = require("./ux-form-theme");
-var theme = new ux_form_theme_1.UxFormTheme();
 var UxForm = /** @class */ (function () {
     function UxForm(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.bindSubmitToEnter = false;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxForm.prototype.bind = function () {
         if (this.theme != null) {

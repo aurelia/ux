@@ -9,13 +9,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_grid_theme_1 = require("./ux-grid-theme");
-var gridTheme = new ux_grid_theme_1.UxGridTheme();
 var UxGrid = /** @class */ (function () {
     function UxGrid(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
-        styleEngine.ensureDefaultTheme(gridTheme);
     }
     UxGrid.prototype.bind = function () {
         this.themeChanged(this.theme);

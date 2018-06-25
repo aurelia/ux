@@ -9,8 +9,6 @@ import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, normalizeBooleanAttribute } from '@aurelia-ux/core';
-import { UxChipInputTheme } from './ux-chip-input-theme';
-var theme = new UxChipInputTheme();
 var UxChipInput = /** @class */ (function () {
     function UxChipInput(element, styleEngine) {
         this.element = element;
@@ -20,7 +18,6 @@ var UxChipInput = /** @class */ (function () {
         this.separator = ', ';
         this.value = undefined;
         this.chips = new Array();
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxChipInput.prototype.bind = function () {
         this.themeChanged(this.theme);

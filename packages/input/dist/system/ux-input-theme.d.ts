@@ -2,15 +2,22 @@ import { UxTheme } from '@aurelia-ux/core';
 export declare class UxInputTheme implements UxTheme {
     themeKey: string;
     foreground: string;
+    foregroundLabel: string;
     background: string;
+    backgroundHover: string;
+    fontSize: string;
+    letterSpacing: string;
+    labelFontSize: string;
+    labelLetterSpacing: string;
+    border: string;
+    borderHover: string;
+    borderFocus: string;
+    borderRadius: string;
     borderBottom: string;
     borderBottomHover: string;
-    borderBottomSelected: string;
+    borderBottomFocus: string;
     diabledForeground: string;
-    disabledBorderBottom: string;
-    fullWidthBorder: string;
-    fullWidthForeground: string;
-    fullWidthBackground: string;
-    fullWidthBackgroundDisabled: string;
+    disabledBackground: string;
+    disabledBorder: string;
     error: string;
 }

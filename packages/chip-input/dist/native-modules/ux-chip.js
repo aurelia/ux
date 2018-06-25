@@ -9,14 +9,11 @@ import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
-import { UxChipTheme } from './ux-chip-theme';
-var theme = new UxChipTheme();
 var UxChip = /** @class */ (function () {
     function UxChip(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.value = undefined;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxChip.prototype.bind = function () {
         this.themeChanged(this.theme);

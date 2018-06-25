@@ -8,15 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
-var ux_input_info_theme_1 = require("./ux-input-info-theme");
 var core_1 = require("@aurelia-ux/core");
-var theme = new ux_input_info_theme_1.UxInputInfoTheme();
 var UxInputInfo = /** @class */ (function () {
     function UxInputInfo(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.uxInputCounter = null;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxInputInfo.prototype.bind = function () {
         if (this.target === undefined) {

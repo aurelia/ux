@@ -10,9 +10,7 @@ var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_switch_theme_1 = require("./ux-switch-theme");
 var aurelia_framework_1 = require("aurelia-framework");
-var theme = new ux_switch_theme_1.UxSwitchTheme();
 var UxSwitch = /** @class */ (function () {
     function UxSwitch(element, styleEngine) {
         this.element = element;
@@ -21,7 +19,6 @@ var UxSwitch = /** @class */ (function () {
         this.effect = 'ripple';
         this.ripple = null;
         Object.setPrototypeOf(element, uxSwitchElementProto);
-        styleEngine.ensureDefaultTheme(theme);
     }
     Object.defineProperty(UxSwitch.prototype, "isDisabled", {
         get: function () {

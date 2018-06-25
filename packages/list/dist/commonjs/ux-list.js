@@ -9,13 +9,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_list_theme_1 = require("./ux-list-theme");
-var theme = new ux_list_theme_1.UxListTheme();
 var UxList = /** @class */ (function () {
     function UxList(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxList.prototype.bind = function () {
         if (this.theme != null) {

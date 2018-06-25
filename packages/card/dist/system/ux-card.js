@@ -1,4 +1,4 @@
-System.register(["aurelia-dependency-injection", "aurelia-templating", "@aurelia-ux/core", "./ux-card-theme"], function (exports_1, context_1) {
+System.register(["aurelia-dependency-injection", "aurelia-templating", "@aurelia-ux/core"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["aurelia-dependency-injection", "aurelia-templating", "@aurelia
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var aurelia_dependency_injection_1, aurelia_templating_1, core_1, ux_card_theme_1, UxCard;
+    var aurelia_dependency_injection_1, aurelia_templating_1, core_1, UxCard;
     return {
         setters: [
             function (aurelia_dependency_injection_1_1) {
@@ -18,9 +18,6 @@ System.register(["aurelia-dependency-injection", "aurelia-templating", "@aurelia
             },
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (ux_card_theme_1_1) {
-                ux_card_theme_1 = ux_card_theme_1_1;
             }
         ],
         execute: function () {
@@ -28,7 +25,6 @@ System.register(["aurelia-dependency-injection", "aurelia-templating", "@aurelia
                 function UxCard(element, styleEngine) {
                     this.element = element;
                     this.styleEngine = styleEngine;
-                    styleEngine.ensureDefaultTheme(new ux_card_theme_1.UxCardTheme());
                 }
                 UxCard.prototype.bind = function () {
                     if (this.theme != null) {

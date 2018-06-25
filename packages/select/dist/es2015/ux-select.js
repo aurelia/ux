@@ -7,9 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { customElement, bindable, computedFrom, DOM, processContent, ElementEvents, inject, PLATFORM, ObserverLocator, TaskQueue, } from 'aurelia-framework';
 import { getLogger } from 'aurelia-logging';
 import { StyleEngine } from '@aurelia-ux/core';
-import { UxSelectTheme } from './ux-select-theme';
 import { getAuViewModel, bool } from './util';
-const theme = new UxSelectTheme();
 const UP = 38;
 // const RIGHT = 39;
 const DOWN = 40;
@@ -32,8 +30,6 @@ class UxSelect {
         this.ignoreSelectEvent = true;
         // Only chrome persist the element prototype when cloning with clone node
         Object.setPrototypeOf(element, UxSelectElementProto);
-        this.theme = theme;
-        styleEngine.ensureDefaultTheme(theme);
     }
     bind() {
         if (bool(this.autofocus)) {

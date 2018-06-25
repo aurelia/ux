@@ -10,9 +10,7 @@ var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_checkbox_theme_1 = require("./ux-checkbox-theme");
 var aurelia_pal_1 = require("aurelia-pal");
-var theme = new ux_checkbox_theme_1.UxCheckboxTheme();
 var UxCheckbox = /** @class */ (function () {
     function UxCheckbox(element, styleEngine) {
         this.element = element;
@@ -22,7 +20,6 @@ var UxCheckbox = /** @class */ (function () {
         this.effect = 'ripple';
         this.ripple = null;
         Object.setPrototypeOf(element, uxCheckboxElementProto);
-        styleEngine.ensureDefaultTheme(theme);
     }
     Object.defineProperty(UxCheckbox.prototype, "isDisabled", {
         get: function () {

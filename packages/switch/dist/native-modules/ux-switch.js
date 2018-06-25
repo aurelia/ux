@@ -8,9 +8,7 @@ import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
-import { UxSwitchTheme } from './ux-switch-theme';
 import { DOM, ElementEvents } from 'aurelia-framework';
-var theme = new UxSwitchTheme();
 var UxSwitch = /** @class */ (function () {
     function UxSwitch(element, styleEngine) {
         this.element = element;
@@ -19,7 +17,6 @@ var UxSwitch = /** @class */ (function () {
         this.effect = 'ripple';
         this.ripple = null;
         Object.setPrototypeOf(element, uxSwitchElementProto);
-        styleEngine.ensureDefaultTheme(theme);
     }
     Object.defineProperty(UxSwitch.prototype, "isDisabled", {
         get: function () {

@@ -21,15 +21,6 @@ export declare class StyleEngine {
      */
     applyThemeGroup(themes: UxTheme[]): void;
     /**
-     * Checks to see if a base theme has been registered.
-     * If no base theme is found, the theme is registered,
-     * bindings are set up, and a new style element is added
-     * with the processed theme to the document head.
-     *
-     * @param theme A theme derived from the UxTheme base class.
-     */
-    ensureDefaultTheme(theme: UxTheme): void;
-    /**
      * Retrieves the default theme object for the provided key that can then be updated.
      *
      * @param key Key of the theme to be retrieved.

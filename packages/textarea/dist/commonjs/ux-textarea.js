@@ -10,9 +10,7 @@ var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_textarea_theme_1 = require("./ux-textarea-theme");
 var aurelia_framework_1 = require("aurelia-framework");
-var theme = new ux_textarea_theme_1.UxTextAreaTheme();
 var UxTextArea = /** @class */ (function () {
     function UxTextArea(element, styleEngine) {
         this.element = element;
@@ -24,7 +22,6 @@ var UxTextArea = /** @class */ (function () {
         this.readonly = false;
         this.value = undefined;
         Object.setPrototypeOf(element, uxTextAreaElementProto);
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxTextArea.prototype.bind = function () {
         var element = this.element;

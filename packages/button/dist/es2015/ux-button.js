@@ -7,15 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
-import { UxButtonTheme } from './ux-button-theme';
-const theme = new UxButtonTheme();
 let UxButton = class UxButton {
     constructor(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.disabled = false;
         this.ripple = null;
-        styleEngine.ensureDefaultTheme(theme);
     }
     bind() {
         if (normalizeBooleanAttribute('disabled', this.disabled)) {

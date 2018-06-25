@@ -1400,43 +1400,26 @@ var StyleController = /** @class */ (function () {
         this.globalStyleEngine = globalStyleEngine;
         this.themes = [];
     }
-    /**
-     * Checks to see if a base theme has been registered.
-     * If no base theme is found, the theme is registered,
-     * bindings are set up, and a new style element is added
-     * with the processed theme to the document head.
-     *
-     * @param theme A theme derived from the UxTheme base class.
-     */
-    StyleController.prototype.ensureBaseThemeCreated = function (theme) {
-        var baseTheme = this.themes[theme.themeKey];
-        if (baseTheme != null) {
-            return;
-        }
-        baseTheme = theme;
-        this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux theme " + theme.themeKey, this.processInnerHtml(theme), ':root');
-        this.setWatches(theme);
-        this.themes[theme.themeKey] = theme;
-    };
     StyleController.prototype.updateTheme = function (theme, element) {
         var baseTheme = { themeKey: 'base-theme' };
-        var defaultTheme = this.themes[theme.themeKey];
-        if (defaultTheme == null) {
-            this.ensureBaseThemeCreated(theme);
+        if (theme.themeKey == null) {
+            throw new Error('Provided theme has no themeKey property.');
         }
-        defaultTheme = this.themes[theme.themeKey];
-        if (defaultTheme == null) {
-            return;
-        }
-        for (var key in theme) {
-            if (element == null) {
+        if (element != null) {
+            for (var key in theme) {
                 if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
-                    defaultTheme[key] = theme[key];
+                    element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), theme[key]);
                 }
             }
-            else {
-                element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), theme[key]);
+        }
+        else {
+            var uxTheme = this.themes.splice(this.themes.indexOf(this.themes[theme.themeKey]))[0];
+            if (uxTheme != null) {
+                this.removeWatches(uxTheme);
             }
+            this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux theme " + theme.themeKey, this.processInnerHtml(theme), ':root');
+            this.setWatches(theme);
+            this.themes[theme.themeKey] = theme;
         }
     };
     StyleController.prototype.getThemeKeys = function (theme) {
@@ -1459,10 +1442,18 @@ var StyleController = /** @class */ (function () {
         var _this = this;
         for (var _i = 0, _a = this.getThemeKeys(theme); _i < _a.length; _i++) {
             var key = _a[_i];
-            this.observerLocator.getObserver(theme, key).subscribe(function () {
-                _this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux theme " + theme.themeKey, _this.processInnerHtml(theme), ':root');
-            });
+            this.observerLocator.getObserver(theme, key).subscribe(function () { return _this.themePropertyChanged(theme); });
         }
+    };
+    StyleController.prototype.removeWatches = function (theme) {
+        var _this = this;
+        for (var _i = 0, _a = this.getThemeKeys(theme); _i < _a.length; _i++) {
+            var key = _a[_i];
+            this.observerLocator.getObserver(theme, key).unsubscribe(function () { return _this.themePropertyChanged(theme); });
+        }
+    };
+    StyleController.prototype.themePropertyChanged = function (theme) {
+        this.globalStyleEngine.addOrUpdateGlobalStyle("aurelia-ux theme " + theme.themeKey, this.processInnerHtml(theme), ':root');
     };
     StyleController.prototype.processInnerHtml = function (theme) {
         var designInnerHtml = '';
@@ -1517,17 +1508,6 @@ var StyleEngine = /** @class */ (function () {
             var theme = themes_1[_i];
             this.applyTheme(theme);
         }
-    };
-    /**
-     * Checks to see if a base theme has been registered.
-     * If no base theme is found, the theme is registered,
-     * bindings are set up, and a new style element is added
-     * with the processed theme to the document head.
-     *
-     * @param theme A theme derived from the UxTheme base class.
-     */
-    StyleEngine.prototype.ensureDefaultTheme = function (theme) {
-        this.styleController.ensureBaseThemeCreated(theme);
     };
     /**
      * Retrieves the default theme object for the provided key that can then be updated.

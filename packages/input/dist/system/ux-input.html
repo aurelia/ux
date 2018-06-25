@@ -3,8 +3,13 @@
   disabled.bind="disabled & booleanAttr"
   readonly.bind="readonly & booleanAttr"
   aria-disabled.bind="disabled & booleanAttr"
-  aria-readonly.bind="readonly & booleanAttr">
+  aria-readonly.bind="readonly & booleanAttr"
+  click.trigger="focusInput()">
   <require from="./ux-input.css"></require>
+
+  <slot name="leading-icon"></slot>
+
+  <label if.bind="label || placeholder">${label || placeholder}</label>
 
   <input  
     ref="textbox"
@@ -14,4 +19,8 @@
     readonly.bind="readonly & booleanAttr"
     required.bind="required & booleanAttr" />
 
+  <slot name="trailing-icon"></slot>
+
+  <div class="ux-input__border-bottom"></div>
+  <div class="ux-input__border-bottom-active"></div>
 </template>

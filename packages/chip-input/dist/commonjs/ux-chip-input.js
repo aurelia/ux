@@ -11,8 +11,6 @@ var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_chip_input_theme_1 = require("./ux-chip-input-theme");
-var theme = new ux_chip_input_theme_1.UxChipInputTheme();
 var UxChipInput = /** @class */ (function () {
     function UxChipInput(element, styleEngine) {
         this.element = element;
@@ -22,7 +20,6 @@ var UxChipInput = /** @class */ (function () {
         this.separator = ', ';
         this.value = undefined;
         this.chips = new Array();
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxChipInput.prototype.bind = function () {
         this.themeChanged(this.theme);

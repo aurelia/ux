@@ -9,15 +9,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_button_theme_1 = require("./ux-button-theme");
-var theme = new ux_button_theme_1.UxButtonTheme();
 var UxButton = /** @class */ (function () {
     function UxButton(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.disabled = false;
         this.ripple = null;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxButton.prototype.bind = function () {
         if (core_1.normalizeBooleanAttribute('disabled', this.disabled)) {

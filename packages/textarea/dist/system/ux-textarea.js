@@ -1,4 +1,4 @@
-System.register(["aurelia-templating", "aurelia-pal", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-textarea-theme", "aurelia-framework"], function (exports_1, context_1) {
+System.register(["aurelia-templating", "aurelia-pal", "aurelia-dependency-injection", "@aurelia-ux/core", "aurelia-framework"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-dependency-inject
     function stopEvent(e) {
         e.stopPropagation();
     }
-    var aurelia_templating_1, aurelia_pal_1, aurelia_dependency_injection_1, core_1, ux_textarea_theme_1, aurelia_framework_1, theme, UxTextArea, getVm, uxTextAreaElementProto;
+    var aurelia_templating_1, aurelia_pal_1, aurelia_dependency_injection_1, core_1, aurelia_framework_1, UxTextArea, getVm, uxTextAreaElementProto;
     return {
         setters: [
             function (aurelia_templating_1_1) {
@@ -25,15 +25,11 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-dependency-inject
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (ux_textarea_theme_1_1) {
-                ux_textarea_theme_1 = ux_textarea_theme_1_1;
-            },
             function (aurelia_framework_1_1) {
                 aurelia_framework_1 = aurelia_framework_1_1;
             }
         ],
         execute: function () {
-            theme = new ux_textarea_theme_1.UxTextAreaTheme();
             UxTextArea = /** @class */ (function () {
                 function UxTextArea(element, styleEngine) {
                     this.element = element;
@@ -45,7 +41,6 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-dependency-inject
                     this.readonly = false;
                     this.value = undefined;
                     Object.setPrototypeOf(element, uxTextAreaElementProto);
-                    styleEngine.ensureDefaultTheme(theme);
                 }
                 UxTextArea.prototype.bind = function () {
                     var element = this.element;
