@@ -61,7 +61,7 @@
       "dist": "dist/amd"
     },
     "peerDependencies": {
-      "aurelia-binding": "^1.0.0 || ^2.0.0",
+      "aurelia-binding": "^2.0.0",
       "aurelia-dependency-injection": "^1.0.0",
       "aurelia-logging": "^1.0.0",
       "aurelia-pal": "^1.0.0",
@@ -75,7 +75,7 @@
       "@aurelia-ux/core": "^0.4.0"
     },
     "dependencies": {
-      "aurelia-binding": "^1.0.0 || ^2.0.0",
+      "aurelia-binding": "^2.0.0",
       "aurelia-dependency-injection": "^1.0.0",
       "aurelia-logging": "^1.0.0",
       "aurelia-pal": "^1.0.0",
