@@ -3,6 +3,7 @@ import { customElement, bindable, ViewResources, inlineView } from 'aurelia-temp
 import { observable, bindingMode, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
+import { DOM } from 'aurelia-framework';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -456,6 +457,14 @@ UxYearList = __decorate([
     inlineView(UX_YEAR_LIST_VIEW)
 ], UxYearList);
 
+var cldCss = "ux-calendar{display:block;height:260px;display:flex;flex-direction:column}ux-calendar div.calendar-row{display:flex;align-items:center;justify-content:space-around;height:2em}ux-calendar .calendar-row.weekdays{color:#e0e0e0;color:var(--ux-theme--datepicker-weekday-foreground, #E0E0E0)}ux-calendar .calendar-row .day{width:100%;display:flex;justify-content:center}ux-calendar div.day-highlight{width:1.9em;height:1.9em;border-radius:100%;display:flex;align-items:center;justify-content:center;cursor:pointer}ux-calendar div.day-highlight.selected{color:#fff;color:var(--ux-theme--datepicker-selected-day-foreground, var(--ux-design--accent-foreground, #FFF));background-color:#ff4081;background-color:var(--ux-theme--datepicker-selected-day-background, var(--ux-design--accent, #FF4081))}ux-calendar div.day-highlight.out-of-range{color:#757575;color:var(--ux-theme--datepicker-out-of-range-foreground, #757575);cursor:default}ux-calendar div.month-display{display:flex;justify-content:space-between;align-items:center}ux-calendar div.month-display svg{fill:currentColor;width:24px;height:24px}"
+
+var dpCss = "ux-datepicker{display:flex;position:relative}ux-datepicker>ux-button>button.icon{color:#333;color:var(--ux-theme-datepicker-foreground, #333)}ux-datepicker>.overlay:not(:empty){position:fixed;left:0;top:0;width:100%;height:100%;z-index:80;display:flex;align-items:center;justify-content:center;animation-name:datepicker-background-fade-in;animation-duration:250ms;background-color:rgba(0,0,0,.25);background-color:var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25))}ux-datepicker>ux-button svg{fill:currentColor;fill:var(--ux-theme--datepicker-calendar-icon, currentColor);width:24px;height:24px}@keyframes datepicker-background-fade-in{0%{background-color:transparent}to{background-color:rgba(0,0,0,.25);background-color:var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25))}}"
+
+var pdCss = "ux-picker-dialog{color:#262626;color:var(--ux-design--control-foreground, #262626);background-color:#fff;background-color:var(--ux-design--control-background, #FFF);width:300px;user-select:none;-khtml-user-select:none;-ms-user-select:none;-moz-user-select:none;-webkit-touch-callout:none;-webkit-user-select:none;animation-duration:250ms;animation-name:datepicker-dialog-grow}ux-picker-dialog header{width:auto;height:124px;padding:16px 24px;box-sizing:border-box;color:#fff;color:var(--ux-theme--datepicker-header-foreground, var(--ux-design--primary-foreground, #FFF));background:#3f51b5;background:var(--ux-theme--datepicker-header-background, var(--ux-design--primary, #3F51B5))}ux-picker-dialog header>div.year,ux-picker-dialog header>div.date{opacity:.7;cursor:pointer}ux-picker-dialog header div.year{font-size:1.1em}ux-picker-dialog header div.year.active{opacity:1}ux-picker-dialog header div.date{font-size:2em;font-weight:400}ux-picker-dialog header div.date.active{opacity:1}ux-picker-dialog footer{display:flex;justify-content:flex-end}@keyframes datepicker-dialog-grow{0%{transform:scale3d(0,0,0)}to{transform:scale3d(1,1,1)}}"
+
+var ylCss = "ux-year-list{display:block;height:260px;overflow-y:auto;text-align:center}ux-year-list>.years{font-size:1em;cursor:pointer;margin:24px 0}ux-year-list>.years.selected{font-size:1.75em;color:#ff4081;color:var(--ux-design--accent, #FF4081)}"
+
 class UxDatepickerTheme {
     constructor() {
         this.themeKey = 'datepicker';
@@ -463,6 +472,7 @@ class UxDatepickerTheme {
 }
 
 function configure(config) {
+    DOM.injectStyles(cldCss + dpCss + pdCss + ylCss, undefined, undefined, 'ux-datepicker-css');
     config.globalResources([
         UxCalendar,
         UxDatepicker,
