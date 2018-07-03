@@ -2,7 +2,7 @@ import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, AureliaUX } from '@aurelia-ux/core';
-import { observable, bindingMode } from 'aurelia-framework';
+import { observable, bindingMode, DOM as DOM$1 } from 'aurelia-framework';
 import { ValueAttributeObserver, EventSubscriber } from 'aurelia-binding';
 
 /*! *****************************************************************************
@@ -34,7 +34,7 @@ function __decorate(decorators, target, key, desc) {
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 }
 
-var UX_TEXTAREA_VIEW = "<template role=\"textbox\"> <require from=\"@aurelia-ux/textarea/ux-textarea.css\"></require> <textarea ref=\"textbox\" value.bind=\"rawValue\" focus.bind=\"focus\" disabled.bind=\"disabled & booleanAttr\" readonly.bind=\"readonly & booleanAttr\" require.bind=\"required & booleanAttr\" aria-disabled.bind=\"disabled & booleanAttr\" aria-readonly.bind=\"readonly & booleanAttr\" aria-required.bind=\"required & booleanAttr\">\r\n  </textarea> </template> ";
+var UX_TEXTAREA_VIEW = "<template role=\"textbox\"> <textarea ref=\"textbox\" value.bind=\"rawValue\" focus.bind=\"focus\" disabled.bind=\"disabled & booleanAttr\" readonly.bind=\"readonly & booleanAttr\" require.bind=\"required & booleanAttr\" aria-disabled.bind=\"disabled & booleanAttr\" aria-readonly.bind=\"readonly & booleanAttr\" aria-required.bind=\"required & booleanAttr\">\r\n  </textarea> </template> ";
 
 var UxTextArea = /** @class */ (function () {
     function UxTextArea(element, styleEngine) {
@@ -186,6 +186,8 @@ var uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
     }
 });
 
+var css = "ux-textarea{display:block;width:100%}ux-textarea>textarea{width:100%;padding:6px 0 4px 0;margin-bottom:4px;border:0;outline:0;resize:none;padding-left:0;padding-right:0;transition:border-color 250ms ease;color:inherit;color:var(--ux-theme--textarea-foreground, inherit);background-color:transparent;background-color:var(--ux-theme--textarea-background, transparent);border-bottom:1px solid #9e9e9e;border-bottom:var(--ux-theme--textarea-border-bottom, 1px solid #9E9E9E)}ux-textarea>textarea:hover,ux-textarea>textarea:focus{border-bottom:1px solid #ff4081;border-bottom:var(--ux-theme--textarea-border-bottom-focus, 1px solid var(--ux-design--accent, #FF4081))}ux-textarea>textarea:focus{border-bottom-width:2px;padding-bottom:3px}ux-textarea>textarea[disabled],ux-textarea>textarea[disabled]:hover,ux-textarea>textarea[disabled]:focus,ux-textarea>textarea[readonly],ux-textarea>textarea[readonly]:hover,ux-textarea>textarea[readonly]:focus{color:#a4a4a4;color:var(--ux-theme--textarea-disabled-foreground, #A4A4A4);border-bottom:1px dashed #a4a4a4;border-bottom:var(--ux-theme--textarea-disabled-border-bottom, 1px dashed #A4A4A4)}ux-textarea.show-grip>ux-textarea>textarea{resize:both}ux-textarea.full-width>ux-textarea>textarea{padding:20px 8px;margin-bottom:0;font-size:16px;color:#232323;color:var(--ux-theme--textarea-full-width-foreground, #232323);border:1px solid #eee;border:var(--ux-theme--textarea-full-width-border, 1px solid #EEEEEE);background-color:#fff;background-color:var(--ux-theme--textarea-full-width-background, #FFF)}ux-textarea.full-width>ux-textarea>textarea[disabled] ux-textarea.full-width>ux-textarea>textarea[disabled]:hover,ux-textarea.full-width>ux-textarea>textarea[disabled]:focus,ux-textarea.full-width>ux-textarea>textarea[readonly],ux-textarea.full-width>ux-textarea>textarea[readonly]:hover,ux-textarea.full-width>ux-textarea>textarea[readonly]:focus{background-color:#eee;background-color:var(--ux-theme--textarea-full-width-background-disabled, #EEEEEE);border:1px dashed #e0e0e0;border:var(--ux-theme--textarea-disabled-border-bottom, 1px dashed #E0E0E0);color:#e0e0e0;color:var(--ux-theme--textarea-disabled-foreground, #E0E0E0)}ux-textarea.has-error ux-textarea>textarea{border-bottom-color:#f44336;border-bottom-color:var(--ux-theme--textarea-error, #F44336)}ux-textarea.full-width.has-error ux-textarea>textarea{border-color:#f44336;border-color:var(--ux-theme--textarea-error, #F44336)}"
+
 var UxTextAreaTheme = /** @class */ (function () {
     function UxTextAreaTheme() {
         this.themeKey = 'textarea';
@@ -194,6 +196,7 @@ var UxTextAreaTheme = /** @class */ (function () {
 }());
 
 function configure(config) {
+    DOM$1.injectStyles(css, undefined, undefined, 'ux-textarea-css');
     config.container.get(AureliaUX).registerUxElementConfig(uxTextAreaConfig);
     config.globalResources(UxTextArea);
 }
