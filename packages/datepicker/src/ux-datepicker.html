@@ -1,6 +1,4 @@
 <template>
-  <require from="@aurelia-ux/datepicker/ux-datepicker.css"></require>
-
   <ux-input ref="textbox" value.bind="textboxValue" blur.trigger="changeTextboxValue()" placeholder.bind="placeholder"></ux-input>
 
   <ux-button type="icon" click.delegate="toggleDialog('month')" if.bind="type !== 'time'">

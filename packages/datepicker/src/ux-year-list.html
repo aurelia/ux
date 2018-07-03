@@ -1,6 +1,4 @@
 <template>
-  <require from="@aurelia-ux/datepicker/ux-year-list.css"></require>
-
   <template repeat.for="year of yearList">
     <div class="years ${year == value.year() ? 'selected' : ''}" click.delegate="selectYear(year)">
       ${year}

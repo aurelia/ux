@@ -75,7 +75,7 @@ var DatetimeUtility = /** @class */ (function () {
     return DatetimeUtility;
 }());
 
-var UX_CALENDAR_VIEW = "<template> <require from=\"@aurelia-ux/datepicker/ux-calendar.css\"></require> <div class=\"month-display\"> <ux-button type=\"icon\" click.delegate=\"previousMonth()\"> <svg viewBox=\"0 0 24 24\"> <path d=\"M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z\"></path> </svg> </ux-button> <span> ${displayMonth.format('MMMM YYYY')} </span> <ux-button type=\"icon\" click.delegate=\"nextMonth()\"> <svg viewBox=\"0 0 24 24\"> <path d=\"M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\"></path> </svg> </ux-button> </div> <div class=\"calendar-row weekdays\"> <div class=\"day\" repeat.for=\"weekday of weekdays\"> ${weekday[0]} </div> </div> <div class=\"calendar-row\" repeat.for=\"week of calendarRows\"> <div class=\"day\" repeat.for=\"day of week\"> <div click.delegate=\"changeCalendarSelection(day)\" if.bind=\"day\" class=\"day-highlight ${day.isSame(value, 'day') ? 'selected' : ''} ${isValidDate(day) ? 'out-of-range' : '' }\"> ${day.date()} </div> </div> </div> </template> ";
+var UX_CALENDAR_VIEW = "<template> <div class=\"month-display\"> <ux-button type=\"icon\" click.delegate=\"previousMonth()\"> <svg viewBox=\"0 0 24 24\"> <path d=\"M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z\"></path> </svg> </ux-button> <span> ${displayMonth.format('MMMM YYYY')} </span> <ux-button type=\"icon\" click.delegate=\"nextMonth()\"> <svg viewBox=\"0 0 24 24\"> <path d=\"M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\"></path> </svg> </ux-button> </div> <div class=\"calendar-row weekdays\"> <div class=\"day\" repeat.for=\"weekday of weekdays\"> ${weekday[0]} </div> </div> <div class=\"calendar-row\" repeat.for=\"week of calendarRows\"> <div class=\"day\" repeat.for=\"day of week\"> <div click.delegate=\"changeCalendarSelection(day)\" if.bind=\"day\" class=\"day-highlight ${day.isSame(value, 'day') ? 'selected' : ''} ${isValidDate(day) ? 'out-of-range' : '' }\"> ${day.date()} </div> </div> </div> </template> ";
 
 var moment$1 = moment_;
 var UxCalendar = /** @class */ (function () {
@@ -159,7 +159,7 @@ var UxCalendar = /** @class */ (function () {
     return UxCalendar;
 }());
 
-var UX_DATEPICKER_VIEW = "<template> <require from=\"@aurelia-ux/datepicker/ux-datepicker.css\"></require> <ux-input ref=\"textbox\" value.bind=\"textboxValue\" blur.trigger=\"changeTextboxValue()\" placeholder.bind=\"placeholder\"></ux-input> <ux-button type=\"icon\" click.delegate=\"toggleDialog('month')\" if.bind=\"type !== 'time'\"> <svg viewBox=\"0 0 24 24\"> <path d=\"M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z\"></path> </svg> </ux-button> <div class=\"overlay\" if.bind=\"showDialog\"> <ux-picker-dialog display.bind=\"display\" config.bind=\"config\" type.bind=\"type\" initial-date.bind=\"initialDate\" close-dialog.call=\"showDialog = false\" min-date.bind=\"minDate\" max-date.bind=\"maxDate\" value.two-way=\"value\"></ux-picker-dialog> </div> </template> ";
+var UX_DATEPICKER_VIEW = "<template> <ux-input ref=\"textbox\" value.bind=\"textboxValue\" blur.trigger=\"changeTextboxValue()\" placeholder.bind=\"placeholder\"></ux-input> <ux-button type=\"icon\" click.delegate=\"toggleDialog('month')\" if.bind=\"type !== 'time'\"> <svg viewBox=\"0 0 24 24\"> <path d=\"M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z\"></path> </svg> </ux-button> <div class=\"overlay\" if.bind=\"showDialog\"> <ux-picker-dialog display.bind=\"display\" config.bind=\"config\" type.bind=\"type\" initial-date.bind=\"initialDate\" close-dialog.call=\"showDialog = false\" min-date.bind=\"minDate\" max-date.bind=\"maxDate\" value.two-way=\"value\"></ux-picker-dialog> </div> </template> ";
 
 var moment$2 = moment_;
 var UxDatepicker = /** @class */ (function () {
@@ -324,7 +324,7 @@ var UxDatepicker = /** @class */ (function () {
     return UxDatepicker;
 }());
 
-var UX_PICKER_DIALOG_VIEW = "<template role=\"dialog\"> <require from=\"@aurelia-ux/datepicker/ux-picker-dialog.css\"></require> <header> <template if.bind=\"type !== 'time'\"> <div class=\"year ${display === 'year' ? 'active':''}\" click.trigger=\"display = 'year'\"> ${selectedDate.format('YYYY')} </div> <div class=\"date ${display === 'month' ? 'active':''}\" click.trigger=\"display = 'month'\"> ${selectedDate.format('ddd, MMM D')} </div> </template> </header> <ux-year-list if.bind=\"display === 'year'\" config.bind=\"config\" min-date.bind=\"minDate\" max-date.bind=\"maxDate\" value.two-way=\"selectedDate\"> </ux-year-list> <ux-calendar if.bind=\"display === 'month'\" config.bind=\"config\" value.two-way=\"selectedDate\" min-date.bind=\"minDate\" max-date.bind=\"maxDate\"> </ux-calendar> <footer> <ux-button type=\"flat\" click.delegate=\"closeDialog()\">Cancel</ux-button> <ux-button type=\"flat\" click.delegate=\"selectDate()\">OK</ux-button> </footer> </template> ";
+var UX_PICKER_DIALOG_VIEW = "<template role=\"dialog\"> <header> <template if.bind=\"type !== 'time'\"> <div class=\"year ${display === 'year' ? 'active':''}\" click.trigger=\"display = 'year'\"> ${selectedDate.format('YYYY')} </div> <div class=\"date ${display === 'month' ? 'active':''}\" click.trigger=\"display = 'month'\"> ${selectedDate.format('ddd, MMM D')} </div> </template> </header> <ux-year-list if.bind=\"display === 'year'\" config.bind=\"config\" min-date.bind=\"minDate\" max-date.bind=\"maxDate\" value.two-way=\"selectedDate\"> </ux-year-list> <ux-calendar if.bind=\"display === 'month'\" config.bind=\"config\" value.two-way=\"selectedDate\" min-date.bind=\"minDate\" max-date.bind=\"maxDate\"> </ux-calendar> <footer> <ux-button type=\"flat\" click.delegate=\"closeDialog()\">Cancel</ux-button> <ux-button type=\"flat\" click.delegate=\"selectDate()\">OK</ux-button> </footer> </template> ";
 
 var moment$3 = moment_;
 var UxPickerDialog = /** @class */ (function () {
@@ -397,7 +397,7 @@ var UxPickerDialog = /** @class */ (function () {
     return UxPickerDialog;
 }());
 
-var UX_YEAR_LIST_VIEW = "<template> <require from=\"@aurelia-ux/datepicker/ux-year-list.css\"></require> <template repeat.for=\"year of yearList\"> <div class=\"years ${year == value.year() ? 'selected' : ''}\" click.delegate=\"selectYear(year)\"> ${year} </div> </template> </template> ";
+var UX_YEAR_LIST_VIEW = "<template> <template repeat.for=\"year of yearList\"> <div class=\"years ${year == value.year() ? 'selected' : ''}\" click.delegate=\"selectYear(year)\"> ${year} </div> </template> </template> ";
 
 var UxYearList = /** @class */ (function () {
     function UxYearList(element, resources) {
