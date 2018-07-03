@@ -1,12 +1,14 @@
-import { FrameworkConfiguration, bindingMode, ObserverLocator } from 'aurelia-framework';
+import { FrameworkConfiguration, bindingMode, ObserverLocator, DOM } from 'aurelia-framework';
 import { CheckedObserver, EventSubscriber } from 'aurelia-binding';
 import { AureliaUX } from '@aurelia-ux/core';
 import { UxSwitch } from './ux-switch';
+import css from './ux-switch.css';
 
 export { UxSwitchTheme } from './ux-switch-theme';
 export { UxSwitch, UxSwitchElement } from './ux-switch';
 
 export function configure(config: FrameworkConfiguration) {
+  DOM.injectStyles(css, undefined, undefined, 'ux-switch-css');
   (config.container.get(AureliaUX) as AureliaUX).registerUxElementConfig(uxSwitchConfig);
   config.globalResources(UxSwitch);
 }

@@ -33,7 +33,7 @@ function __decorate(decorators, target, key, desc) {
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 }
 
-var UX_SWITCH_VIEW = "<template class=\"${effect !== null ? effect : ''}\"> <require from=\"@aurelia-ux/core/effects/paper-ripple.css\"></require> <require from=\"./ux-switch.css\"></require> <input type=\"checkbox\" ref=\"checkbox\" checked.bind=\"value\" indeterminate.bind=\"indeterminate\" mousedown.trigger=\"onMouseDown($event)\" disabled.bind=\"disabled & booleanAttr\" aria-checked.bind=\"value & booleanAttr\" aria-disabledb.bind=\"disabled & booleanAttr\"> <div class=\"track\"> <div class=\"indicator\"> <div class=\"ripplecontainer\"> <span class=\"ripple\"></span> </div> </div> </div> </template> ";
+var UX_SWITCH_VIEW = "<template class=\"${effect !== null ? effect : ''}\"> <require from=\"@aurelia-ux/core/effects/paper-ripple.css\"></require> <input type=\"checkbox\" ref=\"checkbox\" checked.bind=\"value\" indeterminate.bind=\"indeterminate\" mousedown.trigger=\"onMouseDown($event)\" disabled.bind=\"disabled & booleanAttr\" aria-checked.bind=\"value & booleanAttr\" aria-disabledb.bind=\"disabled & booleanAttr\"> <div class=\"track\"> <div class=\"indicator\"> <div class=\"ripplecontainer\"> <span class=\"ripple\"></span> </div> </div> </div> </template> ";
 
 let UxSwitch = class UxSwitch {
     constructor(element, styleEngine) {
@@ -178,6 +178,8 @@ const uxSwitchElementProto = Object.create(HTMLElement.prototype, {
     }
 });
 
+var css = "ux-switch{display:inline-block;position:relative;cursor:pointer}ux-switch>input{position:absolute;top:0;bottom:0;left:0;right:0;opacity:0;width:100%;height:100%;cursor:pointer;z-index:1}ux-switch>input:disabled{cursor:default}ux-switch .track{margin:6px 5px;height:12px;width:32px;border:0;border-radius:6px;background-color:#e0e0e0;background-color:var(--ux-theme--switch-track, #E0E0E0);transition:background-color 150ms ease-in-out;position:relative}ux-switch input:disabled~.track,ux-switch input:disabled:checked~.track{background-color:#9e9e9e;background-color:var(--ux-theme--switch-track-disabled, #9E9E9E)}ux-switch input:disabled~.track .indicator,ux-switch input:disabled:checked~.track .indicator{background-color:#e0e0e0;background-color:var(--ux-theme--switch-indicator-disabled, #E0E0E0)}ux-switch input:checked~.track{background-color:#ff80ab;background-color:var(--ux-theme--switch-track-active, var(--ux-design--accent-light, #FF80AB))}ux-switch:focus{outline:0}ux-switch .track .indicator{position:relative;left:-3px;top:-3px;height:18px;width:18px;background-color:#fff;background-color:var(--ux-theme--switch-indicator, #FFF);border-radius:50%;box-shadow:0 1px 4px 0 rgba(0,0,0,.6);transition:left .1s ease-in-out,background-color .1s ease-in-out}ux-switch input:checked~.track .indicator{left:calc(100% - 14px);background-color:#ff80ab;background-color:var(--ux-theme--switch-indicator-active, var(--ux-design--accent, #F48FB1));box-shadow:0 2px 5px 0 rgba(0,0,0,.4)}ux-switch .ripplecontainer{position:relative;width:0;height:0}ux-switch .ripplecontainer>.paper-ripple{top:auto;left:auto;right:-36px;bottom:-36px;width:50px;height:50px;border-radius:50%}ux-switch .ripplecontainer>.ripple{position:absolute;bottom:-37px;width:50px;height:50px;border-radius:50%;pointer-events:none;background-color:rgba(0,0,0,.22);transition:transform 100ms ease-in-out;transform:scale3d(0,0,0);left:-6px}ux-switch input:focus~.ripplecontainer>.ripple{transform:scale3d(1,1,1)}ux-switch input:disabled:focus~.ripplecontainer>.ripple{transform:scale3d(0,0,0)}"
+
 class UxSwitchTheme {
     constructor() {
         this.themeKey = 'switch';
@@ -185,6 +187,7 @@ class UxSwitchTheme {
 }
 
 function configure(config) {
+    DOM.injectStyles(css, undefined, undefined, 'ux-switch-css');
     config.container.get(AureliaUX).registerUxElementConfig(uxSwitchConfig);
     config.globalResources(UxSwitch);
 }
