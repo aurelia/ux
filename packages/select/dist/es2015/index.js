@@ -32,7 +32,7 @@ function bool(v) {
     return !!(v || v === '');
 }
 
-var UX_SELECT_VIEW = "<template class=\"ux-select ${multiple ? 'multiple' : ''}\" tabindex=\"-1\" disabled.bind=\"disabled & booleanAttr\" aria-multiselectable.bind=\"multiple\" aria-disabled.bind=\"isDisabled\" keydown.trigger=\"onKeyDown($event.which)\" blur.trigger=\"onBlur() & debounce:1\"> <require from=\"@aurelia-ux/core/effects/paper-ripple.css\"></require> <require from=\"@aurelia-ux/select/ux-select.css\"></require> <div class=\"ux-select-container\" ref=\"container\" click.trigger=\"onTriggerClick()\"> <div class=\"ux-select-trigger\"> <div class=\"ux-select-value\">${displayValue}</div> <div class=\"ux-select-arrow\"></div> </div> </div> <div ref=\"optionWrapperEl\" class=\"ux-select-list-wrapper\" css=\"top: ${listAnchor.y}px; left: ${listAnchor.x}px;\"> <div ref=\"optionCtEl\" class=\"ux-select-list-ct\" select.trigger=\"onSelect($event)\" css=\"\r\n        max-width: ${theme.listMaxWidth}px;\r\n        max-height: ${theme.listMaxHeight}\"><slot></slot></div> </div> </template> ";
+var UX_SELECT_VIEW = "<template class=\"ux-select ${multiple ? 'multiple' : ''}\" tabindex=\"-1\" disabled.bind=\"disabled & booleanAttr\" aria-multiselectable.bind=\"multiple\" aria-disabled.bind=\"isDisabled\" keydown.trigger=\"onKeyDown($event.which)\" blur.trigger=\"onBlur() & debounce:1\"> <require from=\"@aurelia-ux/core/effects/paper-ripple.css\"></require> <div class=\"ux-select-container\" ref=\"container\" click.trigger=\"onTriggerClick()\"> <div class=\"ux-select-trigger\"> <div class=\"ux-select-value\">${displayValue}</div> <div class=\"ux-select-arrow\"></div> </div> </div> <div ref=\"optionWrapperEl\" class=\"ux-select-list-wrapper\" css=\"top: ${listAnchor.y}px; left: ${listAnchor.x}px;\"> <div ref=\"optionCtEl\" class=\"ux-select-list-ct\" select.trigger=\"onSelect($event)\" css=\"\r\n        max-width: ${theme.listMaxWidth}px;\r\n        max-height: ${theme.listMaxHeight}\"><slot></slot></div> </div> </template> ";
 
 const UP = 38;
 // const RIGHT = 39;
@@ -783,6 +783,8 @@ const UxOptionElementProto = Object.create(HTMLElement.prototype, {
     }
 });
 
+var css = ".ux-select{display:inline-block;min-width:50px;max-width:100%;color:var(--ux-theme--select-foreground);box-sizing:border-box;outline:0}.ux-select *{box-sizing:border-box}.ux-select .ux-select-container{display:block;padding:8px 0 7px;border-bottom:1px solid #d3d3d3;outline:0;cursor:pointer}.ux-select:focus .ux-select-container,.ux-select-container:focus{border-bottom-color:red}.ux-select .ux-select-trigger{display:block;width:100%;height:18px;line-height:18px}.ux-select .ux-select-value{float:left;width:calc(100% - 18px);height:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ux-select .ux-select-arrow{float:left;width:18px;height:18px;text-align:center}.ux-select .ux-select-arrow:before{content:'';display:inline-block;margin-top:6px;border-top:5px solid #d3d3d3;border-left:5px solid transparent;border-right:5px solid transparent}.ux-select .ux-select-list-wrapper{position:fixed;display:none;min-width:180px;z-index:9999;user-select:none}.ux-select .ux-select-list-wrapper.open{display:block}.ux-select .ux-select-list-ct{max-height:400px;overflow-y:auto;background-color:transparent;opacity:0;transform:scale(.7,.7);transition:.125s cubic-bezier(.25,.8,.25,1)}.ux-select .ux-select-list-ct.open{opacity:1;background-color:#f2f2f2;transform:scale(1,1);box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12)}.ux-optgroup{display:block}.ux-optgroup .ux-optgroup-label{height:48px;line-height:48px;padding-left:16px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;pointer-events:none}.ux-optgroup.disabled{color:silver;pointer-events:none!important}.ux-option{position:relative;display:flex;flex-direction:row;align-items:center;max-width:100%;height:48px;padding:0 16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box;text-align:left;cursor:pointer}.ux-option:hover{background-color:var(--ux-theme--select-option-hover)}.ux-option.focused{background-color:var(--ux-theme--select-option-focused)}.ux-option.selected{background-color:var(--ux-theme--select-option-selected)}.ux-option.disabled{color:silver;pointer-events:none}.ux-option .ux-checkbox{width:20px;height:20px;flex-basis:20px;flex-shrink:0;margin-right:8px;border:2px solid rgba(0,0,0,.5)}.ux-option .ux-option-text{display:inline-block;flex-grow:1;align-self:stretch;line-height:48px;overflow:hidden;text-overflow:ellipsis}.ux-select:not(.multiple) .ux-optgroup .ux-option{padding-left:32px}.ux-select.multiple .ux-option.selected{background-color:transparent;color:#00f}";
+
 class UxSelectTheme {
     constructor() {
         this.themeKey = 'select';
@@ -810,6 +812,7 @@ class UxSelectTheme {
 }
 
 function configure(config) {
+    DOM.injectStyles(css, undefined, undefined, 'ux-select-css');
     config.container.get(AureliaUX).registerUxElementConfig(uxSelectConfig);
     config.globalResources([
         UxSelect,
