@@ -1,12 +1,14 @@
 import { AureliaUX } from '@aurelia-ux/core';
 import { CheckedObserver, EventSubscriber } from 'aurelia-binding';
-import { bindingMode, FrameworkConfiguration, ObserverLocator } from 'aurelia-framework';
+import { bindingMode, FrameworkConfiguration, ObserverLocator, DOM } from 'aurelia-framework';
 import { UxCheckbox } from './ux-checkbox';
+import css from './ux-checkbox.css';
 
 export { UxCheckbox, UxCheckboxElement } from './ux-checkbox';
 export { UxCheckboxTheme } from './ux-checkbox-theme';
 
 export function configure(config: FrameworkConfiguration) {
+  DOM.injectStyles(css, undefined, undefined, 'ux-checkbox-css');
   (config.container.get(AureliaUX) as AureliaUX).registerUxElementConfig(uxCheckBoxConfig);
   config.globalResources(UxCheckbox);
 }
