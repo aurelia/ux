@@ -5,6 +5,6 @@ export { UxInputInfoTheme } from './ux-input-info-theme';
 import css from './ux-input-info.css';
 
 export function configure(config: FrameworkConfiguration) {
-  DOM.injectStyles(css, undefined, false, 'ux-input-info');
+  DOM.injectStyles(css, undefined, false, 'ux-input-info-css');
   config.globalResources(UxInputInfo);
 }
