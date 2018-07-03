@@ -3,6 +3,7 @@ import { Logger } from 'aurelia-logging';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, processDesignAttributes } from '@aurelia-ux/core';
+import { DOM } from 'aurelia-framework';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -3882,7 +3883,7 @@ class IconMap {
     }
 }
 
-var UX_ICON_VIEW = "<template> <require from=\"@aurelia-ux/icon/ux-icon.css\"></require> <slot></slot> </template> ";
+var UX_ICON_VIEW = "<template> <slot></slot> </template> ";
 
 let UxIcon = class UxIcon {
     constructor(element, styleEngine, logger) {
@@ -3934,6 +3935,8 @@ UxIcon = __decorate([
     inlineView(UX_ICON_VIEW)
 ], UxIcon);
 
+var css = "ux-icon{display:inline-block;align-self:center;width:24px;width:var(--ux-theme--icon-size, 24px);height:24px;height:var(--ux-theme--icon-size, 24px)}ux-icon>svg{width:24px;width:var(--ux-theme--icon-size, 24px);height:24px;height:var(--ux-theme--icon-size, 24px);fill:currentColor}"
+
 class UxIconTheme {
     constructor() {
         this.themeKey = 'icon';
@@ -3941,6 +3944,7 @@ class UxIconTheme {
 }
 
 function configure(config) {
+    DOM.injectStyles(css, undefined, undefined, 'ux-icon-css');
     config.globalResources(UxIcon);
 }
 
