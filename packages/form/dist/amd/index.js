@@ -1,4 +1,4 @@
-define('@aurelia-ux/form', ['exports', 'aurelia-templating', 'aurelia-dependency-injection', 'aurelia-pal', '@aurelia-ux/core'], function (exports, aureliaTemplating, aureliaDependencyInjection, aureliaPal, core) { 'use strict';
+define('@aurelia-ux/form', ['exports', 'aurelia-templating', 'aurelia-dependency-injection', 'aurelia-pal', '@aurelia-ux/core', 'aurelia-framework'], function (exports, aureliaTemplating, aureliaDependencyInjection, aureliaPal, core, aureliaFramework) { 'use strict';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -58,7 +58,7 @@ var UxField = /** @class */ (function () {
     return UxField;
 }());
 
-var UX_FORM_VIEW = "<template role=\"form\"> <require from=\"./ux-form.css\"></require> <slot></slot> </template> ";
+var UX_FORM_VIEW = "<template role=\"form\"> <slot></slot> </template> ";
 
 var UxForm = /** @class */ (function () {
     function UxForm(element, styleEngine) {
@@ -157,6 +157,8 @@ var UxSubmitCustomAttribute = /** @class */ (function () {
     return UxSubmitCustomAttribute;
 }());
 
+var css = "ux-form{display:flex;flex-direction:column;width:100%}ux-form .form-row{display:flex;flex-direction:row}ux-form .form-row>*{margin-left:8px;margin-right:8px}ux-form .form-row>:last-child{margin-right:0}ux-form .form-row>:first-child{margin-left:0}ux-form ux-field{display:flex;flex-direction:column;width:100%;margin-top:16px}ux-form ux-field>label{font-size:14px;font-size:var(--ux-theme--form-label-font-size, 14px);color:inherit;color:var(--ux-theme--form-label-color, inherit)}"
+
 var UxFormTheme = /** @class */ (function () {
     function UxFormTheme() {
         this.themeKey = 'form';
@@ -165,6 +167,7 @@ var UxFormTheme = /** @class */ (function () {
 }());
 
 function configure(config) {
+    aureliaFramework.DOM.injectStyles(css, undefined, undefined, 'ux-form-css');
     config.globalResources([
         UxField,
         UxForm,
