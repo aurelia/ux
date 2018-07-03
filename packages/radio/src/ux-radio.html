@@ -1,6 +1,5 @@
 <template class="${effect !== null ? effect : ''}">
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
-  <require from="./ux-radio.css"></require>
 
   <input type="radio" ref="radio"
     change.trigger="value = $event.target.checked"
