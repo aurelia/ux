@@ -1,6 +1,8 @@
 import typescript from 'rollup-plugin-typescript2';
 import * as fse from 'fs-extra';
 import html from 'rollup-plugin-html';
+import { createFilter } from 'rollup-pluginutils';
+import csso from 'csso';
 
 /**
  * @param {string | string[]} cssFiles CSS files path to be copied
@@ -82,10 +84,10 @@ export function configRollup(elementName, cssFiles, isProduction) {
         },
         cacheRoot: '.rollupcache'
       }),
-      copy({
-        verbose: true,
-        files: configCopyCssPath(cssFiles, 'es2015')
-      }),
+      // copy({
+      //   verbose: true,
+      //   files: configCopyCssPath(cssFiles, 'es2015')
+      // }),
       html({
         include: '**/*.html',
         htmlMinifierOptions: {
@@ -93,7 +95,8 @@ export function configRollup(elementName, cssFiles, isProduction) {
           collapseBooleanAttributes: true,
           conservativeCollapse: true,
         }
-      })
+      }),
+      css(),
     ]
   }].concat(!isProduction
     ? []
@@ -114,10 +117,10 @@ export function configRollup(elementName, cssFiles, isProduction) {
           },
           cacheRoot: '.rollupcache',
         }),
-        copy({
-          verbose: true,
-          files: configCopyCssPath(cssFiles, ['amd', 'commonjs', 'native-modules'])
-        }),
+        // copy({
+        //   verbose: true,
+        //   files: configCopyCssPath(cssFiles, ['amd', 'commonjs', 'native-modules'])
+        // }),
         html({
           include: '**/*.html',
           htmlMinifierOptions: {
@@ -125,8 +128,32 @@ export function configRollup(elementName, cssFiles, isProduction) {
             collapseBooleanAttributes: true,
             conservativeCollapse: true,
           }
-        })
+        }),
+        css(),
       ]
     }]
   );
+}
+
+
+export default function css () {
+  const filter = createFilter(['**/*.css'], []);
+
+  return {
+    name: 'css',
+    transform (code, id) {
+      if (!filter(id)) {
+        return;
+      }
+
+      return {
+        code: 'export default ' + JSON.stringify(csso.minify(code, {
+          restructure: false,
+          debug: false,
+          sourceMap: false
+        }).css),
+        map: { mappings: '' }
+      };
+    }
+  };
 }
