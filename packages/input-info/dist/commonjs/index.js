@@ -21,13 +21,6 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
-/* global Reflect, Promise */
-
-
-
-
-
-
 
 function __decorate(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -89,7 +82,7 @@ var UxInputInfoTheme = /** @class */ (function () {
     return UxInputInfoTheme;
 }());
 
-var css = "ux-input-info{display:flex;font-size:14px;width:100%;color:#909090;color:var(--ux-theme--input-info-foreground, #909090)}ux-input-info>.hint-text,ux-input-info>.error-text{flex-grow:1}ux-input-info>.hint-text:first-child,ux-input-info>.error-text:first-child{display:block}ux-input-info>.hint-text,ux-input-info>.error-text{display:none}ux-input-info>.counter{transition:250ms;flex-wrap:nowrap;display:flex}ux-input.focused+ux-input-info>.counter{color:#ff4081;color:var(--ux-design--accent, #FF4081)}ux-input>input[disabled]+ux-input-info{display:none}.has-error+ux-input-info{color:#f44336;color:var(--ux-theme--input-info-error, #F44336)}"
+var css = "ux-input-info{display:flex;font-size:14px;width:100%;color:#909090;color:var(--ux-theme--input-info-foreground, #909090)}ux-input-info>.hint-text,ux-input-info>.error-text{flex-grow:1}ux-input-info>.hint-text:first-child,ux-input-info>.error-text:first-child{display:block}ux-input-info>.hint-text,ux-input-info>.error-text{display:none}ux-input-info>.counter{transition:250ms;flex-wrap:nowrap;display:flex}ux-input.focused+ux-input-info>.counter{color:#ff4081;color:var(--ux-design--accent, #FF4081)}ux-input>input[disabled]+ux-input-info{display:none}.has-error+ux-input-info{color:#f44336;color:var(--ux-theme--input-info-error, #F44336)}";
 
 function configure(config) {
     aureliaFramework.DOM.injectStyles(css, undefined, false, 'ux-input-info-css');

@@ -19,13 +19,6 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
-/* global Reflect, Promise */
-
-
-
-
-
-
 
 function __decorate(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -280,11 +273,11 @@ var UxChipInput = /** @class */ (function () {
     return UxChipInput;
 }());
 
-var chipCss = "ux-chip{display:inline-flex;align-items:center;font-size:14px;height:32px;border-radius:100px;background-color:#ff4081;background-color:var(--ux-theme--chip-background, var(--ux-design--accent, #FF4081));color:#fff;color:var(--ux-theme--chip-foreground, var(--ux-design--accent-foreground, #FFF))}ux-chip:focus{outline:0;box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);box-shadow:var(--ux-design--elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14),0 1px 10px 0 rgba(0, 0, 0, 0.12),0 2px 4px -1px rgba(0, 0, 0, 0.2))}ux-chip>span{margin:0 12px}ux-chip>span.close{display:none}ux-chip[deletable]>span{margin-right:0}ux-chip[deletable]>span.close{display:inline-flex;justify-content:center;align-items:center;margin:0 4px;color:#eee;color:var(--ux-theme--chip-delete-foreground, #EEEEEE);background-color:#9e9e9e;background-color:var(--ux-theme--chip-delete-background, #9E9E9E);height:24px;width:24px;border-radius:24px;cursor:pointer}ux-chip[deletable]>span.close::before{content:'+';font-size:24px;transform:rotate(45deg)}"
+var chipCss = "ux-chip{display:inline-flex;align-items:center;font-size:14px;height:32px;border-radius:100px;background-color:#ff4081;background-color:var(--ux-theme--chip-background, var(--ux-design--accent, #FF4081));color:#fff;color:var(--ux-theme--chip-foreground, var(--ux-design--accent-foreground, #FFF))}ux-chip:focus{outline:0;box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);box-shadow:var(--ux-design--elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14),0 1px 10px 0 rgba(0, 0, 0, 0.12),0 2px 4px -1px rgba(0, 0, 0, 0.2))}ux-chip>span{margin:0 12px}ux-chip>span.close{display:none}ux-chip[deletable]>span{margin-right:0}ux-chip[deletable]>span.close{display:inline-flex;justify-content:center;align-items:center;margin:0 4px;color:#eee;color:var(--ux-theme--chip-delete-foreground, #EEEEEE);background-color:#9e9e9e;background-color:var(--ux-theme--chip-delete-background, #9E9E9E);height:24px;width:24px;border-radius:24px;cursor:pointer}ux-chip[deletable]>span.close::before{content:'+';font-size:24px;transform:rotate(45deg)}";
 
-var chipInputCss = "ux-chip-input{display:flex;flex-wrap:wrap;flex-direction:row;align-items:center;width:100%}ux-chip-input>ux-chip,ux-chip-input>ux-tag{margin-right:6px;cursor:default}ux-chip-input>input{align-self:stretch;background:0 0;border:0;flex-grow:1;min-width:180px;color:inherit;color:var(--ux-theme--chip-input-foreground, inherit)}ux-chip-input>input:focus{outline:0}ux-chip-input>input+div.bottom-border{align-self:flex-end;background-color:#9e9e9e;background-color:var(--ux-theme--chip-input-bottom-border, #9E9E9E);height:1px;margin-top:2px;margin-bottom:4px;transition:background-color 250ms ease;width:100%}ux-chip-input:hover>div.bottom-border,ux-chip-input>input:focus+div.bottom-border{background-color:#ff4081;background-color:var(--ux-design--accent, #FF4081)}ux-chip-input>input:focus+div.bottom-border{height:2px;margin-bottom:3px}"
+var chipInputCss = "ux-chip-input{display:flex;flex-wrap:wrap;flex-direction:row;align-items:center;width:100%}ux-chip-input>ux-chip,ux-chip-input>ux-tag{margin-right:6px;cursor:default}ux-chip-input>input{align-self:stretch;background:0 0;border:0;flex-grow:1;min-width:180px;color:inherit;color:var(--ux-theme--chip-input-foreground, inherit)}ux-chip-input>input:focus{outline:0}ux-chip-input>input+div.bottom-border{align-self:flex-end;background-color:#9e9e9e;background-color:var(--ux-theme--chip-input-bottom-border, #9E9E9E);height:1px;margin-top:2px;margin-bottom:4px;transition:background-color 250ms ease;width:100%}ux-chip-input:hover>div.bottom-border,ux-chip-input>input:focus+div.bottom-border{background-color:#ff4081;background-color:var(--ux-design--accent, #FF4081)}ux-chip-input>input:focus+div.bottom-border{height:2px;margin-bottom:3px}";
 
-var tagCss = "ux-tag{display:inline-flex;align-items:center;font-size:14px;height:24px;border-radius:2px;background-color:#ff4081;background-color:var(--ux-theme--tag-background, var(--ux-design--accent, #FF4081));color:#fff;color:var(--ux-theme--tag-foreground, var(--ux-design--accent-foreground, #FFF))}ux-tag>span{margin:0 8px}ux-tag>span.close{display:none}ux-tag[deletable]>span{margin-right:0}ux-tag[deletable]>span.close{display:inline-flex;justify-content:center;align-items:center;margin:0 4px;cursor:pointer}ux-tag[deletable]>span.close::before{content:'+';font-size:24px;transform:rotate(45deg)}"
+var tagCss = "ux-tag{display:inline-flex;align-items:center;font-size:14px;height:24px;border-radius:2px;background-color:#ff4081;background-color:var(--ux-theme--tag-background, var(--ux-design--accent, #FF4081));color:#fff;color:var(--ux-theme--tag-foreground, var(--ux-design--accent-foreground, #FFF))}ux-tag>span{margin:0 8px}ux-tag>span.close{display:none}ux-tag[deletable]>span{margin-right:0}ux-tag[deletable]>span.close{display:inline-flex;justify-content:center;align-items:center;margin:0 4px;cursor:pointer}ux-tag[deletable]>span.close::before{content:'+';font-size:24px;transform:rotate(45deg)}";
 
 var UxChipInputTheme = /** @class */ (function () {
     function UxChipInputTheme() {
