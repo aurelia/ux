@@ -1,31 +1,10 @@
 import * as moment_ from 'moment';
+import { __decorate } from 'tslib';
 import { customElement, bindable, ViewResources, inlineView } from 'aurelia-templating';
 import { observable, bindingMode, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
 import { DOM } from 'aurelia-framework';
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
-***************************************************************************** */
-
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
 
 const moment = moment_;
 class DatetimeUtility {
@@ -68,7 +47,7 @@ class DatetimeUtility {
     }
 }
 
-var UX_CALENDAR_VIEW = "<template> <div class=\"month-display\"> <ux-button type=\"icon\" click.delegate=\"previousMonth()\"> <svg viewBox=\"0 0 24 24\"> <path d=\"M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z\"></path> </svg> </ux-button> <span> ${displayMonth.format('MMMM YYYY')} </span> <ux-button type=\"icon\" click.delegate=\"nextMonth()\"> <svg viewBox=\"0 0 24 24\"> <path d=\"M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\"></path> </svg> </ux-button> </div> <div class=\"calendar-row weekdays\"> <div class=\"day\" repeat.for=\"weekday of weekdays\"> ${weekday[0]} </div> </div> <div class=\"calendar-row\" repeat.for=\"week of calendarRows\"> <div class=\"day\" repeat.for=\"day of week\"> <div click.delegate=\"changeCalendarSelection(day)\" if.bind=\"day\" class=\"day-highlight ${day.isSame(value, 'day') ? 'selected' : ''} ${isValidDate(day) ? 'out-of-range' : '' }\"> ${day.date()} </div> </div> </div> </template> ";
+var UX_CALENDAR_VIEW = "<template> <div class=month-display> <ux-button type=icon click.delegate=previousMonth()> <svg viewBox=\"0 0 24 24\"> <path d=\"M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z\"></path> </svg> </ux-button> <span> ${displayMonth.format('MMMM YYYY')} </span> <ux-button type=icon click.delegate=nextMonth()> <svg viewBox=\"0 0 24 24\"> <path d=\"M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z\"></path> </svg> </ux-button> </div> <div class=\"calendar-row weekdays\"> <div class=day repeat.for=\"weekday of weekdays\"> ${weekday[0]} </div> </div> <div class=calendar-row repeat.for=\"week of calendarRows\"> <div class=day repeat.for=\"day of week\"> <div click.delegate=changeCalendarSelection(day) if.bind=day class=\"day-highlight ${day.isSame(value, 'day') ? 'selected' : ''} ${isValidDate(day) ? 'out-of-range' : '' }\"> ${day.date()} </div> </div> </div> </template> ";
 
 const moment$1 = moment_;
 let UxCalendar = class UxCalendar {
@@ -151,7 +130,7 @@ UxCalendar = __decorate([
     inlineView(UX_CALENDAR_VIEW)
 ], UxCalendar);
 
-var UX_DATEPICKER_VIEW = "<template> <ux-input ref=\"textbox\" value.bind=\"textboxValue\" blur.trigger=\"changeTextboxValue()\" placeholder.bind=\"placeholder\"></ux-input> <ux-button type=\"icon\" click.delegate=\"toggleDialog('month')\" if.bind=\"type !== 'time'\"> <svg viewBox=\"0 0 24 24\"> <path d=\"M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z\"></path> </svg> </ux-button> <div class=\"overlay\" if.bind=\"showDialog\"> <ux-picker-dialog display.bind=\"display\" config.bind=\"config\" type.bind=\"type\" initial-date.bind=\"initialDate\" close-dialog.call=\"showDialog = false\" min-date.bind=\"minDate\" max-date.bind=\"maxDate\" value.two-way=\"value\"></ux-picker-dialog> </div> </template> ";
+var UX_DATEPICKER_VIEW = "<template> <ux-input ref=textbox value.bind=textboxValue blur.trigger=changeTextboxValue() placeholder.bind=placeholder></ux-input> <ux-button type=icon click.delegate=\"toggleDialog('month')\" if.bind=\"type !== 'time'\"> <svg viewBox=\"0 0 24 24\"> <path d=\"M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z\"></path> </svg> </ux-button> <div class=overlay if.bind=showDialog> <ux-picker-dialog display.bind=display config.bind=config type.bind=type initial-date.bind=initialDate close-dialog.call=\"showDialog = false\" min-date.bind=minDate max-date.bind=maxDate value.two-way=value></ux-picker-dialog> </div> </template> ";
 
 const moment$2 = moment_;
 let UxDatepicker = class UxDatepicker {
@@ -315,7 +294,7 @@ UxDatepicker = __decorate([
     inlineView(UX_DATEPICKER_VIEW)
 ], UxDatepicker);
 
-var UX_PICKER_DIALOG_VIEW = "<template role=\"dialog\"> <header> <template if.bind=\"type !== 'time'\"> <div class=\"year ${display === 'year' ? 'active':''}\" click.trigger=\"display = 'year'\"> ${selectedDate.format('YYYY')} </div> <div class=\"date ${display === 'month' ? 'active':''}\" click.trigger=\"display = 'month'\"> ${selectedDate.format('ddd, MMM D')} </div> </template> </header> <ux-year-list if.bind=\"display === 'year'\" config.bind=\"config\" min-date.bind=\"minDate\" max-date.bind=\"maxDate\" value.two-way=\"selectedDate\"> </ux-year-list> <ux-calendar if.bind=\"display === 'month'\" config.bind=\"config\" value.two-way=\"selectedDate\" min-date.bind=\"minDate\" max-date.bind=\"maxDate\"> </ux-calendar> <footer> <ux-button type=\"flat\" click.delegate=\"closeDialog()\">Cancel</ux-button> <ux-button type=\"flat\" click.delegate=\"selectDate()\">OK</ux-button> </footer> </template> ";
+var UX_PICKER_DIALOG_VIEW = "<template role=dialog> <header> <template if.bind=\"type !== 'time'\"> <div class=\"year ${display === 'year' ? 'active':''}\" click.trigger=\"display = 'year'\"> ${selectedDate.format('YYYY')} </div> <div class=\"date ${display === 'month' ? 'active':''}\" click.trigger=\"display = 'month'\"> ${selectedDate.format('ddd, MMM D')} </div> </template> </header> <ux-year-list if.bind=\"display === 'year'\" config.bind=config min-date.bind=minDate max-date.bind=maxDate value.two-way=selectedDate> </ux-year-list> <ux-calendar if.bind=\"display === 'month'\" config.bind=config value.two-way=selectedDate min-date.bind=minDate max-date.bind=maxDate> </ux-calendar> <footer> <ux-button type=flat click.delegate=closeDialog()>Cancel</ux-button> <ux-button type=flat click.delegate=selectDate()>OK</ux-button> </footer> </template> ";
 
 const moment$3 = moment_;
 let UxPickerDialog = class UxPickerDialog {
@@ -387,7 +366,7 @@ UxPickerDialog = __decorate([
     inlineView(UX_PICKER_DIALOG_VIEW)
 ], UxPickerDialog);
 
-var UX_YEAR_LIST_VIEW = "<template> <template repeat.for=\"year of yearList\"> <div class=\"years ${year == value.year() ? 'selected' : ''}\" click.delegate=\"selectYear(year)\"> ${year} </div> </template> </template> ";
+var UX_YEAR_LIST_VIEW = "<template> <template repeat.for=\"year of yearList\"> <div class=\"years ${year == value.year() ? 'selected' : ''}\" click.delegate=selectYear(year)> ${year} </div> </template> </template> ";
 
 let UxYearList = class UxYearList {
     constructor(element, resources) {
@@ -450,13 +429,13 @@ UxYearList = __decorate([
     inlineView(UX_YEAR_LIST_VIEW)
 ], UxYearList);
 
-var cldCss = "ux-calendar{display:block;height:260px;display:flex;flex-direction:column}ux-calendar div.calendar-row{display:flex;align-items:center;justify-content:space-around;height:2em}ux-calendar .calendar-row.weekdays{color:#e0e0e0;color:var(--ux-theme--datepicker-weekday-foreground, #E0E0E0)}ux-calendar .calendar-row .day{width:100%;display:flex;justify-content:center}ux-calendar div.day-highlight{width:1.9em;height:1.9em;border-radius:100%;display:flex;align-items:center;justify-content:center;cursor:pointer}ux-calendar div.day-highlight.selected{color:#fff;color:var(--ux-theme--datepicker-selected-day-foreground, var(--ux-design--accent-foreground, #FFF));background-color:#ff4081;background-color:var(--ux-theme--datepicker-selected-day-background, var(--ux-design--accent, #FF4081))}ux-calendar div.day-highlight.out-of-range{color:#757575;color:var(--ux-theme--datepicker-out-of-range-foreground, #757575);cursor:default}ux-calendar div.month-display{display:flex;justify-content:space-between;align-items:center}ux-calendar div.month-display svg{fill:currentColor;width:24px;height:24px}";
+var cldCss = "ux-calendar{display:block;height:260px;display:flex;flex-direction:column}ux-calendar div.calendar-row{display:flex;align-items:center;justify-content:space-around;height:2em}ux-calendar .calendar-row.weekdays{color:#e0e0e0;color:var(--ux-theme--datepicker-weekday-foreground, #E0E0E0)}ux-calendar .calendar-row .day{width:100%;display:flex;justify-content:center}ux-calendar div.day-highlight{width:1.9em;height:1.9em;border-radius:100%;display:flex;align-items:center;justify-content:center;cursor:pointer}ux-calendar div.day-highlight.selected{color:#fff;color:var(--ux-theme--datepicker-selected-day-foreground, var(--ux-design--accent-foreground, #FFF));background-color:#ff4081;background-color:var(--ux-theme--datepicker-selected-day-background, var(--ux-design--accent, #FF4081))}ux-calendar div.day-highlight.out-of-range{color:#757575;color:var(--ux-theme--datepicker-out-of-range-foreground, #757575);cursor:default}ux-calendar div.month-display{display:flex;justify-content:space-between;align-items:center}ux-calendar div.month-display svg{fill:currentColor;width:24px;height:24px}"
 
-var dpCss = "ux-datepicker{display:flex;position:relative}ux-datepicker>ux-button>button.icon{color:#333;color:var(--ux-theme-datepicker-foreground, #333)}ux-datepicker>.overlay:not(:empty){position:fixed;left:0;top:0;width:100%;height:100%;z-index:80;display:flex;align-items:center;justify-content:center;animation-name:datepicker-background-fade-in;animation-duration:250ms;background-color:rgba(0,0,0,.25);background-color:var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25))}ux-datepicker>ux-button svg{fill:currentColor;fill:var(--ux-theme--datepicker-calendar-icon, currentColor);width:24px;height:24px}@keyframes datepicker-background-fade-in{0%{background-color:transparent}to{background-color:rgba(0,0,0,.25);background-color:var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25))}}";
+var dpCss = "ux-datepicker{display:flex;position:relative}ux-datepicker>ux-button>button.icon{color:#333;color:var(--ux-theme-datepicker-foreground, #333)}ux-datepicker>.overlay:not(:empty){position:fixed;left:0;top:0;width:100%;height:100%;z-index:80;display:flex;align-items:center;justify-content:center;animation-name:datepicker-background-fade-in;animation-duration:250ms;background-color:rgba(0,0,0,.25);background-color:var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25))}ux-datepicker>ux-button svg{fill:currentColor;fill:var(--ux-theme--datepicker-calendar-icon, currentColor);width:24px;height:24px}@keyframes datepicker-background-fade-in{0%{background-color:transparent}to{background-color:rgba(0,0,0,.25);background-color:var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25))}}"
 
-var pdCss = "ux-picker-dialog{color:#262626;color:var(--ux-design--control-foreground, #262626);background-color:#fff;background-color:var(--ux-design--control-background, #FFF);width:300px;user-select:none;-khtml-user-select:none;-ms-user-select:none;-moz-user-select:none;-webkit-touch-callout:none;-webkit-user-select:none;animation-duration:250ms;animation-name:datepicker-dialog-grow}ux-picker-dialog header{width:auto;height:124px;padding:16px 24px;box-sizing:border-box;color:#fff;color:var(--ux-theme--datepicker-header-foreground, var(--ux-design--primary-foreground, #FFF));background:#3f51b5;background:var(--ux-theme--datepicker-header-background, var(--ux-design--primary, #3F51B5))}ux-picker-dialog header>div.year,ux-picker-dialog header>div.date{opacity:.7;cursor:pointer}ux-picker-dialog header div.year{font-size:1.1em}ux-picker-dialog header div.year.active{opacity:1}ux-picker-dialog header div.date{font-size:2em;font-weight:400}ux-picker-dialog header div.date.active{opacity:1}ux-picker-dialog footer{display:flex;justify-content:flex-end}@keyframes datepicker-dialog-grow{0%{transform:scale3d(0,0,0)}to{transform:scale3d(1,1,1)}}";
+var pdCss = "ux-picker-dialog{color:#262626;color:var(--ux-design--control-foreground, #262626);background-color:#fff;background-color:var(--ux-design--control-background, #FFF);width:300px;user-select:none;-khtml-user-select:none;-ms-user-select:none;-moz-user-select:none;-webkit-touch-callout:none;-webkit-user-select:none;animation-duration:250ms;animation-name:datepicker-dialog-grow}ux-picker-dialog header{width:auto;height:124px;padding:16px 24px;box-sizing:border-box;color:#fff;color:var(--ux-theme--datepicker-header-foreground, var(--ux-design--primary-foreground, #FFF));background:#3f51b5;background:var(--ux-theme--datepicker-header-background, var(--ux-design--primary, #3F51B5))}ux-picker-dialog header>div.year,ux-picker-dialog header>div.date{opacity:.7;cursor:pointer}ux-picker-dialog header div.year{font-size:1.1em}ux-picker-dialog header div.year.active{opacity:1}ux-picker-dialog header div.date{font-size:2em;font-weight:400}ux-picker-dialog header div.date.active{opacity:1}ux-picker-dialog footer{display:flex;justify-content:flex-end}@keyframes datepicker-dialog-grow{0%{transform:scale3d(0,0,0)}to{transform:scale3d(1,1,1)}}"
 
-var ylCss = "ux-year-list{display:block;height:260px;overflow-y:auto;text-align:center}ux-year-list>.years{font-size:1em;cursor:pointer;margin:24px 0}ux-year-list>.years.selected{font-size:1.75em;color:#ff4081;color:var(--ux-design--accent, #FF4081)}";
+var ylCss = "ux-year-list{display:block;height:260px;overflow-y:auto;text-align:center}ux-year-list>.years{font-size:1em;cursor:pointer;margin:24px 0}ux-year-list>.years.selected{font-size:1.75em;color:#ff4081;color:var(--ux-design--accent, #FF4081)}"
 
 class UxDatepickerTheme {
     constructor() {
