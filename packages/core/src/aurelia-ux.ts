@@ -86,7 +86,7 @@ export class AureliaUX {
     const adapters = this.adapters;
     let elementAdapters = adapters[tagName] || adapters[tagName.toLowerCase()];
     if (!elementAdapters) {
-      elementAdapters = adapters[tagName] = adapters[tagName.toLowerCase()] = { tagName: tagName, properties: {} };
+      elementAdapters = adapters[tagName] = adapters[tagName.toLowerCase()] = { tagName, properties: {} };
     }
     return elementAdapters;
   }

@@ -1,4 +1,4 @@
-import { BindingBehaviorResource, FrameworkConfiguration, PLATFORM, ViewResources } from 'aurelia-framework';
+import { FrameworkConfiguration, DOM } from 'aurelia-framework';
 
 import { AureliaUX } from './aurelia-ux';
 import { BooleanBB } from './components/boolean-attr-binding-behavior';
@@ -20,6 +20,8 @@ export { GlobalStyleEngine } from './styles/global-style-engine';
 export { AureliaUX } from './aurelia-ux';
 export { UXConfiguration } from './ux-configuration';
 
+import rippleCss from './effects/paper-ripple.css';
+
 let uxCorePromise: Promise<AureliaUX>;
 
 export function configure(config: FrameworkConfiguration, callback?: (config: AureliaUX) => Promise<any>) {
@@ -27,6 +29,7 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
     return uxCorePromise;
   }
   const ux: AureliaUX = config.container.get(AureliaUX);
+  DOM.injectStyles(rippleCss, undefined, undefined, 'ux-ripple-css');
   config.globalResources(BooleanBB);
 
   if (typeof callback === 'function') {

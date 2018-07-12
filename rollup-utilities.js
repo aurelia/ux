@@ -73,21 +73,23 @@ export function configRollup(elementName, cssFiles, isProduction) {
       file: 'dist/es2015/index.js',
       format: 'es'
     },
+    external: 'tslib',
     plugins: [
       typescript({
         useTsconfigDeclarationDir: true,
         tsconfigOverride: {
           compilerOptions: {
             target: 'es2015',
-            declarationDir: 'dist/types'
+            declarationDir: 'dist/types',
+            importHelpers: true
           }
         },
         cacheRoot: '.rollupcache'
       }),
-      // copy({
-      //   verbose: true,
-      //   files: configCopyCssPath(cssFiles, 'es2015')
-      // }),
+      copy({
+        verbose: true,
+        files: configCopyCssPath(cssFiles, 'es2015')
+      }),
       html({
         include: '**/*.html',
         htmlMinifierOptions: {
@@ -107,20 +109,22 @@ export function configRollup(elementName, cssFiles, isProduction) {
         { file: 'dist/amd/index.js', format: 'amd', amd: { id: `@aurelia-ux/${elementName}` } },
         { file: 'dist/native-modules/index.js', format: 'es' }
       ],
+      external: 'tslib',
       plugins: [
         typescript({
           tsconfigOverride: {
             compilerOptions: {
               declaration: false,
-              declarationDir: null
+              declarationDir: null,
+              importHelpers: true
             }
           },
           cacheRoot: '.rollupcache',
         }),
-        // copy({
-        //   verbose: true,
-        //   files: configCopyCssPath(cssFiles, ['amd', 'commonjs', 'native-modules'])
-        // }),
+        copy({
+          verbose: true,
+          files: configCopyCssPath(cssFiles, ['amd', 'commonjs', 'native-modules'])
+        }),
         html({
           include: '**/*.html',
           htmlMinifierOptions: {
