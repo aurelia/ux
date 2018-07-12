@@ -9,7 +9,7 @@ var aureliaDependencyInjection = require('aurelia-dependency-injection');
 var core = require('@aurelia-ux/core');
 var aureliaFramework = require('aurelia-framework');
 
-var UX_SWITCH_VIEW = "<template class=\"${effect !== null ? effect : ''}\"> <require from=@aurelia-ux/core/effects/paper-ripple.css></require> <input type=checkbox ref=checkbox checked.bind=value indeterminate.bind=indeterminate mousedown.trigger=onMouseDown($event) disabled.bind=\"disabled & booleanAttr\" aria-checked.bind=\"value & booleanAttr\" aria-disabledb.bind=\"disabled & booleanAttr\"> <div class=track> <div class=indicator> <div class=ripplecontainer> <span class=ripple></span> </div> </div> </div> </template> ";
+var UX_SWITCH_VIEW = "<template class=\"${effect !== null ? effect : ''}\"> <input type=checkbox ref=checkbox checked.bind=value indeterminate.bind=indeterminate mousedown.trigger=onMouseDown($event) disabled.bind=\"disabled & booleanAttr\" aria-checked.bind=\"value & booleanAttr\" aria-disabledb.bind=\"disabled & booleanAttr\"> <div class=track> <div class=indicator> <div class=ripplecontainer> <span class=ripple></span> </div> </div> </div> </template> ";
 
 var UxSwitch = /** @class */ (function () {
     function UxSwitch(element, styleEngine) {

@@ -1,6 +1,6 @@
 define('@aurelia-ux/radio', ['exports', 'tslib', 'aurelia-templating', 'aurelia-binding', 'aurelia-dependency-injection', '@aurelia-ux/core', 'aurelia-framework'], function (exports, tslib_1, aureliaTemplating, aureliaBinding, aureliaDependencyInjection, core, aureliaFramework) { 'use strict';
 
-var UX_RADIO_VIEW = "<template class=\"${effect !== null ? effect : ''}\"> <require from=@aurelia-ux/core/effects/paper-ripple.css></require> <input type=radio ref=radio change.trigger=\"value = $event.target.checked\" mousedown.trigger=onMouseDown($event) disabled.bind=\"disabled & booleanAttr\" aria-checked.bind=\"indeterminate ? 'mixed' : checked ? true : false\" aria-disabled.bind=\"disabled & booleanAttr\"> <div class=ripplecontainer> <span class=ripple></span> </div> <div class=radio> <div class=background-box> </div> </div> </template> ";
+var UX_RADIO_VIEW = "<template class=\"${effect !== null ? effect : ''}\"> <input type=radio ref=radio change.trigger=\"value = $event.target.checked\" mousedown.trigger=onMouseDown($event) disabled.bind=\"disabled & booleanAttr\" aria-checked.bind=\"indeterminate ? 'mixed' : checked ? true : false\" aria-disabled.bind=\"disabled & booleanAttr\"> <div class=ripplecontainer> <span class=ripple></span> </div> <div class=radio> <div class=background-box> </div> </div> </template> ";
 
 var UxRadio = /** @class */ (function () {
     function UxRadio(element, styleEngine) {
