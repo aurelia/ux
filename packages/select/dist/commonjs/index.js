@@ -2,32 +2,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var tslib_1 = require('tslib');
 var aureliaFramework = require('aurelia-framework');
 var aureliaLogging = require('aurelia-logging');
 var core = require('@aurelia-ux/core');
 var aureliaBinding = require('aurelia-binding');
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
-***************************************************************************** */
-
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
 
 function getAuViewModel(el) {
     return el.au.controller.viewModel;
@@ -36,7 +15,7 @@ function bool(v) {
     return !!(v || v === '');
 }
 
-var UX_SELECT_VIEW = "<template class=\"ux-select ${multiple ? 'multiple' : ''}\" tabindex=\"-1\" disabled.bind=\"disabled & booleanAttr\" aria-multiselectable.bind=\"multiple\" aria-disabled.bind=\"isDisabled\" keydown.trigger=\"onKeyDown($event.which)\" blur.trigger=\"onBlur() & debounce:1\"> <require from=\"@aurelia-ux/core/effects/paper-ripple.css\"></require> <div class=\"ux-select-container\" ref=\"container\" click.trigger=\"onTriggerClick()\"> <div class=\"ux-select-trigger\"> <div class=\"ux-select-value\">${displayValue}</div> <div class=\"ux-select-arrow\"></div> </div> </div> <div ref=\"optionWrapperEl\" class=\"ux-select-list-wrapper\" css=\"top: ${listAnchor.y}px; left: ${listAnchor.x}px;\"> <div ref=\"optionCtEl\" class=\"ux-select-list-ct\" select.trigger=\"onSelect($event)\" css=\"\r\n        max-width: ${theme.listMaxWidth}px;\r\n        max-height: ${theme.listMaxHeight}\"><slot></slot></div> </div> </template> ";
+var UX_SELECT_VIEW = "<template class=\"ux-select ${multiple ? 'multiple' : ''}\" tabindex=-1 disabled.bind=\"disabled & booleanAttr\" aria-multiselectable.bind=multiple aria-disabled.bind=isDisabled keydown.trigger=onKeyDown($event.which) blur.trigger=\"onBlur() & debounce:1\"> <require from=@aurelia-ux/core/effects/paper-ripple.css></require> <div class=ux-select-container ref=container click.trigger=onTriggerClick()> <div class=ux-select-trigger> <div class=ux-select-value>${displayValue}</div> <div class=ux-select-arrow></div> </div> </div> <div ref=optionWrapperEl class=ux-select-list-wrapper css=\"top: ${listAnchor.y}px; left: ${listAnchor.x}px;\"> <div ref=optionCtEl class=ux-select-list-ct select.trigger=onSelect($event) css=\"\r\n        max-width: ${theme.listMaxWidth}px;\r\n        max-height: ${theme.listMaxHeight}\"><slot></slot></div> </div> </template> ";
 
 var UP = 38;
 // const RIGHT = 39;
@@ -448,28 +427,28 @@ var UxSelect = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    __decorate([
+    tslib_1.__decorate([
         aureliaFramework.bindable()
     ], UxSelect.prototype, "theme", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aureliaFramework.bindable()
     ], UxSelect.prototype, "autofocus", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aureliaFramework.bindable({ defaultValue: false })
     ], UxSelect.prototype, "disabled", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aureliaFramework.bindable({ defaultValue: false })
     ], UxSelect.prototype, "multiple", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aureliaFramework.bindable()
     ], UxSelect.prototype, "placeholder", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aureliaFramework.computedFrom('multiple')
     ], UxSelect.prototype, "isMultiple", null);
-    __decorate([
+    tslib_1.__decorate([
         aureliaFramework.computedFrom('disabled')
     ], UxSelect.prototype, "isDisabled", null);
-    UxSelect = __decorate([
+    UxSelect = tslib_1.__decorate([
         aureliaFramework.inject(Element, core.StyleEngine, aureliaFramework.ObserverLocator, aureliaFramework.TaskQueue),
         aureliaFramework.processContent(extractUxOption),
         aureliaFramework.customElement('ux-select'),
@@ -513,7 +492,7 @@ function defaultMatcher(a, b) {
     return a === b;
 }
 
-var UX_OPTGROUP_VIEW = "<template class=\"ux-optgroup\" class.bind=\"isDisabled ? 'disabled' : ''\" disabled.bind=\"isDisabled & booleanAttr\" aria-disabled.bind=\"isDisabled & booleanAttr\"> <div class=\"ux-optgroup-label\" textcontent.bind=\"label\"></div> <div class=\"ux-optgroup-options-ct\" ref=\"optionsCt\"><slot></slot></div> </template> ";
+var UX_OPTGROUP_VIEW = "<template class=ux-optgroup class.bind=\"isDisabled ? 'disabled' : ''\" disabled.bind=\"isDisabled & booleanAttr\" aria-disabled.bind=\"isDisabled & booleanAttr\"> <div class=ux-optgroup-label textcontent.bind=label></div> <div class=ux-optgroup-options-ct ref=optionsCt><slot></slot></div> </template> ";
 
 var UxOptGroup = /** @class */ (function () {
     function UxOptGroup(element, bindingEngine) {
@@ -571,10 +550,10 @@ var UxOptGroup = /** @class */ (function () {
         this.disabled = disabled;
         this.isDisabled = disabled || this.parentDisabled;
     };
-    __decorate([
+    tslib_1.__decorate([
         aureliaFramework.bindable()
     ], UxOptGroup.prototype, "label", void 0);
-    UxOptGroup = __decorate([
+    UxOptGroup = tslib_1.__decorate([
         aureliaFramework.inject(aureliaFramework.DOM.Element, aureliaFramework.BindingEngine),
         aureliaFramework.processContent(extractUxOptions),
         aureliaFramework.customElement('ux-optgroup'),
@@ -609,7 +588,7 @@ var UxOptGroupElementProto = Object.create(HTMLElement.prototype, {
     }
 });
 
-var UX_OPTION_VIEW = "<template class=\"ux-option ripple ${selected ? 'selected' : ''} ${focused ? 'focused' : ''} ${isDisabled ? 'disabled' : ''}\" click.trigger=\"onClick()\" mousedown.delegate=\"onMouseDown($event)\" disabled.bind=\"isDisabled & booleanAttr\" aria-disabled.bind=\"isDisabled & booleanAttr\"> <svg xml:space=\"preserve\" if.bind=\"isMultiple\" class=\"ux-checkbox\" viewBox=\"0 0 24 24\"> <path d=\"M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z\" show.bind=\"selected\"/> </svg> <div class=\"ux-option-text\" ref=\"textEl\" textcontent.bind=\"text\"></div> </template> ";
+var UX_OPTION_VIEW = "<template class=\"ux-option ripple ${selected ? 'selected' : ''} ${focused ? 'focused' : ''} ${isDisabled ? 'disabled' : ''}\" click.trigger=onClick() mousedown.delegate=onMouseDown($event) disabled.bind=\"isDisabled & booleanAttr\" aria-disabled.bind=\"isDisabled & booleanAttr\"> <svg xml:space=preserve if.bind=isMultiple class=ux-checkbox viewBox=\"0 0 24 24\"> <path d=\"M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z\" show.bind=selected /> </svg> <div class=ux-option-text ref=textEl textcontent.bind=text></div> </template> ";
 
 var UxOption = /** @class */ (function () {
     function UxOption(element, bindingEngine) {
@@ -745,13 +724,13 @@ var UxOption = /** @class */ (function () {
             }
         }
     };
-    __decorate([
+    tslib_1.__decorate([
         aureliaFramework.bindable()
     ], UxOption.prototype, "text", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aureliaFramework.bindable()
     ], UxOption.prototype, "value", void 0);
-    UxOption = __decorate([
+    UxOption = tslib_1.__decorate([
         aureliaFramework.inject(aureliaFramework.DOM.Element, aureliaFramework.BindingEngine),
         aureliaFramework.customElement('ux-option'),
         aureliaFramework.processAttributes(convertTextToAttr),
