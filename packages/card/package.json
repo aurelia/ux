@@ -42,6 +42,9 @@
     "@aurelia-ux/core": "^0.11.1",
     "aurelia-framework": "^1.3.0"
   },
+  "peerDependencies": {
+    "tslib": "^1.9.3"
+  },
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
     "@types/karma": "^1.7.3",

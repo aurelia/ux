@@ -96,6 +96,7 @@ export function configRollup(elementName, cssFiles, isProduction) {
           collapseWhitespace: true,
           collapseBooleanAttributes: true,
           conservativeCollapse: true,
+          removeAttributeQuotes: true
         }
       }),
       css(),
@@ -131,6 +132,7 @@ export function configRollup(elementName, cssFiles, isProduction) {
             collapseWhitespace: true,
             collapseBooleanAttributes: true,
             conservativeCollapse: true,
+            removeAttributeQuotes: true
           }
         }),
         css(),
