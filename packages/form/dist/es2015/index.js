@@ -1,30 +1,9 @@
+import { __decorate } from 'tslib';
 import { customElement, bindable, inlineView, customAttribute } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { DOM } from 'aurelia-pal';
 import { StyleEngine } from '@aurelia-ux/core';
 import { DOM as DOM$1 } from 'aurelia-framework';
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
-***************************************************************************** */
-
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
 
 var UX_FIELD_VIEW = "<template> <slot></slot> </template> ";
 
@@ -54,7 +33,7 @@ UxField = __decorate([
     inlineView(UX_FIELD_VIEW)
 ], UxField);
 
-var UX_FORM_VIEW = "<template role=\"form\"> <slot></slot> </template> ";
+var UX_FORM_VIEW = "<template role=form> <slot></slot> </template> ";
 
 let UxForm = class UxForm {
     constructor(element, styleEngine) {
@@ -147,7 +126,7 @@ UxSubmitCustomAttribute = __decorate([
     customAttribute('ux-submit')
 ], UxSubmitCustomAttribute);
 
-var css = "ux-form{display:flex;flex-direction:column;width:100%}ux-form .form-row{display:flex;flex-direction:row}ux-form .form-row>*{margin-left:8px;margin-right:8px}ux-form .form-row>:last-child{margin-right:0}ux-form .form-row>:first-child{margin-left:0}ux-form ux-field{display:flex;flex-direction:column;width:100%;margin-top:16px}ux-form ux-field>label{font-size:14px;font-size:var(--ux-theme--form-label-font-size, 14px);color:inherit;color:var(--ux-theme--form-label-color, inherit)}";
+var css = "ux-form{display:flex;flex-direction:column;width:100%}ux-form .form-row{display:flex;flex-direction:row}ux-form .form-row>*{margin-left:8px;margin-right:8px}ux-form .form-row>:last-child{margin-right:0}ux-form .form-row>:first-child{margin-left:0}ux-form ux-field{display:flex;flex-direction:column;width:100%;margin-top:16px}ux-form ux-field>label{font-size:14px;font-size:var(--ux-theme--form-label-font-size, 14px);color:inherit;color:var(--ux-theme--form-label-color, inherit)}"
 
 class UxFormTheme {
     constructor() {
