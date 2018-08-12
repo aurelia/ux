@@ -1,0 +1,46 @@
+ux-datepicker {
+  display: flex;
+  position: relative;
+}
+
+    ux-datepicker > ux-button > button.icon {
+      color: #333;
+      color: var(--ux-theme-datepicker-foreground, #333);
+    }
+
+  ux-datepicker > .overlay:not(:empty) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    animation-name: datepicker-background-fade-in;
+    animation-duration: 250ms;
+    
+    background-color: rgba(0, 0, 0, 0.25);
+    background-color: var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25));
+  }
+
+
+ux-datepicker > ux-button svg {
+  fill: currentColor;
+  fill: var(--ux-theme--datepicker-calendar-icon, currentColor);
+  width: 24px;
+  height: 24px;
+}
+
+
+@keyframes datepicker-background-fade-in {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.25);
+    background-color: var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25));
+  }
+}

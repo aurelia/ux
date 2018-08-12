@@ -1,0 +1,26 @@
+<template class="${effect !== null ? effect : ''}">
+
+  <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
+  <require from="./ux-checkbox.css"></require>
+
+  <input type="checkbox" ref="checkbox"
+    checked.bind="value"
+    indeterminate.bind="indeterminate"
+    mousedown.trigger="onMouseDown($event)"
+    disabled.bind="disabled & booleanAttr"
+    aria-checked="indeterminate ? 'mixed' : value ? true : false"
+    aria-disabled.bind="disabled & booleanAttr">
+
+  <div class="ripplecontainer">
+    <span class="ripple"></span>
+  </div>
+
+  <div class="checkbox">
+    <div class="background-box">
+      <svg viewBox="0 0 24 24">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+      </svg>
+    </div>
+  </div>
+</template>

@@ -1,11 +1,39 @@
-import { __decorate } from 'tslib';
 import { inject, Container } from 'aurelia-dependency-injection';
 import { DOM, PLATFORM } from 'aurelia-pal';
 import { getLogger } from 'aurelia-logging';
 import { Loader } from 'aurelia-loader';
 import { ObserverLocator, bindingBehavior } from 'aurelia-binding';
-import { ObserverLocator as ObserverLocator$1, DOM as DOM$1 } from 'aurelia-framework';
+import { ObserverLocator as ObserverLocator$1, BindingBehaviorResource } from 'aurelia-framework';
 import { SyntaxInterpreter } from 'aurelia-templating-binding';
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+
+
+
+
+
+
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
 
 var swatches = {
     red: {
@@ -1501,16 +1529,15 @@ var StyleEngine = /** @class */ (function () {
     return StyleEngine;
 }());
 
-var rippleCss = ".paper-ripple{display:block;position:absolute;top:0;left:0;right:0;bottom:0;border-radius:inherit;overflow:hidden;pointer-events:none}.paper-ripple .paper-ripple__background,.paper-ripple .paper-ripple__waves,.paper-ripple .paper-ripple__wave-container,.paper-ripple .paper-ripple__wave{pointer-events:none;position:absolute;top:0;left:0;width:100%;height:100%}.paper-ripple .paper-ripple__background,.paper-ripple .paper-ripple__wave{opacity:0}.paper-ripple .paper-ripple__waves,.paper-ripple .paper-ripple__wave{overflow:hidden}.paper-ripple .paper-ripple__wave-container,.paper-ripple .paper-ripple__wave{border-radius:50%}.paper-ripple .paper-ripple__background{will-change:opacity,background-color}.paper-ripple .paper-ripple__wave{will-change:opacity,transform}.paper-ripple .paper-ripple__wave-container{will-change:transform}.paper-ripple--round .paper-ripple__background,.paper-ripple--round .paper-ripple__waves{border-radius:50%}.paper-ripple--round .paper-ripple__wave-container{overflow:hidden}";
-
 var uxCorePromise;
 function configure(config, callback) {
     if (uxCorePromise) {
         return uxCorePromise;
     }
     var ux = config.container.get(AureliaUX);
-    DOM$1.injectStyles(rippleCss, undefined, undefined, 'ux-ripple-css');
-    config.globalResources(BooleanBB);
+    var boolAttr = new BindingBehaviorResource('');
+    boolAttr.initialize(config.container, BooleanBB);
+    boolAttr.register(config.aurelia.resources, 'booleanAttr');
     if (typeof callback === 'function') {
         return uxCorePromise = Promise.resolve(callback(ux))
             .then(function () { return ux.start(config); });

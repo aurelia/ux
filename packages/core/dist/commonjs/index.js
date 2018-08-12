@@ -2,7 +2,6 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var tslib_1 = require('tslib');
 var aureliaDependencyInjection = require('aurelia-dependency-injection');
 var aureliaPal = require('aurelia-pal');
 var aureliaLogging = require('aurelia-logging');
@@ -10,6 +9,35 @@ var aureliaLoader = require('aurelia-loader');
 var aureliaBinding = require('aurelia-binding');
 var aureliaFramework = require('aurelia-framework');
 var aureliaTemplatingBinding = require('aurelia-templating-binding');
+
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+
+
+
+
+
+
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
 
 var swatches = {
     red: {
@@ -372,7 +400,7 @@ var IOS = /** @class */ (function () {
         this.design = design;
         this.type = 'ios';
     }
-    IOS = tslib_1.__decorate([
+    IOS = __decorate([
         aureliaDependencyInjection.inject(IOSDesign)
     ], IOS);
     return IOS;
@@ -415,7 +443,7 @@ var Android = /** @class */ (function () {
         this.design = design;
         this.type = 'android';
     }
-    Android = tslib_1.__decorate([
+    Android = __decorate([
         aureliaDependencyInjection.inject(MaterialDesign)
     ], Android);
     return Android;
@@ -452,7 +480,7 @@ var Cordova = /** @class */ (function () {
         var device = aureliaPal.PLATFORM.global.device || { platform: 'android' };
         return device.platform.toLowerCase();
     };
-    Cordova = tslib_1.__decorate([
+    Cordova = __decorate([
         aureliaDependencyInjection.inject(aureliaDependencyInjection.Container)
     ], Cordova);
     return Cordova;
@@ -468,7 +496,7 @@ var Web = /** @class */ (function () {
         var _this = this;
         return Promise.resolve().then(function () { return _this; });
     };
-    Web = tslib_1.__decorate([
+    Web = __decorate([
         aureliaDependencyInjection.inject(MaterialDesign)
     ], Web);
     return Web;
@@ -489,7 +517,7 @@ var Electron = /** @class */ (function () {
     Electron.prototype.start = function (config) {
         return Promise.resolve().then(function () { return config.container.get(Web); });
     };
-    Electron = tslib_1.__decorate([
+    Electron = __decorate([
         aureliaDependencyInjection.inject(MaterialDesign)
     ], Electron);
     return Electron;
@@ -580,7 +608,7 @@ var UXConfiguration = /** @class */ (function () {
         });
         return this;
     };
-    UXConfiguration = tslib_1.__decorate([
+    UXConfiguration = __decorate([
         aureliaDependencyInjection.inject(aureliaLoader.Loader, GlobalStyleEngine)
     ], UXConfiguration);
     return UXConfiguration;
@@ -631,7 +659,7 @@ var DesignProcessor = /** @class */ (function () {
         }
         return designInnerHtml;
     };
-    DesignProcessor = tslib_1.__decorate([
+    DesignProcessor = __decorate([
         aureliaDependencyInjection.inject(aureliaBinding.ObserverLocator, GlobalStyleEngine)
     ], DesignProcessor);
     return DesignProcessor;
@@ -734,7 +762,7 @@ var AureliaUX = /** @class */ (function () {
         }
         this.addUxElementObserverAdapter(observerAdapter.tagName.toUpperCase(), observerAdapter.properties);
     };
-    AureliaUX = tslib_1.__decorate([
+    AureliaUX = __decorate([
         aureliaDependencyInjection.inject(UXConfiguration, aureliaDependencyInjection.Container, DesignProcessor, aureliaFramework.ObserverLocator)
     ], AureliaUX);
     return AureliaUX;
@@ -749,7 +777,7 @@ var BooleanBB = /** @class */ (function () {
     BooleanBB.prototype.unbind = function () {
         // Empty
     };
-    BooleanBB = tslib_1.__decorate([
+    BooleanBB = __decorate([
         aureliaBinding.bindingBehavior('booleanAttr')
     ], BooleanBB);
     return BooleanBB;
@@ -1445,7 +1473,7 @@ var StyleController = /** @class */ (function () {
         }
         return designInnerHtml;
     };
-    StyleController = tslib_1.__decorate([
+    StyleController = __decorate([
         aureliaDependencyInjection.inject(aureliaBinding.ObserverLocator, GlobalStyleEngine)
     ], StyleController);
     return StyleController;
@@ -1499,13 +1527,11 @@ var StyleEngine = /** @class */ (function () {
     StyleEngine.prototype.getDefaultTheme = function (key) {
         return this.styleController.themes[key];
     };
-    StyleEngine = tslib_1.__decorate([
+    StyleEngine = __decorate([
         aureliaDependencyInjection.inject(StyleController)
     ], StyleEngine);
     return StyleEngine;
 }());
-
-var rippleCss = ".paper-ripple{display:block;position:absolute;top:0;left:0;right:0;bottom:0;border-radius:inherit;overflow:hidden;pointer-events:none}.paper-ripple .paper-ripple__background,.paper-ripple .paper-ripple__waves,.paper-ripple .paper-ripple__wave-container,.paper-ripple .paper-ripple__wave{pointer-events:none;position:absolute;top:0;left:0;width:100%;height:100%}.paper-ripple .paper-ripple__background,.paper-ripple .paper-ripple__wave{opacity:0}.paper-ripple .paper-ripple__waves,.paper-ripple .paper-ripple__wave{overflow:hidden}.paper-ripple .paper-ripple__wave-container,.paper-ripple .paper-ripple__wave{border-radius:50%}.paper-ripple .paper-ripple__background{will-change:opacity,background-color}.paper-ripple .paper-ripple__wave{will-change:opacity,transform}.paper-ripple .paper-ripple__wave-container{will-change:transform}.paper-ripple--round .paper-ripple__background,.paper-ripple--round .paper-ripple__waves{border-radius:50%}.paper-ripple--round .paper-ripple__wave-container{overflow:hidden}";
 
 var uxCorePromise;
 function configure(config, callback) {
@@ -1513,8 +1539,9 @@ function configure(config, callback) {
         return uxCorePromise;
     }
     var ux = config.container.get(AureliaUX);
-    aureliaFramework.DOM.injectStyles(rippleCss, undefined, undefined, 'ux-ripple-css');
-    config.globalResources(BooleanBB);
+    var boolAttr = new aureliaFramework.BindingBehaviorResource('');
+    boolAttr.initialize(config.container, BooleanBB);
+    boolAttr.register(config.aurelia.resources, 'booleanAttr');
     if (typeof callback === 'function') {
         return uxCorePromise = Promise.resolve(callback(ux))
             .then(function () { return ux.start(config); });

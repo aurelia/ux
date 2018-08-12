@@ -1,0 +1,15 @@
+<template role="textbox">
+  <require from="./ux-textarea.css"></require>
+
+  <textarea ref="textbox"
+    value.bind="rawValue"
+    focus.bind="focus"
+    disabled.bind="disabled & booleanAttr"
+    readonly.bind="readonly & booleanAttr"
+    require.bind="required & booleanAttr"
+    aria-disabled.bind="disabled & booleanAttr"
+    aria-readonly.bind="readonly & booleanAttr"
+    aria-required.bind="required & booleanAttr">
+  </textarea>
+
+</template>
