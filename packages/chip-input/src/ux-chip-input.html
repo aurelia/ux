@@ -10,7 +10,7 @@
       ${chip}
     </ux-chip>
   </template>
-  
+
   <template if.bind="type.toLowerCase() === 'tag'">
     <ux-tag deletable
       ref="tagrepeat"
@@ -21,6 +21,6 @@
     </ux-tag>
   </template>
 
-  <input ref="textbox" keyup.delegate="handleKeyup($event)"/>
+  <input ref="textbox" keyup.delegate="handleKeyup($event)">
   <div class="bottom-border"></div>
 </template>
