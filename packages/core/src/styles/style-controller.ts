@@ -54,11 +54,11 @@ export class StyleController {
   }
 
   public generateCssVariableName(themeKey: string, propertyKey: string) {
-    return `--ux-theme--${themeKey}-${kebabCase(propertyKey)}`;
+    return `--aurelia-ux--${themeKey}-${kebabCase(propertyKey)}`;
   }
 
   public generateCssVariable(themeKey: string, propertyKey: string, value: string | number) {
-    return `--ux-theme--${themeKey}-${kebabCase(propertyKey)}: ${value};`;
+    return `--aurelia-ux--${themeKey}-${kebabCase(propertyKey)}: ${value};`;
   }
 
   private setWatches(theme: UxTheme) {

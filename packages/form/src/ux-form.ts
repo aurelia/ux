@@ -60,7 +60,7 @@ export class UxForm implements UxComponent {
   }
 
   public submitForm() {
-    const submitEvent = DOM.createCustomEvent('submit', { bubbles: true, target: this.element });
+    const submitEvent = DOM.createCustomEvent('submit', { bubbles: true, target: this.element } as any);
 
     this.element.dispatchEvent(submitEvent);
   }

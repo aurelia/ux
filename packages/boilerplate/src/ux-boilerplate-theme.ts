@@ -6,9 +6,9 @@ export class UxBoilerplateTheme implements UxTheme {
   /*
    * The theming system will convert all of these properties to CSS variables.
    *
-   * The naming convention for this is --ux-theme--key-property
+   * The naming convention for this is --aurelia-ux--key-property
    *
-   * For example background would become --ux-theme--boilerplate-background
+   * For example background would become --aurelia-ux--boilerplate-background
    */
 
   public background: string;
