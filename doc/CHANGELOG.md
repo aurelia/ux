@@ -1,3 +1,17 @@
+### [aurelia-ux 0.11.0](https://github.com/aurelia/ux/compare/v0.10.1...v0.11.0)
+
+#### Bug Fixes
+
+* style: update properties that do not have a watcher on theme change
+* theming: remove ensureDefaultTheme
+* input: conform to new material design standards, add floating label
+* input: add border radius to top of input
+* input: apply correct css variables
+* input: correct background colors and inherit font color
+* input: align hover effect with material specifications
+* input: increase animation length and add variables
+* style: add border radius to outline button
+
 ### [aurelia-ux 0.10.0](https://github.com/aurelia/ux/compare/v0.9.1...v0.10.0)
 
 #### Features

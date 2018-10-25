@@ -8,14 +8,11 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
-import { UxFormTheme } from './ux-form-theme';
-const theme = new UxFormTheme();
 let UxForm = class UxForm {
     constructor(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.bindSubmitToEnter = false;
-        styleEngine.ensureDefaultTheme(theme);
     }
     bind() {
         if (this.theme != null) {

@@ -9,14 +9,11 @@ import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
-import { UxTagTheme } from './ux-tag-theme';
-const theme = new UxTagTheme();
 let UxTag = class UxTag {
     constructor(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.value = undefined;
-        styleEngine.ensureDefaultTheme(theme);
     }
     bind() {
         this.themeChanged(this.theme);

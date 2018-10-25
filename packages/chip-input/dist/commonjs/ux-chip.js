@@ -11,14 +11,11 @@ var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_chip_theme_1 = require("./ux-chip-theme");
-var theme = new ux_chip_theme_1.UxChipTheme();
 var UxChip = /** @class */ (function () {
     function UxChip(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.value = undefined;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxChip.prototype.bind = function () {
         this.themeChanged(this.theme);

@@ -4,10 +4,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-radio-theme", "aurelia-framework"], function (require, exports, aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_radio_theme_1, aurelia_framework_1) {
+define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "aurelia-framework"], function (require, exports, aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, aurelia_framework_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var theme = new ux_radio_theme_1.UxRadioTheme();
     var UxRadio = /** @class */ (function () {
         function UxRadio(element, styleEngine) {
             this.element = element;
@@ -17,7 +16,6 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             this.checked = false;
             this.ripple = null;
             Object.setPrototypeOf(element, uxRadioElementProto);
-            styleEngine.ensureDefaultTheme(theme);
         }
         Object.defineProperty(UxRadio.prototype, "isDisabled", {
             get: function () {

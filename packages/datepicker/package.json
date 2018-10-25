@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/datepicker",
-  "version": "0.10.1",
+  "version": "0.11.1",
   "description": "Datepicker component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -62,7 +62,7 @@
       "dist": "dist/amd"
     },
     "peerDependencies": {
-      "aurelia-binding": "^1.0.0 || ^2.0.0",
+      "aurelia-binding": "^2.0.0",
       "aurelia-dependency-injection": "^1.0.0",
       "aurelia-logging": "^1.0.0",
       "aurelia-pal": "^1.0.0",
@@ -76,7 +76,7 @@
       "@aurelia-ux/core": "^0.3.0"
     },
     "dependencies": {
-      "aurelia-binding": "^1.0.0 || ^2.0.0",
+      "aurelia-binding": "^2.0.0",
       "aurelia-dependency-injection": "^1.0.0",
       "aurelia-logging": "^1.0.0",
       "aurelia-pal": "^1.0.0",
@@ -92,7 +92,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.10.1",
+    "@aurelia-ux/core": "^0.11.1",
     "aurelia-framework": "^1.0.0",
     "moment": "^2.18.1"
   },

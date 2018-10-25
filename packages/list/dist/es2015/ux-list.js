@@ -7,13 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
-import { UxListTheme } from './ux-list-theme';
-const theme = new UxListTheme();
 let UxList = class UxList {
     constructor(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
-        styleEngine.ensureDefaultTheme(theme);
     }
     bind() {
         if (this.theme != null) {

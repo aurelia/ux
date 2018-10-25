@@ -10,9 +10,7 @@ var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_radio_theme_1 = require("./ux-radio-theme");
 var aurelia_framework_1 = require("aurelia-framework");
-var theme = new ux_radio_theme_1.UxRadioTheme();
 var UxRadio = /** @class */ (function () {
     function UxRadio(element, styleEngine) {
         this.element = element;
@@ -22,7 +20,6 @@ var UxRadio = /** @class */ (function () {
         this.checked = false;
         this.ripple = null;
         Object.setPrototypeOf(element, uxRadioElementProto);
-        styleEngine.ensureDefaultTheme(theme);
     }
     Object.defineProperty(UxRadio.prototype, "isDisabled", {
         get: function () {

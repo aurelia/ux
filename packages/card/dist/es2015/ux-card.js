@@ -7,12 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { inject } from 'aurelia-dependency-injection';
 import { bindable, customElement } from 'aurelia-templating';
 import { StyleEngine } from '@aurelia-ux/core';
-import { UxCardTheme } from './ux-card-theme';
 let UxCard = class UxCard {
     constructor(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
-        styleEngine.ensureDefaultTheme(new UxCardTheme());
     }
     bind() {
         if (this.theme != null) {

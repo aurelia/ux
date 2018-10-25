@@ -8,9 +8,7 @@ import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
-import { UxRadioTheme } from './ux-radio-theme';
 import { ElementEvents, DOM } from 'aurelia-framework';
-const theme = new UxRadioTheme();
 let UxRadio = class UxRadio {
     constructor(element, styleEngine) {
         this.element = element;
@@ -20,7 +18,6 @@ let UxRadio = class UxRadio {
         this.checked = false;
         this.ripple = null;
         Object.setPrototypeOf(element, uxRadioElementProto);
-        styleEngine.ensureDefaultTheme(theme);
     }
     get isDisabled() {
         return normalizeBooleanAttribute('disabled', this.disabled);

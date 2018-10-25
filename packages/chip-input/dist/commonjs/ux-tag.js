@@ -11,14 +11,11 @@ var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_tag_theme_1 = require("./ux-tag-theme");
-var theme = new ux_tag_theme_1.UxTagTheme();
 var UxTag = /** @class */ (function () {
     function UxTag(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.value = undefined;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxTag.prototype.bind = function () {
         this.themeChanged(this.theme);

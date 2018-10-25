@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/components",
-  "version": "0.10.1",
+  "version": "0.11.1",
   "description": "Official components made with Aurelia UX",
   "keywords": [
     "aurelia",
@@ -61,7 +61,7 @@
       "dist": "dist/amd"
     },
     "peerDependencies": {
-      "aurelia-binding": "^1.0.0 || ^2.0.0",
+      "aurelia-binding": "^2.0.0",
       "aurelia-dependency-injection": "^1.0.0",
       "aurelia-logging": "^1.0.0",
       "aurelia-pal": "^1.0.0",
@@ -75,7 +75,7 @@
       "@aurelia-ux/core": "^0.4.0"
     },
     "dependencies": {
-      "aurelia-binding": "^1.0.0 || ^2.0.0",
+      "aurelia-binding": "^2.0.0",
       "aurelia-dependency-injection": "^1.0.0",
       "aurelia-logging": "^1.0.0",
       "aurelia-pal": "^1.0.0",
@@ -103,21 +103,21 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/button": "^0.10.1",
-    "@aurelia-ux/card": "^0.10.1",
-    "@aurelia-ux/checkbox": "^0.10.1",
-    "@aurelia-ux/chip-input": "^0.10.1",
-    "@aurelia-ux/core": "^0.10.1",
-    "@aurelia-ux/datepicker": "^0.10.1",
-    "@aurelia-ux/form": "^0.10.1",
-    "@aurelia-ux/grid": "^0.10.1",
-    "@aurelia-ux/input": "^0.10.1",
-    "@aurelia-ux/input-info": "^0.10.1",
-    "@aurelia-ux/list": "^0.10.1",
-    "@aurelia-ux/radio": "^0.10.1",
-    "@aurelia-ux/select": "^0.10.1",
-    "@aurelia-ux/switch": "^0.10.1",
-    "@aurelia-ux/textarea": "^0.10.1",
+    "@aurelia-ux/button": "^0.11.1",
+    "@aurelia-ux/card": "^0.11.1",
+    "@aurelia-ux/checkbox": "^0.11.1",
+    "@aurelia-ux/chip-input": "^0.11.1",
+    "@aurelia-ux/core": "^0.11.1",
+    "@aurelia-ux/datepicker": "^0.11.1",
+    "@aurelia-ux/form": "^0.11.1",
+    "@aurelia-ux/grid": "^0.11.1",
+    "@aurelia-ux/input": "^0.11.1",
+    "@aurelia-ux/input-info": "^0.11.1",
+    "@aurelia-ux/list": "^0.11.1",
+    "@aurelia-ux/radio": "^0.11.1",
+    "@aurelia-ux/select": "^0.11.1",
+    "@aurelia-ux/switch": "^0.11.1",
+    "@aurelia-ux/textarea": "^0.11.1",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {

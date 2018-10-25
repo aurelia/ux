@@ -9,16 +9,13 @@ import { Logger } from 'aurelia-logging';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, processDesignAttributes } from '@aurelia-ux/core';
-import { UxIconTheme } from './ux-icon-theme';
 import IconMap from './ux-icon-map';
-var theme = new UxIconTheme();
 var UxIcon = /** @class */ (function () {
     function UxIcon(element, styleEngine, logger) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.logger = logger;
         this.icon = undefined;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxIcon.prototype.bind = function () {
         if (this.size) {

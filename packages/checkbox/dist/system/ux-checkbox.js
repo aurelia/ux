@@ -1,4 +1,4 @@
-System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-checkbox-theme", "aurelia-pal"], function (exports_1, context_1) {
+System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "aurelia-pal"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
     function stopEvent(e) {
         e.stopPropagation();
     }
-    var aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_checkbox_theme_1, aurelia_pal_1, theme, UxCheckbox, getVm, uxCheckboxElementProto;
+    var aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, aurelia_pal_1, UxCheckbox, getVm, uxCheckboxElementProto;
     return {
         setters: [
             function (aurelia_templating_1_1) {
@@ -25,15 +25,11 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (ux_checkbox_theme_1_1) {
-                ux_checkbox_theme_1 = ux_checkbox_theme_1_1;
-            },
             function (aurelia_pal_1_1) {
                 aurelia_pal_1 = aurelia_pal_1_1;
             }
         ],
         execute: function () {
-            theme = new ux_checkbox_theme_1.UxCheckboxTheme();
             UxCheckbox = /** @class */ (function () {
                 function UxCheckbox(element, styleEngine) {
                     this.element = element;
@@ -43,7 +39,6 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                     this.effect = 'ripple';
                     this.ripple = null;
                     Object.setPrototypeOf(element, uxCheckboxElementProto);
-                    styleEngine.ensureDefaultTheme(theme);
                 }
                 Object.defineProperty(UxCheckbox.prototype, "isDisabled", {
                     get: function () {

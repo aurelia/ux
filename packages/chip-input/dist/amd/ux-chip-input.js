@@ -4,10 +4,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-chip-input-theme"], function (require, exports, aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_chip_input_theme_1) {
+define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core"], function (require, exports, aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var theme = new ux_chip_input_theme_1.UxChipInputTheme();
     var UxChipInput = /** @class */ (function () {
         function UxChipInput(element, styleEngine) {
             this.element = element;
@@ -17,7 +16,6 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
             this.separator = ', ';
             this.value = undefined;
             this.chips = new Array();
-            styleEngine.ensureDefaultTheme(theme);
         }
         UxChipInput.prototype.bind = function () {
             this.themeChanged(this.theme);

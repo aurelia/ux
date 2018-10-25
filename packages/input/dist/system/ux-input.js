@@ -1,4 +1,4 @@
-System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-input-theme"], function (exports_1, context_1) {
+System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
     function stopEvent(e) {
         e.stopPropagation();
     }
-    var aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_input_theme_1, theme, UxInput, getVm, uxInputElementProto;
+    var aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, UxInput, getVm, uxInputElementProto;
     return {
         setters: [
             function (aurelia_templating_1_1) {
@@ -27,13 +27,9 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
             },
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (ux_input_theme_1_1) {
-                ux_input_theme_1 = ux_input_theme_1_1;
             }
         ],
         execute: function () {
-            theme = new ux_input_theme_1.UxInputTheme();
             UxInput = /** @class */ (function () {
                 function UxInput(element, styleEngine) {
                     this.element = element;
@@ -45,7 +41,6 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                     this.focused = false;
                     this.value = undefined;
                     Object.setPrototypeOf(element, uxInputElementProto);
-                    styleEngine.ensureDefaultTheme(theme);
                 }
                 UxInput.prototype.bind = function () {
                     var element = this.element;
@@ -53,11 +48,17 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                     if (this.autofocus || this.autofocus === '') {
                         this.focused = true;
                     }
+                    if (element.hasAttribute('id')) {
+                        var attributeValue = element.getAttribute('id');
+                        if (attributeValue) {
+                            element.removeAttribute('id');
+                            textbox.setAttribute('id', attributeValue);
+                        }
+                    }
                     if (element.hasAttribute('placeholder')) {
                         var attributeValue = element.getAttribute('placeholder');
                         if (attributeValue) {
-                            textbox.setAttribute('placeholder', attributeValue);
-                            element.removeAttribute('placeholder');
+                            this.label = attributeValue;
                         }
                     }
                     if (element.hasAttribute('step')) {
@@ -139,6 +140,12 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                     this.styleEngine.applyTheme(newValue, this.element);
                 };
                 UxInput.prototype.focusedChanged = function (focused) {
+                    if (focused === true) {
+                        this.element.classList.add('ux-input--focused');
+                    }
+                    else {
+                        this.element.classList.remove('ux-input--focused');
+                    }
                     this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
                 };
                 UxInput.prototype.typeChanged = function (newValue) {
@@ -147,10 +154,19 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                     }
                 };
                 UxInput.prototype.rawValueChanged = function (newValue) {
+                    if (newValue.length > 0) {
+                        this.element.classList.add('ux-input--has-value');
+                    }
+                    else {
+                        this.element.classList.remove('ux-input--has-value');
+                    }
                     if (this.ignoreRawChanges) {
                         return;
                     }
                     this.setValue(newValue);
+                };
+                UxInput.prototype.focusInput = function () {
+                    this.textbox.focus();
                 };
                 __decorate([
                     aurelia_templating_1.bindable
@@ -176,6 +192,9 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                 __decorate([
                     aurelia_templating_1.bindable
                 ], UxInput.prototype, "theme", void 0);
+                __decorate([
+                    aurelia_templating_1.bindable
+                ], UxInput.prototype, "label", void 0);
                 __decorate([
                     aurelia_templating_1.bindable
                 ], UxInput.prototype, "type", void 0);

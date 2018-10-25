@@ -9,12 +9,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_templating_1 = require("aurelia-templating");
 var core_1 = require("@aurelia-ux/core");
-var ux_card_theme_1 = require("./ux-card-theme");
 var UxCard = /** @class */ (function () {
     function UxCard(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
-        styleEngine.ensureDefaultTheme(new ux_card_theme_1.UxCardTheme());
     }
     UxCard.prototype.bind = function () {
         if (this.theme != null) {

@@ -69,6 +69,7 @@ ux-button>button.text.large {
 
 ux-button>button.outline {
   border: 1px solid;
+  border-radius: 4px;
 }
 
 ux-button>button.outline:focus {

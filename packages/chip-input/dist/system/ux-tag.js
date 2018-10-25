@@ -1,4 +1,4 @@
-System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-tag-theme"], function (exports_1, context_1) {
+System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_tag_theme_1, theme, UxTag;
+    var aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, UxTag;
     return {
         setters: [
             function (aurelia_templating_1_1) {
@@ -24,19 +24,14 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
             },
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (ux_tag_theme_1_1) {
-                ux_tag_theme_1 = ux_tag_theme_1_1;
             }
         ],
         execute: function () {
-            theme = new ux_tag_theme_1.UxTagTheme();
             UxTag = /** @class */ (function () {
                 function UxTag(element, styleEngine) {
                     this.element = element;
                     this.styleEngine = styleEngine;
                     this.value = undefined;
-                    styleEngine.ensureDefaultTheme(theme);
                 }
                 UxTag.prototype.bind = function () {
                     this.themeChanged(this.theme);

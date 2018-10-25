@@ -11,9 +11,7 @@ var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
 var datetime_utility_1 = require("./resources/datetime-utility");
-var ux_datepicker_theme_1 = require("./ux-datepicker-theme");
 var moment = require("moment");
-var theme = new ux_datepicker_theme_1.UxDatepickerTheme();
 var UxDatepicker = /** @class */ (function () {
     function UxDatepicker(element, resources, styleEngine) {
         this.element = element;
@@ -30,7 +28,6 @@ var UxDatepicker = /** @class */ (function () {
             time: ['h:m a', 'H:m']
         };
         this.showDialog = false;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxDatepicker.prototype.bind = function () {
         if (this.initialDate != null) {

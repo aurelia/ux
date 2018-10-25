@@ -11,16 +11,13 @@ var aurelia_logging_1 = require("aurelia-logging");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
-var ux_icon_theme_1 = require("./ux-icon-theme");
 var ux_icon_map_1 = require("./ux-icon-map");
-var theme = new ux_icon_theme_1.UxIconTheme();
 var UxIcon = /** @class */ (function () {
     function UxIcon(element, styleEngine, logger) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.logger = logger;
         this.icon = undefined;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxIcon.prototype.bind = function () {
         if (this.size) {

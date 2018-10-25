@@ -1,4 +1,4 @@
-System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./ux-select-theme", "./util"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./util"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -27,7 +27,7 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
     function defaultMatcher(a, b) {
         return a === b;
     }
-    var aurelia_framework_1, aurelia_logging_1, core_1, ux_select_theme_1, util_1, theme, UP, DOWN, ENTER, SPACE, logger, invalidMultipleValueMsg, selectArrayContext, UxSelect, UxSelectElementProto;
+    var aurelia_framework_1, aurelia_logging_1, core_1, util_1, UP, DOWN, ENTER, SPACE, logger, invalidMultipleValueMsg, selectArrayContext, UxSelect, UxSelectElementProto;
     return {
         setters: [
             function (aurelia_framework_1_1) {
@@ -39,15 +39,11 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (ux_select_theme_1_1) {
-                ux_select_theme_1 = ux_select_theme_1_1;
-            },
             function (util_1_1) {
                 util_1 = util_1_1;
             }
         ],
         execute: function () {
-            theme = new ux_select_theme_1.UxSelectTheme();
             UP = 38;
             // const RIGHT = 39;
             DOWN = 40;
@@ -68,8 +64,6 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
                     this.ignoreSelectEvent = true;
                     // Only chrome persist the element prototype when cloning with clone node
                     Object.setPrototypeOf(element, UxSelectElementProto);
-                    this.theme = theme;
-                    styleEngine.ensureDefaultTheme(theme);
                 }
                 UxSelect.prototype.bind = function () {
                     if (util_1.bool(this.autofocus)) {

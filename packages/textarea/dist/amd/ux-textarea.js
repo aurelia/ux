@@ -4,10 +4,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-textarea-theme", "aurelia-framework"], function (require, exports, aurelia_templating_1, aurelia_pal_1, aurelia_dependency_injection_1, core_1, ux_textarea_theme_1, aurelia_framework_1) {
+define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-dependency-injection", "@aurelia-ux/core", "aurelia-framework"], function (require, exports, aurelia_templating_1, aurelia_pal_1, aurelia_dependency_injection_1, core_1, aurelia_framework_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var theme = new ux_textarea_theme_1.UxTextAreaTheme();
     var UxTextArea = /** @class */ (function () {
         function UxTextArea(element, styleEngine) {
             this.element = element;
@@ -19,7 +18,6 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-depe
             this.readonly = false;
             this.value = undefined;
             Object.setPrototypeOf(element, uxTextAreaElementProto);
-            styleEngine.ensureDefaultTheme(theme);
         }
         UxTextArea.prototype.bind = function () {
             var element = this.element;

@@ -8,9 +8,7 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
-import { UxTextAreaTheme } from './ux-textarea-theme';
 import { observable } from 'aurelia-framework';
-var theme = new UxTextAreaTheme();
 var UxTextArea = /** @class */ (function () {
     function UxTextArea(element, styleEngine) {
         this.element = element;
@@ -22,7 +20,6 @@ var UxTextArea = /** @class */ (function () {
         this.readonly = false;
         this.value = undefined;
         Object.setPrototypeOf(element, uxTextAreaElementProto);
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxTextArea.prototype.bind = function () {
         var element = this.element;

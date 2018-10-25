@@ -8,9 +8,7 @@ import { customElement, bindable, ElementEvents } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, PaperRipple, normalizeBooleanAttribute, } from '@aurelia-ux/core';
-import { UxCheckboxTheme } from './ux-checkbox-theme';
 import { DOM } from 'aurelia-pal';
-const theme = new UxCheckboxTheme();
 let UxCheckbox = class UxCheckbox {
     constructor(element, styleEngine) {
         this.element = element;
@@ -20,7 +18,6 @@ let UxCheckbox = class UxCheckbox {
         this.effect = 'ripple';
         this.ripple = null;
         Object.setPrototypeOf(element, uxCheckboxElementProto);
-        styleEngine.ensureDefaultTheme(theme);
     }
     get isDisabled() {
         return normalizeBooleanAttribute('disabled', this.disabled);

@@ -9,9 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_framework_1 = require("aurelia-framework");
 var aurelia_logging_1 = require("aurelia-logging");
 var core_1 = require("@aurelia-ux/core");
-var ux_select_theme_1 = require("./ux-select-theme");
 var util_1 = require("./util");
-var theme = new ux_select_theme_1.UxSelectTheme();
 var UP = 38;
 // const RIGHT = 39;
 var DOWN = 40;
@@ -32,8 +30,6 @@ var UxSelect = /** @class */ (function () {
         this.ignoreSelectEvent = true;
         // Only chrome persist the element prototype when cloning with clone node
         Object.setPrototypeOf(element, UxSelectElementProto);
-        this.theme = theme;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxSelect.prototype.bind = function () {
         if (util_1.bool(this.autofocus)) {

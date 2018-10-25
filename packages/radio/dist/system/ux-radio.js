@@ -1,4 +1,4 @@
-System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-radio-theme", "aurelia-framework"], function (exports_1, context_1) {
+System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "aurelia-framework"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
     function stopEvent(e) {
         e.stopPropagation();
     }
-    var aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_radio_theme_1, aurelia_framework_1, theme, UxRadio, getVm, uxRadioElementProto;
+    var aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, aurelia_framework_1, UxRadio, getVm, uxRadioElementProto;
     return {
         setters: [
             function (aurelia_templating_1_1) {
@@ -25,15 +25,11 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (ux_radio_theme_1_1) {
-                ux_radio_theme_1 = ux_radio_theme_1_1;
-            },
             function (aurelia_framework_1_1) {
                 aurelia_framework_1 = aurelia_framework_1_1;
             }
         ],
         execute: function () {
-            theme = new ux_radio_theme_1.UxRadioTheme();
             UxRadio = /** @class */ (function () {
                 function UxRadio(element, styleEngine) {
                     this.element = element;
@@ -43,7 +39,6 @@ System.register(["aurelia-templating", "aurelia-binding", "aurelia-dependency-in
                     this.checked = false;
                     this.ripple = null;
                     Object.setPrototypeOf(element, uxRadioElementProto);
-                    styleEngine.ensureDefaultTheme(theme);
                 }
                 Object.defineProperty(UxRadio.prototype, "isDisabled", {
                     get: function () {

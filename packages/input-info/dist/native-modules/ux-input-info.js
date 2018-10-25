@@ -6,15 +6,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
-import { UxInputInfoTheme } from './ux-input-info-theme';
 import { StyleEngine } from '@aurelia-ux/core';
-var theme = new UxInputInfoTheme();
 var UxInputInfo = /** @class */ (function () {
     function UxInputInfo(element, styleEngine) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.uxInputCounter = null;
-        styleEngine.ensureDefaultTheme(theme);
     }
     UxInputInfo.prototype.bind = function () {
         if (this.target === undefined) {

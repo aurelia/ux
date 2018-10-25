@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/core",
-  "version": "0.10.1",
+  "version": "0.11.1",
   "description": "A user experience framework for Aurelia.",
   "keywords": [
     "aurelia",
@@ -49,7 +49,7 @@
       "dist": "dist/amd"
     },
     "peerDependencies": {
-      "aurelia-binding": "^1.0.0 || ^2.0.0",
+      "aurelia-binding": "^2.0.0",
       "aurelia-dependency-injection": "^1.0.0",
       "aurelia-logging": "^1.0.0",
       "aurelia-pal": "^1.0.0",
@@ -62,7 +62,7 @@
       "aurelia-path": "^1.0.0"
     },
     "dependencies": {
-      "aurelia-binding": "^1.0.0 || ^2.0.0",
+      "aurelia-binding": "^2.0.0",
       "aurelia-dependency-injection": "^1.0.0",
       "aurelia-logging": "^1.0.0",
       "aurelia-pal": "^1.0.0",
@@ -77,7 +77,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "aurelia-binding": "^1.7.1 || ^2.0.0",
+    "aurelia-binding": "^2.0.0",
     "aurelia-framework": "^1.0.0",
     "aurelia-templating-resources": "^1.6.0"
   },
