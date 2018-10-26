@@ -2,12 +2,16 @@ import { inject } from 'aurelia-dependency-injection';
 import { ObserverLocator } from 'aurelia-binding';
 import { UxTheme } from './ux-theme';
 import { GlobalStyleEngine } from './global-style-engine';
+import { AureliaUX } from '../aurelia-ux';
 
-@inject(ObserverLocator, GlobalStyleEngine)
+@inject(ObserverLocator, GlobalStyleEngine, AureliaUX)
 export class StyleController {
   public themes: UxTheme[] = [];
 
-  constructor(public observerLocator: ObserverLocator, private globalStyleEngine: GlobalStyleEngine) { }
+  constructor(
+    private observerLocator: ObserverLocator,
+    private globalStyleEngine: GlobalStyleEngine,
+    private ux: AureliaUX) { }
 
   public updateTheme(theme: UxTheme, element?: HTMLElement) {
     const baseTheme: UxTheme = { themeKey: 'base-theme' };
@@ -16,7 +20,13 @@ export class StyleController {
       throw new Error('Provided theme has no themeKey property.');
     }
 
-    if (element != null) {
+    if (theme.themeKey === 'design') {
+      for (const key in theme) {
+        if (key !== 'themeKey') {
+          (this.ux.design as any)[key] = (theme as any)[key];
+        }
+      }
+    } else if (element != null) {
       for (const key in theme) {
         if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
           element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), (theme as any)[key]);
