@@ -1,6 +1,7 @@
 ux-input-info {
   display: flex;
   font-size: 14px;
+  padding: 0 16px;
   width: 100%;
   color: #909090;
   color: var(--aurelia-ux--input-info-foreground, #909090);
