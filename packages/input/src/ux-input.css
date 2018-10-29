@@ -12,8 +12,8 @@ ux-input {
   color: var(--aurelia-ux--input-foreground, inherit);
   background-color: #00000011;
   background-color: var(--aurelia-ux--input-background, #00000011);
-  border-radius: 4px 4px 0 0;
-  border-radius: var(--aurelia-ux--input-border-radius, 4px 4px 0 0);
+  border-radius: 4px;
+  border-radius: var(--aurelia-ux--input-border-radius, 4px);
 }
 
 ux-input:hover {
@@ -79,26 +79,11 @@ ux-input [slot="leading-icon"]~label {
 }
 
 ux-input :not(input) {
-  color: #555;
-  color: var(--aurelia-ux--input-foreground-label, #555);
+  color: #808080;
+  color: var(--aurelia-ux--input-foreground-label, #808080);
 }
 
 .ux-input__border-bottom {
-  height: 1px;
-  background-color: #00000066;
-  background-color: var(--aurelia-ux--input-border-bottom, #00000066);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-ux-input:hover .ux-input__border-bottom {
-  background-color: #00000066;
-  background-color: var(--aurelia-ux--input-border-bottom-hover, #00000066);
-}
-
-.ux-input__border-bottom-active {
   height: 2px;
   background-color: #4043ff;
   background-color: var(--aurelia-ux--input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff));
@@ -110,7 +95,7 @@ ux-input:hover .ux-input__border-bottom {
   transition: transform ease 150ms;
 }
 
-ux-input input:focus~.ux-input__border-bottom-active {
+ux-input input:focus~.ux-input__border-bottom {
   transform: scaleX(1);
 }
 
@@ -118,13 +103,13 @@ ux-input.has-error input {
   box-shadow: none;
 }
 
-ux-input.has-error .ux-input__border-bottom,
-ux-input.has-error .ux-input__border-bottom-active {
+.has-error .ux-input__border-bottom {
+  transform: scaleX(1);
   background-color: #F44336;
   background-color: var(--aurelia-ux--input-error, #F44336);
 }
 
-ux-input.has-error> :not(input) {
+.has-error > :not(input) {
   color: #F44336;
   color: var(--aurelia-ux--input-error, #F44336);
 }
