@@ -3,7 +3,7 @@ ux-input-info {
   font-size: 14px;
   width: 100%;
   color: #909090;
-  color: var(--ux-theme--input-info-foreground, #909090);
+  color: var(--aurelia-ux--input-info-foreground, #909090);
 }
 
 ux-input-info>.hint-text,
@@ -29,7 +29,7 @@ ux-input-info>.counter {
 
 ux-input.focused+ux-input-info>.counter {
   color: #FF4081;
-  color: var(--ux-design--accent, #FF4081);
+  color: var(--aurelia-ux--design-accent, #FF4081);
 }
 
 ux-input>input[disabled]+ux-input-info {
@@ -38,5 +38,5 @@ ux-input>input[disabled]+ux-input-info {
 
 .has-error+ux-input-info {
   color:  #F44336;
-  color: var(--ux-theme--input-info-error, #F44336);
+  color: var(--aurelia-ux--input-info-error, #F44336);
 }

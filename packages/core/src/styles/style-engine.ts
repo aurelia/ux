@@ -4,7 +4,7 @@ import { UxTheme } from './ux-theme';
 
 @inject(StyleController)
 export class StyleEngine {
-  constructor(public styleController: StyleController) { }
+  constructor(private styleController: StyleController) { }
 
   /**
    * Processes a UxTheme into the corresponding CSS Variables
@@ -16,15 +16,11 @@ export class StyleEngine {
    * @param theme UxTheme to process.
    */
   public applyTheme(theme: UxTheme, element?: HTMLElement) {
-    if (theme == null) {
+    if (theme == null || theme.themeKey == null) {
       return;
     }
 
-    if (element != null) {
-      this.styleController.updateTheme(theme, element);
-    } else {
-      this.styleController.updateTheme(theme);
-    }
+    this.styleController.updateTheme(theme, element);
   }
 
   /**

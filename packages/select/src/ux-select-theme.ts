@@ -23,7 +23,7 @@ export class UxSelectTheme implements UxTheme {
   public optionSelected: string = swatches.grey.p400;
 
   public borderBottom: string = `1px solid ${swatches.grey.p500}`;
-  public borderBottomHover: string = '1px solid var(--ux-design--accent)';
+  public borderBottomHover: string = '1px solid var(--aurelia-ux--design-accent)';
   public borderBottomSelected: string = '';
 
   public listboxShadow: string = 'rgba(0, 0, 0, 0.12)';
