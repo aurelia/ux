@@ -1,7 +1,7 @@
 System.register(["aurelia-pal"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var aurelia_pal_1, UxResponsiveUtilities;
+    var __moduleName = context_1 && context_1.id;
     return {
         setters: [
             function (aurelia_pal_1_1) {

@@ -6,6 +6,7 @@ System.register(["aurelia-framework", "./util"], function (exports_1, context_1)
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
+    var aurelia_framework_1, util_1, UxOptGroup, UxOptGroupElementProto;
     var __moduleName = context_1 && context_1.id;
     function extractUxOptions(_, __, node) {
         var currentChild = node.firstChild;
@@ -18,7 +19,6 @@ System.register(["aurelia-framework", "./util"], function (exports_1, context_1)
         }
         return true;
     }
-    var aurelia_framework_1, util_1, UxOptGroup, UxOptGroupElementProto;
     return {
         setters: [
             function (aurelia_framework_1_1) {

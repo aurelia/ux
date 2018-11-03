@@ -644,7 +644,7 @@ var DesignProcessor = /** @class */ (function () {
         var designInnerHtml = '';
         for (var key in design) {
             if (design.hasOwnProperty(key)) {
-                designInnerHtml += "  --ux-design--" + kebabCase(key) + ": " + design[key] + ";\r\n";
+                designInnerHtml += "  --aurelia-ux--design-" + kebabCase(key) + ": " + design[key] + ";\r\n";
             }
         }
         return designInnerHtml;
@@ -1395,9 +1395,10 @@ function normalizeBooleanAttribute(attributeName, value) {
 }
 
 var StyleController = /** @class */ (function () {
-    function StyleController(observerLocator, globalStyleEngine) {
+    function StyleController(observerLocator, globalStyleEngine, ux) {
         this.observerLocator = observerLocator;
         this.globalStyleEngine = globalStyleEngine;
+        this.ux = ux;
         this.themes = [];
     }
     StyleController.prototype.updateTheme = function (theme, element) {
@@ -1405,7 +1406,14 @@ var StyleController = /** @class */ (function () {
         if (theme.themeKey == null) {
             throw new Error('Provided theme has no themeKey property.');
         }
-        if (element != null) {
+        if (theme.themeKey === 'design') {
+            for (var key in theme) {
+                if (key !== 'themeKey') {
+                    this.ux.design[key] = theme[key];
+                }
+            }
+        }
+        else if (element != null) {
             for (var key in theme) {
                 if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
                     element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), theme[key]);
@@ -1433,10 +1441,10 @@ var StyleController = /** @class */ (function () {
         return themeKeys;
     };
     StyleController.prototype.generateCssVariableName = function (themeKey, propertyKey) {
-        return "--ux-theme--" + themeKey + "-" + kebabCase$1(propertyKey);
+        return "--aurelia-ux--" + themeKey + "-" + kebabCase$1(propertyKey);
     };
     StyleController.prototype.generateCssVariable = function (themeKey, propertyKey, value) {
-        return "--ux-theme--" + themeKey + "-" + kebabCase$1(propertyKey) + ": " + value + ";";
+        return "--aurelia-ux--" + themeKey + "-" + kebabCase$1(propertyKey) + ": " + value + ";";
     };
     StyleController.prototype.setWatches = function (theme) {
         var _this = this;
@@ -1464,7 +1472,7 @@ var StyleController = /** @class */ (function () {
         return designInnerHtml;
     };
     StyleController = __decorate([
-        aureliaDependencyInjection.inject(aureliaBinding.ObserverLocator, GlobalStyleEngine)
+        aureliaDependencyInjection.inject(aureliaBinding.ObserverLocator, GlobalStyleEngine, AureliaUX)
     ], StyleController);
     return StyleController;
 }());
@@ -1487,15 +1495,10 @@ var StyleEngine = /** @class */ (function () {
      * @param theme UxTheme to process.
      */
     StyleEngine.prototype.applyTheme = function (theme, element) {
-        if (theme == null) {
+        if (theme == null || theme.themeKey == null) {
             return;
         }
-        if (element != null) {
-            this.styleController.updateTheme(theme, element);
-        }
-        else {
-            this.styleController.updateTheme(theme);
-        }
+        this.styleController.updateTheme(theme, element);
     };
     /**
      * Applies an array of themes. This is to enable the creation of

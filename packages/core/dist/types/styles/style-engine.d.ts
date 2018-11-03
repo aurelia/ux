@@ -1,7 +1,7 @@
 import { StyleController } from './style-controller';
 import { UxTheme } from './ux-theme';
 export declare class StyleEngine {
-    styleController: StyleController;
+    private styleController;
     constructor(styleController: StyleController);
     /**
      * Processes a UxTheme into the corresponding CSS Variables

@@ -20,6 +20,5 @@
     "packages/tabs",
     "packages/textarea"
   ],
-  "npmClient": "yarn",
   "version": "0.11.1"
 }

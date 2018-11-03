@@ -11,13 +11,13 @@
 
   <label if.bind="label || placeholder">${label || placeholder}</label>
 
-  <input  
+  <input
     ref="textbox"
     value.bind="rawValue"
     focus.bind="focused"
     disabled.bind="disabled & booleanAttr"
     readonly.bind="readonly & booleanAttr"
-    required.bind="required & booleanAttr" />
+    required.bind="required & booleanAttr">
 
   <slot name="trailing-icon"></slot>
 

@@ -26,31 +26,31 @@ var UxButton = /** @class */ (function () {
         this.effectChanged(this.effect);
     };
     UxButton.prototype.typeChanged = function (newValue) {
+        var _a;
         var typeClasses = ['text', 'flat', 'outline', 'raised', 'fab'];
         (_a = this.button.classList).remove.apply(_a, typeClasses);
         if (newValue == null || typeClasses.includes(newValue) === false) {
             newValue = 'raised';
         }
         this.button.classList.add(newValue);
-        var _a;
     };
     UxButton.prototype.sizeChanged = function (newValue) {
+        var _a;
         var sizeClasses = ['small', 'medium', 'large'];
         (_a = this.button.classList).remove.apply(_a, sizeClasses);
         if (newValue == null || sizeClasses.includes(newValue) === false) {
             newValue = 'medium';
         }
         this.button.classList.add(newValue);
-        var _a;
     };
     UxButton.prototype.effectChanged = function (newValue) {
+        var _a;
         var effectClasses = ['ripple', 'none'];
         (_a = this.button.classList).remove.apply(_a, effectClasses);
         if (newValue == null || effectClasses.includes(newValue) === false) {
             newValue = 'ripple';
         }
         this.button.classList.add(newValue);
-        var _a;
     };
     UxButton.prototype.themeChanged = function (newValue) {
         if (newValue != null && newValue.themeKey == null) {

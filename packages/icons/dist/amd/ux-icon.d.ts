@@ -12,5 +12,5 @@ export declare class UxIcon implements UxComponent {
     bind(): void;
     themeChanged(newValue: any): void;
     iconChanged(newValue: any): void;
-    private changeIcon(icon);
+    private changeIcon;
 }

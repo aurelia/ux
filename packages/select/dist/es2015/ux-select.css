@@ -2,7 +2,7 @@
   display: inline-block;
   min-width: 50px;
   max-width: 100%;
-  color: var(--ux-theme--select-foreground);
+  color: var(--aurelia-ux--select-foreground);
   box-sizing: border-box;
   outline: 0;
 }
@@ -121,15 +121,15 @@
 }
 
 .ux-option:hover {
-  background-color: var(--ux-theme--select-option-hover);
+  background-color: var(--aurelia-ux--select-option-hover);
 }
 
 .ux-option.focused {
-  background-color: var(--ux-theme--select-option-focused);
+  background-color: var(--aurelia-ux--select-option-focused);
 }
 
 .ux-option.selected {
-  background-color: var(--ux-theme--select-option-selected);
+  background-color: var(--aurelia-ux--select-option-selected);
 }
 
 .ux-option.disabled {

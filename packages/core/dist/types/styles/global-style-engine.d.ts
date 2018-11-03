@@ -5,5 +5,5 @@ export declare class GlobalStyleEngine {
     constructor();
     addOrUpdateGlobalStyle(id: string, css: string, tagGroup?: string): void;
     removeGlobalStyle(id: string): void;
-    private updateGlobalStyleElement();
+    private updateGlobalStyleElement;
 }

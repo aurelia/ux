@@ -12,5 +12,5 @@ export declare class UxYearList {
     attached(): void;
     selectYear(year: number): void;
     readonly yearList: number[];
-    private scrollToActive();
+    private scrollToActive;
 }

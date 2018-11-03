@@ -8,5 +8,5 @@ export declare class DesignProcessor {
     setSwatchVariables(): void;
     setDesignVariables(design: Design): void;
     setDesignWatches(design: Design): void;
-    private buildInnerHTML(design);
+    private buildInnerHTML;
 }

@@ -14,7 +14,7 @@ ux-calendar div.calendar-row {
 
 ux-calendar .calendar-row.weekdays {
   color: #E0E0E0;
-  color: var(--ux-theme--datepicker-weekday-foreground, #E0E0E0);
+  color: var(--aurelia-ux--datepicker-weekday-foreground, #E0E0E0);
 }
 
 ux-calendar .calendar-row .day {
@@ -35,14 +35,14 @@ ux-calendar div.day-highlight {
 
 ux-calendar div.day-highlight.selected {
   color: #FFF;
-  color: var(--ux-theme--datepicker-selected-day-foreground, var(--ux-design--accent-foreground, #FFF));
+  color: var(--aurelia-ux--datepicker-selected-day-foreground, var(--aurelia-ux--design-accent-foreground, #FFF));
   background-color: #FF4081;
-  background-color: var(--ux-theme--datepicker-selected-day-background, var(--ux-design--accent, #FF4081));
+  background-color: var(--aurelia-ux--datepicker-selected-day-background, var(--aurelia-ux--design-accent, #FF4081));
 }
 
 ux-calendar div.day-highlight.out-of-range {
   color: #757575;
-  color: var(--ux-theme--datepicker-out-of-range-foreground, #757575);
+  color: var(--aurelia-ux--datepicker-out-of-range-foreground, #757575);
   cursor: default;
 }
 

@@ -34,34 +34,34 @@ export declare class PaperRipple {
      * @returns If `true`, waves will exhibit a gravitational pull towards the center of the container as they fade away.
      */
     /**
-     * Sets the value that indicates whether all the waves should be re-centered towards the center of the container.
-     * @returns Nothing.
-     */
+    * Sets the value that indicates whether all the waves should be re-centered towards the center of the container.
+    * @returns Nothing.
+    */
     recenters: boolean;
     /**
      * Determines whether all the waves should start a movement from the center of the container.
      * @returns If `true`, waves will center inside its container
      */
     /**
-     * Sets the value that indicates whether all the waves should start a movement from the center of the container.
-     * @returns Nothing.
-     */
+    * Sets the value that indicates whether all the waves should start a movement from the center of the container.
+    * @returns Nothing.
+    */
     center: boolean;
     /**
      * Determines whether ripple effect should apply within a circle.
      * @returns If `true`, ripple effect will apply within a circle.
      */
     /**
-     * Sets the value that indicates whether ripple effect should apply within a circle.
-     * @returns Nothing.
-     */
+    * Sets the value that indicates whether ripple effect should apply within a circle.
+    * @returns Nothing.
+    */
     round: boolean;
     /**
      * Determines whether the ripple should keep animating or not.
      * @returns `true`, if so, otherwise `false`.
      */
     readonly shouldKeepAnimating: boolean;
-    private initTarget(target?);
+    private initTarget;
     /**
      * Adds new wave to the list of visual ripples.
      * @returns Current instance for method chaining.

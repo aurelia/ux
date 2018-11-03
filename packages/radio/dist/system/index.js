@@ -1,5 +1,6 @@
 System.register(["aurelia-framework", "aurelia-binding", "@aurelia-ux/core", "./ux-radio-theme", "./ux-radio"], function (exports_1, context_1) {
     "use strict";
+    var aurelia_framework_1, aurelia_binding_1, core_1, uxRadioConfig;
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
         config.container.get(core_1.AureliaUX).registerUxElementConfig(uxRadioConfig);
@@ -8,7 +9,6 @@ System.register(["aurelia-framework", "aurelia-binding", "@aurelia-ux/core", "./
         ]);
     }
     exports_1("configure", configure);
-    var aurelia_framework_1, aurelia_binding_1, core_1, uxRadioConfig;
     return {
         setters: [
             function (aurelia_framework_1_1) {

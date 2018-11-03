@@ -2,15 +2,15 @@ ux-icon {
     display: inline-block;
     align-self: center;
     width: 24px;
-    width: var(--ux-theme--icon-size, 24px);
+    width: var(--aurelia-ux--icon-size, 24px);
     height: 24px;
-    height: var(--ux-theme--icon-size, 24px);
+    height: var(--aurelia-ux--icon-size, 24px);
 }
 
 ux-icon > svg {
     width: 24px;
-    width: var(--ux-theme--icon-size, 24px);
+    width: var(--aurelia-ux--icon-size, 24px);
     height: 24px;
-    height: var(--ux-theme--icon-size, 24px);
+    height: var(--aurelia-ux--icon-size, 24px);
     fill: currentColor;
 }

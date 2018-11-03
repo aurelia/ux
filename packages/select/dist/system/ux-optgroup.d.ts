@@ -26,8 +26,8 @@ export declare class UxOptGroup {
     bind(): void;
     attached(): void;
     detached(): void;
-    private getUxSelect();
-    private setParentDisabled(disabled);
+    private getUxSelect;
+    private setParentDisabled;
     getOptions(): UxOptionElement[];
     getDisabled(): boolean;
     setDisabled(disabled: boolean): void;
