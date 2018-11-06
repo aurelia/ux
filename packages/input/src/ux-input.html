@@ -1,5 +1,5 @@
 <template role="textbox"
-  class.bind="focused ? 'focused' : ''"
+class="ux-input ${focused ? 'ux-input--focused' : ''}"
   disabled.bind="disabled & booleanAttr"
   readonly.bind="readonly & booleanAttr"
   aria-disabled.bind="disabled & booleanAttr"
@@ -9,10 +9,11 @@
 
   <slot name="leading-icon"></slot>
 
-  <label if.bind="label || placeholder">${label || placeholder}</label>
+  <label class="ux-input__label" if.bind="label || placeholder">${label || placeholder}</label>
 
   <input
     ref="textbox"
+    class="ux-input__inner-input"
     value.bind="rawValue"
     focus.bind="focused"
     disabled.bind="disabled & booleanAttr"
