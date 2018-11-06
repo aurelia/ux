@@ -64,6 +64,15 @@ export class UxRadio implements UxComponent {
       }
     }
 
+    if (element.hasAttribute('name')) {
+      const name = element.getAttribute('name');
+
+      if (name != null) {
+        radio.setAttribute('name', name);
+        element.removeAttribute('name');
+      }
+    }
+
     if (element.hasAttribute('checked')) {
       element.checked = true;
     }
