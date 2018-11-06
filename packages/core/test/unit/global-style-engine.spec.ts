@@ -569,7 +569,7 @@ describe('aurelia-ux/core', () => {
 
   beforeAll(() => {
     styleEngine = new GlobalStyleEngine();
-    styleElement = document.head.querySelector('#aurelia-ux-core') as HTMLStyleElement;
+    styleElement = document.querySelector('#aurelia-ux-core') as HTMLStyleElement;
   });
 
   it('expect style element to be created', () => {

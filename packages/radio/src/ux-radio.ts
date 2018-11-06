@@ -154,7 +154,6 @@ function stopEvent(e: Event) {
   e.stopPropagation();
 }
 
-
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
 const uxRadioElementProto = Object.create(HTMLElement.prototype, {
   type: {
