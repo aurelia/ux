@@ -24,6 +24,7 @@ export class UxInput implements UxComponent {
   @bindable public theme: UxInputTheme;
   @bindable public label: any;
   @bindable public type: any;
+  @bindable public value: any;
 
   @observable
   public rawValue: string = '';
@@ -31,7 +32,6 @@ export class UxInput implements UxComponent {
   @observable
   public focused: boolean = false;
 
-  public value: any = undefined;
   public textbox: HTMLInputElement;
 
   constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
@@ -41,6 +41,10 @@ export class UxInput implements UxComponent {
   public bind() {
     const element = this.element;
     const textbox = this.textbox;
+
+    if (this.value != null) {
+      this.rawValue = this.value;
+    }
 
     if (this.autofocus || this.autofocus === '') {
       this.focused = true;
