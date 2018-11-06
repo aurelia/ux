@@ -9,17 +9,21 @@ export class GlobalStyleEngine {
   private styleTag: HTMLStyleElement;
 
   constructor() {
-    this.styleTag = DOM.createElement('style') as HTMLStyleElement;
+    this.styleTag = DOM.querySelector('#aurelia-ux-core') as HTMLStyleElement;
 
-    this.styleTag.type = 'text/css';
-    this.styleTag.id = 'aurelia-ux-core';
+    if (this.styleTag == null) {
+      this.styleTag = DOM.createElement('style') as HTMLStyleElement;
 
-    DOM.appendNode(this.styleTag, document.head);
+      this.styleTag.type = 'text/css';
+      this.styleTag.id = 'aurelia-ux-core';
+
+      DOM.appendNode(this.styleTag, document.head);
+    }
   }
 
   public addOrUpdateGlobalStyle(id: string, css: string, tagGroup?: string) {
     if (id === undefined || css === undefined) {
-      this.logger.warn('AddOrUpdateGlobalStyle: The parameters id and css must both be provided.', {id, css});
+      this.logger.warn('AddOrUpdateGlobalStyle: The parameters id and css must both be provided.', { id, css });
     }
 
     const index = this.globalStyles.findIndex(t => t.id === id);
@@ -38,7 +42,7 @@ export class GlobalStyleEngine {
 
   public removeGlobalStyle(id: string) {
     if (id === undefined) {
-      this.logger.warn('removeGlobalStyle: The id parameter must be provided.', {id});
+      this.logger.warn('removeGlobalStyle: The id parameter must be provided.', { id });
     }
 
     const index = this.globalStyles.findIndex(t => t.id === id);
