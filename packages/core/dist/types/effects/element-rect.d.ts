@@ -40,7 +40,7 @@ export declare class ElementRect {
      * @param The point object containing x and y coordinates.
      * @returns Distance from a point to the container's farthest corner.
      */
-    distanceToFarthestCorner({x, y}: Point): number;
+    distanceToFarthestCorner({ x, y }: Point): number;
     /**
      * Determines if the specified point is contained within this element.
      * @param {(Event|Object)} ev - The object containing coordinates of the point.

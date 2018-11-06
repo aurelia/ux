@@ -6,6 +6,7 @@ System.register(["aurelia-framework", "@aurelia-ux/core", "./util"], function (e
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
+    var aurelia_framework_1, core_1, util_1, UxOption, UxOptionElementProto;
     var __moduleName = context_1 && context_1.id;
     function removeWave(el) {
         el.ripple.upAction();
@@ -25,7 +26,6 @@ System.register(["aurelia-framework", "@aurelia-ux/core", "./util"], function (e
         node.setAttribute('text', node.textContent || '');
         node.textContent = '';
     }
-    var aurelia_framework_1, core_1, util_1, UxOption, UxOptionElementProto;
     return {
         setters: [
             function (aurelia_framework_1_1) {

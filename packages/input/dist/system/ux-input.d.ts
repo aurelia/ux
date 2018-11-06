@@ -27,7 +27,7 @@ export declare class UxInput implements UxComponent {
     detached(): void;
     getValue(): any;
     setValue(value: any): void;
-    private processRawValue(rawValue);
+    private processRawValue;
     themeChanged(newValue: any): void;
     focusedChanged(focused: boolean): void;
     typeChanged(newValue: any): void;

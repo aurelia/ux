@@ -42,18 +42,18 @@ export declare class UxSelect implements UxComponent {
     constructor(element: UxSelectElement, styleEngine: StyleEngine, observerLocator: ObserverLocator, taskQueue: TaskQueue);
     bind(): void;
     unbind(): void;
-    private resolveDisplayValue();
+    private resolveDisplayValue;
     private ignoreSelectEvent;
-    private synchronizeOptions();
-    private synchronizeValue();
-    private setupListAnchor();
-    private unsetupListAnchor();
+    private synchronizeOptions;
+    private synchronizeValue;
+    private setupListAnchor;
+    private unsetupListAnchor;
     listAnchor: {
         x: number | string;
         y: number | string;
     } | null;
-    private calcAnchorPosition();
-    private onKeyboardSelect();
+    private calcAnchorPosition;
+    private onKeyboardSelect;
     call(): void;
     getValue(): any;
     private arrayObserver;
@@ -62,7 +62,7 @@ export declare class UxSelect implements UxComponent {
     expand(): void;
     private isCollapsing;
     collapse(): void;
-    private setFocusedOption(focusedOption);
+    private setFocusedOption;
     moveSelectedIndex(offset: number): void;
     onTriggerClick(): void;
     onBlur(): void;

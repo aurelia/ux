@@ -1,7 +1,7 @@
 ux-list {
   display: block;
   background-color: transparent;
-  background-color: var(--ux-theme--list-background, transparent);
+  background-color: var(--aurelia-ux--list-background, transparent);
 }
 
 ux-list>.ux-list-item,
@@ -11,7 +11,7 @@ ux-list>ux-list-item {
   padding: 16px;
   font-size: 16px;
   color: inherit;
-  color: var(--ux-theme--list-foreground, inherit);
+  color: var(--aurelia-ux--list-foreground, inherit);
   text-decoration: none;
 }
 
@@ -62,7 +62,7 @@ ux-list>.ux-list-item>.list-content>.secondary,
 ux-list>ux-list-item>.list-content>.secondary {
   font-size: 14px;
   color: #888;
-  color: var(--ux-theme--list-secondary-foreground, #888);
+  color: var(--aurelia-ux--list-secondary-foreground, #888);
 }
 
 ux-list[type="two-line"]>.ux-list-item>.list-content,

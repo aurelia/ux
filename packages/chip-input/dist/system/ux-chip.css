@@ -8,15 +8,15 @@ ux-chip {
   border-radius: 100px;
 
   background-color:  #FF4081;
-  background-color: var(--ux-theme--chip-background, var(--ux-design--accent, #FF4081));
+  background-color: var(--aurelia-ux--chip-background, var(--aurelia-ux--design-accent, #FF4081));
   color: #FFF;
-  color: var(--ux-theme--chip-foreground, var(--ux-design--accent-foreground, #FFF));
+  color: var(--aurelia-ux--chip-foreground, var(--aurelia-ux--design-accent-foreground, #FFF));
 }
 
   ux-chip:focus {
     outline: none;
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),0 1px 10px 0 rgba(0, 0, 0, 0.12),0 2px 4px -1px rgba(0, 0, 0, 0.2);
-    box-shadow: var(--ux-design--elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14),0 1px 10px 0 rgba(0, 0, 0, 0.12),0 2px 4px -1px rgba(0, 0, 0, 0.2));
+    box-shadow: var(--aurelia-ux--design-elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14),0 1px 10px 0 rgba(0, 0, 0, 0.12),0 2px 4px -1px rgba(0, 0, 0, 0.2));
   }
 
   ux-chip > span {
@@ -37,9 +37,9 @@ ux-chip {
       align-items: center;
       margin: 0 4px;
       color: #EEEEEE;
-      color: var(--ux-theme--chip-delete-foreground, #EEEEEE);
+      color: var(--aurelia-ux--chip-delete-foreground, #EEEEEE);
       background-color: #9E9E9E;
-      background-color: var(--ux-theme--chip-delete-background, #9E9E9E);
+      background-color: var(--aurelia-ux--chip-delete-background, #9E9E9E);
       height: 24px;
       width: 24px;
       border-radius: 24px;

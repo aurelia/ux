@@ -30,11 +30,11 @@ export declare class UxOption {
     bind(): void;
     attached(): void;
     detached(): void;
-    private getOptGroup();
-    private getUxSelect();
-    private uxMultipleChanged(useSelect);
-    private setParentDisabled(disabled);
-    private notify();
+    private getOptGroup;
+    private getUxSelect;
+    private uxMultipleChanged;
+    private setParentDisabled;
+    private notify;
     getFocused(): boolean;
     setFocused(focused: boolean): void;
     getSelected(): boolean;

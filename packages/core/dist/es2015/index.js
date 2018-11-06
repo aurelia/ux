@@ -627,7 +627,7 @@ let DesignProcessor = class DesignProcessor {
         let designInnerHtml = '';
         for (const key in design) {
             if (design.hasOwnProperty(key)) {
-                designInnerHtml += `  --ux-design--${kebabCase(key)}: ${design[key]};\r\n`;
+                designInnerHtml += `  --aurelia-ux--design-${kebabCase(key)}: ${design[key]};\r\n`;
             }
         }
         return designInnerHtml;
@@ -1283,9 +1283,10 @@ function normalizeBooleanAttribute(attributeName, value) {
 }
 
 let StyleController = class StyleController {
-    constructor(observerLocator, globalStyleEngine) {
+    constructor(observerLocator, globalStyleEngine, ux) {
         this.observerLocator = observerLocator;
         this.globalStyleEngine = globalStyleEngine;
+        this.ux = ux;
         this.themes = [];
     }
     updateTheme(theme, element) {
@@ -1293,7 +1294,14 @@ let StyleController = class StyleController {
         if (theme.themeKey == null) {
             throw new Error('Provided theme has no themeKey property.');
         }
-        if (element != null) {
+        if (theme.themeKey === 'design') {
+            for (const key in theme) {
+                if (key !== 'themeKey') {
+                    this.ux.design[key] = theme[key];
+                }
+            }
+        }
+        else if (element != null) {
             for (const key in theme) {
                 if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
                     element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), theme[key]);
@@ -1321,10 +1329,10 @@ let StyleController = class StyleController {
         return themeKeys;
     }
     generateCssVariableName(themeKey, propertyKey) {
-        return `--ux-theme--${themeKey}-${kebabCase$1(propertyKey)}`;
+        return `--aurelia-ux--${themeKey}-${kebabCase$1(propertyKey)}`;
     }
     generateCssVariable(themeKey, propertyKey, value) {
-        return `--ux-theme--${themeKey}-${kebabCase$1(propertyKey)}: ${value};`;
+        return `--aurelia-ux--${themeKey}-${kebabCase$1(propertyKey)}: ${value};`;
     }
     setWatches(theme) {
         for (const key of this.getThemeKeys(theme)) {
@@ -1348,7 +1356,7 @@ let StyleController = class StyleController {
     }
 };
 StyleController = __decorate([
-    inject(ObserverLocator, GlobalStyleEngine)
+    inject(ObserverLocator, GlobalStyleEngine, AureliaUX)
 ], StyleController);
 function kebabCase$1(value) {
     value = value.charAt(0).toLowerCase() + value.slice(1);
@@ -1369,15 +1377,10 @@ let StyleEngine = class StyleEngine {
      * @param theme UxTheme to process.
      */
     applyTheme(theme, element) {
-        if (theme == null) {
+        if (theme == null || theme.themeKey == null) {
             return;
         }
-        if (element != null) {
-            this.styleController.updateTheme(theme, element);
-        }
-        else {
-            this.styleController.updateTheme(theme);
-        }
+        this.styleController.updateTheme(theme, element);
     }
     /**
      * Applies an array of themes. This is to enable the creation of

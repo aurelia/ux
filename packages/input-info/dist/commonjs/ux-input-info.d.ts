@@ -10,5 +10,5 @@ export declare class UxInputInfo implements UxComponent {
     constructor(element: HTMLElement, styleEngine: StyleEngine);
     bind(): void;
     themeChanged(newValue: UxInputInfoTheme): void;
-    private findAndSetTarget(element);
+    private findAndSetTarget;
 }

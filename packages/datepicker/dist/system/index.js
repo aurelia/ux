@@ -1,5 +1,6 @@
 System.register(["aurelia-framework", "./ux-datepicker-theme"], function (exports_1, context_1) {
     "use strict";
+    var aurelia_framework_1;
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
         config.globalResources([
@@ -10,7 +11,6 @@ System.register(["aurelia-framework", "./ux-datepicker-theme"], function (export
         ]);
     }
     exports_1("configure", configure);
-    var aurelia_framework_1;
     return {
         setters: [
             function (aurelia_framework_1_1) {

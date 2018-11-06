@@ -9,25 +9,25 @@ ux-input {
   position: relative;
   cursor: text;
   color: inherit;
-  color: var(--ux-theme--input-foreground, inherit);
+  color: var(--aurelia-ux--input-foreground, inherit);
   background-color: #00000011;
-  background-color: var(--ux-theme--input-background, #00000011);
+  background-color: var(--aurelia-ux--input-background, #00000011);
   border-radius: 4px 4px 0 0;
-  border-radius: var(--ux-theme--input-border-radius, 4px 4px 0 0);
+  border-radius: var(--aurelia-ux--input-border-radius, 4px 4px 0 0);
 }
 
 ux-input:hover {
   background-color: #00000027;
-  background-color: var(--ux-theme--input-background-hover, #00000027);
+  background-color: var(--aurelia-ux--input-background-hover, #00000027);
 }
 
 ux-input>input {
   width: 100%;
   box-sizing: border-box;
   font-size: inherit;
-  font-size: var(--ux-theme--input-font-size, inherit);
+  font-size: var(--aurelia-ux--input-font-size, inherit);
   letter-spacing: inherit;
-  letter-spacing: var(--ux-theme--input-letter-spacing, inherit);
+  letter-spacing: var(--aurelia-ux--input-letter-spacing, inherit);
   padding: 6px 0 4px 0;
   padding-right: 0px;
   padding-left: 0px;
@@ -43,15 +43,15 @@ ux-input label {
   position: absolute;
   cursor: text;
   font-size: 13px;
-  font-size: var(--ux-theme--input-label-font-size, 13px);
+  font-size: var(--aurelia-ux--input-label-font-size, 13px);
   letter-spacing: 0.5px;
-  letter-spacing: var(--ux-theme--input-label-letter-spacing, 0.5px);
+  letter-spacing: var(--aurelia-ux--input-label-letter-spacing, 0.5px);
   transition: transform ease 150ms;
 }
 
 ux-input.ux-input--focused label {
   color: #4043ff;
-  color: var(--ux-theme--input-border-focus, var(--ux-design--primary, #4043ff));
+  color: var(--aurelia-ux--input-border-focus, var(--aurelia-ux--design-primary, #4043ff));
 }
 
 ux-input.ux-input--has-value label,
@@ -80,13 +80,13 @@ ux-input [slot="leading-icon"]~label {
 
 ux-input :not(input) {
   color: #555;
-  color: var(--ux-theme--input-foreground-label, #555);
+  color: var(--aurelia-ux--input-foreground-label, #555);
 }
 
 .ux-input__border-bottom {
   height: 1px;
   background-color: #00000066;
-  background-color: var(--ux-theme--input-border-bottom, #00000066);
+  background-color: var(--aurelia-ux--input-border-bottom, #00000066);
   position: absolute;
   bottom: 0;
   left: 0;
@@ -95,13 +95,13 @@ ux-input :not(input) {
 
 ux-input:hover .ux-input__border-bottom {
   background-color: #00000066;
-  background-color: var(--ux-theme--input-border-bottom-hover, #00000066);
+  background-color: var(--aurelia-ux--input-border-bottom-hover, #00000066);
 }
 
 .ux-input__border-bottom-active {
   height: 2px;
   background-color: #4043ff;
-  background-color: var(--ux-theme--input-border-bottom-focus, var(--ux-design--primary, #4043ff));
+  background-color: var(--aurelia-ux--input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff));
   position: absolute;
   bottom: 0;
   left: 0;
@@ -121,18 +121,18 @@ ux-input.has-error input {
 ux-input.has-error .ux-input__border-bottom,
 ux-input.has-error .ux-input__border-bottom-active {
   background-color: #F44336;
-  background-color: var(--ux-theme--input-error, #F44336);
+  background-color: var(--aurelia-ux--input-error, #F44336);
 }
 
 ux-input.has-error> :not(input) {
   color: #F44336;
-  color: var(--ux-theme--input-error, #F44336);
+  color: var(--aurelia-ux--input-error, #F44336);
 }
 
 ux-input[disabled],
 ux-input[readonly] {
   background-color: #e1e1e1;
-  background-color: var(--ux-theme--input-disabled-background, #e1e1e1);
+  background-color: var(--aurelia-ux--input-disabled-background, #e1e1e1);
 }
 
 ux-input[disabled],
@@ -144,7 +144,7 @@ ux-input[readonly] label,
 ux-input[readonly]:hover,
 ux-input[readonly]:focus {
   color: #989898;
-  color: var(--ux-theme--input-disabled-foreground, #989898);
+  color: var(--aurelia-ux--input-disabled-foreground, #989898);
 }
 
 ux-input[disabled] .ux-input__border-bottom,
@@ -154,12 +154,12 @@ ux-input[readonly] .ux-input__border-bottom,
 ux-input[readonly]:hover .ux-input__border-bottom,
 ux-input[readonly]:focus .ux-input__border-bottom {
   background-color: #989898;
-  background-color: var(--ux-theme--input-disabled-border, #989898);
+  background-color: var(--aurelia-ux--input-disabled-border, #989898);
 }
 
 ux-input.outline {
   border: 1px solid #00000066;
-  border: 1px solid var(--ux-theme--input-border, #00000066);
+  border: 1px solid var(--aurelia-ux--input-border, #00000066);
   border-radius: 6px;
 }
 
@@ -170,12 +170,12 @@ ux-input.outline .ux-input__border-bottom-active {
 
 ux-input.outline:hover {
   border: 1px solid #00000066;
-  border: 1px solid var(--ux-theme--input-border-hover, #00000066);
+  border: 1px solid var(--aurelia-ux--input-border-hover, #00000066);
 }
 
 ux-input.outline.ux-input--focused {
   border: 2px solid #4043ff;
-  border: 2px solid var(--ux-theme--input-border-focus, var(--ux-design--primary, #4043ff));
+  border: 2px solid var(--aurelia-ux--input-border-focus, var(--aurelia-ux--design-primary, #4043ff));
 }
 
 ux-input.outline.ux-input--has-value label,
@@ -187,5 +187,5 @@ ux-input.outline.ux-input--focused label {
 
 ux-input.outline.has-error {
   border-color: #F44336;
-  border-color: var(--ux-theme--input-error, #F44336);
+  border-color: var(--aurelia-ux--input-error, #F44336);
 }

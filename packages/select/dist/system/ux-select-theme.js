@@ -1,7 +1,7 @@
 System.register(["@aurelia-ux/core"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var core_1, UxSelectTheme;
+    var __moduleName = context_1 && context_1.id;
     return {
         setters: [
             function (core_1_1) {
@@ -28,7 +28,7 @@ System.register(["@aurelia-ux/core"], function (exports_1, context_1) {
                     this.optionFocused = core_1.swatches.grey.p300;
                     this.optionSelected = core_1.swatches.grey.p400;
                     this.borderBottom = "1px solid " + core_1.swatches.grey.p500;
-                    this.borderBottomHover = '1px solid var(--ux-design--accent)';
+                    this.borderBottomHover = '1px solid var(--aurelia-ux--design-accent)';
                     this.borderBottomSelected = '';
                     this.listboxShadow = 'rgba(0, 0, 0, 0.12)';
                     this.error = core_1.swatches.red.p500;

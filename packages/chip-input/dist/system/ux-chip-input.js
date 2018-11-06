@@ -6,8 +6,8 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __moduleName = context_1 && context_1.id;
     var aurelia_templating_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, UxChipInput;
+    var __moduleName = context_1 && context_1.id;
     return {
         setters: [
             function (aurelia_templating_1_1) {

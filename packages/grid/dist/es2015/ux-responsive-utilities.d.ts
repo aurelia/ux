@@ -17,7 +17,7 @@ export declare class UxResponsiveUtilities implements Disposable {
     xl: boolean;
     private updating;
     constructor();
-    private onResize();
+    private onResize;
     private calculateResponsiveValues;
     dispose(): void;
 }

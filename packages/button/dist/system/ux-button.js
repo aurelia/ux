@@ -6,8 +6,8 @@ System.register(["aurelia-templating", "aurelia-dependency-injection", "@aurelia
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var __moduleName = context_1 && context_1.id;
     var aurelia_templating_1, aurelia_dependency_injection_1, core_1, UxButton;
+    var __moduleName = context_1 && context_1.id;
     return {
         setters: [
             function (aurelia_templating_1_1) {
@@ -38,31 +38,31 @@ System.register(["aurelia-templating", "aurelia-dependency-injection", "@aurelia
                     this.effectChanged(this.effect);
                 };
                 UxButton.prototype.typeChanged = function (newValue) {
+                    var _a;
                     var typeClasses = ['text', 'flat', 'outline', 'raised', 'fab'];
                     (_a = this.button.classList).remove.apply(_a, typeClasses);
                     if (newValue == null || typeClasses.includes(newValue) === false) {
                         newValue = 'raised';
                     }
                     this.button.classList.add(newValue);
-                    var _a;
                 };
                 UxButton.prototype.sizeChanged = function (newValue) {
+                    var _a;
                     var sizeClasses = ['small', 'medium', 'large'];
                     (_a = this.button.classList).remove.apply(_a, sizeClasses);
                     if (newValue == null || sizeClasses.includes(newValue) === false) {
                         newValue = 'medium';
                     }
                     this.button.classList.add(newValue);
-                    var _a;
                 };
                 UxButton.prototype.effectChanged = function (newValue) {
+                    var _a;
                     var effectClasses = ['ripple', 'none'];
                     (_a = this.button.classList).remove.apply(_a, effectClasses);
                     if (newValue == null || effectClasses.includes(newValue) === false) {
                         newValue = 'ripple';
                     }
                     this.button.classList.add(newValue);
-                    var _a;
                 };
                 UxButton.prototype.themeChanged = function (newValue) {
                     if (newValue != null && newValue.themeKey == null) {

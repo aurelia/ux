@@ -23,13 +23,13 @@ ux-datepicker {
     animation-duration: 250ms;
     
     background-color: rgba(0, 0, 0, 0.25);
-    background-color: var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25));
+    background-color: var(--aurelia-ux--datepicker-overlay, rgba(0, 0, 0, 0.25));
   }
 
 
 ux-datepicker > ux-button svg {
   fill: currentColor;
-  fill: var(--ux-theme--datepicker-calendar-icon, currentColor);
+  fill: var(--aurelia-ux--datepicker-calendar-icon, currentColor);
   width: 24px;
   height: 24px;
 }
@@ -41,6 +41,6 @@ ux-datepicker > ux-button svg {
   }
   to {
     background-color: rgba(0, 0, 0, 0.25);
-    background-color: var(--ux-theme--datepicker-overlay, rgba(0, 0, 0, 0.25));
+    background-color: var(--aurelia-ux--datepicker-overlay, rgba(0, 0, 0, 0.25));
   }
 }

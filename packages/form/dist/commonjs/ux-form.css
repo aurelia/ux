@@ -31,7 +31,7 @@ ux-form ux-field {
 
 ux-form ux-field > label {
     font-size: 14px;
-    font-size: var(--ux-theme--form-label-font-size, 14px);
+    font-size: var(--aurelia-ux--form-label-font-size, 14px);
     color: inherit;
-    color: var(--ux-theme--form-label-color, inherit);
+    color: var(--aurelia-ux--form-label-color, inherit);
 }

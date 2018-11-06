@@ -19,7 +19,7 @@ ux-chip-input {
     flex-grow: 1;
     min-width: 180px;
     color: inherit;
-    color: var(--ux-theme--chip-input-foreground, inherit);
+    color: var(--aurelia-ux--chip-input-foreground, inherit);
   }
 
   ux-chip-input>input:focus {
@@ -29,7 +29,7 @@ ux-chip-input {
   ux-chip-input>input+div.bottom-border {
     align-self: flex-end;
     background-color: #9E9E9E;
-    background-color: var(--ux-theme--chip-input-bottom-border, #9E9E9E);
+    background-color: var(--aurelia-ux--chip-input-bottom-border, #9E9E9E);
     height: 1px;
     margin-top: 2px;
     margin-bottom: 4px;
@@ -40,7 +40,7 @@ ux-chip-input {
     ux-chip-input:hover>div.bottom-border,
     ux-chip-input>input:focus+div.bottom-border {
       background-color: #FF4081;
-      background-color: var(--ux-design--accent, #FF4081);
+      background-color: var(--aurelia-ux--design-accent, #FF4081);
     }
 
     ux-chip-input > input:focus+div.bottom-border {

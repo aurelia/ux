@@ -6,6 +6,7 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
+    var aurelia_framework_1, aurelia_logging_1, core_1, util_1, UP, DOWN, ENTER, SPACE, logger, invalidMultipleValueMsg, selectArrayContext, UxSelect, UxSelectElementProto;
     var __moduleName = context_1 && context_1.id;
     function extractUxOption(_, __, node) {
         if (node.hasAttribute('containerless')) {
@@ -27,7 +28,6 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
     function defaultMatcher(a, b) {
         return a === b;
     }
-    var aurelia_framework_1, aurelia_logging_1, core_1, util_1, UP, DOWN, ENTER, SPACE, logger, invalidMultipleValueMsg, selectArrayContext, UxSelect, UxSelectElementProto;
     return {
         setters: [
             function (aurelia_framework_1_1) {

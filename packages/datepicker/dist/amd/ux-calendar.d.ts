@@ -17,5 +17,5 @@ export declare class UxCalendar {
     nextMonth(): void;
     changeCalendarSelection(newDate: moment.Moment): void;
     displayMonthChanged(newDate: moment.Moment): void;
-    private isValidDate(date);
+    private isValidDate;
 }

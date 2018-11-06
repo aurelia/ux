@@ -26,9 +26,9 @@ export declare class AureliaUX {
     platform: Platform;
     design: Design;
     constructor(use: UXConfiguration, container: Container, designProcessor: DesignProcessor, observerLocator: ObserverLocator);
-    private createAdapter();
-    private getOrCreateUxElementAdapters(tagName);
-    private interceptDetermineDefaultBindingMode();
+    private createAdapter;
+    private getOrCreateUxElementAdapters;
+    private interceptDetermineDefaultBindingMode;
     start(config: FrameworkConfiguration): Promise<this>;
     addUxElementObserverAdapter(tagName: string, properties: Record<string, UxElementPropertyObserver>): void;
     registerUxElementConfig(observerAdapter: UxElementObserverAdapter): void;
