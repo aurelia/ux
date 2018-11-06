@@ -53,13 +53,13 @@ export class UxButton implements UxComponent {
   public sizeChanged(newValue: string | null) {
     const sizeClasses = ['ux-button--small', 'ux-button--medium', 'ux-button--large'];
 
-    this.button.classList.remove(...sizeClasses);
+    this.element.classList.remove(...sizeClasses);
 
     if (newValue == null || sizeClasses.includes(`ux-button--${newValue}`) === false) {
       newValue = 'medium';
     }
 
-    this.button.classList.add(`ux-button--${newValue}`);
+    this.element.classList.add(`ux-button--${newValue}`);
   }
 
   public effectChanged(newValue: string | null) {
