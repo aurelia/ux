@@ -1,4 +1,4 @@
-import {Design} from '../designs/design';
+import { Design } from '../designs/design';
 
 export interface Platform {
   type: string;

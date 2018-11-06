@@ -1,5 +1,5 @@
-import {Platform} from '../platforms/platform';
-import {FrameworkConfiguration} from 'aurelia-framework';
+import { Platform } from '../platforms/platform';
+import { FrameworkConfiguration } from 'aurelia-framework';
 
 export interface Host {
   type: string;

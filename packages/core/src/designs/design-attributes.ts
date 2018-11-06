@@ -1,4 +1,4 @@
-import {ViewCompiler, ViewResources} from 'aurelia-templating';
+import { ViewCompiler, ViewResources } from 'aurelia-templating';
 
 export function processDesignAttributes(
   _: ViewCompiler,

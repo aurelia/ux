@@ -1,6 +1,6 @@
-import {Design} from './design';
-import {swatches} from '../colors/swatches';
-import {shadows} from '../colors/shadows';
+import { Design } from './design';
+import { swatches } from '../colors/swatches';
+import { shadows } from '../colors/shadows';
 
 export class IOSDesign implements Design {
   public type = 'ios';
@@ -15,7 +15,7 @@ export class IOSDesign implements Design {
   public primaryForeground = swatches.white;
 
   public primaryLight = swatches.indigo.p100;
-  public primaryLightForeground  = swatches.grey.p500;
+  public primaryLightForeground = swatches.grey.p500;
 
   public primaryDark = swatches.indigo.p700;
   public primaryDarkForeground = swatches.white;

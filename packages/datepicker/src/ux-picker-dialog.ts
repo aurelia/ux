@@ -3,6 +3,8 @@ import { inject } from 'aurelia-dependency-injection';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import * as moment from 'moment';
 
+type Moment = moment.Moment;
+
 @inject(ViewResources)
 @customElement('ux-picker-dialog')
 export class UxPickerDialog {
@@ -12,12 +14,12 @@ export class UxPickerDialog {
   @bindable public weekdays: any;
   @bindable public config: DatepickerSettings;
   @bindable public initialDate: any;
-  @bindable public minDate: moment.Moment;
-  @bindable public maxDate: moment.Moment;
+  @bindable public minDate: Moment;
+  @bindable public maxDate: Moment;
   @bindable public value: Date | null;
   @bindable public closeDialog: () => {};
 
-  private selectedDate: moment.Moment;
+  private selectedDate: Moment;
 
   constructor(public resources: ViewResources) { }
 

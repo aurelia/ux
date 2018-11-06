@@ -1,5 +1,5 @@
-import {PaperWave} from './paper-wave';
-import {PLATFORM} from 'aurelia-pal';
+import { PaperWave } from './paper-wave';
+import { PLATFORM } from 'aurelia-pal';
 
 /**
  * Provides all the logic to produce ripple visual effect.

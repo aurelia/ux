@@ -1,4 +1,4 @@
-import {Point} from './point';
+import { Point } from './point';
 
 /**
  * Provides the utilities for getting element's metrics.
