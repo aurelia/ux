@@ -6,11 +6,17 @@ export class UxButtonTheme implements UxTheme {
   public background: string;
   public foreground: string;
 
+  public accentBackground: string;
+  public accentForeground: string;
+
   public flatBackground: string;
   public flatForeground: string;
 
-  public accentBackground: string;
-  public accentForeground: string;
+  public textBackground: string;
+  public textForeground: string;
+
+  public outlineForeground: string;
+  public outlineBorder: string;
 
   public accentFlatBackground: string;
   public accentFlatForeground: string;
