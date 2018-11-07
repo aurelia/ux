@@ -103,6 +103,10 @@ ux-button {
   background-color: rgba(124, 124, 124, 0.25);
 }
 
+.ux-button--text:focus {
+  background-color: rgba(124, 124, 124, 0.30);
+}
+
 .ux-button--outline:focus {
   border: 1px solid #3F51B5;
   border: 1px solid var(--aurelia-ux--design-primary, #3F51B5);
@@ -145,6 +149,11 @@ ux-button {
 
 .ux-button--flat.ux-button--disabled {
   opacity: .74;
+}
+
+.ux-fab-button {
+  height: auto;
+  width: auto;
 }
 
 .ux-button--small .ux-button--fab {

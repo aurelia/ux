@@ -43,6 +43,12 @@ export class UxButton implements UxComponent {
 
     this.button.classList.remove(...typeClasses);
 
+    if (newValue === 'fab') {
+      this.element.classList.add('ux-fab-button');
+    } else {
+      this.element.classList.remove('ux-fab-button');
+    }
+
     if (newValue == null || typeClasses.includes(`ux-button--${newValue}`) === false) {
       newValue = 'raised';
     }
