@@ -46,45 +46,42 @@ export class UxRadio implements UxComponent {
   }
 
   public bind() {
-    const element = this.element;
-    const radio = this.radio;
-
-    if (element.hasAttribute('id')) {
-      const id = element.id;
+    if (this.element.hasAttribute('id')) {
+      const id = this.element.id;
 
       if (id != null) {
-        radio.setAttribute('id', id);
-        element.removeAttribute('id');
+        this.radio.setAttribute('id', id);
+        this.element.removeAttribute('id');
       }
     }
 
-    if (element.hasAttribute('tabindex')) {
-      const tabIndex = element.getAttribute('tabindex');
+    if (this.element.hasAttribute('tabindex')) {
+      const tabIndex = this.element.getAttribute('tabindex');
 
       if (tabIndex != null) {
-        radio.setAttribute('tabindex', tabIndex);
-        element.removeAttribute('tabindex');
+        this.radio.setAttribute('tabindex', tabIndex);
+        this.element.removeAttribute('tabindex');
       }
     }
 
-    if (element.hasAttribute('name')) {
-      const name = element.getAttribute('name');
+    if (this.element.hasAttribute('name')) {
+      const name = this.element.getAttribute('name');
 
       if (name != null) {
-        radio.setAttribute('name', name);
-        element.removeAttribute('name');
+        this.radio.setAttribute('name', name);
+        this.element.removeAttribute('name');
       }
     }
 
-    if (element.hasAttribute('checked')) {
-      element.checked = true;
+    if (this.element.hasAttribute('checked')) {
+      this.element.checked = true;
     }
 
     if (this.checked) {
-      radio.checked = true;
+      this.radio.checked = true;
+      this.element.classList.add('ux-radio--checked');
     }
 
-    this.setChecked(this.value);
     this.disabledChanged(this.radio.disabled);
     this.themeChanged(this.theme);
   }
@@ -112,12 +109,12 @@ export class UxRadio implements UxComponent {
 
       if (this.radio) {
         this.radio.checked = !!newValue;
-      }
 
-      if (this.radio.checked) {
-        this.element.classList.add('ux-radio--checked');
-      } else {
-        this.element.classList.remove('ux-radio--checked');
+        if (this.radio.checked) {
+          this.element.classList.add('ux-radio--checked');
+        } else {
+          this.element.classList.remove('ux-radio--checked');
+        }
       }
 
       this.ignoreValueChanges = false;
