@@ -147,17 +147,17 @@ ux-button {
   opacity: .74;
 }
 
-.ux-button--fab.ux-button--small {
+.ux-button--small .ux-button--fab {
   width: 40px;
   height: 40px;
 }
 
-.ux-button--fab.ux-button--medium {
+.ux-button--medium .ux-button--fab {
   width: 56px;
   height: 56px;
 }
 
-.ux-button--fab.ux-button--large {
+.ux-button--large .ux-button--fab {
   width: 64px;
   height: 64px;
 }
