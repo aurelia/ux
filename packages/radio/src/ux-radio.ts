@@ -30,6 +30,9 @@ export class UxRadio implements UxComponent {
   @observable({ initializer: () => false })
   public value: boolean;
 
+  @observable()
+  public focused: boolean;
+
   private radio: HTMLInputElement;
   private ripple: PaperRipple | null = null;
 
@@ -81,6 +84,8 @@ export class UxRadio implements UxComponent {
       radio.checked = true;
     }
 
+    this.setChecked(this.value);
+    this.disabledChanged(this.radio.disabled);
     this.themeChanged(this.theme);
   }
 
@@ -104,11 +109,35 @@ export class UxRadio implements UxComponent {
       this.checked = newValue;
       this.ignoreValueChanges = true;
       this.value = newValue;
+
       if (this.radio) {
         this.radio.checked = !!newValue;
       }
+
+      if (this.radio.checked) {
+        this.element.classList.add('ux-radio--checked');
+      } else {
+        this.element.classList.remove('ux-radio--checked');
+      }
+
       this.ignoreValueChanges = false;
       this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
+    }
+  }
+
+  public disabledChanged(newValue: boolean) {
+    if (newValue === true) {
+      this.element.classList.add('ux-radio--disabled');
+    } else {
+      this.element.classList.remove('ux-radio--disabled');
+    }
+  }
+
+  public focusedChanged(newValue: boolean) {
+    if (newValue === true) {
+      this.element.classList.add('ux-radio--focused');
+    } else {
+      this.element.classList.remove('ux-radio--focused');
     }
   }
 
@@ -124,6 +153,7 @@ export class UxRadio implements UxComponent {
     if (this.ignoreValueChanges) {
       return;
     }
+
     this.setChecked(value);
   }
 
