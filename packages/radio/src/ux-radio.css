@@ -41,8 +41,8 @@
 .ux-radio__background-fill {
   width: 100%;
   height: 100%;
-  background-color: #FF4081;
-  background-color: var(--aurelia-ux--radio-checked-background, var(--aurelia-ux--design-accent, #FF4081));
+  background-color: #3F51B5;
+  background-color: var(--aurelia-ux--radio-checked-background, var(--aurelia-ux--design-primary, #3F51B5));
   border-radius: 50%;
   transform: scale3d(0, 0, 0);
   transition: 150ms;
@@ -82,9 +82,8 @@
 }
 
 .ux-radio--checked .ux-radio__border {
-  border: solid 2px #FF4081;
-  border: var(--aurelia-ux--radio-checked-background, var(--aurelia-ux--design-accent, #FF4081));
-  border: var(--aurelia-ux--radio-hover-border, solid 2px var(--aurelia-ux--design-accent, #FF4081));
+  border: solid 2px #3F51B5;
+  border: solid 2px var(--aurelia-ux--radio-checked-background, var(--aurelia-ux--design-primary, #3F51B5));
 }
 
 .ux-radio--checked .ux-radio__background-fill {
@@ -115,6 +114,6 @@
 }
 
 .ux-radio:hover:not(.ux-radio__disabled) .ux-radio__border {
-  border: solid 2px #FF4081;
-  border: var(--aurelia-ux--radio-hover-border, solid 2px var(--aurelia-ux--design-accent, #FF4081));
+  border: solid 2px #3F51B5;
+  border: var(--aurelia-ux--radio-hover-border, solid 2px var(--aurelia-ux--design-primary, #3F51B5));
 }
