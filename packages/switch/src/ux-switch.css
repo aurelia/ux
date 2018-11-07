@@ -1,10 +1,10 @@
-ux-switch {
+.ux-switch {
   display: inline-block;
   position: relative;
   cursor: pointer;
 }
 
-ux-switch>input {
+.ux-switch__inner-input {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -17,43 +17,19 @@ ux-switch>input {
   z-index: 1;
 }
 
-ux-switch>input:disabled {
-  cursor: default;
-}
-
-ux-switch .track {
+.ux-switch__track {
   margin: 6px 5px;
   height: 12px;
   width: 32px;
   border: none;
   border-radius: 6px;
   background-color: #E0E0E0;
-  background-color: var(--aurelia-ux--switch-track, #E0E0E0);
+  background-color: var(--aurelia-ux--switch-ux-switch__track, #E0E0E0);
   transition: background-color 150ms ease-in-out;
   position: relative;
 }
 
-ux-switch input:disabled ~ .track,
-ux-switch input:disabled:checked ~ .track {
-  background-color: #9E9E9E;
-  background-color: var(--aurelia-ux--switch-track-disabled, #9E9E9E);
-}
-
-ux-switch input:disabled ~ .track .indicator, ux-switch input:disabled:checked ~ .track .indicator {
-  background-color: #E0E0E0;
-  background-color: var(--aurelia-ux--switch-indicator-disabled, #E0E0E0);
-}
-
-ux-switch input:checked ~ .track {
-  background-color: #FF80AB;
-  background-color: var(--aurelia-ux--switch-track-active, var(--aurelia-ux--design-accent-light, #FF80AB));
-}
-
-ux-switch:focus {
-  outline: none;
-}
-
-ux-switch .track .indicator {
+.ux-switch__indicator {
   position: relative;
   left: -3px;
   top: -3px;
@@ -66,20 +42,43 @@ ux-switch .track .indicator {
   transition: left .1s ease-in-out, background-color .1s ease-in-out;
 }
 
-ux-switch input:checked ~ .track .indicator {
+.ux-switch:focus {
+  outline: none;
+}
+
+.ux-switch__inner-input:disabled {
+  cursor: default;
+}
+
+.ux-switch--checked .ux-switch__track {
+  background-color: #FF80AB;
+  background-color: var(--aurelia-ux--switch-ux-switch__track-active, var(--aurelia-ux--design-accent-light, #FF80AB));
+}
+
+.ux-switch--checked .ux-switch__indicator {
   left: calc(100% - 14px);
   background-color: #FF80AB;
   background-color: var(--aurelia-ux--switch-indicator-active, var(--aurelia-ux--design-accent, #F48FB1));
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
 }
 
-ux-switch .ripplecontainer {
+.ux-switch--disabled .ux-switch__track {
+  background-color: #9E9E9E;
+  background-color: var(--aurelia-ux--switch-ux-switch__track-disabled, #9E9E9E);
+}
+
+.ux-switch--disabled .ux-switch__indicator {
+  background-color: #E0E0E0;
+  background-color: var(--aurelia-ux--switch-indicator-disabled, #E0E0E0);
+}
+
+.ux-switch .ripplecontainer {
   position: relative;
   width: 0;
   height: 0;
 }
 
-ux-switch .ripplecontainer>.paper-ripple {
+.ux-switch .paper-ripple {
   top: auto;
   left: auto;
   right: -36px;
@@ -89,7 +88,7 @@ ux-switch .ripplecontainer>.paper-ripple {
   border-radius: 50%;
 }
 
-ux-switch .ripplecontainer>.ripple {
+.ux-switch .ripple {
   position: absolute;
   bottom: -37px;
   width: 50px;
@@ -102,11 +101,11 @@ ux-switch .ripplecontainer>.ripple {
   left: -6px;
 }
 
-ux-switch input:focus ~ .ripplecontainer>.ripple {
+.ux-switch--focus .ripple {
   transform: scale3d(1, 1, 1);
 }
 
-ux-switch input:disabled:focus ~ .ripplecontainer>.ripple {
+.ux-switch--disabled.ux-switch--focus .ripple {
   transform: scale3d(0, 0, 0);
 }
 
