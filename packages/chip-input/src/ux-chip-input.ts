@@ -12,7 +12,7 @@ export class UxChipInput implements UxComponent {
   @bindable public disabled: boolean | string = false;
   @bindable public readonly: boolean | string = false;
   @bindable public theme: UxChipInputTheme;
-  @bindable public type: any;
+  @bindable public label: any;
   @bindable public separator: string = ', ';
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
@@ -60,12 +60,12 @@ export class UxChipInput implements UxComponent {
     const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
 
     this.textbox.addEventListener('focus', () => {
-      this.element.classList.add('focused');
+      this.element.classList.add('ux-chip-input--focused');
     });
 
     this.textbox.addEventListener('blur', () => {
       this.addChip();
-      this.element.classList.remove('focused');
+      this.element.classList.remove('ux-chip-input--focused');
       this.element.dispatchEvent(blurEvent);
     });
   }
@@ -74,12 +74,12 @@ export class UxChipInput implements UxComponent {
     const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
 
     this.textbox.removeEventListener('focus', () => {
-      this.element.classList.add('focused');
+      this.element.classList.add('ux-chip-input--focused');
     });
 
     this.textbox.removeEventListener('blur', () => {
       this.addChip();
-      this.element.classList.remove('focused');
+      this.element.classList.remove('ux-chip-input--focused');
       this.element.dispatchEvent(blurEvent);
     });
   }
