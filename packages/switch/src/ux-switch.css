@@ -4,6 +4,10 @@
   cursor: pointer;
 }
 
+.ux-switch--disabled {
+  opacity: 0.5;
+}
+
 .ux-switch__inner-input {
   position: absolute;
   top: 0;
@@ -51,8 +55,8 @@
 }
 
 .ux-switch--checked .ux-switch__track {
-  background-color: #3F51B5;
-  background-color: var(--aurelia-ux--switch-ux-switch__track-active, var(--aurelia-ux--design-primary, #3F51B5));
+  background-color: #6776cc;
+  background-color: var(--aurelia-ux--switch-ux-switch__track-active, var(--aurelia-ux--design-primary-light, #6776cc));
 }
 
 .ux-switch--checked .ux-switch__indicator {
@@ -62,16 +66,6 @@
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
 }
 
-.ux-switch--disabled .ux-switch__track {
-  background-color: #9E9E9E;
-  background-color: var(--aurelia-ux--switch-ux-switch__track-disabled, #9E9E9E);
-}
-
-.ux-switch--disabled .ux-switch__indicator {
-  background-color: #E0E0E0;
-  background-color: var(--aurelia-ux--switch-indicator-disabled, #E0E0E0);
-}
-
 .ux-switch .ripplecontainer {
   position: relative;
   width: 0;
@@ -79,33 +73,31 @@
 }
 
 .ux-switch .paper-ripple {
-  top: auto;
-  left: auto;
-  right: -36px;
-  bottom: -36px;
-  width: 50px;
-  height: 50px;
+  top: -11px;
+  left: -11px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 
 .ux-switch .ripple {
   position: absolute;
-  bottom: -37px;
-  width: 50px;
-  height: 50px;
+  top: -11px;
+  left: -11px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   pointer-events: none;
-  background-color: rgba(0, 0, 0, 0.22);
+  background-color: rgba(132, 132, 132, 0.25);
   transition: transform 100ms ease-in-out;
   transform: scale3d(0, 0, 0);
-  left: -6px;
 }
 
-.ux-switch--focus .ripple {
+.ux-switch--focused .ripple {
   transform: scale3d(1, 1, 1);
 }
 
-.ux-switch--disabled.ux-switch--focus .ripple {
+.ux-switch--disabled.ux-switch--focused .ripple {
   transform: scale3d(0, 0, 0);
 }
 

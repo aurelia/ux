@@ -25,6 +25,9 @@ export class UxSwitch implements UxComponent {
   @observable({ initializer: () => false })
   public value: boolean;
 
+  @observable()
+  public focused: boolean;
+
   private checkbox: HTMLInputElement;
   private ripple: PaperRipple | null = null;
 
@@ -62,8 +65,8 @@ export class UxSwitch implements UxComponent {
       }
     }
 
-    this.disabledChanged(this.disabled);
     this.valueChanged(this.value);
+    this.disabledChanged(this.checkbox.disabled);
     this.themeChanged(this.theme);
   }
 
@@ -127,12 +130,6 @@ export class UxSwitch implements UxComponent {
       this.element.classList.add('ux-switch--disabled');
     } else {
       this.element.classList.remove('ux-switch--disabled');
-    }
-
-    if (normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-      this.checkbox.setAttribute('disabled', '');
-    } else if (this.element.classList.contains('disabled')) {
-      this.checkbox.removeAttribute('disabled');
     }
   }
 
