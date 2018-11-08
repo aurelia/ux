@@ -1,7 +1,8 @@
-<template role="textbox">
+<template role="textbox" class="ux-textarea">
   <require from="./ux-textarea.css"></require>
 
   <textarea ref="textbox"
+    class="ux-textarea__inner-textarea"
     value.bind="rawValue"
     focus.bind="focus"
     disabled.bind="disabled & booleanAttr"
@@ -12,4 +13,5 @@
     aria-required.bind="required & booleanAttr">
   </textarea>
 
+  <div class="ux-textarea__bottom-border"></div>
 </template>
