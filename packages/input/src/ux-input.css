@@ -1,5 +1,5 @@
 .ux-input {
-  display: flex;
+  display: inline-flex;
   width: 100%;
   height: 56px;
   padding: 0 16px;
