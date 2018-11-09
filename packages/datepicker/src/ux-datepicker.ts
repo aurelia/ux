@@ -35,12 +35,14 @@ export class UxDatepicker implements UxComponent {
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any;
 
+  public textbox: HTMLInputElement;
   private textboxValue: string;
   private showDialog = false;
 
   constructor(public element: HTMLElement, public resources: ViewResources, public styleEngine: StyleEngine) { }
 
   public bind() {
+    this.processAttribute('placeholder');
 
     if (this.initialDate != null) {
       const dateParse = moment(this.initialDate);
@@ -168,5 +170,14 @@ export class UxDatepicker implements UxComponent {
     }
 
     this.styleEngine.applyTheme(newValue, this.element);
+  }
+
+  private processAttribute(attributeName: string) {
+    const attributeValue = this.element.getAttribute('placeholder');
+
+    if (attributeValue) {
+      this.element.removeAttribute(attributeName);
+      this.textbox.setAttribute(attributeName, attributeValue)
+    }
   }
 }
