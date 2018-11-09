@@ -90,7 +90,6 @@ export class UxSelect implements UxComponent {
   public expanded: boolean;
 
   // Populated by Aurelia
-  public readonly container: HTMLElement;
   public readonly optionWrapperEl: HTMLElement;
   public readonly optionCtEl: UxOptionContainer;
 
@@ -231,7 +230,7 @@ export class UxSelect implements UxComponent {
 
   public listAnchor: { x: number | string, y: number | string } | null;
   private calcAnchorPosition() {
-    const elDim = this.container.getBoundingClientRect();
+    const elDim = this.element.getBoundingClientRect();
     const offsetY = (48 - elDim.height) / 2;
     this.listAnchor = { x: elDim.left, y: elDim.top - offsetY };
   }
@@ -296,9 +295,9 @@ export class UxSelect implements UxComponent {
       return;
     }
     this.isExpanding = true;
-    this.optionWrapperEl.classList.add('open');
+    this.optionWrapperEl.classList.add('ux-select__list-wrapper--open');
     setTimeout(() => {
-      this.optionCtEl.classList.add('open');
+      this.optionCtEl.classList.add('ux-select__list-wrapper--open');
       this.isExpanding = false;
       this.expanded = true;
       this.setFocusedOption(this.selectedOption);
@@ -312,9 +311,9 @@ export class UxSelect implements UxComponent {
       return;
     }
     this.isCollapsing = true;
-    this.optionCtEl.classList.remove('open');
+    this.optionCtEl.classList.remove('ux-select__list-wrapper--open');
     setTimeout(() => {
-      this.optionWrapperEl.classList.remove('open');
+      this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
       this.isCollapsing = false;
       this.expanded = false;
       this.setFocusedOption(null);
