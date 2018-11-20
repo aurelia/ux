@@ -33,39 +33,51 @@ export class UxButton implements UxComponent {
   }
 
   public typeChanged(newValue: string | null) {
-    const typeClasses = ['text', 'flat', 'outline', 'raised', 'fab'];
+    const typeClasses = [
+      'ux-button--text',
+      'ux-button--flat',
+      'ux-button--outline',
+      'ux-button--raised',
+      'ux-button--fab'
+    ];
 
     this.button.classList.remove(...typeClasses);
 
-    if (newValue == null || typeClasses.includes(newValue) === false) {
+    if (newValue === 'fab') {
+      this.element.classList.add('ux-fab-button');
+    } else {
+      this.element.classList.remove('ux-fab-button');
+    }
+
+    if (newValue == null || typeClasses.includes(`ux-button--${newValue}`) === false) {
       newValue = 'raised';
     }
 
-    this.button.classList.add(newValue);
+    this.button.classList.add(`ux-button--${newValue}`);
   }
 
   public sizeChanged(newValue: string | null) {
-    const sizeClasses = ['small', 'medium', 'large'];
+    const sizeClasses = ['ux-button--small', 'ux-button--medium', 'ux-button--large'];
 
-    this.button.classList.remove(...sizeClasses);
+    this.element.classList.remove(...sizeClasses);
 
-    if (newValue == null || sizeClasses.includes(newValue) === false) {
+    if (newValue == null || sizeClasses.includes(`ux-button--${newValue}`) === false) {
       newValue = 'medium';
     }
 
-    this.button.classList.add(newValue);
+    this.element.classList.add(`ux-button--${newValue}`);
   }
 
   public effectChanged(newValue: string | null) {
-    const effectClasses = ['ripple', 'none'];
+    const effectClasses = ['ux-button--ripple'];
 
     this.button.classList.remove(...effectClasses);
 
-    if (newValue == null || effectClasses.includes(newValue) === false) {
+    if (newValue == null || effectClasses.includes(`ux-button--${newValue}`) === false) {
       newValue = 'ripple';
     }
 
-    this.button.classList.add(newValue);
+    this.button.classList.add(`ux-button--${newValue}`);
   }
 
   public themeChanged(newValue: any) {
@@ -85,13 +97,13 @@ export class UxButton implements UxComponent {
   }
 
   public onMouseDown(e: MouseEvent) {
-    if (this.button.classList.contains('ripple')) {
+    if (this.button.classList.contains('ux-button--ripple')) {
       if (this.ripple === null) {
         this.ripple = new PaperRipple();
         this.button.appendChild(this.ripple.$);
       }
 
-      if (this.button.classList.contains('fab')) {
+      if (this.button.classList.contains('ux-button--fab')) {
         this.ripple.center = true;
         this.ripple.round = true;
       }
@@ -103,7 +115,7 @@ export class UxButton implements UxComponent {
   }
 
   public onMouseUp() {
-    if (this.button.classList.contains('ripple') && this.ripple !== null) {
+    if (this.button.classList.contains('ux-button--ripple') && this.ripple !== null) {
       this.ripple.upAction();
     }
 

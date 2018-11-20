@@ -1,10 +1,10 @@
-import {Host} from './host';
-import {Platform} from '../platforms/platform';
-import {inject} from 'aurelia-dependency-injection';
-import {MaterialDesign} from '../designs/material-design';
-import {FrameworkConfiguration} from 'aurelia-framework';
-import {Web} from './web';
-import {PLATFORM} from 'aurelia-pal';
+import { Host } from './host';
+import { Platform } from '../platforms/platform';
+import { inject } from 'aurelia-dependency-injection';
+import { MaterialDesign } from '../designs/material-design';
+import { FrameworkConfiguration } from 'aurelia-framework';
+import { Web } from './web';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(MaterialDesign)
 export class Electron implements Host {

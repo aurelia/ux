@@ -1,30 +1,42 @@
+import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
-import { bindable, customElement } from 'aurelia-templating';
-import { UxComponent, StyleEngine } from '@aurelia-ux/core';
-import { UxCardTheme } from './ux-card-theme';
 
-@inject(Element, StyleEngine)
-@customElement('ux-card')
-export class UxCard implements UxComponent {
+@inject(Element)
+@customElement('ux-grid-cell')
+export class UxGridCell {
   @bindable public xs?: string;
   @bindable public sm?: string;
   @bindable public md?: string;
   @bindable public lg?: string;
   @bindable public xl?: string;
   @bindable public order?: string;
-  @bindable public theme: UxCardTheme;
 
-  constructor(public element: HTMLElement, private styleEngine: StyleEngine) { }
+  constructor(private element: HTMLElement) { }
 
-  public bind() {
-    if (this.theme != null) {
-      this.themeChanged(this.theme);
-    }
+  public async bind() {
+    this.processAttributes();
+
     this.xsChanged(this.xs);
     this.smChanged(this.sm);
     this.mdChanged(this.md);
     this.lgChanged(this.lg);
     this.xlChanged(this.xl);
+  }
+
+  public processAttributes() {
+    const alignAttributes = [
+      'align-self-top',
+      'align-self-middle',
+      'align-self-bottom',
+      'align-self-stretch'
+    ];
+
+    for (const attribute of alignAttributes) {
+      if (this.element.hasAttribute(attribute)) {
+        this.element.removeAttribute(attribute);
+        this.element.classList.add(`ux-grid-cell--${attribute}`);
+      }
+    }
   }
 
   public xsChanged(newValue?: string) {
@@ -49,15 +61,15 @@ export class UxCard implements UxComponent {
 
   public sizeChanged(size: string, value?: string) {
     for (let i = 0; i < 10; i++) {
-      this.element.classList.remove(`ux-card--${size}-${i}`);
-      this.element.classList.remove(`ux-card--order-${this.order}-${size}-${i}`);
+      this.element.classList.remove(`ux-grid-cell--${size}-${i}`);
+      this.element.classList.remove(`ux-grid-cell--order-${this.order}-${size}-${i}`);
     }
 
     if (typeof value === 'string') {
-      this.element.classList.add(`ux-card--${size}-${value}`);
+      this.element.classList.add(`ux-grid-cell--${size}-${value}`);
 
       if (typeof this.order === 'string') {
-        this.element.classList.add(`ux-card--order-${this.order}-${size}-${value}`);
+        this.element.classList.add(`ux-grid-cell--order-${this.order}-${size}-${value}`);
       }
     }
   }
@@ -68,9 +80,5 @@ export class UxCard implements UxComponent {
     this.mdChanged(this.md);
     this.lgChanged(this.lg);
     this.xlChanged(this.xl);
-  }
-
-  public themeChanged(newValue: any) {
-    this.styleEngine.applyTheme(newValue, this.element);
   }
 }

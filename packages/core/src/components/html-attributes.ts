@@ -9,16 +9,13 @@
  */
 export function normalizeBooleanAttribute(attributeName: string, value: boolean | string): boolean {
   let ret: boolean;
+
+  // tslint:disable-next-line
   if (typeof value === 'string') {
-    if (value === '' || value.toLocaleLowerCase() === attributeName.toLocaleLowerCase()) {
-      // if string, then it can be true if the value is blank,
-      // or the value matches the name of the attribue with case insensitivity
-      ret = true;
-    } else {
-      ret = false;
-    }
+    ret = value === '' || value.toLocaleLowerCase() === attributeName.toLocaleLowerCase();
   } else {
     ret = value as boolean;
   }
+
   return ret;
 }

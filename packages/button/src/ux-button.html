@@ -2,7 +2,7 @@
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-button.css"></require>
 
-  <button ref="button" class="${disabled ? 'disabled' : ''}"
+  <button ref="button" class="ux-button ${disabled ? 'ux-button--disabled' : ''}"
     mousedown.trigger="onMouseDown($event)"
     mouseup.trigger="onMouseUp()"
     mouseleave.trigger="onMouseUp()">

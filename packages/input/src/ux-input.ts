@@ -31,7 +31,7 @@ export class UxInput implements UxComponent {
   @observable
   public focused: boolean = false;
 
-  public value: any = undefined;
+  public value: any;
   public textbox: HTMLInputElement;
 
   constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
@@ -41,6 +41,11 @@ export class UxInput implements UxComponent {
   public bind() {
     const element = this.element;
     const textbox = this.textbox;
+
+    const textboxValue = this.textbox.getAttribute('value');
+    if (textboxValue != null) {
+      this.rawValue = textboxValue;
+    }
 
     if (this.autofocus || this.autofocus === '') {
       this.focused = true;

@@ -90,7 +90,6 @@ export class UxSelect implements UxComponent {
   public expanded: boolean;
 
   // Populated by Aurelia
-  public readonly container: HTMLElement;
   public readonly optionWrapperEl: HTMLElement;
   public readonly optionCtEl: UxOptionContainer;
 
@@ -231,7 +230,7 @@ export class UxSelect implements UxComponent {
 
   public listAnchor: { x: number | string, y: number | string } | null;
   private calcAnchorPosition() {
-    const elDim = this.container.getBoundingClientRect();
+    const elDim = this.element.getBoundingClientRect();
     const offsetY = (48 - elDim.height) / 2;
     this.listAnchor = { x: elDim.left, y: elDim.top - offsetY };
   }
@@ -296,13 +295,13 @@ export class UxSelect implements UxComponent {
       return;
     }
     this.isExpanding = true;
-    this.optionWrapperEl.classList.add('open');
+    this.optionWrapperEl.classList.add('ux-select__list-wrapper--open');
     setTimeout(() => {
-      this.optionCtEl.classList.add('open');
+      this.optionCtEl.classList.add('ux-select__list-wrapper--open');
       this.isExpanding = false;
       this.expanded = true;
       this.setFocusedOption(this.selectedOption);
-    }, this.theme.listTransition);
+    }, this.theme && this.theme.listTransition || 125);
     this.setupListAnchor();
   }
 
@@ -312,14 +311,14 @@ export class UxSelect implements UxComponent {
       return;
     }
     this.isCollapsing = true;
-    this.optionCtEl.classList.remove('open');
+    this.optionCtEl.classList.remove('ux-select__list-wrapper--open');
     setTimeout(() => {
-      this.optionWrapperEl.classList.remove('open');
+      this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
       this.isCollapsing = false;
       this.expanded = false;
       this.setFocusedOption(null);
       this.unsetupListAnchor();
-    }, this.theme.listTransition);
+    }, this.theme && this.theme.listTransition || 125);
   }
 
   private setFocusedOption(focusedOption: UxOptionElement | null) {
@@ -330,7 +329,6 @@ export class UxSelect implements UxComponent {
       }
       if (focusedOption) {
         focusedOption.focused = true;
-        focusedOption.wave();
         focusedOption.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       }
       this.focusedUxOption = focusedOption;
@@ -422,17 +420,19 @@ export class UxSelect implements UxComponent {
     }
   }
 
-  public onKeyDown(key: number) {
+  public onKeyDown(event: KeyboardEvent) {
     if (this.isDisabled) {
       return;
     }
     // tslint:disable-next-line:switch-default
-    switch (key) {
+    switch (event.which) {
       case UP: case DOWN:
-        this.moveSelectedIndex(key === UP ? -1 : 1);
+        this.moveSelectedIndex(event.which === UP ? -1 : 1);
+        event.preventDefault();
         break;
       case ENTER: case SPACE:
         this.onKeyboardSelect();
+        event.preventDefault();
         break;
     }
     return true;
@@ -511,7 +511,7 @@ function extractUxOption(
     logger.warn('cannot use containerless on <ux-select/>. Consider using as-element instead.');
     node.removeAttribute('containerless');
   }
-  let currentChild = node.firstChild;
+  let currentChild: any = node.firstChild;
 
   while (currentChild) {
     const nextSibling = currentChild.nextSibling;

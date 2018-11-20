@@ -5,15 +5,15 @@ describe('aurelia-ux/core', () => {
   let container: Container;
   let ux: AureliaUX;
   let observerLocator: ObserverLocator;
-  
+
   beforeEach(() => {
     container = new Container();
     ux = container.get(AureliaUX);
     observerLocator = container.get(ObserverLocator);
   });
-  
+
   it('add ux elements observer adapter', () => {
-    let adapter: any = {};
+    const adapter: any = {};
 
     ux.addUxElementObserverAdapter('UX-INPUT', {
       value: {
@@ -22,14 +22,16 @@ describe('aurelia-ux/core', () => {
       }
     });
 
-    let input = document.createElement('ux-input');
+    const input = document.createElement('ux-input');
     // needs a getter to get it resolves to adapter
     Object.defineProperty(input, 'value', {
       get() {
         return '';
       }
     });
-    let observer = observerLocator.getObserver(input, 'value');
+
+    const observer = observerLocator.getObserver(input, 'value');
+
     expect(observer).toBe(adapter);
   });
 });

@@ -16,11 +16,11 @@ import { Electron } from './hosts/electron';
 import { UXConfiguration } from './ux-configuration';
 import { DesignProcessor } from './designs/design-processor';
 
-export type GetElementObserver =
-  (obj: Element,
-    propertyName: string,
-    observerLocator: ObserverLocator,
-    descriptor?: PropertyDescriptor | null) => InternalPropertyObserver | null;
+export type GetElementObserver = (
+  obj: Element,
+  propertyName: string,
+  observerLocator: ObserverLocator,
+  descriptor?: PropertyDescriptor | null) => InternalPropertyObserver | null;
 
 export interface UxElementObserverAdapter {
   tagName: string;
@@ -86,12 +86,13 @@ export class AureliaUX {
     const adapters = this.adapters;
     let elementAdapters = adapters[tagName] || adapters[tagName.toLowerCase()];
     if (!elementAdapters) {
-      elementAdapters = adapters[tagName] = adapters[tagName.toLowerCase()] = { tagName: tagName, properties: {} };
+      elementAdapters = adapters[tagName] = adapters[tagName.toLowerCase()] = { tagName, properties: {} };
     }
     return elementAdapters;
   }
 
   private interceptDetermineDefaultBindingMode(): void {
+    // tslint:disable-next-line
     const ux = this;
     const originalFn = SyntaxInterpreter.prototype.determineDefaultBindingMode;
 

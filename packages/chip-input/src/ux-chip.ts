@@ -21,6 +21,11 @@ export class UxChip implements UxComponent {
 
   public bind() {
     this.themeChanged(this.theme);
+
+    if (this.element.hasAttribute('deletable')) {
+      this.element.removeAttribute('deletable');
+      this.element.classList.add('ux-chip--deletable');
+    }
   }
 
   public themeChanged(newValue: UxChipTheme) {

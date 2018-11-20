@@ -148,7 +148,6 @@ function stopEvent(e: Event) {
   e.stopPropagation();
 }
 
-
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
 const uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
   value: {
@@ -160,4 +159,3 @@ const uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
     }
   }
 });
-

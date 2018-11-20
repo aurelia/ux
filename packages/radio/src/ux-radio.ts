@@ -30,6 +30,9 @@ export class UxRadio implements UxComponent {
   @observable({ initializer: () => false })
   public value: boolean;
 
+  @observable()
+  public focused: boolean;
+
   private radio: HTMLInputElement;
   private ripple: PaperRipple | null = null;
 
@@ -43,35 +46,43 @@ export class UxRadio implements UxComponent {
   }
 
   public bind() {
-    const element = this.element;
-    const radio = this.radio;
-
-    if (element.hasAttribute('id')) {
-      const id = element.id;
+    if (this.element.hasAttribute('id')) {
+      const id = this.element.id;
 
       if (id != null) {
-        radio.setAttribute('id', id);
-        element.removeAttribute('id');
+        this.radio.setAttribute('id', id);
+        this.element.removeAttribute('id');
       }
     }
 
-    if (element.hasAttribute('tabindex')) {
-      const tabIndex = element.getAttribute('tabindex');
+    if (this.element.hasAttribute('tabindex')) {
+      const tabIndex = this.element.getAttribute('tabindex');
 
       if (tabIndex != null) {
-        radio.setAttribute('tabindex', tabIndex);
-        element.removeAttribute('tabindex');
+        this.radio.setAttribute('tabindex', tabIndex);
+        this.element.removeAttribute('tabindex');
       }
     }
 
-    if (element.hasAttribute('checked')) {
-      element.checked = true;
+    if (this.element.hasAttribute('name')) {
+      const name = this.element.getAttribute('name');
+
+      if (name != null) {
+        this.radio.setAttribute('name', name);
+        this.element.removeAttribute('name');
+      }
+    }
+
+    if (this.element.hasAttribute('checked')) {
+      this.element.checked = true;
     }
 
     if (this.checked) {
-      radio.checked = true;
+      this.radio.checked = true;
+      this.element.classList.add('ux-radio--checked');
     }
 
+    this.disabledChanged(this.radio.disabled);
     this.themeChanged(this.theme);
   }
 
@@ -95,11 +106,35 @@ export class UxRadio implements UxComponent {
       this.checked = newValue;
       this.ignoreValueChanges = true;
       this.value = newValue;
+
       if (this.radio) {
         this.radio.checked = !!newValue;
+
+        if (this.radio.checked) {
+          this.element.classList.add('ux-radio--checked');
+        } else {
+          this.element.classList.remove('ux-radio--checked');
+        }
       }
+
       this.ignoreValueChanges = false;
       this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
+    }
+  }
+
+  public disabledChanged(newValue: boolean) {
+    if (newValue === true) {
+      this.element.classList.add('ux-radio--disabled');
+    } else {
+      this.element.classList.remove('ux-radio--disabled');
+    }
+  }
+
+  public focusedChanged(newValue: boolean) {
+    if (newValue === true) {
+      this.element.classList.add('ux-radio--focused');
+    } else {
+      this.element.classList.remove('ux-radio--focused');
     }
   }
 
@@ -115,6 +150,7 @@ export class UxRadio implements UxComponent {
     if (this.ignoreValueChanges) {
       return;
     }
+
     this.setChecked(value);
   }
 
@@ -153,7 +189,6 @@ export class UxRadio implements UxComponent {
 function stopEvent(e: Event) {
   e.stopPropagation();
 }
-
 
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
 const uxRadioElementProto = Object.create(HTMLElement.prototype, {
