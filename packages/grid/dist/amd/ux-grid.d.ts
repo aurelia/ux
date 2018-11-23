@@ -7,6 +7,7 @@ export declare class UxGrid implements UxComponent {
     columns: null | number;
     constructor(element: HTMLElement, styleEngine: StyleEngine);
     bind(): void;
+    processAttributes(): void;
     themeChanged(newValue: any): void;
     columnsChanged(newValue: null | number): void;
 }

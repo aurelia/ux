@@ -1,18 +1,20 @@
-<template class="${effect !== null ? effect : ''}">
+<template class="ux-switch ${effect !== null ? effect : ''}">
 
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-switch.css"></require>
 
-  <input type="checkbox" ref="checkbox"
+  <input type="checkbox"
+    ref="checkbox"
+    class="ux-switch__inner-input"
     checked.bind="value"
-    indeterminate.bind="indeterminate"
+    focus.bind="focused"
     mousedown.trigger="onMouseDown($event)"
     disabled.bind="disabled & booleanAttr"
     aria-checked.bind="value & booleanAttr"
     aria-disabledb.bind="disabled & booleanAttr">
 
-  <div class="track">
-    <div class="indicator">
+  <div class="ux-switch__track">
+    <div class="ux-switch__indicator">
       <div class="ripplecontainer">
         <span class="ripple"></span>
       </div>

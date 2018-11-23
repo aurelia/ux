@@ -6,7 +6,7 @@ export declare class UxChipInput implements UxComponent {
     disabled: boolean | string;
     readonly: boolean | string;
     theme: UxChipInputTheme;
-    type: any;
+    label: any;
     separator: string;
     value: any;
     chips: string[];

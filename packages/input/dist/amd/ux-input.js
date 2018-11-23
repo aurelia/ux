@@ -16,12 +16,15 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
             this.readonly = false;
             this.rawValue = '';
             this.focused = false;
-            this.value = undefined;
             Object.setPrototypeOf(element, uxInputElementProto);
         }
         UxInput.prototype.bind = function () {
             var element = this.element;
             var textbox = this.textbox;
+            var textboxValue = this.textbox.getAttribute('value');
+            if (textboxValue != null) {
+                this.rawValue = textboxValue;
+            }
             if (this.autofocus || this.autofocus === '') {
                 this.focused = true;
             }

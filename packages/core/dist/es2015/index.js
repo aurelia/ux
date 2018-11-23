@@ -506,10 +506,13 @@ class GlobalStyleEngine {
     constructor() {
         this.logger = getLogger('aurelia-ux');
         this.globalStyles = [];
-        this.styleTag = DOM.createElement('style');
-        this.styleTag.type = 'text/css';
-        this.styleTag.id = 'aurelia-ux-core';
-        DOM.appendNode(this.styleTag, document.head);
+        this.styleTag = DOM.querySelector('#aurelia-ux-core');
+        if (this.styleTag == null) {
+            this.styleTag = DOM.createElement('style');
+            this.styleTag.type = 'text/css';
+            this.styleTag.id = 'aurelia-ux-core';
+            DOM.appendNode(this.styleTag, document.head);
+        }
     }
     addOrUpdateGlobalStyle(id, css, tagGroup) {
         if (id === undefined || css === undefined) {
@@ -683,11 +686,12 @@ let AureliaUX = class AureliaUX {
         const adapters = this.adapters;
         let elementAdapters = adapters[tagName] || adapters[tagName.toLowerCase()];
         if (!elementAdapters) {
-            elementAdapters = adapters[tagName] = adapters[tagName.toLowerCase()] = { tagName: tagName, properties: {} };
+            elementAdapters = adapters[tagName] = adapters[tagName.toLowerCase()] = { tagName, properties: {} };
         }
         return elementAdapters;
     }
     interceptDetermineDefaultBindingMode() {
+        // tslint:disable-next-line
         const ux = this;
         const originalFn = SyntaxInterpreter.prototype.determineDefaultBindingMode;
         SyntaxInterpreter.prototype.determineDefaultBindingMode = function (element, attrName, context) {
@@ -1266,15 +1270,9 @@ class PaperRipple {
  */
 function normalizeBooleanAttribute(attributeName, value) {
     let ret;
+    // tslint:disable-next-line
     if (typeof value === 'string') {
-        if (value === '' || value.toLocaleLowerCase() === attributeName.toLocaleLowerCase()) {
-            // if string, then it can be true if the value is blank,
-            // or the value matches the name of the attribue with case insensitivity
-            ret = true;
-        }
-        else {
-            ret = false;
-        }
+        ret = value === '' || value.toLocaleLowerCase() === attributeName.toLocaleLowerCase();
     }
     else {
         ret = value;

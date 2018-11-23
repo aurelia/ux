@@ -25,6 +25,7 @@ export declare class UxDatepicker implements UxComponent {
         time: string[];
     };
     value: any;
+    textbox: HTMLInputElement;
     private textboxValue;
     private showDialog;
     constructor(element: HTMLElement, resources: ViewResources, styleEngine: StyleEngine);
@@ -37,4 +38,5 @@ export declare class UxDatepicker implements UxComponent {
     minTimeChanged(newValue: any): void;
     maxTimeChanged(newValue: any): void;
     themeChanged(newValue: any): void;
+    private processAttribute;
 }

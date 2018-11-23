@@ -1,10 +1,10 @@
 export interface DatepickerSettings {
     calendarSettings?: {
-        disableWeekdays?: Array<string | number>;
         disableDays?: Array<{
-            month: number;
-            day: number;
+            day?: number;
+            month?: number;
             year?: number;
+            weekday?: number;
         }>;
     };
 }

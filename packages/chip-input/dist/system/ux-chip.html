@@ -1,10 +1,10 @@
-<template role="textbox">
+<template role="textbox" class="ux-chip">
   <require from="./ux-chip.css"></require>
 
-  <span>
+  <span class="ux-chip__content">
     <slot></slot>
   </span>
 
-  <span class="close" click.delegate="closeChip()">
+  <span class="ux-chip__close" click.delegate="closeChip()">
   </span>
 </template>

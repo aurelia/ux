@@ -14,6 +14,7 @@ export declare class UxSwitch implements UxComponent {
     theme: UxSwitchTheme;
     checked: any;
     value: boolean;
+    focused: boolean;
     private checkbox;
     private ripple;
     readonly isDisabled: boolean;
@@ -23,6 +24,7 @@ export declare class UxSwitch implements UxComponent {
     detached(): void;
     getChecked(): any;
     setChecked(value: any): void;
+    focusedChanged(newValue: boolean): void;
     valueChanged(newValue: boolean): void;
     themeChanged(newValue: UxSwitchTheme): void;
     disabledChanged(newValue: boolean | string): void;

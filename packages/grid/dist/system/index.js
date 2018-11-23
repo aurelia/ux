@@ -4,7 +4,8 @@ System.register(["aurelia-framework", "./ux-responsive-utilities", "./ux-grid-th
     var __moduleName = context_1 && context_1.id;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/grid/ux-grid')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/grid/ux-grid'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/grid/ux-grid-cell')
         ]);
     }
     exports_1("configure", configure);

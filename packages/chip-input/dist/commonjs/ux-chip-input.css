@@ -1,49 +1,53 @@
-ux-chip-input {
+.ux-chip-input {
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
-  width: 100%;  
+  width: 100%;
+  min-height: 56px;
+  padding: 0 16px;
+  padding-bottom: 5px;
+  color: inherit;
+  color: var(--aurelia-ux--chip-input-foreground, inherit);
+  background-color: #00000011;
+  background-color: var(--aurelia-ux--chip-input-background, #00000011);
+  border-radius: 4px;
+  border-radius: var(--aurelia-ux--chip-input-border-radius, 4px);
 }
 
-  ux-chip-input>ux-chip,
-  ux-chip-input>ux-tag {
-    margin-right: 6px;
-    cursor: default;
-  }
+.ux-chip-input__inner-input {
+  align-self: stretch;
+  background: transparent;
+  border: none;
+  flex-grow: 1;
+  min-width: 180px;
+  color: inherit;
+  color: var(--aurelia-ux--chip-input-foreground, inherit);
+}
 
-  ux-chip-input>input {
-    align-self: stretch;
-    background: transparent;
-    border: none;
-    flex-grow: 1;
-    min-width: 180px;
-    color: inherit;
-    color: var(--aurelia-ux--chip-input-foreground, inherit);
-  }
+.ux-chip-input__bottom-border {
+  height: 2px;
+  background-color: #4043ff;
+  background-color: var(--aurelia-ux--chip-input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff));
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: scalex(0);
+  transition: ease 150ms;
+}
 
-  ux-chip-input>input:focus {
-    outline: none;
-  }
+.ux-chip-input__inner-input:focus {
+  outline: none;
+}
 
-  ux-chip-input>input+div.bottom-border {
-    align-self: flex-end;
-    background-color: #9E9E9E;
-    background-color: var(--aurelia-ux--chip-input-bottom-border, #9E9E9E);
-    height: 1px;
-    margin-top: 2px;
-    margin-bottom: 4px;
-    transition: background-color 250ms ease;
-    width: 100%;
-  }
+.ux-chip-input .ux-chip,
+.ux-chip-input .ux-tag {
+  margin-right: 6px;
+  cursor: default;
+}
 
-    ux-chip-input:hover>div.bottom-border,
-    ux-chip-input>input:focus+div.bottom-border {
-      background-color: #FF4081;
-      background-color: var(--aurelia-ux--design-accent, #FF4081);
-    }
-
-    ux-chip-input > input:focus+div.bottom-border {
-      height: 2px;
-      margin-bottom: 3px;
-    }
+.ux-chip-input__inner-input:focus+.ux-chip-input__bottom-border {
+  transform: scalex(1);
+}

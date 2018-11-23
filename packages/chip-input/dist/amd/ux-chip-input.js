@@ -44,11 +44,11 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
             var _this = this;
             var blurEvent = aurelia_pal_1.DOM.createCustomEvent('blur', { bubbles: true });
             this.textbox.addEventListener('focus', function () {
-                _this.element.classList.add('focused');
+                _this.element.classList.add('ux-chip-input--focused');
             });
             this.textbox.addEventListener('blur', function () {
                 _this.addChip();
-                _this.element.classList.remove('focused');
+                _this.element.classList.remove('ux-chip-input--focused');
                 _this.element.dispatchEvent(blurEvent);
             });
         };
@@ -56,11 +56,11 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
             var _this = this;
             var blurEvent = aurelia_pal_1.DOM.createCustomEvent('blur', { bubbles: true });
             this.textbox.removeEventListener('focus', function () {
-                _this.element.classList.add('focused');
+                _this.element.classList.add('ux-chip-input--focused');
             });
             this.textbox.removeEventListener('blur', function () {
                 _this.addChip();
-                _this.element.classList.remove('focused');
+                _this.element.classList.remove('ux-chip-input--focused');
                 _this.element.dispatchEvent(blurEvent);
             });
         };
@@ -157,7 +157,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
         ], UxChipInput.prototype, "theme", void 0);
         __decorate([
             aurelia_templating_1.bindable
-        ], UxChipInput.prototype, "type", void 0);
+        ], UxChipInput.prototype, "label", void 0);
         __decorate([
             aurelia_templating_1.bindable
         ], UxChipInput.prototype, "separator", void 0);

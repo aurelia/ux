@@ -5,8 +5,7 @@ System.register(["aurelia-framework", "./ux-chip-input-theme", "./ux-tag-theme",
     function configure(config) {
         config.globalResources([
             aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/chip-input/ux-chip-input'),
-            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/chip-input/ux-chip'),
-            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/chip-input/ux-tag')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/chip-input/ux-chip')
         ]);
     }
     exports_1("configure", configure);

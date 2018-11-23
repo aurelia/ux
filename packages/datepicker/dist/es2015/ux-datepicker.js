@@ -28,6 +28,7 @@ let UxDatepicker = class UxDatepicker {
         this.showDialog = false;
     }
     bind() {
+        this.processAttribute('placeholder');
         if (this.initialDate != null) {
             const dateParse = moment(this.initialDate);
             if (dateParse.isValid()) {
@@ -124,6 +125,13 @@ let UxDatepicker = class UxDatepicker {
             newValue.themeKey = 'datepicker';
         }
         this.styleEngine.applyTheme(newValue, this.element);
+    }
+    processAttribute(attributeName) {
+        const attributeValue = this.element.getAttribute('placeholder');
+        if (attributeValue) {
+            this.element.removeAttribute(attributeName);
+            this.textbox.setAttribute(attributeName, attributeValue);
+        }
     }
 };
 __decorate([

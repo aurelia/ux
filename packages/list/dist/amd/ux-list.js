@@ -16,6 +16,15 @@ define(["require", "exports", "aurelia-templating", "aurelia-dependency-injectio
             if (this.theme != null) {
                 this.themeChanged(this.theme);
             }
+            this.typeChanged(this.type);
+        };
+        UxList.prototype.typeChanged = function (newValue, oldValue) {
+            if (typeof oldValue === 'string') {
+                this.element.classList.remove("ux-list--" + oldValue);
+            }
+            if (typeof newValue === 'string') {
+                this.element.classList.add("ux-list--" + newValue);
+            }
         };
         UxList.prototype.themeChanged = function (newValue) {
             if (newValue != null && newValue.themeKey == null) {
@@ -26,6 +35,9 @@ define(["require", "exports", "aurelia-templating", "aurelia-dependency-injectio
         __decorate([
             aurelia_templating_1.bindable
         ], UxList.prototype, "theme", void 0);
+        __decorate([
+            aurelia_templating_1.bindable
+        ], UxList.prototype, "type", void 0);
         UxList = __decorate([
             aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
             aurelia_templating_1.customElement('ux-list')

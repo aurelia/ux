@@ -14,27 +14,31 @@ export class DatetimeUtility {
         }
         if (config && config.calendarSettings) {
             const settings = config.calendarSettings;
-            if (settings.disableDays != null) {
-                if (settings.disableDays.some(disabledDate => {
-                    let disabledYear = date.year();
-                    if (disabledDate.year != null) {
-                        disabledYear = disabledDate.year;
-                    }
-                    const parsedVal = moment({ day: disabledDate.day, month: disabledDate.month, year: disabledYear });
-                    if (parsedVal.isValid() && parsedVal.isSame(date, 'day')) {
-                        return true;
-                    }
-                    return false;
-                })) {
-                    result = true;
-                }
-            }
-            if (settings.disableWeekdays != null) {
-                if (settings.disableWeekdays.some(disabledDay => disabledDay.toString() === date.day().toString())) {
-                    result = true;
-                }
+            if (settings.disableDays &&
+                settings.disableDays.some(disabledDate => this.checkDayForDisabled(disabledDate, date))) {
+                result = true;
             }
         }
         return result;
+    }
+    static checkDayForDisabled(disabledDateConfig, date) {
+        if (disabledDateConfig.weekday != null) {
+            return disabledDateConfig.weekday === date.weekday();
+        }
+        if (disabledDateConfig.day || disabledDateConfig.month || disabledDateConfig.year) {
+            const disabledDate = Object.assign({}, disabledDateConfig);
+            if (disabledDate.year == null) {
+                disabledDate.year = date.year();
+            }
+            if (disabledDate.day == null) {
+                disabledDate.day = date.date();
+            }
+            if (disabledDate.month == null) {
+                disabledDate.month = date.month() + 1;
+            }
+            const parsedVal = moment(`${disabledDate.month}-${disabledDate.day}-${disabledDate.year}`);
+            return parsedVal.isValid() && parsedVal.isSame(date, 'day');
+        }
+        return false;
     }
 }

@@ -14,6 +14,7 @@ export declare class UxRadio implements UxComponent {
     theme: UxRadioTheme;
     checked: boolean;
     value: boolean;
+    focused: boolean;
     private radio;
     private ripple;
     readonly isDisabled: boolean;
@@ -23,6 +24,8 @@ export declare class UxRadio implements UxComponent {
     detached(): void;
     getChecked(): boolean;
     setChecked(value: any): void;
+    disabledChanged(newValue: boolean): void;
+    focusedChanged(newValue: boolean): void;
     themeChanged(newValue: UxRadioTheme): void;
     valueChanged(value: boolean): void;
     onMouseDown(e: MouseEvent): void;

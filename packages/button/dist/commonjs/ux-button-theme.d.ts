@@ -3,10 +3,14 @@ export declare class UxButtonTheme implements UxTheme {
     themeKey: string;
     background: string;
     foreground: string;
-    flatBackground: string;
-    flatForeground: string;
     accentBackground: string;
     accentForeground: string;
+    flatBackground: string;
+    flatForeground: string;
+    textBackground: string;
+    textForeground: string;
+    outlineForeground: string;
+    outlineBorder: string;
     accentFlatBackground: string;
     accentFlatForeground: string;
     backgroundDisabled: string;

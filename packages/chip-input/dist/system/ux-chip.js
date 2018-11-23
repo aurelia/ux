@@ -35,6 +35,10 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                 }
                 UxChip.prototype.bind = function () {
                     this.themeChanged(this.theme);
+                    if (this.element.hasAttribute('deletable')) {
+                        this.element.removeAttribute('deletable');
+                        this.element.classList.add('ux-chip--deletable');
+                    }
                 };
                 UxChip.prototype.themeChanged = function (newValue) {
                     if (newValue != null && newValue.themeKey == null) {

@@ -1,26 +1,14 @@
-<template role="textbox">
+<template role="textbox" class="ux-chip-input">
   <require from="./ux-chip-input.css"></require>
 
-  <template if.bind="type.toLowerCase() !== 'tag'">
-    <ux-chip deletable
-      ref="chiprepeat"
-      close.trigger="removeChip(chip)"
-      dblclick.trigger="editChip(chip)"
-      repeat.for="chip of chips">
-      ${chip}
-    </ux-chip>
-  </template>
+  <ux-chip deletable
+    ref="chiprepeat"
+    close.trigger="removeChip(chip)"
+    dblclick.trigger="editChip(chip)"
+    repeat.for="chip of chips">
+    ${chip}
+  </ux-chip>
 
-  <template if.bind="type.toLowerCase() === 'tag'">
-    <ux-tag deletable
-      ref="tagrepeat"
-      close.trigger="removeChip(chip)"
-      dblclick.trigger="editChip(chip)"
-      repeat.for="chip of chips">
-      ${chip}
-    </ux-tag>
-  </template>
-
-  <input ref="textbox" keyup.delegate="handleKeyup($event)">
-  <div class="bottom-border"></div>
+  <input class="ux-chip-input__inner-input" ref="textbox" keyup.delegate="handleKeyup($event)">
+  <div class="ux-chip-input__bottom-border"></div>
 </template>

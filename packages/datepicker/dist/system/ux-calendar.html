@@ -1,32 +1,32 @@
 <template>
   <require from="./ux-calendar.css"></require>
 
-  <div class="month-display">
-    <ux-button type="icon" click.delegate="previousMonth()">
-      <svg viewBox="0 0 24 24">
+  <div class="ux-calendar__month-display">
+    <ux-button type="text" click.delegate="previousMonth()">
+      <svg viewBox="0 0 24 24" class="ux-calendar__svg-icon">
         <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
       </svg>
     </ux-button>
     <span>
       ${displayMonth.format('MMMM YYYY')}
     </span>
-    <ux-button type="icon" click.delegate="nextMonth()">
-      <svg viewBox="0 0 24 24">
+    <ux-button type="text" click.delegate="nextMonth()">
+      <svg viewBox="0 0 24 24" class="ux-calendar__svg-icon">
         <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
       </svg>
     </ux-button>
 
   </div>
-  <div class="calendar-row weekdays">
-    <div class="day" repeat.for="weekday of weekdays">
+  <div class="ux-calendar__row ux-calendar__row--weekdays">
+    <div class="ux-calendar__day" repeat.for="weekday of weekdays">
       ${weekday[0]}
     </div>
   </div>
-  <div class="calendar-row" repeat.for="week of calendarRows">
-    <div class="day" repeat.for="day of week">
-      <div click.delegate="changeCalendarSelection(day)" if.bind="day" class="day-highlight 
-             ${day.isSame(value, 'day') ? 'selected' : ''}
-             ${isValidDate(day) ? 'out-of-range' : '' }">
+  <div class="ux-calendar__row" repeat.for="week of calendarRows">
+    <div class="ux-calendar__day" repeat.for="day of week">
+      <div click.delegate="changeCalendarSelection(day)" if.bind="day" class="ux-calendar__day--highlight
+             ${day.isSame(value, 'day') ? 'ux-calendar__day--selected' : ''}
+             ${isValidDate(day) ? 'ux-calendar__day--out-of-range' : '' }">
         ${day.date()}
       </div>
     </div>

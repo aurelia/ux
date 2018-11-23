@@ -1,84 +1,51 @@
-ux-textarea {
-  display: block;
+.ux-textarea {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
+  min-height: 56px;
+  padding: 0 16px;
+  padding-bottom: 5px;
+  color: inherit;
+  color: var(--aurelia-ux--textarea-foreground, inherit);
+  background-color: #00000011;
+  background-color: var(--aurelia-ux--textarea-background, #00000011);
+  border-radius: 4px;
+  border-radius: var(--aurelia-ux--textarea-border-radius, 4px);
 }
-  ux-textarea > textarea {
-    width: 100%;
-    padding: 6px 0 4px 0;
-    margin-bottom: 4px;
-    border: 0;
-    outline: none;
-    resize: none;
-    padding-left:0;
-    padding-right:0;
-    transition: border-color 250ms ease;
-    color: inherit;
-    color: var(--aurelia-ux--textarea-foreground, inherit);
-    background-color: transparent;
-    background-color: var(--aurelia-ux--textarea-background, transparent);
-    border-bottom: 1px solid #9E9E9E;
-    border-bottom: var(--aurelia-ux--textarea-border-bottom, 1px solid #9E9E9E);
-  }
 
-    ux-textarea > textarea:hover,
-    ux-textarea > textarea:focus {
-      border-bottom: 1px solid #FF4081;
-      border-bottom: var(--aurelia-ux--textarea-border-bottom-focus, 1px solid var(--aurelia-ux--design-accent, #FF4081));
-    }
+.ux-textarea__inner-textarea {
+  width: 100%;
+  padding: 6px 0 4px 0;
+  margin-bottom: 4px;
+  border: 0;
+  outline: none;
+  resize: none;
+  padding-left: 0;
+  padding-right: 0;
+  transition: border-color 250ms ease;
+  color: inherit;
+  background-color: transparent;
+}
 
-    ux-textarea > textarea:focus {
-      border-bottom-width: 2px;
-      padding-bottom: 3px;
-    }
+.ux-textarea__bottom-border {
+  height: 2px;
+  background-color: #4043ff;
+  background-color: var(--aurelia-ux--chip-input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff));
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: scalex(0);
+  transition: ease 150ms;
+}
 
-    ux-textarea > textarea[disabled],
-    ux-textarea > textarea[disabled]:hover,
-    ux-textarea > textarea[disabled]:focus,
-    ux-textarea > textarea[readonly],
-    ux-textarea > textarea[readonly]:hover,
-    ux-textarea > textarea[readonly]:focus {
-      color: #A4A4A4;
-      color: var(--aurelia-ux--textarea-disabled-foreground, #A4A4A4);
-      border-bottom: 1px dashed #A4A4A4;
-      border-bottom: var(--aurelia-ux--textarea-disabled-border-bottom, 1px dashed #A4A4A4);
-    }
-    
-  ux-textarea.show-grip > ux-textarea > textarea {
-    resize: both;
-  }
+.ux-textarea--show-grip .ux-textarea__inner-textarea {
+  resize: both;
+}
 
-  ux-textarea.full-width > ux-textarea > textarea {
-    padding: 20px 8px;
-    margin-bottom: 0;
-    font-size: 16px;
-    color: #232323;
-    color: var(--aurelia-ux--textarea-full-width-foreground, #232323);
-    border: 1px solid #EEEEEE;
-    border: var(--aurelia-ux--textarea-full-width-border, 1px solid #EEEEEE);
-    background-color: #FFF;
-    background-color: var(--aurelia-ux--textarea-full-width-background, #FFF);
-  }
-
-    ux-textarea.full-width > ux-textarea > textarea[disabled]
-    ux-textarea.full-width > ux-textarea > textarea[disabled]:hover,
-    ux-textarea.full-width > ux-textarea > textarea[disabled]:focus,
-    ux-textarea.full-width > ux-textarea > textarea[readonly],
-    ux-textarea.full-width > ux-textarea > textarea[readonly]:hover,
-    ux-textarea.full-width > ux-textarea > textarea[readonly]:focus  {
-      background-color: #EEEEEE;
-      background-color: var(--aurelia-ux--textarea-full-width-background-disabled, #EEEEEE);
-      border: 1px dashed #E0E0E0;
-      border: var(--aurelia-ux--textarea-disabled-border-bottom, 1px dashed #E0E0E0);
-      color: #E0E0E0;
-      color: var(--aurelia-ux--textarea-disabled-foreground, #E0E0E0);
-    }
-  
-  ux-textarea.has-error ux-textarea > textarea {
-    border-bottom-color: #F44336;
-    border-bottom-color: var(--aurelia-ux--textarea-error, #F44336);
-  }
-
-  ux-textarea.full-width.has-error ux-textarea > textarea {
-    border-color: #F44336;
-    border-color: var(--aurelia-ux--textarea-error, #F44336);
-  }
+.ux-textarea__inner-textarea:focus+.ux-textarea__bottom-border {
+  transform: scalex(1);
+}

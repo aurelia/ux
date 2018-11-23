@@ -29,28 +29,35 @@ var UxRadio = /** @class */ (function () {
         configurable: true
     });
     UxRadio.prototype.bind = function () {
-        var element = this.element;
-        var radio = this.radio;
-        if (element.hasAttribute('id')) {
-            var id = element.id;
+        if (this.element.hasAttribute('id')) {
+            var id = this.element.id;
             if (id != null) {
-                radio.setAttribute('id', id);
-                element.removeAttribute('id');
+                this.radio.setAttribute('id', id);
+                this.element.removeAttribute('id');
             }
         }
-        if (element.hasAttribute('tabindex')) {
-            var tabIndex = element.getAttribute('tabindex');
+        if (this.element.hasAttribute('tabindex')) {
+            var tabIndex = this.element.getAttribute('tabindex');
             if (tabIndex != null) {
-                radio.setAttribute('tabindex', tabIndex);
-                element.removeAttribute('tabindex');
+                this.radio.setAttribute('tabindex', tabIndex);
+                this.element.removeAttribute('tabindex');
             }
         }
-        if (element.hasAttribute('checked')) {
-            element.checked = true;
+        if (this.element.hasAttribute('name')) {
+            var name_1 = this.element.getAttribute('name');
+            if (name_1 != null) {
+                this.radio.setAttribute('name', name_1);
+                this.element.removeAttribute('name');
+            }
+        }
+        if (this.element.hasAttribute('checked')) {
+            this.element.checked = true;
         }
         if (this.checked) {
-            radio.checked = true;
+            this.radio.checked = true;
+            this.element.classList.add('ux-radio--checked');
         }
+        this.disabledChanged(this.radio.disabled);
         this.themeChanged(this.theme);
     };
     UxRadio.prototype.attached = function () {
@@ -71,9 +78,31 @@ var UxRadio = /** @class */ (function () {
             this.value = newValue;
             if (this.radio) {
                 this.radio.checked = !!newValue;
+                if (this.radio.checked) {
+                    this.element.classList.add('ux-radio--checked');
+                }
+                else {
+                    this.element.classList.remove('ux-radio--checked');
+                }
             }
             this.ignoreValueChanges = false;
             this.element.dispatchEvent(aurelia_framework_1.DOM.createCustomEvent('change', { bubbles: true }));
+        }
+    };
+    UxRadio.prototype.disabledChanged = function (newValue) {
+        if (newValue === true) {
+            this.element.classList.add('ux-radio--disabled');
+        }
+        else {
+            this.element.classList.remove('ux-radio--disabled');
+        }
+    };
+    UxRadio.prototype.focusedChanged = function (newValue) {
+        if (newValue === true) {
+            this.element.classList.add('ux-radio--focused');
+        }
+        else {
+            this.element.classList.remove('ux-radio--focused');
         }
     };
     UxRadio.prototype.themeChanged = function (newValue) {
@@ -129,6 +158,9 @@ var UxRadio = /** @class */ (function () {
     __decorate([
         aurelia_binding_1.observable({ initializer: function () { return false; } })
     ], UxRadio.prototype, "value", void 0);
+    __decorate([
+        aurelia_binding_1.observable()
+    ], UxRadio.prototype, "focused", void 0);
     __decorate([
         aurelia_binding_1.computedFrom('disabled')
     ], UxRadio.prototype, "isDisabled", null);

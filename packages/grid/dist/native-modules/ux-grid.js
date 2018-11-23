@@ -17,6 +17,23 @@ var UxGrid = /** @class */ (function () {
         if (this.columns != null) {
             this.columnsChanged(this.columns);
         }
+        this.processAttributes();
+    };
+    UxGrid.prototype.processAttributes = function () {
+        var alignAttributes = [
+            'align-cells-top',
+            'align-cells-middle',
+            'align-cells-bottom',
+            'fixed',
+            'remove-padding'
+        ];
+        for (var _i = 0, alignAttributes_1 = alignAttributes; _i < alignAttributes_1.length; _i++) {
+            var attribute = alignAttributes_1[_i];
+            if (this.element.hasAttribute(attribute)) {
+                this.element.removeAttribute(attribute);
+                this.element.classList.add("ux-grid--" + attribute);
+            }
+        }
     };
     UxGrid.prototype.themeChanged = function (newValue) {
         if (newValue != null && newValue.themeKey == null) {

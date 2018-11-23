@@ -1,29 +1,29 @@
-ux-calendar {
+.ux-calendar {
   display: block;
   height: 260px;
   display: flex;
   flex-direction: column;
 }
 
-ux-calendar div.calendar-row {
+.ux-calendar__row {
   display: flex;
   align-items: center;
   justify-content: space-around;
   height: 2em;
 }
 
-ux-calendar .calendar-row.weekdays {
+.ux-calendar__row--weekdays {
   color: #E0E0E0;
   color: var(--aurelia-ux--datepicker-weekday-foreground, #E0E0E0);
 }
 
-ux-calendar .calendar-row .day {
+.ux-calendar__day {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-ux-calendar div.day-highlight {
+.ux-calendar__day--highlight {
   width: 1.9em;
   height: 1.9em;
   border-radius: 100%;
@@ -33,26 +33,26 @@ ux-calendar div.day-highlight {
   cursor: pointer;
 }
 
-ux-calendar div.day-highlight.selected {
+.ux-calendar__day--selected {
   color: #FFF;
   color: var(--aurelia-ux--datepicker-selected-day-foreground, var(--aurelia-ux--design-accent-foreground, #FFF));
   background-color: #FF4081;
   background-color: var(--aurelia-ux--datepicker-selected-day-background, var(--aurelia-ux--design-accent, #FF4081));
 }
 
-ux-calendar div.day-highlight.out-of-range {
+.ux-calendar__day--out-of-range {
   color: #757575;
   color: var(--aurelia-ux--datepicker-out-of-range-foreground, #757575);
   cursor: default;
 }
 
-ux-calendar div.month-display {
+.ux-calendar__month-display {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-ux-calendar div.month-display svg {
+.ux-calendar__svg-icon {
   fill: currentColor;
   width: 24px;
   height: 24px;

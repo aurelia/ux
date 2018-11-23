@@ -45,22 +45,22 @@ let UxChipInput = class UxChipInput {
     attached() {
         const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
         this.textbox.addEventListener('focus', () => {
-            this.element.classList.add('focused');
+            this.element.classList.add('ux-chip-input--focused');
         });
         this.textbox.addEventListener('blur', () => {
             this.addChip();
-            this.element.classList.remove('focused');
+            this.element.classList.remove('ux-chip-input--focused');
             this.element.dispatchEvent(blurEvent);
         });
     }
     detached() {
         const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
         this.textbox.removeEventListener('focus', () => {
-            this.element.classList.add('focused');
+            this.element.classList.add('ux-chip-input--focused');
         });
         this.textbox.removeEventListener('blur', () => {
             this.addChip();
-            this.element.classList.remove('focused');
+            this.element.classList.remove('ux-chip-input--focused');
             this.element.dispatchEvent(blurEvent);
         });
     }
@@ -158,7 +158,7 @@ __decorate([
 ], UxChipInput.prototype, "theme", void 0);
 __decorate([
     bindable
-], UxChipInput.prototype, "type", void 0);
+], UxChipInput.prototype, "label", void 0);
 __decorate([
     bindable
 ], UxChipInput.prototype, "separator", void 0);

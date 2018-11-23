@@ -1,29 +1,25 @@
 <template
-  class="ux-select ${multiple ? 'multiple' : ''}"
-  tabindex="-1"
+  class="ux-select ${multiple ? 'ux-select--multiple' : ''}"
+  tabindex="0"
   disabled.bind="disabled & booleanAttr"
   aria-multiselectable.bind="multiple"
   aria-disabled.bind="isDisabled"
-  keydown.trigger="onKeyDown($event.which)"
-  blur.trigger="onBlur() & debounce:1">
+  keydown.trigger="onKeyDown($event)"
+  blur.trigger="onBlur() & debounce:1"
+  click.trigger="onTriggerClick()">
 
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-select.css"></require>
 
-  <div class="ux-select-container"
-    ref="container"
-    click.trigger="onTriggerClick()">
-    <div class="ux-select-trigger">
-      <div class="ux-select-value">${displayValue}</div>
-      <div class="ux-select-arrow"></div>
-    </div>
-  </div>
+  <div class="ux-select__value">${displayValue}</div>
+  <div class="ux-select__arrow"></div>
+  <div class="ux-select__border-bottom"></div>
   
   <div ref="optionWrapperEl"
-    class="ux-select-list-wrapper"
+    class="ux-select__list-wrapper"
     css="top: ${listAnchor.y}px; left: ${listAnchor.x}px;">
     <div ref="optionCtEl"
-      class="ux-select-list-ct"
+      class="ux-select__list-container"
       select.trigger="onSelect($event)"
       css="
         max-width: ${theme.listMaxWidth}px;

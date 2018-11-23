@@ -28,28 +28,27 @@ var UxSwitch = /** @class */ (function () {
         configurable: true
     });
     UxSwitch.prototype.bind = function () {
-        var element = this.element;
-        var checkbox = this.checkbox;
-        if (element.hasAttribute('id')) {
-            var attributeValue = element.getAttribute('id');
+        if (this.element.hasAttribute('id')) {
+            var attributeValue = this.element.getAttribute('id');
             if (attributeValue != null) {
-                checkbox.setAttribute('id', attributeValue);
+                this.checkbox.setAttribute('id', attributeValue);
             }
         }
-        if (element.hasAttribute('tabindex')) {
-            var attributeValue = element.getAttribute('tabindex');
+        if (this.element.hasAttribute('tabindex')) {
+            var attributeValue = this.element.getAttribute('tabindex');
             if (attributeValue != null) {
-                checkbox.setAttribute('tabindex', attributeValue);
+                this.checkbox.setAttribute('tabindex', attributeValue);
             }
         }
-        if (element.hasAttribute('checked')) {
-            var attributeValue = element.getAttribute('checked');
+        if (this.element.hasAttribute('checked')) {
+            var attributeValue = this.element.getAttribute('checked');
             if (attributeValue || attributeValue === '') {
-                element.checked = true;
+                this.element.checked = true;
             }
         }
+        this.valueChanged(this.value);
+        this.disabledChanged(this.checkbox.disabled);
         this.themeChanged(this.theme);
-        this.disabledChanged(this.disabled);
     };
     UxSwitch.prototype.attached = function () {
         this.checkbox.addEventListener('change', stopEvent);
@@ -71,9 +70,23 @@ var UxSwitch = /** @class */ (function () {
             this.element.dispatchEvent(aurelia_framework_1.DOM.createCustomEvent('change', { bubbles: true }));
         }
     };
+    UxSwitch.prototype.focusedChanged = function (newValue) {
+        if (newValue === true) {
+            this.element.classList.add('ux-switch--focused');
+        }
+        else {
+            this.element.classList.remove('ux-switch--focused');
+        }
+    };
     UxSwitch.prototype.valueChanged = function (newValue) {
         if (this.ignoreValueChanges) {
             return;
+        }
+        if (newValue === true) {
+            this.element.classList.add('ux-switch--checked');
+        }
+        else {
+            this.element.classList.remove('ux-switch--checked');
         }
         this.setChecked(newValue);
     };
@@ -84,11 +97,11 @@ var UxSwitch = /** @class */ (function () {
         this.styleEngine.applyTheme(newValue, this.element);
     };
     UxSwitch.prototype.disabledChanged = function (newValue) {
-        if (core_1.normalizeBooleanAttribute('disabled', newValue) && !this.element.classList.contains('disabled')) {
-            this.checkbox.setAttribute('disabled', '');
+        if (newValue === true) {
+            this.element.classList.add('ux-switch--disabled');
         }
-        else if (this.element.classList.contains('disabled')) {
-            this.checkbox.removeAttribute('disabled');
+        else {
+            this.element.classList.remove('ux-switch--disabled');
         }
     };
     UxSwitch.prototype.onMouseDown = function (e) {
@@ -132,6 +145,9 @@ var UxSwitch = /** @class */ (function () {
     __decorate([
         aurelia_binding_1.observable({ initializer: function () { return false; } })
     ], UxSwitch.prototype, "value", void 0);
+    __decorate([
+        aurelia_binding_1.observable()
+    ], UxSwitch.prototype, "focused", void 0);
     __decorate([
         aurelia_binding_1.computedFrom('disabled')
     ], UxSwitch.prototype, "isDisabled", null);

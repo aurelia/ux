@@ -14,6 +14,7 @@ export declare class UxCheckbox implements UxComponent {
     theme: UxCheckboxTheme;
     checked: boolean;
     value: boolean;
+    focused: boolean;
     private indeterminate;
     private checkbox;
     private ripple;
@@ -26,6 +27,8 @@ export declare class UxCheckbox implements UxComponent {
     setChecked(value: any): void;
     getIndeterminate(): boolean;
     setIndeterminate(value: any): void;
+    disabledChanged(newValue: boolean): void;
+    focusedChanged(newValue: boolean): void;
     themeChanged(newValue: UxCheckboxTheme): void;
     valueChanged(newValue: boolean): void;
     onMouseDown(e: MouseEvent): void;

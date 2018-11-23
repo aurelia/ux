@@ -7,8 +7,7 @@ define(["require", "exports", "aurelia-framework", "./ux-chip-input-theme", "./u
     function configure(config) {
         config.globalResources([
             aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/chip-input/ux-chip-input'),
-            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/chip-input/ux-chip'),
-            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/chip-input/ux-tag')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/chip-input/ux-chip')
         ]);
     }
     exports.configure = configure;

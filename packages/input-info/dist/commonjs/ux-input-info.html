@@ -1,10 +1,10 @@
-<template>
+<template class="ux-input-info">
   <require from="./ux-input-info.css"></require>
 
-  <span class="hint-text">
+  <span class="ux-input-info__hint-text">
     <slot></slot>
   </span>
-  <div class="counter" if.bind="uxInputCounter !== null">
+  <div class="ux-input-info__counter" if.bind="uxInputCounter !== null">
     <span>${target.value.length ? target.value.length : 0}</span>
     <span if.bind="target.maxlength > 0">/${target.maxlength}</span>
   </div>

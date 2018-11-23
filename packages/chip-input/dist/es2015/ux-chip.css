@@ -1,4 +1,4 @@
-ux-chip {
+.ux-chip {
   display: inline-flex;
   align-items: center;
 
@@ -7,47 +7,47 @@ ux-chip {
   height: 32px;
   border-radius: 100px;
 
-  background-color:  #FF4081;
-  background-color: var(--aurelia-ux--chip-background, var(--aurelia-ux--design-accent, #FF4081));
-  color: #FFF;
-  color: var(--aurelia-ux--chip-foreground, var(--aurelia-ux--design-accent-foreground, #FFF));
+  background-color: #e0e0e0;
+  background-color: var(--aurelia-ux--chip-background, #e0e0e0);
+  color: #333;
+  color: var(--aurelia-ux--chip-foreground, #333);
 }
 
-  ux-chip:focus {
-    outline: none;
-    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),0 1px 10px 0 rgba(0, 0, 0, 0.12),0 2px 4px -1px rgba(0, 0, 0, 0.2);
-    box-shadow: var(--aurelia-ux--design-elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14),0 1px 10px 0 rgba(0, 0, 0, 0.12),0 2px 4px -1px rgba(0, 0, 0, 0.2));
-  }
+.ux-chip__content {
+  margin: 0 12px;
+}
 
-  ux-chip > span {
-    margin: 0 12px;
-  }
+.ux-chip__close {
+  display: none;
+}
 
-    ux-chip > span.close {
-      display:none;
-    }
+.ux-chip:focus {
+  outline: none;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--aurelia-ux--design-elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2));
+}
 
-  ux-chip[deletable] > span {
-    margin-right: 0;
-  }
+.ux-chip--deletable .ux-chip__content {
+  margin-right: 0;
+}
 
-    ux-chip[deletable] > span.close {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 4px;
-      color: #EEEEEE;
-      color: var(--aurelia-ux--chip-delete-foreground, #EEEEEE);
-      background-color: #9E9E9E;
-      background-color: var(--aurelia-ux--chip-delete-background, #9E9E9E);
-      height: 24px;
-      width: 24px;
-      border-radius: 24px;
-      cursor: pointer;
-    }
+.ux-chip--deletable .ux-chip__close {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 4px;
+  color: #EEEEEE;
+  color: var(--aurelia-ux--chip-delete-foreground, #EEEEEE);
+  background-color: #9E9E9E;
+  background-color: var(--aurelia-ux--chip-delete-background, #9E9E9E);
+  height: 24px;
+  width: 24px;
+  border-radius: 24px;
+  cursor: pointer;
+}
 
-      ux-chip[deletable] > span.close::before {
-        content: '+';    
-        font-size: 24px;
-        transform: rotate(45deg);
-      }
+.ux-chip--deletable .ux-chip__close::before {
+  content: '+';
+  font-size: 24px;
+  transform: rotate(45deg);
+}

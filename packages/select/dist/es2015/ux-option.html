@@ -1,5 +1,5 @@
 <template
-  class="ux-option ripple ${selected ? 'selected' : ''} ${focused ? 'focused' : ''} ${isDisabled ? 'disabled' : ''}"
+  class="ux-option ripple ${selected ? 'ux-option--selected' : ''} ${focused ? 'ux-option--focused' : ''} ${isDisabled ? 'ux-option--disabled' : ''}"
   click.trigger="onClick()"
   mousedown.delegate="onMouseDown($event)"
   disabled.bind="isDisabled & booleanAttr"
@@ -7,5 +7,5 @@
   <svg xml:space="preserve" if.bind="isMultiple" class="ux-checkbox" viewBox="0 0 24 24">
     <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" show.bind="selected" />
   </svg>
-  <div class="ux-option-text" ref="textEl" textcontent.bind='text'></div>
+  <div class="ux-option__text" ref="textEl" textcontent.bind='text'></div>
 </template>

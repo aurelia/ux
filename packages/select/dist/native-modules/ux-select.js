@@ -157,7 +157,7 @@ var UxSelect = /** @class */ (function () {
         this.winEvents.disposeAll();
     };
     UxSelect.prototype.calcAnchorPosition = function () {
-        var elDim = this.container.getBoundingClientRect();
+        var elDim = this.element.getBoundingClientRect();
         var offsetY = (48 - elDim.height) / 2;
         this.listAnchor = { x: elDim.left, y: elDim.top - offsetY };
     };
@@ -216,13 +216,13 @@ var UxSelect = /** @class */ (function () {
             return;
         }
         this.isExpanding = true;
-        this.optionWrapperEl.classList.add('open');
+        this.optionWrapperEl.classList.add('ux-select__list-wrapper--open');
         setTimeout(function () {
-            _this.optionCtEl.classList.add('open');
+            _this.optionCtEl.classList.add('ux-select__list-wrapper--open');
             _this.isExpanding = false;
             _this.expanded = true;
             _this.setFocusedOption(_this.selectedOption);
-        }, this.theme.listTransition);
+        }, this.theme && this.theme.listTransition || 125);
         this.setupListAnchor();
     };
     UxSelect.prototype.collapse = function () {
@@ -231,14 +231,14 @@ var UxSelect = /** @class */ (function () {
             return;
         }
         this.isCollapsing = true;
-        this.optionCtEl.classList.remove('open');
+        this.optionCtEl.classList.remove('ux-select__list-wrapper--open');
         setTimeout(function () {
-            _this.optionWrapperEl.classList.remove('open');
+            _this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
             _this.isCollapsing = false;
             _this.expanded = false;
             _this.setFocusedOption(null);
             _this.unsetupListAnchor();
-        }, this.theme.listTransition);
+        }, this.theme && this.theme.listTransition || 125);
     };
     UxSelect.prototype.setFocusedOption = function (focusedOption) {
         var oldFocusedOption = this.focusedUxOption;
@@ -248,7 +248,6 @@ var UxSelect = /** @class */ (function () {
             }
             if (focusedOption) {
                 focusedOption.focused = true;
-                focusedOption.wave();
                 focusedOption.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
             this.focusedUxOption = focusedOption;
@@ -338,19 +337,21 @@ var UxSelect = /** @class */ (function () {
             }
         }
     };
-    UxSelect.prototype.onKeyDown = function (key) {
+    UxSelect.prototype.onKeyDown = function (event) {
         if (this.isDisabled) {
             return;
         }
         // tslint:disable-next-line:switch-default
-        switch (key) {
+        switch (event.which) {
             case UP:
             case DOWN:
-                this.moveSelectedIndex(key === UP ? -1 : 1);
+                this.moveSelectedIndex(event.which === UP ? -1 : 1);
+                event.preventDefault();
                 break;
             case ENTER:
             case SPACE:
                 this.onKeyboardSelect();
+                event.preventDefault();
                 break;
         }
         return true;

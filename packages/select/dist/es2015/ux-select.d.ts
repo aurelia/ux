@@ -36,7 +36,6 @@ export declare class UxSelect implements UxComponent {
     value: any;
     displayValue: string;
     expanded: boolean;
-    readonly container: HTMLElement;
     readonly optionWrapperEl: HTMLElement;
     readonly optionCtEl: UxOptionContainer;
     constructor(element: UxSelectElement, styleEngine: StyleEngine, observerLocator: ObserverLocator, taskQueue: TaskQueue);
@@ -67,7 +66,7 @@ export declare class UxSelect implements UxComponent {
     onTriggerClick(): void;
     onBlur(): void;
     onSelect(e: CustomEvent): void;
-    onKeyDown(key: number): true | undefined;
+    onKeyDown(event: KeyboardEvent): true | undefined;
     themeChanged(newValue: UxSelectTheme): void;
     multipleChanged(newValue: boolean | string, oldValue: boolean | string): void;
     readonly options: UxOptionElement[];

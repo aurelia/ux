@@ -17,6 +17,22 @@ let UxGrid = class UxGrid {
         if (this.columns != null) {
             this.columnsChanged(this.columns);
         }
+        this.processAttributes();
+    }
+    processAttributes() {
+        const alignAttributes = [
+            'align-cells-top',
+            'align-cells-middle',
+            'align-cells-bottom',
+            'fixed',
+            'remove-padding'
+        ];
+        for (const attribute of alignAttributes) {
+            if (this.element.hasAttribute(attribute)) {
+                this.element.removeAttribute(attribute);
+                this.element.classList.add(`ux-grid--${attribute}`);
+            }
+        }
     }
     themeChanged(newValue) {
         if (newValue != null && newValue.themeKey == null) {

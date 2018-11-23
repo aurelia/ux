@@ -17,6 +17,10 @@ let UxChip = class UxChip {
     }
     bind() {
         this.themeChanged(this.theme);
+        if (this.element.hasAttribute('deletable')) {
+            this.element.removeAttribute('deletable');
+            this.element.classList.add('ux-chip--deletable');
+        }
     }
     themeChanged(newValue) {
         if (newValue != null && newValue.themeKey == null) {

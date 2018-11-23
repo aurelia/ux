@@ -149,7 +149,7 @@ class UxSelect {
         this.winEvents.disposeAll();
     }
     calcAnchorPosition() {
-        const elDim = this.container.getBoundingClientRect();
+        const elDim = this.element.getBoundingClientRect();
         const offsetY = (48 - elDim.height) / 2;
         this.listAnchor = { x: elDim.left, y: elDim.top - offsetY };
     }
@@ -207,13 +207,13 @@ class UxSelect {
             return;
         }
         this.isExpanding = true;
-        this.optionWrapperEl.classList.add('open');
+        this.optionWrapperEl.classList.add('ux-select__list-wrapper--open');
         setTimeout(() => {
-            this.optionCtEl.classList.add('open');
+            this.optionCtEl.classList.add('ux-select__list-wrapper--open');
             this.isExpanding = false;
             this.expanded = true;
             this.setFocusedOption(this.selectedOption);
-        }, this.theme.listTransition);
+        }, this.theme && this.theme.listTransition || 125);
         this.setupListAnchor();
     }
     collapse() {
@@ -221,14 +221,14 @@ class UxSelect {
             return;
         }
         this.isCollapsing = true;
-        this.optionCtEl.classList.remove('open');
+        this.optionCtEl.classList.remove('ux-select__list-wrapper--open');
         setTimeout(() => {
-            this.optionWrapperEl.classList.remove('open');
+            this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
             this.isCollapsing = false;
             this.expanded = false;
             this.setFocusedOption(null);
             this.unsetupListAnchor();
-        }, this.theme.listTransition);
+        }, this.theme && this.theme.listTransition || 125);
     }
     setFocusedOption(focusedOption) {
         const oldFocusedOption = this.focusedUxOption;
@@ -238,7 +238,6 @@ class UxSelect {
             }
             if (focusedOption) {
                 focusedOption.focused = true;
-                focusedOption.wave();
                 focusedOption.scrollIntoView({ block: 'nearest', inline: 'nearest' });
             }
             this.focusedUxOption = focusedOption;
@@ -328,19 +327,21 @@ class UxSelect {
             }
         }
     }
-    onKeyDown(key) {
+    onKeyDown(event) {
         if (this.isDisabled) {
             return;
         }
         // tslint:disable-next-line:switch-default
-        switch (key) {
+        switch (event.which) {
             case UP:
             case DOWN:
-                this.moveSelectedIndex(key === UP ? -1 : 1);
+                this.moveSelectedIndex(event.which === UP ? -1 : 1);
+                event.preventDefault();
                 break;
             case ENTER:
             case SPACE:
                 this.onKeyboardSelect();
+                event.preventDefault();
                 break;
         }
         return true;

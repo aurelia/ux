@@ -5,7 +5,8 @@ define(["require", "exports", "aurelia-framework", "./ux-responsive-utilities", 
     exports.UxGridTheme = ux_grid_theme_1.UxGridTheme;
     function configure(config) {
         config.globalResources([
-            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/grid/ux-grid')
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/grid/ux-grid'),
+            aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/grid/ux-grid-cell')
         ]);
     }
     exports.configure = configure;

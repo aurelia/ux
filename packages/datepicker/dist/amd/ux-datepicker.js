@@ -25,6 +25,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             this.showDialog = false;
         }
         UxDatepicker.prototype.bind = function () {
+            this.processAttribute('placeholder');
             if (this.initialDate != null) {
                 var dateParse = moment(this.initialDate);
                 if (dateParse.isValid()) {
@@ -121,6 +122,13 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                 newValue.themeKey = 'datepicker';
             }
             this.styleEngine.applyTheme(newValue, this.element);
+        };
+        UxDatepicker.prototype.processAttribute = function (attributeName) {
+            var attributeValue = this.element.getAttribute('placeholder');
+            if (attributeValue) {
+                this.element.removeAttribute(attributeName);
+                this.textbox.setAttribute(attributeName, attributeValue);
+            }
         };
         __decorate([
             aurelia_templating_1.bindable
