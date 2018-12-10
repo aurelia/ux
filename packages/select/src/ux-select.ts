@@ -121,6 +121,10 @@ export class UxSelect implements UxComponent {
     this.taskQueue.queueMicroTask(this);
   }
 
+  public attached() {
+    this.resolveDisplayValue();
+  }
+
   public unbind() {
     this.winEvents.disposeAll();
     if (this.arrayObserver) {
@@ -131,8 +135,20 @@ export class UxSelect implements UxComponent {
   }
 
   private resolveDisplayValue() {
-    const value = this.value;
-    this.displayValue = Array.isArray(value) ? value.slice().sort().join(', ') : value;
+    const values = this.options
+      .filter(option =>
+        Array.isArray(this.value) ?
+          this.value.some(value => value === option.value) :
+          option.value === this.value)
+      .map(t => t.innerText);
+
+    this.displayValue = values.join(', ');
+
+    if (this.displayValue.length > 0) {
+      this.element.classList.add('ux-select--has-value');
+    } else {
+      this.element.classList.remove('ux-select--has-value');
+    }
   }
 
   private ignoreSelectEvent: boolean = true;
