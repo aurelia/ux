@@ -117,7 +117,7 @@ function extractUxOptions(
   __: ViewResources,
   node: Element
 ) {
-  let currentChild = node.firstChild;
+  let currentChild: any = node.firstChild;
   while (currentChild) {
     const nextSibling = currentChild.nextSibling;
     if (currentChild.nodeName !== 'UX-OPTION') {

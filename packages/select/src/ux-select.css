@@ -34,6 +34,17 @@
   white-space: nowrap;
 }
 
+.ux-select__placeholder {
+  position: absolute;
+  font-size: inherit;
+  cursor: text;
+  transition: 150ms ease;
+  font-size: 13px;
+  font-size: var(--aurelia-ux--input-label-font-size, 13px);
+  letter-spacing: 0.5px;
+  letter-spacing: var(--aurelia-ux--input-label-letter-spacing, 0.5px);
+}
+
 .ux-select__arrow {
   text-align: center;
 }
@@ -129,6 +140,15 @@
 
 .ux-option:hover {
   background-color: var(--aurelia-ux--select-option-hover);
+}
+
+.ux-select--focused .ux-select__placeholder {
+  color: #4043ff;
+  color: var(--aurelia-ux--input-border-focus, var(--aurelia-ux--design-primary, #4043ff));
+}
+
+.ux-select--has-value .ux-select__placeholder {
+  transform: translateY(-1.2em);
 }
 
 .ux-optgroup .ux-optgroup-label {
