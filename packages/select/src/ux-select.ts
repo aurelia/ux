@@ -313,11 +313,11 @@ export class UxSelect implements UxComponent {
     this.isExpanding = true;
     this.optionWrapperEl.classList.add('ux-select__list-wrapper--open');
     setTimeout(() => {
-      this.optionCtEl.classList.add('ux-select__list-wrapper--open');
+      this.optionCtEl.classList.add('ux-select__list-container--open');
       this.isExpanding = false;
       this.expanded = true;
       this.setFocusedOption(this.selectedOption);
-    }, this.theme && this.theme.listTransition || 125);
+    }, 0);
     this.setupListAnchor();
   }
 
@@ -327,7 +327,7 @@ export class UxSelect implements UxComponent {
       return;
     }
     this.isCollapsing = true;
-    this.optionCtEl.classList.remove('ux-select__list-wrapper--open');
+    this.optionCtEl.classList.remove('ux-select__list-container--open');
     setTimeout(() => {
       this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
       this.isCollapsing = false;
@@ -524,7 +524,7 @@ function extractUxOption(
   node: HTMLElement
 ) {
   if (node.hasAttribute('containerless')) {
-    logger.warn('cannot use containerless on <ux-select/>. Consider using as-element instead.');
+    logger.warn('Cannot use containerless on <ux-select/>. Consider using as-element instead.');
     node.removeAttribute('containerless');
   }
   let currentChild: any = node.firstChild;
