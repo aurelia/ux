@@ -15,6 +15,7 @@ export class UxInput implements UxComponent {
   private ignoreRawChanges: boolean;
 
   @bindable public autofocus = null;
+  @bindable public autocomplete: string;
   @bindable public disabled: any = false;
   @bindable public maxlength: number;
   @bindable public minlength: number;
@@ -105,6 +106,7 @@ export class UxInput implements UxComponent {
       textbox.setAttribute('maxlength', this.maxlength.toString());
     }
 
+    this.autocompleteChanged(this.autocomplete);
     this.themeChanged(this.theme);
   }
 
@@ -151,6 +153,14 @@ export class UxInput implements UxComponent {
       }
     }
     return newValue;
+  }
+
+  public autocompleteChanged(newValue: any) {
+    if (newValue == null) {
+      this.textbox.setAttribute('autocomplete', newValue);
+    } else {
+      this.textbox.removeAttribute('autocomplete');
+    }
   }
 
   public themeChanged(newValue: any) {
