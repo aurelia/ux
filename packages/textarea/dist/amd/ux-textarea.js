@@ -22,9 +22,6 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-depe
         UxTextArea.prototype.bind = function () {
             var element = this.element;
             var textbox = this.textbox;
-            if (this.theme != null) {
-                this.themeChanged(this.theme);
-            }
             if (this.autofocus || this.autofocus === '') {
                 this.focus = true;
             }
@@ -49,6 +46,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-depe
             if (this.maxlength) {
                 textbox.setAttribute('maxlength', this.maxlength.toString());
             }
+            this.autocompleteChanged(this.autocomplete);
         };
         UxTextArea.prototype.attached = function () {
             var textbox = this.textbox;
@@ -80,6 +78,14 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-depe
                 this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent('change', { bubbles: true }));
             }
         };
+        UxTextArea.prototype.autocompleteChanged = function (newValue) {
+            if (newValue == null) {
+                this.textbox.setAttribute('autocomplete', newValue);
+            }
+            else {
+                this.textbox.removeAttribute('autocomplete');
+            }
+        };
         UxTextArea.prototype.rawValueChanged = function (rawValue) {
             if (this.ignoreRawChanges) {
                 return;
@@ -102,6 +108,9 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-depe
             focus = focus || focus === '' ? true : false;
             this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
         };
+        __decorate([
+            aurelia_templating_1.bindable
+        ], UxTextArea.prototype, "autocomplete", void 0);
         __decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "autofocus", void 0);

@@ -40,6 +40,7 @@ export declare class UxSelect implements UxComponent {
     readonly optionCtEl: UxOptionContainer;
     constructor(element: UxSelectElement, styleEngine: StyleEngine, observerLocator: ObserverLocator, taskQueue: TaskQueue);
     bind(): void;
+    attached(): void;
     unbind(): void;
     private resolveDisplayValue;
     private ignoreSelectEvent;

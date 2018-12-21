@@ -7,10 +7,10 @@
   height: 32px;
   border-radius: 100px;
 
-  background-color: #e0e0e0;
-  background-color: var(--aurelia-ux--chip-background, #e0e0e0);
+  background-color: rgba(132, 132, 132, 0.18);
+  background-color: var(--aurelia-ux--chip-background, rgba(132, 132, 132, 0.18));
   color: #333;
-  color: var(--aurelia-ux--chip-foreground, #333);
+  color: var(--aurelia-ux--chip-foreground, var(--aurelia-ux--design-app-foreground, #333));
 }
 
 .ux-chip__content {

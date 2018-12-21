@@ -1,6 +1,7 @@
 .ux-textarea {
   display: flex;
   position: relative;
+  box-sizing: border-box;
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;

@@ -10,7 +10,6 @@ exports.UxCheckbox = checkbox_1.UxCheckbox;
 var chip_input_1 = require("@aurelia-ux/chip-input");
 exports.UxChipInputTheme = chip_input_1.UxChipInputTheme;
 exports.UxChipTheme = chip_input_1.UxChipTheme;
-exports.UxTagTheme = chip_input_1.UxTagTheme;
 var grid_1 = require("@aurelia-ux/grid");
 exports.UxGridTheme = grid_1.UxGridTheme;
 exports.UxResponsiveUtilities = grid_1.UxResponsiveUtilities;

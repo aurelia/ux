@@ -79,6 +79,7 @@ ux-button {
   box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
 }
 
+.ux-button--text,
 .ux-button--raised,
 .ux-button--flat {
   min-width: 88px;
@@ -125,12 +126,18 @@ ux-button {
   transition-delay: 0s;
 }
 
+.ux-button--flat:disabled,
 .ux-button--raised:disabled,
 .ux-button--fab:disabled {
   background-color: #9E9E9E;
   background-color: var(--aurelia-ux--button-background-disabled, #9E9E9E);
   color: #CFD8DC;
   color: var(--aurelia-ux--button-foreground-disabled, #CFD8DC);
+}
+
+.ux-button--text:disabled {
+  color: rgba(128, 128, 128, 0.5);
+  color: var(--aurelia-ux--button-foreground-disabled, rgba(128, 128, 128, 0.5));
 }
 
 .ux-button--accent > .ux-button {
@@ -147,8 +154,9 @@ ux-button {
   color: var(--aurelia-ux--button-accent-flat-foreground, var(--aurelia-ux--design-accent, #FF4081));
 }
 
-.ux-button--flat.ux-button--disabled {
-  opacity: .74;
+.ux-button--text.ux-button--text-remove-padding {
+  min-width: auto;
+  padding: 0 8px;
 }
 
 .ux-fab-button {

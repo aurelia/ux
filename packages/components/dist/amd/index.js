@@ -7,7 +7,6 @@ define(["require", "exports", "@aurelia-ux/card", "@aurelia-ux/button", "@aureli
     exports.UxCheckbox = checkbox_1.UxCheckbox;
     exports.UxChipInputTheme = chip_input_1.UxChipInputTheme;
     exports.UxChipTheme = chip_input_1.UxChipTheme;
-    exports.UxTagTheme = chip_input_1.UxTagTheme;
     exports.UxGridTheme = grid_1.UxGridTheme;
     exports.UxResponsiveUtilities = grid_1.UxResponsiveUtilities;
     exports.UxDatepickerTheme = datepicker_1.UxDatepickerTheme;

@@ -1,4 +1,4 @@
-System.register(["aurelia-framework", "./ux-chip-input-theme", "./ux-tag-theme", "./ux-chip-theme"], function (exports_1, context_1) {
+System.register(["aurelia-framework", "./ux-chip-input-theme", "./ux-chip-theme"], function (exports_1, context_1) {
     "use strict";
     var aurelia_framework_1;
     var __moduleName = context_1 && context_1.id;
@@ -17,11 +17,6 @@ System.register(["aurelia-framework", "./ux-chip-input-theme", "./ux-tag-theme",
             function (ux_chip_input_theme_1_1) {
                 exports_1({
                     "UxChipInputTheme": ux_chip_input_theme_1_1["UxChipInputTheme"]
-                });
-            },
-            function (ux_tag_theme_1_1) {
-                exports_1({
-                    "UxTagTheme": ux_tag_theme_1_1["UxTagTheme"]
                 });
             },
             function (ux_chip_theme_1_1) {

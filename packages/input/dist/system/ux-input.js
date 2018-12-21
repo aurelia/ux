@@ -94,6 +94,7 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                     if (this.maxlength) {
                         textbox.setAttribute('maxlength', this.maxlength.toString());
                     }
+                    this.autocompleteChanged(this.autocomplete);
                     this.themeChanged(this.theme);
                 };
                 UxInput.prototype.attached = function () {
@@ -136,6 +137,14 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                     }
                     return newValue;
                 };
+                UxInput.prototype.autocompleteChanged = function (newValue) {
+                    if (newValue == null) {
+                        this.textbox.setAttribute('autocomplete', newValue);
+                    }
+                    else {
+                        this.textbox.removeAttribute('autocomplete');
+                    }
+                };
                 UxInput.prototype.themeChanged = function (newValue) {
                     if (newValue != null && newValue.themeKey == null) {
                         newValue.themeKey = 'input';
@@ -174,6 +183,9 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-binding", "aureli
                 __decorate([
                     aurelia_templating_1.bindable
                 ], UxInput.prototype, "autofocus", void 0);
+                __decorate([
+                    aurelia_templating_1.bindable
+                ], UxInput.prototype, "autocomplete", void 0);
                 __decorate([
                     aurelia_templating_1.bindable
                 ], UxInput.prototype, "disabled", void 0);

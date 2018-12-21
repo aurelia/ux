@@ -45,9 +45,6 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-dependency-inject
                 UxTextArea.prototype.bind = function () {
                     var element = this.element;
                     var textbox = this.textbox;
-                    if (this.theme != null) {
-                        this.themeChanged(this.theme);
-                    }
                     if (this.autofocus || this.autofocus === '') {
                         this.focus = true;
                     }
@@ -72,6 +69,7 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-dependency-inject
                     if (this.maxlength) {
                         textbox.setAttribute('maxlength', this.maxlength.toString());
                     }
+                    this.autocompleteChanged(this.autocomplete);
                 };
                 UxTextArea.prototype.attached = function () {
                     var textbox = this.textbox;
@@ -103,6 +101,14 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-dependency-inject
                         this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent('change', { bubbles: true }));
                     }
                 };
+                UxTextArea.prototype.autocompleteChanged = function (newValue) {
+                    if (newValue == null) {
+                        this.textbox.setAttribute('autocomplete', newValue);
+                    }
+                    else {
+                        this.textbox.removeAttribute('autocomplete');
+                    }
+                };
                 UxTextArea.prototype.rawValueChanged = function (rawValue) {
                     if (this.ignoreRawChanges) {
                         return;
@@ -125,6 +131,9 @@ System.register(["aurelia-templating", "aurelia-pal", "aurelia-dependency-inject
                     focus = focus || focus === '' ? true : false;
                     this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
                 };
+                __decorate([
+                    aurelia_templating_1.bindable
+                ], UxTextArea.prototype, "autocomplete", void 0);
                 __decorate([
                     aurelia_templating_1.bindable
                 ], UxTextArea.prototype, "autofocus", void 0);

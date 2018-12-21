@@ -73,6 +73,7 @@ let UxInput = class UxInput {
         if (this.maxlength) {
             textbox.setAttribute('maxlength', this.maxlength.toString());
         }
+        this.autocompleteChanged(this.autocomplete);
         this.themeChanged(this.theme);
     }
     attached() {
@@ -115,6 +116,14 @@ let UxInput = class UxInput {
         }
         return newValue;
     }
+    autocompleteChanged(newValue) {
+        if (newValue == null) {
+            this.textbox.setAttribute('autocomplete', newValue);
+        }
+        else {
+            this.textbox.removeAttribute('autocomplete');
+        }
+    }
     themeChanged(newValue) {
         if (newValue != null && newValue.themeKey == null) {
             newValue.themeKey = 'input';
@@ -154,6 +163,9 @@ let UxInput = class UxInput {
 __decorate([
     bindable
 ], UxInput.prototype, "autofocus", void 0);
+__decorate([
+    bindable
+], UxInput.prototype, "autocomplete", void 0);
 __decorate([
     bindable
 ], UxInput.prototype, "disabled", void 0);

@@ -49,6 +49,9 @@ class UxSelect {
         // Initially Synchronize options with value of this element
         this.taskQueue.queueMicroTask(this);
     }
+    attached() {
+        this.resolveDisplayValue();
+    }
     unbind() {
         this.winEvents.disposeAll();
         if (this.arrayObserver) {
@@ -58,8 +61,18 @@ class UxSelect {
         this.selectedOption = null;
     }
     resolveDisplayValue() {
-        const value = this.value;
-        this.displayValue = Array.isArray(value) ? value.slice().sort().join(', ') : value;
+        const values = this.options
+            .filter(option => Array.isArray(this.value) ?
+            this.value.some(value => value === option.value) :
+            option.value === this.value)
+            .map(t => t.innerText);
+        this.displayValue = values.join(', ');
+        if (this.displayValue.length > 0) {
+            this.element.classList.add('ux-select--has-value');
+        }
+        else {
+            this.element.classList.remove('ux-select--has-value');
+        }
     }
     synchronizeOptions() {
         const value = this.value;
@@ -209,11 +222,11 @@ class UxSelect {
         this.isExpanding = true;
         this.optionWrapperEl.classList.add('ux-select__list-wrapper--open');
         setTimeout(() => {
-            this.optionCtEl.classList.add('ux-select__list-wrapper--open');
+            this.optionCtEl.classList.add('ux-select__list-container--open');
             this.isExpanding = false;
             this.expanded = true;
             this.setFocusedOption(this.selectedOption);
-        }, this.theme && this.theme.listTransition || 125);
+        }, 0);
         this.setupListAnchor();
     }
     collapse() {
@@ -221,7 +234,7 @@ class UxSelect {
             return;
         }
         this.isCollapsing = true;
-        this.optionCtEl.classList.remove('ux-select__list-wrapper--open');
+        this.optionCtEl.classList.remove('ux-select__list-container--open');
         setTimeout(() => {
             this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
             this.isCollapsing = false;
@@ -431,7 +444,7 @@ UxSelect = __decorate([
 export { UxSelect };
 function extractUxOption(_, __, node) {
     if (node.hasAttribute('containerless')) {
-        logger.warn('cannot use containerless on <ux-select/>. Consider using as-element instead.');
+        logger.warn('Cannot use containerless on <ux-select/>. Consider using as-element instead.');
         node.removeAttribute('containerless');
     }
     let currentChild = node.firstChild;

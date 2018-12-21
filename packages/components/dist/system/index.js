@@ -43,8 +43,7 @@ System.register(["@aurelia-ux/card", "@aurelia-ux/button", "@aurelia-ux/checkbox
             function (chip_input_2_1) {
                 exports_1({
                     "UxChipInputTheme": chip_input_2_1["UxChipInputTheme"],
-                    "UxChipTheme": chip_input_2_1["UxChipTheme"],
-                    "UxTagTheme": chip_input_2_1["UxTagTheme"]
+                    "UxChipTheme": chip_input_2_1["UxChipTheme"]
                 });
                 chip_input_1 = chip_input_2_1;
             },

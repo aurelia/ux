@@ -71,6 +71,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
             if (this.maxlength) {
                 textbox.setAttribute('maxlength', this.maxlength.toString());
             }
+            this.autocompleteChanged(this.autocomplete);
             this.themeChanged(this.theme);
         };
         UxInput.prototype.attached = function () {
@@ -113,6 +114,14 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
             }
             return newValue;
         };
+        UxInput.prototype.autocompleteChanged = function (newValue) {
+            if (newValue == null) {
+                this.textbox.setAttribute('autocomplete', newValue);
+            }
+            else {
+                this.textbox.removeAttribute('autocomplete');
+            }
+        };
         UxInput.prototype.themeChanged = function (newValue) {
             if (newValue != null && newValue.themeKey == null) {
                 newValue.themeKey = 'input';
@@ -151,6 +160,9 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-bind
         __decorate([
             aurelia_templating_1.bindable
         ], UxInput.prototype, "autofocus", void 0);
+        __decorate([
+            aurelia_templating_1.bindable
+        ], UxInput.prototype, "autocomplete", void 0);
         __decorate([
             aurelia_templating_1.bindable
         ], UxInput.prototype, "disabled", void 0);

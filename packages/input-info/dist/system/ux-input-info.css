@@ -5,6 +5,8 @@
   width: 100%;
   color: #909090;
   color: var(--aurelia-ux--input-info-foreground, #909090);
+  box-sizing: border-box;
+  margin-top: 4px;
 }
 
 .ux-input-info>.ux-input-info__hint-text,

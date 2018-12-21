@@ -8,6 +8,7 @@ export declare class UxTextArea implements UxComponent {
     private styleEngine;
     private ignoreRawChanges;
     private isAttached;
+    autocomplete: string;
     autofocus: boolean | string | null;
     autoResize: boolean | string;
     cols: number;
@@ -27,6 +28,7 @@ export declare class UxTextArea implements UxComponent {
     detached(): void;
     getValue(): any;
     setValue(value: any): void;
+    autocompleteChanged(newValue: any): void;
     rawValueChanged(rawValue: string): void;
     themeChanged(newValue: any): void;
     fitTextContent(): void;
