@@ -73,6 +73,17 @@ let UxCheckbox = class UxCheckbox {
     setIndeterminate(value) {
         this.indeterminate = !!value;
     }
+    checkedChanged(newValue, oldValue) {
+        if (newValue === oldValue) {
+            return;
+        }
+        if (newValue === true) {
+            this.element.classList.add('ux-checkbox--checked');
+        }
+        else {
+            this.element.classList.remove('ux-checkbox--checked');
+        }
+    }
     disabledChanged(newValue) {
         if (newValue === true) {
             this.element.classList.add('ux-checkbox--disabled');
@@ -98,12 +109,6 @@ let UxCheckbox = class UxCheckbox {
     valueChanged(newValue) {
         if (this.ignoreValueChanges) {
             return;
-        }
-        if (newValue === true) {
-            this.element.classList.add('ux-checkbox--checked');
-        }
-        else {
-            this.element.classList.remove('ux-checkbox--checked');
         }
         this.setChecked(newValue);
     }
@@ -145,6 +150,9 @@ __decorate([
 __decorate([
     bindable
 ], UxCheckbox.prototype, "theme", void 0);
+__decorate([
+    observable()
+], UxCheckbox.prototype, "checked", void 0);
 __decorate([
     observable()
 ], UxCheckbox.prototype, "value", void 0);

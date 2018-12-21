@@ -24,6 +24,7 @@ export declare class UxSwitch implements UxComponent {
     detached(): void;
     getChecked(): any;
     setChecked(value: any): void;
+    checkedChanged(newValue: any, oldValue: any): void;
     focusedChanged(newValue: boolean): void;
     valueChanged(newValue: boolean): void;
     themeChanged(newValue: UxSwitchTheme): void;

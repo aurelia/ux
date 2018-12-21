@@ -64,6 +64,17 @@ let UxSwitch = class UxSwitch {
             this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
         }
     }
+    checkedChanged(newValue, oldValue) {
+        if (newValue === oldValue) {
+            return;
+        }
+        if (newValue === true) {
+            this.element.classList.add('ux-switch--checked');
+        }
+        else {
+            this.element.classList.remove('ux-switch--checked');
+        }
+    }
     focusedChanged(newValue) {
         if (newValue === true) {
             this.element.classList.add('ux-switch--focused');
@@ -75,12 +86,6 @@ let UxSwitch = class UxSwitch {
     valueChanged(newValue) {
         if (this.ignoreValueChanges) {
             return;
-        }
-        if (newValue === true) {
-            this.element.classList.add('ux-switch--checked');
-        }
-        else {
-            this.element.classList.remove('ux-switch--checked');
         }
         this.setChecked(newValue);
     }
@@ -136,6 +141,9 @@ __decorate([
 __decorate([
     bindable
 ], UxSwitch.prototype, "theme", void 0);
+__decorate([
+    observable()
+], UxSwitch.prototype, "checked", void 0);
 __decorate([
     observable({ initializer: () => false })
 ], UxSwitch.prototype, "value", void 0);

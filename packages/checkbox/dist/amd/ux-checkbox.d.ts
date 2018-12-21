@@ -27,6 +27,7 @@ export declare class UxCheckbox implements UxComponent {
     setChecked(value: any): void;
     getIndeterminate(): boolean;
     setIndeterminate(value: any): void;
+    checkedChanged(newValue: any, oldValue: any): void;
     disabledChanged(newValue: boolean): void;
     focusedChanged(newValue: boolean): void;
     themeChanged(newValue: UxCheckboxTheme): void;

@@ -70,6 +70,17 @@ var UxSwitch = /** @class */ (function () {
             this.element.dispatchEvent(aurelia_framework_1.DOM.createCustomEvent('change', { bubbles: true }));
         }
     };
+    UxSwitch.prototype.checkedChanged = function (newValue, oldValue) {
+        if (newValue === oldValue) {
+            return;
+        }
+        if (newValue === true) {
+            this.element.classList.add('ux-switch--checked');
+        }
+        else {
+            this.element.classList.remove('ux-switch--checked');
+        }
+    };
     UxSwitch.prototype.focusedChanged = function (newValue) {
         if (newValue === true) {
             this.element.classList.add('ux-switch--focused');
@@ -81,12 +92,6 @@ var UxSwitch = /** @class */ (function () {
     UxSwitch.prototype.valueChanged = function (newValue) {
         if (this.ignoreValueChanges) {
             return;
-        }
-        if (newValue === true) {
-            this.element.classList.add('ux-switch--checked');
-        }
-        else {
-            this.element.classList.remove('ux-switch--checked');
         }
         this.setChecked(newValue);
     };
@@ -142,6 +147,9 @@ var UxSwitch = /** @class */ (function () {
     __decorate([
         aurelia_templating_1.bindable
     ], UxSwitch.prototype, "theme", void 0);
+    __decorate([
+        aurelia_binding_1.observable()
+    ], UxSwitch.prototype, "checked", void 0);
     __decorate([
         aurelia_binding_1.observable({ initializer: function () { return false; } })
     ], UxSwitch.prototype, "value", void 0);
