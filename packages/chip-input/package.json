@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/chip-input",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Chip and Tag component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -95,7 +95,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.13.0",
+    "@aurelia-ux/core": "^0.14.0",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
