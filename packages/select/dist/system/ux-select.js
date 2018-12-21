@@ -10,7 +10,7 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
     var __moduleName = context_1 && context_1.id;
     function extractUxOption(_, __, node) {
         if (node.hasAttribute('containerless')) {
-            logger.warn('cannot use containerless on <ux-select/>. Consider using as-element instead.');
+            logger.warn('Cannot use containerless on <ux-select/>. Consider using as-element instead.');
             node.removeAttribute('containerless');
         }
         var currentChild = node.firstChild;
@@ -83,6 +83,9 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
                     // Initially Synchronize options with value of this element
                     this.taskQueue.queueMicroTask(this);
                 };
+                UxSelect.prototype.attached = function () {
+                    this.resolveDisplayValue();
+                };
                 UxSelect.prototype.unbind = function () {
                     this.winEvents.disposeAll();
                     if (this.arrayObserver) {
@@ -92,8 +95,21 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
                     this.selectedOption = null;
                 };
                 UxSelect.prototype.resolveDisplayValue = function () {
-                    var value = this.value;
-                    this.displayValue = Array.isArray(value) ? value.slice().sort().join(', ') : value;
+                    var _this = this;
+                    var values = this.options
+                        .filter(function (option) {
+                        return Array.isArray(_this.value) ?
+                            _this.value.some(function (value) { return value === option.value; }) :
+                            option.value === _this.value;
+                    })
+                        .map(function (t) { return t.innerText; });
+                    this.displayValue = values.join(', ');
+                    if (this.displayValue.length > 0) {
+                        this.element.classList.add('ux-select--has-value');
+                    }
+                    else {
+                        this.element.classList.remove('ux-select--has-value');
+                    }
                 };
                 UxSelect.prototype.synchronizeOptions = function () {
                     var value = this.value;
@@ -254,11 +270,11 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
                     this.isExpanding = true;
                     this.optionWrapperEl.classList.add('ux-select__list-wrapper--open');
                     setTimeout(function () {
-                        _this.optionCtEl.classList.add('ux-select__list-wrapper--open');
+                        _this.optionCtEl.classList.add('ux-select__list-container--open');
                         _this.isExpanding = false;
                         _this.expanded = true;
                         _this.setFocusedOption(_this.selectedOption);
-                    }, this.theme && this.theme.listTransition || 125);
+                    }, 0);
                     this.setupListAnchor();
                 };
                 UxSelect.prototype.collapse = function () {
@@ -267,7 +283,7 @@ System.register(["aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./
                         return;
                     }
                     this.isCollapsing = true;
-                    this.optionCtEl.classList.remove('ux-select__list-wrapper--open');
+                    this.optionCtEl.classList.remove('ux-select__list-container--open');
                     setTimeout(function () {
                         _this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
                         _this.isCollapsing = false;

@@ -2,7 +2,7 @@ import { FrameworkConfiguration } from 'aurelia-framework';
 export { UxCardTheme } from '@aurelia-ux/card';
 export { UxButtonTheme } from '@aurelia-ux/button';
 export { UxCheckboxTheme, UxCheckbox, UxCheckboxElement } from '@aurelia-ux/checkbox';
-export { UxChipInputTheme, UxChipTheme, UxTagTheme } from '@aurelia-ux/chip-input';
+export { UxChipInputTheme, UxChipTheme } from '@aurelia-ux/chip-input';
 export { UxGridTheme, UxResponsiveUtilities } from '@aurelia-ux/grid';
 export { UxDatepickerTheme } from '@aurelia-ux/datepicker';
 export { UxFormTheme } from '@aurelia-ux/form';

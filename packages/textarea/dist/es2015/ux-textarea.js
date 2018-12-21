@@ -24,9 +24,6 @@ let UxTextArea = class UxTextArea {
     bind() {
         const element = this.element;
         const textbox = this.textbox;
-        if (this.theme != null) {
-            this.themeChanged(this.theme);
-        }
         if (this.autofocus || this.autofocus === '') {
             this.focus = true;
         }
@@ -51,6 +48,7 @@ let UxTextArea = class UxTextArea {
         if (this.maxlength) {
             textbox.setAttribute('maxlength', this.maxlength.toString());
         }
+        this.autocompleteChanged(this.autocomplete);
     }
     attached() {
         const textbox = this.textbox;
@@ -82,6 +80,14 @@ let UxTextArea = class UxTextArea {
             this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
         }
     }
+    autocompleteChanged(newValue) {
+        if (newValue == null) {
+            this.textbox.setAttribute('autocomplete', newValue);
+        }
+        else {
+            this.textbox.removeAttribute('autocomplete');
+        }
+    }
     rawValueChanged(rawValue) {
         if (this.ignoreRawChanges) {
             return;
@@ -105,6 +111,9 @@ let UxTextArea = class UxTextArea {
         this.element.dispatchEvent(DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
     }
 };
+__decorate([
+    bindable
+], UxTextArea.prototype, "autocomplete", void 0);
 __decorate([
     bindable
 ], UxTextArea.prototype, "autofocus", void 0);
