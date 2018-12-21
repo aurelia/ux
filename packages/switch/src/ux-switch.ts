@@ -20,6 +20,7 @@ export class UxSwitch implements UxComponent {
   @bindable public id: string;
   @bindable public theme: UxSwitchTheme;
 
+  @observable()
   public checked: any;
 
   @observable({ initializer: () => false })
@@ -95,6 +96,18 @@ export class UxSwitch implements UxComponent {
     }
   }
 
+  public checkedChanged(newValue: any, oldValue: any) {
+    if (newValue === oldValue) {
+      return;
+    }
+
+    if (newValue === true) {
+      this.element.classList.add('ux-switch--checked');
+    } else {
+      this.element.classList.remove('ux-switch--checked');
+    }
+  }
+
   public focusedChanged(newValue: boolean) {
     if (newValue === true) {
       this.element.classList.add('ux-switch--focused');
@@ -106,12 +119,6 @@ export class UxSwitch implements UxComponent {
   public valueChanged(newValue: boolean) {
     if (this.ignoreValueChanges) {
       return;
-    }
-
-    if (newValue === true) {
-      this.element.classList.add('ux-switch--checked');
-    } else {
-      this.element.classList.remove('ux-switch--checked');
     }
 
     this.setChecked(newValue);
