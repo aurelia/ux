@@ -27,6 +27,7 @@ export class UxCheckbox implements UxComponent {
   @bindable public id: string;
   @bindable public theme: UxCheckboxTheme;
 
+  @observable()
   public checked: boolean;
 
   @observable()
@@ -118,6 +119,18 @@ export class UxCheckbox implements UxComponent {
     this.indeterminate = !!value;
   }
 
+  public checkedChanged(newValue: any, oldValue: any) {
+    if (newValue === oldValue) {
+      return;
+    }
+
+    if (newValue === true) {
+      this.element.classList.add('ux-checkbox--checked');
+    } else {
+      this.element.classList.remove('ux-checkbox--checked');
+    }
+  }
+
   public disabledChanged(newValue: boolean) {
     if (newValue === true) {
       this.element.classList.add('ux-checkbox--disabled');
@@ -145,12 +158,6 @@ export class UxCheckbox implements UxComponent {
   public valueChanged(newValue: boolean) {
     if (this.ignoreValueChanges) {
       return;
-    }
-
-    if (newValue === true) {
-      this.element.classList.add('ux-checkbox--checked');
-    } else {
-      this.element.classList.remove('ux-checkbox--checked');
     }
 
     this.setChecked(newValue);
