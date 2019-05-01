@@ -1,0 +1,144 @@
+{
+  "name": "@aurelia-ux/slider",
+  "version": "0.14.1",
+  "description": "Slider component for Aurelia UX",
+  "keywords": [
+    "aurelia",
+    "styles",
+    "components",
+    "ux"
+  ],
+  "homepage": "http://aurelia.io",
+  "bugs": {
+    "url": "https://github.com/aurelia/ux/issues"
+  },
+  "license": "MIT",
+  "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
+  "contributors": [
+    "Zach Hollingshead <zach.hollingshead@gmail.com>",
+    "Rick Delhommer <rdelhommer@gmail.com>"
+  ],
+  "main": "dist/commonjs/index.js",
+  "typings": "dist/commonjs/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aurelia/ux"
+  },
+  "scripts": {
+    "lint": "cross-env tslint --project tsconfig.json",
+    "test": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start --single-run",
+    "develop": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start",
+    "prebuild:amd": "cross-env rimraf dist/amd",
+    "build:amd": "cross-env tsc --project tsconfig.json --outDir dist/amd --module amd",
+    "postbuild:amd": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/amd",
+    "prebuild:commonjs": "cross-env rimraf dist/commonjs",
+    "build:commonjs": "cross-env tsc --project tsconfig.json --outDir dist/commonjs --module commonjs",
+    "postbuild:commonjs": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/commonjs",
+    "prebuild:es2015": "cross-env rimraf dist/es2015",
+    "build:es2015": "cross-env tsc --project tsconfig.json --outDir dist/es2015 --module es2015 --target es2015",
+    "postbuild:es2015": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/es2015",
+    "prebuild:native-modules": "cross-env rimraf dist/native-modules",
+    "build:native-modules": "cross-env tsc --project tsconfig.json --outDir dist/native-modules --module es2015",
+    "postbuild:native-modules": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/native-modules",
+    "prebuild:system": "cross-env rimraf dist/system",
+    "build:system": "cross-env tsc --project tsconfig.json --outDir dist/system --module system",
+    "postbuild:system": "cross-env copyfiles --up 1 src/**/*.html src/**/*.css dist/system",
+    "prebuild": "cross-env rimraf dist",
+    "build": "concurrently \"npm run build:amd\" \"npm run build:commonjs\" \"npm run build:es2015\" \"npm run build:native-modules\" \"npm run build:system\"",
+    "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
+    "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
+    "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",
+    "changelog": "cross-env conventional-changelog -p ux -i doc/CHANGELOG.md -s",
+    "bump-version": "npm --no-git-tag-version version",
+    "preprepare-release": "cross-env npm run test",
+    "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
+  },
+  "jspm": {
+    "registry": "npm",
+    "jspmPackage": true,
+    "main": "index",
+    "format": "amd",
+    "directories": {
+      "dist": "dist/amd"
+    },
+    "peerDependencies": {
+      "aurelia-binding": "^2.0.0",
+      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-logging": "^1.0.0",
+      "aurelia-pal": "^1.0.0",
+      "aurelia-task-queue": "^1.0.0",
+      "aurelia-templating": "^1.0.0",
+      "aurelia-loader": "^1.0.0",
+      "aurelia-templating-binding": "^1.0.0",
+      "aurelia-framework": "^1.0.0",
+      "aurelia-metadata": "^1.0.0",
+      "aurelia-path": "^1.0.0",
+      "@aurelia-ux/core": "^0.4.0"
+    },
+    "dependencies": {
+      "aurelia-binding": "^2.0.0",
+      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-logging": "^1.0.0",
+      "aurelia-pal": "^1.0.0",
+      "aurelia-task-queue": "^1.0.0",
+      "aurelia-templating": "^1.0.0",
+      "aurelia-loader": "^1.0.0",
+      "aurelia-templating-binding": "^1.0.0",
+      "aurelia-framework": "^1.0.0",
+      "aurelia-metadata": "^1.0.0",
+      "aurelia-path": "^1.0.0",
+      "@aurelia-ux/core": "^0.4.0"
+    },
+    "devDependencies": {}
+  },
+  "dependencies": {
+    "@aurelia-ux/core": "^0.4.0",
+    "aurelia-framework": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.8.6",
+    "@types/karma": "^1.7.3",
+    "@types/node": "^7.0.11",
+    "@types/webpack": "^3.8.8",
+    "aurelia-bootstrapper": "^2.1.1",
+    "aurelia-pal-browser": "^1.2.0",
+    "aurelia-pal-nodejs": "^1.0.0-beta.1.0.0",
+    "aurelia-polyfills": "^1.2.1",
+    "aurelia-testing": "^1.0.0-beta.3.0.1",
+    "aurelia-webpack-plugin": "^3.0.0-rc.1",
+    "concurrently": "^3.4.0",
+    "conventional-changelog-cli": "^1.3.1",
+    "copyfiles": "^1.2.0",
+    "cross-env": "^3.2.4",
+    "istanbul-instrumenter-loader": "^3.0.0",
+    "jasmine-core": "^2.99.1",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-coverage-istanbul-reporter": "^1.4.1",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-jasmine": "^1.1.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.13",
+    "path": "^0.12.7",
+    "requirejs": "^2.3.3",
+    "requirejs-text": "^2.0.15",
+    "rimraf": "^2.6.1",
+    "ts-loader": "^4.0.1",
+    "ts-node": "^5.0.1",
+    "tsconfig-paths": "^3.1.1",
+    "tslint": "^4.4.2",
+    "typedoc": "^0.9.0",
+    "typescript": "^2.2.1",
+    "webpack": "^4.0.1"
+  },
+  "aurelia": {
+    "build": {
+      "resources": []
+    },
+    "documentation": {
+      "articles": []
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<template>
+  <require from="./ux-slider.css"></require>
+
+  <div class="slider-container" 
+       class.bind="disabled ? 'disabled' : ''"
+       mousedown.delegate="onTrackMouseDown($event)">
+    <div class="slider-track slider-track-before" 
+         class.bind="isActive ? 'active' : 'inactive'"
+         css="width: ${sliderBeforeWidth}%;"></div>
+    <div class="slider-thumb-container">
+      <button keydown.delegate="onKeyDown($event)">
+      </button>
+    </div>
+    <div class="slider-track slider-track-after" 
+         class.bind="isActive ? 'active' : 'inactive'"
+         css="width: ${sliderAfterWidth}%;"></div>
+  </div>
+</template>
