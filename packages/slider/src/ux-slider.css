@@ -1,46 +1,42 @@
-ux-slider {
+.ux-slider {
   display: inline-block;
   position: relative;
 }
 
-ux-slider>.slider-container {
+.ux-slider__container {
   width: 100%;
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
-ux-slider>.slider-container * {
-  cursor: pointer;
-}
-
-ux-slider>.slider-container>.slider-track {
+.ux-slider__track {
   z-index: 1;
   background-color: var(--aurelia-ux--slider-background, var(--aurelia-ux--design-primary, #3F51B5));
   height: 2px;
 }
 
-ux-slider>.slider-container>.slider-track.slider-track-before {
-  opacity: 0.8;
-}
-
-ux-slider>.slider-container>.slider-track.slider-track-after {
-  opacity: 0.4;
-}
-
-ux-slider>.slider-container>.slider-track.inactive {
-  transition: width 0.2s ease-out;
-}
-
-ux-slider>.slider-container>.slider-track.active {
+.ux-slider__track--active {
   transition: none;
 }
 
-ux-slider>.slider-container>.slider-thumb-container {
-  display: flex;
+.ux-slider__track--inactive {
+  transition: width 0.2s ease-out;
 }
 
-ux-slider>.slider-container>.slider-thumb-container>button {
+.ux-slider__track-before {
+  opacity: 0.8;
+}
+
+.ux-slider__track-after {
+  opacity: 0.4;
+}
+
+.ux-slider__container * {
+  cursor: pointer;
+}
+
+.ux-slider__thumb-button {
   border-radius: 50%;
   border: none;
   padding: 0px;
@@ -53,24 +49,24 @@ ux-slider>.slider-container>.slider-thumb-container>button {
   outline: 0;
 }
 
-ux-slider>.slider-container>.slider-thumb-container>button:hover, ux-slider>.slider-container>.slider-thumb-container>button:focus {
+.ux-slider__container--enabled .ux-slider__thumb-button:hover,
+.ux-slider__container--enabled .ux-slider__thumb-button:focus {
   box-shadow: 0px 0px 0px calc(var(--aurelia-ux--slider-thumb-diameter, 12px) * 0.75) rgba(63, 81, 181, 0.2);
 }
 
-/* Disabled */
-ux-slider>.slider-container.disabled {
+.ux-slider__container--disabled {
   cursor: no-drop;
 }
 
-ux-slider>.slider-container.disabled * {
+.ux-slider__container--disabled * {
   cursor: no-drop;
 }
 
-ux-slider>.slider-container.disabled>.slider-track {
+.ux-slider__container--disabled .ux-slider__track {
   background-color: var(--aurelia-ux--slider-disabled-background, #e1e1e1);
 }
 
-ux-slider>.slider-container.disabled>.slider-thumb-container>button {
+.ux-slider__container--disabled .ux-slider__thumb-button {
   background-color: var(--aurelia-ux--slider-disabled-background, #e1e1e1);
 }
 
