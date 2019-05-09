@@ -2,7 +2,7 @@
   <require from="./ux-slider.css"></require>
 
   <div class="ux-slider__container" 
-       class.bind="disabled ? 'ux-slider__container--disabled' : '.ux-slider__container--enabled'"
+       class.bind="disabled ? 'ux-slider__container--disabled' : 'ux-slider__container--enabled'"
        mousedown.delegate="onTrackMouseDown($event)">
     <div class="ux-slider__track ux-slider__track-before" 
          class.bind="isActive ? 'ux-slider__track--active' : 'ux-slider__track--inactive'"

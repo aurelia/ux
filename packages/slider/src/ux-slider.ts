@@ -1,4 +1,4 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, ElementEvents } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxSliderTheme } from './ux-slider-theme';
@@ -13,8 +13,6 @@ export interface UxSliderElement extends HTMLElement {
 export class UxSlider implements UxComponent {
   private isActive: boolean;
   private percentValue: number;
-  private onMouseMove: (e: MouseEvent) => void = (e) => this.updateValue(e.clientX);
-  private onMouseUp: (e: MouseEvent) => void = this.handleMouseUp.bind(this);
 
   @bindable public theme: UxSliderTheme;
   @bindable({ defaultBindingMode: bindingMode.twoWay }) public value: number;
@@ -45,20 +43,7 @@ export class UxSlider implements UxComponent {
     this.minChanged();
     this.maxChanged();
     this.valueChanged();
-    this.disabledChanged();
     this.stepChanged();
-  }
-
-  public detached() {
-    window.removeEventListener('mouseup', this.onMouseUp);
-  }
-
-  public disabledChanged() {
-    if (this.disabled) {
-      window.removeEventListener('mouseup', this.onMouseUp);
-    } else {
-      window.addEventListener('mouseup', this.onMouseUp);
-    }
   }
 
   public stepChanged() {
@@ -129,7 +114,20 @@ export class UxSlider implements UxComponent {
 
     this.isActive = true;
 
-    window.addEventListener('mousemove', this.onMouseMove);
+    const winEvents = new ElementEvents(window as any);
+    const upAction = (e: MouseEvent) => {
+      if (!this.isActive) {
+        return;
+      }
+
+      this.updateValue(e.clientX);
+      this.isActive = false;
+
+      winEvents.disposeAll();
+    };
+    winEvents.subscribe('blur', upAction);
+    winEvents.subscribe('mouseup', upAction, true);
+    winEvents.subscribe('mousemove', this.onMouseMove.bind(this), true);
   }
 
   public onKeyDown(e: KeyboardEvent) {
@@ -152,14 +150,9 @@ export class UxSlider implements UxComponent {
     this.value = value;
   }
 
-  private handleMouseUp(e: MouseEvent) {
-    if (!this.isActive) {
-      return;
-    }
-
+  private onMouseMove(e: MouseEvent) {
+    console.log(e);
     this.updateValue(e.clientX);
-    window.removeEventListener('mousemove', this.onMouseMove);
-    this.isActive = false;
   }
 
   private boundValue(potentialValue: number) {
