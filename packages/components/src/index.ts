@@ -22,6 +22,7 @@ export {
   UxSelectElement,
   UxSelectTheme
 } from '@aurelia-ux/select';
+export { UxSliderTheme, UxSlider, UxSliderElement } from '@aurelia-ux/slider';
 
 import { configure as configureButtonComponent } from '@aurelia-ux/button';
 import { configure as configureCardComponent } from '@aurelia-ux/card';
@@ -37,6 +38,7 @@ import { configure as configureRadioComponent } from '@aurelia-ux/radio';
 import { configure as configureTextareaComponent } from '@aurelia-ux/textarea';
 import { configure as configureSwitchComponent } from '@aurelia-ux/switch';
 import { configure as configureSelectComponent } from '@aurelia-ux/select';
+import { configure as configureSliderComponent } from '@aurelia-ux/slider';
 
 export function configure(config: FrameworkConfiguration) {
   configureButtonComponent(config);
@@ -53,4 +55,5 @@ export function configure(config: FrameworkConfiguration) {
   configureTextareaComponent(config);
   configureSwitchComponent(config);
   configureSelectComponent(config);
+  configureSliderComponent(config);
 }
