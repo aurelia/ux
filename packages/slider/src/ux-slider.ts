@@ -4,6 +4,10 @@ import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxSliderTheme } from './ux-slider-theme';
 import { computedFrom, bindingMode } from 'aurelia-binding';
 
+export interface UxSliderElement extends HTMLElement {
+  value: number;
+}
+
 @inject(Element, StyleEngine)
 @customElement('ux-slider')
 export class UxSlider implements UxComponent {
@@ -20,8 +24,10 @@ export class UxSlider implements UxComponent {
   @bindable public step: number;
 
   constructor(
-    public element: HTMLElement,
-    private styleEngine: StyleEngine) { }
+    public element: UxSliderElement,
+    private styleEngine: StyleEngine) {
+      Object.setPrototypeOf(element, uxSliderElementProto);
+    }
 
   @computedFrom('percentValue')
   get sliderBeforeWidth(): number {
@@ -127,7 +133,7 @@ export class UxSlider implements UxComponent {
   }
 
   public onKeyDown(e: KeyboardEvent) {
-    var steppedValue = e.keyCode === 37 || e.keyCode === 40
+    const steppedValue = e.keyCode === 37 || e.keyCode === 40
       ? this.value - this.step
       : e.keyCode === 38 || e.keyCode === 39
         ? this.value + this.step
@@ -136,6 +142,14 @@ export class UxSlider implements UxComponent {
     this.value = this.boundValue(steppedValue);
 
     return true;
+  }
+
+  public getValue() {
+    return this.value;
+  }
+
+  public setValue(value: number) {
+    this.value = value;
   }
 
   private handleMouseUp(e: MouseEvent) {
@@ -156,3 +170,15 @@ export class UxSlider implements UxComponent {
         : potentialValue;
   }
 }
+
+const getVm = <T>(_: any) => _.au.controller.viewModel as T;
+const uxSliderElementProto = Object.create(HTMLElement.prototype, {
+  value: {
+    get() {
+      return getVm<UxSlider>(this).getValue();
+    },
+    set(value: number) {
+      getVm<UxSlider>(this).setValue(value);
+    }
+  }
+});
