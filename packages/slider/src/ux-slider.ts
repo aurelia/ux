@@ -125,7 +125,7 @@ export class UxSlider implements UxComponent {
 
       winEvents.disposeAll();
     };
-    winEvents.subscribe('blur', upAction);
+    winEvents.subscribe('blur', upAction, true);
     winEvents.subscribe('mouseup', upAction, true);
     winEvents.subscribe('mousemove', this.onMouseMove.bind(this), true);
   }
