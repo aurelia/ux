@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/card",
-  "version": "0.14.1",
+  "version": "0.15.0",
   "description": "Card component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -54,7 +54,7 @@
     "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.14.1",
+    "@aurelia-ux/core": "^0.15.0",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
