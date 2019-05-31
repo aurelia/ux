@@ -13,4 +13,5 @@ export { UxRadioTheme, UxRadio, UxRadioElement } from '@aurelia-ux/radio';
 export { UxTextAreaTheme, UxTextArea, UxTextAreaElement } from '@aurelia-ux/textarea';
 export { UxSwitchTheme, UxSwitch, UxSwitchElement } from '@aurelia-ux/switch';
 export { UxOption, UxOptionElement, UxOptGroup, UxOptGroupElement, UxSelect, UxSelectElement, UxSelectTheme } from '@aurelia-ux/select';
+export { UxSliderTheme, UxSlider, UxSliderElement } from '@aurelia-ux/slider';
 export declare function configure(config: FrameworkConfiguration): void;

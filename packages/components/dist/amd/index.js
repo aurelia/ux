@@ -1,4 +1,4 @@
-define(["require", "exports", "@aurelia-ux/card", "@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/grid", "@aurelia-ux/datepicker", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select", "@aurelia-ux/button", "@aurelia-ux/card", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/datepicker", "@aurelia-ux/grid", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select"], function (require, exports, card_1, button_1, checkbox_1, chip_input_1, grid_1, datepicker_1, form_1, input_1, input_info_1, list_1, radio_1, textarea_1, switch_1, select_1, button_2, card_2, checkbox_2, chip_input_2, datepicker_2, grid_2, form_2, input_2, input_info_2, list_2, radio_2, textarea_2, switch_2, select_2) {
+define(["require", "exports", "@aurelia-ux/card", "@aurelia-ux/button", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/grid", "@aurelia-ux/datepicker", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select", "@aurelia-ux/slider", "@aurelia-ux/button", "@aurelia-ux/card", "@aurelia-ux/checkbox", "@aurelia-ux/chip-input", "@aurelia-ux/datepicker", "@aurelia-ux/grid", "@aurelia-ux/form", "@aurelia-ux/input", "@aurelia-ux/input-info", "@aurelia-ux/list", "@aurelia-ux/radio", "@aurelia-ux/textarea", "@aurelia-ux/switch", "@aurelia-ux/select", "@aurelia-ux/slider"], function (require, exports, card_1, button_1, checkbox_1, chip_input_1, grid_1, datepicker_1, form_1, input_1, input_info_1, list_1, radio_1, textarea_1, switch_1, select_1, slider_1, button_2, card_2, checkbox_2, chip_input_2, datepicker_2, grid_2, form_2, input_2, input_info_2, list_2, radio_2, textarea_2, switch_2, select_2, slider_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.UxCardTheme = card_1.UxCardTheme;
@@ -25,6 +25,8 @@ define(["require", "exports", "@aurelia-ux/card", "@aurelia-ux/button", "@aureli
     exports.UxOptGroup = select_1.UxOptGroup;
     exports.UxSelect = select_1.UxSelect;
     exports.UxSelectTheme = select_1.UxSelectTheme;
+    exports.UxSliderTheme = slider_1.UxSliderTheme;
+    exports.UxSlider = slider_1.UxSlider;
     function configure(config) {
         button_2.configure(config);
         card_2.configure(config);
@@ -40,6 +42,7 @@ define(["require", "exports", "@aurelia-ux/card", "@aurelia-ux/button", "@aureli
         textarea_2.configure(config);
         switch_2.configure(config);
         select_2.configure(config);
+        slider_2.configure(config);
     }
     exports.configure = configure;
 });

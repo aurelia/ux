@@ -38,6 +38,9 @@ exports.UxOption = select_1.UxOption;
 exports.UxOptGroup = select_1.UxOptGroup;
 exports.UxSelect = select_1.UxSelect;
 exports.UxSelectTheme = select_1.UxSelectTheme;
+var slider_1 = require("@aurelia-ux/slider");
+exports.UxSliderTheme = slider_1.UxSliderTheme;
+exports.UxSlider = slider_1.UxSlider;
 var button_2 = require("@aurelia-ux/button");
 var card_2 = require("@aurelia-ux/card");
 var checkbox_2 = require("@aurelia-ux/checkbox");
@@ -52,6 +55,7 @@ var radio_2 = require("@aurelia-ux/radio");
 var textarea_2 = require("@aurelia-ux/textarea");
 var switch_2 = require("@aurelia-ux/switch");
 var select_2 = require("@aurelia-ux/select");
+var slider_2 = require("@aurelia-ux/slider");
 function configure(config) {
     button_2.configure(config);
     card_2.configure(config);
@@ -67,5 +71,6 @@ function configure(config) {
     textarea_2.configure(config);
     switch_2.configure(config);
     select_2.configure(config);
+    slider_2.configure(config);
 }
 exports.configure = configure;

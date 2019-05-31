@@ -16,6 +16,7 @@
     "packages/list",
     "packages/radio",
     "packages/select",
+    "packages/slider",
     "packages/switch",
     "packages/tabs",
     "packages/textarea"

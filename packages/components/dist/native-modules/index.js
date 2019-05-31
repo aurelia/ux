@@ -12,6 +12,7 @@ export { UxRadioTheme, UxRadio } from '@aurelia-ux/radio';
 export { UxTextAreaTheme, UxTextArea } from '@aurelia-ux/textarea';
 export { UxSwitchTheme, UxSwitch } from '@aurelia-ux/switch';
 export { UxOption, UxOptGroup, UxSelect, UxSelectTheme } from '@aurelia-ux/select';
+export { UxSliderTheme, UxSlider } from '@aurelia-ux/slider';
 import { configure as configureButtonComponent } from '@aurelia-ux/button';
 import { configure as configureCardComponent } from '@aurelia-ux/card';
 import { configure as configureCheckboxComponent } from '@aurelia-ux/checkbox';
@@ -26,6 +27,7 @@ import { configure as configureRadioComponent } from '@aurelia-ux/radio';
 import { configure as configureTextareaComponent } from '@aurelia-ux/textarea';
 import { configure as configureSwitchComponent } from '@aurelia-ux/switch';
 import { configure as configureSelectComponent } from '@aurelia-ux/select';
+import { configure as configureSliderComponent } from '@aurelia-ux/slider';
 export function configure(config) {
     configureButtonComponent(config);
     configureCardComponent(config);
@@ -41,4 +43,5 @@ export function configure(config) {
     configureTextareaComponent(config);
     configureSwitchComponent(config);
     configureSelectComponent(config);
+    configureSliderComponent(config);
 }
