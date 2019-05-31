@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/grid",
-  "version": "0.15.0",
+  "version": "0.14.1",
   "description": "Responsive grid and utilities for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -94,7 +94,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.15.0",
+    "@aurelia-ux/core": "^0.14.1",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
