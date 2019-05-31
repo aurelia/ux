@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/checkbox",
-  "version": "0.14.1",
+  "version": "0.15.0",
   "description": "Checkbox component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -93,7 +93,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.14.1",
+    "@aurelia-ux/core": "^0.15.0",
     "aurelia-framework": "^1.0.0"
   },
   "devDependencies": {
