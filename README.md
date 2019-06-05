@@ -10,7 +10,7 @@ This library is part of the [Aurelia](http://www.aurelia.io/) platform and exten
 
 ## Documentation
 
-Check out the [showcase application](https://github.com/aurelia/app-ux-showcase) for demos and documentation. If you are interested in contributing, have a read through [our wiki](https://github.com/aurelia/ux/wiki).
+Check out the [showcase application](https://github.com/aurelia/app-ux-showcase) for demos and documentation. If you are interested in contributing, have a read through [our wiki](https://github.com/aurelia/ux/wiki). You can view an online demo here, [https://aux-demo.web.app](https://aux-demo.web.app).
 
 ## Building
 
