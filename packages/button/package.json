@@ -16,7 +16,8 @@
   "license": "MIT",
   "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
   "contributors": [
-    "Zach Hollingshead <zach.hollingshead@gmail.com>"
+    "Zach Hollingshead <zach.hollingshead@gmail.com>",
+    "bigopon <bigopon.777@gmail.com>"
   ],
   "main": "dist/commonjs/index.js",
   "typings": "dist/commonjs/index.d.ts",
