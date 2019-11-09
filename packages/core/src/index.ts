@@ -1,4 +1,4 @@
-import { BindingBehaviorResource, FrameworkConfiguration, PLATFORM, ViewResources } from 'aurelia-framework';
+import { BindingBehaviorResource, FrameworkConfiguration } from 'aurelia-framework';
 
 import { AureliaUX } from './aurelia-ux';
 import { BooleanBB } from './components/boolean-attr-binding-behavior';
