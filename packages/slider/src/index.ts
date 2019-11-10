@@ -1,3 +1,4 @@
+/// <reference path="html.d.ts" />
 import { FrameworkConfiguration } from 'aurelia-framework';
 import { UxSlider } from './ux-slider';
 

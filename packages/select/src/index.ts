@@ -1,3 +1,4 @@
+/// <reference path="html.d.ts" />
 import {
   FrameworkConfiguration,
   bindingMode,

@@ -1,3 +1,4 @@
+/// <reference path="html.d.ts" />
 import { FrameworkConfiguration, bindingMode } from 'aurelia-framework';
 import { ValueAttributeObserver, EventSubscriber } from 'aurelia-binding';
 import { AureliaUX } from '@aurelia-ux/core';
