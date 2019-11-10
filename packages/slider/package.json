@@ -19,7 +19,7 @@
     "Rick Delhommer <rdelhommer@gmail.com>"
   ],
   "main": "dist/commonjs/index.js",
-  "typings": "dist/commonjs/index.d.ts",
+  "typings": "dist/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/aurelia/ux"
