@@ -54,7 +54,6 @@ export default ([
       { file: `${TARGET_DIR}/commonjs/${FILE_NAME_OUTPUT}`,         format: 'cjs' },
       { file: `${TARGET_DIR}/amd/${FILE_NAME_OUTPUT}`,              format: 'amd', amd: { id: packageJson.name } },
       { file: `${TARGET_DIR}/native-modules/${FILE_NAME_OUTPUT}`,   format: 'es' },
-      { file: `${TARGET_DIR}/system/${FILE_NAME_OUTPUT}`,           format: 'system' }
     ],
     plugins: [
       typescript({
