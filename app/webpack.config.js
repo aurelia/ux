@@ -20,6 +20,8 @@ module.exports = function({ production = '' } = {}) {
       ],
       alias: {
         'src': path.resolve(__dirname, 'src'),
+        // alias all aurelia packages to parent node_modules,
+        // so packages & core modules will use the same version of core modules
         ...([
           'loader',
           'pal',
@@ -35,11 +37,32 @@ module.exports = function({ production = '' } = {}) {
             map[aureliaName] = path.resolve(__dirname, `../node_modules/${aureliaName}`);
             return map;
           },
-          {
-            '@aurelia-ux/button': path.resolve(__dirname, '../packages/button/src'),
-            '@aurelia-ux/core': path.resolve(__dirname, '../packages/core/src')
-          })
-        )
+          {}
+        )),
+        // alias all packages to src code
+        ...([
+          'button',
+          'card',
+          'checkbox',
+          'chip-input',
+          'core',
+          'datepicker',
+          'form',
+          'grid',
+          'icons',
+          'input',
+          'input-info',
+          'list',
+          'radio',
+          'select',
+          'slider',
+          'switch',
+          'textarea',
+        ].reduce((map, packageName) => {
+          const mappedPackagedName = `@aurelia-ux/${packageName}`;
+          map[mappedPackagedName] = path.resolve(__dirname, `../packages/${packageName}/src`)
+          return map;
+        }, {}))
       }
     },
     entry: {

@@ -10,7 +10,9 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .use
     .developmentLogging()
     .standardConfiguration()
+    .plugin(PLATFORM.moduleName('@aurelia-ux/core'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/button'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/textarea'))
 
   await aurelia.start()
   await aurelia.setRoot(PLATFORM.moduleName('app'), document.body)
