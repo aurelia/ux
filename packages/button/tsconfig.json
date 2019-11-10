@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "amd",
+    "module": "esnext",
     "moduleResolution": "node",
     "target": "es5",
     "lib": [
