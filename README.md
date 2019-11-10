@@ -37,11 +37,43 @@ Check out the [showcase application](https://github.com/aurelia/app-ux-showcase)
 
 ## Developing
 
-### From the project's root directory
+### Build from a package's own directory
+
+1. Production build:
+```shell
+npm run build
+```
+2. Dev build:
+```shell
+npm run build:dev
+# or for watch
+npm run build:dev:watch
+```
+
+If you want to build to a specific, non default, folder, do:
+```shell
+npm run build -- --environment target_dir: path/to/my/dir
+# or
+npm run build:dev -- --environment target_dir: path/to/my/dir
+# or
+npm run build:dev:watch -- --environment target_dir: path/to/my/dir
+```
+
+### Run a test app
+
+To run the test app, with all dependencies pointing to the packages source code, do:
+```shell
+cd app
+npm ci
+npm run dev
+```
+This will use `webpack-dev-server` and `webpack` to alias all `ux` dependencies to the source in `pakcages` folder.
+
+### Testing from the project's root directory
 
 `npm run develop -- --package=name` runs the tests for the specified package in `watch` mode  (defaults to `-- --package=core` when omitted)
 
-### From a package's own directory
+### Testing from a package's own directory
 
 `npm run develop` runs the tests for that package in `watch` mode
 
