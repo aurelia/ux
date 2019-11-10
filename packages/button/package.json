@@ -29,6 +29,7 @@
     "lint": "cross-env tslint --project tsconfig.json",
     "test": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start --single-run",
     "develop": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start",
+    "prebuild": "rimraf dist",
     "build": "rollup -c --environment BUILD:production --silent",
     "build:dev": "rollup -c",
     "build:dev:watch": "rollup -w -c",
