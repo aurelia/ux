@@ -1,6 +1,6 @@
 import typescript from 'rollup-plugin-typescript2';
 import packageJson from './package.json';
-import { copy, html } from '../../rollup.plugins'
+import { copy, html, typings } from '../../rollup.plugins'
 
 const FILE_NAME_ENTRY = 'src/index.ts';
 const FILE_NAME_OUTPUT = 'index.js';
@@ -40,6 +40,9 @@ export default ([
       }),
       html({
         htmlMinifierOptions: OPTIONS_HTML_MINIFIER
+      }),
+      typings({
+        dir: `${TARGET_DIR}/types`
       })
     ]
   }

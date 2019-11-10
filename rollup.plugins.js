@@ -2,6 +2,27 @@ import { dirname } from 'path';
 import * as fse from 'fs-extra';
 import { createFilter } from 'rollup-pluginutils';
 import { minify } from 'html-minifier';
+import { exec } from 'child_process';
+
+/**
+ * @param {{ dir: string }} options
+ * @returns {import('rollup').Plugin}
+ */
+export function typings(options = {}) {
+  return {
+    name: 'rollup-plugin-typings-aurelia-ux',
+    buildEnd: function(error) {
+      if (error) {
+        return;
+      }
+      exec(`npm run build:typings ${options.dir ? ` -- --declarationDir ${options.dir}` : ''}`, (error) => {
+        if (error) {
+          console.log('Failure building typings:', error.toString());
+        }
+      });
+    }
+  }
+}
 
 /**
  * @param {{ verbose: boolean, files: { from: string, to: string }[] }} options
@@ -63,7 +84,7 @@ export function html(options = {}) {
 	const filter = createFilter(options.include, options.exclude);
 
 	return {
-		name: 'html',
+		name: 'rollup-plugin-html-fork-aurelia',
 
 		transform(code, id) {
 
