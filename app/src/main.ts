@@ -13,6 +13,16 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/core'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/button'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/textarea'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/switch'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/slider'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/select'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/radio'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/list'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/input-info'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/input'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/icons'))
+
+  // todo: left -> right order: grid + form + datepicker + chip-input + checkbox + card
 
   await aurelia.start()
   await aurelia.setRoot(PLATFORM.moduleName('app'), document.body)
