@@ -9,6 +9,7 @@ const OPTIONS_HTML_MINIFIER = {
   collapseBooleanAttributes: true,
   conservativeCollapse: true
 };
+const FILE_NAME_MAIN_CSS = 'ux-button.css';
 
 const TARGET_DIR = process.env.target_dir || 'dist';
 
@@ -35,7 +36,7 @@ export default ([
       copy({
         verbose: true,
         files: [
-          { from: 'src/ux-button.css', to: `${TARGET_DIR}/es2015/ux-button.css` }
+          { from: `src/${FILE_NAME_MAIN_CSS}`, to: `${TARGET_DIR}/es2015/${FILE_NAME_MAIN_CSS}` }
         ]
       }),
       html({
@@ -68,9 +69,9 @@ export default ([
       copy({
         verbose: true,
         files: [
-          { from: 'src/ux-button.css', to: `${TARGET_DIR}/commonjs/ux-button.css` },
-          { from: 'src/ux-button.css', to: `${TARGET_DIR}/amd/ux-button.css` },
-          { from: 'src/ux-button.css', to: `${TARGET_DIR}/native-modules/ux-button.css` },
+          { from: `src/${FILE_NAME_MAIN_CSS}`, to: `${TARGET_DIR}/commonjs/${FILE_NAME_MAIN_CSS}` },
+          { from: `src/${FILE_NAME_MAIN_CSS}`, to: `${TARGET_DIR}/amd/${FILE_NAME_MAIN_CSS}` },
+          { from: `src/${FILE_NAME_MAIN_CSS}`, to: `${TARGET_DIR}/native-modules/${FILE_NAME_MAIN_CSS}` },
         ]
       }),
       html({
