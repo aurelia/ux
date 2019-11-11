@@ -100,3 +100,17 @@ export function html(options = {}) {
 		}
 	};
 }
+
+/**
+ * @param {string[]} fileNames
+ * @param {string[]} moduleNames
+ */
+export function buildCopyInstruction(fileNames, moduleNames, targetDir) {
+  const files = [];
+  moduleNames.forEach(moduleName => {
+    fileNames.forEach(fileName => {
+      files.push({ from: `src/${fileName}`, to: `${targetDir}/${moduleName}/${fileName}` });
+    });
+  });
+  return files;
+}
