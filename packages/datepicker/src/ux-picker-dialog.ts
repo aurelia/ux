@@ -1,12 +1,12 @@
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
+import { customElement, bindable, ViewResources, inlineView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { DatepickerSettings } from './resources/datepicker-settings';
-import * as moment from 'moment';
-
-type Moment = moment.Moment;
+import { moment, Moment } from './resources/moment';
+import * as UX_PICKER_DIALOG_VIEW from './ux-picker-dialog.html';
 
 @inject(ViewResources)
 @customElement('ux-picker-dialog')
+@inlineView(UX_PICKER_DIALOG_VIEW)
 export class UxPickerDialog {
   @bindable public theme = null;
   @bindable public type = 'datetime';

@@ -19,10 +19,17 @@
 		"Zach Hollingshead <zach.hollingshead@gmail.com>"
 	],
 	"main": "dist/commonjs/index.js",
-	"typings": "dist/commonjs/index.d.ts",
+	"typings": "dist/types/index.d.ts",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/aurelia/ux"
+	},
+	"scripts": {
+    "prebuild": "rimraf dist",
+    "build": "rollup -c --environment BUILD:production --silent",
+    "build:dev": "rollup -c",
+    "build:dev:watch": "rollup -w -c",
+    "build:typings": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types"
 	},
 	"jspm": {
 		"registry": "npm",

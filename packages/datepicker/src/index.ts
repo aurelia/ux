@@ -1,4 +1,9 @@
-import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
+/// <reference path="html.d.ts" />
+import { FrameworkConfiguration } from 'aurelia-framework';
+import { UxCalendar } from './ux-calendar';
+import { UxDatepicker } from './ux-datepicker';
+import { UxPickerDialog } from './ux-picker-dialog';
+import { UxYearList } from './ux-year-list';
 
 export { DatepickerSettings } from './resources/datepicker-settings';
 
@@ -6,9 +11,9 @@ export { UxDatepickerTheme } from './ux-datepicker-theme';
 
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([
-    PLATFORM.moduleName('@aurelia-ux/datepicker/ux-calendar'),
-    PLATFORM.moduleName('@aurelia-ux/datepicker/ux-datepicker'),
-    PLATFORM.moduleName('@aurelia-ux/datepicker/ux-picker-dialog'),
-    PLATFORM.moduleName('@aurelia-ux/datepicker/ux-year-list')
+    UxCalendar,
+    UxDatepicker,
+    UxPickerDialog,
+    UxYearList
   ]);
 }
