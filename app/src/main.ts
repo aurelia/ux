@@ -25,9 +25,6 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/checkbox'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/card'))
 
-  // done this about more than a year ago https://github.com/aurelia/ux/commit/e2273a4453dbd1057d9caf2cbaa0e306c0a8676f
-  // todo: verify what's missing compared to a year ago
-
   await aurelia.start();
   await aurelia.setRoot(PLATFORM.moduleName('app'), document.body);
 };
