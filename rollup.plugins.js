@@ -72,6 +72,12 @@ function fatal (name, src, dest, err) {
   process.exit(err.errno);
 }
 
+const OPTIONS_HTML_MINIFIER = {
+  collapseWhitespace: true,
+  collapseBooleanAttributes: true,
+  conservativeCollapse: true
+};
+
 /**
  * @param {{ include: string | RegExp; exclude: string | RegExp }} options
  * @returns {import('rollup').Plugin}
@@ -90,7 +96,7 @@ export function html(options = {}) {
 
 			if (filter(id)) {
 				const x = {
-          code: `export default ${JSON.stringify(minify(code, options.htmlMinifierOptions))};`,
+          code: `export default ${JSON.stringify(minify(code, OPTIONS_HTML_MINIFIER))};`,
           // code: `export default ${JSON.stringify(code)};`,
 					map: { mappings: '' }
 				};

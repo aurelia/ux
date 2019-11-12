@@ -14,7 +14,8 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
-    "noEmitHelpers": false
+    "noEmitHelpers": false,
+    "sourceMap": true
   },
   "exclude": [
     ".vscode",

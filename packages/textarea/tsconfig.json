@@ -12,11 +12,10 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "strictNullChecks": true,
-    "declaration": false,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "noEmitHelpers": false,
-    "skipLibCheck": true
+    "sourceMap": true
   },
   "exclude": [
     ".vscode",
