@@ -24,6 +24,13 @@
 		"type": "git",
 		"url": "https://github.com/aurelia/ux"
 	},
+	"scripts": {
+    "prebuild": "rimraf dist",
+    "build": "rollup -c --environment BUILD:production --silent",
+    "build:dev": "rollup -c",
+    "build:dev:watch": "rollup -w -c",
+    "build:typings": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types"
+	},
 	"jspm": {
 		"registry": "npm",
 		"jspmPackage": true,
@@ -63,6 +70,7 @@
 		"devDependencies": {}
 	},
 	"dependencies": {
+		"@aurelia-ux/core": "0.16.0",
 		"aurelia-framework": "^1.0.0"
 	},
 	"devDependencies": {
