@@ -120,7 +120,10 @@
     "@aurelia-ux/slider": "^0.16.0",
     "@aurelia-ux/switch": "^0.16.0",
     "@aurelia-ux/textarea": "^0.16.0",
-    "aurelia-framework": "^1.0.0"
+    "aurelia-framework": "^1.0.0",
+    "conventional-changelog-cli": "^2.0.27",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^5.20.1"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.6",

@@ -25,11 +25,11 @@
 		"url": "https://github.com/aurelia/ux"
 	},
 	"scripts": {
-    "prebuild": "rimraf dist",
-    "build": "rollup -c --environment BUILD:production --silent",
-    "build:dev": "rollup -c",
-    "build:dev:watch": "rollup -w -c",
-    "build:typings": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types"
+		"prebuild": "rimraf dist",
+		"build": "rollup -c --environment BUILD:production --silent",
+		"build:dev": "rollup -c",
+		"build:dev:watch": "rollup -w -c",
+		"build:typings": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types"
 	},
 	"jspm": {
 		"registry": "npm",
@@ -71,7 +71,10 @@
 	},
 	"dependencies": {
 		"aurelia-framework": "^1.0.0",
-		"moment": "^2.18.1"
+		"conventional-changelog-cli": "^2.0.27",
+		"moment": "^2.18.1",
+		"tsconfig-paths": "^3.9.0",
+		"tslint": "^5.20.1"
 	},
 	"devDependencies": {
 		"@types/jasmine": "^2.8.6",
