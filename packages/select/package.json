@@ -87,7 +87,7 @@
     "@types/jasmine": "^2.8.6",
     "@types/karma": "^1.7.3",
     "@types/node": "^7.0.11",
-    "@types/webpack": "^3.8.8",
+    "@types/webpack": "^4.39.8",
     "aurelia-bootstrapper": "^2.1.1",
     "aurelia-pal-browser": "^1.2.0",
     "aurelia-pal-nodejs": "^1.0.0-beta.1.0.0",
@@ -95,6 +95,7 @@
     "aurelia-testing": "^1.0.0-beta.3.0.1",
     "aurelia-webpack-plugin": "^3.0.0-rc.1",
     "concurrently": "^3.4.0",
+    "conventional-changelog-cli": "^2.0.27",
     "copyfiles": "^1.2.0",
     "cross-env": "^3.2.4",
     "istanbul-instrumenter-loader": "^3.0.0",
@@ -116,11 +117,10 @@
     "rollup-plugin-typescript2": "^0.25.2",
     "ts-loader": "^4.0.1",
     "ts-node": "^5.0.1",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^5.20.1",
     "typedoc": "^0.9.0",
     "typescript": "^3.7.2",
-    "webpack": "^4.0.1",
-    "conventional-changelog-cli": "^2.0.27",
-    "tsconfig-paths": "^3.9.0",
-    "tslint": "^5.20.1"
+    "webpack": "^4.0.1"
   }
 }
