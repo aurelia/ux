@@ -1,12 +1,13 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxFormTheme } from './ux-form-theme';
+import * as UX_FORM_VIEW from './ux-form.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-form')
-
+@inlineView(UX_FORM_VIEW)
 export class UxForm implements UxComponent {
   @bindable public theme: UxFormTheme;
   @bindable public submitOnEnter: any;
@@ -30,7 +31,7 @@ export class UxForm implements UxComponent {
       this.element.addEventListener('keyup', (e: KeyboardEvent) => {
         let canSubmit = true;
 
-        if (e.srcElement != null && e.srcElement.tagName === 'TEXTAREA') {
+        if (e.srcElement != null && (e.srcElement as Element).tagName === 'TEXTAREA') {
           canSubmit = false;
         }
 

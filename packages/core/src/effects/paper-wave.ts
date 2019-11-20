@@ -94,7 +94,7 @@ export class PaperWave {
     this.opacityDecayVelocity = options.opacityDecayVelocity || 0.8;
     this.$wave = _doc.createElement('div');
     this.$wave.classList.add('paper-ripple__wave');
-    this.$wave.style.backgroundColor = this.color;
+    this.$wave.style.backgroundColor = this.color!;
     this.$ = _doc.createElement('div');
     this.$.classList.add('paper-ripple__wave-container');
     this.$.appendChild(this.$wave);

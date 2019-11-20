@@ -1,9 +1,10 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
+import * as UX_FIELD_VIEW from './ux-field.html';
 
 @inject(Element)
 @customElement('ux-field')
-
+@inlineView(UX_FIELD_VIEW)
 export class UxField {
   @bindable public label: string;
 

@@ -1,14 +1,14 @@
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
+import { customElement, bindable, ViewResources, inlineView } from 'aurelia-templating';
 import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
-import * as moment from 'moment';
-
-type Moment = moment.Moment;
+import { moment, Moment } from './resources/moment';
+import * as UX_CALENDAR_VIEW from './ux-calendar.html';
 
 @inject(ViewResources)
 @customElement('ux-calendar')
+@inlineView(UX_CALENDAR_VIEW)
 export class UxCalendar {
     @bindable public theme = null;
 

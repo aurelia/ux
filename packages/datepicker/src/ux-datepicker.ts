@@ -1,14 +1,16 @@
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
+import { customElement, bindable, ViewResources, inlineView } from 'aurelia-templating';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
-import * as moment from 'moment';
+import { moment } from './resources/moment';
+import * as UX_DATEPICKER_VIEW from './ux-datepicker.html';
 
 @inject(Element, ViewResources, StyleEngine)
 @customElement('ux-datepicker')
+@inlineView(UX_DATEPICKER_VIEW)
 export class UxDatepicker implements UxComponent {
   @bindable public theme: UxDatepickerTheme;
 

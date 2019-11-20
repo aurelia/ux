@@ -1,13 +1,14 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxChipInputTheme } from './ux-chip-input-theme';
+import * as UX_CHIP_INPUT_VIEW from './ux-chip-input.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-chip-input')
-
+@inlineView(UX_CHIP_INPUT_VIEW)
 export class UxChipInput implements UxComponent {
   @bindable public disabled: boolean | string = false;
   @bindable public readonly: boolean | string = false;

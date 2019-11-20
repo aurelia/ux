@@ -1,13 +1,19 @@
-import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
+/// <reference path="html.d.ts" />
+import { FrameworkConfiguration } from 'aurelia-framework';
+import { UxCard } from './ux-card';
+import { UxCardHeader } from './ux-card-header';
+import { UxCardActionRow } from './ux-card-action-row';
+import { UxCardContent } from './ux-card-content';
+import { UxCardFooter } from './ux-card-footer';
 
 export { UxCardTheme } from './ux-card-theme';
 
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([
-    PLATFORM.moduleName('@aurelia-ux/card/ux-card'),
-    PLATFORM.moduleName('@aurelia-ux/card/ux-card-header'),
-    PLATFORM.moduleName('@aurelia-ux/card/ux-card-action-row'),
-    PLATFORM.moduleName('@aurelia-ux/card/ux-card-content'),
-    PLATFORM.moduleName('@aurelia-ux/card/ux-card-footer')
+    UxCard,
+    UxCardHeader,
+    UxCardActionRow,
+    UxCardContent,
+    UxCardFooter
   ]);
 }

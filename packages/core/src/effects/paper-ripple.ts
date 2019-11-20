@@ -139,7 +139,7 @@ export class PaperRipple {
   public addWave() {
     const wave = new PaperWave(this);
     this.$waves.appendChild(wave.$);
-    this.$background.style.backgroundColor = wave.color;
+    this.$background.style.backgroundColor = wave.color!;
     this.waves.push(wave);
     return wave;
   }
@@ -206,7 +206,7 @@ export class PaperRipple {
     // tslint:enable:prefer-const
 
     if (!this.shouldKeepAnimating && this.waves.length === 0) {
-      this.$background.style.backgroundColor = null;
+      this.$background.style.backgroundColor = null!;
     } else {
       PLATFORM.requestAnimationFrame(this.animate.bind(this));
     }

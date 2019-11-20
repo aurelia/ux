@@ -1,4 +1,4 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import {
@@ -9,6 +9,7 @@ import {
 } from '@aurelia-ux/core';
 import { UxRadioTheme } from './ux-radio-theme';
 import { ElementEvents, DOM } from 'aurelia-framework';
+import * as VIEW from './ux-radio.html';
 
 export interface UxRadioElement extends HTMLElement {
   type: 'radio';
@@ -17,6 +18,7 @@ export interface UxRadioElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-radio')
+@inlineView(VIEW)
 export class UxRadio implements UxComponent {
   private ignoreValueChanges: boolean;
 
@@ -182,7 +184,7 @@ export class UxRadio implements UxComponent {
       winEvents.subscribe('mouseup', upAction, true);
     }
 
-    e.preventDefault();
+    return true;
   }
 }
 

@@ -1,24 +1,21 @@
 {
   "compilerOptions": {
-    "module": "amd",
+    "module": "esnext",
     "moduleResolution": "node",
     "target": "es5",
     "lib": [
       "es2017",
       "dom"
     ],
-    "rootDir": "src",
-    "outDir": "dist/test",
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "strictNullChecks": true,
-    "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "noEmitHelpers": false,
-    "skipLibCheck": true
+    "sourceMap": true
   },
   "exclude": [
     ".vscode",

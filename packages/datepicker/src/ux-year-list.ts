@@ -1,10 +1,12 @@
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
+import { customElement, bindable, ViewResources, inlineView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { computedFrom } from 'aurelia-binding';
-import { Moment } from 'moment';
+import { Moment } from './resources/moment';
+import * as UX_YEAR_LIST_VIEW from './ux-year-list.html';
 
 @inject(Element, ViewResources)
 @customElement('ux-year-list')
+@inlineView(UX_YEAR_LIST_VIEW)
 export class UxYearList {
   @bindable public theme = null;
 
