@@ -16,18 +16,19 @@ Check out the [showcase application](https://github.com/aurelia/app-ux-showcase)
 
 **Before The First Build**
 
-`npm install` installs dependencies for the base Aurelia UX project
+`npm ci`: installs dependencies for the base Aurelia UX project
+`npm run bootstrap`: sets up a symlink between all of the packages in the monorepo
+`npm run build`: builds all of the mono repo projects.
 
-`lerna bootstrap --hoist`: sets up a symlink between all of the packages in the monorepo
-`lerna run build`: builds all of the mono repo projects.
-
->Note: `lerna run build` is very CPU intensive and takes a small period of time on most machines. If you are working within a single component, you might try `npm run build` instead at the component level.
+>Note: `npm run build` is very CPU intensive and takes a small period of time on most machines. If you are working within a single component, you might try `npm run build` instead at the component package level.
 
 ## Tests
 
 ### From the project's root directory
 
 `npm run test -- --package=name` runs the tests for the specified package (defaults to `-- --package=core` when omitted)
+
+If you have `lerna` installed globally:
 
 `lerna run test` runs the tests for all packages (will start multiple chrome instances simultaneously)
 
