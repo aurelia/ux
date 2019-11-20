@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "aurelia-binding": "^2.0.0",
+    "aurelia-dependency-injection": "^1.5.2",
     "aurelia-framework": "^1.0.0",
     "aurelia-templating-resources": "^1.6.0"
   },
