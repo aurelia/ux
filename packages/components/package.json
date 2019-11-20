@@ -31,6 +31,7 @@
     "build:dev": "rollup -c",
     "build:dev:watch": "rollup -w -c",
     "prebuild": "cross-env rimraf dist",
+    "build:typings": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
     "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
     "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
     "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",
