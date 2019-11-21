@@ -202,8 +202,14 @@ export class UxInput implements UxComponent {
     this.setValue(newValue);
   }
 
-  public focusInput() {
+  public focus() {
     this.textbox.focus();
+  }
+
+  public blur() {
+    if (document.activeElement === this.textbox) {
+      this.textbox.blur();
+    }
   }
 }
 
@@ -212,7 +218,8 @@ function stopEvent(e: Event) {
 }
 
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
-const uxInputElementProto = Object.create(HTMLElement.prototype, {
+const uxInputElementProto = Object.assign(
+  Object.create(HTMLElement.prototype, {
   value: {
     get() {
       return getVm<UxInput>(this).getValue();
@@ -220,5 +227,13 @@ const uxInputElementProto = Object.create(HTMLElement.prototype, {
     set(value: any) {
       getVm<UxInput>(this).setValue(value);
     }
+  },
+  }), {
+    focus() {
+      getVm<UxInput>(this).focused = true;
+    },
+    blur() {
+      getVm<UxInput>(this).focused = false;
+    }
   }
-});
+);
