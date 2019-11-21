@@ -1,10 +1,11 @@
 import { customElement, bindable, ViewResources, inlineView } from 'aurelia-templating';
-import { bindingMode } from 'aurelia-binding';
+import { bindingMode, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
+import { DOM } from 'aurelia-pal';
 import { moment } from './resources/moment';
 import * as UX_DATEPICKER_VIEW from './ux-datepicker.html';
 
@@ -37,11 +38,16 @@ export class UxDatepicker implements UxComponent {
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any;
 
+  @observable
+  public focused: boolean = false;
+
   public textbox: HTMLInputElement;
   private textboxValue: string;
   private showDialog = false;
 
-  constructor(public element: HTMLElement, public resources: ViewResources, public styleEngine: StyleEngine) { }
+  constructor(public element: HTMLElement, public resources: ViewResources, public styleEngine: StyleEngine) {
+    Object.setPrototypeOf(element, uxDatepickerElementProto);
+  }
 
   public bind() {
     this.processAttribute('placeholder');
@@ -182,4 +188,62 @@ export class UxDatepicker implements UxComponent {
       this.textbox.setAttribute(attributeName, attributeValue)
     }
   }
+
+  public getValue() {
+    return this.value;
+  }
+
+  public setValue(value: any) {
+    const oldValue = this.value;
+    const newValue = value;
+
+    if (oldValue !== newValue) {
+      this.value = newValue;
+      this.element.dispatchEvent(DOM.createCustomEvent('change', { bubbles: true }));
+    }
+  }
+
+  public focusedChanged(focused: boolean) {
+    if (focused === true) {
+      this.element.classList.add('ux-datepicker--focused');
+    } else {
+      this.element.classList.remove('ux-datepicker--focused');
+    }
+
+    this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
+  }
+
+  public focus(openDialog: boolean = false) {
+    this.textbox.focus();
+    if (openDialog && !this.showDialog) {
+      this.toggleDialog('month');
+    }
+  }
+
+  public blur() {
+    if (document.activeElement === this.textbox) {
+      this.textbox.blur();
+    }
+  }
 }
+
+const getVm = <T>(_: any) => _.au.controller.viewModel as T;
+const uxDatepickerElementProto = Object.assign(
+  Object.create(HTMLElement.prototype, {
+  value: {
+    get() {
+      return getVm<UxDatepicker>(this).getValue();
+    },
+    set(value: any) {
+      getVm<UxDatepicker>(this).setValue(value);
+    }
+  },
+  }), {
+    focus() {
+      getVm<UxDatepicker>(this).focused = true;
+    },
+    blur() {
+      getVm<UxDatepicker>(this).focused = false;
+    }
+  }
+);
