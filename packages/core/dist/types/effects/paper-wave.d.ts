@@ -67,68 +67,68 @@ export declare class PaperWave {
      * Gets the time in milliseconds elapsed from the moment where interaction with the wave was started.
      * @returns The time in milliseconds.
      */
-    readonly touchDownElapsed: number;
+    get touchDownElapsed(): number;
     /**
      * Gets the time in milliseconds elapsed from the moment where interaction with the wave was ended.
      * @returns The time in milliseconds.
      */
-    readonly touchUpElapsed: number;
+    get touchUpElapsed(): number;
     /**
      * Gets the time in seconds elapsed since the moment where interaction with the wave was started.
      * @returns The time in seconds.
      */
-    readonly touchDownElapsedSeconds: number;
+    get touchDownElapsedSeconds(): number;
     /**
      * Gets the time in seconds elapsed since the moment where interaction with the wave was ended.
      * @returns The time in seconds.
      */
-    readonly touchUpElapsedSeconds: number;
+    get touchUpElapsedSeconds(): number;
     /**
      * Gets the total interaction time.
      * @returns The time in seconds
      */
-    readonly mouseInteractionSeconds: number;
+    get mouseInteractionSeconds(): number;
     /**
      * Gets the wave's radius at the current time.
      *
      * @returns {Number} The value of the wave's radius.
      */
-    readonly radius: number;
+    get radius(): number;
     /**
      * Gets the wave's opacity at the current time.
      * @returns The value of the wave's opacity.
      */
-    readonly opacity: number;
+    get opacity(): number;
     /**
      * Gets the wave's outer opacity at the current time.
      * @returns The value of the wave's outer opacity.
      */
-    readonly outerOpacity: number;
+    get outerOpacity(): number;
     /**
      * Determines whether the wave is fully opaque or not.
      * @returns `true`, if so, otherwise `false`.
      */
-    readonly isWaveFullyOpaque: boolean;
+    get isWaveFullyOpaque(): boolean;
     /**
      * Determines whether the wave reached its max radius or not.
      * @returns `true`, if so, otherwise `false`.
      */
-    readonly isMaxRadiusReached: boolean;
+    get isMaxRadiusReached(): boolean;
     /**
      * Determines whether the animation of rippling effect completed or not.
      * @returns `true`, if so, otherwise `false`.
      */
-    readonly isAnimationComplete: boolean;
+    get isAnimationComplete(): boolean;
     /**
      * Gets the wave's translation fraction value.
      * @returns The value of the wave's translation fraction.
      */
-    readonly translationFraction: number;
+    get translationFraction(): number;
     /**
      * Gets the wave's current position.
      * @returns {{x: Number, y: Number}} Object containing coordinates of the wave's current position.
      */
-    readonly currentPosition: {
+    get currentPosition(): {
         x: number;
         y: number;
     };
@@ -137,7 +137,7 @@ export declare class PaperWave {
      *
      * @returns {Boolean} `true`, if so, otherwise `false`.
      */
-    readonly isTouchDown: boolean | 0;
+    get isTouchDown(): boolean | 0;
     /**
      * Resets all the wave's values.
      * @returns Current instance for method chaining.

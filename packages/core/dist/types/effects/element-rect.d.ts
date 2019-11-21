@@ -23,11 +23,11 @@ export declare class ElementRect {
     /**
      * Returns the center coordinates of the current element.
      */
-    readonly center: Point;
+    get center(): Point;
     /**
      * Returns the size of the current element and its position relative to the viewport.
      */
-    readonly boundingRect: ClientRect | DOMRect;
+    get boundingRect(): DOMRect;
     /**
      * Calculates euclidean distance between two points.
      * @param point1 - Start point

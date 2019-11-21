@@ -5,7 +5,7 @@ export declare class Cordova implements Host {
     private container;
     type: string;
     constructor(container: Container);
-    readonly isAvailable: boolean;
+    get isAvailable(): boolean;
     start(): Promise<Platform>;
     private getPlatformType;
 }

@@ -33,34 +33,37 @@ export declare class PaperRipple {
      * Determines whether all the waves should be re-centered towards the center of the container.
      * @returns If `true`, waves will exhibit a gravitational pull towards the center of the container as they fade away.
      */
+    get recenters(): boolean;
     /**
-    * Sets the value that indicates whether all the waves should be re-centered towards the center of the container.
-    * @returns Nothing.
-    */
-    recenters: boolean;
+     * Sets the value that indicates whether all the waves should be re-centered towards the center of the container.
+     * @returns Nothing.
+     */
+    set recenters(newValue: boolean);
     /**
      * Determines whether all the waves should start a movement from the center of the container.
      * @returns If `true`, waves will center inside its container
      */
+    get center(): boolean;
     /**
-    * Sets the value that indicates whether all the waves should start a movement from the center of the container.
-    * @returns Nothing.
-    */
-    center: boolean;
+     * Sets the value that indicates whether all the waves should start a movement from the center of the container.
+     * @returns Nothing.
+     */
+    set center(newValue: boolean);
     /**
      * Determines whether ripple effect should apply within a circle.
      * @returns If `true`, ripple effect will apply within a circle.
      */
+    get round(): boolean;
     /**
-    * Sets the value that indicates whether ripple effect should apply within a circle.
-    * @returns Nothing.
-    */
-    round: boolean;
+     * Sets the value that indicates whether ripple effect should apply within a circle.
+     * @returns Nothing.
+     */
+    set round(newValue: boolean);
     /**
      * Determines whether the ripple should keep animating or not.
      * @returns `true`, if so, otherwise `false`.
      */
-    readonly shouldKeepAnimating: boolean;
+    get shouldKeepAnimating(): boolean;
     private initTarget;
     /**
      * Adds new wave to the list of visual ripples.

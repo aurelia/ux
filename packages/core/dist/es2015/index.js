@@ -1,10 +1,10 @@
+import { ObserverLocator as ObserverLocator$1, BindingBehaviorResource } from 'aurelia-framework';
 import { inject, Container } from 'aurelia-dependency-injection';
-import { DOM, PLATFORM } from 'aurelia-pal';
+import { SyntaxInterpreter } from 'aurelia-templating-binding';
+import { PLATFORM, DOM } from 'aurelia-pal';
 import { getLogger } from 'aurelia-logging';
 import { Loader } from 'aurelia-loader';
 import { ObserverLocator, bindingBehavior } from 'aurelia-binding';
-import { ObserverLocator as ObserverLocator$1, BindingBehaviorResource } from 'aurelia-framework';
-import { SyntaxInterpreter } from 'aurelia-templating-binding';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -20,13 +20,6 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
-/* global Reflect, Promise */
-
-
-
-
-
-
 
 function __decorate(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1423,4 +1416,5 @@ function configure(config, callback) {
     }
 }
 
-export { configure, swatches, shadows, processDesignAttributes, PaperRipple, normalizeBooleanAttribute, StyleEngine, GlobalStyleEngine, AureliaUX, UXConfiguration };
+export { AureliaUX, GlobalStyleEngine, PaperRipple, StyleEngine, UXConfiguration, configure, normalizeBooleanAttribute, processDesignAttributes, shadows, swatches };
+//# sourceMappingURL=index.js.map

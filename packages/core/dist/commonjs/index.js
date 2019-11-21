@@ -2,13 +2,13 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+var aureliaFramework = require('aurelia-framework');
 var aureliaDependencyInjection = require('aurelia-dependency-injection');
+var aureliaTemplatingBinding = require('aurelia-templating-binding');
 var aureliaPal = require('aurelia-pal');
 var aureliaLogging = require('aurelia-logging');
 var aureliaLoader = require('aurelia-loader');
 var aureliaBinding = require('aurelia-binding');
-var aureliaFramework = require('aurelia-framework');
-var aureliaTemplatingBinding = require('aurelia-templating-binding');
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -24,13 +24,6 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
-/* global Reflect, Promise */
-
-
-
-
-
-
 
 function __decorate(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1553,13 +1546,14 @@ function configure(config, callback) {
     }
 }
 
-exports.configure = configure;
-exports.swatches = swatches;
-exports.shadows = shadows;
-exports.processDesignAttributes = processDesignAttributes;
-exports.PaperRipple = PaperRipple;
-exports.normalizeBooleanAttribute = normalizeBooleanAttribute;
-exports.StyleEngine = StyleEngine;
-exports.GlobalStyleEngine = GlobalStyleEngine;
 exports.AureliaUX = AureliaUX;
+exports.GlobalStyleEngine = GlobalStyleEngine;
+exports.PaperRipple = PaperRipple;
+exports.StyleEngine = StyleEngine;
 exports.UXConfiguration = UXConfiguration;
+exports.configure = configure;
+exports.normalizeBooleanAttribute = normalizeBooleanAttribute;
+exports.processDesignAttributes = processDesignAttributes;
+exports.shadows = shadows;
+exports.swatches = swatches;
+//# sourceMappingURL=index.js.map
