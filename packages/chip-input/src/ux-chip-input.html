@@ -9,6 +9,6 @@
     ${chip}
   </ux-chip>
 
-  <input class="ux-chip-input__inner-input" ref="textbox" keyup.delegate="handleKeyup($event)">
+  <input class="ux-chip-input__inner-input" ref="textbox" keyup.delegate="handleKeyup($event)" focus.bind="focused">
   <div class="ux-chip-input__bottom-border"></div>
 </template>
