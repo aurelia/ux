@@ -135,7 +135,7 @@
   border-right: 5px solid transparent;
 }
 
-.ux-select:focus {
+.ux-select--focused {
   outline: none;
 }
 
@@ -183,7 +183,7 @@
   color: blue;
 }
 
-.ux-select:focus .ux-select__border-bottom {
+.ux-select--focused .ux-select__border-bottom {
   transform: scaleX(1);
 }
 

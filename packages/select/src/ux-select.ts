@@ -1,6 +1,7 @@
 import {
   customElement,
   bindable,
+  observable,
   computedFrom,
   ViewResources,
   ViewCompiler,
@@ -85,6 +86,9 @@ export class UxSelect implements UxComponent {
   @bindable()
   public placeholder: string;
 
+  @observable
+  public focused: boolean = false;
+
   public value: any;
   public displayValue: string;
   public expanded: boolean;
@@ -106,6 +110,7 @@ export class UxSelect implements UxComponent {
   public bind() {
     if (bool(this.autofocus)) {
       // setTimeout(focusEl, 0, this.button);
+      this.focused = true;
     }
     if (this.isMultiple) {
       if (!this.value) {
@@ -323,6 +328,9 @@ export class UxSelect implements UxComponent {
 
   private isCollapsing: boolean;
   public collapse() {
+    if (!this.optionCtEl) {
+      return;
+    }
     if (this.isCollapsing) {
       return;
     }
@@ -407,7 +415,9 @@ export class UxSelect implements UxComponent {
   }
 
   public onBlur() {
+    console.log('onBlur');
     if (!this.element.contains(DOM.activeElement)) {
+      this.focused = false;
       this.collapse();
     }
   }
@@ -460,6 +470,27 @@ export class UxSelect implements UxComponent {
     }
 
     this.styleEngine.applyTheme(newValue, this.element);
+  }
+
+  public focusedChanged(focused: boolean) {
+    if (focused === true) {
+      this.element.classList.add('ux-select--focused');
+      this.expand();
+      this.element.focus();
+    } else {
+      this.element.classList.remove('ux-select--focused');
+      this.collapse();
+    }
+
+    this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
+  }
+
+  public focus() {
+    this.focused = true;
+  }
+
+  public blur() {
+    this.focused = false;
   }
 
   public multipleChanged(newValue: boolean | string, oldValue: boolean | string) {
@@ -541,22 +572,31 @@ function extractUxOption(
   return true;
 }
 
-const UxSelectElementProto = Object.create(HTMLElement.prototype, {
-  value: {
-    get() {
-      return getAuViewModel<UxSelect>(this).getValue();
+const getVm = <T>(_: any) => _.au.controller.viewModel as T;
+const UxSelectElementProto = Object.assign(
+  Object.create(HTMLElement.prototype, {
+    value: {
+      get() {
+        return getAuViewModel<UxSelect>(this).getValue();
+      },
+      set(v: any) {
+        return getAuViewModel<UxSelect>(this).setValue(v);
+      }
     },
-    set(v: any) {
-      return getAuViewModel<UxSelect>(this).setValue(v);
+    options: {
+      get() {
+        return getAuViewModel<UxSelect>(this).getOptions();
+      }
     }
-  },
-  options: {
-    get() {
-      return getAuViewModel<UxSelect>(this).getOptions();
+  }), {
+    focus() {
+      getVm<UxSelect>(this).focused = true;
+    },
+    blur() {
+      getVm<UxSelect>(this).focused = false;
     }
   }
-});
-
+);
 function defaultMatcher<T = any>(a: T, b: T) {
   return a === b;
 }
