@@ -34,7 +34,7 @@
 .ux-textarea__bottom-border {
   height: 2px;
   background-color: #4043ff;
-  background-color: var(--aurelia-ux--chip-input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff));
+  background-color: var(--aurelia-ux--textarea-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff));
   position: absolute;
   bottom: 0;
   left: 0;

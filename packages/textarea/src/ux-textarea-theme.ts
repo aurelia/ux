@@ -9,6 +9,7 @@ export class UxTextAreaTheme implements UxTheme {
   public borderBottom: string;
   public borderBottomHover: string;
   public borderBottomSelected: string;
+  public borderBottomFocus: string;
 
   public diabledForeground: string;
   public disabledBorderBottom: string;
