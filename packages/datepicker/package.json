@@ -1,6 +1,6 @@
 {
 	"name": "@aurelia-ux/datepicker",
-	"version": "0.16.0",
+	"version": "0.17.0",
 	"description": "Datepicker component for Aurelia UX",
 	"keywords": [
 		"aurelia",
