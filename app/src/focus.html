@@ -1,0 +1,77 @@
+<template>
+  <section>
+    <h1>Test the focus attribute</h1>
+    
+    <p>Click on a button below to focus a component using the public focus() and blur() api</p>
+    <ux-button click.delegate="focus('input')" size="small" type="text">Input</ux-button>
+    <ux-button click.delegate="focus('textarea')" size="small" type="text">Textarea</ux-button>
+    <ux-button click.delegate="focus('select')" size="small" type="text">Select</ux-button>
+    <ux-button click.delegate="focus('datepicker')" size="small" type="text">Date Picker</ux-button>
+    <ux-button click.delegate="focus('chipInput')" size="small" type="text">Chip Input</ux-button>
+
+    <p>Click on a button below to focus a component using the focus custom attribute</p>
+    <ux-button click.delegate="focus('input', true)" size="small" type="text">Input</ux-button>
+    <ux-button click.delegate="focus('textarea', true)" size="small" type="text">Textarea</ux-button>
+    <ux-button click.delegate="focus('select', true)" size="small" type="text">Select</ux-button>
+    <ux-button click.delegate="focus('datepicker', true)" size="small" type="text">Date Picker</ux-button>
+    <ux-button click.delegate="focus('chipInput', true)" size="small" type="text">Chip Input</ux-button>
+
+    <p>Focus datepicker with openDialog=true</p>
+    <ux-button click.delegate="focusDatepicker()" size="small" type="text">Date Picker & Dialog</ux-button>
+
+    <ux-form>
+      <ux-field label="Input">
+        <ux-input view-model.ref="viewModels.input" focus.bind="focused.input"></ux-input>
+      </ux-field>
+      <ux-field label="Textarea">
+        <ux-textarea view-model.ref="viewModels.textarea" focus.bind="focused.textarea"></ux-textarea>
+      </ux-field>
+      <ux-field label="Select">
+        <ux-select view-model.ref="viewModels.select" focus.bind="focused.select">
+          <ux-option>Option 1</ux-option>
+          <ux-option>Option 2</ux-option>
+          <ux-option>Option 3</ux-option>
+        </ux-select>
+      </ux-field>
+      <ux-field label="Datepicker">
+        <ux-datepicker view-model.ref="viewModels.datepicker" focus.bind="focused.datepicker"></ux-datepicker>
+      </ux-field>
+      <ux-field label="Chip Input">
+        <ux-chip-input view-model.ref="viewModels.chipInput" focus.bind="focused.chipInput"></ux-chip-input>
+      </ux-field>
+      <ux-field label="Checkbox">
+        <label>
+          <ux-checkbox></ux-checkbox>
+          Check 1
+        </label>
+        <label>
+          <ux-checkbox></ux-checkbox>
+          Check 2
+        </label>
+      </ux-field>
+      <ux-field label="Radio">
+        <label>
+          <ux-radio name="quantity_radio" checked.bind="quantity" model.bind="'low'"></ux-radio>
+          Check 1
+        </label>
+        <label>
+          <ux-radio name="quantity_radio" checked.bind="quantity" model.bind="'high'"></ux-radio>
+          Check 2
+        </label>
+      </ux-field>
+      <ux-field label="Switch">
+        <label>
+          Disabled: <ux-switch checked.bind="messageDisabled"></ux-switch>
+        </label>
+      </ux-field>
+      <ux-field label="Switch">
+        <label>
+          Rating: <ux-slider value.bind="rating" style="width: 500px;"></ux-slider>
+        </label>
+      </ux-field>
+
+    </ux-form>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </section>
+</template>

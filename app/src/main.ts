@@ -10,6 +10,7 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .standardConfiguration()
     .plugin(PLATFORM.moduleName('@aurelia-ux/core'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/button'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/form'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/textarea'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/switch'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/slider'))
