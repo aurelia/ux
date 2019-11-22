@@ -15,6 +15,7 @@ export class UxChipInput implements UxComponent {
   @bindable public theme: UxChipInputTheme;
   @bindable public label: any;
   @bindable public separator: string = ', ';
+  @bindable public addChipOnBlur: boolean | string = true;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
@@ -172,6 +173,8 @@ export class UxChipInput implements UxComponent {
   public blur() {
     if (document.activeElement === this.textbox) {
       this.textbox.blur();
+    }
+    if (normalizeBooleanAttribute('add-chip-on-blur', this.addChipOnBlur)) {
       this.addChip();
     }
   }
