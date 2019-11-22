@@ -142,11 +142,7 @@ export class UxTextArea implements UxComponent {
   }
 
   public focusedChanged(focused: boolean) {
-    if (focused === true) {
-      this.element.classList.add('ux-textarea--focused');
-    } else {
-      this.element.classList.remove('ux-textarea--focused');
-    }
+    this.element.classList.toggle('ux-textarea--focused');
 
     this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', {bubbles: false}));
   }

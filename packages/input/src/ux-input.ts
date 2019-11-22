@@ -174,11 +174,7 @@ export class UxInput implements UxComponent {
   }
 
   public focusedChanged(focused: boolean) {
-    if (focused === true) {
-      this.element.classList.add('ux-input--focused');
-    } else {
-      this.element.classList.remove('ux-input--focused');
-    }
+    this.element.classList.toggle('ux-input--focused', focused);
 
     this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
   }
