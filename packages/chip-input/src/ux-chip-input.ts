@@ -62,34 +62,6 @@ export class UxChipInput implements UxComponent {
     }
   }
 
-  public attached() {
-    // const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-
-    // this.textbox.addEventListener('focus', () => {
-    //   this.element.classList.add('ux-chip-input--focused');
-    // });
-
-    // this.textbox.addEventListener('blur', () => {
-    //   this.addChip();
-    //   this.element.classList.remove('ux-chip-input--focused');
-    //   this.element.dispatchEvent(blurEvent);
-    // });
-  }
-
-  public detached() {
-    // const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-
-    // this.textbox.removeEventListener('focus', () => {
-    //   this.element.classList.add('ux-chip-input--focused');
-    // });
-
-    // this.textbox.removeEventListener('blur', () => {
-    //   this.addChip();
-    //   this.element.classList.remove('ux-chip-input--focused');
-    //   this.element.dispatchEvent(blurEvent);
-    // });
-  }
-
   public handleKeyup(event: KeyboardEvent) {
     const key = event.which || event.keyCode;
 
