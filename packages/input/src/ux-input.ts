@@ -214,8 +214,7 @@ function stopEvent(e: Event) {
 }
 
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
-const uxInputElementProto = Object.assign(
-  Object.create(HTMLElement.prototype, {
+const uxInputElementProto = Object.create(HTMLElement.prototype, {
   value: {
     get() {
       return getVm<UxInput>(this).getValue();
@@ -224,12 +223,14 @@ const uxInputElementProto = Object.assign(
       getVm<UxInput>(this).setValue(value);
     }
   },
-  }), {
-    focus() {
+  focus: {
+    value() {
       getVm<UxInput>(this).focused = true;
-    },
-    blur() {
+    }
+  },
+  blur: {
+    value() {
       getVm<UxInput>(this).focused = false;
     }
   }
-);
+});

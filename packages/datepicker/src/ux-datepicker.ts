@@ -224,8 +224,7 @@ export class UxDatepicker implements UxComponent {
 }
 
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
-const uxDatepickerElementProto = Object.assign(
-  Object.create(HTMLElement.prototype, {
+const uxDatepickerElementProto = Object.create(HTMLElement.prototype, {
   value: {
     get() {
       return getVm<UxDatepicker>(this).getValue();
@@ -234,12 +233,14 @@ const uxDatepickerElementProto = Object.assign(
       getVm<UxDatepicker>(this).setValue(value);
     }
   },
-  }), {
-    focus() {
+  focus: {
+    value() {
       getVm<UxDatepicker>(this).focused = true;
-    },
-    blur() {
+    }
+  },
+  blur: {
+    value() {
       getVm<UxDatepicker>(this).focused = false;
     }
   }
-);
+});

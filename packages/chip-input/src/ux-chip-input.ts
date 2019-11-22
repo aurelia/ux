@@ -211,8 +211,7 @@ export class UxChipInput implements UxComponent {
 }
 
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
-const uxChipInputElementProto = Object.assign(
-  Object.create(HTMLElement.prototype, {
+const uxChipInputElementProto = Object.create(HTMLElement.prototype, {
   value: {
     get() {
       return getVm<UxChipInput>(this).getValue();
@@ -221,12 +220,14 @@ const uxChipInputElementProto = Object.assign(
       getVm<UxChipInput>(this).setValue(value);
     }
   },
-  }), {
-    focus() {
+  focus: {
+    value() {
       getVm<UxChipInput>(this).focused = true;
-    },
-    blur() {
+    }
+  },
+  blur: {
+    value() {
       getVm<UxChipInput>(this).focused = false;
     }
   }
-);
+});

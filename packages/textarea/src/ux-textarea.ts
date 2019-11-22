@@ -170,8 +170,7 @@ function stopEvent(e: Event) {
 }
 
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
-const uxTextAreaElementProto = Object.assign(
-  Object.create(HTMLElement.prototype, {
+const uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
   value: {
     get() {
       return getVm<UxTextArea>(this).getValue();
@@ -180,12 +179,14 @@ const uxTextAreaElementProto = Object.assign(
       getVm<UxTextArea>(this).setValue(value);
     }
   },
-  }), {
-    focus() {
+  focus: {
+    value() {
       getVm<UxTextArea>(this).focused = true;
-    },
-    blur() {
+    }
+  },
+  blur: {
+    value() {
       getVm<UxTextArea>(this).focused = false;
     }
   }
-);
+});
