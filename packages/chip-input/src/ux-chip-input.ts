@@ -160,11 +160,7 @@ export class UxChipInput implements UxComponent {
   }
 
   public focusedChanged(focused: boolean) {
-    if (focused === true) {
-      this.element.classList.add('ux-chip-input--focused');
-    } else {
-      this.element.classList.remove('ux-chip-input--focused');
-    }
+    this.element.classList.toggle('ux-chip-input--focused', focused);
 
     this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
   }

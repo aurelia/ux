@@ -126,11 +126,7 @@ export class UxTextArea implements UxComponent {
   }
 
   public rawValueChanged(rawValue: string) {
-    if (rawValue.length > 0) {
-      this.element.classList.add('ux-textarea--has-value');
-    } else {
-      this.element.classList.remove('ux-textarea--has-value');
-    }
+    this.element.classList.toggle('ux-textarea--has-value', rawValue.length > 0);
     if (this.ignoreRawChanges) {
       return;
     }
