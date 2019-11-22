@@ -25,7 +25,6 @@ Each component that implements the `focus()` and `blur()` API must have a distin
 
 * `ux-input` (done)
 * `ux-textarea` (done)
-* `ux-select` (work in progress)
 * `ux-datepicker` (done)
 * `ux-chip-input` (done)
 
@@ -33,6 +32,7 @@ Each component that implements the `focus()` and `blur()` API must have a distin
 
 *I am not sure if these components need to fully implement the focus() and blur() api. They do need to respond to <tab> keys and show a focused state. It seems to me, however, that they don't need to implement the focus() and blur() API as it doesn't make sense that we programatically want to focus a button or a checkbox?*
 
+* `ux-select` (tab works correctly)
 * `ux-checkbox` (tab works correctly)
 * `ux-radio` (tab works correctly)
 * `ux-switch` (tab works correctly)
