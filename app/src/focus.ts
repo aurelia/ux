@@ -1,6 +1,6 @@
-export interface StringTMap<T> { [key: string]: T; };
-export interface StringAnyMap extends StringTMap<any> {};
-export interface StringBooleanMap extends StringTMap<boolean> {};
+interface StringTMap<T> { [key: string]: T; }
+interface StringAnyMap extends StringTMap<any> {}
+interface StringBooleanMap extends StringTMap<boolean> {}
 
 export class Focus {
   private focused: StringBooleanMap = {
