@@ -4,7 +4,7 @@ import { inject } from 'aurelia-dependency-injection';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { moment, Moment } from './resources/moment';
-import * as UX_CALENDAR_VIEW from './ux-calendar.html';
+import UX_CALENDAR_VIEW from './ux-calendar.html';
 
 @inject(ViewResources)
 @customElement('ux-calendar')

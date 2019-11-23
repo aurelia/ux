@@ -5,7 +5,7 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, processDesignAttributes } from '@aurelia-ux/core';
 import { UxIconTheme } from './ux-icon-theme';
 import IconMap from './ux-icon-map';
-import * as VIEW from './ux-icon.html';
+import VIEW from './ux-icon.html';
 
 @inject(Element, StyleEngine, Logger)
 @customElement('ux-icon')

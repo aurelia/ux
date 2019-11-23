@@ -18,7 +18,7 @@ import {
 } from '@aurelia-ux/core';
 
 import { getAuViewModel } from './util';
-import * as UX_OPTION_VIEW from './ux-option.html';
+import UX_OPTION_VIEW from './ux-option.html';
 
 export interface UxOptionElement extends HTMLElement {
   disabled: boolean;

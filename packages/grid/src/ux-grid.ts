@@ -2,7 +2,7 @@ import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxGridTheme } from './ux-grid-theme';
-import * as VIEW from './ux-grid.html';
+import VIEW from './ux-grid.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-grid')

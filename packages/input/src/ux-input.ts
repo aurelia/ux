@@ -4,7 +4,7 @@ import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
-import * as VIEW from './ux-input.html';
+import VIEW from './ux-input.html';
 
 export interface UxInputElement extends HTMLElement {
   value: any;

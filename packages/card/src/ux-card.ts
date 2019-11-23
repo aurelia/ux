@@ -2,7 +2,7 @@ import { inject } from 'aurelia-dependency-injection';
 import { bindable, customElement, inlineView } from 'aurelia-templating';
 import { UxComponent, StyleEngine } from '@aurelia-ux/core';
 import { UxCardTheme } from './ux-card-theme';
-import * as UX_CARD_VIEW from './ux-card.html';
+import UX_CARD_VIEW from './ux-card.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-card')

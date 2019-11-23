@@ -11,7 +11,7 @@ import {
 
 import { UxCheckboxTheme } from './ux-checkbox-theme';
 import { DOM } from 'aurelia-pal';
-import * as UX_CHECKBOX_VIEW from './ux-checkbox.html';
+import UX_CHECKBOX_VIEW from './ux-checkbox.html';
 
 export interface UxCheckboxElement extends HTMLElement {
   type: 'checkbox';

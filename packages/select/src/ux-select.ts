@@ -22,7 +22,7 @@ import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
 import { UxOptionElement } from './ux-option';
 import { getAuViewModel, bool } from './util';
-import * as UX_SELECT_VIEW from './ux-select.html';
+import UX_SELECT_VIEW from './ux-select.html';
 
 declare module './ux-option' {
   interface UxOption {

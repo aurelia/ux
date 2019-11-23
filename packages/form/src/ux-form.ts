@@ -3,7 +3,7 @@ import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxFormTheme } from './ux-form-theme';
-import * as UX_FORM_VIEW from './ux-form.html';
+import UX_FORM_VIEW from './ux-form.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-form')

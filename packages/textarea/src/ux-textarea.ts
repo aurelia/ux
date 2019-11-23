@@ -4,7 +4,7 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxTextAreaTheme } from './ux-textarea-theme';
 import { observable } from 'aurelia-framework';
-import * as VIEW from './ux-textarea.html';
+import VIEW from './ux-textarea.html';
 
 export interface UxTextAreaElement extends HTMLElement {
   value: string;

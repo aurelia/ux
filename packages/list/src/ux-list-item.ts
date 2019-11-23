@@ -1,5 +1,5 @@
 import { customElement, bindable, inlineView } from 'aurelia-templating';
-import * as VIEW from './ux-list-item.html';
+import VIEW from './ux-list-item.html';
 
 @customElement('ux-list-item')
 @inlineView(VIEW)

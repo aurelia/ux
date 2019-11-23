@@ -9,7 +9,7 @@ import {
 } from '@aurelia-ux/core';
 import { UxRadioTheme } from './ux-radio-theme';
 import { ElementEvents, DOM } from 'aurelia-framework';
-import * as VIEW from './ux-radio.html';
+import VIEW from './ux-radio.html';
 
 export interface UxRadioElement extends HTMLElement {
   type: 'radio';

@@ -2,7 +2,7 @@ import { customElement, bindable, ViewResources, inlineView } from 'aurelia-temp
 import { inject } from 'aurelia-dependency-injection';
 import { computedFrom } from 'aurelia-binding';
 import { Moment } from './resources/moment';
-import * as UX_YEAR_LIST_VIEW from './ux-year-list.html';
+import UX_YEAR_LIST_VIEW from './ux-year-list.html';
 
 @inject(Element, ViewResources)
 @customElement('ux-year-list')

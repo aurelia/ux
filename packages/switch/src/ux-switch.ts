@@ -4,7 +4,7 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
 import { DOM, ElementEvents } from 'aurelia-framework';
-import * as VIEW from './ux-switch.html';
+import VIEW from './ux-switch.html';
 
 export interface UxSwitchElement extends HTMLElement {
   type: 'checkbox';

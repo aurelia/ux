@@ -1,6 +1,6 @@
 import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
-import * as VIEW from './ux-grid-cell.html';
+import VIEW from './ux-grid-cell.html';
 
 @inject(Element)
 @customElement('ux-grid-cell')

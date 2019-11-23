@@ -6,7 +6,7 @@ import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
 import { moment } from './resources/moment';
-import * as UX_DATEPICKER_VIEW from './ux-datepicker.html';
+import UX_DATEPICKER_VIEW from './ux-datepicker.html';
 
 @inject(Element, ViewResources, StyleEngine)
 @customElement('ux-datepicker')

@@ -13,7 +13,7 @@ import {
 
 import { UxOptionElement } from './ux-option';
 import { getAuViewModel } from './util';
-import * as UX_OPTGROUP_VIEW from './ux-optgroup.html';
+import UX_OPTGROUP_VIEW from './ux-optgroup.html';
 
 declare module './ux-option' {
   interface UxOption {

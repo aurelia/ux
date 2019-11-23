@@ -4,7 +4,7 @@ import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxChipInputTheme } from './ux-chip-input-theme';
-import * as UX_CHIP_INPUT_VIEW from './ux-chip-input.html';
+import UX_CHIP_INPUT_VIEW from './ux-chip-input.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-chip-input')

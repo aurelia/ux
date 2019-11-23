@@ -1,6 +1,6 @@
 import { inject } from 'aurelia-dependency-injection';
 import { bindable, customElement, inlineView } from 'aurelia-templating';
-import * as UX_CARD_HEADER_VIEW from './ux-card-header.html';
+import UX_CARD_HEADER_VIEW from './ux-card-header.html';
 
 @inject(Element)
 @customElement('ux-card-header')

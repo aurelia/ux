@@ -3,7 +3,7 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxSliderTheme } from './ux-slider-theme';
 import { computedFrom, bindingMode } from 'aurelia-binding';
-import * as VIEW from './ux-slider.html';
+import VIEW from './ux-slider.html';
 
 export interface UxSliderElement extends HTMLElement {
   value: number;

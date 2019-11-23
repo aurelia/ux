@@ -2,7 +2,7 @@ import { customElement, bindable, inlineView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxButtonTheme } from './ux-button-theme';
-import * as VIEW from './ux-button.html';
+import VIEW from './ux-button.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-button')
