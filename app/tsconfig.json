@@ -9,7 +9,9 @@
       "aurelia-framework": [
         "../node_modules/aurelia-framework"
       ]
-    }
+    },
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   },
   "exclude": []
 }

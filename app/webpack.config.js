@@ -40,29 +40,29 @@ module.exports = function({ production = '' } = {}) {
           {}
         )),
         // alias all packages to src code
-        ...([
-          'button',
-          'card',
-          'checkbox',
-          'chip-input',
-          'core',
-          'datepicker',
-          'form',
-          'grid',
-          'icons',
-          'input',
-          'input-info',
-          'list',
-          'radio',
-          'select',
-          'slider',
-          'switch',
-          'textarea',
-        ].reduce((map, packageName) => {
-          const mappedPackagedName = `@aurelia-ux/${packageName}`;
-          map[mappedPackagedName] = path.resolve(__dirname, `../packages/${packageName}/src`)
-          return map;
-        }, {}))
+        // ...([
+        //   'button',
+        //   'card',
+        //   'checkbox',
+        //   'chip-input',
+        //   'core',
+        //   'datepicker',
+        //   'form',
+        //   'grid',
+        //   'icons',
+        //   'input',
+        //   'input-info',
+        //   'list',
+        //   'radio',
+        //   'select',
+        //   'slider',
+        //   'switch',
+        //   'textarea',
+        // ].reduce((map, packageName) => {
+        //   const mappedPackagedName = `@aurelia-ux/${packageName}`;
+        //   map[mappedPackagedName] = path.resolve(__dirname, `../packages/${packageName}/src`)
+        //   return map;
+        // }, {}))
       }
     },
     entry: {
@@ -96,7 +96,7 @@ module.exports = function({ production = '' } = {}) {
         ],
         aureliaApp: undefined,
         entry: undefined,
-        noModulePathResolve: true
+        dist: 'es2015',
       }),
       new HtmlWebpackPlugin({
 
