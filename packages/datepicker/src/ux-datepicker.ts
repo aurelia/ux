@@ -7,10 +7,14 @@ import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
 import { moment } from './resources/moment';
 import UX_DATEPICKER_VIEW from './ux-datepicker.html';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element, ViewResources, StyleEngine)
 @customElement('ux-datepicker')
-@inlineView(UX_DATEPICKER_VIEW)
+@inlineView(
+  UX_DATEPICKER_VIEW,
+  [PLATFORM.moduleName('@aurelia-ux/datepicker/ux-datepicker.css')]
+)
 export class UxDatepicker implements UxComponent {
   @bindable public theme: UxDatepickerTheme;
 

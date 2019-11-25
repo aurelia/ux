@@ -3,10 +3,14 @@ import { inject } from 'aurelia-dependency-injection';
 import { UxInputInfoTheme } from './ux-input-info-theme';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import VIEW from './ux-input-info.html';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element, StyleEngine)
 @customElement('ux-input-info')
-@inlineView(VIEW)
+@inlineView(
+  VIEW,
+  [PLATFORM.moduleName('@aurelia-ux/input-info/ux-input-info.css')]
+)
 export class UxInputInfo implements UxComponent {
   @bindable public target: Element;
   @bindable public uxInputCounter = null;

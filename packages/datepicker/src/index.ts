@@ -9,6 +9,8 @@ export { DatepickerSettings } from './resources/datepicker-settings';
 
 export { UxDatepickerTheme } from './ux-datepicker-theme';
 
+export { UxCalendar, UxDatepicker, UxPickerDialog, UxYearList };
+
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([
     UxCalendar,

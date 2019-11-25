@@ -57,9 +57,15 @@ export interface UxOptionContainer extends HTMLElement {
 }
 
 @inject(Element, StyleEngine, ObserverLocator, TaskQueue)
-@processContent(extractUxOption)
+@processContent(ensureUxOptionOrUxOptGroup)
 @customElement('ux-select')
-@inlineView(UX_SELECT_VIEW)
+@inlineView(
+  UX_SELECT_VIEW,
+  [
+    PLATFORM.moduleName('@aurelia-ux/core/effects/paper-ripple.css'),
+    PLATFORM.moduleName('@aurelia-ux/select/ux-select.css')
+  ]
+)
 export class UxSelect implements UxComponent {
 
   private selectedOption: UxOptionElement | null = null;
@@ -518,7 +524,11 @@ export class UxSelect implements UxComponent {
   }
 }
 
-function extractUxOption(
+/**
+ * A View-compiler hook that will remove any element that is not `<ux-option>` or `<ux-optgroup/>`
+ * as child of this `<ux-select/>` element
+ */
+function ensureUxOptionOrUxOptGroup(
   _: ViewCompiler,
   __: ViewResources,
   node: HTMLElement

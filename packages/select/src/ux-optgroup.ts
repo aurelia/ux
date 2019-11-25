@@ -31,7 +31,7 @@ export interface OptGroupOptionsCt extends HTMLElement {
 }
 
 @inject(DOM.Element, BindingEngine)
-@processContent(extractUxOptions)
+@processContent(ensureOnlyUxOption)
 @customElement('ux-optgroup')
 @inlineView(UX_OPTGROUP_VIEW)
 export class UxOptGroup {
@@ -112,7 +112,10 @@ export class UxOptGroup {
   }
 }
 
-function extractUxOptions(
+/**
+ * A View-compiler hook that will remove any element that is not `<ux-option>` as child of `<ux-optgroup/>`
+ */
+function ensureOnlyUxOption(
   _: ViewCompiler,
   __: ViewResources,
   node: Element

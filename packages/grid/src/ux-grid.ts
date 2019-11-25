@@ -3,10 +3,14 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxGridTheme } from './ux-grid-theme';
 import VIEW from './ux-grid.html';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element, StyleEngine)
 @customElement('ux-grid')
-@inlineView(VIEW)
+@inlineView(
+  VIEW,
+  [PLATFORM.moduleName('@aurelia-ux/grid/ux-grid.css')]
+)
 export class UxGrid implements UxComponent {
   @bindable public theme: UxGridTheme;
   @bindable public columns: null | number;

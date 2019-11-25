@@ -3,7 +3,7 @@ import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
-import { DOM, ElementEvents } from 'aurelia-framework';
+import { DOM, ElementEvents, PLATFORM } from 'aurelia-framework';
 import VIEW from './ux-switch.html';
 
 export interface UxSwitchElement extends HTMLElement {
@@ -11,9 +11,16 @@ export interface UxSwitchElement extends HTMLElement {
   checked: boolean;
 }
 
+
 @inject(Element, StyleEngine)
 @customElement('ux-switch')
-@inlineView(VIEW)
+@inlineView(
+  VIEW,
+  [
+    PLATFORM.moduleName('@aurelia-ux/core/effects/paper-ripple.css'),
+    PLATFORM.moduleName('@aurelia-ux/switch/ux-switch.css')
+  ]
+)
 export class UxSwitch implements UxComponent {
   private ignoreValueChanges: boolean;
 

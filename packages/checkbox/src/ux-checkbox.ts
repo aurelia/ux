@@ -10,7 +10,7 @@ import {
 } from '@aurelia-ux/core';
 
 import { UxCheckboxTheme } from './ux-checkbox-theme';
-import { DOM } from 'aurelia-pal';
+import { DOM, PLATFORM } from 'aurelia-pal';
 import UX_CHECKBOX_VIEW from './ux-checkbox.html';
 
 export interface UxCheckboxElement extends HTMLElement {
@@ -20,7 +20,13 @@ export interface UxCheckboxElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-checkbox')
-@inlineView(UX_CHECKBOX_VIEW)
+@inlineView(
+  UX_CHECKBOX_VIEW,
+  [
+    PLATFORM.moduleName('@aurelia-ux/core/effects/paper-ripple.css'),
+    PLATFORM.moduleName('@aurelia-ux/checkbox/ux-checkbox.css')
+  ]
+)
 export class UxCheckbox implements UxComponent {
   private ignoreValueChanges: boolean = false;
 
