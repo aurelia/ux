@@ -22,4 +22,7 @@ export interface Palette {
 
   accentDark: string;
   accentDarkForeground: string;
+
+  disabledBackground: string;
+  disabledForeground: string;
 }

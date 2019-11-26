@@ -29,6 +29,9 @@ export class MaterialDesign implements Design {
   public accentDark = swatches.pink.a400;
   public accentDarkForeground = swatches.white;
 
+  public disabledBackground = swatches.grey.p500;
+  public disabledForeground = swatches.blueGrey.p100;
+
   public elevationNone = shadows.depth_0;
   public elevation2dp = shadows.depth_2dp;
   public elevation3dp = shadows.depth_3dp;
