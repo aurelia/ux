@@ -1,0 +1,11 @@
+.color-feedback {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+}
+
+ux-field {
+  display: block;
+  margin-bottom: 8px;
+}

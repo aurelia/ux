@@ -1,0 +1,37 @@
+header.main-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 8px 16px;
+  box-shadow: var(--aurelia-ux--design-elevation4dp);
+  background-color: var(--ux-swatch--grey-p200);
+}
+
+header.main-header > * {
+  margin-right: 16px;
+}
+
+header.main-header > ux-chip {
+  cursor: pointer;
+}
+
+header.main-header > ux-chip.theme-toggler {
+  justify-self: flex-end;
+}
+
+router-view.page {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 16px;
+}

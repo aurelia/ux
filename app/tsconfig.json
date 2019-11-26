@@ -6,7 +6,8 @@
       "aurelia-framework": [
         "../node_modules/aurelia-framework"
       ]
-    }
+    },
+    "resolveJsonModule": true
   },
   "exclude": []
 }

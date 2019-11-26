@@ -1,0 +1,79 @@
+<template>
+  <require from="./theming.css"></require>
+  <h2>Theming</h2>
+  <h3 >Custom Aurelia UX Core Properties</h3>
+  <ux-button click.delegate="showCoreProperties = !showCoreProperties" size="small" type="outline">${showCoreProperties ? 'Hide Properties' : 'Show Properties'}</ux-button>
+  <ux-grid theme.bind="{outerPadding: '0'}" if.bind="showCoreProperties">
+    <ux-grid-cell sm="3">
+      <ux-field repeat.for="prop of ['appBackground', 'appForeground', 'controlBackground', 'controlForeground', 'disabledBackground', 'disabledForeground']">
+        <ux-input label.bind="prop" value.bind="design[prop]">
+          <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+        </ux-input>
+      </ux-field>     
+    </ux-grid-cell>
+    <ux-grid-cell sm="3">
+      <ux-field repeat.for="prop of ['primary', 'primaryForeground', 'primaryDark', 'primaryDarkForeground', 'primaryLight', 'primaryLightForeground']">
+        <ux-input label.bind="prop" value.bind="design[prop]">
+          <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+        </ux-input>
+      </ux-field>     
+    </ux-grid-cell>
+    <ux-grid-cell sm="3">
+      <ux-field repeat.for="prop of ['accent', 'accentForeground', 'accentDark', 'accentDarkForeground', 'accentLight', 'accentLightForeground']">
+        <ux-input label.bind="prop" value.bind="design[prop]">
+          <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+        </ux-input>
+      </ux-field>     
+    </ux-grid-cell>
+    <ux-grid-cell sm="3">
+    </ux-grid-cell>
+  </ux-grid>
+  <h3>Buttons</h3>
+  <ux-grid theme.bind="{outerPadding: '0'}">
+    <ux-grid-cell sm="3">
+      <h4>Primary (default)</h4>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" type="raised">Raised</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" type="flat">Flat</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" type="text">Text</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" type="outline">Outline</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" type="fab">Fab</ux-button></p>
+    </ux-grid-cell>
+    <ux-grid-cell sm="3">
+      <h4>Accent (.ux-button--accent)</h4>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" class="ux-button--accent" type="raised">Raised</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" class="ux-button--accent" type="flat">Flat</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" class="ux-button--accent" type="text">Text</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" class="ux-button--accent" type="outline">Outline</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" class="ux-button--accent" type="fab">Fab</ux-button></p>
+    </ux-grid-cell>
+    <ux-grid-cell sm="3">
+      <h4>Disabled (disabled)</h4>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" disabled type="raised">Raised</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" disabled type="flat">Flat</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" disabled type="text">Text</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" disabled type="outline">Outline</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" disabled type="fab">Fab</ux-button></p>
+    </ux-grid-cell>
+    <ux-grid-cell sm="3">
+      <h4>Custom Button Theme</h4>
+      <ux-field repeat.for="prop of ['background', 'foreground', 'accentBackground', 'accentForeground', 'disabledBackground', 'disabledForeground']">
+        <ux-input label.bind="prop" value.bind="buttonTheme[prop]" change.trigger="themeChanged('buttonTheme')"></ux-input>
+      </ux-field>
+      <ux-grid  theme.bind="{outerPadding: '0'}">
+        <ux-grid-cell xs="6">
+          <ux-field>
+            <label>Border Radius</label>
+            <br><ux-slider value.bind="buttonBorderRadius" min="0" max="10" style="width:100%"></ux-slider>
+          </ux-field>
+        </ux-grid-cell>
+        <ux-grid-cell xs="6">
+          <ux-field>
+            <label>Border Width</label>
+            <br><ux-slider value.bind="buttonBorderWidth" min="0" max="5" style="width:100%"></ux-slider>
+          </ux-field>
+        </ux-grid-cell>
+      </ux-grid>
+      <ux-button size="small" type="outline" click.delegate="resetTheme('buttonTheme')">Reset</ux-button>
+    </ux-grid-cell>
+  </ux-grid>
+</template>
