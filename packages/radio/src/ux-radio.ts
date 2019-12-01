@@ -1,4 +1,4 @@
-import { customElement, bindable, inlineView } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import {
@@ -8,8 +8,7 @@ import {
   normalizeBooleanAttribute
 } from '@aurelia-ux/core';
 import { UxRadioTheme } from './ux-radio-theme';
-import { ElementEvents, DOM, PLATFORM } from 'aurelia-framework';
-import VIEW from './ux-radio.html';
+import { ElementEvents, DOM } from 'aurelia-framework';
 
 export interface UxRadioElement extends HTMLElement {
   type: 'radio';
@@ -18,13 +17,6 @@ export interface UxRadioElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-radio')
-@inlineView(
-  VIEW,
-  [
-    PLATFORM.moduleName('@aurelia-ux/core/effects/paper-ripple.css'),
-    PLATFORM.moduleName('@aurelia-ux/radio/ux-radio.css')
-  ]
-)
 export class UxRadio implements UxComponent {
   private ignoreValueChanges: boolean;
 
