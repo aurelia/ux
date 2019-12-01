@@ -1,16 +1,11 @@
-import { customElement, bindable, inlineView } from 'aurelia-templating';
-import { DOM, PLATFORM } from 'aurelia-pal';
+import { customElement, bindable } from 'aurelia-templating';
+import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxFormTheme } from './ux-form-theme';
-import UX_FORM_VIEW from './ux-form.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-form')
-@inlineView(
-  UX_FORM_VIEW,
-  [PLATFORM.moduleName('@aurelia-ux/form/ux-form.css')]
-)
 export class UxForm implements UxComponent {
   @bindable public theme: UxFormTheme;
   @bindable public submitOnEnter: any;
