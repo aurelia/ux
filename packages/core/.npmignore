@@ -1,4 +1,4 @@
-src
+.rollupcache
 test
 .npmignore
 karma.conf.ts

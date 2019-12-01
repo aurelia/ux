@@ -16,16 +16,17 @@ export class UXConfiguration {
   }
 
   public cssNormalize() {
-    const normalizeCssPath = PLATFORM.moduleName('@aurelia-ux/core/styles/normalize.css');
+    PLATFORM.moduleName('./styles/normalize.css');
+    const fullCssPath = '@aurelia-ux/core/styles/normalize.css';
     this
       .loader
-      .loadText(normalizeCssPath)
+      .loadText(fullCssPath)
       .catch(err => {
         this.logger.warn('Aurelia-UX Core failed to load normalize.css, some visual errors may appear.', err);
       })
       .then(text => {
         if (text) {
-          this.globalStyleEngine.addOrUpdateGlobalStyle(normalizeCssPath, text);
+          this.globalStyleEngine.addOrUpdateGlobalStyle(fullCssPath, text);
         }
       });
 
