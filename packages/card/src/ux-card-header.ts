@@ -1,10 +1,8 @@
 import { inject } from 'aurelia-dependency-injection';
-import { bindable, customElement, inlineView } from 'aurelia-templating';
-import UX_CARD_HEADER_VIEW from './ux-card-header.html';
+import { bindable, customElement } from 'aurelia-templating';
 
 @inject(Element)
 @customElement('ux-card-header')
-@inlineView(UX_CARD_HEADER_VIEW)
 export class UxCardHeader {
   @bindable public color: string;
 
