@@ -1,15 +1,12 @@
-/// <reference path="html.d.ts" />
 import {
   FrameworkConfiguration,
   bindingMode,
+  PLATFORM,
 } from 'aurelia-framework';
 
 import { ValueAttributeObserver, EventSubscriber } from 'aurelia-binding';
 
 import { AureliaUX } from '@aurelia-ux/core';
-import { UxSelect } from './ux-select';
-import { UxOptGroup } from './ux-optgroup';
-import { UxOption } from './ux-option';
 
 export { UxOption, UxOptionElement } from './ux-option';
 export { UxOptGroup, UxOptGroupElement } from './ux-optgroup';
@@ -19,9 +16,9 @@ export { UxSelectTheme } from './ux-select-theme';
 export function configure(config: FrameworkConfiguration) {
   config.container.get(AureliaUX).registerUxElementConfig(uxSelectConfig);
   config.globalResources([
-    UxSelect,
-    UxOptGroup,
-    UxOption
+    PLATFORM.moduleName('./ux-select'),
+    PLATFORM.moduleName('./ux-optgroup'),
+    PLATFORM.moduleName('./ux-option')
   ]);
 }
 

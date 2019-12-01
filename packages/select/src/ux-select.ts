@@ -12,7 +12,6 @@ import {
   InternalCollectionObserver,
   ObserverLocator,
   TaskQueue,
-  inlineView,
 } from 'aurelia-framework';
 
 import { getLogger } from 'aurelia-logging';
@@ -22,7 +21,6 @@ import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
 import { UxOptionElement } from './ux-option';
 import { getAuViewModel, bool } from './util';
-import UX_SELECT_VIEW from './ux-select.html';
 
 declare module './ux-option' {
   interface UxOption {
@@ -59,13 +57,6 @@ export interface UxOptionContainer extends HTMLElement {
 @inject(Element, StyleEngine, ObserverLocator, TaskQueue)
 @processContent(ensureUxOptionOrUxOptGroup)
 @customElement('ux-select')
-@inlineView(
-  UX_SELECT_VIEW,
-  [
-    PLATFORM.moduleName('@aurelia-ux/core/effects/paper-ripple.css'),
-    PLATFORM.moduleName('@aurelia-ux/select/ux-select.css')
-  ]
-)
 export class UxSelect implements UxComponent {
 
   private selectedOption: UxOptionElement | null = null;
