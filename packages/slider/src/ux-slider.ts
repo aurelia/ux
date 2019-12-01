@@ -1,10 +1,8 @@
-import { customElement, bindable, ElementEvents, inlineView } from 'aurelia-templating';
+import { customElement, bindable, ElementEvents } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxSliderTheme } from './ux-slider-theme';
 import { computedFrom, bindingMode } from 'aurelia-binding';
-import VIEW from './ux-slider.html';
-import { PLATFORM } from 'aurelia-pal';
 
 export interface UxSliderElement extends HTMLElement {
   value: number;
@@ -12,10 +10,6 @@ export interface UxSliderElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-slider')
-@inlineView(
-  VIEW,
-  [PLATFORM.moduleName('@aurelia-ux/slider/ux-slider.css')]
-)
 export class UxSlider implements UxComponent {
   private isActive: boolean;
   private percentValue: number;

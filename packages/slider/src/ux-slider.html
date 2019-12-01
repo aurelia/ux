@@ -1,4 +1,5 @@
 <template class="ux-slider">
+  <require from="./ux-slider.css"></require>
   <div class="ux-slider__container" 
        class.bind="disabled ? 'ux-slider__container--disabled' : 'ux-slider__container--enabled'"
        mousedown.delegate="onTrackMouseDown($event)">
