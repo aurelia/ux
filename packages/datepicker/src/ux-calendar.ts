@@ -1,18 +1,12 @@
-import { customElement, bindable, ViewResources, inlineView } from 'aurelia-templating';
+import { customElement, bindable, ViewResources } from 'aurelia-templating';
 import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
-import { moment, Moment } from './resources/moment';
-import UX_CALENDAR_VIEW from './ux-calendar.html';
-import { PLATFORM } from 'aurelia-pal';
+import { moment, Moment } from './resources/moment-rexports';
 
 @inject(ViewResources)
 @customElement('ux-calendar')
-@inlineView(
-  UX_CALENDAR_VIEW,
-  [PLATFORM.moduleName('@aurelia-ux/datepicker/ux-calendar.css')]
-)
 export class UxCalendar {
   @bindable public theme = null;
 
@@ -33,6 +27,7 @@ export class UxCalendar {
   public bind() {
     this.displayMonth = this.value.clone();
   }
+
 
   public previousMonth() {
     this.displayMonth = this.displayMonth.clone().subtract(1, 'month');

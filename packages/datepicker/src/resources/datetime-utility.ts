@@ -1,5 +1,5 @@
 import { DatepickerSettings } from './datepicker-settings';
-import { moment, Moment } from './moment';
+import { moment, Moment } from './moment-rexports';
 
 export class DatetimeUtility {
 

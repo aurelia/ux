@@ -25,11 +25,23 @@
 		"url": "https://github.com/aurelia/ux"
 	},
 	"scripts": {
+		"build-ts:amd": "tsc -p tsconfig.json -t es5 -m amd      --outDir dist/amd",
+		"build-ts:cjs": "tsc -p tsconfig.json -t es5 -m commonjs --outDir dist/commonjs",
+		"build-ts:ntv": "tsc -p tsconfig.json -t es5 -m es6      --outDir dist/native-modules",
+		"build-ts:es6": "tsc -p tsconfig.json -t es6 -m es6      --outDir dist/es2015",
+		"build-ts:types": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+		"build-assets:amd": "copyfiles -u 1 src/**/*.html src/**/*.css dist/amd",
+		"build-assets:cjs": "copyfiles -u 1 src/**/*.html src/**/*.css dist/commonjs",
+		"build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",
+		"build-assets:es6": "copyfiles -u 1 src/**/*.html src/**/*.css dist/es2015",
+
+		"build:amd": "npm run build-ts:amd && npm run build-assets:amd",
+		"build:cjs": "npm run build-ts:cjs && npm run build-assets:cjs",
+		"build:ntv": "npm run build-ts:ntv && npm run build-assets:ntv",
+		"build:es6": "npm run build-ts:es6 && npm run build-assets:es6",
+
 		"prebuild": "rimraf dist",
-		"build": "rollup -c --environment BUILD:production --silent",
-		"build:dev": "rollup -c",
-		"build:dev:watch": "rollup -w -c",
-		"build:typings": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types"
+		"build": "concurrently \"npm:build:*\""
 	},
 	"jspm": {
 		"registry": "npm",
@@ -72,7 +84,7 @@
 	"dependencies": {
 		"@aurelia-ux/core": "^0.17.0",
 		"aurelia-binding": "^2.0.0",
-		"moment": "^2.18.1"
+		"moment": "^2.24.0"
 	},
 	"devDependencies": {
 		"@types/jasmine": "^2.8.6",
@@ -105,8 +117,6 @@
 		"requirejs": "^2.3.3",
 		"requirejs-text": "^2.0.15",
 		"rimraf": "^3.0.0",
-		"rollup": "^1.26.3",
-		"rollup-plugin-typescript2": "^0.25.2",
 		"ts-loader": "^6.2.1",
 		"ts-node": "^5.0.1",
 		"tsconfig-paths": "^3.9.0",
