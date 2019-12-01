@@ -1,19 +1,10 @@
-import { customElement, bindable, inlineView } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxButtonTheme } from './ux-button-theme';
-import VIEW from './ux-button.html';
-import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element, StyleEngine)
 @customElement('ux-button')
-@inlineView(
-  VIEW,
-  [
-    PLATFORM.moduleName('@aurelia-ux/core/effects/paper-ripple.css'),
-    PLATFORM.moduleName('@aurelia-ux/button/ux-button.css')
-  ]
-)
 export class UxButton implements UxComponent {
   @bindable public type: string | null;
   @bindable public size: string | null;
