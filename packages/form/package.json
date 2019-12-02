@@ -1,141 +1,135 @@
 {
-	"name": "@aurelia-ux/form",
-	"version": "0.17.0",
-	"description": "Form component for Aurelia UX",
-	"keywords": [
-		"aurelia",
-		"styles",
-		"components",
-		"ux",
-		"form"
-	],
-	"homepage": "http://aurelia.io",
-	"bugs": {
-		"url": "https://github.com/aurelia/ux/issues"
-	},
-	"license": "MIT",
-	"author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
-	"contributors": [
-		"Zach Hollingshead <zach.hollingshead@gmail.com>"
-	],
-	"main": "dist/commonjs/index.js",
-	"typings": "dist/types/index.d.ts",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/aurelia/ux"
-	},
-	"scripts": {
-		"build-ts:amd": "tsc -p tsconfig.json -t es5 -m amd      --outDir dist/amd",
-		"build-ts:cjs": "tsc -p tsconfig.json -t es5 -m commonjs --outDir dist/commonjs",
-		"build-ts:ntv": "tsc -p tsconfig.json -t es5 -m es6      --outDir dist/native-modules",
-		"build-ts:es6": "tsc -p tsconfig.json -t es6 -m es6      --outDir dist/es2015",
-		"build-ts:types": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
-		"build-assets:amd": "copyfiles -u 1 src/**/*.html src/**/*.css dist/amd",
-		"build-assets:cjs": "copyfiles -u 1 src/**/*.html src/**/*.css dist/commonjs",
-		"build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",
-		"build-assets:es6": "copyfiles -u 1 src/**/*.html src/**/*.css dist/es2015",
-
-		"build:amd": "npm run build-ts:amd && npm run build-assets:amd",
-		"build:cjs": "npm run build-ts:cjs && npm run build-assets:cjs",
-		"build:ntv": "npm run build-ts:ntv && npm run build-assets:ntv",
-		"build:es6": "npm run build-ts:es6 && npm run build-assets:es6",
-
-		"prebuild": "rimraf dist",
-		"build": "concurrently \"npm:build:*\""
-	},
-	"jspm": {
-		"registry": "npm",
-		"jspmPackage": true,
-		"main": "index",
-		"format": "amd",
-		"directories": {
-			"dist": "dist/amd"
-		},
-		"peerDependencies": {
-			"aurelia-binding": "^2.0.0",
-			"aurelia-dependency-injection": "^1.0.0",
-			"aurelia-logging": "^1.0.0",
-			"aurelia-pal": "^1.0.0",
-			"aurelia-task-queue": "^1.0.0",
-			"aurelia-templating": "^1.0.0",
-			"aurelia-loader": "^1.0.0",
-			"aurelia-templating-binding": "^1.0.0",
-			"aurelia-framework": "^1.0.0",
-			"aurelia-metadata": "^1.0.0",
-			"aurelia-path": "^1.0.0",
-			"@aurelia-ux/core": "^0.3.0"
-		},
-		"dependencies": {
-			"aurelia-binding": "^2.0.0",
-			"aurelia-dependency-injection": "^1.0.0",
-			"aurelia-logging": "^1.0.0",
-			"aurelia-pal": "^1.0.0",
-			"aurelia-task-queue": "^1.0.0",
-			"aurelia-templating": "^1.0.0",
-			"aurelia-loader": "^1.0.0",
-			"aurelia-templating-binding": "^1.0.0",
-			"aurelia-framework": "^1.0.0",
-			"aurelia-metadata": "^1.0.0",
-			"aurelia-path": "^1.0.0",
-			"@aurelia-ux/core": "^0.3.0"
-		},
-		"devDependencies": {}
-	},
-	"dependencies": {
-		"@aurelia-ux/core": "^0.17.0",
-		"aurelia-binding": "^2.0.0"
-	},
-	"devDependencies": {
-		"@types/jasmine": "^2.8.6",
-		"@types/karma": "^1.7.3",
-		"@types/node": "^7.0.11",
-		"@types/webpack": "^4.39.8",
-		"aurelia-bootstrapper": "^2.1.1",
-		"aurelia-framework": "^1.3.1",
-		"aurelia-pal-browser": "^1.2.0",
-		"aurelia-pal-nodejs": "^1.0.0-beta.1.0.0",
-		"aurelia-polyfills": "^1.2.1",
-		"aurelia-testing": "^1.0.0-beta.3.0.1",
-		"aurelia-webpack-plugin": "^4.0.0",
-		"concurrently": "^3.4.0",
-		"conventional-changelog-cli": "^2.0.27",
-		"copyfiles": "^1.2.0",
-		"cross-env": "^3.2.4",
-		"istanbul-instrumenter-loader": "^3.0.0",
-		"jasmine-core": "^2.99.1",
-		"karma": "^1.7.1",
-		"karma-chrome-launcher": "^2.0.0",
-		"karma-coverage": "^1.1.1",
-		"karma-coverage-istanbul-reporter": "^1.4.1",
-		"karma-ie-launcher": "^1.0.0",
-		"karma-jasmine": "^1.1.1",
-		"karma-mocha-reporter": "^2.2.5",
-		"karma-sourcemap-loader": "^0.3.7",
-		"karma-webpack": "^2.0.13",
-		"path": "^0.12.7",
-		"requirejs": "^2.3.3",
-		"requirejs-text": "^2.0.15",
-		"rimraf": "^3.0.0",
-		"rollup": "^1.26.3",
-		"rollup-plugin-typescript2": "^0.25.2",
-		"ts-loader": "^6.2.1",
-		"ts-node": "^5.0.1",
-		"tsconfig-paths": "^3.9.0",
-		"tslint": "^5.20.1",
-		"typedoc": "^0.9.0",
-		"typescript": "^3.7.2",
-		"webpack": "^4.41.2",
-		"webpack-cli": "^3.3.10"
-	},
-	"aurelia": {
-		"build": {
-			"resources": [
-				"@aurelia-ux/form/ux-form",
-				"@aurelia-ux/form/ux-field"
-			]
-		},
-		"documentation": {
-			"articles": []
-		}
-	}
+  "name": "@aurelia-ux/form",
+  "version": "0.17.0",
+  "description": "Form component for Aurelia UX",
+  "keywords": [
+    "aurelia",
+    "styles",
+    "components",
+    "ux",
+    "form"
+  ],
+  "homepage": "http://aurelia.io",
+  "bugs": {
+    "url": "https://github.com/aurelia/ux/issues"
+  },
+  "license": "MIT",
+  "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
+  "contributors": [
+    "Zach Hollingshead <zach.hollingshead@gmail.com>"
+  ],
+  "main": "dist/commonjs/index.js",
+  "typings": "dist/types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aurelia/ux"
+  },
+  "scripts": {
+    "build-ts:amd": "tsc -p tsconfig.json -t es5 -m amd      --outDir dist/amd",
+    "build-ts:cjs": "tsc -p tsconfig.json -t es5 -m commonjs --outDir dist/commonjs",
+    "build-ts:ntv": "tsc -p tsconfig.json -t es5 -m es6      --outDir dist/native-modules",
+    "build-ts:es6": "tsc -p tsconfig.json -t es6 -m es6      --outDir dist/es2015",
+    "build-ts:types": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+    "build-assets:amd": "copyfiles -u 1 src/**/*.html src/**/*.css dist/amd",
+    "build-assets:cjs": "copyfiles -u 1 src/**/*.html src/**/*.css dist/commonjs",
+    "build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",
+    "build-assets:es6": "copyfiles -u 1 src/**/*.html src/**/*.css dist/es2015",
+    "prebuild": "rimraf dist",
+		"build": "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\""
+  },
+  "jspm": {
+    "registry": "npm",
+    "jspmPackage": true,
+    "main": "index",
+    "format": "amd",
+    "directories": {
+      "dist": "dist/amd"
+    },
+    "peerDependencies": {
+      "aurelia-binding": "^2.0.0",
+      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-logging": "^1.0.0",
+      "aurelia-pal": "^1.0.0",
+      "aurelia-task-queue": "^1.0.0",
+      "aurelia-templating": "^1.0.0",
+      "aurelia-loader": "^1.0.0",
+      "aurelia-templating-binding": "^1.0.0",
+      "aurelia-framework": "^1.0.0",
+      "aurelia-metadata": "^1.0.0",
+      "aurelia-path": "^1.0.0",
+      "@aurelia-ux/core": "^0.3.0"
+    },
+    "dependencies": {
+      "aurelia-binding": "^2.0.0",
+      "aurelia-dependency-injection": "^1.0.0",
+      "aurelia-logging": "^1.0.0",
+      "aurelia-pal": "^1.0.0",
+      "aurelia-task-queue": "^1.0.0",
+      "aurelia-templating": "^1.0.0",
+      "aurelia-loader": "^1.0.0",
+      "aurelia-templating-binding": "^1.0.0",
+      "aurelia-framework": "^1.0.0",
+      "aurelia-metadata": "^1.0.0",
+      "aurelia-path": "^1.0.0",
+      "@aurelia-ux/core": "^0.3.0"
+    },
+    "devDependencies": {}
+  },
+  "dependencies": {
+    "@aurelia-ux/core": "^0.17.0",
+    "aurelia-binding": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.8.6",
+    "@types/karma": "^1.7.3",
+    "@types/node": "^7.0.11",
+    "@types/webpack": "^4.39.8",
+    "aurelia-bootstrapper": "^2.1.1",
+    "aurelia-framework": "^1.3.1",
+    "aurelia-pal-browser": "^1.2.0",
+    "aurelia-pal-nodejs": "^1.0.0-beta.1.0.0",
+    "aurelia-polyfills": "^1.2.1",
+    "aurelia-testing": "^1.0.0-beta.3.0.1",
+    "aurelia-webpack-plugin": "^4.0.0",
+    "concurrently": "^3.4.0",
+    "conventional-changelog-cli": "^2.0.27",
+    "copyfiles": "^1.2.0",
+    "cross-env": "^3.2.4",
+    "istanbul-instrumenter-loader": "^3.0.0",
+    "jasmine-core": "^2.99.1",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-coverage-istanbul-reporter": "^1.4.1",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-jasmine": "^1.1.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.13",
+    "path": "^0.12.7",
+    "requirejs": "^2.3.3",
+    "requirejs-text": "^2.0.15",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.26.3",
+    "rollup-plugin-typescript2": "^0.25.2",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^5.0.1",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^5.20.1",
+    "typedoc": "^0.9.0",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "aurelia": {
+    "build": {
+      "resources": [
+        "@aurelia-ux/form/ux-form",
+        "@aurelia-ux/form/ux-field"
+      ]
+    },
+    "documentation": {
+      "articles": []
+    }
+  }
 }
