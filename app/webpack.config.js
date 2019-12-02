@@ -11,18 +11,13 @@ module.exports = function({ production = '' } = {}) {
   return {
     mode: production === 'production' ? 'production' : 'development',
     resolve: {
-      // symlinks: true,
       extensions: ['.ts', '.js'],
       modules: [
         path.resolve(__dirname, 'src'),
         path.resolve(__dirname, 'node_modules'),
-        // root node modules for common aurelia packages
-        // path.resolve(__dirname, '../packages/core'),
-        // path.resolve(__dirname, '../packages/datepicker')
       ],
       alias: {
         'src': path.resolve(__dirname, 'src'),
-        // '@aurelia-ux': path.resolve(__dirname, '../packages'),
         // alias all aurelia packages to parent node_modules,
         // so packages & core modules will use the same version of core modules
         ...([
@@ -57,7 +52,6 @@ module.exports = function({ production = '' } = {}) {
           },
           {}
         )),
-        // moment: path.resolve(__dirname, './node_modules/moment'),
         // alias all packages to src code
         ...([
           'button',
@@ -79,7 +73,7 @@ module.exports = function({ production = '' } = {}) {
           'textarea',
         ].reduce((map, packageName) => {
           const mappedPackagedName = `@aurelia-ux/${packageName}`;
-          map[mappedPackagedName] = path.resolve(__dirname, `../packages/${packageName}/src/`);
+          map[mappedPackagedName] = path.resolve(__dirname, `../packages/${packageName}/src`);
           return map;
         }, {}))
       },
@@ -114,25 +108,73 @@ module.exports = function({ production = '' } = {}) {
     },
     plugins: [
       new AureliaWebpackPlugin.AureliaPlugin({
-        // config: [
-        //   "defaultBindingLanguage",
-        //   // "router",
-        //   // "history",
-        //   "defaultResources",
-        //   "eventAggregator",
-        //   "developmentLogging",
-        // ],
         aureliaApp: undefined,
         entry: undefined,
         dist: 'es2015',
-        // noModulePathResolve: true,
       }),
+      // note that following config is for webpack aliasing to source code
+      // it won't be necessary for real app
       new AureliaWebpackPlugin.ModuleDependenciesPlugin({
+        '@aurelia-ux/button': [
+          './ux-button.html'
+        ],
+        '@aurelia-ux/card': [
+          './ux-card-action-row.html',
+          './ux-card-content.html',
+          './ux-card-footer.html',
+          './ux-card-header.html',
+          './ux-card.html'
+        ],
+        '@aurelia-ux/checkbox': [
+          './ux-checkbox.html'
+        ],
+        '@aurelia-ux/chip-input': [
+          './ux-chip-input.html',
+          './ux-chip.html'
+        ],
         "@aurelia-ux/datepicker": [
           "./ux-calendar.html",
           "./ux-datepicker.html",
           "./ux-picker-dialog.html",
           "./ux-year-list.html",
+        ],
+        '@aurelia-ux/form': [
+          './ux-field.html',
+          './ux-form.html'
+        ],
+        '@aurelia-ux/grid': [
+          './ux-grid-cell.html',
+          './ux-grid.html'
+        ],
+        '@aurelia-ux/icons': [
+          './ux-icon.html'
+        ],
+        '@aurelia-ux/input': [
+          './ux-input.html'
+        ],
+        '@aurelia-ux/input-info': [
+          './ux-input-info.html'
+        ],
+        '@aurelia-ux/list': [
+          './ux-list-item.html',
+          './ux-list.html'
+        ],
+        '@aurelia-ux/radio': [
+          './ux-radio.html'
+        ],
+        '@aurelia-ux/select': [
+          './ux-optgroup.html',
+          './ux-option.html',
+          './ux-select.html'
+        ],
+        '@aurelia-ux/slider': [
+          './ux-slider.html'
+        ],
+        '@aurelia-ux/switch': [
+          './ux-switch.html'
+        ],
+        '@aurelia-ux/textarea': [
+          './ux-textarea.html'
         ],
       }),
       new HtmlWebpackPlugin({
