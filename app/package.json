@@ -11,7 +11,24 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "aurelia-logging-console": "^1.1.1"
+    "@aurelia-ux/button": "file:../packages/button",
+    "@aurelia-ux/card": "file:../packages/card",
+    "@aurelia-ux/checkbox": "file:../packages/checkbox",
+    "@aurelia-ux/chip-input": "file:../packages/chip-input",
+    "@aurelia-ux/core": "file:../packages/core",
+    "@aurelia-ux/datepicker": "file:../packages/datepicker",
+    "@aurelia-ux/grid": "file:../packages/grid",
+    "@aurelia-ux/icons": "file:../packages/icons",
+    "@aurelia-ux/input": "file:../packages/input",
+    "@aurelia-ux/input-info": "file:../packages/input-info",
+    "@aurelia-ux/list": "file:../packages/list",
+    "@aurelia-ux/radio": "file:../packages/radio",
+    "@aurelia-ux/select": "file:../packages/select",
+    "@aurelia-ux/slider": "file:../packages/slider",
+    "@aurelia-ux/switch": "file:../packages/switch",
+    "@aurelia-ux/textarea": "file:../packages/textarea",
+    "aurelia-logging-console": "^1.1.1",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
     "aurelia-loader-webpack": "^2.2.1",

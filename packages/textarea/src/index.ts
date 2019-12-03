@@ -1,15 +1,13 @@
-/// <reference path="html.d.ts" />
-import { FrameworkConfiguration, bindingMode } from 'aurelia-framework';
+import { FrameworkConfiguration, bindingMode, PLATFORM } from 'aurelia-framework';
 import { ValueAttributeObserver, EventSubscriber } from 'aurelia-binding';
 import { AureliaUX } from '@aurelia-ux/core';
-import { UxTextArea } from './ux-textarea';
 
 export { UxTextAreaTheme } from './ux-textarea-theme';
 export { UxTextArea, UxTextAreaElement } from './ux-textarea';
 
 export function configure(config: FrameworkConfiguration) {
   config.container.get(AureliaUX).registerUxElementConfig(uxTextAreaConfig);
-  config.globalResources(UxTextArea);
+  config.globalResources(PLATFORM.moduleName('./ux-textarea'));
 }
 
 const uxTextAreaConfig = {

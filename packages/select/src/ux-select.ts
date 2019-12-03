@@ -12,7 +12,6 @@ import {
   InternalCollectionObserver,
   ObserverLocator,
   TaskQueue,
-  inlineView,
 } from 'aurelia-framework';
 
 import { getLogger } from 'aurelia-logging';
@@ -22,7 +21,6 @@ import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
 import { UxOptionElement } from './ux-option';
 import { getAuViewModel, bool } from './util';
-import * as UX_SELECT_VIEW from './ux-select.html';
 
 declare module './ux-option' {
   interface UxOption {
@@ -57,9 +55,8 @@ export interface UxOptionContainer extends HTMLElement {
 }
 
 @inject(Element, StyleEngine, ObserverLocator, TaskQueue)
-@processContent(extractUxOption)
+@processContent(ensureUxOptionOrUxOptGroup)
 @customElement('ux-select')
-@inlineView(UX_SELECT_VIEW)
 export class UxSelect implements UxComponent {
 
   private selectedOption: UxOptionElement | null = null;
@@ -518,7 +515,11 @@ export class UxSelect implements UxComponent {
   }
 }
 
-function extractUxOption(
+/**
+ * A View-compiler hook that will remove any element that is not `<ux-option>` or `<ux-optgroup/>`
+ * as child of this `<ux-select/>` element
+ */
+function ensureUxOptionOrUxOptGroup(
   _: ViewCompiler,
   __: ViewResources,
   node: HTMLElement

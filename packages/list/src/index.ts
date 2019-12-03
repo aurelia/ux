@@ -1,5 +1,4 @@
-/// <reference path="html.d.ts" />
-import { FrameworkConfiguration } from 'aurelia-framework';
+import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
 import { UxList } from './ux-list';
 import { UxListItem } from './ux-list-item';
 
@@ -8,7 +7,7 @@ export { UxList, UxListItem };
 
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([
-    UxList,
-    UxListItem
+    PLATFORM.moduleName('./ux-list'),
+    PLATFORM.moduleName('./ux-list-item')
   ]);
 }

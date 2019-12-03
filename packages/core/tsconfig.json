@@ -16,7 +16,8 @@
     "noEmitHelpers": false,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "lib": ["es2017", "dom"]
+    "lib": ["es2017", "dom"],
+    "sourceMap": true
   },
   "exclude": [
     ".vscode",
@@ -25,13 +26,5 @@
     "node_modules",
     "karma.conf.ts",
     "test"
-  ],
-  "filesGlob": [
-    "./src/**/*.ts",
-    "./test/**/*.ts",
-    "./custom_typings/**/*.d.ts"
-  ],
-  "atom": {
-    "rewriteTsconfig": false
-  }
+  ]
 }

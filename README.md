@@ -60,14 +60,26 @@ npm run build:dev -- --environment target_dir: path/to/my/dir
 npm run build:dev:watch -- --environment target_dir: path/to/my/dir
 ```
 
-### Run a test app
-
-To run the test app, with all dependencies pointing to the packages source code, do:
+### Run a test app which emulates dependencies installation
+To run the test app, first make sure you built all the packages via the instruction of how to build above. Then open a shell at root of this project and copy paste the following:
 ```shell
 cd app
 npm ci
 npm run dev
 ```
+
+### Run a test app with direct source bundling
+
+To run the test app, with all dependencies pointing to the packages source code, first make sure you could run in previous step, then do:
+1. Uncomment line 33 to line 65 in webpack.config.js in `app` folder
+2. Open a shell at root of this project and run:
+
+```shell
+cd app
+npm ci
+npm run dev
+```
+
 This will use `webpack-dev-server` and `webpack` to alias all `ux` dependencies to the source in `pakcages` folder.
 
 ### Testing from the project's root directory

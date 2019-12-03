@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 
 const _moment = moment;
 export { _moment as moment };

@@ -1,8 +1,6 @@
 <template class="ux-switch ${effect !== null ? effect : ''}">
-
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
-  <require from="@aurelia-ux/switch/ux-switch.css"></require>
-
+  <require from="./ux-switch.css"></require>
   <input type="checkbox"
     ref="checkbox"
     class="ux-switch__inner-input"
@@ -11,7 +9,7 @@
     mousedown.trigger="onMouseDown($event)"
     disabled.bind="disabled & booleanAttr"
     aria-checked.bind="value & booleanAttr"
-    aria-disabledb.bind="disabled & booleanAttr">
+    aria-disabled.bind="disabled & booleanAttr">
 
   <div class="ux-switch__track">
     <div class="ux-switch__indicator">

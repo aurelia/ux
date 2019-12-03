@@ -1,10 +1,8 @@
-/// <reference path="html.d.ts" />
-import { FrameworkConfiguration } from 'aurelia-framework';
-import { UxSlider } from './ux-slider';
+import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
 
 export { UxSliderTheme } from './ux-slider-theme';
 export { UxSlider, UxSliderElement } from './ux-slider';
 
 export function configure(config: FrameworkConfiguration) {
-  config.globalResources(UxSlider);
+  config.globalResources(PLATFORM.moduleName('./ux-slider'));
 }

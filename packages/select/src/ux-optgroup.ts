@@ -6,14 +6,12 @@ import {
   processContent,
   DOM,
   inject,
-  inlineView,
   BindingEngine,
   Disposable,
 } from 'aurelia-framework';
 
 import { UxOptionElement } from './ux-option';
 import { getAuViewModel } from './util';
-import * as UX_OPTGROUP_VIEW from './ux-optgroup.html';
 
 declare module './ux-option' {
   interface UxOption {
@@ -31,9 +29,8 @@ export interface OptGroupOptionsCt extends HTMLElement {
 }
 
 @inject(DOM.Element, BindingEngine)
-@processContent(extractUxOptions)
+@processContent(ensureOnlyUxOption)
 @customElement('ux-optgroup')
-@inlineView(UX_OPTGROUP_VIEW)
 export class UxOptGroup {
 
   private subscriptions: Disposable[];
@@ -112,7 +109,10 @@ export class UxOptGroup {
   }
 }
 
-function extractUxOptions(
+/**
+ * A View-compiler hook that will remove any element that is not `<ux-option>` as child of `<ux-optgroup/>`
+ */
+function ensureOnlyUxOption(
   _: ViewCompiler,
   __: ViewResources,
   node: Element

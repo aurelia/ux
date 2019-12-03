@@ -1,12 +1,16 @@
-import { customElement, bindable, ViewResources, inlineView } from 'aurelia-templating';
+import { customElement, bindable, ViewResources } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { computedFrom } from 'aurelia-binding';
-import { Moment } from './resources/moment';
-import * as UX_YEAR_LIST_VIEW from './ux-year-list.html';
+import { Moment } from './resources/moment-rexports';
+// import UX_YEAR_LIST_VIEW from './ux-year-list.html';
+// import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element, ViewResources)
 @customElement('ux-year-list')
-@inlineView(UX_YEAR_LIST_VIEW)
+// @inlineView(
+//   UX_YEAR_LIST_VIEW,
+//   [PLATFORM.moduleName('@aurelia-ux/datepicker/ux-year-list.css')]
+// )
 export class UxYearList {
   @bindable public theme = null;
 

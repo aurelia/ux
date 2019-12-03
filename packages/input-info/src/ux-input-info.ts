@@ -1,12 +1,10 @@
-import { customElement, bindable, inlineView } from 'aurelia-templating';
+import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { UxInputInfoTheme } from './ux-input-info-theme';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
-import * as VIEW from './ux-input-info.html';
 
 @inject(Element, StyleEngine)
 @customElement('ux-input-info')
-@inlineView(VIEW)
 export class UxInputInfo implements UxComponent {
   @bindable public target: Element;
   @bindable public uxInputCounter = null;
