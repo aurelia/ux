@@ -1,4 +1,4 @@
-import { customElement, bindable, ElementEvents, inlineView } from 'aurelia-templating';
+import { customElement, bindable, ElementEvents } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 
@@ -11,7 +11,6 @@ import {
 
 import { UxCheckboxTheme } from './ux-checkbox-theme';
 import { DOM } from 'aurelia-pal';
-import * as UX_CHECKBOX_VIEW from './ux-checkbox.html';
 
 export interface UxCheckboxElement extends HTMLElement {
   type: 'checkbox';
@@ -20,7 +19,6 @@ export interface UxCheckboxElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-checkbox')
-@inlineView(UX_CHECKBOX_VIEW)
 export class UxCheckbox implements UxComponent {
   private ignoreValueChanges: boolean = false;
 

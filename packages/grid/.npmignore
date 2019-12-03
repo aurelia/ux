@@ -1,2 +1,6 @@
-src
+.rollupcache
+test
+karma.conf.ts
+rollup.config.js
+tsconfig-test.json
 tsconfig.json

@@ -9,7 +9,6 @@ import {
   customElement,
   Disposable,
   BindingEngine,
-  inlineView,
   processAttributes,
 } from 'aurelia-framework';
 
@@ -18,7 +17,6 @@ import {
 } from '@aurelia-ux/core';
 
 import { getAuViewModel } from './util';
-import * as UX_OPTION_VIEW from './ux-option.html';
 
 export interface UxOptionElement extends HTMLElement {
   disabled: boolean;
@@ -37,7 +35,6 @@ export interface UxOptionSelectEvent extends Event {
 @inject(DOM.Element, BindingEngine)
 @customElement('ux-option')
 @processAttributes(convertTextToAttr)
-@inlineView(UX_OPTION_VIEW)
 export class UxOption {
 
   private selected: boolean = false;

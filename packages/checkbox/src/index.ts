@@ -1,15 +1,13 @@
-/// <reference path="html.d.ts" />
-import { FrameworkConfiguration, bindingMode, ObserverLocator } from 'aurelia-framework';
+import { FrameworkConfiguration, bindingMode, ObserverLocator, PLATFORM } from 'aurelia-framework';
 import { CheckedObserver, EventSubscriber } from 'aurelia-binding';
 import { AureliaUX } from '@aurelia-ux/core';
-import { UxCheckbox } from './ux-checkbox';
 
 export { UxCheckboxTheme } from './ux-checkbox-theme';
 export { UxCheckbox, UxCheckboxElement } from './ux-checkbox';
 
 export function configure(config: FrameworkConfiguration) {
   config.container.get(AureliaUX).registerUxElementConfig(uxCheckBoxConfig);
-  config.globalResources(UxCheckbox);
+  config.globalResources(PLATFORM.moduleName('./ux-checkbox'));
 }
 
 const uxCheckBoxConfig = {

@@ -1,6 +1,5 @@
 <template role="dialog">
-  <require from="@aurelia-ux/datepicker/ux-picker-dialog.css"></require>
-
+  <require from="./ux-picker-dialog.css"></require>
   <header>
     <template if.bind="type !== 'time'">
       <div class="year ${display === 'year' ? 'active':''}" click.trigger="display = 'year'">

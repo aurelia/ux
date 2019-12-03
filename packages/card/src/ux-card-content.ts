@@ -1,7 +1,5 @@
-import { customElement, inlineView } from 'aurelia-templating';
-import * as UX_CARD_CONTENT_VIEW from './ux-card-content.html';
+import { customElement } from 'aurelia-templating';
 
 @customElement('ux-card-content')
-@inlineView(UX_CARD_CONTENT_VIEW)
 export class UxCardContent {
 }
