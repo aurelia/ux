@@ -1,32 +1,32 @@
 {
-  "light": [
+  "aurelia": [
     {
       "themeKey": "design",
     
-      "controlBackground": "#fff",
-      "controlForeground": "#212121",
-      "appBackground": "#fafafa",
+      "controlBackground": "#00000011",
+      "controlForeground": "#000000EE",
+      "appBackground": "#FAFAFA",
       "appForeground": "#212121",
-      "disabledBackground": "#d8e1e5",
-      "disabledForeground": "#8F8F8F",
-      "primary": "#b9deff",
-      "primaryForeground": "#000000",
-      "primaryLight": "#ecffff",
-      "primaryLightForeground": "#000000",
-      "primaryDark": "#88accc",
-      "primaryDarkForeground": "#000000",
-      "accent": "#ffa4c7",
-      "accentForeground": "#000000",
-      "accentLight": "#ffd6fa",
-      "accentLightForeground": "#000000",
-      "accentDark": "#ca7496",
-      "accentDarkForeground": "#000000"
+      "disabledBackground": "#9E9E9E",
+      "disabledForeground": "#CFD8DC",
+      "primary": "#3F51B5",
+      "primaryForeground": "#fff",
+      "primaryLight": "#C5CAE9",
+      "primaryLightForeground": "#9E9E9E",
+      "primaryDark": "#303F9F",
+      "primaryDarkForeground": "#fff",
+      "accent": "#FF4081",
+      "accentForeground": "#fff",
+      "accentLight": "#FF80AB",
+      "accentLightForeground": "#fff",
+      "accentDark": "#F50057",
+      "accentDarkForeground": "#fff"
     }],
   "dark": [
     {
       "themeKey": "design",
-      "controlBackground": "#373740",
-      "controlForeground": "#fff",
+      "controlBackground": "#000000EE",
+      "controlForeground": "#CCCCCC",
       "appBackground": "#33333d",
       "appForeground": "#fff",
       "disabledBackground": "#9E9E9E",

@@ -1,11 +1,10 @@
 <template>
   <require from="./theming.css"></require>
   <h2>Theming</h2>
-  <h3 >Custom Aurelia UX Core Properties</h3>
-  <ux-button click.delegate="showCoreProperties = !showCoreProperties" size="small" type="outline">${showCoreProperties ? 'Hide Properties' : 'Show Properties'}</ux-button>
+  <h3 click.delegate="showCoreProperties = !showCoreProperties"><ux-icon icon="${showCoreProperties ? 'indeterminate_check_box':'add_box'}"></ux-icon> Custom Aurelia UX Core Properties</h3>
   <ux-grid theme.bind="{outerPadding: '0'}" if.bind="showCoreProperties">
     <ux-grid-cell sm="3">
-      <ux-field repeat.for="prop of ['appBackground', 'appForeground', 'controlBackground', 'controlForeground', 'disabledBackground', 'disabledForeground']">
+      <ux-field repeat.for="prop of ['appBackground', 'appForeground', 'controlBackground', 'controlForeground', 'controlLabel', 'disabledBackground', 'disabledForeground']">
         <ux-input label.bind="prop" value.bind="design[prop]">
           <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
         </ux-input>
@@ -28,30 +27,30 @@
     <ux-grid-cell sm="3">
     </ux-grid-cell>
   </ux-grid>
-  <h3>Buttons</h3>
-  <ux-grid theme.bind="{outerPadding: '0'}">
+  <h3 click.delegate="showButton = !showButton"><ux-icon icon="${showButton ? 'indeterminate_check_box':'add_box'}"></ux-icon> Buttons</h3>
+  <ux-grid theme.bind="{outerPadding: '0'}" if.bind="showButton">
     <ux-grid-cell sm="3">
       <h4>Primary (default)</h4>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" type="raised">Raised</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" type="flat">Flat</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" type="text">Text</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" type="outline">Outline</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" type="fab">Fab</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" type="raised">Raised</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" type="flat">Flat</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" type="text">Text</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" type="outline">Outline</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" type="fab">Fab</ux-button></p>
     </ux-grid-cell>
     <ux-grid-cell sm="3">
       <h4>Accent (.ux-button--accent)</h4>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" class="ux-button--accent" type="raised">Raised</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" class="ux-button--accent" type="flat">Flat</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" class="ux-button--accent" type="text">Text</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" class="ux-button--accent" type="outline">Outline</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" class="ux-button--accent" type="fab">Fab</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="raised">Raised</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="flat">Flat</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="text">Text</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="outline">Outline</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="fab">Fab</ux-button></p>
     </ux-grid-cell>
     <ux-grid-cell sm="3">
       <h4>Disabled (disabled)</h4>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" disabled type="raised">Raised</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" disabled type="flat">Flat</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" disabled type="text">Text</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme & signal:'button-theme-changed'" disabled type="outline">Outline</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" disabled type="raised">Raised</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" disabled type="flat">Flat</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" disabled type="text">Text</ux-button></p>
+      <p><ux-button theme.bind="buttonTheme" disabled type="outline">Outline</ux-button></p>
       <p><ux-button theme.bind="buttonTheme" disabled type="fab">Fab</ux-button></p>
     </ux-grid-cell>
     <ux-grid-cell sm="3">
@@ -74,6 +73,63 @@
         </ux-grid-cell>
       </ux-grid>
       <ux-button size="small" type="outline" click.delegate="resetTheme('buttonTheme')">Reset</ux-button>
+    </ux-grid-cell>
+  </ux-grid>
+  <h3 click.delegate="showInput = !showInput"><ux-icon icon="${showInput ? 'indeterminate_check_box':'add_box'}"></ux-icon> Input</h3>
+  <ux-grid theme.bind="{outerPadding: '0'}" if.bind="showInput">
+    <ux-grid-cell sm="3">
+      <h4>Default</h4>
+      <p><ux-input theme.bind="inputTheme"></ux-input></p>
+      <p>
+        <ux-input theme.bind="inputTheme" label="With floated label"></ux-input>
+        <ux-input-info>And helper text</ux-input-info>
+      </p>
+      <p><ux-input theme.bind="inputTheme" placeholder="With placeholder"></ux-input></p>
+      <p>
+        <ux-field label="UX-FIELD with label">
+          <ux-input theme.bind="inputTheme"></ux-input>
+        </ux-field>
+      </p>
+    </ux-grid-cell>
+    <ux-grid-cell sm="3">
+      <h4>Icons</h4>
+      <p><ux-input theme.bind="inputTheme" label="With leading icon"><ux-icon icon="person" slot="leading-icon"></ux-icon></ux-input></p>
+      <p><ux-input theme.bind="inputTheme" label="With trailing icon"><ux-icon icon="remove_red_eye" slot="trailing-icon"></ux-icon></ux-input></p>
+      <h4>Outline</h4>
+      <p><ux-input variant="outline" theme.bind="inputTheme" label="With leading icon"></ux-input></p>
+    </ux-grid-cell>
+    <ux-grid-cell sm="3">
+      <h4>Custom Input Theme</h4>
+      <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'fontSize', 'letterSpacing', 'labelFontSize', 'labelLetterSpacing']">
+        <ux-input label.bind="prop" value.bind="inputTheme[prop]" change.trigger="themeChanged('inputTheme')"></ux-input>
+      </ux-field>
+    </ux-grid-cell>
+    <ux-grid-cell sm="3">
+        <h4>&nbsp;</h4>
+      <ux-field repeat.for="prop of ['borderColor', 'borderBottomWidth', 'borderBottomColor', 'disabledForeground', 'disabledBackground', 'disabledBorder', 'error']">
+        <ux-input label.bind="prop" value.bind="inputTheme[prop]" change.trigger="themeChanged('inputTheme')"></ux-input>
+      </ux-field>
+      <ux-grid  theme.bind="{outerPadding: '0'}">
+        <ux-grid-cell xs="6">
+          <ux-field>
+            <label>Border Radius</label>
+            <br><ux-slider value.bind="inputBorderRadius" min="0" max="10" style="width:100%"></ux-slider>
+          </ux-field>
+        </ux-grid-cell>
+        <ux-grid-cell xs="6">
+          <ux-field>
+            <label>Border Width</label>
+            <br><ux-slider value.bind="inputBorderWidth" min="0" max="5" style="width:100%"></ux-slider>
+          </ux-field>
+        </ux-grid-cell>
+        <ux-grid-cell xs="6">
+          <ux-field>
+            <label>Border Active Width</label>
+            <br><ux-slider value.bind="inputBorderActiveWidth" min="0" max="5" style="width:100%"></ux-slider>
+          </ux-field>
+        </ux-grid-cell>
+      </ux-grid>
+      <ux-button size="small" type="outline" click.delegate="resetTheme('inputTheme')">Reset</ux-button>
     </ux-grid-cell>
   </ux-grid>
 </template>

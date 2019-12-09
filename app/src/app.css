@@ -1,3 +1,8 @@
+body {
+  background: var(--aurelia-ux--design-app-background);
+  color: var(--aurelia-ux--design-app-foreground);
+}
+
 header.main-header {
   position: absolute;
   top: 0;
@@ -11,6 +16,7 @@ header.main-header {
   padding: 8px 16px;
   box-shadow: var(--aurelia-ux--design-elevation4dp);
   background-color: var(--ux-swatch--grey-p200);
+  z-index: 1;
 }
 
 header.main-header > * {
