@@ -8,8 +8,8 @@ export class IOSDesign implements Design {
   public appBackground = swatches.grey.p50;
   public appForeground = swatches.grey.p900;
 
-  public controlBackground = swatches.white;
-  public controlForeground = swatches.grey.p900;
+  public controlBackground = swatches.alphaGrey.p50;
+  public controlForeground = swatches.alphaGrey.a700;
 
   public primary = swatches.indigo.p500;
   public primaryForeground = swatches.white;
