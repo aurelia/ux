@@ -1,5 +1,5 @@
 <template role="textbox"
-  class="ux-input ${focused ? 'ux-input--focused' : ''}"
+  class="ux-input ${focused ? 'ux-input--focused' : ''} ux-input--${variant}"
   disabled.bind="disabled & booleanAttr"
   readonly.bind="readonly & booleanAttr"
   aria-disabled.bind="disabled & booleanAttr"
@@ -22,5 +22,6 @@
 
   <slot name="trailing-icon"></slot>
 
-  <div class="ux-input__border-bottom"></div>
+  <div class="ux-input__border-bottom" if.bind="variant === 'filled'"></div>
+  <div class="ux-input__border-bottom-active" if.bind="variant === 'filled'"></div>
 </template>

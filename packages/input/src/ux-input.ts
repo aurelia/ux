@@ -25,6 +25,7 @@ export class UxInput implements UxComponent {
   @bindable public theme: UxInputTheme;
   @bindable public label: any;
   @bindable public type: any;
+  @bindable public variant: 'filled' | 'outline' = 'filled';
 
   @observable
   public rawValue: string = '';
@@ -107,6 +108,7 @@ export class UxInput implements UxComponent {
     }
 
     this.autocompleteChanged(this.autocomplete);
+    //this.variantChanged(this.variant, '');
     this.themeChanged(this.theme);
   }
 
@@ -203,6 +205,11 @@ export class UxInput implements UxComponent {
   public focusInput() {
     this.textbox.focus();
   }
+
+  // public variantChanged(newValue: string, oldValue: string) {
+  //   this.element.classList.remove(`ux-input--${oldValue}`);
+  //   this.element.classList.add(`ux-input--${newValue}`);
+  // }
 }
 
 function stopEvent(e: Event) {
