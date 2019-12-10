@@ -4,6 +4,7 @@ export interface Palette {
 
   controlBackground: string;
   controlForeground: string;
+  controlLabel: string;
 
   primary: string;
   primaryForeground: string;
@@ -25,4 +26,7 @@ export interface Palette {
 
   disabledBackground: string;
   disabledForeground: string;
+
+  error: string;
+  errorContrast: string;
 }
