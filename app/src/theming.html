@@ -4,7 +4,7 @@
   <h3 click.delegate="showCoreProperties = !showCoreProperties"><ux-icon icon="${showCoreProperties ? 'indeterminate_check_box':'add_box'}"></ux-icon> Custom Aurelia UX Core Properties</h3>
   <ux-grid theme.bind="{outerPadding: '0'}" if.bind="showCoreProperties">
     <ux-grid-cell sm="3">
-      <ux-field repeat.for="prop of ['appBackground', 'appForeground', 'controlBackground', 'controlForeground', 'controlLabel', 'disabledBackground', 'disabledForeground']">
+      <ux-field repeat.for="prop of ['appBackground', 'appForeground', 'controlBackground', 'controlForeground', 'controlLabel', 'disabledBackground', 'disabledForeground', 'error', 'errorContrast']">
         <ux-input label.bind="prop" value.bind="design[prop]">
           <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
         </ux-input>
@@ -75,20 +75,20 @@
       <ux-button size="small" type="outline" click.delegate="resetTheme('buttonTheme')">Reset</ux-button>
     </ux-grid-cell>
   </ux-grid>
-  <h3 click.delegate="showInput = !showInput"><ux-icon icon="${showInput ? 'indeterminate_check_box':'add_box'}"></ux-icon> Input</h3>
+  <h3 click.delegate="showInput = !showInput"><ux-icon icon="${showInput ? 'indeterminate_check_box':'add_box'}"></ux-icon> Input & Input Info</h3>
   <ux-grid theme.bind="{outerPadding: '0'}" if.bind="showInput">
     <ux-grid-cell sm="3">
       <h4>Default</h4>
       <p><ux-input theme.bind="inputTheme"></ux-input></p>
       <p>
-        <ux-input theme.bind="inputTheme" label="With floated label"></ux-input>
-        <ux-input-info>And helper text</ux-input-info>
+        <ux-input theme.bind="inputTheme" label="With floated label" maxlength.bind="50"></ux-input>
+        <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
       </p>
-      <p><ux-input theme.bind="inputTheme" placeholder="With placeholder"></ux-input></p>
       <p>
-        <ux-field label="UX-FIELD with label">
-          <ux-input theme.bind="inputTheme"></ux-input>
-        </ux-field>
+        <ux-input class="ux-input--has-error" theme.bind="inputTheme" label="With error">
+            <ux-icon icon="error" slot="trailing-icon"></ux-icon>
+        </ux-input>
+        <ux-input-info>Error message</ux-input-info>
       </p>
     </ux-grid-cell>
     <ux-grid-cell sm="3">
@@ -96,7 +96,14 @@
       <p><ux-input theme.bind="inputTheme" label="With leading icon"><ux-icon icon="person" slot="leading-icon"></ux-icon></ux-input></p>
       <p><ux-input theme.bind="inputTheme" label="With trailing icon"><ux-icon icon="remove_red_eye" slot="trailing-icon"></ux-icon></ux-input></p>
       <h4>Outline</h4>
-      <p><ux-input variant="outline" theme.bind="inputTheme" label="With leading icon"></ux-input></p>
+      <p>
+        <ux-input variant="outline" theme.bind="inputTheme" label="With leading icon"></ux-input>
+        <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
+      </p>
+      <p>
+        <ux-input variant="outline" class="ux-input--has-error" theme.bind="inputTheme" label="With error"></ux-input>
+        <ux-input-info>Error message</ux-input-info>
+      </p>
     </ux-grid-cell>
     <ux-grid-cell sm="3">
       <h4>Custom Input Theme</h4>
