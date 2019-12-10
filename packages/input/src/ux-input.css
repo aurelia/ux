@@ -34,7 +34,7 @@
 }
 
 .ux-input__border-bottom {
-  height: 1px;
+  height: var(--aurelia-ux--input-border-width, 1px);
   /* background-color: #4043ff;
   background-color: var(--aurelia-ux--input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff)); */
   background-color: #757575;
