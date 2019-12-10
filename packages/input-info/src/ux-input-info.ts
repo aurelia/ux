@@ -1,7 +1,10 @@
+import { UxTextArea } from './../../textarea/src/ux-textarea';
+import { UxInput } from './../../input/src/ux-input';
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { UxInputInfoTheme } from './ux-input-info-theme';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { computedFrom } from 'aurelia-binding';
 
 @inject(Element, StyleEngine)
 @customElement('ux-input-info')
@@ -40,5 +43,21 @@ export class UxInputInfo implements UxComponent {
     if (inputElement.nodeName === 'UX-INPUT' || inputElement.nodeName === 'UX-TEXTAREA') {
       this.target = inputElement.au.controller.viewModel;
     }
+  }
+
+  @computedFrom('target', 'target.maxlength')
+  public get maxLength(): number {
+    if (this.target instanceof UxInput || this.target instanceof UxTextArea) {
+      return this.target.maxlength;
+    }
+    return 0;
+  }
+
+  @computedFrom('target', 'target.value', 'target.value.length')
+  public get length(): number {
+    if (this.target instanceof UxInput || this.target instanceof UxTextArea) {
+      return this.target.value.length;
+    }
+    return 0;
   }
 }
