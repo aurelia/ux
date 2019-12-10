@@ -36,6 +36,6 @@
 }
 
 .ux-input--focused+.ux-input-info .ux-input-info__counter {
-  color: #FF4081;
-  color: var(--aurelia-ux--design-accent, #FF4081);
+  /* color: #FF4081;
+  color: var(--aurelia-ux--design-accent, #FF4081); */
 }
