@@ -99,7 +99,7 @@
 
 .ux-input--has-error :not(input) {
   color: #F44336;
-  color: var(--aurelia-ux--input-error, #F44336);
+  color: var(--aurelia-ux--input-error, var(--aurelia-ux--design-error, #F44336));
 }
 
 .ux-input:hover.ux-input--filled {
@@ -141,7 +141,7 @@
 .ux-input--has-error .ux-input__border-bottom {
   transform: scaleX(1);
   background-color: #F44336;
-  background-color: var(--aurelia-ux--input-error, #F44336);
+  background-color: var(--aurelia-ux--input-error, var(--aurelia-ux--design-error, #F44336));
 }
 
 .ux-input[disabled],
