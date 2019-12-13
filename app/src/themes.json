@@ -3,8 +3,8 @@
     {
       "themeKey": "design",
     
-      "controlBackground": "#00000011",
-      "controlForeground": "#000000EE",
+      "controlBackground": "#EFEFEF",
+      "controlForeground": "#333333",
       "appBackground": "#FAFAFA",
       "appForeground": "#212121",
       "disabledBackground": "#9E9E9E",
@@ -23,19 +23,22 @@
       "accentLightForeground": "#fff",
       "accentDark": "#F50057",
       "accentDarkForeground": "#fff"
+    }, {
+      "themeKey": "card",
+      "background": ""
     }],
   "dark": [
     {
       "themeKey": "design",
+      "appBackground": "#222255",
+      "appForeground": "#fff",
       "controlBackground": "#000000EE",
       "controlForeground": "#CCCCCC",
-      "appBackground": "#33333d",
-      "appForeground": "#fff",
       "disabledBackground": "#9E9E9E",
       "disabledForeground": "#CFD8DC",
       "error": "#B71C1C",
       "errorContrast": "#FFFFFF",
-      "primary": "#3F51B5",
+      "primary": "#7FA1E5",
       "primaryForeground": "#FFFFFF",
       "primaryLight": "#C5CAE9",
       "primaryLightForeground": "#9E9E9E",
@@ -47,5 +50,9 @@
       "accentLightForeground": "#FFFFFF",
       "accentDark": "#F50057",
       "accentDarkForeground": "#FFFFFF"
-    }]
+    }, {
+      "themeKey": "card",
+      "background": "#333356"
+    }
+  ]
 }

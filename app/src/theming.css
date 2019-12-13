@@ -17,4 +17,17 @@
   margin-bottom: 8px;
 }
 
+.ux-card-component__media {
+  height: 100px;
+  padding: 16px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.ux-card-component__media > * {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
 

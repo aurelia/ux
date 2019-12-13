@@ -1,6 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
 body {
   background: var(--aurelia-ux--design-app-background);
   color: var(--aurelia-ux--design-app-foreground);
+
+}
+
+section {
+  max-width: 1024px;
+  margin: 0px auto;
+  padding: 20px 20px 40px 20px;
 }
 
 header.main-header {
@@ -12,7 +27,7 @@ header.main-header {
   display: flex;
   align-content: center;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 8px 16px;
   box-shadow: var(--aurelia-ux--design-elevation4dp);
   background-color: var(--ux-swatch--grey-p200);

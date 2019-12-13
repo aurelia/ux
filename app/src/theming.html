@@ -1,142 +1,347 @@
 <template>
   <require from="./theming.css"></require>
-  <h2>Theming</h2>
-  <h3 click.delegate="showCoreProperties = !showCoreProperties"><ux-icon icon="${showCoreProperties ? 'indeterminate_check_box':'add_box'}"></ux-icon> Custom Aurelia UX Core Properties</h3>
-  <ux-grid theme.bind="{outerPadding: '0'}" if.bind="showCoreProperties">
-    <ux-grid-cell sm="3">
-      <ux-field repeat.for="prop of ['appBackground', 'appForeground', 'controlBackground', 'controlForeground', 'controlLabel', 'disabledBackground', 'disabledForeground', 'error', 'errorContrast']">
-        <ux-input label.bind="prop" value.bind="design[prop]">
-          <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
-        </ux-input>
-      </ux-field>     
-    </ux-grid-cell>
-    <ux-grid-cell sm="3">
-      <ux-field repeat.for="prop of ['primary', 'primaryForeground', 'primaryDark', 'primaryDarkForeground', 'primaryLight', 'primaryLightForeground']">
-        <ux-input label.bind="prop" value.bind="design[prop]">
-          <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
-        </ux-input>
-      </ux-field>     
-    </ux-grid-cell>
-    <ux-grid-cell sm="3">
-      <ux-field repeat.for="prop of ['accent', 'accentForeground', 'accentDark', 'accentDarkForeground', 'accentLight', 'accentLightForeground']">
-        <ux-input label.bind="prop" value.bind="design[prop]">
-          <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
-        </ux-input>
-      </ux-field>     
-    </ux-grid-cell>
-    <ux-grid-cell sm="3">
-    </ux-grid-cell>
-  </ux-grid>
-  <h3 click.delegate="showButton = !showButton"><ux-icon icon="${showButton ? 'indeterminate_check_box':'add_box'}"></ux-icon> Buttons</h3>
-  <ux-grid theme.bind="{outerPadding: '0'}" if.bind="showButton">
-    <ux-grid-cell sm="3">
-      <h4>Primary (default)</h4>
-      <p><ux-button theme.bind="buttonTheme" type="raised">Raised</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" type="flat">Flat</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" type="text">Text</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" type="outline">Outline</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" type="fab">Fab</ux-button></p>
-    </ux-grid-cell>
-    <ux-grid-cell sm="3">
-      <h4>Accent (.ux-button--accent)</h4>
-      <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="raised">Raised</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="flat">Flat</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="text">Text</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="outline">Outline</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="fab">Fab</ux-button></p>
-    </ux-grid-cell>
-    <ux-grid-cell sm="3">
-      <h4>Disabled (disabled)</h4>
-      <p><ux-button theme.bind="buttonTheme" disabled type="raised">Raised</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" disabled type="flat">Flat</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" disabled type="text">Text</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" disabled type="outline">Outline</ux-button></p>
-      <p><ux-button theme.bind="buttonTheme" disabled type="fab">Fab</ux-button></p>
-    </ux-grid-cell>
-    <ux-grid-cell sm="3">
-      <h4>Custom Button Theme</h4>
-      <ux-field repeat.for="prop of ['background', 'foreground', 'accentBackground', 'accentForeground', 'disabledBackground', 'disabledForeground']">
-        <ux-input label.bind="prop" value.bind="buttonTheme[prop]" change.trigger="themeChanged('buttonTheme')"></ux-input>
-      </ux-field>
-      <ux-grid  theme.bind="{outerPadding: '0'}">
-        <ux-grid-cell xs="6">
+
+  <section>
+    <h2>Theming</h2>
+    <p>Design and test your themes using Aurelia UX Theming Tool</p>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-card sm="4">
+        <ux-card-header>
+          <span class="ux-card__thumbnail">1.</span>
+          <div class="ux-card__title">Create one or several themes</div>
+        </ux-card-header>
+        <ux-card-content>
+          You can create many themes and switch between them in all pages of this tool.
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="4">
+        <ux-card-header>
+          <span class="ux-card__thumbnail">2.</span>
+          <div class="ux-card__title">Set the Core Variables</div>
+        </ux-card-header>
+        <ux-card-content>
+          This will give a first look and fell for your entire application.
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="4">
+        <ux-card-header>
+          <span class="ux-card__thumbnail">3.</span>
+          <div class="ux-card__title">Customize Components Variables</div>
+        </ux-card-header>
+        <ux-card-content>
+          You can be very specific on how each component should be themed. Leave the variables empty to use default values from Core Variables.
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>1. Available Themes</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-card sm="3">
+        <ux-card-header class="ux-card__title">Aurelia</ux-card-header>
+        <ux-card-content>Default Aurelia Theme</ux-card-content>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="selectTheme('aurelia')" disabled.bind="themeService.currentTheme === 'aurelia'">Select</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+      <ux-card sm="3">
+        <ux-card-header class="ux-card__title">Dark</ux-card-header>
+        <ux-card-content>Default Dark Theme</ux-card-content>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="selectTheme('dark')" disabled.bind="themeService.currentTheme === 'dark'">Select</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+      <ux-card sm="3" repeat.for="theme of themeService.themes">
+        <ux-card-header class="ux-card__title"><ux-input variant="outline" value.bind="theme.name" label="Theme Name"></ux-input></ux-card-header>
+        <ux-card-content>Default Dark Theme</ux-card-content>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="selectTheme($index)" disabled.bind="themeService.currentTheme === $index">Select</ux-button>
+          <ux-button type="text" click.delegate="saveTheme($index)" if.bind="themeService.currentTheme === $index">Save</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+      <ux-grid-cell sm="3" class="ux-grid-cell--align-self-middle" style="text-align: center;">
+        <ux-button class="ux-button--accent" type="fab" click.delegate="newTheme()"><ux-icon icon="add"></ux-icon></ux-button>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>2. Set the Core Variables</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-card sm="6" md="4">
+        <ux-card-header>
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Application Colors</span>
+            <span class="ux-card__sub-title">Set the backdrop and text color for main elements</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-field repeat.for="prop of ['appBackground', 'appForeground']">
+            <ux-input label.bind="prop" value.bind="design[prop]">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+            </ux-input>
+          </ux-field>    
+        </ux-card-content>
+      </ux-card>
+  
+      <ux-card sm="6" md="4">
+        <ux-card-header>
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Primary Colors</span>
+            <span class="ux-card__sub-title">The primary color should represent your brand</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-field repeat.for="prop of ['primary', 'primaryForeground']">
+            <ux-input label.bind="prop" value.bind="design[prop]">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+            </ux-input>
+          </ux-field>     
+          <template if.bind="showAdvancedPrimary">
+            <ux-field repeat.for="prop of ['primaryDark', 'primaryDarkForeground', 'primaryLight', 'primaryLightForeground']">
+              <ux-input label.bind="prop" value.bind="design[prop]">
+                <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+              </ux-input>
+            </ux-field>
+          </template>
+        </ux-card-content>
+        <div class="ux-card__separator"></div>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="showAdvancedPrimary = !showAdvancedPrimary">${showAdvancedPrimary ? 'Collapse':'Expand'}</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+  
+      <ux-card sm="6" md="4">
+        <ux-card-header>
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Accent Colors</span>
+            <span class="ux-card__sub-title">The accent color provides more ways to accent and distinguish your product</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-field repeat.for="prop of ['accent', 'accentForeground']">
+            <ux-input label.bind="prop" value.bind="design[prop]">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+            </ux-input>
+          </ux-field>     
+          <template if.bind="showAdvancedaccent">
+            <ux-field repeat.for="prop of ['accentDark', 'accentDarkForeground', 'accentLight', 'accentLightForeground']">
+              <ux-input label.bind="prop" value.bind="design[prop]">
+                <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+              </ux-input>
+            </ux-field>
+          </template>
+        </ux-card-content>
+        <div class="ux-card__separator"></div>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="showAdvancedAccent = !showAdvancedAccent">${showAdvancedAccent ? 'Collapse':'Expand'}</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+    
+      <ux-card sm="6" md="4">
+        <ux-card-header>
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Control Colors</span>
+            <span class="ux-card__sub-title">These colors will be the defaults for control elements such as ux-input, ux-textarea, etc...</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-grid-cell sm="3">
+            <ux-field repeat.for="prop of ['controlBackground', 'controlForeground', 'controlLabel']">
+              <ux-input label.bind="prop" value.bind="design[prop]">
+                <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+              </ux-input>
+            </ux-field>     
+          </ux-grid-cell>
+        </ux-card-content>
+      </ux-card>
+  
+      <ux-card sm="6" md="4">
+        <ux-card-header>
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">State Colors</span>
+            <span class="ux-card__sub-title">These colors help to unify different states that can be applied to elements such as buttons or controls</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-grid-cell sm="3">
+            <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground', 'error', 'errorContrast']">
+              <ux-input label.bind="prop" value.bind="design[prop]">
+                <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+              </ux-input>
+            </ux-field>     
+          </ux-grid-cell>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>3. Customize Components Variables</h2>
+
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-card sm="6" md="4">
+        <ux-card-media class="ux-card-component__media">
+          <ux-button class="${buttonPreviewClass}" type.bind="buttonPreviewType" disabled.bind="buttonPreviewDisabled">Exemple</ux-button>          
+        </ux-card-media>
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Button</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
           <ux-field>
-            <label>Border Radius</label>
-            <br><ux-slider value.bind="buttonBorderRadius" min="0" max="10" style="width:100%"></ux-slider>
+            <label>Preview Style</label>
+            <ux-grid class="ux-grid--remove-padding">
+              <ux-grid-cell sm="6">
+                <ux-select value.bind="buttonPreviewClass">
+                  <ux-option value="">Default</ux-option>
+                  <ux-option value="ux-button--accent">Accent</ux-option>
+                </ux-select>
+              </ux-grid-cell>
+              <ux-grid-cell sm="6">
+                <ux-select value.bind="buttonPreviewType">
+                  <ux-option value="raised">Raised</ux-option>
+                  <ux-option value="flat">Flat</ux-option>
+                  <ux-option value="outline">Outline</ux-option>
+                  <ux-option value="text">Text</ux-option>
+                  <ux-option value="fab">Fab</ux-option>
+                </ux-select>
+              </ux-grid-cell>
+            </ux-grid>
+            <ux-field>
+              <label>Preview State</label>
+              <div class="form-row">
+                <label>
+                  <ux-checkbox checked.bind="buttonPreviewDisabled">Disabled</ux-checkbox>
+                  Disabled
+                </label>
+              </div>
+            </ux-field>
           </ux-field>
-        </ux-grid-cell>
-        <ux-grid-cell xs="6">
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['background', 'foreground', 'accentBackground', 'accentForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.button[prop]" change.delegate="themeService.componentThemeChanged('button')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.button[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <template if.bind="showAdvancedButton">
+            <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground']">
+              <ux-input label.bind="prop" value.bind="themeService.button[prop]" change.delegate="themeService.componentThemeChanged('button')">
+                <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.button[prop]}"></span>
+              </ux-input>
+            </ux-field>
+            <ux-field>
+              <label>Border Radius</label>
+              <br><ux-slider value.bind="themeService.buttonBorderRadius" min="0" max="10" style="width:100%"></ux-slider>
+            </ux-field>
+            <ux-field>
+              <label>Border Width</label>
+              <br><ux-slider value.bind="themeService.buttonBorderWidth" min="0" max="5" style="width:100%"></ux-slider>
+            </ux-field>
+          </template>
+        </ux-card-content>
+        <div class="ux-card__separator"></div>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="showAdvancedButton = !showAdvancedButton">${showAdvancedButton ? 'Collapse':'Expand'}</ux-button>
+          <ux-button type="text">Reset</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+      <ux-card sm="6" md="4">
+        <ux-card-media class="ux-card-component__media">
+          <ux-input type.bind="inputPreviewType" disabled.bind="inputPreviewDisabled" variant.bind="inputPreviewVariant"></ux-input>     
+          <ux-input-info>Helper Text</ux-input-info>     
+        </ux-card-media>
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Input</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <div class="ux-card__separator"></div>
           <ux-field>
-            <label>Border Width</label>
-            <br><ux-slider value.bind="buttonBorderWidth" min="0" max="5" style="width:100%"></ux-slider>
+            <label>Preview Type</label>
+            <ux-select value.bind="inputPreviewType">
+              <ux-option value="text">text</ux-option>
+              <ux-option value="password">password</ux-option>
+              <ux-option value="email">email</ux-option>
+              <ux-option value="url">url</ux-option>
+              <ux-option value="tel">tel</ux-option>
+              <ux-option value="search">search</ux-option>
+              <ux-option value="number">number</ux-option>
+            </ux-select>
+            <ux-field>
+              <label>Preview Variant</label>
+              <div class="form-row">
+                <label>
+                  <ux-radio checked.bind="inputPreviewVariant" model.bind="'filled'"></ux-radio>
+                  Filled
+                </label>
+                <label>
+                  <ux-radio checked.bind="inputPreviewVariant" model.bind="'outline'"></ux-radio>
+                  Outline
+                </label>
+              </div>
+            </ux-field>
+            <ux-field>
+              <label>Preview State</label>
+              <div class="form-row">
+                <label>
+                  <ux-checkbox checked.bind="inputPreviewDisabled">Disabled</ux-checkbox>
+                  Disabled
+                </label>
+              </div>
+            </ux-field>
           </ux-field>
-        </ux-grid-cell>
-      </ux-grid>
-      <ux-button size="small" type="outline" click.delegate="resetTheme('buttonTheme')">Reset</ux-button>
-    </ux-grid-cell>
-  </ux-grid>
-  <h3 click.delegate="showInput = !showInput"><ux-icon icon="${showInput ? 'indeterminate_check_box':'add_box'}"></ux-icon> Input & Input Info</h3>
-  <ux-grid theme.bind="{outerPadding: '0'}" if.bind="showInput">
-    <ux-grid-cell sm="3">
-      <h4>Default</h4>
-      <p><ux-input theme.bind="inputTheme"></ux-input></p>
-      <p>
-        <ux-input theme.bind="inputTheme" label="With floated label" maxlength.bind="50"></ux-input>
-        <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
-      </p>
-      <p>
-        <ux-input class="ux-input--has-error" theme.bind="inputTheme" label="With error">
-            <ux-icon icon="error" slot="trailing-icon"></ux-icon>
-        </ux-input>
-        <ux-input-info>Error message</ux-input-info>
-      </p>
-    </ux-grid-cell>
-    <ux-grid-cell sm="3">
-      <h4>Icons</h4>
-      <p><ux-input theme.bind="inputTheme" label="With leading icon"><ux-icon icon="person" slot="leading-icon"></ux-icon></ux-input></p>
-      <p><ux-input theme.bind="inputTheme" label="With trailing icon"><ux-icon icon="remove_red_eye" slot="trailing-icon"></ux-icon></ux-input></p>
-      <h4>Outline</h4>
-      <p>
-        <ux-input variant="outline" theme.bind="inputTheme" label="With leading icon"></ux-input>
-        <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
-      </p>
-      <p>
-        <ux-input variant="outline" class="ux-input--has-error" theme.bind="inputTheme" label="With error"></ux-input>
-        <ux-input-info>Error message</ux-input-info>
-      </p>
-    </ux-grid-cell>
-    <ux-grid-cell sm="3">
-      <h4>Custom Input Theme</h4>
-      <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'fontSize', 'letterSpacing', 'labelFontSize', 'labelLetterSpacing']">
-        <ux-input label.bind="prop" value.bind="inputTheme[prop]" change.trigger="themeChanged('inputTheme')"></ux-input>
-      </ux-field>
-    </ux-grid-cell>
-    <ux-grid-cell sm="3">
-        <h4>&nbsp;</h4>
-      <ux-field repeat.for="prop of ['borderColor', 'borderBottomWidth', 'borderBottomColor', 'disabledForeground', 'disabledBackground', 'disabledBorder', 'error']">
-        <ux-input label.bind="prop" value.bind="inputTheme[prop]" change.trigger="themeChanged('inputTheme')"></ux-input>
-      </ux-field>
-      <ux-grid  theme.bind="{outerPadding: '0'}">
-        <ux-grid-cell xs="6">
-          <ux-field>
-            <label>Border Radius</label>
-            <br><ux-slider value.bind="inputBorderRadius" min="0" max="10" style="width:100%"></ux-slider>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel']">
+            <ux-input label.bind="prop" value.bind="themeService.input[prop]">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.input[prop]}"></span>
+            </ux-input>
           </ux-field>
-        </ux-grid-cell>
-        <ux-grid-cell xs="6">
-          <ux-field>
-            <label>Border Width</label>
-            <br><ux-slider value.bind="inputBorderWidth" min="0" max="5" style="width:100%"></ux-slider>
-          </ux-field>
-        </ux-grid-cell>
-        <ux-grid-cell xs="6">
-          <ux-field>
-            <label>Border Active Width</label>
-            <br><ux-slider value.bind="inputBorderActiveWidth" min="0" max="5" style="width:100%"></ux-slider>
-          </ux-field>
-        </ux-grid-cell>
-      </ux-grid>
-      <ux-button size="small" type="outline" click.delegate="resetTheme('inputTheme')">Reset</ux-button>
-    </ux-grid-cell>
-  </ux-grid>
+          <template if.bind="showAdvancedInput">
+            <ux-field repeat.for="prop of ['backgroundHover', 'borderColor', 'borderBottomColor', 'disabledForeground', 'disabledBackground', 'disabledBorder', 'error']">
+              <ux-input label.bind="prop" value.bind="themeService.input[prop]">
+                <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.input[prop]}"></span>
+              </ux-input>
+            </ux-field>
+            <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'labelFontSize', 'labelLetterSpacing']">
+              <ux-input label.bind="prop" value.bind="themeService.input[prop]"></ux-input>
+            </ux-field>  
+            <ux-field>
+              <label>Border Radius</label>
+              <br><ux-slider value.bind="themeService.inputBorderRadius" min="0" max="10" style="width:100%"></ux-slider>
+            </ux-field>
+            <ux-field>
+              <label>Border Width</label>
+              <br><ux-slider value.bind="themeService.inputBorderWidth" min="0" max="5" style="width:100%"></ux-slider>
+            </ux-field>
+            <ux-field>
+              <label>Border Active Width</label>
+              <br><ux-slider value.bind="themeService.inputBorderActiveWidth" min="0" max="5" style="width:100%"></ux-slider>
+            </ux-field> 
+          </template>
+        </ux-card-content>
+        <div class="ux-card__separator"></div>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="showAdvancedInput = !showAdvancedInput">${showAdvancedInput ? 'Collapse':'Expand'}</ux-button>
+          <ux-button type="text">Reset</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+    </ux-grid>
+
+  </section>
+
+  
+
+  
+
 </template>

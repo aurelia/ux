@@ -1,22 +1,17 @@
-import { StyleEngine, UxTheme } from '@aurelia-ux/core';
+import { ThemeService } from './theme-service';
 import { inject } from 'aurelia-dependency-injection';
 import { RouterConfiguration, Router } from 'aurelia-router';
 import { routes } from './routes';
-import * as themes from './themes.json';
 
-@inject(StyleEngine)
+@inject(ThemeService)
 export class App {
   public router: Router;
-  private theme: string | null = localStorage.getItem('theme');
 
-  constructor(private styleEngine: StyleEngine) {
-    const currentTheme = this.theme === 'dark' ? themes.dark : themes.aurelia;
-    console.log('currentTheme', currentTheme);
-    this.styleEngine.applyThemeGroup(currentTheme);
+  constructor(private themeService: ThemeService) {
+    this.themeService.init();
   }
 
   public activate() {
-    this.toggleTheme(this.theme || 'dark');
     document.body.classList.add('theming');
   }
 
@@ -30,20 +25,5 @@ export class App {
     config.options.root = '/';
 
     config.map(routes);
-  }
-
-  public toggleTheme(themeName?: string) {
-    if (themeName) {
-      if (themeName === this.theme) {
-        return;
-      }
-      this.theme = themeName;
-    } else {
-      this.theme = this.theme === 'aurelia' ? 'dark' : 'aurelia';
-    }
-    localStorage.setItem('theme', this.theme);
-    const currentThemes: UxTheme[] = this.theme === 'dark' ? (themes.dark as UxTheme[]) : (themes.aurelia as UxTheme[]);
-    console.log('currentThemes', currentThemes);
-    this.styleEngine.applyThemeGroup(currentThemes);
   }
 }
