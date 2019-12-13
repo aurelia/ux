@@ -79,17 +79,7 @@ export class UxInput implements UxComponent {
       }
     }
 
-    if ([
-      'text',
-      'password',
-      'number',
-      'email',
-      'url',
-      'tel',
-      'search'
-    ].includes(this.type)) {
-      textbox.setAttribute('type', this.type);
-    }
+    this.typeChanged(this.type);
 
     if (this.min) {
       textbox.setAttribute('min', this.min.toString());
@@ -108,7 +98,6 @@ export class UxInput implements UxComponent {
     }
 
     this.autocompleteChanged(this.autocomplete);
-    //this.variantChanged(this.variant, '');
     this.themeChanged(this.theme);
   }
 
@@ -184,9 +173,19 @@ export class UxInput implements UxComponent {
   }
 
   public typeChanged(newValue: any) {
-    if (newValue !== 'text' && newValue !== 'password' && newValue !== 'number') {
+    if (![
+      'text',
+      'password',
+      'number',
+      'email',
+      'url',
+      'tel',
+      'search'
+    ].includes(newValue)) {
       this.type = 'text';
+      return;
     }
+    this.textbox.setAttribute('type', this.type);
   }
 
   public rawValueChanged(newValue: string) {
@@ -206,10 +205,6 @@ export class UxInput implements UxComponent {
     this.textbox.focus();
   }
 
-  // public variantChanged(newValue: string, oldValue: string) {
-  //   this.element.classList.remove(`ux-input--${oldValue}`);
-  //   this.element.classList.add(`ux-input--${newValue}`);
-  // }
 }
 
 function stopEvent(e: Event) {
