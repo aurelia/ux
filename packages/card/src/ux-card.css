@@ -36,6 +36,12 @@
 .ux-card__spacer {
   flex: 1;
 }
+.ux-card__separator {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 24px auto;
+}
 
 .ux-card__title {
   display: flex;
