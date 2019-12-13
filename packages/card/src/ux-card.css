@@ -20,7 +20,13 @@
 
 .ux-card__header {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+}
+
+.ux-card__thumbnail {
+  flex-shrink: 0;
+  margin-right: 16px;
+  align-self: flex-start;
 }
 
 .ux-card__header-row {
