@@ -34,7 +34,6 @@
 .ux-card__title {
   display: flex;
   flex-direction: column;
-  font-family: Roboto, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
