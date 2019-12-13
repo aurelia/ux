@@ -4,7 +4,7 @@
   padding: 0 16px;
   width: 100%;
   color: #757575;
-  color: var(--aurelia-ux--input-info-foreground, var(--aurelia-ux--design-control-label, #757575));
+  color: var(--aurelia-ux--input-info-foreground, var(--aurelia-ux--design-control-label-color, #757575));
   box-sizing: border-box;
   margin-top: 4px;
 }

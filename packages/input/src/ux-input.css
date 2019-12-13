@@ -25,7 +25,7 @@
   background: var(--aurelia-ux--design-app-background);
   border-style: solid;
   border-color: #757575;
-  border-color: var(--aurelia-ux--input-foreground-label, var(--aurelia-ux--design-control-label, #757575));
+  border-color: var(--aurelia-ux--input-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
   border-width: var(--aurelia-ux--input-border-width, 1px);
 }
 .ux-input:hover:not(.ux-input--focused).ux-input--outline {
@@ -38,7 +38,7 @@
   /* background-color: #4043ff;
   background-color: var(--aurelia-ux--input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff)); */
   background-color: #757575;
-  background-color: var(--aurelia-ux--input-border-bottom-color, var(--aurelia-ux--design-control-label, #757575));
+  background-color: var(--aurelia-ux--input-border-bottom-color, var(--aurelia-ux--design-control-label-color, #757575));
   position: absolute;
   bottom: 0;
   left: 0;
@@ -94,7 +94,7 @@
 
 .ux-input :not(input) {
   color: #757575;
-  color: var(--aurelia-ux--input-foreground-label, var(--aurelia-ux--design-control-label, #757575));
+  color: var(--aurelia-ux--input-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
 }
 
 .ux-input--has-error :not(input) {

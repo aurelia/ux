@@ -10,7 +10,7 @@ export class IOSDesign implements Design {
 
   public controlBackground = swatches.alphaGrey.p50;
   public controlForeground = swatches.alphaGrey.a700;
-  public controlLabel = swatches.grey.p600;
+  public controlLabelColor = swatches.grey.p600;
 
   public primary = swatches.indigo.p500;
   public primaryForeground = swatches.white;

@@ -4,7 +4,7 @@ export interface Palette {
 
   controlBackground: string;
   controlForeground: string;
-  controlLabel: string;
+  controlLabelColor: string;
 
   primary: string;
   primaryForeground: string;
