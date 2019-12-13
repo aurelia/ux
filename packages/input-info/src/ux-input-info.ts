@@ -1,9 +1,9 @@
-import { UxTextArea } from './../../textarea/src/ux-textarea';
-import { UxInput } from './../../input/src/ux-input';
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { UxInputInfoTheme } from './ux-input-info-theme';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { UxTextArea } from '@aurelia-ux/textarea';
+import { UxInput } from '@aurelia-ux/input';
 import { computedFrom } from 'aurelia-binding';
 
 @inject(Element, StyleEngine)
