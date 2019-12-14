@@ -108,7 +108,7 @@ export class UxSlider implements UxComponent {
     this.value = this.boundValue(steppedValue);
   }
 
-  public onTrackMouseDown() {
+  public onTrackMouseDown(e: MouseEvent | TouchEvent) {
     if (this.disabled) {
       return;
     }
@@ -116,19 +116,34 @@ export class UxSlider implements UxComponent {
     this.isActive = true;
 
     const winEvents = new ElementEvents(window as any);
-    const upAction = (e: MouseEvent) => {
+    const upAction = (e: MouseEvent | TouchEvent | FocusEvent) => {
+      if (!this.isActive) {
+        winEvents.disposeAll();
+        return;
+      }
+      if (e instanceof MouseEvent && e.clientX) {
+        this.updateValue(e.clientX);
+      }
+      if (e instanceof TouchEvent && e.touches.length) {
+        this.updateValue(e.touches[0].clientX);
+      }
+      this.isActive = false;
+      winEvents.disposeAll();
+    };
+    const moveAction = (e: MouseEvent | TouchEvent) => {
       if (!this.isActive) {
         return;
       }
-
-      this.updateValue(e.clientX);
-      this.isActive = false;
-
-      winEvents.disposeAll();
+      this.updateValue(e instanceof MouseEvent ? e.clientX : e.touches[0].clientX);
     };
     winEvents.subscribe('blur', upAction, true);
-    winEvents.subscribe('mouseup', upAction, true);
-    winEvents.subscribe('mousemove', this.onMouseMove.bind(this), true);
+    if (e instanceof MouseEvent) {
+      winEvents.subscribe('mouseup', upAction, true);
+      winEvents.subscribe('mousemove', moveAction, true);
+    } else if (e instanceof TouchEvent) {
+      winEvents.subscribe('touchend', upAction, true);
+      winEvents.subscribe('touchmove', moveAction, true);
+    }
   }
 
   public onKeyDown(e: KeyboardEvent) {
@@ -149,10 +164,6 @@ export class UxSlider implements UxComponent {
 
   public setValue(value: number) {
     this.value = value;
-  }
-
-  private onMouseMove(e: MouseEvent) {
-    this.updateValue(e.clientX);
   }
 
   private boundValue(potentialValue: number) {
