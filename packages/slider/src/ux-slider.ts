@@ -98,8 +98,9 @@ export class UxSlider implements UxComponent {
   }
 
   public updateValue(currentMouseX: number) {
-    const normalizedMouseX = currentMouseX - this.element.offsetLeft;
-    const percentValue = normalizedMouseX / this.element.clientWidth;
+    const rect = this.element.getBoundingClientRect();
+    const normalizedMouseX = currentMouseX - rect.x;
+    const percentValue = normalizedMouseX / rect.width;
     const rawValue = ((this.max - this.min) * percentValue) + this.min;
     const numSteps = Math.round((rawValue - this.min) / this.step);
     const steppedValue = this.min + (this.step * numSteps);
