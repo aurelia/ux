@@ -99,7 +99,9 @@ export class StyleController {
     let designInnerHtml = '';
 
     for (const key of this.getThemeKeys(theme)) {
-      designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, (theme as any)[key])}\r\n`;
+      if ((theme as any)[key]) {
+        designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, (theme as any)[key])}\r\n`;
+      }
     }
 
     return designInnerHtml;
