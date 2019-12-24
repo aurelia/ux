@@ -5,10 +5,10 @@
   box-sizing: border-box;
   padding: 0;
   border-radius: 2px;
-  background-color: #fff;
-  background-color: var(--aurelia-ux--card-background, var(--ux-swatch--white, #fff));
-  color: #B71C1C;
-  color: var(--aurelia-ux--card-foreground, var(--aurelia-ux--design-app-foreground, #B71C1C));
+  background-color: #F5F5F5;
+  background-color: var(--aurelia-ux--card-background, var(--aurelia-ux--design-surface-background, #F5F5F5));
+  color: #212121;
+  color: var(--aurelia-ux--card-foreground, var(--aurelia-ux--design-surface-foreground, #212121));
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
 }
