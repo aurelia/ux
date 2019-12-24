@@ -2,6 +2,9 @@ export interface Palette {
   appBackground: string;
   appForeground: string;
 
+  surfaceBackground: string;
+  surfaceForeground: string;
+
   controlBackground: string;
   controlForeground: string;
   controlLabelColor: string;

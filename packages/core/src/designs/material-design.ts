@@ -8,6 +8,9 @@ export class MaterialDesign implements Design {
   public appBackground = swatches.grey.p50;
   public appForeground = swatches.grey.p900;
 
+  public surfaceBackground = swatches.grey.p100;
+  public surfaceForeground = swatches.grey.p900;
+
   public controlBackground = swatches.alphaGrey.p50;
   public controlForeground = swatches.alphaGrey.a700;
   public controlLabelColor = swatches.grey.p600;
