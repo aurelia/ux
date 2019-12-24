@@ -80,11 +80,11 @@
 .ux-input__label {
   position: absolute;
   cursor: text;
-  font-size: 13px;
-  font-size: var(--aurelia-ux--input-label-font-size, 13px);
+  font-size: inherit;
+  font-size: var(--aurelia-ux--input-font-size, inherit);
   letter-spacing: 0.5px;
   letter-spacing: var(--aurelia-ux--input-label-letter-spacing, 0.5px);
-  transition: transform ease 150ms;
+  transition: all ease 150ms;
 }
 
 .ux-input--outline .ux-input__label {
@@ -116,6 +116,8 @@
 
 .ux-input--has-value .ux-input__label,
 .ux-input--focused .ux-input__label {
+  font-size: 13px;
+  font-size: var(--aurelia-ux--input-label-font-size, 13px);
   transform: translateY(-1.3em);
 }
 
