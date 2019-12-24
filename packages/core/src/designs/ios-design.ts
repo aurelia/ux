@@ -37,7 +37,7 @@ export class IOSDesign implements Design {
   public disabledForeground = swatches.blueGrey.p100;
 
   public error = swatches.red.p500;
-  public errorContrast = swatches.white;
+  public onError = swatches.white;
 
   public elevationNone = shadows.depth_0;
   public elevation2dp = shadows.depth_2dp;

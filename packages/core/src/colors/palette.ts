@@ -31,5 +31,5 @@ export interface Palette {
   disabledForeground: string;
 
   error: string;
-  errorContrast: string;
+  onError: string;
 }
