@@ -26,7 +26,7 @@ export class UxInputTheme implements UxTheme {
   public borderActiveWidth?: string;
   // public borderBottomActiveColor?: string;
 
-  public diabledForeground?: string;
+  public disabledForeground?: string;
   public disabledBackground?: string;
   public disabledBorder?: string;
 

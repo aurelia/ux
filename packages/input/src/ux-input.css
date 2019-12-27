@@ -148,6 +148,8 @@
 
 .ux-input[disabled],
 .ux-input[readonly] {
+  color: #9E9E9E;
+  color: var(--aurelia-ux--input-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
   background-color: #e1e1e1;
   background-color: var(--aurelia-ux--input-disabled-background, #e1e1e1);
 }
