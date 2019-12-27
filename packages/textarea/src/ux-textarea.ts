@@ -74,6 +74,7 @@ export class UxTextArea implements UxComponent {
       textbox.setAttribute('maxlength', this.maxlength.toString());
     }
 
+    this.themeChanged(this.theme);
     this.autocompleteChanged(this.autocomplete);
   }
 
