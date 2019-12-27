@@ -1,9 +1,10 @@
-<template role="textbox" class="ux-textarea">
+<template role="textbox" class="ux-textarea ${focus ? 'ux-textarea--focused':''} ux-textarea--${variant}" click.trigger="focus = true">
   <require from="./ux-textarea.css"></require>
+  <label class="ux-textarea__label" if.bind="label || placeholder">${label || placeholder}</label>
   <textarea ref="textbox"
     class="ux-textarea__inner-textarea"
     value.bind="rawValue"
-    focus.bind="focus"
+    focus.bind="focus" 
     disabled.bind="disabled & booleanAttr"
     readonly.bind="readonly & booleanAttr"
     require.bind="required & booleanAttr"
@@ -12,5 +13,6 @@
     aria-required.bind="required & booleanAttr">
   </textarea>
 
-  <div class="ux-textarea__bottom-border"></div>
+  <div class="ux-textarea__border-bottom" if.bind="variant === 'filled'"></div>
+  <div class="ux-textarea__border-bottom-active" if.bind="variant === 'filled'"></div>
 </template>

@@ -25,7 +25,9 @@ export class UxTextArea implements UxComponent {
   @bindable public minlength: number;
   @bindable public readonly: boolean | string = false;
   @bindable public rows: number;
+  @bindable public label: any;
   @bindable public theme: UxTextAreaTheme;
+  @bindable public variant: 'filled' | 'outline' = 'filled';
 
   @observable({ initializer: () => '' })
   public rawValue: string;
@@ -51,8 +53,8 @@ export class UxTextArea implements UxComponent {
       const attributeValue = element.getAttribute('placeholder');
 
       if (attributeValue) {
-        textbox.setAttribute('placeholder', attributeValue);
-        element.removeAttribute('placeholder');
+        // textbox.setAttribute('placeholder', attributeValue);
+        // element.removeAttribute('placeholder');
       }
     }
 
@@ -123,11 +125,17 @@ export class UxTextArea implements UxComponent {
     }
   }
 
-  public rawValueChanged(rawValue: string) {
+  public rawValueChanged(newValue: string) {
+    if (typeof newValue === 'string' && newValue.length > 0) {
+      this.element.classList.add('ux-textarea--has-value');
+    } else {
+      this.element.classList.remove('ux-textarea--has-value');
+    }
+
     if (this.ignoreRawChanges) {
       return;
     }
-    this.setValue(rawValue);
+    this.setValue(newValue);
   }
 
   public themeChanged(newValue: any) {
@@ -148,6 +156,24 @@ export class UxTextArea implements UxComponent {
   public focusChanged(focus: boolean | string) {
     focus = focus || focus === '' ? true : false;
     this.element.dispatchEvent(DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
+  }
+
+  public variantChanged(newValue: string) {
+    if (newValue === 'outline') {
+      let parentBackgroundColor = '';
+      let el: HTMLElement = this.element;
+      while (parentBackgroundColor === '' && el.parentElement) {
+        let color = window.getComputedStyle(el.parentElement, null).getPropertyValue('background-color');
+        if (color.toString() === 'rgba(0, 0, 0, 0)') {
+          color = '';
+        }
+        parentBackgroundColor = color;
+        el = el.parentElement;
+      }
+      this.element.style.backgroundColor = parentBackgroundColor;
+    } else {
+      this.element.style.backgroundColor = '';
+    }
   }
 }
 
