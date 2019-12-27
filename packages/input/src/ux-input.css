@@ -28,23 +28,19 @@
   border-color: var(--aurelia-ux--input-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
   border-width: var(--aurelia-ux--input-border-width, 1px);
 }
-.ux-input:hover:not(.ux-input--focused).ux-input--outline {
+.ux-input:hover:not(.ux-input--focused, .ux-input--has-error).ux-input--outline {
   border-color: #000000EE;
   border-color: var(--aurelia-ux--input-foreground, var(--aurelia-ux--design-control-foreground, #000000EE));
 }
 
 .ux-input__border-bottom {
   height: var(--aurelia-ux--input-border-width, 1px);
-  /* background-color: #4043ff;
-  background-color: var(--aurelia-ux--input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff)); */
   background-color: #757575;
   background-color: var(--aurelia-ux--input-border-bottom-color, var(--aurelia-ux--design-control-label-color, #757575));
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  /* transform: scalex(0); */
-  /* transition: transform ease 150ms; */
 }
 
 .ux-input__border-bottom-active {
@@ -88,7 +84,7 @@
 }
 
 .ux-input--outline .ux-input__label {
-  background: var(--aurelia-ux--design-app-background);
+  background: inherit;
   padding: 0 4px;
 }
 
@@ -170,10 +166,13 @@
 
 
 .ux-input__inner-input:focus~.ux-input__border-bottom-active {
-  /* height: var(--aurelia-ux--input-border-bottom-active-width, 2px); */
   transform: scaleX(1);
-  /* background-color: #3F51B5;
-  background-color: var(--aurelia-ux--input-active-color, var(--aurelia-ux--design-primary, #3F51B5)); */
+}
+
+.ux-input--has-error.ux-input--outline {
+  border-color: #F44336;
+  border-color: var(--aurelia-ux--input-error, var(--aurelia-ux--design-error, #F44336));
+  border-width: var(--aurelia-ux--input-border-active-width, 2px);
 }
 
 .ux-input--focused.ux-input--outline {

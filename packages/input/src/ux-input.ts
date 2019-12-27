@@ -99,6 +99,7 @@ export class UxInput implements UxComponent {
 
     this.autocompleteChanged(this.autocomplete);
     this.themeChanged(this.theme);
+    this.variantChanged(this.variant);
   }
 
   public attached() {
@@ -203,6 +204,24 @@ export class UxInput implements UxComponent {
 
   public focusInput() {
     this.textbox.focus();
+  }
+
+  public variantChanged(newValue: string) {
+    if (newValue === 'outline') {
+      let parentBackgroundColor = '';
+      let el: HTMLElement = this.element;
+      while (parentBackgroundColor === '' && el.parentElement) {
+        let color = window.getComputedStyle(el.parentElement, null).getPropertyValue('background-color');
+        if (color.toString() === 'rgba(0, 0, 0, 0)') {
+          color = '';
+        }
+        parentBackgroundColor = color;
+        el = el.parentElement;
+      }
+      this.element.style.backgroundColor = parentBackgroundColor;
+    } else {
+      this.element.style.backgroundColor = '';
+    }
   }
 
 }
