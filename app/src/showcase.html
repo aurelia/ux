@@ -4,4 +4,81 @@
     <h1>Showcase</h1>
     <p>Find here common usecases and see how each Aurelia UX component fit with the others.</p>
   </section>
+  <section>
+
+    <div class="form-row" style="text-align: center">
+      Variant
+      <label>
+        <ux-radio model.bind="'filled'" checked.bind="variant"></ux-radio>
+        Filled
+      </label>
+      <label>
+        <ux-radio model.bind="'outline'" checked.bind="variant"></ux-radio>
+        Outline
+      </label>
+    </div>
+
+    <ux-grid class="remove-padding">
+      <ux-card sm="6">
+        <ux-card-content>
+          <ux-form>
+            <div class="form-row">
+  
+              <ux-field label="First Name">
+                <ux-input variant.bind="variant" maxlength="10" value.bind="firstName & validate"></ux-input>
+                <ux-input-info ux-input-counter>John</ux-input-info>
+              </ux-field>
+  
+              <ux-field label="Last Name">
+                <ux-input variant.bind="variant" maxlength="10" value.bind="lastName & validate"></ux-input>
+                <ux-input-info ux-input-counter>Doe</ux-input-info>
+              </ux-field>
+  
+            </div>
+  
+            <ux-field label="Email Address">
+              <ux-input variant.bind="variant" type="email" value.bind="email & validate"></ux-input>
+              <ux-input-info>email@example.com</ux-input-info>
+            </ux-field>
+  
+            <ux-field label="Biography">
+              <ux-textarea variant.bind="variant" auto-resize></ux-textarea>
+            </ux-field>
+  
+            <ux-button click.delegate="submit()">Submit</ux-button>
+          </ux-form>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="6">
+        <ux-card-content>
+          <ux-form>
+            <div class="form-row">
+  
+              <ux-field>
+                <ux-input variant.bind="variant" label="First Name" maxlength="10" value.bind="firstName & validate"></ux-input label="First Name">
+                <ux-input-info ux-input-counter>John</ux-input-info>
+              </ux-field>
+  
+              <ux-field>
+                <ux-input variant.bind="variant" label="Last Name" maxlength="10" value.bind="lastName & validate"></ux-input>
+                <ux-input-info ux-input-counter>Doe</ux-input-info>
+              </ux-field>
+  
+            </div>
+  
+            <ux-field>
+              <ux-input variant.bind="variant" label="Email Address" type="email" value.bind="email & validate"></ux-input label="Email Address">
+              <ux-input-info>email@example.com</ux-input-info>
+            </ux-field>
+  
+            <ux-field>
+              <ux-textarea variant.bind="variant" label="Biography" auto-resize></ux-textarea>
+            </ux-field>
+  
+            <ux-button click.delegate="submit()">Submit</ux-button>
+          </ux-form>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+  </section>
 </template>

@@ -11,27 +11,27 @@
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="4">
         <h4>Primary (default)</h4>
-        <p><ux-button theme.bind="buttonTheme" type="raised">Raised</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" type="flat">Flat</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" type="text">Text</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" type="outline">Outline</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" type="fab">Fab</ux-button></p>
+        <p><ux-button type="raised">Raised</ux-button></p>
+        <p><ux-button type="flat">Flat</ux-button></p>
+        <p><ux-button type="text">Text</ux-button></p>
+        <p><ux-button type="outline">Outline</ux-button></p>
+        <p><ux-button type="fab">Fab</ux-button></p>
       </ux-grid-cell>
       <ux-grid-cell sm="4">
         <h4>Accent (.ux-button--accent)</h4>
-        <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="raised">Raised</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="flat">Flat</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="text">Text</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="outline">Outline</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" class="ux-button--accent" type="fab">Fab</ux-button></p>
+        <p><ux-button class="ux-button--accent" type="raised">Raised</ux-button></p>
+        <p><ux-button class="ux-button--accent" type="flat">Flat</ux-button></p>
+        <p><ux-button class="ux-button--accent" type="text">Text</ux-button></p>
+        <p><ux-button class="ux-button--accent" type="outline">Outline</ux-button></p>
+        <p><ux-button class="ux-button--accent" type="fab">Fab</ux-button></p>
       </ux-grid-cell>
       <ux-grid-cell sm="4">
         <h4>Disabled (disabled)</h4>
-        <p><ux-button theme.bind="buttonTheme" disabled type="raised">Raised</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" disabled type="flat">Flat</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" disabled type="text">Text</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" disabled type="outline">Outline</ux-button></p>
-        <p><ux-button theme.bind="buttonTheme" disabled type="fab">Fab</ux-button></p>
+        <p><ux-button disabled type="raised">Raised</ux-button></p>
+        <p><ux-button disabled type="flat">Flat</ux-button></p>
+        <p><ux-button disabled type="text">Text</ux-button></p>
+        <p><ux-button disabled type="outline">Outline</ux-button></p>
+        <p><ux-button disabled type="fab">Fab</ux-button></p>
       </ux-grid-cell>
     </ux-grid>
   </section>
@@ -41,13 +41,13 @@
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="6">
         <h4>Default</h4>
-        <p><ux-input theme.bind="inputTheme"></ux-input></p>
+        <p><ux-input></ux-input></p>
         <p>
-          <ux-input theme.bind="inputTheme" label="With floated label" maxlength.bind="50"></ux-input>
+          <ux-input label="With floated label" maxlength.bind="50"></ux-input>
           <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
         </p>
         <p>
-          <ux-input class="ux-input--has-error" theme.bind="inputTheme" label="With error">
+          <ux-input class="ux-input--has-error" label="With error">
               <ux-icon icon="error" slot="trailing-icon"></ux-icon>
           </ux-input>
           <ux-input-info>Error message</ux-input-info>
@@ -55,16 +55,47 @@
       </ux-grid-cell>
       <ux-grid-cell sm="6">
         <h4>Icons</h4>
-        <p><ux-input theme.bind="inputTheme" label="With leading icon"><ux-icon icon="person" slot="leading-icon"></ux-icon></ux-input></p>
-        <p><ux-input theme.bind="inputTheme" label="With trailing icon"><ux-icon icon="remove_red_eye" slot="trailing-icon"></ux-icon></ux-input></p>
+        <p><ux-input label="With leading icon"><ux-icon icon="person" slot="leading-icon"></ux-icon></ux-input></p>
+        <p><ux-input label="With trailing icon"><ux-icon icon="remove_red_eye" slot="trailing-icon"></ux-icon></ux-input></p>
         <h4>Outline</h4>
         <p>
-          <ux-input variant="outline" theme.bind="inputTheme" label="With leading icon"></ux-input>
+          <ux-input variant="outline" label="With leading icon"></ux-input>
           <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
         </p>
         <p>
-          <ux-input variant="outline" class="ux-input--has-error" theme.bind="inputTheme" label="With error"></ux-input>
+          <ux-input variant="outline" class="ux-input--has-error" label="With error"></ux-input>
           <ux-input-info>Error message</ux-input-info>
+        </p>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>Textarea & Input Info</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Default</h4>
+        <p><ux-textarea></ux-textarea></p>
+        <p>
+          <ux-textarea label="With floated label" auto-resize></ux-textarea>
+        </p>
+        <p>
+          <ux-textarea class="ux-textarea--has-error" label="With error"></ux-textarea>
+        </p>
+        <p>
+          <ux-textarea auto-resize label="Auto Resize"></ux-textarea>
+        </p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>Outline</h4>
+        <p>
+          <ux-textarea variant="outline" label="Default"></ux-textarea>
+        </p>
+        <p>
+          <ux-textarea variant="outline" class="ux-textarea--has-error" label="With error"></ux-textarea>
+        </p>
+        <p>
+          <ux-textarea variant="outline" auto-resize label="Auto Resize"></ux-textarea>
         </p>
       </ux-grid-cell>
     </ux-grid>

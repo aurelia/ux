@@ -82,7 +82,7 @@
             <ux-input label.bind="prop" value.bind="design[prop]">
               <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
             </ux-input>
-          </ux-field>    
+          </ux-field>
         </ux-card-content>
       </ux-card>
   
@@ -318,15 +318,15 @@
             </ux-field>  
             <ux-field>
               <label>Border Radius</label>
-              <br><ux-slider value.bind="themeService.inputBorderRadius" min="0" max="10" style="width:100%"></ux-slider>
+              <br><ux-slider value.bind="themeService.inputBorderRadius" min="0" max="10" step="1" style="width:100%"></ux-slider>
             </ux-field>
             <ux-field>
               <label>Border Width</label>
-              <br><ux-slider value.bind="themeService.inputBorderWidth" min="0" max="5" style="width:100%"></ux-slider>
+              <br><ux-slider value.bind="themeService.inputBorderWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
             </ux-field>
             <ux-field>
               <label>Border Active Width</label>
-              <br><ux-slider value.bind="themeService.inputBorderActiveWidth" min="0" max="5" style="width:100%"></ux-slider>
+              <br><ux-slider value.bind="themeService.inputBorderActiveWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
             </ux-field> 
           </template>
         </ux-card-content>

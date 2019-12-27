@@ -1,7 +1,7 @@
 import { PLATFORM } from "aurelia-pal";
 
 export let routes = [
-  { route: '', redirect: 'demo' },
+  { route: '', redirect: 'theming' },
 
   { route: 'theming', moduleId: PLATFORM.moduleName('theming'), name: 'theming', title: 'Theming', nav: true },
   { route: 'components', moduleId: PLATFORM.moduleName('components'), name: 'components', title: 'Components', nav: true },

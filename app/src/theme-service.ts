@@ -102,12 +102,10 @@ export class ThemeService {
   }
 
   public componentThemeChanged(key: string) {
-    console.log('componentThemeChanged', key);
     let theme: any = (this as any)[key];
     theme = {...theme};
     Object.keys(theme).forEach(key => !theme[key] ? delete theme[key] : '');
     (this as any)[key] = theme;
-    console.log('theme', theme);
     this.styleEngine.applyTheme(theme);
   }
 
@@ -121,15 +119,12 @@ export class ThemeService {
   }
 
   public inputVariableChanged() {
-    console.log('here');
     if (!this.input) {
       return;
     }
-    console.log('here2');
     this.input.borderRadius = `${this.inputBorderRadius}px`;
     this.input.borderWidth = `${this.inputBorderWidth}px`;
     this.input.borderActiveWidth = `${this.inputBorderActiveWidth}px`;
-    console.log('here3');
     this.componentThemeChanged('input');
   }
 }
