@@ -51,6 +51,7 @@
   transition: padding-top 250ms ease;
   color: inherit;
   background-color: transparent;
+  font-weight: 400;
 }
 
 .ux-textarea__border-bottom {

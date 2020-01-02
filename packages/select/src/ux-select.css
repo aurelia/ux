@@ -74,6 +74,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-weight: 400;
 }
 
 .ux-select__label,

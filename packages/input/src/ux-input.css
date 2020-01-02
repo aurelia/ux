@@ -75,6 +75,7 @@
   outline: none;
   padding-left: 0;
   padding-right: 0;
+  font-weight: 400;
 }
 
 .ux-input__label {
