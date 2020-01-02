@@ -13,6 +13,8 @@ export class Showcase {
   public firstName = '';
   public lastName = '';
   public email = '';
+  public interests: Array<string> = [];
+  public ageGroup: string = '21-30';
   public variant = 'filled';
   public controller: ValidationController;
 

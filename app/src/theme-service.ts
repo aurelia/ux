@@ -1,3 +1,4 @@
+import { UxTextAreaTheme } from './../../packages/textarea/src/ux-textarea-theme';
 import { StyleEngine, UxTheme } from '@aurelia-ux/core';
 import * as themes from './themes.json';
 import { inject, observable } from 'aurelia-framework';
@@ -13,15 +14,25 @@ export interface ThemesSet {
 export class ThemeService {
 
   public themesSets: Array<ThemesSet>;
-  public currentTheme: 'none' | 'aurelia' | 'dark' | number;
+  public currentTheme: 'none' | 'light' | 'dark' | number;
 
   public button: UxButtonTheme = {themeKey: 'button'};
   public input: UxInputTheme = {themeKey: 'input'};
+  public textarea: UxTextAreaTheme = {themeKey: 'textarea'};
+  public select: UxTextAreaTheme = {themeKey: 'select'};
+  public checkbox: UxTextAreaTheme = {themeKey: 'checkbox'};
+  public radio: UxTextAreaTheme = {themeKey: 'radio'};
   @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderRadius: number = 2;
   @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderWidth: number = 1;
   @observable({changeHandler: 'inputVariableChanged'}) public inputBorderRadius: number = 2;
   @observable({changeHandler: 'inputVariableChanged'}) public inputBorderWidth: number = 1;
   @observable({changeHandler: 'inputVariableChanged'}) public inputBorderActiveWidth: number = 2;
+  @observable({changeHandler: 'textareaVariableChanged'}) public textareaBorderRadius: number = 2;
+  @observable({changeHandler: 'textareaVariableChanged'}) public textareaBorderWidth: number = 1;
+  @observable({changeHandler: 'textareaVariableChanged'}) public textareaBorderActiveWidth: number = 2;
+  @observable({changeHandler: 'selectVariableChanged'}) public selectBorderRadius: number = 2;
+  @observable({changeHandler: 'selectVariableChanged'}) public selectBorderWidth: number = 1;
+  @observable({changeHandler: 'selectVariableChanged'}) public selectBorderActiveWidth: number = 2;
 
 
   constructor(private styleEngine: StyleEngine) {}
@@ -42,8 +53,8 @@ export class ThemeService {
       localStorage.setItem('themes', JSON.stringify(storageThemes));
     }
     this.themesSets = storageThemes;
-    let currentTheme: string | number = localStorage.getItem('currentTheme') || 'aurelia';
-    if (currentTheme !== 'none' && currentTheme !== 'aurelia' && currentTheme !== 'dark') {
+    let currentTheme: string | number = localStorage.getItem('currentTheme') || 'light';
+    if (currentTheme !== 'none' && currentTheme !== 'light' && currentTheme !== 'dark') {
       currentTheme = parseInt(currentTheme, 10);
     }
     this.apply(currentTheme);
@@ -53,8 +64,12 @@ export class ThemeService {
     const name = `New theme ${this.themesSets.length + 1}`;
     this.themesSets.push({
       name,
-      themes: this.aurelia
+      themes: this.light
     });
+    localStorage.setItem('themes', JSON.stringify(this.themesSets));
+  }
+
+  public saveThemesSet() {
     localStorage.setItem('themes', JSON.stringify(this.themesSets));
   }
 
@@ -62,20 +77,20 @@ export class ThemeService {
     return themes.none;
   }
 
-  get aurelia() {
-    return themes.aurelia;
+  get light() {
+    return themes.light;
   }
 
   get dark() {
     return themes.dark;
   }
 
-  public apply(theme: 'none' | 'aurelia' | 'dark' | number, setAureliaIfNotFound: boolean = false) {
+  public apply(theme: 'none' | 'light' | 'dark' | number, setLightIfNotFound: boolean = false) {
     let themeToApply: UxTheme[] | null = null;
     if (theme === 'none') {
       themeToApply = this.none;
-    } else if (theme === 'aurelia') {
-      themeToApply = this.aurelia;
+    } else if (theme === 'light') {
+      themeToApply = this.light;
     } else if (theme === 'dark') {
       themeToApply = this.dark;
     } else if (typeof theme === 'number' && this.themesSets[theme]) {
@@ -83,9 +98,9 @@ export class ThemeService {
     }
     if (themeToApply === null) {
       console.warn('Theme to apply not found');
-      if (setAureliaIfNotFound) {
-        theme = 'aurelia';
-        themeToApply = this.aurelia;
+      if (setLightIfNotFound) {
+        theme = 'light';
+        themeToApply = this.light;
       } else {
         return;
       }
@@ -132,5 +147,25 @@ export class ThemeService {
     this.input.borderWidth = `${this.inputBorderWidth}px`;
     this.input.borderActiveWidth = `${this.inputBorderActiveWidth}px`;
     this.componentThemeChanged('input');
+  }
+
+  public textareaVariableChanged() {
+    if (!this.textarea) {
+      return;
+    }
+    this.textarea.borderRadius = `${this.textareaBorderRadius}px`;
+    this.textarea.borderWidth = `${this.textareaBorderWidth}px`;
+    this.textarea.borderActiveWidth = `${this.textareaBorderActiveWidth}px`;
+    this.componentThemeChanged('textarea');
+  }
+
+  public selectVariableChanged() {
+    if (!this.select) {
+      return;
+    }
+    this.select.borderRadius = `${this.selectBorderRadius}px`;
+    this.select.borderWidth = `${this.selectBorderWidth}px`;
+    this.select.borderActiveWidth = `${this.selectBorderActiveWidth}px`;
+    this.componentThemeChanged('select');
   }
 }

@@ -24,22 +24,19 @@
       "accentLightForeground": "",
       "accentDark": "",
       "accentDarkForeground": ""
-    }, {
-      "themeKey": "card",
-      "background": ""
     }],
-  "aurelia": [
+  "light": [
     {
       "themeKey": "design",
     
       "controlBackground": "#EFEFEF",
       "controlForeground": "#333333",
-      "appBackground": "#dadada",
+      "appBackground": "#FAFAFA",
       "appForeground": "#212121",
       "surfaceBackground": "#FFFFFF",
       "surfaceForeground": "#212121",
-      "disabledBackground": "#9E9E9E",
-      "disabledForeground": "#CFD8DC",
+      "disabledBackground": "#EFEFEF",
+      "disabledForeground": "#BBBBBB",
       "error": "#F44336",
       "errorContrast": "#FFFFFF",
       "primary": "#3F51B5",
@@ -54,19 +51,17 @@
       "accentLightForeground": "#FFFFFF",
       "accentDark": "#F50057",
       "accentDarkForeground": "#FFFFFF"
-    }, {
-      "themeKey": "card",
-      "background": ""
     }],
   "dark": [
     {
       "themeKey": "design",
       "appBackground": "#222255",
-      "appForeground": "#FFFFFF",
+      "appForeground": "#BABABA",
       "surfaceBackground": "#333356",
-      "surfaceForeground": "#FFFFFF",
-      "controlBackground": "#000000EE",
+      "surfaceForeground": "#BABABA",
+      "controlBackground": "#1C1C2F",
       "controlForeground": "#CCCCCC",
+      "controlLabelColor": "#B5B5D3",
       "disabledBackground": "#9E9E9E",
       "disabledForeground": "#CFD8DC",
       "error": "#B71C1C",
@@ -83,9 +78,6 @@
       "accentLightForeground": "#FFFFFF",
       "accentDark": "#F50057",
       "accentDarkForeground": "#FFFFFF"
-    }, {
-      "themeKey": "card",
-      "background": "#333356"
     }
   ]
 }

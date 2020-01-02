@@ -43,7 +43,7 @@
         <h4>Default</h4>
         <p><ux-input></ux-input></p>
         <p>
-          <ux-input label="With floated label" maxlength.bind="50"></ux-input>
+          <ux-input label="With floating label" maxlength.bind="50"></ux-input>
           <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
         </p>
         <p>
@@ -74,10 +74,10 @@
     <h2>Textarea & Input Info</h2>
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="6">
-        <h4>Default</h4>
+        <h4>Filled</h4>
         <p><ux-textarea></ux-textarea></p>
         <p>
-          <ux-textarea label="With floated label" auto-resize></ux-textarea>
+          <ux-textarea label="With floating label" auto-resize></ux-textarea>
         </p>
         <p>
           <ux-textarea class="ux-textarea--has-error" label="With error"></ux-textarea>
@@ -100,4 +100,67 @@
       </ux-grid-cell>
     </ux-grid>
   </section>
+
+  <section>
+    <h2>Select & Input Info</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Filled</h4>
+        <p><ux-select placeholder="Choose an option">
+          <ux-option>Option 1</ux-option>
+          <ux-option>Option 2</ux-option>
+          <ux-option>Option 3</ux-option>
+          <ux-option>Option 4</ux-option>
+          <ux-option>Option 5</ux-option>
+        </ux-select></p>
+        <p>
+          <ux-select label="With floating label">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
+        <p>
+          <ux-select class="ux-select--has-error" label="With error">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>Outline</h4>
+        <p><ux-select variant="outline" placeholder="Choose an option">
+          <ux-option>Option 1</ux-option>
+          <ux-option>Option 2</ux-option>
+          <ux-option>Option 3</ux-option>
+          <ux-option>Option 4</ux-option>
+          <ux-option>Option 5</ux-option>
+        </ux-select></p>
+        <p>
+          <ux-select label="With floating label" variant="outline">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
+        <p>
+          <ux-select class="ux-select--has-error" label="With error" variant="outline">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+  <section></section>
 </template>

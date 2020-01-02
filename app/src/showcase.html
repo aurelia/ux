@@ -6,23 +6,29 @@
   </section>
   <section>
 
-    <div class="form-row" style="text-align: center">
-      Variant
-      <label>
-        <ux-radio model.bind="'filled'" checked.bind="variant"></ux-radio>
-        Filled
-      </label>
-      <label>
-        <ux-radio model.bind="'outline'" checked.bind="variant"></ux-radio>
-        Outline
-      </label>
-    </div>
+    <ux-card sm="6">
+      <ux-card-header>
+        <span class="ux-card__title">Basic forms exemples</span>
+      </ux-card-header>
+      <ux-card-content>
+        <ux-field>
+          <label>Variant</label>
+          <div class="ux-form__row">
+            <ux-radio model.bind="'filled'" checked.bind="variant"></ux-radio>
+            <label>Filled</label>
+            <ux-radio model.bind="'outline'" checked.bind="variant"></ux-radio>
+            <label>Outline</label>
+          </div>
+        </ux-field>
+      </ux-card-content>
+    </ux-card>
 
-    <ux-grid class="remove-padding">
+    <ux-grid class="ux-grid--remove-padding">
       <ux-card sm="6">
+        <ux-card-header><span class="ux-card__title">Labels on top</span></ux-card-header>
         <ux-card-content>
           <ux-form>
-            <div class="form-row">
+            <div class="ux-form__row">
   
               <ux-field label="First Name">
                 <ux-input variant.bind="variant" maxlength="10" value.bind="firstName & validate"></ux-input>
@@ -40,19 +46,91 @@
               <ux-input variant.bind="variant" type="email" value.bind="email & validate"></ux-input>
               <ux-input-info>email@example.com</ux-input-info>
             </ux-field>
+
+            <ux-field label="Contact Type">
+              <ux-select variant.bind="variant" value.bind="contactType" placeholder="Choose an option">
+                <ux-option>Private</ux-option>
+                <ux-option>Professionnal</ux-option>
+              </ux-select>
+            </ux-field>
   
             <ux-field label="Biography">
               <ux-textarea variant.bind="variant" auto-resize></ux-textarea>
             </ux-field>
+
+            <div class="ux-form__row">
+              <ux-field>
+                <label>Interests</label>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'sport'"></ux-checkbox>
+                  <label>Sport</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'technology'"></ux-checkbox>
+                  <label>Technology</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'business'"></ux-checkbox>
+                  <label>Business</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'travel'"></ux-checkbox>
+                  <label>Travel</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'art'"></ux-checkbox>
+                  <label>Art</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'politics'"></ux-checkbox>
+                  <label>Politics</label>
+                </div>
+              </ux-field>
+
+              <ux-field>
+                <label>Age Group</label>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'0-10'"></ux-radio>
+                  <label>0-10</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'11-20'"></ux-radio>
+                  <label>11-20</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'21-30'"></ux-radio>
+                  <label>21-30</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'31-40'"></ux-radio>
+                  <label>31-40</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'41-50'"></ux-radio>
+                  <label>41-50</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'51+'"></ux-radio>
+                  <label>51+</label>
+                </div>
+              </ux-field>
+            </div>
+
   
-            <ux-button click.delegate="submit()">Submit</ux-button>
           </ux-form>
         </ux-card-content>
+        <ux-card-footer>
+          <ux-card-action-row>
+            <ux-button click.delegate="submit()">Submit</ux-button>
+          </ux-card-action-row>
+        </ux-card-footer>
       </ux-card>
       <ux-card sm="6">
+        <ux-card-header><span class="ux-card__title">Floating labels</span></ux-card-header>
         <ux-card-content>
+
           <ux-form>
-            <div class="form-row">
+            <div class="ux-form__row">
   
               <ux-field>
                 <ux-input variant.bind="variant" label="First Name" maxlength="10" value.bind="firstName & validate"></ux-input label="First Name">
@@ -70,14 +148,82 @@
               <ux-input variant.bind="variant" label="Email Address" type="email" value.bind="email & validate"></ux-input label="Email Address">
               <ux-input-info>email@example.com</ux-input-info>
             </ux-field>
+
+            <ux-field>
+              <ux-select variant.bind="variant" value.bind="contactType" label="Contact Type">
+                <ux-option>Private</ux-option>
+                <ux-option>Professionnal</ux-option>
+              </ux-select>
+            </ux-field>
   
             <ux-field>
               <ux-textarea variant.bind="variant" label="Biography" auto-resize></ux-textarea>
             </ux-field>
-  
-            <ux-button click.delegate="submit()">Submit</ux-button>
+
+            <div class="ux-form__row">
+              <ux-field>
+                <label>Interests</label>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'sport'"></ux-checkbox>
+                  <label>Sport</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'technology'"></ux-checkbox>
+                  <label>Technology</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'business'"></ux-checkbox>
+                  <label>Business</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'travel'"></ux-checkbox>
+                  <label>Travel</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'art'"></ux-checkbox>
+                  <label>Art</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'politics'"></ux-checkbox>
+                  <label>Politics</label>
+                </div>
+              </ux-field>
+
+              <ux-field>
+                <label>Age Group</label>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'0-10'"></ux-radio>
+                  <label>0-10</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'11-20'"></ux-radio>
+                  <label>11-20</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'21-30'"></ux-radio>
+                  <label>21-30</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'31-40'"></ux-radio>
+                  <label>31-40</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'41-50'"></ux-radio>
+                  <label>41-50</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio checked.bind="ageGroup" model.bind="'51+'"></ux-radio>
+                  <label>51+</label>
+                </div>
+              </ux-field>
+            </div>
           </ux-form>
         </ux-card-content>
+        <ux-card-footer>
+          <ux-card-action-row>
+            <ux-button click.delegate="submit()">Submit</ux-button>
+          </ux-card-action-row>
+        </ux-card-footer>
       </ux-card>
     </ux-grid>
   </section>

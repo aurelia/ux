@@ -30,4 +30,9 @@
   margin-top: 4px;
   margin-bottom: 4px;
 }
-
+.component-selector {
+  margin: 16px 0;
+}
+.component-selector ux-chip {
+  cursor: pointer;
+}

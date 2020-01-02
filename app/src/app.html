@@ -2,7 +2,7 @@
   <require from="./app.css"></require>
 
   <header class="main-header">
-    <ux-chip class="${nav.isActive ? 'ux-chip--selected':''}" repeat.for="nav of router.navigation" click.delegate="router.navigateToRoute(nav.config.route)">${nav.title}</ux-chip>
+    <ux-chip theme.bind="{background: '#666', foreground: '#ccc', activeColor: '#333'}" class="${nav.isActive ? 'ux-chip--selected':''}" repeat.for="nav of router.navigation" click.delegate="router.navigateToRoute(nav.config.route)">${nav.title}</ux-chip>
   </header>
   <router-view class="page"></router-view>
 

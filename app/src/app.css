@@ -31,6 +31,7 @@ header.main-header {
   padding: 8px 16px;
   box-shadow: var(--aurelia-ux--design-elevation4dp);
   background-color: var(--ux-swatch--grey-p200);
+  color: var(--ux-swatch--grey-p900);
   z-index: 1;
 }
 
