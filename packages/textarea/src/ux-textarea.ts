@@ -89,6 +89,8 @@ export class UxTextArea implements UxComponent {
 
     textbox.addEventListener('change', stopEvent);
     textbox.addEventListener('input', stopEvent);
+
+    this.variantChanged(this.variant);
   }
 
   public detached() {
