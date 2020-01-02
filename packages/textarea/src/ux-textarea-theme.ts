@@ -3,9 +3,9 @@ import { UxTheme } from '@aurelia-ux/core';
 export class UxTextAreaTheme implements UxTheme {
   public themeKey = 'textarea';
 
-  public foreground: string;
+  public foreground?: string;
   public foregroundLabel?: string;
-  public background: string;
+  public background?: string;
   public backgroundHover?: string;
   public activeColor?: string;
 
@@ -24,7 +24,6 @@ export class UxTextAreaTheme implements UxTheme {
 
   public diabledForeground?: string;
   public disabledBackground?: string;
-  public disabledBorder?: string;
 
-  public error: string;
+  public error?: string;
 }
