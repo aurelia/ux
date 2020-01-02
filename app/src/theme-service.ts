@@ -13,7 +13,7 @@ export interface ThemesSet {
 export class ThemeService {
 
   public themesSets: Array<ThemesSet>;
-  public currentTheme: 'aurelia' | 'dark' | number;
+  public currentTheme: 'none' | 'aurelia' | 'dark' | number;
 
   public button: UxButtonTheme = {themeKey: 'button'};
   public input: UxInputTheme = {themeKey: 'input'};
@@ -43,7 +43,7 @@ export class ThemeService {
     }
     this.themesSets = storageThemes;
     let currentTheme: string | number = localStorage.getItem('currentTheme') || 'aurelia';
-    if (currentTheme !== 'aurelia' && currentTheme !== 'dark') {
+    if (currentTheme !== 'none' && currentTheme !== 'aurelia' && currentTheme !== 'dark') {
       currentTheme = parseInt(currentTheme, 10);
     }
     this.apply(currentTheme);
@@ -58,6 +58,10 @@ export class ThemeService {
     localStorage.setItem('themes', JSON.stringify(this.themesSets));
   }
 
+  get none() {
+    return themes.none;
+  }
+
   get aurelia() {
     return themes.aurelia;
   }
@@ -66,9 +70,11 @@ export class ThemeService {
     return themes.dark;
   }
 
-  public apply(theme: 'aurelia' | 'dark' | number, setAureliaIfNotFound: boolean = false) {
+  public apply(theme: 'none' | 'aurelia' | 'dark' | number, setAureliaIfNotFound: boolean = false) {
     let themeToApply: UxTheme[] | null = null;
-    if (theme === 'aurelia') {
+    if (theme === 'none') {
+      themeToApply = this.none;
+    } else if (theme === 'aurelia') {
       themeToApply = this.aurelia;
     } else if (theme === 'dark') {
       themeToApply = this.dark;

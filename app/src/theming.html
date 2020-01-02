@@ -39,6 +39,13 @@
     <h2>1. Available Themes</h2>
     <ux-grid class="ux-grid--remove-padding">
       <ux-card sm="3">
+        <ux-card-header class="ux-card__title">None</ux-card-header>
+        <ux-card-content>Clear all theme variables</ux-card-content>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="selectTheme('none')" disabled.bind="themeService.currentTheme === 'none'">Select</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+      <ux-card sm="3">
         <ux-card-header class="ux-card__title">Aurelia</ux-card-header>
         <ux-card-content>Default Aurelia Theme</ux-card-content>
         <ux-card-action-row>
