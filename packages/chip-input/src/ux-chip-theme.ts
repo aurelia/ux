@@ -5,6 +5,7 @@ export class UxChipTheme implements UxTheme {
 
   public background: string;
   public foreground: string;
+  public activeColor?: string;
 
   public deleteBackground: string;
   public deleteForeground: string;

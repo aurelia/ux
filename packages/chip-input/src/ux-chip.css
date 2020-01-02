@@ -29,7 +29,7 @@
 
 .ux-chip--selected {
   background-color: rgba(132, 132, 132, 0.5);
-  background-color: var(--aurelia-ux--chip-background, rgba(132, 132, 132, 0.5));
+  background-color: var(--aurelia-ux--chip-active-color, rgba(132, 132, 132, 0.5));
 }
 
 .ux-chip--deletable .ux-chip__content {
