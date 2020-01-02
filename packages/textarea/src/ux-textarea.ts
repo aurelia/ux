@@ -170,7 +170,7 @@ export class UxTextArea implements UxComponent {
         parentBackgroundColor = color;
         el = el.parentElement;
       }
-      this.element.style.backgroundColor = parentBackgroundColor;
+      this.element.style.backgroundColor = parentBackgroundColor || '#FFFFFF';
     } else {
       this.element.style.backgroundColor = '';
     }

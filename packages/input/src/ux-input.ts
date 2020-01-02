@@ -99,12 +99,12 @@ export class UxInput implements UxComponent {
 
     this.autocompleteChanged(this.autocomplete);
     this.themeChanged(this.theme);
-    this.variantChanged(this.variant);
   }
 
   public attached() {
     this.textbox.addEventListener('change', stopEvent);
     this.textbox.addEventListener('input', stopEvent);
+    this.variantChanged(this.variant);
   }
 
   public detached() {
@@ -218,7 +218,7 @@ export class UxInput implements UxComponent {
         parentBackgroundColor = color;
         el = el.parentElement;
       }
-      this.element.style.backgroundColor = parentBackgroundColor;
+      this.element.style.backgroundColor = parentBackgroundColor || '#FFFFFF';
     } else {
       this.element.style.backgroundColor = '';
     }
