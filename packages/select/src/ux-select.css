@@ -35,6 +35,7 @@
   white-space: nowrap;
 }
 
+.ux-select__label,
 .ux-select__placeholder {
   position: absolute;
   font-size: inherit;
@@ -143,12 +144,16 @@
   background-color: var(--aurelia-ux--select-option-hover);
 }
 
-.ux-select--focused .ux-select__placeholder {
+.ux-select--has-value .ux-select__placeholder {
+  display: none;
+}
+
+.ux-select--focused .ux-select__label {
   color: #4043ff;
   color: var(--aurelia-ux--input-border-focus, var(--aurelia-ux--design-primary, #4043ff));
 }
 
-.ux-select--has-value .ux-select__placeholder {
+.ux-select--has-value .ux-select__label {
   transform: translateY(-1.2em);
 }
 

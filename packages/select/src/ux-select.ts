@@ -82,6 +82,9 @@ export class UxSelect implements UxComponent {
   @bindable()
   public placeholder: string;
 
+  @bindable()
+  public label: string;
+
   public value: any;
   public displayValue: string;
   public expanded: boolean;
