@@ -29,7 +29,7 @@
   border-color: var(--aurelia-ux--textarea-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
   border-width: var(--aurelia-ux--textarea-border-width, 1px);
 }
-.ux-textarea:hover:not(.ux-textarea--focused, .ux-textarea--has-error).ux-textarea--outline {
+.ux-textarea--outline:hover:not(.ux-textarea--focused):not(.ux-textarea--has-error) {
   border-color: #212121;
   border-color: var(--aurelia-ux--textarea-foreground, var(--aurelia-ux--design-control-foreground, #212121));
 }

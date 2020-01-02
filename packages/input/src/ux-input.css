@@ -28,7 +28,7 @@
   border-color: var(--aurelia-ux--input-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
   border-width: var(--aurelia-ux--input-border-width, 1px);
 }
-.ux-input:hover:not(.ux-input--focused, .ux-input--has-error).ux-input--outline {
+.ux-input--outline:hover:not(.ux-input--focused):not(.ux-input--has-error) {
   border-color: #212121;
   border-color: var(--aurelia-ux--input-foreground, var(--aurelia-ux--design-control-foreground, #212121));
 }
