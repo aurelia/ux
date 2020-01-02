@@ -7,10 +7,10 @@
   box-sizing: border-box;
   position: relative;
   cursor: text;
-  color: #000000EE;
-  color: var(--aurelia-ux--input-foreground, var(--aurelia-ux--design-control-foreground, #000000EE));
-  background-color: #00000011;
-  background-color: var(--aurelia-ux--input-background, var(--aurelia-ux--design-control-background, #00000011));
+  color: #212121;
+  color: var(--aurelia-ux--input-foreground, var(--aurelia-ux--design-control-foreground, #212121));
+  background-color: #E0E0E0;
+  background-color: var(--aurelia-ux--input-background, var(--aurelia-ux--design-control-background, #E0E0E0));
   border-radius: 4px;
   border-radius: var(--aurelia-ux--input-border-radius, 4px);
 }
@@ -29,8 +29,8 @@
   border-width: var(--aurelia-ux--input-border-width, 1px);
 }
 .ux-input:hover:not(.ux-input--focused, .ux-input--has-error).ux-input--outline {
-  border-color: #000000EE;
-  border-color: var(--aurelia-ux--input-foreground, var(--aurelia-ux--design-control-foreground, #000000EE));
+  border-color: #212121;
+  border-color: var(--aurelia-ux--input-foreground, var(--aurelia-ux--design-control-foreground, #212121));
 }
 
 .ux-input__border-bottom {
