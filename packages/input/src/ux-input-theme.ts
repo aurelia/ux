@@ -14,21 +14,15 @@ export class UxInputTheme implements UxTheme {
   public labelFontSize?: string;
   public labelLetterSpacing?: string;
 
-  // public border?: string;
-  // public borderHover?: string;
-  // public borderFocus?: string;
   public borderRadius?: string;
   public borderWidth?: string;
-  public borderColor?: string;
 
   public borderBottomWidth?: string;
   public borderBottomColor?: string;
   public borderActiveWidth?: string;
-  // public borderBottomActiveColor?: string;
 
   public disabledForeground?: string;
   public disabledBackground?: string;
-  public disabledBorder?: string;
 
   public error?: string;
 }

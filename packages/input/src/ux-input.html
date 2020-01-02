@@ -22,6 +22,6 @@
 
   <slot name="trailing-icon"></slot>
 
-  <div class="ux-input__border-bottom" if.bind="variant === 'filled'"></div>
-  <div class="ux-input__border-bottom-active" if.bind="variant === 'filled'"></div>
+  <div class="ux-input__border-bottom" if.bind="variant === 'filled' && !disabled"></div>
+  <div class="ux-input__border-bottom-active" if.bind="variant === 'filled' && !disabled"></div>
 </template>

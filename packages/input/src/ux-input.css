@@ -55,6 +55,10 @@
   transition: transform ease 150ms;
 }
 
+.ux-input__inner-input:focus~.ux-input__border-bottom-active {
+  transform: scaleX(1);
+}
+
 .ux-input__inner-input {
   width: 100%;
   box-sizing: border-box;
@@ -104,8 +108,6 @@
 }
 
 .ux-input--focused .ux-input__label {
-  /* color: #4043ff;
-  color: var(--aurelia-ux--input-border-focus, var(--aurelia-ux--design-primary, #4043ff)); */
   color: #3F51B5;
   color: var(--aurelia-ux--input-active-color, var(--aurelia-ux--design-primary, #3F51B5));
 }
@@ -147,7 +149,26 @@
   color: #9E9E9E;
   color: var(--aurelia-ux--input-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
   background-color: #e1e1e1;
-  background-color: var(--aurelia-ux--input-disabled-background, #e1e1e1);
+  background-color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+}
+.ux-input[disabled] .ux-input__label,
+.ux-input[readonly] .ux-input__label {
+  color: #9E9E9E;
+  color: var(--aurelia-ux--input-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
+}
+
+.ux-input--outline[disabled],
+.ux-input--outline[readonly] {
+  color: #e1e1e1;
+  color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+  background-color: transparent;
+  border-color: #e1e1e1;
+  border-color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+}
+.ux-input--outline[disabled] .ux-input__label,
+.ux-input--outline[readonly] .ux-input__label {
+  color: #e1e1e1;
+  color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
 }
 
 .ux-input [slot="leading-icon"]~.ux-input__label {
@@ -165,9 +186,7 @@
 
 
 
-.ux-input__inner-input:focus~.ux-input__border-bottom-active {
-  transform: scaleX(1);
-}
+
 
 .ux-input--has-error.ux-input--outline {
   border-color: #F44336;
@@ -181,8 +200,3 @@
   border-width: var(--aurelia-ux--input-border-active-width, 2px);
 }
 
-.ux-input[disabled] .ux-input__border-bottom,
-.ux-input[readonly] .ux-input__border-bottom {
-  background-color: #989898;
-  background-color: var(--aurelia-ux--input-disabled-border, #989898);
-}
