@@ -11,8 +11,8 @@ export class MaterialDesign implements Design {
   public surfaceBackground = swatches.grey.p100;
   public surfaceForeground = swatches.grey.p900;
 
-  public controlBackground = swatches.alphaGrey.p50;
-  public controlForeground = swatches.alphaGrey.a700;
+  public controlBackground = swatches.grey.p50;
+  public controlForeground = swatches.grey.p900;
   public controlLabelColor = swatches.grey.p600;
 
   public primary = swatches.indigo.p500;
