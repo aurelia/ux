@@ -85,6 +85,9 @@ export class UxSelect implements UxComponent {
   @bindable()
   public label: string;
 
+  @bindable()
+  public variant: 'filled' | 'outline' = 'filled';
+
   public value: any;
   public displayValue: string;
   public expanded: boolean;
@@ -123,6 +126,7 @@ export class UxSelect implements UxComponent {
 
   public attached() {
     this.resolveDisplayValue();
+    this.variantChanged(this.variant);
   }
 
   public unbind() {
@@ -478,6 +482,24 @@ export class UxSelect implements UxComponent {
         ? [] // Changing from single to multiple = reset value to empty array
         : null // Changing from multiple to single = reset value to null
       );
+    }
+  }
+
+  public variantChanged(newValue: string) {
+    if (newValue === 'outline') {
+      let parentBackgroundColor = '';
+      let el: HTMLElement = this.element;
+      while (parentBackgroundColor === '' && el.parentElement) {
+        let color = window.getComputedStyle(el.parentElement, null).getPropertyValue('background-color');
+        if (color.toString() === 'rgba(0, 0, 0, 0)') {
+          color = '';
+        }
+        parentBackgroundColor = color;
+        el = el.parentElement;
+      }
+      this.element.style.backgroundColor = parentBackgroundColor || '#FFFFFF';
+    } else {
+      this.element.style.backgroundColor = '';
     }
   }
 

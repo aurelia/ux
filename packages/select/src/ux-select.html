@@ -1,9 +1,11 @@
 <template
-  class="ux-select ${multiple ? 'ux-select--multiple' : ''}"
+  class="ux-select ${multiple ? 'ux-select--multiple' : ''} ${expanded ? 'ux-select--focused':''} ux-select--${variant}"
   tabindex="0"
   disabled.bind="disabled & booleanAttr"
+  readonly.bind="readonly & booleanAttr"
+  aria-disabled.bind="disabled & booleanAttr"
+  aria-readonly.bind="readonly & booleanAttr"
   aria-multiselectable.bind="multiple"
-  aria-disabled.bind="isDisabled"
   keydown.trigger="onKeyDown($event)"
   blur.trigger="onBlur() & debounce:1"
   click.trigger="onTriggerClick()">
@@ -14,7 +16,8 @@
   <div class="ux-select__label">${label}</div>
   <div class="ux-select__value">${displayValue}</div>
   <div class="ux-select__arrow"></div>
-  <div class="ux-select__border-bottom"></div>
+  <div class="ux-select__border-bottom" if.bind="variant === 'filled' && !disabled"></div>
+  <div class="ux-select__border-bottom-active" if.bind="variant === 'filled' && !disabled"></div>
   
   <div ref="optionWrapperEl"
     class="ux-select__list-wrapper"
