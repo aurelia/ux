@@ -34,6 +34,16 @@
 }
 
 .ux-input__border-bottom {
+  height: var(--aurelia-ux--input-border-active-width, 2px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.ux-input__border-bottom:before {
+  display: block;
+  content: '';
   height: var(--aurelia-ux--input-border-width, 1px);
   background-color: #757575;
   background-color: var(--aurelia-ux--input-border-bottom-color, var(--aurelia-ux--design-control-label-color, #757575));
@@ -43,7 +53,9 @@
   right: 0;
 }
 
-.ux-input__border-bottom-active {
+.ux-input__border-bottom:after {
+  display: block;
+  content: '';
   height: var(--aurelia-ux--input-border-active-width, 2px);
   background-color: #3F51B5;
   background-color: var(--aurelia-ux--input-active-color, var(--aurelia-ux--design-primary, #3F51B5));
@@ -55,7 +67,7 @@
   transition: transform ease 150ms;
 }
 
-.ux-input__inner-input:focus~.ux-input__border-bottom-active {
+.ux-input__inner-input:focus~.ux-input__border-bottom:after {
   transform: scaleX(1);
 }
 
@@ -139,8 +151,7 @@
   box-shadow: none;
 }
 
-.ux-input--has-error .ux-input__border-bottom {
-  transform: scaleX(1);
+.ux-input--has-error .ux-input__border-bottom:before {
   background-color: #F44336;
   background-color: var(--aurelia-ux--input-error, var(--aurelia-ux--design-error, #F44336));
 }
