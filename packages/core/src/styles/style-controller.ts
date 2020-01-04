@@ -72,7 +72,9 @@ export class StyleController {
   }
 
   public generateCssVariable(themeKey: string, propertyKey: string, value: string | number) {
-    if (value === undefined || value === 'undefined') {return '';}
+    if (value === undefined || value === 'undefined') {
+      return '';
+    }
     return `--aurelia-ux--${themeKey}-${kebabCase(propertyKey)}: ${value};`;
   }
 
