@@ -53,7 +53,7 @@ export class UxInputInfo implements UxComponent {
     return 0;
   }
 
-  @computedFrom('target', 'target.value', 'target.value.length')
+  @computedFrom('target', 'target.value')
   public get length(): number {
     if (this.target instanceof UxInput || this.target instanceof UxTextArea) {
       return this.target.value.length;
