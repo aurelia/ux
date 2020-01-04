@@ -121,10 +121,10 @@ export class UxSlider implements UxComponent {
         winEvents.disposeAll();
         return;
       }
-      if (e instanceof MouseEvent && e.clientX) {
+      if (e instanceof MouseEvent) {
         this.updateValue(e.clientX);
       }
-      if (e instanceof TouchEvent && e.touches.length) {
+      if (e instanceof TouchEvent && e.touches.length > 0) {
         this.updateValue(e.touches[0].clientX);
       }
       this.isActive = false;
