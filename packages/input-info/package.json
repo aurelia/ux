@@ -86,8 +86,6 @@
   },
   "dependencies": {
     "@aurelia-ux/core": "^0.17.0",
-    "@aurelia-ux/input": "^0.17.0",
-    "@aurelia-ux/textarea": "^0.17.0",
     "aurelia-binding": "^2.0.0",
     "moment": "^2.18.1"
   },

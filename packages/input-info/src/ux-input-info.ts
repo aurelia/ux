@@ -2,14 +2,12 @@ import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { UxInputInfoTheme } from './ux-input-info-theme';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
-import { UxTextArea } from '@aurelia-ux/textarea';
-import { UxInput } from '@aurelia-ux/input';
 import { computedFrom } from 'aurelia-binding';
 
 @inject(Element, StyleEngine)
 @customElement('ux-input-info')
 export class UxInputInfo implements UxComponent {
-  @bindable public target: Element;
+  @bindable public target: { element: Element, value: string, maxlength: number };
   @bindable public uxInputCounter = null;
   @bindable public theme: UxInputInfoTheme;
 
@@ -47,16 +45,18 @@ export class UxInputInfo implements UxComponent {
 
   @computedFrom('target', 'target.maxlength')
   public get maxLength(): number {
-    if (this.target instanceof UxInput || this.target instanceof UxTextArea) {
-      return this.target.maxlength;
+    const target = this.target;
+    if (target.element.tagName === 'UX-INPUT' || target.element.tagName === 'UX-TEXTAREA') {
+      return target.maxlength;
     }
     return 0;
   }
 
   @computedFrom('target', 'target.value')
   public get length(): number {
-    if (this.target instanceof UxInput || this.target instanceof UxTextArea) {
-      return this.target.value.length;
+    const target = this.target;
+    if (target.element.tagName === 'UX-INPUT' || target.element.tagName === 'UX-TEXTAREA') {
+      return target.value.length;
     }
     return 0;
   }
