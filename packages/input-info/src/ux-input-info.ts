@@ -52,7 +52,7 @@ export class UxInputInfo implements UxComponent {
     return 0;
   }
 
-  @computedFrom('target', 'target.value')
+  @computedFrom('target.value')
   public get length(): number {
     const target = this.target;
     if (target.element.tagName === 'UX-INPUT' || target.element.tagName === 'UX-TEXTAREA') {
