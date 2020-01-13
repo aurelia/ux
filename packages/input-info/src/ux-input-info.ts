@@ -43,7 +43,7 @@ export class UxInputInfo implements UxComponent {
     }
   }
 
-  @computedFrom('target', 'target.maxlength')
+  @computedFrom('target.maxlength')
   public get maxLength(): number {
     const target = this.target;
     if (target.element.tagName === 'UX-INPUT' || target.element.tagName === 'UX-TEXTAREA') {
