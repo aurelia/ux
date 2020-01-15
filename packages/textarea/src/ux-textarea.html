@@ -19,6 +19,5 @@
     aria-required.bind="required & booleanAttr">
   </textarea>
 
-  <div class="ux-textarea__border-bottom" if.bind="variant === 'filled' && !disabled"></div>
-  <div class="ux-textarea__border-bottom-active" if.bind="variant === 'filled' && !disabled"></div>
+  <div class="ux-textarea__border-bottom" show.bind="variant === 'filled' && !disabled"></div>
 </template>
