@@ -1,5 +1,5 @@
 import { ViewResources } from 'aurelia-templating';
-import { Moment } from './resources/moment';
+import { Moment } from './resources/moment-rexports';
 export declare class UxYearList {
     element: Element;
     resources: ViewResources;

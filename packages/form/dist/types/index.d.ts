@@ -1,4 +1,3 @@
-/// <reference path="../../src/html.d.ts" />
 import { FrameworkConfiguration } from 'aurelia-framework';
 import { UxForm } from './ux-form';
 import { UxField } from './ux-field';

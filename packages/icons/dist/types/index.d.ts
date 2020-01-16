@@ -1,4 +1,3 @@
-/// <reference path="../../src/html.d.ts" />
 import { FrameworkConfiguration } from 'aurelia-framework';
 import { UxIcon } from './ux-icon';
 export { UxIconTheme } from './ux-icon-theme';

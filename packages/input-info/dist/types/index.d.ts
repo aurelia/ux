@@ -1,4 +1,3 @@
-/// <reference path="../../src/html.d.ts" />
 import { FrameworkConfiguration } from 'aurelia-framework';
 import { UxInputInfo } from './ux-input-info';
 export { UxInputInfo };

@@ -1,196 +1,77 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var card = require('@aurelia-ux/card');
-var button = require('@aurelia-ux/button');
-var checkbox = require('@aurelia-ux/checkbox');
-var chipInput = require('@aurelia-ux/chip-input');
-var grid = require('@aurelia-ux/grid');
-var datepicker = require('@aurelia-ux/datepicker');
-var form = require('@aurelia-ux/form');
-var input = require('@aurelia-ux/input');
-var inputInfo = require('@aurelia-ux/input-info');
-var list = require('@aurelia-ux/list');
-var radio = require('@aurelia-ux/radio');
-var textarea = require('@aurelia-ux/textarea');
-var _switch = require('@aurelia-ux/switch');
-var select = require('@aurelia-ux/select');
-var slider = require('@aurelia-ux/slider');
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var card_1 = require("@aurelia-ux/card");
+exports.UxCardTheme = card_1.UxCardTheme;
+var button_1 = require("@aurelia-ux/button");
+exports.UxButtonTheme = button_1.UxButtonTheme;
+var checkbox_1 = require("@aurelia-ux/checkbox");
+exports.UxCheckboxTheme = checkbox_1.UxCheckboxTheme;
+exports.UxCheckbox = checkbox_1.UxCheckbox;
+var chip_input_1 = require("@aurelia-ux/chip-input");
+exports.UxChipInputTheme = chip_input_1.UxChipInputTheme;
+exports.UxChipTheme = chip_input_1.UxChipTheme;
+var grid_1 = require("@aurelia-ux/grid");
+exports.UxGridTheme = grid_1.UxGridTheme;
+exports.UxResponsiveUtilities = grid_1.UxResponsiveUtilities;
+var datepicker_1 = require("@aurelia-ux/datepicker");
+exports.UxDatepickerTheme = datepicker_1.UxDatepickerTheme;
+var form_1 = require("@aurelia-ux/form");
+exports.UxFormTheme = form_1.UxFormTheme;
+var input_1 = require("@aurelia-ux/input");
+exports.UxInputTheme = input_1.UxInputTheme;
+exports.UxInput = input_1.UxInput;
+var input_info_1 = require("@aurelia-ux/input-info");
+exports.UxInputInfoTheme = input_info_1.UxInputInfoTheme;
+var list_1 = require("@aurelia-ux/list");
+exports.UxListTheme = list_1.UxListTheme;
+var radio_1 = require("@aurelia-ux/radio");
+exports.UxRadioTheme = radio_1.UxRadioTheme;
+exports.UxRadio = radio_1.UxRadio;
+var textarea_1 = require("@aurelia-ux/textarea");
+exports.UxTextAreaTheme = textarea_1.UxTextAreaTheme;
+exports.UxTextArea = textarea_1.UxTextArea;
+var switch_1 = require("@aurelia-ux/switch");
+exports.UxSwitchTheme = switch_1.UxSwitchTheme;
+exports.UxSwitch = switch_1.UxSwitch;
+var select_1 = require("@aurelia-ux/select");
+exports.UxOption = select_1.UxOption;
+exports.UxOptGroup = select_1.UxOptGroup;
+exports.UxSelect = select_1.UxSelect;
+exports.UxSelectTheme = select_1.UxSelectTheme;
+var slider_1 = require("@aurelia-ux/slider");
+exports.UxSliderTheme = slider_1.UxSliderTheme;
+exports.UxSlider = slider_1.UxSlider;
+var button_2 = require("@aurelia-ux/button");
+var card_2 = require("@aurelia-ux/card");
+var checkbox_2 = require("@aurelia-ux/checkbox");
+var chip_input_2 = require("@aurelia-ux/chip-input");
+var datepicker_2 = require("@aurelia-ux/datepicker");
+var grid_2 = require("@aurelia-ux/grid");
+var form_2 = require("@aurelia-ux/form");
+var input_2 = require("@aurelia-ux/input");
+var input_info_2 = require("@aurelia-ux/input-info");
+var list_2 = require("@aurelia-ux/list");
+var radio_2 = require("@aurelia-ux/radio");
+var textarea_2 = require("@aurelia-ux/textarea");
+var switch_2 = require("@aurelia-ux/switch");
+var select_2 = require("@aurelia-ux/select");
+var slider_2 = require("@aurelia-ux/slider");
 function configure(config) {
-    button.configure(config);
-    card.configure(config);
-    checkbox.configure(config);
-    chipInput.configure(config);
-    datepicker.configure(config);
-    grid.configure(config);
-    form.configure(config);
-    input.configure(config);
-    inputInfo.configure(config);
-    list.configure(config);
-    radio.configure(config);
-    textarea.configure(config);
-    _switch.configure(config);
-    select.configure(config);
-    slider.configure(config);
+    button_2.configure(config);
+    card_2.configure(config);
+    checkbox_2.configure(config);
+    chip_input_2.configure(config);
+    datepicker_2.configure(config);
+    grid_2.configure(config);
+    form_2.configure(config);
+    input_2.configure(config);
+    input_info_2.configure(config);
+    list_2.configure(config);
+    radio_2.configure(config);
+    textarea_2.configure(config);
+    switch_2.configure(config);
+    select_2.configure(config);
+    slider_2.configure(config);
 }
-
-Object.defineProperty(exports, 'UxCardTheme', {
-  enumerable: true,
-  get: function () {
-    return card.UxCardTheme;
-  }
-});
-Object.defineProperty(exports, 'UxButtonTheme', {
-  enumerable: true,
-  get: function () {
-    return button.UxButtonTheme;
-  }
-});
-Object.defineProperty(exports, 'UxCheckbox', {
-  enumerable: true,
-  get: function () {
-    return checkbox.UxCheckbox;
-  }
-});
-Object.defineProperty(exports, 'UxCheckboxTheme', {
-  enumerable: true,
-  get: function () {
-    return checkbox.UxCheckboxTheme;
-  }
-});
-Object.defineProperty(exports, 'UxChipInputTheme', {
-  enumerable: true,
-  get: function () {
-    return chipInput.UxChipInputTheme;
-  }
-});
-Object.defineProperty(exports, 'UxChipTheme', {
-  enumerable: true,
-  get: function () {
-    return chipInput.UxChipTheme;
-  }
-});
-Object.defineProperty(exports, 'UxGridTheme', {
-  enumerable: true,
-  get: function () {
-    return grid.UxGridTheme;
-  }
-});
-Object.defineProperty(exports, 'UxResponsiveUtilities', {
-  enumerable: true,
-  get: function () {
-    return grid.UxResponsiveUtilities;
-  }
-});
-Object.defineProperty(exports, 'UxDatepickerTheme', {
-  enumerable: true,
-  get: function () {
-    return datepicker.UxDatepickerTheme;
-  }
-});
-Object.defineProperty(exports, 'UxFormTheme', {
-  enumerable: true,
-  get: function () {
-    return form.UxFormTheme;
-  }
-});
-Object.defineProperty(exports, 'UxInput', {
-  enumerable: true,
-  get: function () {
-    return input.UxInput;
-  }
-});
-Object.defineProperty(exports, 'UxInputTheme', {
-  enumerable: true,
-  get: function () {
-    return input.UxInputTheme;
-  }
-});
-Object.defineProperty(exports, 'UxInputInfoTheme', {
-  enumerable: true,
-  get: function () {
-    return inputInfo.UxInputInfoTheme;
-  }
-});
-Object.defineProperty(exports, 'UxListTheme', {
-  enumerable: true,
-  get: function () {
-    return list.UxListTheme;
-  }
-});
-Object.defineProperty(exports, 'UxRadio', {
-  enumerable: true,
-  get: function () {
-    return radio.UxRadio;
-  }
-});
-Object.defineProperty(exports, 'UxRadioTheme', {
-  enumerable: true,
-  get: function () {
-    return radio.UxRadioTheme;
-  }
-});
-Object.defineProperty(exports, 'UxTextArea', {
-  enumerable: true,
-  get: function () {
-    return textarea.UxTextArea;
-  }
-});
-Object.defineProperty(exports, 'UxTextAreaTheme', {
-  enumerable: true,
-  get: function () {
-    return textarea.UxTextAreaTheme;
-  }
-});
-Object.defineProperty(exports, 'UxSwitch', {
-  enumerable: true,
-  get: function () {
-    return _switch.UxSwitch;
-  }
-});
-Object.defineProperty(exports, 'UxSwitchTheme', {
-  enumerable: true,
-  get: function () {
-    return _switch.UxSwitchTheme;
-  }
-});
-Object.defineProperty(exports, 'UxOptGroup', {
-  enumerable: true,
-  get: function () {
-    return select.UxOptGroup;
-  }
-});
-Object.defineProperty(exports, 'UxOption', {
-  enumerable: true,
-  get: function () {
-    return select.UxOption;
-  }
-});
-Object.defineProperty(exports, 'UxSelect', {
-  enumerable: true,
-  get: function () {
-    return select.UxSelect;
-  }
-});
-Object.defineProperty(exports, 'UxSelectTheme', {
-  enumerable: true,
-  get: function () {
-    return select.UxSelectTheme;
-  }
-});
-Object.defineProperty(exports, 'UxSlider', {
-  enumerable: true,
-  get: function () {
-    return slider.UxSlider;
-  }
-});
-Object.defineProperty(exports, 'UxSliderTheme', {
-  enumerable: true,
-  get: function () {
-    return slider.UxSliderTheme;
-  }
-});
 exports.configure = configure;
 //# sourceMappingURL=index.js.map

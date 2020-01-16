@@ -1,4 +1,3 @@
-/// <reference path="../../src/html.d.ts" />
 import { FrameworkConfiguration } from 'aurelia-framework';
 export { UxCheckboxTheme } from './ux-checkbox-theme';
 export { UxCheckbox, UxCheckboxElement } from './ux-checkbox';
