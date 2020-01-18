@@ -114,6 +114,11 @@
     <ux-input-info ux-input-counter>Char count: </ux-input-info>
   </fieldset>
   <fieldset>
+    <legend>UX-input & Autocomplete & Labels</legend>
+    <ux-input value.bind="username" label="Username" autocomplete="username"></ux-input>
+    <ux-input type="password" value.bind="password" label="Password" autocomplete="current-password"></ux-input>
+  </fieldset>
+  <fieldset>
     <legend>UX-textarea & UX-input-info</legend>
     <ux-textarea value.bind="message" disabled.bind="messageDisabled" maxlength="50"></ux-textarea>
     <ux-input-info ux-input-counter>Char count: </ux-input-info>

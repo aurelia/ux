@@ -157,9 +157,9 @@ export class UxInput implements UxComponent {
 
   public autocompleteChanged(newValue: any) {
     if (newValue == null) {
-      this.textbox.setAttribute('autocomplete', newValue);
-    } else {
       this.textbox.removeAttribute('autocomplete');
+    } else {
+      this.textbox.setAttribute('autocomplete', newValue);
     }
   }
 
