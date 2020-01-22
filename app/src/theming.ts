@@ -10,7 +10,7 @@ export class Theming {
 
   public design: Design;
 
-  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' = 'button';
+  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' = 'button';
 
   public buttonPreviewClass = '';
   public buttonPreviewType = 'raised';
@@ -29,6 +29,11 @@ export class Theming {
   public selectPreviewVariant = 'filled';
   public selectPreviewDisabled = false;
   public selectPreviewError = false;
+
+  public datepickerPreviewType = 'datetime';
+  public datepickerPreviewVariant = 'filled';
+  public datepickerPreviewDisabled = false;
+  public datepickerPreviewError = false;
 
   constructor(private themeService: ThemeService, private ux: AureliaUX) {
     this.design = this.ux.design;

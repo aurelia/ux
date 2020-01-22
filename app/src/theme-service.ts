@@ -1,3 +1,4 @@
+import { UxDatepickerTheme } from './../../packages/datepicker/src/ux-datepicker-theme';
 import { UxTextAreaTheme } from './../../packages/textarea/src/ux-textarea-theme';
 import { StyleEngine, UxTheme } from '@aurelia-ux/core';
 import * as themes from './themes.json';
@@ -22,6 +23,7 @@ export class ThemeService {
   public select: UxTextAreaTheme = {themeKey: 'select'};
   public checkbox: UxTextAreaTheme = {themeKey: 'checkbox'};
   public radio: UxTextAreaTheme = {themeKey: 'radio'};
+  public datepicker: UxDatepickerTheme = {themeKey: 'datepicker'};
   @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderRadius: number = 2;
   @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderWidth: number = 1;
   @observable({changeHandler: 'inputVariableChanged'}) public inputBorderRadius: number = 2;
@@ -33,6 +35,9 @@ export class ThemeService {
   @observable({changeHandler: 'selectVariableChanged'}) public selectBorderRadius: number = 2;
   @observable({changeHandler: 'selectVariableChanged'}) public selectBorderWidth: number = 1;
   @observable({changeHandler: 'selectVariableChanged'}) public selectBorderActiveWidth: number = 2;
+  @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderRadius: number = 2;
+  @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderWidth: number = 1;
+  @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderActiveWidth: number = 2;
 
 
   constructor(private styleEngine: StyleEngine) {}
@@ -167,5 +172,15 @@ export class ThemeService {
     this.select.borderWidth = `${this.selectBorderWidth}px`;
     this.select.borderActiveWidth = `${this.selectBorderActiveWidth}px`;
     this.componentThemeChanged('select');
+  }
+
+  public datepickerVariableChanged() {
+    if (!this.datepicker) {
+      return;
+    }
+    this.datepicker.borderRadius = `${this.datepickerBorderRadius}px`;
+    this.datepicker.borderWidth = `${this.datepickerBorderWidth}px`;
+    this.datepicker.borderActiveWidth = `${this.datepickerBorderActiveWidth}px`;
+    this.componentThemeChanged('datepicker');
   }
 }

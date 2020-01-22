@@ -166,6 +166,7 @@
       <ux-chip click.delegate="selectComponent('input')" class="${selectedComponent === 'input' ? 'ux-chip--selected':''}">Input</ux-chip>
       <ux-chip click.delegate="selectComponent('textarea')" class="${selectedComponent === 'textarea' ? 'ux-chip--selected':''}">Textarea</ux-chip>
       <ux-chip click.delegate="selectComponent('select')" class="${selectedComponent === 'select' ? 'ux-chip--selected':''}">Select</ux-chip>
+      <ux-chip click.delegate="selectComponent('datepicker')" class="${selectedComponent === 'datepicker' ? 'ux-chip--selected':''}">Datepicker</ux-chip>
     </div>
 
     <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'button'">
@@ -475,6 +476,95 @@
       </ux-card>
       <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
         <ux-card-content innerhtml.bind="json(themeService.select)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'datepicker'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Datepicker</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-datepicker label="Datepicker label" type.bind="datepickerPreviewType" disabled.bind="datepickerPreviewDisabled" variant.bind="datepickerPreviewVariant" class="${datepickerPreviewError ? 'ux-datepicker--has-error':''}"></ux-input>
+          <ux-input-info>Helper Text</ux-input-info>     
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Preview Type</label>
+            <ux-select value.bind="datepickerPreviewType">
+              <ux-option value="datetime">datetime</ux-option>
+              <ux-option value="password">date</ux-option>
+              <ux-option value="email">time</ux-option>
+            </ux-select>
+          </ux-field>
+          <ux-field>
+            <label>Preview Variant</label>
+            <div class="ux-form__row">
+              <ux-radio checked.bind="datepickerPreviewVariant" model.bind="'filled'"></ux-radio>
+              <label>Filled</label>
+              <ux-radio checked.bind="datepickerPreviewVariant" model.bind="'outline'"></ux-radio>
+              <label>Outline</label>
+            </div>
+          </ux-field>
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="datepickerPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+              <ux-checkbox checked.bind="datepickerPreviewError"></ux-checkbox>
+              <label>Error</label>
+            </div>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderBottomColor']">
+            <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.datepicker[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground', 'error']">
+            <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.datepicker[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'labelFontSize', 'labelLetterSpacing']">
+            <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')"></ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['headerForeground', 'headerBackground']">
+            <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.datepicker[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['weekdayForeground', 'selectedDayForeground', 'selectedDayBackground', 'outOfRangeForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.datepicker[prop]}"></span>
+            </ux-input>
+          </ux-field>  
+          <ux-field>
+            <label>Border Radius</label>
+            <br><ux-slider value.bind="themeService.datepickerBorderRadius" min="0" max="10" step="1" style="width:100%"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Width</label>
+            <br><ux-slider value.bind="themeService.datepickerBorderWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Active Width</label>
+            <br><ux-slider value.bind="themeService.datepickerBorderActiveWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.datepicker)">
         </ux-card-content>
       </ux-card>
     </ux-grid>
