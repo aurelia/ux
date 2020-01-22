@@ -1,10 +1,11 @@
 import { customElement, bindable, ViewResources } from 'aurelia-templating';
-import { bindingMode } from 'aurelia-binding';
+import { bindingMode, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
+import { DOM } from 'aurelia-pal';
 import { moment } from './resources/moment-rexports';
 // import UX_DATEPICKER_VIEW from './ux-datepicker.html';
 // import { PLATFORM } from 'aurelia-pal';
@@ -27,6 +28,11 @@ export class UxDatepicker implements UxComponent {
   @bindable public maxDate: any;
   @bindable public placeholder: any;
   @bindable public config: DatepickerSettings;
+  @bindable public autofocus = null;
+  @bindable public disabled: any = false;
+  @bindable public readonly: any = false;
+  @bindable public label: any;
+  @bindable public variant: 'filled' | 'outline' = 'filled';
 
   @bindable public formatters = {
     date: 'L',
@@ -41,6 +47,9 @@ export class UxDatepicker implements UxComponent {
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any;
 
+  @observable
+  public focused: boolean = false;
+
   public textbox: HTMLInputElement;
   private textboxValue: string;
   private showDialog = false;
@@ -49,6 +58,10 @@ export class UxDatepicker implements UxComponent {
 
   public bind() {
     this.processAttribute('placeholder');
+
+    if (this.autofocus || this.autofocus === '') {
+      this.focused = true;
+    }
 
     if (this.initialDate != null) {
       const dateParse = moment(this.initialDate);
@@ -184,6 +197,38 @@ export class UxDatepicker implements UxComponent {
     if (attributeValue) {
       this.element.removeAttribute(attributeName);
       this.textbox.setAttribute(attributeName, attributeValue)
+    }
+  }
+
+  public focusedChanged(focused: boolean) {
+    if (focused === true) {
+      this.element.classList.add('ux-datepicker--focused');
+    } else {
+      this.element.classList.remove('ux-datepicker--focused');
+    }
+
+    this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
+  }
+
+  public focusInput() {
+    this.textbox.focus();
+  }
+
+  public variantChanged(newValue: string) {
+    if (newValue === 'outline') {
+      let parentBackgroundColor = '';
+      let el: HTMLElement = this.element;
+      while (parentBackgroundColor === '' && el.parentElement) {
+        let color = window.getComputedStyle(el.parentElement, null).getPropertyValue('background-color');
+        if (color.toString() === 'rgba(0, 0, 0, 0)') {
+          color = '';
+        }
+        parentBackgroundColor = color;
+        el = el.parentElement;
+      }
+      this.element.style.backgroundColor = parentBackgroundColor || '#FFFFFF';
+    } else {
+      this.element.style.backgroundColor = '';
     }
   }
 }
