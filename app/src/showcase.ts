@@ -37,4 +37,5 @@ ValidationRules
     .ensure('firstName').required().minLength(2)
     .ensure('lastName').required().minLength(2)
     .ensure('email').required().email()
-    .on(Showcase); 
+    .ensure('birthdate').required()
+    .on(Showcase);

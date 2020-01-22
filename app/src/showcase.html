@@ -47,6 +47,11 @@
               <ux-input-info>email@example.com</ux-input-info>
             </ux-field>
 
+            <ux-field label="Birthdate">
+              <ux-datepicker variant.bind="variant" value.bind="birthdate & validate"></ux-datetime>
+                <ux-input-info></ux-input-info>
+            </ux-field>
+
             <ux-field label="Contact Type">
               <ux-select variant.bind="variant" value.bind="contactType" placeholder="Choose an option">
                 <ux-option>Private</ux-option>
@@ -147,6 +152,11 @@
             <ux-field>
               <ux-input variant.bind="variant" label="Email Address" type="email" value.bind="email & validate"></ux-input label="Email Address">
               <ux-input-info>email@example.com</ux-input-info>
+            </ux-field>
+
+            <ux-field>
+              <ux-datepicker variant.bind="variant" label="Birthdate" value.bind="birthdate & validate"></ux-datetime>
+              <ux-input-info></ux-input-info>
             </ux-field>
 
             <ux-field>
