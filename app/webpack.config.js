@@ -123,6 +123,7 @@ module.exports = function({ production = '' } = {}) {
           './ux-card-content.html',
           './ux-card-footer.html',
           './ux-card-header.html',
+          './ux-card-separator.html',
           './ux-card.html'
         ],
         '@aurelia-ux/checkbox': [
