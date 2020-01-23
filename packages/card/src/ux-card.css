@@ -44,6 +44,14 @@
   margin: 24px auto;
 }
 
+.ux-card__separator--no-margin {
+  margin: auto auto 0px auto;
+}
+
+.ux-card__separator--no-margin~.ux-card__footer {
+  margin-top: 0px;
+}
+
 .ux-card__title {
   display: flex;
   flex-direction: column;
@@ -73,7 +81,7 @@
 .ux-card__header--primary {
   color: #3f51b5;
   background-color: var(--aurelia-ux--card-primary-header-background, var(--aurelia-ux--design-primary, #3F51B5));
-  color: #fff;
+  color: rgb(36, 28, 28);
   color: var(--aurelia-ux--card-primary-header-foreground, var(--aurelia-ux--design-primary-foreground, #fff));
 }
 
