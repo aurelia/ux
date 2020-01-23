@@ -59,7 +59,7 @@
         <p><ux-input label="With trailing icon"><ux-icon icon="remove_red_eye" slot="trailing-icon"></ux-icon></ux-input></p>
         <h4>Outline</h4>
         <p>
-          <ux-input variant="outline" label="With leading icon"></ux-input>
+          <ux-input variant="outline" label="With leading icon"><ux-icon icon="person" slot="leading-icon"></ux-icon></ux-input>
           <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
         </p>
         <p>
@@ -162,5 +162,35 @@
       </ux-grid-cell>
     </ux-grid>
   </section>
+
+  <section>
+    <h2>Datepicker & Input Info</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Default</h4>
+        <p><ux-datepicker></ux-datepicker></p>
+        <p>
+          <ux-datepicker label="With floating label"></ux-datepicker>
+          <ux-input-info>And helper text</ux-input-info>
+        </p>
+        <p>
+          <ux-datepicker class="ux-datepicker--has-error" label="With error"></ux-datepicker>
+          <ux-input-info>Error message</ux-input-info>
+        </p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>Outline</h4>
+        <p>
+          <ux-datepicker variant="outline" label="Outline datepicker"></ux-datepicker>
+          <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
+        </p>
+        <p>
+          <ux-datepicker variant="outline" class="ux-input--has-error" label="With error"></ux-datepicker>
+          <ux-input-info>Error message</ux-input-info>
+        </p>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
   <section></section>
 </template>
