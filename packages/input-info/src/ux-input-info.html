@@ -3,7 +3,7 @@
   <span class="ux-input-info__hint-text">
     <slot></slot>
   </span>
-  <div class="ux-input-info__counter" if.bind="uxInputCounter !== null">
+  <div class="ux-input-info__counter" if.bind="uxInputCounter !== null && target !== undefined">
     <span>${length ? length : 0}</span>
     <span if.bind="maxLength > 0">/${maxLength}</span>
   </div>
