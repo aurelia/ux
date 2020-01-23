@@ -4,6 +4,13 @@ import {
   ValidateResult
 } from 'aurelia-validation';
 
+const errorClasses: {[key: string]: string} = {
+  'ux-input': 'ux-input--has-error',
+  'ux-datepicker': 'ux-datepicker--has-error',
+  'ux-select': 'ux-select--has-error',
+  'ux-textarea': 'ux-textarea--has-error'
+};
+
 export class AureliaUXFormRenderer {
   public render(instruction: RenderInstruction) {
     for (const { result, elements } of instruction.unrender) {
@@ -24,7 +31,11 @@ export class AureliaUXFormRenderer {
       return;
     }
 
-    element.classList.add('ux-input--has-error');
+    for (const tag in errorClasses) {
+      if (element.classList.contains(tag)) {
+        element.classList.add(errorClasses[tag]);
+      }
+    }
 
     const uxField = element.closest('ux-field');
     if (!uxField) {
@@ -49,7 +60,11 @@ export class AureliaUXFormRenderer {
       return;
     }
 
-    element.classList.remove('ux-input--has-error');
+    for (const tag in errorClasses) {
+      if (element.classList.contains(tag)) {
+        element.classList.remove(errorClasses[tag]);
+      }
+    }
 
     const uxField = element.closest('ux-field');
     if (!uxField) {
