@@ -243,4 +243,72 @@
       </ux-card>
     </ux-grid>
   </section>
+  <section>
+    <ux-card sm="12">
+      <ux-card-header>
+        <span class="ux-card__title">List exemples</span>
+      </ux-card-header>
+      <ux-card-content>
+        <ux-field>
+          <label>Border</label>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="listBorder"></ux-checkbox>
+            <label>Enabled</label>
+          </div>
+        </ux-field>
+        <ux-field>
+          <label>Nb lines</label>
+          <div class="ux-form__row">
+            <ux-radio checked.bind="listNbLines" model.bind="'wrap'"></ux-radio>
+            <label>Unlimitted</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-radio checked.bind="listNbLines" model.bind="'two-line'"></ux-radio>
+            <label>2</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-radio checked.bind="listNbLines" model.bind="'three-line'"></ux-radio>
+            <label>3</label>
+          </div>
+        </ux-field>
+      </ux-card-content>
+    </ux-card>
+    
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-card sm="4" md="6">
+        <ux-card-header><span class="ux-card__title">Icon and chevron</span></ux-card-header>
+        <ux-card-content>
+          <ux-list class="${listBorder ? 'ux-list--border' : ''} ux-list--${listNbLines}">
+            <ux-list-item repeat.for="item of listPeople">
+              <ux-icon icon="${item.icon}" class="ux-list-item__detail"></ux-icon>
+              <div class="ux-list-item__content">
+                ${item.name}
+                <div class="ux-list-item__secondary-content">${item.secondary}</div>
+              </div>
+              <div class="ux-list-item__action-item">
+                <ux-icon icon="chevron_right"></ux-icon>
+              </div>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+      </ux-card>
+
+      <ux-card sm="4" md="6">
+        <ux-card-header><span class="ux-card__title">Settings</span></ux-card-header>
+        <ux-card-content>
+          <ux-list class="${listBorder ? 'ux-list--border' : ''} ux-list--${listNbLines}">
+            <ux-list-item repeat.for="item of listSettings">
+              <ux-icon icon="${item.icon}" class="ux-list-item__detail"></ux-icon>
+              <div class="ux-list-item__content">
+                ${item.setting}
+                <div class="ux-list-item__secondary-content">${item.description}</div>
+              </div>
+              <div class="ux-list-item__action-item">
+                <ux-switch></ux-switch>
+              </div>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+      </ux-card>
+  </section>
 </template>

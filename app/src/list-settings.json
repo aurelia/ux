@@ -1,0 +1,27 @@
+[
+  {
+    "icon": "settings_backup_restore",
+    "setting": "Irure sint magna",
+    "description": "Magna Lorem magna."
+  },
+  {
+    "icon": "settings_phone",
+    "setting": "Et consectetur laborum",
+    "description": "Occaecat ad non dolore est aliquip dolore proident eu amet."
+  },
+  {
+    "icon": "settings_ethernet",
+    "setting": "Dolore laborum voluptate",
+    "description": "Proident aute quis sunt velit magna cupidatat."
+  },
+  {
+    "icon": "settings_bluetooth",
+    "setting": "Esse duis duis",
+    "description": "Irure consectetur voluptate duis fugiat Lorem nisi do excepteur occaecat."
+  },
+  {
+    "icon": "notifications",
+    "setting": "Ex ad quis",
+    "description": "Pariatur veniam sint nulla ullamco pariatur excepteur magna aute commodo veniam magna cillum sint dolor."
+  }
+]
