@@ -32,6 +32,7 @@
 
 .ux-card__header-row {
   display: flex;
+  align-items: center;
 }
 
 .ux-card__spacer {
