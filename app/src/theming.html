@@ -168,6 +168,8 @@
       <ux-chip click.delegate="selectComponent('select')" class="${selectedComponent === 'select' ? 'ux-chip--selected':''}">Select</ux-chip>
       <ux-chip click.delegate="selectComponent('datepicker')" class="${selectedComponent === 'datepicker' ? 'ux-chip--selected':''}">Datepicker</ux-chip>
       <ux-chip click.delegate="selectComponent('slider')" class="${selectedComponent === 'slider' ? 'ux-chip--selected':''}">Slider</ux-chip>
+      <ux-chip click.delegate="selectComponent('checkbox')" class="${selectedComponent === 'checkbox' ? 'ux-chip--selected':''}">Checkbox</ux-chip>
+      <ux-chip click.delegate="selectComponent('radio')" class="${selectedComponent === 'radio' ? 'ux-chip--selected':''}">Radio</ux-chip>
     </div>
 
     <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'button'">
@@ -227,11 +229,11 @@
           </ux-field>
           <ux-field>
             <label>Border Radius</label>
-            <br><ux-slider value.bind="themeService.buttonBorderRadius" min="0" max="10" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.buttonBorderRadius" min="0" max="10"></ux-slider>
           </ux-field>
           <ux-field>
             <label>Border Width</label>
-            <br><ux-slider value.bind="themeService.buttonBorderWidth" min="0" max="5" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.buttonBorderWidth" min="0" max="5"></ux-slider>
           </ux-field>
         </ux-card-content>
       </ux-card>
@@ -304,15 +306,15 @@
           </ux-field>  
           <ux-field>
             <label>Border Radius</label>
-            <br><ux-slider value.bind="themeService.inputBorderRadius" min="0" max="10" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.inputBorderRadius" min="0" max="10" step="1"></ux-slider>
           </ux-field>
           <ux-field>
             <label>Border Width</label>
-            <br><ux-slider value.bind="themeService.inputBorderWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.inputBorderWidth" min="0" max="5" step="1"></ux-slider>
           </ux-field>
           <ux-field>
             <label>Border Active Width</label>
-            <br><ux-slider value.bind="themeService.inputBorderActiveWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.inputBorderActiveWidth" min="0" max="5" step="1"></ux-slider>
           </ux-field>
         </ux-card-content>
       </ux-card>
@@ -380,15 +382,15 @@
           </ux-field>  
           <ux-field>
             <label>Border Radius</label>
-            <br><ux-slider value.bind="themeService.textareaBorderRadius" min="0" max="10" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.textareaBorderRadius" min="0" max="10" step="1"></ux-slider>
           </ux-field>
           <ux-field>
             <label>Border Width</label>
-            <br><ux-slider value.bind="themeService.textareaBorderWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.textareaBorderWidth" min="0" max="5" step="1"></ux-slider>
           </ux-field>
           <ux-field>
             <label>Border Active Width</label>
-            <br><ux-slider value.bind="themeService.textareaBorderActiveWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.textareaBorderActiveWidth" min="0" max="5" step="1"></ux-slider>
           </ux-field> 
         </ux-card-content>
       </ux-card>
@@ -463,15 +465,15 @@
           </ux-field>  
           <ux-field>
             <label>Border Radius</label>
-            <br><ux-slider value.bind="themeService.selectBorderRadius" min="0" max="10" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.selectBorderRadius" min="0" max="10" step="1"></ux-slider>
           </ux-field>
           <ux-field>
             <label>Border Width</label>
-            <br><ux-slider value.bind="themeService.selectBorderWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.selectBorderWidth" min="0" max="5" step="1"></ux-slider>
           </ux-field>
           <ux-field>
             <label>Border Active Width</label>
-            <br><ux-slider value.bind="themeService.selectBorderActiveWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.selectBorderActiveWidth" min="0" max="5" step="1"></ux-slider>
           </ux-field> 
         </ux-card-content>
       </ux-card>
@@ -552,15 +554,15 @@
           </ux-field>  
           <ux-field>
             <label>Border Radius</label>
-            <br><ux-slider value.bind="themeService.datepickerBorderRadius" min="0" max="10" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.datepickerBorderRadius" min="0" max="10" step="1"></ux-slider>
           </ux-field>
           <ux-field>
             <label>Border Width</label>
-            <br><ux-slider value.bind="themeService.datepickerBorderWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.datepickerBorderWidth" min="0" max="5" step="1"></ux-slider>
           </ux-field>
           <ux-field>
             <label>Border Active Width</label>
-            <br><ux-slider value.bind="themeService.datepickerBorderActiveWidth" min="0" max="5" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.datepickerBorderActiveWidth" min="0" max="5" step="1"></ux-slider>
           </ux-field>
         </ux-card-content>
       </ux-card>
@@ -579,12 +581,12 @@
           </div>
         </ux-card-header>
         <ux-card-media class="ux-card-component__media">
-          <ux-slider if.bind="sliderPreviewType === 'default'" value.bind="sliderValue" disabled.bind="sliderPreviewDisabled" style="width:100%"></ux-slider>
-          <ux-slider if.bind="sliderPreviewType === 'icons'" value.bind="sliderValue" disabled.bind="sliderPreviewDisabled" style="width:100%">
+          <ux-slider if.bind="sliderPreviewType === 'default'" value.bind="sliderValue" disabled.bind="sliderPreviewDisabled"></ux-slider>
+          <ux-slider if.bind="sliderPreviewType === 'icons'" value.bind="sliderValue" disabled.bind="sliderPreviewDisabled">
             <ux-icon icon="volume_down" slot="leading-icon"></ux-icon>
             <ux-icon icon="volume_up" slot="trailing-icon"></ux-icon>
           </ux-slider>
-          <ux-slider if.bind="sliderPreviewType === 'value'" value.bind="sliderValue" disabled.bind="sliderPreviewDisabled" style="width:100%">
+          <ux-slider if.bind="sliderPreviewType === 'value'" value.bind="sliderValue" disabled.bind="sliderPreviewDisabled">
             <span slot="leading-icon">R</span>
             <span slot="trailing-icon">${sliderValue}</span>
           </ux-slider>
@@ -616,11 +618,11 @@
           <div class="ux-card__separator"></div>
           <ux-field>
             <label>Thumb Diameter</label>
-            <br><ux-slider value.bind="themeService.sliderThumbDiameter" min="10" max="30" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.sliderThumbDiameter" min="10" max="30" step="1"></ux-slider>
           </ux-field>
           <ux-field>
             <label>Track Height</label>
-            <br><ux-slider value.bind="themeService.sliderTrackHeight" min="1" max="10" step="1" style="width:100%"></ux-slider>
+            <br><ux-slider value.bind="themeService.sliderTrackHeight" min="1" max="10" step="1"></ux-slider>
           </ux-field>
         </ux-card-content>
       </ux-card>
@@ -630,6 +632,89 @@
       </ux-card>
     </ux-grid>
 
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'checkbox'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Checkbox</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-checkbox value.bind="checkboxValue" indeterminate.bind="checkboxIndeterminate" disabled.bind="checkboxPreviewDisabled"></ux-checkbox>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="checkboxPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+            </div>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="checkboxIndeterminate"></ux-checkbox>
+              <label>Indeterminate</label>
+            </div>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['borderColor', 'activeColor', 'checkmarkColor', 'disabledBackground', 'disabledForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.checkbox[prop]" change.delegate="themeService.componentThemeChanged('checkbox')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.checkbox[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field>
+            <label>Border width</label>
+            <br><ux-slider value.bind="themeService.checkboxBorderWidth" min="1" max="5" step="1"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.checkbox)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'radio'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Radio</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-radio value.bind="radioValue" disabled.bind="radioPreviewDisabled"></ux-radio>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="radioPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+            </div>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['borderColor', 'activeColor', 'checkmarkColor', 'disabledBackground', 'disabledForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.radio[prop]" change.delegate="themeService.componentThemeChanged('radio')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.radio[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field>
+            <label>Border width</label>
+            <br><ux-slider value.bind="themeService.radioBorderWidth" min="1" max="5" step="1"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.radio)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
   </section>
 
   

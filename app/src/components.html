@@ -225,5 +225,47 @@
     </ux-grid>
   </section>
 
+  <section>
+    <h2>Selection Controls: checkbox and radio</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Checkbox</h4>
+        <ux-field>
+          <label>Interests</label>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="interests" model.bind="'sport'"></ux-checkbox>
+            <label>Sport</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="interests" model.bind="'technology'"></ux-checkbox>
+            <label>Technology</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="interests" model.bind="'business'"></ux-checkbox>
+            <label>Business</label>
+          </div>
+        </ux-field>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>Radio</h4>
+        <ux-field>
+          <label>Age Group</label>
+          <div class="ux-form__row">
+            <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'0-20'"></ux-radio>
+            <label>0-20</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'20-40'"></ux-radio>
+            <label>20-40</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'40+'"></ux-radio>
+            <label>40+</label>
+          </div>
+        </ux-field>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
   <section></section>
 </template>

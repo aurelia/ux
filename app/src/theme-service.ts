@@ -1,3 +1,5 @@
+import { UxCheckboxTheme } from './../../packages/checkbox/src/ux-checkbox-theme';
+import { UxRadioTheme } from './../../packages/radio/src/ux-radio-theme';
 import { UxSliderTheme } from './../../packages/slider/src/ux-slider-theme';
 import { UxDatepickerTheme } from './../../packages/datepicker/src/ux-datepicker-theme';
 import { UxTextAreaTheme } from './../../packages/textarea/src/ux-textarea-theme';
@@ -22,8 +24,8 @@ export class ThemeService {
   public input: UxInputTheme = {themeKey: 'input'};
   public textarea: UxTextAreaTheme = {themeKey: 'textarea'};
   public select: UxTextAreaTheme = {themeKey: 'select'};
-  public checkbox: UxTextAreaTheme = {themeKey: 'checkbox'};
-  public radio: UxTextAreaTheme = {themeKey: 'radio'};
+  public checkbox: UxCheckboxTheme = {themeKey: 'checkbox'};
+  public radio: UxRadioTheme = {themeKey: 'radio'};
   public datepicker: UxDatepickerTheme = {themeKey: 'datepicker'};
   public slider: UxSliderTheme = {themeKey: 'slider'};
   @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderRadius: number = 2;
@@ -42,6 +44,8 @@ export class ThemeService {
   @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderActiveWidth: number = 2;
   @observable({changeHandler: 'sliderVariableChanged'}) public sliderThumbDiameter: number = 18;
   @observable({changeHandler: 'sliderVariableChanged'}) public sliderTrackHeight: number = 4;
+  @observable({changeHandler: 'checkboxVariableChanged'}) public checkboxBorderWidth: number = 2;
+  @observable({changeHandler: 'radioVariableChanged'}) public radioBorderWidth: number = 2;
 
 
   constructor(private styleEngine: StyleEngine) {}
@@ -195,5 +199,21 @@ export class ThemeService {
     this.slider.thumbDiameter = `${this.sliderThumbDiameter}px`;
     this.slider.trackHeight = `${this.sliderTrackHeight}px`;
     this.componentThemeChanged('slider');
+  }
+
+  public checkboxVariableChanged() {
+    if (!this.checkbox) {
+      return;
+    }
+    this.checkbox.borderWidth = `${this.checkboxBorderWidth}px`;
+    this.componentThemeChanged('checkbox');
+  }
+
+  public radioVariableChanged() {
+    if (!this.radio) {
+      return;
+    }
+    this.radio.borderWidth = `${this.radioBorderWidth}px`;
+    this.componentThemeChanged('radio');
   }
 }

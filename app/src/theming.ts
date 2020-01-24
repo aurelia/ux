@@ -38,6 +38,11 @@ export class Theming {
   public sliderPreviewType = 'default';
   public sliderPreviewDisabled = false;
 
+  public checkboxIndeterminate = false;
+  public checkboxPreviewDisabled = false;
+
+  public radioPreviewDisabled = false;
+
   constructor(private themeService: ThemeService, private ux: AureliaUX) {
     this.design = this.ux.design;
   }
