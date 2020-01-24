@@ -182,7 +182,7 @@ export class UxRadio implements UxComponent {
       winEvents.subscribe('mouseup', upAction, true);
     }
 
-    return true;
+    e.preventDefault();
   }
 }
 
