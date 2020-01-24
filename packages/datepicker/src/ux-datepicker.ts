@@ -201,12 +201,7 @@ export class UxDatepicker implements UxComponent {
   }
 
   public focusedChanged(focused: boolean) {
-    if (focused === true) {
-      this.element.classList.add('ux-datepicker--focused');
-    } else {
-      this.element.classList.remove('ux-datepicker--focused');
-    }
-
+    this.element.classList.toggle('ux-datepicker--focused', focused === true)
     this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
   }
 
