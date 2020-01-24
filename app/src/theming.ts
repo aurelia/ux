@@ -35,6 +35,9 @@ export class Theming {
   public datepickerPreviewDisabled = false;
   public datepickerPreviewError = false;
 
+  public sliderPreviewType = 'default';
+  public sliderPreviewDisabled = false;
+
   constructor(private themeService: ThemeService, private ux: AureliaUX) {
     this.design = this.ux.design;
   }

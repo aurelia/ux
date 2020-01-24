@@ -1,3 +1,4 @@
+import { UxSliderTheme } from './../../packages/slider/src/ux-slider-theme';
 import { UxDatepickerTheme } from './../../packages/datepicker/src/ux-datepicker-theme';
 import { UxTextAreaTheme } from './../../packages/textarea/src/ux-textarea-theme';
 import { StyleEngine, UxTheme } from '@aurelia-ux/core';
@@ -24,6 +25,7 @@ export class ThemeService {
   public checkbox: UxTextAreaTheme = {themeKey: 'checkbox'};
   public radio: UxTextAreaTheme = {themeKey: 'radio'};
   public datepicker: UxDatepickerTheme = {themeKey: 'datepicker'};
+  public slider: UxSliderTheme = {themeKey: 'slider'};
   @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderRadius: number = 2;
   @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderWidth: number = 1;
   @observable({changeHandler: 'inputVariableChanged'}) public inputBorderRadius: number = 2;
@@ -38,6 +40,8 @@ export class ThemeService {
   @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderRadius: number = 2;
   @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderWidth: number = 1;
   @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderActiveWidth: number = 2;
+  @observable({changeHandler: 'sliderVariableChanged'}) public sliderThumbDiameter: number = 18;
+  @observable({changeHandler: 'sliderVariableChanged'}) public sliderTrackHeight: number = 4;
 
 
   constructor(private styleEngine: StyleEngine) {}
@@ -182,5 +186,14 @@ export class ThemeService {
     this.datepicker.borderWidth = `${this.datepickerBorderWidth}px`;
     this.datepicker.borderActiveWidth = `${this.datepickerBorderActiveWidth}px`;
     this.componentThemeChanged('datepicker');
+  }
+
+  public sliderVariableChanged() {
+    if (!this.slider) {
+      return;
+    }
+    this.slider.thumbDiameter = `${this.sliderThumbDiameter}px`;
+    this.slider.trackHeight = `${this.sliderTrackHeight}px`;
+    this.componentThemeChanged('slider');
   }
 }

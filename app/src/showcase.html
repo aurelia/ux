@@ -158,7 +158,7 @@
             </ux-field>
 
             <ux-field>
-              <ux-datepicker variant.bind="variant" label="Birthdate" value.bind="birthdate & validate"></ux-datepicker>
+              <ux-datepicker autofocus variant.bind="variant" label="Birthdate" value.bind="birthdate & validate"></ux-datepicker>
               <ux-input-info></ux-input-info>
             </ux-field>
 
@@ -232,6 +232,28 @@
                 </div>
               </ux-field>
             </div>
+
+            <ux-field>
+              <label>Color</label>
+              <div class="ux-form__row">
+                <ux-slider min="0" max="255" step="1" value.bind="sliderRValue" theme.bind="{background: 'red'}">
+                  <span slot="leading-icon">R</span>
+                  <span slot="trailing-icon">${sliderRValue}</span>
+                </ux-slider>
+              </div>
+              <div class="ux-form__row">
+                <ux-slider min="0" max="255" step="1" value.bind="sliderGValue" theme.bind="{background: 'green'}">
+                  <span slot="leading-icon">G</span>
+                  <span slot="trailing-icon">${sliderGValue}</span>
+                </ux-slider>
+              </div>
+              <div class="ux-form__row">
+                <ux-slider min="0" max="255" step="1" value.bind="sliderBValue" theme.bind="{background: 'blue'}">
+                  <span slot="leading-icon">B</span>
+                  <span slot="trailing-icon">${sliderBValue}</span>
+                </ux-slider>
+              </div>
+            </ux-field>
           </ux-form>
         </ux-card-content>
         <ux-card-separator no-margin></ux-card-separator>

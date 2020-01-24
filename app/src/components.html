@@ -192,5 +192,38 @@
     </ux-grid>
   </section>
 
+  <section>
+    <h2>Slider</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Slider (default)</h4>
+        <p><ux-slider min="0" max="100"></ux-slider></p>
+        <h4>With icons</h4>
+        <p><ux-slider min="0" max="100">
+          <ux-icon icon="volume_down" slot="leading-icon"></ux-icon>
+          <ux-icon icon="volume_up" slot="trailing-icon"></ux-icon>
+        </ux-slider></p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>With value</h4>
+        <p>
+          <ux-slider min="0" max="255" step="1" value.bind="sliderRValue" theme.bind="{background: 'red'}">
+            <span slot="leading-icon">R</span>
+            <span slot="trailing-icon">${sliderRValue}</span>
+          </ux-slider>
+          <ux-slider min="0" max="255" step="1" value.bind="sliderGValue" theme.bind="{background: 'green'}">
+            <span slot="leading-icon">G</span>
+            <span slot="trailing-icon">${sliderGValue}</span>
+          </ux-slider>
+          <ux-slider min="0" max="255" step="1" value.bind="sliderBValue" theme.bind="{background: 'blue'}">
+            <span slot="leading-icon">B</span>
+            <span slot="trailing-icon">${sliderBValue}</span>
+          </ux-slider>
+        </p>
+        <p style="text-align: center;" css="color: rgb(${sliderRValue}, ${sliderGValue}, ${sliderBValue})">Look at my beautiful color !</p>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
   <section></section>
 </template>
