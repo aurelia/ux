@@ -6,7 +6,7 @@
   </section>
   <section>
 
-    <ux-card sm="6">
+    <ux-card>
       <ux-card-header>
         <span class="ux-card__title">Basic forms exemples</span>
       </ux-card-header>
@@ -266,7 +266,7 @@
     </ux-grid>
   </section>
   <section>
-    <ux-card sm="12">
+    <ux-card>
       <ux-card-header>
         <span class="ux-card__title">List exemples</span>
       </ux-card-header>
@@ -332,5 +332,29 @@
           </ux-list>
         </ux-card-content>
       </ux-card>
+    </ux-grid>
+  </section>
+
+  <section>
+    <ux-card>
+      <ux-card-header>
+        <span class="ux-card__title">Hierachical Selection Controls</span>
+      </ux-card-header>
+      <ux-card-content>
+        <ux-field>
+          <label>Settings</label>
+          <div class="ux-form__row">
+            <ux-checkbox checked.to-view="emailsChecked" indeterminate.to-view="emailsIndeterminate" click.delegate="toggleEmails()"></ux-checkbox>
+            <label>Enabled</label>
+          </div>
+          <div class="ux-form__sub-row">
+            <div class="ux-form__row" repeat.for="email of emailsOptions">
+              <ux-checkbox checked.bind="emails" model.bind="email.value"></ux-checkbox>
+              <label>${email.label}</label>
+            </div>
+          </div>
+        </ux-field>
+      </ux-card-content>
+    </ux-card>
   </section>
 </template>
