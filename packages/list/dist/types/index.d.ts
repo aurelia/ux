@@ -1,4 +1,3 @@
-/// <reference path="../../src/html.d.ts" />
 import { FrameworkConfiguration } from 'aurelia-framework';
 import { UxList } from './ux-list';
 import { UxListItem } from './ux-list-item';

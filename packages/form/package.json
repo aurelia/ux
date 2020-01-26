@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/form",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "Form component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -35,7 +35,7 @@
     "build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",
     "build-assets:es6": "copyfiles -u 1 src/**/*.html src/**/*.css dist/es2015",
     "prebuild": "rimraf dist",
-		"build": "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\""
+    "build": "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\""
   },
   "jspm": {
     "registry": "npm",
@@ -76,7 +76,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.17.0",
+    "@aurelia-ux/core": "^0.17.1",
     "aurelia-binding": "^2.0.0"
   },
   "devDependencies": {

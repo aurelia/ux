@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/select",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "Select component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -28,17 +28,17 @@
     "lint": "cross-env tslint --project tsconfig.json",
     "test": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start --single-run",
     "develop": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start",
-		"build-ts:amd": "tsc -p tsconfig.json -t es5 -m amd      --outDir dist/amd",
-		"build-ts:cjs": "tsc -p tsconfig.json -t es5 -m commonjs --outDir dist/commonjs",
-		"build-ts:ntv": "tsc -p tsconfig.json -t es5 -m es6      --outDir dist/native-modules",
-		"build-ts:es6": "tsc -p tsconfig.json -t es6 -m es6      --outDir dist/es2015",
-		"build-ts:types": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
-		"build-assets:amd": "copyfiles -u 1 src/**/*.html src/**/*.css dist/amd",
-		"build-assets:cjs": "copyfiles -u 1 src/**/*.html src/**/*.css dist/commonjs",
-		"build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",
-		"build-assets:es6": "copyfiles -u 1 src/**/*.html src/**/*.css dist/es2015",
-		"prebuild": "rimraf dist",
-		"build": "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\"",
+    "build-ts:amd": "tsc -p tsconfig.json -t es5 -m amd      --outDir dist/amd",
+    "build-ts:cjs": "tsc -p tsconfig.json -t es5 -m commonjs --outDir dist/commonjs",
+    "build-ts:ntv": "tsc -p tsconfig.json -t es5 -m es6      --outDir dist/native-modules",
+    "build-ts:es6": "tsc -p tsconfig.json -t es6 -m es6      --outDir dist/es2015",
+    "build-ts:types": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+    "build-assets:amd": "copyfiles -u 1 src/**/*.html src/**/*.css dist/amd",
+    "build-assets:cjs": "copyfiles -u 1 src/**/*.html src/**/*.css dist/commonjs",
+    "build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",
+    "build-assets:es6": "copyfiles -u 1 src/**/*.html src/**/*.css dist/es2015",
+    "prebuild": "rimraf dist",
+    "build": "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\"",
     "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
     "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
     "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",
@@ -86,7 +86,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.17.0",
+    "@aurelia-ux/core": "^0.17.1",
     "aurelia-binding": "^2.0.0"
   },
   "devDependencies": {

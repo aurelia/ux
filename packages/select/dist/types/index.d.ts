@@ -1,4 +1,3 @@
-/// <reference path="../../src/html.d.ts" />
 import { FrameworkConfiguration } from 'aurelia-framework';
 export { UxOption, UxOptionElement } from './ux-option';
 export { UxOptGroup, UxOptGroupElement } from './ux-optgroup';

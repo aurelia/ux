@@ -1,4 +1,3 @@
-/// <reference path="../../src/html.d.ts" />
 import { FrameworkConfiguration } from 'aurelia-framework';
 export { UxSwitchTheme } from './ux-switch-theme';
 export { UxSwitch, UxSwitchElement } from './ux-switch';
