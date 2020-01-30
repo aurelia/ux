@@ -112,6 +112,18 @@ export class UxDatepicker implements UxComponent {
     this.showDialog = true;
   }
 
+  public blur() {
+    if (this.showDialog) {
+      // if the dialog is opened, we consider that the most accurate value
+      // comes from the dialog and bring back its value
+      this.valueChanged(this.value);
+      return;
+    }
+    // if the dialog is not opened, the textbox has the most accurate value
+    // and therefore we validate it and assign it to component
+    this.changeTextboxValue();
+  }
+
   public changeTextboxValue() {
     if (!this.textboxValue) {
       this.value = null;
@@ -147,8 +159,6 @@ export class UxDatepicker implements UxComponent {
     if (this.type.toLowerCase() === 'time') {
       this.textboxValue = moment(newValue).format(this.formatters.time);
     }
-
-    this.showDialog = false;
   }
 
   public minDateChanged(newValue: any) {
@@ -201,7 +211,6 @@ export class UxDatepicker implements UxComponent {
   }
 
   public focusedChanged(focused: boolean) {
-    this.element.classList.toggle('ux-datepicker--focused', focused === true)
     this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
   }
 

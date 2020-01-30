@@ -15,7 +15,7 @@
     focus.bind="focused & debounce:100"
     disabled.bind="disabled & booleanAttr"
     readonly.bind="readonly & booleanAttr"
-    blur.trigger="changeTextboxValue()">
+    blur.trigger="blur()">
   </input>
   <div class="ux-datepicker__icon-container"
     click.trigger="toggleDialog('month')"

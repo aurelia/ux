@@ -50,6 +50,7 @@ export class UxPickerDialog {
   public selectDate() {
     if (this.selectedDate != null) {
       this.value = this.selectedDate.toDate();
+      this.closeDialog();
     }
   }
 
