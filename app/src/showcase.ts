@@ -18,9 +18,11 @@ export class Showcase {
   public email = '';
   public interests: Array<string> = [];
   public ageGroup: string = '21-30';
+  public tags: Array<string> = ['draft', 'opened'];
+  public brightness: string = '3';
+  public region: string[] = ['zurich'];
   public variant = 'filled';
   public controller: ValidationController;
-
 
   public listBorder: boolean = true;
   public listNbLines: 'two-line' | 'three-line' = 'two-line';
