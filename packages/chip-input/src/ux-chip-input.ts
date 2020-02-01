@@ -13,6 +13,7 @@ export class UxChipInput implements UxComponent {
   @bindable public theme: UxChipInputTheme;
   @bindable public label: any;
   @bindable public separator: string = ', ';
+  @bindable public chipVariant: 'filled' | 'outline' = 'filled';
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;

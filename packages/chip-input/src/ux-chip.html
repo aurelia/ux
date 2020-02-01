@@ -1,9 +1,16 @@
-<template role="textbox" class="ux-chip">
+<template
+  role="textbox"
+  class="ux-chip ux-chip--${variant} ${focused ? 'ux-chip--focused' : ''} ${selected ? 'ux-chip--selected' : ''}">
   <require from="./ux-chip.css"></require>
+
+  <span class="ux-chip__thumbnail">
+    <ux-icon icon="check" if.bind="isCheckable" show.bind="selected"></ux-icon>
+    <slot name="thumbnail"></slot>
+  </span>
+
   <span class="ux-chip__content">
     <slot></slot>
   </span>
 
-  <span class="ux-chip__close" click.delegate="closeChip()">
-  </span>
+  <span class="ux-chip__close" click.delegate="closeChip($event)"></span>
 </template>

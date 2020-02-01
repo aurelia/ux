@@ -1,0 +1,38 @@
+.ux-chip-choice {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ux-chip-choice .ux-chip-choice__chip-container {
+  display: inline-block;
+  margin: 4px;
+}
+
+.ux-chip-choice .ux-chip {
+  cursor: pointer;
+}
+
+/* .ux-chip-choice .ux-chip-choice__chip-container:first-child {
+  margin-left: 0px;
+} */
+
+/* TYPES */
+.ux-chip-choice--scroll {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}
+.ux-chip-choice--scroll .ux-chip-choice__chip-container {
+  margin-bottom: 0px;
+}
+.ux-chip-choice--stack {
+  display: flex;
+  flex-direction: column;
+}
+.ux-chip-choice--stack .ux-chip-choice__chip-container {
+  margin-left: 0px;
+  margin-top: 8px;
+  margin-bottom: 0px;
+}
+.ux-chip-choice--stack .ux-chip-choice__chip-container:first-child {
+  margin-top: 0px;
+}
