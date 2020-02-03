@@ -6,7 +6,7 @@ import { StyleEngine, UxComponent, processDesignAttributes } from '@aurelia-ux/c
 import { UxIconTheme } from './ux-icon-theme';
 import { UxIconMap } from './ux-icon-map';
 
-@inject(Element, StyleEngine, Logger)
+@inject(Element, UxIconMap, StyleEngine, Logger)
 @customElement('ux-icon')
 @processAttributes(processDesignAttributes)
 export class UxIcon implements UxComponent {
@@ -18,6 +18,7 @@ export class UxIcon implements UxComponent {
 
   constructor(
     private element: HTMLElement,
+    private iconMap: UxIconMap,
     private styleEngine: StyleEngine,
     private logger: Logger
   )  { }
@@ -43,7 +44,7 @@ export class UxIcon implements UxComponent {
   }
 
   private changeIcon(icon: string) {
-    const material = UxIconMap.get(icon);
+    const material = this.iconMap.get(icon);
 
     if (material) {
       this.element.innerHTML = material;

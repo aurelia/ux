@@ -1,27 +1,29 @@
 export class UxIconMap {
 
-  private static Map: {
+  private map: {
     [key: string]: string;
   } = {};
 
-  public static registerIcon(name: string, material: string) {
-    UxIconMap.Map[name] = material;
+  public registerIcon(name: string, material: string) {
+    this.map[name] = material;
   }
 
-  public static registerIcons(icons: Array<{name: string, material: string}>) {
-    icons.map(icon => UxIconMap.registerIcon(icon.name, icon.material));
+  public registerIcons(icons: Array<{name: string, material: string}>) {
+    if (Array.isArray(icons) && icons.length > 0 && typeof icons[0].name === 'string' && typeof icons[0].material === 'string') {
+      icons.map(icon => this.registerIcon(icon.name, icon.material));
+    }
   }
 
-  public static has(name: string | string[]): boolean {
+  public has(name: string | string[]): boolean {
     if (typeof name === 'string') {
       name = [name];
     }
     return name.reduce((missing, icon) => {
-      return missing || UxIconMap.Map[icon] === undefined;
+      return missing ||this.map[icon] === undefined;
     }, false);
   }
 
-  public static get(name: string): string | undefined {
-    return UxIconMap.Map[name];
+  public get(name: string): string | undefined {
+    return this.map[name];
   }
 }
