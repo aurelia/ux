@@ -1,4 +1,4 @@
-import { FrameworkConfiguration, PLATFORM, Container } from 'aurelia-framework';
+import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
 import { UxIcon } from './ux-icon';
 
 export { UxIconTheme } from './ux-icon-theme';
