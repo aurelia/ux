@@ -2,7 +2,7 @@ import { customElement, bindable, observable } from 'aurelia-framework';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxChipTheme } from './ux-chip-theme';
 
 @inject(Element, StyleEngine)
@@ -10,9 +10,7 @@ import { UxChipTheme } from './ux-chip-theme';
 export class UxChip implements UxComponent {
   @bindable public theme: UxChipTheme;
   @bindable public variant: 'filled' | 'outline' = 'filled';
-  @bindable public selectable: boolean | string = false;
-  @bindable public value: any; // use for choice chips
-  public isCheckable: boolean = false; // use for choice chips
+  @bindable public selectedIcon: string = 'check';
 
   @observable
   public focused: boolean = false;

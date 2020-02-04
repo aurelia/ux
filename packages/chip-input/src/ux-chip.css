@@ -33,6 +33,10 @@
   display: inline-block;
 }
 
+.ux-chip__thumbnail > .ux_chip__selected_icon {
+  display: none;
+}
+
 .ux-chip__close {
   display: none;
 }
@@ -88,4 +92,16 @@
 .ux-chip--outline.ux-choice--selected {
   background-color: rgba(132, 132, 132, 0.5);
   background-color: var(--aurelia-ux--chip-active-color, rgba(132, 132, 132, 0.5));
+}
+
+
+/* DISPLAY CHECK ICON FOR MULTIPLE CHIP LIST */
+.ux-choice-container--multiple .ux-chip__thumbnail > *:first-child {
+  display: none;
+}
+
+.ux-choice-container--multiple .ux-choice--selected .ux-chip__thumbnail > .ux_chip__selected_icon,
+.ux-choice-container--multiple .ux-chip--selected .ux-chip__thumbnail > .ux_chip__selected_icon {
+  margin-left: 10px;
+  display: inline-block;
 }
