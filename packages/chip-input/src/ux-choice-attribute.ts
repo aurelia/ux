@@ -1,6 +1,9 @@
 import { UxChoiceContainerAttribute } from './ux-choice-container-attribute';
 import { customAttribute, inject, observable } from 'aurelia-framework';
+import { getLogger } from 'aurelia-logging';
 import './ux-choice.css';
+
+const logger = getLogger('ux-choice');
 
 @customAttribute('ux-choice')
 @inject(Element)
@@ -33,6 +36,8 @@ export class UxChoiceAttribute {
       containerElement.au['ux-choice-container'].viewModel instanceof UxChoiceContainerAttribute) {
       this.container = containerElement.au['ux-choice-container'].viewModel;
       this.container.registerChoice(this);
+    } else {
+      logger.warn('UX-CHOICE attribute without parent UX-CHOICE-CONTAINER, consider adding a container to your choice list');
     }
   }
 
