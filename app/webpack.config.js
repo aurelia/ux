@@ -137,8 +137,8 @@ module.exports = function({ production = '' } = {}) {
           './ux-checkbox.html'
         ],
         '@aurelia-ux/chip-input': [
-          './ux-chip-choice.html',
           './ux-chip-input.html',
+          './ux-chip-list.html',
           './ux-chip.html'
         ],
         "@aurelia-ux/datepicker": [

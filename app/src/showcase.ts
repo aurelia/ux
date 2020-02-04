@@ -20,6 +20,14 @@ export class Showcase {
   public ageGroup: string = '21-30';
   public tags: Array<string> = ['draft', 'opened'];
   public brightness: string = '3';
+  public brightnessOptions = [
+    {value: '1', label: 'Dark'},
+    {value: '2', label: 'Low'},
+    {value: '3', label: 'Medium'},
+    {value: '4', label: 'High'},
+    {value: '5', label: 'Extreme'},
+    {value: '6', label: 'Full'},
+  ];
   public region: string[] = ['zurich'];
   public variant = 'filled';
   public controller: ValidationController;

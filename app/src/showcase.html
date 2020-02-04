@@ -131,42 +131,33 @@
             <ux-field>
               <label>Brightness (inline)</label>
               <div class="ux-form__row">
-                <ux-chip-choice type="inline" value.bind="brightness">
-                  <ux-chip variant.bind="variant" value="1"><ux-icon icon="brightness_1" slot="thumbnail"></ux-icon>Dark</ux-chip>
-                  <ux-chip variant.bind="variant" value="2"><ux-icon icon="brightness_2" slot="thumbnail"></ux-icon>Low</ux-chip>
-                  <ux-chip variant.bind="variant" value="3"><ux-icon icon="brightness_3" slot="thumbnail"></ux-icon>Medium</ux-chip>
-                  <ux-chip variant.bind="variant" value="4"><ux-icon icon="brightness_4" slot="thumbnail"></ux-icon>High</ux-chip>
-                  <ux-chip variant.bind="variant" value="5"><ux-icon icon="brightness_5" slot="thumbnail"></ux-icon>Extreme</ux-chip>
-                  <ux-chip variant.bind="variant" value="6"><ux-icon icon="brightness_6" slot="thumbnail"></ux-icon>Full</ux-chip>
-                </ux-chip-choice>
+                <ux-chip-list type="inline" ux-choice-container.bind="brightness">
+                  <ux-chip variant.bind="variant" ux-choice="${option.value}" repeat.for="option of brightnessOptions">
+                    <ux-icon icon="brightness_${option.value}" slot="thumbnail"></ux-icon>${option.label}
+                  </ux-chip>
+                </ux-chip-list>
               </div>
             </ux-field>
 
             <ux-field>
               <label>Brightness (stack)</label>
               <div class="ux-form__row">
-                <ux-chip-choice type="stack" value.bind="brightness">
-                  <ux-chip variant.bind="variant" value="1"><ux-icon icon="brightness_1" slot="thumbnail"></ux-icon>Dark</ux-chip>
-                  <ux-chip variant.bind="variant" value="2"><ux-icon icon="brightness_2" slot="thumbnail"></ux-icon>Low</ux-chip>
-                  <ux-chip variant.bind="variant" value="3"><ux-icon icon="brightness_3" slot="thumbnail"></ux-icon>Medium</ux-chip>
-                  <ux-chip variant.bind="variant" value="4"><ux-icon icon="brightness_4" slot="thumbnail"></ux-icon>High</ux-chip>
-                  <ux-chip variant.bind="variant" value="5"><ux-icon icon="brightness_5" slot="thumbnail"></ux-icon>Extreme</ux-chip>
-                  <ux-chip variant.bind="variant" value="6"><ux-icon icon="brightness_6" slot="thumbnail"></ux-icon>Full</ux-chip>
-                </ux-chip-choice>
+                <ux-chip-list type="stack" ux-choice-container.bind="brightness">
+                  <ux-chip variant.bind="variant" ux-choice="${option.value}" repeat.for="option of brightnessOptions">
+                    <ux-icon icon="brightness_${option.value}" slot="thumbnail"></ux-icon>${option.label}
+                  </ux-chip>
+                </ux-chip-list>
               </div>
             </ux-field>
 
             <ux-field>
               <label>Brightness (scroll)</label>
               <div class="ux-form__row">
-                <ux-chip-choice type="scroll" value.bind="brightness">
-                  <ux-chip variant.bind="variant" value="1"><ux-icon icon="brightness_1" slot="thumbnail"></ux-icon>Dark</ux-chip>
-                  <ux-chip variant.bind="variant" value="2"><ux-icon icon="brightness_2" slot="thumbnail"></ux-icon>Low</ux-chip>
-                  <ux-chip variant.bind="variant" value="3"><ux-icon icon="brightness_3" slot="thumbnail"></ux-icon>Medium</ux-chip>
-                  <ux-chip variant.bind="variant" value="4"><ux-icon icon="brightness_4" slot="thumbnail"></ux-icon>High</ux-chip>
-                  <ux-chip variant.bind="variant" value="5"><ux-icon icon="brightness_5" slot="thumbnail"></ux-icon>Extreme</ux-chip>
-                  <ux-chip variant.bind="variant" value="6"><ux-icon icon="brightness_6" slot="thumbnail"></ux-icon>Full</ux-chip>
-                </ux-chip-choice>
+                <ux-chip-list type="scroll" ux-choice-container.bind="brightness">
+                  <ux-chip variant.bind="variant" ux-choice="${option.value}" repeat.for="option of brightnessOptions">
+                    <ux-icon icon="brightness_${option.value}" slot="thumbnail"></ux-icon>${option.label}
+                  </ux-chip>
+                </ux-chip-list>
               </div>
             </ux-field>
 
@@ -305,13 +296,13 @@
             <ux-field>
               <label>Choose Region</label>
               <div class="ux-form__row">
-                <ux-chip-choice type="inline" value.bind="region" multiple>
-                  <ux-chip variant.bind="variant" value="basel">Basel</ux-chip>
-                  <ux-chip variant.bind="variant" value="bern">Bern</ux-chip>
-                  <ux-chip variant.bind="variant" value="geneva">Geneva</ux-chip>
-                  <ux-chip variant.bind="variant" value="lausanne">Lausanne</ux-chip>
-                  <ux-chip variant.bind="variant" value="zurich">Zürich</ux-chip>
-                </ux-chip-choice>
+                <ux-chip-list type="inline" ux-choice-container.bind="region" multiple>
+                  <ux-chip variant.bind="variant" ux-choice="basel"><ux-icon icon="person" slot="thumbnail"></ux-icon>Basel</ux-chip>
+                  <ux-chip variant.bind="variant" ux-choice="bern">Bern</ux-chip>
+                  <ux-chip variant.bind="variant" ux-choice="geneva">Geneva</ux-chip>
+                  <ux-chip variant.bind="variant" ux-choice="lausanne">Lausanne</ux-chip>
+                  <ux-chip variant.bind="variant" ux-choice="zurich">Zürich</ux-chip>
+                </ux-chip-list>
               </div>
             </ux-field>
 
