@@ -10,6 +10,6 @@ export { UxIconMap };
 export function configure(config: FrameworkConfiguration, icons?: Array<{name: string, material: string}>) {
   config.globalResources(PLATFORM.moduleName('./ux-icon'));
   if (Array.isArray(icons) && icons.length > 0) {
-    Container.instance.get(UxIconMap).registerIcons(icons);
+    config.container.get(UxIconMap).registerIcons(icons);
   }
 }
