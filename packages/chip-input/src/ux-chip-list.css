@@ -3,8 +3,8 @@
   flex-wrap: wrap;
 }
 
-.ux-chip-list .ux-chip-list__chip-container {
-  display: inline-block;
+.ux-chip-list .ux-chip {
+  /* display: inline-block; */
   margin: 4px;
 }
 
@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-/* .ux-chip-list .ux-chip-list__chip-container:first-child {
+/* .ux-chip-list .ux-chip:first-child {
   margin-left: 0px;
 } */
 
@@ -21,18 +21,19 @@
   overflow-x: auto;
   flex-wrap: nowrap;
 }
-.ux-chip-list--scroll .ux-chip-list__chip-container {
+.ux-chip-list--scroll .ux-chip {
   margin-bottom: 0px;
 }
 .ux-chip-list--stack {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
-.ux-chip-list--stack .ux-chip-list__chip-container {
+.ux-chip-list--stack .ux-chip {
   margin-left: 0px;
   margin-top: 8px;
   margin-bottom: 0px;
 }
-.ux-chip-list--stack .ux-chip-list__chip-container:first-child {
+.ux-chip-list--stack .ux-chip:first-child {
   margin-top: 0px;
 }
