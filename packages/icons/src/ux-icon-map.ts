@@ -1,3 +1,8 @@
+export interface UxIconReg {
+  name: string;
+  material: string;
+}
+
 export class UxIconMap {
 
   private map: {
@@ -8,7 +13,7 @@ export class UxIconMap {
     this.map[name] = material;
   }
 
-  public registerIcons(icons: Array<{name: string, material: string}>) {
+  public registerIcons(icons: Array<UxIconReg>) {
     if (Array.isArray(icons) && icons.length > 0 && typeof icons[0].name === 'string' && typeof icons[0].material === 'string') {
       icons.map(icon => this.registerIcon(icon.name, icon.material));
     }
@@ -19,11 +24,15 @@ export class UxIconMap {
       name = [name];
     }
     return name.reduce((missing, icon) => {
-      return missing ||this.map[icon] === undefined;
+      return missing || this.map[icon] === undefined;
     }, false);
   }
 
   public get(name: string): string | undefined {
     return this.map[name];
+  }
+
+  public getAll(): Array<UxIconReg> {
+    return Object.keys(this.map).map((name) => ({name, material: this.map[name]}));
   }
 }
