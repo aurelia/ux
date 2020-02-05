@@ -79,14 +79,10 @@
   letter-spacing: inherit;
   letter-spacing: var(--aurelia-ux--input-letter-spacing, inherit);
   padding: 6px 0 4px 0;
-  padding-right: 0px;
-  padding-left: 0px;
   border: 0;
   color: inherit;
   background-color: transparent;
   outline: none;
-  padding-left: 0;
-  padding-right: 0;
   font-weight: 400;
 }
 
