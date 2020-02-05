@@ -9,7 +9,6 @@ export class UxChoiceContainerAttribute {
   @bindable public multiple: boolean | 'auto' = 'auto';
 
   public isMultiple: boolean = false;
-  // private observer: MutationObserver;
   private choices: Array<UxChoiceAttribute> = [];
   private processClick: (event: Event) => void;
 
