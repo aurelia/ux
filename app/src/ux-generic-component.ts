@@ -6,4 +6,9 @@ export class UxGenericComponent {
   public labelFontSize = '12px';
   public height = 'auto';
   public style = 'normal';
+
+  public value = '';
+  public value2 = 'With value';
+
+  public backgroundLabelsAndInput: boolean = false;
 }
