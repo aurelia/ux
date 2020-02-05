@@ -7,6 +7,7 @@ import { StyleEngine, UxTheme } from '@aurelia-ux/core';
 import * as themes from './themes.json';
 import { inject, observable } from 'aurelia-framework';
 import { UxInputTheme } from '@aurelia-ux/input';
+import { UxChipInputTheme } from '@aurelia-ux/chip-input';
 import { UxButtonTheme } from '@aurelia-ux/button';
 
 export interface ThemesSet {
@@ -27,6 +28,7 @@ export class ThemeService {
   public checkbox: UxCheckboxTheme = {themeKey: 'checkbox'};
   public radio: UxRadioTheme = {themeKey: 'radio'};
   public datepicker: UxDatepickerTheme = {themeKey: 'datepicker'};
+  public chipInput: UxChipInputTheme = {themeKey: 'chip-input'};
   public slider: UxSliderTheme = {themeKey: 'slider'};
   @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderRadius: number = 2;
   @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderWidth: number = 1;
@@ -42,6 +44,9 @@ export class ThemeService {
   @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderRadius: number = 2;
   @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderWidth: number = 1;
   @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderActiveWidth: number = 2;
+  @observable({changeHandler: 'chipInputVariableChanged'}) public chipInputBorderRadius: number = 2;
+  @observable({changeHandler: 'chipInputVariableChanged'}) public chipInputBorderWidth: number = 1;
+  @observable({changeHandler: 'chipInputVariableChanged'}) public chipInputBorderActiveWidth: number = 2;
   @observable({changeHandler: 'sliderVariableChanged'}) public sliderThumbDiameter: number = 18;
   @observable({changeHandler: 'sliderVariableChanged'}) public sliderTrackHeight: number = 4;
   @observable({changeHandler: 'checkboxVariableChanged'}) public checkboxBorderWidth: number = 2;
@@ -160,6 +165,16 @@ export class ThemeService {
     this.input.borderWidth = `${this.inputBorderWidth}px`;
     this.input.borderActiveWidth = `${this.inputBorderActiveWidth}px`;
     this.componentThemeChanged('input');
+  }
+
+  public chipInputVariableChanged() {
+    if (!this.chipInput) {
+      return;
+    }
+    this.chipInput.borderRadius = `${this.chipInputBorderRadius}px`;
+    this.chipInput.borderWidth = `${this.chipInputBorderWidth}px`;
+    this.chipInput.borderActiveWidth = `${this.chipInputBorderActiveWidth}px`;
+    this.componentThemeChanged('chip-input');
   }
 
   public textareaVariableChanged() {

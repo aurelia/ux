@@ -10,7 +10,7 @@ export class Theming {
 
   public design: Design;
 
-  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' = 'button';
+  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' = 'chip-input';
 
   public buttonPreviewClass = '';
   public buttonPreviewType = 'raised';
@@ -34,6 +34,10 @@ export class Theming {
   public datepickerPreviewVariant = 'filled';
   public datepickerPreviewDisabled = false;
   public datepickerPreviewError = false;
+
+  public chipInputPreviewVariant = 'filled';
+  public chipInputPreviewDisabled = false;
+  public chipInputPreviewError = false;
 
   public sliderPreviewType = 'default';
   public sliderPreviewDisabled = false;

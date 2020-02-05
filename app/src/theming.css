@@ -18,7 +18,7 @@
 }
 
 .ux-card-component__media {
-  height: 100px;
+  min-height: 100px;
   padding: 16px;
   display: flex;
   align-content: center;
