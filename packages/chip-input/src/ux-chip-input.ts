@@ -18,6 +18,7 @@ export class UxChipInput implements UxComponent {
   @bindable public separator: string = ', ';
   @bindable public variant: 'filled' | 'outline' = 'filled';
   @bindable public chipVariant: 'filled' | 'outline' = 'filled';
+  @bindable public dense: any = false;
 
   @observable
   public focused: boolean = false;
@@ -32,17 +33,22 @@ export class UxChipInput implements UxComponent {
   private chiprepeat: Element;
   private tagrepeat: Element;
 
+  // will be set to true if no label or if label is given through the placeholder attribute
+  public placeholder: boolean = false;
+
   constructor(private element: HTMLElement, private styleEngine: StyleEngine) { }
 
   public bind() {
     this.themeChanged(this.theme);
 
+    this.dense = normalizeBooleanAttribute('dense', this.dense);
+
     if (this.element.hasAttribute('placeholder')) {
       const attributeValue = this.element.getAttribute('placeholder');
 
       if (attributeValue) {
-        this.textbox.setAttribute('placeholder', attributeValue);
-        this.element.removeAttribute('placeholder');
+        this.label = attributeValue;
+        this.placeholder = true;
       }
     }
 
@@ -61,6 +67,12 @@ export class UxChipInput implements UxComponent {
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
     }
+
+    this.labelChanged();
+  }
+
+  public attached() {
+    this.variantChanged(this.variant);
   }
 
   public focus() {
@@ -193,6 +205,12 @@ export class UxChipInput implements UxComponent {
       this.element.style.backgroundColor = parentBackgroundColor || '#FFFFFF';
     } else {
       this.element.style.backgroundColor = '';
+    }
+  }
+
+  public labelChanged() {
+    if (typeof this.label !== 'string' || this.label.length === 0) {
+      this.placeholder = true;
     }
   }
 

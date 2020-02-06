@@ -1,12 +1,12 @@
 <template role="textbox" 
-  class="ux-input-component ux-input-component--${variant} ${dense ? 'ux-input-component--dense' : ''} ux-chip-input"
+  class="ux-input-component ux-input-component--${variant} ${dense ? 'ux-input-component--dense' : ''} ${placeholder ? 'ux-input-component--placeholder' : ''} ux-chip-input"
   click.delegate="focus()">
   <require from="./ux-chip-input.css"></require>
 
   <slot name="leading-icon"></slot>
   <span class="ux-input-component__content">
-    <div class="ux-input-component__label-background" if.bind="variant === 'outline' && (label || placeholder)" css="width: ${labelEl.offsetWidth + 6}px;"></div>
-    <div class="ux-input-component__label" ref="labelEl" if.bind="label || placeholder">${label || placeholder}</div>
+    <div class="ux-input-component__label-background" if.bind="variant === 'outline' && label" css="width: ${labelEl.offsetWidth + 6}px;"></div>
+    <div class="ux-input-component__label" ref="labelEl">${label}</div>
   
     <ux-chip deletable
       variant="chipVariant"
