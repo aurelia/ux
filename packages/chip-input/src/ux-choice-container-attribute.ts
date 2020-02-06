@@ -104,7 +104,6 @@ export class UxChoiceContainerAttribute {
   }
 
   public processValue() {
-    console.log('**** processValue');
     if (this.isMultiple && Array.isArray(this.value)) {
       for (const choice of this.choices) {
         choice.selected = this.value.indexOf(choice.value) !== -1;
