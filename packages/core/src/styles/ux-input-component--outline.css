@@ -57,7 +57,6 @@
 
 .ux-input-component--outline .ux-input-component__inner-input {
   padding: var(--inner-input-v-padding, 12px) 0;
-  font-size: var(--font-size, 16px);
 }
 
 /* OUTLINE MAIN COMPONENT IN FOCUSED STATE */

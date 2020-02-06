@@ -118,8 +118,7 @@
   z-index: 2;
   width: 100%;
   box-sizing: border-box;
-  font-size: 6px; /* trick to make the inner input not resizing the outer box when not in focused and without value */
-  transition: font-size ease-out 150ms;
+  margin-bottom: -10px; /* trick to make the inner input not resizing the outer box when not in focused and without value */
   line-height: 1.6;
   line-height: var(--line-height, 1.6);
   letter-spacing: inherit;
@@ -193,12 +192,6 @@
   line-height: 1.6;
   line-height: var(--label-line-height, 1.6);
 }
-.ux-input-component--focused .ux-input-component__inner-input,
-.ux-input-component--has-value .ux-input-component__inner-input {
-  font-size: 16px;
-  font-size: var(--font-size, 16px);
-}
-
 
 
 /* BORDER BOTTOM IN FOCUS STATE  */
