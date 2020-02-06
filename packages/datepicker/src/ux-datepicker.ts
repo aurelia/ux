@@ -1,7 +1,7 @@
 import { customElement, bindable, ViewResources } from 'aurelia-templating';
 import { bindingMode, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
@@ -30,13 +30,13 @@ export class UxDatepicker implements UxComponent {
   @bindable public maxTime: any;
   @bindable public minDate: any;
   @bindable public maxDate: any;
-  @bindable public placeholder: any;
   @bindable public config: DatepickerSettings;
   @bindable public autofocus = null;
   @bindable public disabled: any = false;
   @bindable public readonly: any = false;
   @bindable public label: any;
   @bindable public variant: 'filled' | 'outline' = 'filled';
+  @bindable public dense: any = false;
 
   @bindable public formatters = {
     date: 'L',
@@ -58,6 +58,9 @@ export class UxDatepicker implements UxComponent {
   private textboxValue: string;
   private showDialog = false;
 
+  // will be set to true if no label or if label is given through the placeholder attribute
+  public placeholder: boolean = false;
+
   constructor(public element: HTMLElement, public resources: ViewResources, public styleEngine: StyleEngine) { }
 
   public bind() {
@@ -65,6 +68,18 @@ export class UxDatepicker implements UxComponent {
 
     if (this.autofocus || this.autofocus === '') {
       this.focused = true;
+    }
+
+    this.dense = normalizeBooleanAttribute('dense', this.dense);
+
+    const element = this.element;
+    if (element.hasAttribute('placeholder')) {
+      const attributeValue = element.getAttribute('placeholder');
+
+      if (attributeValue) {
+        this.label = attributeValue;
+        this.placeholder = true;
+      }
     }
 
     if (this.initialDate != null) {
@@ -103,6 +118,11 @@ export class UxDatepicker implements UxComponent {
 
     this.valueChanged(this.value);
     this.themeChanged(this.theme);
+    this.labelChanged();
+  }
+
+  public attached() {
+    this.variantChanged(this.variant);
   }
 
   public toggleDialog(display: string) {
@@ -241,6 +261,12 @@ export class UxDatepicker implements UxComponent {
       this.element.style.backgroundColor = parentBackgroundColor || '#FFFFFF';
     } else {
       this.element.style.backgroundColor = '';
+    }
+  }
+
+  public labelChanged() {
+    if (typeof this.label !== 'string' || this.label.length === 0) {
+      this.placeholder = true;
     }
   }
 }
