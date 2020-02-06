@@ -108,7 +108,7 @@
   border-color: var(--error, #F44336);
 }
 /* HOVER STATE */
-.ux-input-component--outline:hover:not(.ux-input-component--disabled) {
+.ux-input-component--outline:hover:not(.ux-input-component--disabled):not(.ux-input-component--focused) {
   border-color: #212121;
   border-color: var(--foreground, #212121);
 }

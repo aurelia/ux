@@ -1,7 +1,7 @@
 import { customElement, bindable, ViewResources } from 'aurelia-templating';
-import { bindingMode, observable } from 'aurelia-binding';
+import { bindingMode, observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
@@ -20,7 +20,7 @@ import '@aurelia-ux/core/styles/ux-input-component--outline.css';
 //   UX_DATEPICKER_VIEW,
 //   [PLATFORM.moduleName('@aurelia-ux/datepicker/ux-datepicker.css')]
 // )
-export class UxDatepicker implements UxComponent {
+export class UxDatepicker implements UxInputComponent {
   @bindable public theme: UxDatepickerTheme;
 
   @bindable public display = 'month';
@@ -34,7 +34,8 @@ export class UxDatepicker implements UxComponent {
   @bindable public autofocus = null;
   @bindable public disabled: any = false;
   @bindable public readonly: any = false;
-  @bindable public label: any;
+  @bindable public label: string;
+  @bindable public placeholder: string;
   @bindable public variant: 'filled' | 'outline' = 'filled';
   @bindable public dense: any = false;
 
@@ -58,29 +59,15 @@ export class UxDatepicker implements UxComponent {
   private textboxValue: string;
   private showDialog = false;
 
-  // will be set to true if no label or if label is given through the placeholder attribute
-  public placeholder: boolean = false;
-
   constructor(public element: HTMLElement, public resources: ViewResources, public styleEngine: StyleEngine) { }
 
   public bind() {
-    this.processAttribute('placeholder');
 
     if (this.autofocus || this.autofocus === '') {
       this.focused = true;
     }
 
     this.dense = normalizeBooleanAttribute('dense', this.dense);
-
-    const element = this.element;
-    if (element.hasAttribute('placeholder')) {
-      const attributeValue = element.getAttribute('placeholder');
-
-      if (attributeValue) {
-        this.label = attributeValue;
-        this.placeholder = true;
-      }
-    }
 
     if (this.initialDate != null) {
       const dateParse = moment(this.initialDate);
@@ -118,7 +105,6 @@ export class UxDatepicker implements UxComponent {
 
     this.valueChanged(this.value);
     this.themeChanged(this.theme);
-    this.labelChanged();
   }
 
   public attached() {
@@ -229,15 +215,6 @@ export class UxDatepicker implements UxComponent {
     this.styleEngine.applyTheme(newValue, this.element);
   }
 
-  private processAttribute(attributeName: string) {
-    const attributeValue = this.element.getAttribute('placeholder');
-
-    if (attributeValue) {
-      this.element.removeAttribute(attributeName);
-      this.textbox.setAttribute(attributeName, attributeValue)
-    }
-  }
-
   public focusedChanged(focused: boolean) {
     this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
   }
@@ -264,9 +241,8 @@ export class UxDatepicker implements UxComponent {
     }
   }
 
-  public labelChanged() {
-    if (typeof this.label !== 'string' || this.label.length === 0) {
-      this.placeholder = true;
-    }
+  @computedFrom('label')
+  get placeholderMode(): boolean {
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 }

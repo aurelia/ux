@@ -15,7 +15,7 @@ import {
 } from 'aurelia-framework';
 
 import { getLogger } from 'aurelia-logging';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 
 import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
@@ -62,7 +62,7 @@ export interface UxOptionContainer extends HTMLElement {
 @inject(Element, StyleEngine, ObserverLocator, TaskQueue)
 @processContent(ensureUxOptionOrUxOptGroup)
 @customElement('ux-select')
-export class UxSelect implements UxComponent {
+export class UxSelect implements UxInputComponent {
 
   private selectedOption: UxOptionElement | null = null;
 
@@ -84,8 +84,8 @@ export class UxSelect implements UxComponent {
   @bindable({ defaultValue: false })
   public multiple: boolean | string;
 
-  @bindable()
-  public label: string;
+  @bindable public label: string;
+  @bindable public placeholder: string;
 
   @bindable()
   public variant: 'filled' | 'outline' = 'filled';
@@ -99,9 +99,6 @@ export class UxSelect implements UxComponent {
   // Populated by Aurelia
   public readonly optionWrapperEl: HTMLElement;
   public readonly optionCtEl: UxOptionContainer;
-
-  // will be set to true if no label or if label is given through the placeholder attribute
-  public placeholder: boolean = false;
 
   constructor(
     public readonly element: UxSelectElement,
@@ -118,17 +115,7 @@ export class UxSelect implements UxComponent {
       // setTimeout(focusEl, 0, this.button);
     }
 
-    const element = this.element;
     this.dense = normalizeBooleanAttribute('dense', this.dense);
-
-    if (element.hasAttribute('placeholder')) {
-      const attributeValue = element.getAttribute('placeholder');
-
-      if (attributeValue) {
-        this.label = attributeValue;
-        this.placeholder = true;
-      }
-    }
 
     if (this.isMultiple) {
       if (!this.value) {
@@ -142,8 +129,6 @@ export class UxSelect implements UxComponent {
     }
     // Initially Synchronize options with value of this element
     this.taskQueue.queueMicroTask(this);
-
-    this.labelChanged();
   }
 
   public attached() {
@@ -521,10 +506,9 @@ export class UxSelect implements UxComponent {
     }
   }
 
-  public labelChanged() {
-    if (typeof this.label !== 'string' || this.label.length === 0) {
-      this.placeholder = true;
-    }
+  @computedFrom('label')
+  get placeholderMode(): boolean {
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 
   public get options(): UxOptionElement[] {

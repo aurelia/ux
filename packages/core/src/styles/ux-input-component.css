@@ -31,8 +31,8 @@
   /* MIN HEIGHT OF OUTER COMPONENT */
   --min-height: 58.8px;
   --min-height: calc(
-    1 * var(--line-height, 1.6) * var(--font-size, 16px) + /* 25.6 */
-    1 * var(--label-line-height, 1.6) * var(--label-font-size, 12px) + /* 19.2 */
+    1 * var(--line-height, 1.6) * var(--font-size, 16px) +
+    1 * var(--label-line-height, 1.6) * var(--label-font-size, 12px) +
     1 * var(--label-v-padding, 6px) + 
     1 * var(--inner-input-v-padding, 6px) + 
     2 * var(--border-width, 1px));
@@ -197,7 +197,6 @@
 .ux-input-component--has-value .ux-input-component__inner-input {
   font-size: 16px;
   font-size: var(--font-size, 16px);
-  /* position: static; */
 }
 
 
@@ -242,13 +241,31 @@
 }
 
 /* PLACEHOLDER LABEL */
+.ux-input-component--placeholder {
+  --inner-input-v-padding: 12px;
+  --min-height: calc(
+    1 * var(--line-height, 1.6) * var(--font-size, 16px) +
+    2 * var(--inner-input-v-padding, 6px) + 
+    2 * var(--border-width, 1px));
+}
+.ux-input-component--placeholder.ux-input-component--dense {
+  --inner-input-v-padding: 6px;
+}
+.ux-input-component--placeholder .ux-input-component__label {
+  position: absolute;
+  font-size: var(--font-size, 16px);
+  line-height: var(--line-height, 1.6);
+  transform: none;
+  padding: var(--inner-input-v-padding) 0;
+}
 .ux-input-component--placeholder.ux-input-component--focused .ux-input-component__label,
 .ux-input-component--placeholder.ux-input-component--has-value .ux-input-component__label {
-  transform: translateY(var(--empty-label-translation, 13.6px));
-  opacity: 0;
-  min-height: calc(var(--label-font-size, 12px) * var(--label-line-height, 1.6));
+  transform: none;
 }
-.ux-input-component--placeholder.ux-input-component--focused .ux-input-component__inner-input,
-.ux-input-component--placeholder.ux-input-component--has-value .ux-input-component__inner-input {
-  transform: translateY(calc(var(--empty-label-translation, 13.6px) * -0.5 - var(--inner-input-v-padding) / 2));
+.ux-input-component--placeholder.ux-input-component--filled.ux-input-component--has-value .ux-input-component__label {
+  opacity: 0;
+}
+.ux-input-component--placeholder .ux-input-component__inner-input {
+  padding: var(--inner-input-v-padding) 0;
+  font-size: var(--font-size, 16px);
 }

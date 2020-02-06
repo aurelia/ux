@@ -1,9 +1,9 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxTextAreaTheme } from './ux-textarea-theme';
-import { observable } from 'aurelia-framework';
+import { observable, computedFrom } from 'aurelia-framework';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/styles/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
@@ -15,7 +15,7 @@ export interface UxTextAreaElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-textarea')
-export class UxTextArea implements UxComponent {
+export class UxTextArea implements UxInputComponent {
   private ignoreRawChanges: boolean;
   private isAttached: boolean;
 
@@ -29,7 +29,8 @@ export class UxTextArea implements UxComponent {
   @bindable public minlength: number;
   @bindable public readonly: boolean | string = false;
   @bindable public rows: number;
-  @bindable public label: any;
+  @bindable public label: string;
+  @bindable public placeholder: string;
   @bindable public theme: UxTextAreaTheme;
   @bindable public variant: 'filled' | 'outline' = 'filled';
   @bindable public dense: any = false;
@@ -40,9 +41,6 @@ export class UxTextArea implements UxComponent {
   public value: any = undefined;
 
   public textbox: HTMLTextAreaElement;
-
-  // will be set to true if no label or if label is given through the placeholder attribute
-  public placeholder: boolean = false;
 
   constructor(private element: UxTextAreaElement, private styleEngine: StyleEngine) {
     Object.setPrototypeOf(element, uxTextAreaElementProto);
@@ -55,15 +53,6 @@ export class UxTextArea implements UxComponent {
 
     if (this.autofocus || this.autofocus === '') {
       this.focus = true;
-    }
-
-    if (element.hasAttribute('placeholder')) {
-      const attributeValue = element.getAttribute('placeholder');
-
-      if (attributeValue) {
-        this.label = attributeValue;
-        this.placeholder = true;
-      }
     }
 
     this.dense = normalizeBooleanAttribute('dense', this.dense);
@@ -88,7 +77,6 @@ export class UxTextArea implements UxComponent {
 
     this.themeChanged(this.theme);
     this.autocompleteChanged(this.autocomplete);
-    this.labelChanged();
   }
 
   public attached() {
@@ -186,10 +174,9 @@ export class UxTextArea implements UxComponent {
     }
   }
 
-  public labelChanged() {
-    if (typeof this.label !== 'string' || this.label.length === 0) {
-      this.placeholder = true;
-    }
+  @computedFrom('label')
+  get placeholderMode(): boolean {
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 }
 

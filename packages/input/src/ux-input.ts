@@ -1,8 +1,8 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
-import { observable } from 'aurelia-binding';
+import { observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/styles/ux-input-component.css';
@@ -15,7 +15,7 @@ export interface UxInputElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-input')
-export class UxInput implements UxComponent {
+export class UxInput implements UxInputComponent {
   private ignoreRawChanges: boolean;
 
   @bindable public autofocus = null;
@@ -27,7 +27,8 @@ export class UxInput implements UxComponent {
   @bindable public max: number;
   @bindable public readonly: any = false;
   @bindable public theme: UxInputTheme;
-  @bindable public label: any;
+  @bindable public label: string;
+  @bindable public placeholder: string;
   @bindable public type: any;
   @bindable public variant: 'filled' | 'outline' = 'filled';
   @bindable public dense: any = false;
@@ -40,9 +41,6 @@ export class UxInput implements UxComponent {
 
   public value: any;
   public textbox: HTMLInputElement;
-
-  // will be set to true if no label or if label is given through the placeholder attribute
-  public placeholder: boolean = false;
 
   constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
     Object.setPrototypeOf(element, uxInputElementProto);
@@ -69,15 +67,6 @@ export class UxInput implements UxComponent {
       if (attributeValue) {
         element.removeAttribute('id');
         textbox.setAttribute('id', attributeValue);
-      }
-    }
-
-    if (element.hasAttribute('placeholder')) {
-      const attributeValue = element.getAttribute('placeholder');
-
-      if (attributeValue) {
-        this.label = attributeValue;
-        this.placeholder = true;
       }
     }
 
@@ -110,7 +99,6 @@ export class UxInput implements UxComponent {
 
     this.autocompleteChanged(this.autocomplete);
     this.themeChanged(this.theme);
-    this.labelChanged();
   }
 
   public attached() {
@@ -228,10 +216,9 @@ export class UxInput implements UxComponent {
     }
   }
 
-  public labelChanged() {
-    if (typeof this.label !== 'string' || this.label.length === 0) {
-      this.placeholder = true;
-    }
+  @computedFrom('label')
+  get placeholderMode(): boolean {
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 
 }

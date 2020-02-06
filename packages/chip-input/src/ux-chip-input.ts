@@ -1,7 +1,7 @@
 import { customElement, bindable } from 'aurelia-templating';
-import { bindingMode, observable } from 'aurelia-binding';
+import { bindingMode, observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxChipInputTheme } from './ux-chip-input-theme';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/styles/ux-input-component.css';
@@ -10,11 +10,12 @@ import '@aurelia-ux/core/styles/ux-input-component--outline.css';
 
 @inject(Element, StyleEngine)
 @customElement('ux-chip-input')
-export class UxChipInput implements UxComponent {
+export class UxChipInput implements UxInputComponent {
   @bindable public disabled: boolean | string = false;
   @bindable public readonly: boolean | string = false;
   @bindable public theme: UxChipInputTheme;
-  @bindable public label: any;
+  @bindable public label: string;
+  @bindable public placeholder: string;
   @bindable public separator: string = ', ';
   @bindable public variant: 'filled' | 'outline' = 'filled';
   @bindable public chipVariant: 'filled' | 'outline' = 'filled';
@@ -33,24 +34,12 @@ export class UxChipInput implements UxComponent {
   private chiprepeat: Element;
   private tagrepeat: Element;
 
-  // will be set to true if no label or if label is given through the placeholder attribute
-  public placeholder: boolean = false;
-
   constructor(private element: HTMLElement, private styleEngine: StyleEngine) { }
 
   public bind() {
     this.themeChanged(this.theme);
 
     this.dense = normalizeBooleanAttribute('dense', this.dense);
-
-    if (this.element.hasAttribute('placeholder')) {
-      const attributeValue = this.element.getAttribute('placeholder');
-
-      if (attributeValue) {
-        this.label = attributeValue;
-        this.placeholder = true;
-      }
-    }
 
     if (this.value) {
       this.chips = this.value.split(this.separator);
@@ -67,8 +56,7 @@ export class UxChipInput implements UxComponent {
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
     }
-
-    this.labelChanged();
+    this.chipsChanged();
   }
 
   public attached() {
@@ -208,10 +196,9 @@ export class UxChipInput implements UxComponent {
     }
   }
 
-  public labelChanged() {
-    if (typeof this.label !== 'string' || this.label.length === 0) {
-      this.placeholder = true;
-    }
+  @computedFrom('label')
+  get placeholderMode(): boolean {
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 
   public stopEvent(event: Event) {
