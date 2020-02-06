@@ -1,4 +1,6 @@
 export class UxGenericComponent {
+  public hide = true;
+
   public variant = 'filled';
   public showIcons = false;
   public status = '';

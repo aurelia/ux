@@ -24,86 +24,87 @@
     <ux-grid class="ux-grid--remove-padding">
       <ux-card sm="6">
         <ux-card-content>
-          <div 
-            class="ux-input-component ${dense ? 'ux-input-component--dense':''} ux-input-component--filled ${value ? 'ux-input-component--has-value':''} ${focused ? 'ux-input-component--focused':''} ${status ? 'ux-input-component--' + status:''}"
-            css="--font-size: ${fontSize}; --label-font-size: ${labelFontSize}; height: ${height};"
-            click.delegate="focused = true">
-            <span class="ux-input-component__leading" if.bind="showIcons">
-              <ux-icon icon="person"></ux-icon>
-            </span>
-            <span class="ux-input-component__content">
-              <div class="ux-input-component__label-background" if.bind="false" css="width: ${labelEl1.offsetWidth + 6}px;"></div>
-              <div class="ux-input-component__label" ref="labelEl1">Field label</div>
-              <input class="ux-input-component__inner-input" value.bind="value" focus.bind="focused">
-            </span>
-            <span class="ux-input-component__trailing" if.bind="showIcons">
-              <ux-icon icon="clear"></ux-icon>
-            </span>
-            <div class="ux-input-component__border-bottom" if.bind="true && !disabled && status !== 'disabled'"></div>
-          </div>
+          <ux-field>
+            <div 
+              class="ux-input-component ${dense ? 'ux-input-component--dense':''} ux-input-component--filled ${value ? 'ux-input-component--has-value':''} ${focused ? 'ux-input-component--focused':''} ${status ? 'ux-input-component--' + status:''}"
+              css="--font-size: ${fontSize}; --label-font-size: ${labelFontSize}; height: ${height};"
+              click.delegate="focused = true">
+              <span class="ux-input-component__leading" if.bind="showIcons">
+                <ux-icon icon="person"></ux-icon>
+              </span>
+              <span class="ux-input-component__content">
+                <div class="ux-input-component__label-background" if.bind="false" css="width: ${labelEl1.offsetWidth + 6}px;"></div>
+                <div class="ux-input-component__label" ref="labelEl1">Field label</div>
+                <input class="ux-input-component__inner-input" value.bind="value" focus.bind="focused">
+              </span>
+              <span class="ux-input-component__trailing" if.bind="showIcons">
+                <ux-icon icon="clear"></ux-icon>
+              </span>
+              <div class="ux-input-component__border-bottom" if.bind="true && !disabled && status !== 'disabled'"></div>
+            </div>
+          </ux-field>
+          <ux-field>
+            <div 
+              class="ux-input-component ${dense ? 'ux-input-component--dense':''} ux-input-component--filled ${value2 ? 'ux-input-component--has-value':''} ${focused3 ? 'ux-input-component--focused':''} ${status ? 'ux-input-component--' + status:''}"
+              css="--font-size: ${fontSize}; --label-font-size: ${labelFontSize}; height: ${height};"
+              click.delegate="focused3 = true">
+              <span class="ux-input-component__leading" if.bind="showIcons">
+                <ux-icon icon="person"></ux-icon>
+              </span>
+              <span class="ux-input-component__content">
+                <div class="ux-input-component__label-background" if.bind="false" css="width: ${labelEl3.offsetWidth + 6}px;"></div>
+                <div class="ux-input-component__label" ref="labelEl3">Field label</div>
+                <input class="ux-input-component__inner-input" value.bind="value2" focus.bind="focused3">
+              </span>
+              <span class="ux-input-component__trailing" if.bind="showIcons">
+                <ux-icon icon="clear"></ux-icon>
+              </span>
+              <div class="ux-input-component__border-bottom" if.bind="true && !disabled && status !== 'disabled'"></div>
+            </div>
+          </ux-field>
         </ux-card-content>
       </ux-card>
       <ux-card sm="6">
         <ux-card-content>
-          <div 
-            class="ux-input-component ${dense ? 'ux-input-component--dense':''} ux-input-component--outline ${value ? 'ux-input-component--has-value':''} ${focused2 ? 'ux-input-component--focused':''} ${status ? 'ux-input-component--' + status:''}"
-            css="--font-size: ${fontSize}; --label-font-size: ${labelFontSize}; height: ${height};"
-            click.delegate="focused2 = true">
-            <span class="ux-input-component__leading" if.bind="showIcons">
-              <ux-icon icon="person"></ux-icon>
-            </span>
-            <span class="ux-input-component__content">
-              <div class="ux-input-component__label-background" if.bind="true" css="width: ${labelEl2.offsetWidth + 6}px;"></div>
-              <div class="ux-input-component__label" ref="labelEl2">Field label</div>
-              <input class="ux-input-component__inner-input" value.bind="value" focus.bind="focused2">
-            </span>
-            <span class="ux-input-component__trailing" if.bind="showIcons">
-              <ux-icon icon="clear"></ux-icon>
-            </span>
-            <div class="ux-input-component__border-bottom" if.bind="false && !disabled && status !== 'disabled'"></div>
-          </div>
-        </ux-card-content>
-      </ux-card>
-      <ux-card sm="6">
-        <ux-card-content>
-          <div 
-            class="ux-input-component ${dense ? 'ux-input-component--dense':''} ux-input-component--filled ${value2 ? 'ux-input-component--has-value':''} ${focused3 ? 'ux-input-component--focused':''} ${status ? 'ux-input-component--' + status:''}"
-            css="--font-size: ${fontSize}; --label-font-size: ${labelFontSize}; height: ${height};"
-            click.delegate="focused3 = true">
-            <span class="ux-input-component__leading" if.bind="showIcons">
-              <ux-icon icon="person"></ux-icon>
-            </span>
-            <span class="ux-input-component__content">
-              <div class="ux-input-component__label-background" if.bind="false" css="width: ${labelEl3.offsetWidth + 6}px;"></div>
-              <div class="ux-input-component__label" ref="labelEl3">Field label</div>
-              <input class="ux-input-component__inner-input" value.bind="value2" focus.bind="focused3">
-            </span>
-            <span class="ux-input-component__trailing" if.bind="showIcons">
-              <ux-icon icon="clear"></ux-icon>
-            </span>
-            <div class="ux-input-component__border-bottom" if.bind="true && !disabled && status !== 'disabled'"></div>
-          </div>
-        </ux-card-content>
-      </ux-card>
-      <ux-card sm="6">
-        <ux-card-content>
-          <div 
-            class="ux-input-component ${dense ? 'ux-input-component--dense':''} ux-input-component--outline ${value2 ? 'ux-input-component--has-value':''} ${focused4 ? 'ux-input-component--focused':''} ${status ? 'ux-input-component--' + status:''}"
-            css="--font-size: ${fontSize}; --label-font-size: ${labelFontSize}; height: ${height};"
-            click.delegate="focused4 = true">
-            <span class="ux-input-component__leading" if.bind="showIcons">
-              <ux-icon icon="person"></ux-icon>
-            </span>
-            <span class="ux-input-component__content">
-              <div class="ux-input-component__label-background" if.bind="true" css="width: ${labelEl4.offsetWidth + 6}px;"></div>
-              <div class="ux-input-component__label" ref="labelEl4">Field label</div>
-              <input class="ux-input-component__inner-input" value.bind="value2" focus.bind="focused4">
-            </span>
-            <span class="ux-input-component__trailing" if.bind="showIcons">
-              <ux-icon icon="clear"></ux-icon>
-            </span>
-            <div class="ux-input-component__border-bottom" if.bind="false && !disabled && status !== 'disabled'"></div>
-          </div>
+          <ux-field>
+            <div 
+              class="ux-input-component ${dense ? 'ux-input-component--dense':''} ux-input-component--outline ${value ? 'ux-input-component--has-value':''} ${focused2 ? 'ux-input-component--focused':''} ${status ? 'ux-input-component--' + status:''}"
+              css="--font-size: ${fontSize}; --label-font-size: ${labelFontSize}; height: ${height};"
+              click.delegate="focused2 = true">
+              <span class="ux-input-component__leading" if.bind="showIcons">
+                <ux-icon icon="person"></ux-icon>
+              </span>
+              <span class="ux-input-component__content">
+                <div class="ux-input-component__label-background" if.bind="true" css="width: ${labelEl2.offsetWidth + 6}px;"></div>
+                <div class="ux-input-component__label" ref="labelEl2">Field label</div>
+                <input class="ux-input-component__inner-input" value.bind="value" focus.bind="focused2">
+              </span>
+              <span class="ux-input-component__trailing" if.bind="showIcons">
+                <ux-icon icon="clear"></ux-icon>
+              </span>
+              <div class="ux-input-component__border-bottom" if.bind="false && !disabled && status !== 'disabled'"></div>
+            </div>
+
+          </ux-field>
+          <ux-field>
+            <div 
+              class="ux-input-component ${dense ? 'ux-input-component--dense':''} ux-input-component--outline ${value2 ? 'ux-input-component--has-value':''} ${focused4 ? 'ux-input-component--focused':''} ${status ? 'ux-input-component--' + status:''}"
+              css="--font-size: ${fontSize}; --label-font-size: ${labelFontSize}; height: ${height};"
+              click.delegate="focused4 = true">
+              <span class="ux-input-component__leading" if.bind="showIcons">
+                <ux-icon icon="person"></ux-icon>
+              </span>
+              <span class="ux-input-component__content">
+                <div class="ux-input-component__label-background" if.bind="true" css="width: ${labelEl4.offsetWidth + 6}px;"></div>
+                <div class="ux-input-component__label" ref="labelEl4">Field label</div>
+                <input class="ux-input-component__inner-input" value.bind="value2" focus.bind="focused4">
+              </span>
+              <span class="ux-input-component__trailing" if.bind="showIcons">
+                <ux-icon icon="clear"></ux-icon>
+              </span>
+              <div class="ux-input-component__border-bottom" if.bind="false && !disabled && status !== 'disabled'"></div>
+            </div>
+          </ux-field>
         </ux-card-content>
       </ux-card>
     </ux-grid>

@@ -27,11 +27,13 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.normal .ux-card__content {
+.normal .ux-card__content,
+.normal .ux-card__content .ux-form__field {
   background: #fff;
 }
 
-.alternate .ux-card__content {
+.alternate .ux-card__content,
+.alternate .ux-card__content .ux-form__field {
   background: #666;
 }
 

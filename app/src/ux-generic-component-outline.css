@@ -21,6 +21,9 @@
   /* TRANSLATION OF LABEL WHEN INPUT HAS FOCUS */
   --focused-label-translation: -10.6px;
   --focused-label-translation: calc(var(--label-font-size, 12px) * var(--label-line-height, 1.6) / -2 - var(--border-active-width, 2px) / 2);
+  /* EXTRA MARGIN AROUND THE OUTLINE WHEN BORDER IS INACTIVE */
+  --inactive-extra-margin: 1px;
+  --inactive-extra-margin: calc(var(--border-active-width, 2px) - var(--border-width, 1px));
 }
 
 .ux-input-component--dense.ux-input-component--outline {
@@ -37,6 +40,7 @@
   border-color: var(--foreground-label, #757575);
   border-width: var(--border-width, 1px);
   min-height: var(--min-height, 51.6px);
+  margin: var(--inactive-extra-margin, 1px);
 }
 
 .ux-input-component--outline .ux-input-component__label {
@@ -56,6 +60,7 @@
   border-width: 2px;
   border-width: var(--border-active-width, 2px);
   border-color: var(--active-color, #3F51B5);
+  margin: 0;
 }
 /* OUTLINE LABEL AND CONTENT IN FOCUSED, HAS-VALUE STATE */
 .ux-input-component--outline.ux-input-component--focused .ux-input-component__label-background,
