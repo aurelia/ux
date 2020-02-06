@@ -43,6 +43,10 @@
   margin: var(--inactive-extra-margin, 1px);
 }
 
+.ux-input-component--outline .ux-input-component__content {
+  background: inherit; /* inherit only in outline mode so that it can propagate until the label-background but not been impacted by HOVER in filled mode */
+}
+
 .ux-input-component--outline .ux-input-component__label {
   background: transparent;
   position: absolute;
@@ -103,7 +107,23 @@
   border-color: var(--error, #F44336);
 }
 /* HOVER STATE */
-.ux-input--outline:hover:not(.ux-input--focused):not(.ux-input--has-error) {
+.ux-input-component--outline:hover:not(.ux-input-component--disabled) {
   border-color: #212121;
   border-color: var(--foreground, #212121);
+}
+
+/* DISABLED STATE */
+.ux-input-component--outline.ux-input-component--disabled,
+.ux-input--outline[disabled],
+.ux-input--outline[readonly] {
+  color: #e1e1e1;
+  color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+  border-color: #e1e1e1;
+  border-color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+}
+.ux-input-component--outline.ux-input-component--disabled .ux-input__label,
+.ux-input--outline[disabled] .ux-input__label,
+.ux-input--outline[readonly] .ux-input__label {
+  color: #e1e1e1;
+  color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
 }

@@ -1,20 +1,27 @@
 /* CUSTOMIZABLE VARIABLES */
 .ux-input-component {
-  --background: var(--aurelia-ux--design-control-background, #E0E0E0);
   --foreground: var(--aurelia-ux--design-control-foreground, #212121);
   --foreground-label: var(--aurelia-ux--design-control-label-color, #757575);
+  --background: var(--aurelia-ux--design-control-background, #E0E0E0);
+  --background-hover: #00000027;
   --active-color: var(--aurelia-ux--design-primary, #3F51B5);
+
+  --font-size: 16px;
+  --letter-spacing: inherit;
+  --label-font-size: 12px;
+  --label-letter-spacing: 0.5px;
+  --line-height: 1.6;
+  --label-line-height: 1.6;
+
   --border-color: var(--aurelia-ux--design-control-label-color, #757575);
   --border-radius: 4px;
   --border-width: 1px;
   --border-active-width: 2px;
 
-  --font-size: 16px;
-  --label-font-size: 12px;
-  --line-height: 1.6;
-  --label-line-height: 1.6;
-  --letter-spacing: inherit;
-  --label-letter-spacing: 0.5px;
+  --disabled-foreground: var(--aurelia-ux--design-disabled-foreground, #9E9E9E);
+  --disabled-background: var(--aurelia-ux--design-disabled-background, #e1e1e1);
+
+  --error: var(--aurelia-ux--design-error, #F44336);
 }
 
 /* TESTING ZONE */
@@ -64,9 +71,9 @@
   --half-h: 29.4px;
   --half-h: calc(var(--min-height, 58.8px) / 2);
   --abs-empty-label-pos: 13.6px;
-  --abs-empty-label-pos: calc(var(--half-h, 29.4px) - var(--font-size, 16px) * var(--line-height, 1.6) / 2) - var(--label-v-padding, 6px) / 2;
-  --empty-label-translation: 12.6px;
-  --empty-label-translation: calc(var(--abs-empty-label-pos, 13.6px) - var(--border-width, 1px));
+  --abs-empty-label-pos: calc(var(--half-h, 29.4px) - var(--font-size, 16px) * var(--line-height, 1.6) / 2 - var(--label-v-padding, 6px));
+  --empty-label-translation: 13.6px;
+  --empty-label-translation: calc(var(--abs-empty-label-pos, 13.6px));
 }
 .ux-input-component--dense.ux-input-component {
   --label-v-padding: 2px;
@@ -75,7 +82,7 @@
 
 /* OUTER DIV COMPONENT */
 .ux-input-component {
-  display: inline-flex;
+  display: flex;
   width: 100%;
   min-height: 56px;
   padding: 0 16px;
@@ -97,6 +104,8 @@
 .ux-input-component__trailing {
   flex-shrink: 0;
   align-self: center;
+  display: inline-flex;
+  align-items: center;
 }
 .ux-input-component__leading:not(empty) {
   margin-right: 8px;
@@ -110,7 +119,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: inherit;
 }
 
 /* INPUT LABEL */
@@ -128,7 +136,7 @@
   color: #757575;
   color: var(--foreground-label, #757575);
   transition: all ease 150ms;
-  transform: translateY(var(--empty-label-translation, 12.6px));
+  transform: translateY(var(--empty-label-translation, 13.6px));
   padding: var(--label-v-padding, 6px) 0 0 0;
 }
 
@@ -239,5 +247,24 @@
 }
 
 /* HOVER STATE */
+.ux-input-component--filled:hover:not(.ux-input-component--disabled) {
+  background-color: #00000027;
+  background-color: var(--background-hover, #00000027);
+}
 
+/* DISABLED STATE */
+.ux-input-component--filled.ux-input-component--disabled,
+.ux-input-component--filled[disabled],
+.ux-input-component--filled[readonly] {
+  color: #9E9E9E;
+  color: var(--disabled-foreground, #9E9E9E);
+  background-color: #e1e1e1;
+  background-color: var(--disabled-background, #9E9E9E);
+}
+.ux-input-component--filled.ux-input-component--disabled, .ux-input__label,
+.ux-input-component--filled[disabled] .ux-input__label,
+.ux-input-component--filled[readonly] .ux-input__label {
+  color: #9E9E9E;
+  color: var(--disabled-foreground, #9E9E9E);
+}
 
