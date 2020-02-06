@@ -4,6 +4,10 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxTextAreaTheme } from './ux-textarea-theme';
 import { observable } from 'aurelia-framework';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/styles/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/styles/ux-input-component--outline.css';
 
 export interface UxTextAreaElement extends HTMLElement {
   value: string;
@@ -128,11 +132,7 @@ export class UxTextArea implements UxComponent {
   }
 
   public rawValueChanged(newValue: string) {
-    if (typeof newValue === 'string' && newValue.length > 0) {
-      this.element.classList.add('ux-textarea--has-value');
-    } else {
-      this.element.classList.remove('ux-textarea--has-value');
-    }
+    this.element.classList.toggle('ux-input-component--has-value', typeof newValue === 'string' && newValue.length > 0);
 
     if (this.ignoreRawChanges) {
       return;
@@ -157,6 +157,7 @@ export class UxTextArea implements UxComponent {
 
   public focusChanged(focus: boolean | string) {
     focus = focus || focus === '' ? true : false;
+    this.element.classList.toggle('ux-input-component--focused', focus);
     this.element.dispatchEvent(DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
   }
 

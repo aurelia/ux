@@ -13,16 +13,15 @@ export class UxTextAreaTheme implements UxTheme {
   public letterSpacing?: string;
   public labelFontSize?: string;
   public labelLetterSpacing?: string;
+  public lineHeight?: string;
+  public labelLineHeight?: string;
 
+  public borderColor?: string;
   public borderRadius?: string;
   public borderWidth?: string;
-  public borderColor?: string;
-
-  public borderBottomWidth?: string;
-  public borderBottomColor?: string;
   public borderActiveWidth?: string;
 
-  public diabledForeground?: string;
+  public disabledForeground?: string;
   public disabledBackground?: string;
 
   public error?: string;

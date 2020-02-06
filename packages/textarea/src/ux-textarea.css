@@ -1,216 +1,32 @@
 .ux-textarea {
-  display: flex;
-  position: relative;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: flex-start;
-  width: 100%;
-  min-height: 56px;
-  padding: 20px 16px;
-  color: #212121;
-  color: var(--aurelia-ux--textarea-foreground, var(--aurelia-ux--design-control-foreground, #212121));
-  background-color: #E0E0E0;
-  background-color: var(--aurelia-ux--textarea-background, var(--aurelia-ux--design-control-background, #E0E0E0));
-  border-radius: 4px;
-  border-radius: var(--aurelia-ux--textarea-border-radius, 4px);
+  --foreground: var(--aurelia-ux--textarea-foreground, var(--aurelia-ux--design-control-foreground, #212121));
+  --foreground-label: var(--aurelia-ux--textarea-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
+  --background: var(--aurelia-ux--textarea-background, var(--aurelia-ux--design-control-background, #E0E0E0));
+  --background-hover: var(--aurelia-ux--textarea-background-hover, #00000027);
+  --active-color: var(--aurelia-ux--textarea-active-color, var(--aurelia-ux--design-primary, #3F51B5));
+
+  --font-size: var(--aurelia-ux--textarea-font-size, 16px);
+  --letter-spacing: var(--aurelia-ux--textarea-letter-spacing, inherit);
+  --label-font-size: var(--aurelia-ux--textarea-label-font-size, 12px);
+  --label-letter-spacing: var(--aurelia-ux--textarea-label-letter-spacing, 0.5px);
+  --line-height: var(--aurelia-ux--textarea-line-height, 1.6);
+  --label-line-height: var(--aurelia-ux--textarea-label-line-height, 1.6);
+
+  --border-color: var(--aurelia-ux--textarea-border-color, var(--aurelia-ux--design-control-label-color, #757575));
+  --border-radius: var(--aurelia-ux--textarea-border-radius, 4px);
+  --border-width: var(--aurelia-ux--textarea-border-width, 1px);
+  --border-active-width: var(--aurelia-ux--textarea-border-active-width, 2px);
+
+  --disabled-foreground: var(--aurelia-ux--textarea-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
+  --disabled-background: var(--aurelia-ux--textarea-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+
+  --error: var(--aurelia-ux--textarea-error, var(--aurelia-ux--design-error, #F44336));
 }
 
-.ux-textarea--filled {
-  border: 0px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.ux-textarea--outline {
-  background: var(--aurelia-ux--design-app-background);
-  border-style: solid;
-  border-color: #757575;
-  border-color: var(--aurelia-ux--textarea-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
-  border-width: var(--aurelia-ux--textarea-border-width, 1px);
-}
-.ux-textarea--outline:hover:not(.ux-textarea--focused):not(.ux-textarea--has-error) {
-  border-color: #212121;
-  border-color: var(--aurelia-ux--textarea-foreground, var(--aurelia-ux--design-control-foreground, #212121));
-}
-
-.ux-textarea__inner-textarea {
-  width: 100%;
-  box-sizing: border-box;
-  font-size: inherit;
-  font-size: var(--aurelia-ux--textarea-font-size, inherit);
-  letter-spacing: inherit;
-  letter-spacing: var(--aurelia-ux--textarea-letter-spacing, inherit);
-  padding: 0;
-  /* margin-bottom: 4px; */
-  border: 0;
-  outline: none;
+.ux-textarea .ux-input-component__inner-input {
   resize: none;
-  padding-left: 0;
-  padding-right: 0;
-  transition: padding-top 250ms ease;
-  color: inherit;
-  background-color: transparent;
-  font-weight: 400;
 }
 
-.ux-textarea__border-bottom {
-  height: var(--aurelia-ux--textarea-border-active-width, 2px);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.ux-textarea__border-bottom:before {
-  display: block;
-  content: '';
-  height: var(--aurelia-ux--textarea-border-width, 1px);
-  background-color: #757575;
-  background-color: var(--aurelia-ux--textarea-border-bottom-color, var(--aurelia-ux--design-control-label-color, #757575));
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.ux-textarea__border-bottom:after {
-  display: block;
-  content: '';
-  height: var(--aurelia-ux--textarea-border-active-width, 2px);
-  background-color: #3F51B5;
-  background-color: var(--aurelia-ux--textarea-active-color, var(--aurelia-ux--design-primary, #3F51B5));
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: scalex(0);
-  transition: transform ease 150ms;
-}
-
-.ux-textarea--show-grip .ux-textarea__inner-textarea {
+.ux-textarea--show-grip .ux-input-component__inner-input {
   resize: both;
-}
-
-.ux-textarea__label {
-  position: absolute;
-  cursor: text;
-  font-size: inherit;
-  font-size: var(--aurelia-ux--textarea-font-size, inherit);
-  letter-spacing: 0.5px;
-  letter-spacing: var(--aurelia-ux--textarea-label-letter-spacing, 0.5px);
-  transition: all ease 150ms;
-}
-
-.ux-textarea--outline .ux-textarea__label {
-  background: inherit;
-  padding: 0 4px;
-}
-
-.ux-textarea :not(textarea) {
-  color: #757575;
-  color: var(--aurelia-ux--textarea-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
-}
-
-.ux-textarea--has-error :not(textarea) {
-  color: #F44336;
-  color: var(--aurelia-ux--textarea-error, var(--aurelia-ux--design-error, #F44336));
-}
-
-.ux-textarea:hover.ux-textarea--filled {
-  background-color: #00000027;
-  background-color: var(--aurelia-ux--textarea-background-hover, #00000027);
-}
-
-.ux-textarea--focused .ux-textarea__label {
-  color: #3F51B5;
-  color: var(--aurelia-ux--textarea-active-color, var(--aurelia-ux--design-primary, #3F51B5));
-}
-
-.ux-textarea--has-value .ux-textarea__label,
-.ux-textarea--focused .ux-textarea__label {
-  font-size: 13px;
-  font-size: var(--aurelia-ux--textarea-label-font-size, 13px);
-  transform: translateY(-1.3em);
-}
-
-.ux-textarea--outline.ux-textarea--has-value .ux-textarea__label,
-.ux-textarea--outline.ux-textarea--focused .ux-textarea__label {
-  transform: translateY(-2.1em);
-}
-
-.ux-textarea [slot="leading-icon"] {
-  margin-left: -8px;
-  margin-right: 8px;
-}
-
-.ux-textarea [slot="trailing-icon"] {
-  margin-left: 8px;
-  margin-right: -8px;
-}
-
-.ux-textarea--has-error .ux-textarea__inner-textarea {
-  box-shadow: none;
-}
-
-.ux-textarea--has-error .ux-textarea__border-bottom:before {
-  background-color: #F44336;
-  background-color: var(--aurelia-ux--textarea-error, var(--aurelia-ux--design-error, #F44336));
-}
-
-.ux-textarea[disabled],
-.ux-textarea[readonly] {
-  color: #9E9E9E;
-  color: var(--aurelia-ux--textarea-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
-  background-color: #e1e1e1;
-  background-color: var(--aurelia-ux--textarea-disabled-background, #e1e1e1);
-}
-
-.ux-textarea[disabled] .ux-textarea__label,
-.ux-textarea[readonly] .ux-textarea__label {
-  color: #9E9E9E;
-  color: var(--aurelia-ux--textarea-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
-}
-
-.ux-textarea--outline[disabled],
-.ux-textarea--outline[readonly] {
-  color: #e1e1e1;
-  color: var(--aurelia-ux--textarea-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
-  background-color: transparent;
-  border-color: #e1e1e1;
-  border-color: var(--aurelia-ux--textarea-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
-}
-.ux-textarea--outline[disabled] .ux-textarea__label,
-.ux-textarea--outline[readonly] .ux-textarea__label {
-  color: #e1e1e1;
-  color: var(--aurelia-ux--textarea-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
-}
-
-.ux-textarea [slot="leading-icon"]~.ux-textarea__label {
-  transform: translateX(24px);
-}
-
-.ux-textarea--has-value>[slot="leading-icon"]~.ux-textarea__label,
-.ux-textarea--focused>[slot="leading-icon"]~.ux-textarea__label {
-  transform: translateX(24px) translateY(-1.3em);
-}
-.ux-textarea--outline.ux-textarea--has-value>[slot="leading-icon"]~.ux-textarea__label,
-.ux-textarea--outline.ux-textarea--focused>[slot="leading-icon"]~.ux-textarea__label {
-  transform: translateX(24px) translateY(-2.1em);
-}
-
-.ux-textarea__inner-textarea:focus~.ux-textarea__border-bottom:after {
-  transform: scaleX(1);
-}
-
-.ux-textarea--has-error.ux-textarea--outline {
-  border-color: #F44336;
-  border-color: var(--aurelia-ux--textarea-error, var(--aurelia-ux--design-error, #F44336));
-  border-width: var(--aurelia-ux--textarea-border-active-width, 2px);
-}
-
-.ux-textarea--focused.ux-textarea--outline {
-  border-color: #3F51B5;
-  border-color: var(--aurelia-ux--textarea-active-color, var(--aurelia-ux--design-primary, #3F51B5));
-  border-width: var(--aurelia-ux--textarea-border-active-width, 2px);
 }
