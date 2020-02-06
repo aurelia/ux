@@ -4,6 +4,10 @@ import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/styles/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/styles/ux-input-component--outline.css';
 
 export interface UxInputElement extends HTMLElement {
   value: any;
@@ -164,11 +168,7 @@ export class UxInput implements UxComponent {
   }
 
   public focusedChanged(focused: boolean) {
-    if (focused === true) {
-      this.element.classList.add('ux-input--focused');
-    } else {
-      this.element.classList.remove('ux-input--focused');
-    }
+    this.element.classList.toggle('ux-input-component--focused', focused);
 
     this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
   }
@@ -190,11 +190,7 @@ export class UxInput implements UxComponent {
   }
 
   public rawValueChanged(newValue: string) {
-    if (newValue.length > 0) {
-      this.element.classList.add('ux-input--has-value');
-    } else {
-      this.element.classList.remove('ux-input--has-value');
-    }
+    this.element.classList.toggle('ux-input-component--has-value', newValue.length > 0);
 
     if (this.ignoreRawChanges) {
       return;
