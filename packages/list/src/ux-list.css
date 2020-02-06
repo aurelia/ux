@@ -14,6 +14,11 @@
   text-decoration: none;
 }
 
+.ux-list-item.ux-choice--selected {
+  background: #00000011;
+  background: var(--aurelia-ux--list-background-selected, #00000011);
+}
+
 .ux-list-item__detail {
   margin-right: 16px;
 }
