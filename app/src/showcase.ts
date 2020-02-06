@@ -13,6 +13,8 @@ import { computedFrom } from 'aurelia-binding';
 @inject(ValidationControllerFactory)
 export class Showcase {
 
+  public labelPosition = 'floating';
+
   public firstName = '';
   public lastName = '';
   public email = '';

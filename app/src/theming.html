@@ -253,9 +253,16 @@
           </div>
         </ux-card-header>
         <ux-card-media class="ux-card-component__media">
-          <ux-input label="Input label" type.bind="inputPreviewType" disabled.bind="inputPreviewDisabled" variant.bind="inputPreviewVariant" class="${inputPreviewError ? 'ux-input--has-error':''}"></ux-input>
-          <ux-input-info>Helper Text</ux-input-info>     
+          <ux-field>
+            <ux-input label="Input label" type.bind="inputPreviewType" disabled.bind="inputPreviewDisabled" variant="filled" class="${inputPreviewError ? 'ux-input-component--has-error':''}"></ux-input>
+            <ux-input-info>Helper Text</ux-input-info>     
+          </ux-field>
+          <ux-field style="margin-top: 30px;">
+            <ux-input label="Input label" type.bind="inputPreviewType" disabled.bind="inputPreviewDisabled" variant="outline" class="${inputPreviewError ? 'ux-input-component--has-error':''}"></ux-input>
+            <ux-input-info>Helper Text</ux-input-info>     
+          </ux-field>
         </ux-card-media>
+
       </ux-card>
       <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
         <ux-card-content>
@@ -272,15 +279,6 @@
             </ux-select>
           </ux-field>
           <ux-field>
-            <label>Preview Variant</label>
-            <div class="ux-form__row">
-              <ux-radio checked.bind="inputPreviewVariant" model.bind="'filled'"></ux-radio>
-              <label>Filled</label>
-              <ux-radio checked.bind="inputPreviewVariant" model.bind="'outline'"></ux-radio>
-              <label>Outline</label>
-            </div>
-          </ux-field>
-          <ux-field>
             <label>Preview State</label>
             <div class="ux-form__row">
               <ux-checkbox checked.bind="inputPreviewDisabled"></ux-checkbox>
@@ -290,7 +288,7 @@
             </div>
           </ux-field>
           <div class="ux-card__separator"></div>
-          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderBottomColor']">
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderColor']">
             <ux-input label.bind="prop" value.bind="themeService.input[prop]" change.delegate="themeService.componentThemeChanged('input')">
               <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.input[prop]}"></span>
             </ux-input>
@@ -302,7 +300,7 @@
             </ux-input>
           </ux-field>
           <div class="ux-card__separator"></div>
-          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'labelFontSize', 'labelLetterSpacing']">
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'line-height', 'labelFontSize', 'labelLetterSpacing', 'labelLineHeight']">
             <ux-input label.bind="prop" value.bind="themeService.input[prop]" change.delegate="themeService.componentThemeChanged('input')"></ux-input>
           </ux-field>  
           <ux-field>
@@ -334,21 +332,18 @@
           </div>
         </ux-card-header>
         <ux-card-media class="ux-card-component__media">
-          <ux-textarea label="Textarea label" disabled.bind="textareaPreviewDisabled" auto-resize.bind="textareaPreviewAutoResize" variant.bind="textareaPreviewVariant" class="${textareaPreviewError ? 'ux-textarea--has-error':''}"></ux-textarea>
-          <ux-input-info>Helper Text</ux-input-info>     
+          <ux-field>
+            <ux-textarea label="Textarea label" disabled.bind="textareaPreviewDisabled" auto-resize.bind="textareaPreviewAutoResize" variant="filled" class="${textareaPreviewError ? 'ux-input-component--has-error':''}"></ux-textarea>
+            <ux-input-info>Helper Text</ux-input-info>       
+          </ux-field>
+          <ux-field style="margin-top: 30px;">
+            <ux-textarea label="Textarea label" disabled.bind="textareaPreviewDisabled" auto-resize.bind="textareaPreviewAutoResize" variant="outline" class="${textareaPreviewError ? 'ux-input-component--has-error':''}"></ux-textarea>
+            <ux-input-info>Helper Text</ux-input-info>     
+          </ux-field>
         </ux-card-media>
       </ux-card>
       <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
         <ux-card-content>
-          <ux-field>
-            <label>Preview Variant</label>
-            <div class="ux-form__row">
-              <ux-radio checked.bind="textareaPreviewVariant" model.bind="'filled'"></ux-radio>
-              <label>Filled</label>
-              <ux-radio checked.bind="textareaPreviewVariant" model.bind="'outline'"></ux-radio>
-              <label>Outline</label>
-            </div>
-          </ux-field>
           <div class="ux-form__row">
             <label>Auto Resize</label>
             <ux-switch checked.bind="textareaPreviewAutoResize"></ux-switch>
@@ -366,7 +361,7 @@
 
 
           <div class="ux-card__separator"></div>
-          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderBottomColor']">
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderColor']">
             <ux-input label.bind="prop" value.bind="themeService.textarea[prop]" change.delegate="themeService.componentThemeChanged('textarea')">
               <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.textarea[prop]}"></span>
             </ux-input>
@@ -378,7 +373,7 @@
             </ux-input>
           </ux-field>
           <div class="ux-card__separator"></div>
-          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'labelFontSize', 'labelLetterSpacing']">
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'line-height', 'labelFontSize', 'labelLetterSpacing', 'labelLineHeight']">
             <ux-input label.bind="prop" value.bind="themeService.textarea[prop]" change.delegate="themeService.componentThemeChanged('textarea')"></ux-input>
           </ux-field>  
           <ux-field>
@@ -410,26 +405,28 @@
           </div>
         </ux-card-header>
         <ux-card-media class="ux-card-component__media">
-          <ux-select label="Select label" disabled.bind="selectPreviewDisabled" variant.bind="selectPreviewVariant" class="${selectPreviewError ? 'ux-select--has-error':''}">
-            <ux-option>Value 1</ux-option>
-            <ux-option>Value 2</ux-option>
-            <ux-option>Value 3</ux-option>
-            <ux-option>Value 4</ux-option>
-          </ux-select>
-          <ux-input-info>Helper Text</ux-input-info>     
+          <ux-field>
+            <ux-select label="Select label" disabled.bind="selectPreviewDisabled" variant="filled" class="${selectPreviewError ? 'ux-input-component--has-error':''}">
+              <ux-option>Value 1</ux-option>
+              <ux-option>Value 2</ux-option>
+              <ux-option>Value 3</ux-option>
+              <ux-option>Value 4</ux-option>
+            </ux-select>
+            <ux-input-info>Helper Text</ux-input-info>    
+          </ux-field>   
+          <ux-field style="margin-top: 30px;">
+            <ux-select label="Select label" disabled.bind="selectPreviewDisabled" variant="outline" class="${selectPreviewError ? 'ux-input-component--has-error':''}">
+              <ux-option>Value 1</ux-option>
+              <ux-option>Value 2</ux-option>
+              <ux-option>Value 3</ux-option>
+              <ux-option>Value 4</ux-option>
+            </ux-select>
+            <ux-input-info>Helper Text</ux-input-info>  
+          </ux-field>   
         </ux-card-media>
       </ux-card>
       <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
         <ux-card-content>
-          <ux-field>
-            <label>Preview Variant</label>
-            <div class="ux-form__row">
-              <ux-radio checked.bind="selectPreviewVariant" model.bind="'filled'"></ux-radio>
-              <label>Filled</label>
-              <ux-radio checked.bind="selectPreviewVariant" model.bind="'outline'"></ux-radio>
-              <label>Outline</label>
-            </div>
-          </ux-field>
 
           <ux-field>
             <label>Preview State</label>
@@ -443,7 +440,7 @@
 
 
           <div class="ux-card__separator"></div>
-          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel','backgroundHover', 'borderBottomColor']">
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderColor']">
             <ux-input label.bind="prop" value.bind="themeService.select[prop]" change.delegate="themeService.componentThemeChanged('select')">
               <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.select[prop]}"></span>
             </ux-input>
@@ -461,7 +458,7 @@
             </ux-input>
           </ux-field>
           <div class="ux-card__separator"></div>
-          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'labelFontSize', 'labelLetterSpacing']">
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'line-height', 'labelFontSize', 'labelLetterSpacing', 'labelLineHeight']">
             <ux-input label.bind="prop" value.bind="themeService.select[prop]" change.delegate="themeService.componentThemeChanged('select')"></ux-input>
           </ux-field>  
           <ux-field>
@@ -493,8 +490,14 @@
           </div>
         </ux-card-header>
         <ux-card-media class="ux-card-component__media">
-          <ux-datepicker label="Datepicker label" type.bind="datepickerPreviewType" disabled.bind="datepickerPreviewDisabled" variant.bind="datepickerPreviewVariant" class="${datepickerPreviewError ? 'ux-datepicker--has-error':''}"></ux-datepicker>
-          <ux-input-info>Helper Text</ux-input-info>     
+          <ux-field>
+            <ux-datepicker label="Datepicker label" type.bind="datepickerPreviewType" disabled.bind="datepickerPreviewDisabled" variant="filled" class="${datepickerPreviewError ? 'ux-input-component--has-error':''}"></ux-datepicker>
+            <ux-input-info>Helper Text</ux-input-info>     
+          </ux-field>
+          <ux-field style="margin-top: 30px;">
+            <ux-datepicker label="Datepicker label" type.bind="datepickerPreviewType" disabled.bind="datepickerPreviewDisabled" variant="outline" class="${datepickerPreviewError ? 'ux-input-component--has-error':''}"></ux-datepicker>
+            <ux-input-info>Helper Text</ux-input-info>     
+          </ux-field>
         </ux-card-media>
       </ux-card>
       <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
@@ -508,15 +511,6 @@
             </ux-select>
           </ux-field>
           <ux-field>
-            <label>Preview Variant</label>
-            <div class="ux-form__row">
-              <ux-radio checked.bind="datepickerPreviewVariant" model.bind="'filled'"></ux-radio>
-              <label>Filled</label>
-              <ux-radio checked.bind="datepickerPreviewVariant" model.bind="'outline'"></ux-radio>
-              <label>Outline</label>
-            </div>
-          </ux-field>
-          <ux-field>
             <label>Preview State</label>
             <div class="ux-form__row">
               <ux-checkbox checked.bind="datepickerPreviewDisabled"></ux-checkbox>
@@ -526,7 +520,7 @@
             </div>
           </ux-field>
           <div class="ux-card__separator"></div>
-          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderBottomColor']">
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderColor']">
             <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')">
               <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.datepicker[prop]}"></span>
             </ux-input>
@@ -538,7 +532,7 @@
             </ux-input>
           </ux-field>
           <div class="ux-card__separator"></div>
-          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'labelFontSize', 'labelLetterSpacing']">
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'line-height', 'labelFontSize', 'labelLetterSpacing', 'labelLineHeight']">
             <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')"></ux-input>
           </ux-field>
           <div class="ux-card__separator"></div>
@@ -582,21 +576,18 @@
           </div>
         </ux-card-header>
         <ux-card-media class="ux-card-component__media">
-          <ux-chip-input label="Chip Input label" disabled.bind="chipInputPreviewDisabled" variant.bind="chipInputPreviewVariant" class="${chipInputPreviewError ? 'ux-chip-input--has-error':''}"></ux-input>
-          <ux-input-info>Helper Text</ux-input-info>     
+          <ux-field>
+            <ux-chip-input label="Chip Input label" disabled.bind="chipInputPreviewDisabled" variant="filled" class="${chipInputPreviewError ? 'ux-input-component--has-error':''}"></ux-input>
+            <ux-input-info>Helper Text</ux-input-info>
+          </ux-field>     
+          <ux-field style="margin-top: 30px;">
+            <ux-chip-input label="Chip Input label" disabled.bind="chipInputPreviewDisabled" variant="outline" class="${chipInputPreviewError ? 'ux-input-component--has-error':''}"></ux-input>
+            <ux-input-info>Helper Text</ux-input-info>
+          </ux-field>     
         </ux-card-media>
       </ux-card>
       <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
         <ux-card-content>
-          <ux-field>
-            <label>Preview Variant</label>
-            <div class="ux-form__row">
-              <ux-radio checked.bind="chipInputPreviewVariant" model.bind="'filled'"></ux-radio>
-              <label>Filled</label>
-              <ux-radio checked.bind="chipInputPreviewVariant" model.bind="'outline'"></ux-radio>
-              <label>Outline</label>
-            </div>
-          </ux-field>
           <ux-field>
             <label>Preview State</label>
             <div class="ux-form__row">
@@ -607,7 +598,7 @@
             </div>
           </ux-field>
           <div class="ux-card__separator"></div>
-          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderBottomColor']">
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderColor']">
             <ux-input label.bind="prop" value.bind="themeService.chipInput[prop]" change.delegate="themeService.componentThemeChanged('chip-input')">
               <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.chipInput[prop]}"></span>
             </ux-input>
@@ -619,7 +610,7 @@
             </ux-input>
           </ux-field>
           <div class="ux-card__separator"></div>
-          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'labelFontSize', 'labelLetterSpacing']">
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'line-height', 'labelFontSize', 'labelLetterSpacing', 'labelLineHeight']">
             <ux-input label.bind="prop" value.bind="themeService.chipInput[prop]" change.delegate="themeService.componentThemeChanged('chip-input')"></ux-input>
           </ux-field>  
           <ux-field>
@@ -786,9 +777,5 @@
       </ux-card>
     </ux-grid>
   </section>
-
-  
-
-  
 
 </template>
