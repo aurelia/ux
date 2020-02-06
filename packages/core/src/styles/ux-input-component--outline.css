@@ -50,6 +50,7 @@
 .ux-input-component--outline .ux-input-component__label {
   background: transparent;
   position: absolute;
+  top: 0;
   transform: translateY(var(--empty-label-translation, 12px));
   padding: 0;
 }
