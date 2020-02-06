@@ -1,26 +1,26 @@
 .ux-select {
-  --foreground: var(--aurelia-ux--input-foreground, var(--aurelia-ux--design-control-foreground, #212121));
-  --foreground-label: var(--aurelia-ux--input-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
-  --background: var(--aurelia-ux--input-background, var(--aurelia-ux--design-control-background, #E0E0E0));
-  --background-hover: var(--aurelia-ux--input-background-hover, #00000027);
-  --active-color: var(--aurelia-ux--input-active-color, var(--aurelia-ux--design-primary, #3F51B5));
+  --foreground: var(--aurelia-ux--select-foreground, var(--aurelia-ux--design-control-foreground, #212121));
+  --foreground-label: var(--aurelia-ux--select-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
+  --background: var(--aurelia-ux--select-background, var(--aurelia-ux--design-control-background, #E0E0E0));
+  --background-hover: var(--aurelia-ux--select-background-hover, #00000027);
+  --active-color: var(--aurelia-ux--select-active-color, var(--aurelia-ux--design-primary, #3F51B5));
 
-  --font-size: var(--aurelia-ux--input-font-size, 16px);
-  --letter-spacing: var(--aurelia-ux--input-letter-spacing, inherit);
-  --label-font-size: var(--aurelia-ux--input-label-font-size, 12px);
-  --label-letter-spacing: var(--aurelia-ux--input-label-letter-spacing, 0.5px);
-  --line-height: var(--aurelia-ux--input-line-height, 1.6);
-  --label-line-height: var(--aurelia-ux--input-label-line-height, 1.6);
+  --font-size: var(--aurelia-ux--select-font-size, 16px);
+  --letter-spacing: var(--aurelia-ux--select-letter-spacing, inherit);
+  --label-font-size: var(--aurelia-ux--select-label-font-size, 12px);
+  --label-letter-spacing: var(--aurelia-ux--select-label-letter-spacing, 0.5px);
+  --line-height: var(--aurelia-ux--select-line-height, 1.6);
+  --label-line-height: var(--aurelia-ux--select-label-line-height, 1.6);
 
-  --border-color: var(--aurelia-ux--input-border-color, var(--aurelia-ux--design-control-label-color, #757575));
-  --border-radius: var(--aurelia-ux--input-border-radius, 4px);
-  --border-width: var(--aurelia-ux--input-border-width, 1px);
-  --border-active-width: var(--aurelia-ux--input-border-active-width, 2px);
+  --border-color: var(--aurelia-ux--select-border-color, var(--aurelia-ux--design-control-label-color, #757575));
+  --border-radius: var(--aurelia-ux--select-border-radius, 4px);
+  --border-width: var(--aurelia-ux--select-border-width, 1px);
+  --border-active-width: var(--aurelia-ux--select-border-active-width, 2px);
 
-  --disabled-foreground: var(--aurelia-ux--input-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
-  --disabled-background: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+  --disabled-foreground: var(--aurelia-ux--select-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
+  --disabled-background: var(--aurelia-ux--select-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
 
-  --error: var(--aurelia-ux--input-error, var(--aurelia-ux--design-error, #F44336));
+  --error: var(--aurelia-ux--select-error, var(--aurelia-ux--design-error, #F44336));
 }
 
 .ux-select__value {
