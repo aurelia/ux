@@ -22,6 +22,11 @@ import { UxOptGroupElement } from './ux-optgroup';
 import { UxOptionElement } from './ux-option';
 import { getAuViewModel, bool } from './util';
 
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/styles/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/styles/ux-input-component--outline.css';
+
 declare module './ux-option' {
   interface UxOption {
     uxSelect: UxSelect;
