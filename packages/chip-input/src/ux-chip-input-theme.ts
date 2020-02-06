@@ -13,12 +13,12 @@ export class UxChipInputTheme implements UxTheme {
   public letterSpacing?: string;
   public labelFontSize?: string;
   public labelLetterSpacing?: string;
+  public lineHeight?: string;
+  public labelLineHeight?: string;
 
+  public borderColor?: string;
   public borderRadius?: string;
   public borderWidth?: string;
-
-  public borderBottomWidth?: string;
-  public borderBottomColor?: string;
   public borderActiveWidth?: string;
 
   public disabledForeground?: string;
