@@ -1,7 +1,7 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxTextAreaTheme } from './ux-textarea-theme';
 import { observable } from 'aurelia-framework';
 // tslint:disable-next-line: no-submodule-imports
@@ -32,6 +32,7 @@ export class UxTextArea implements UxComponent {
   @bindable public label: any;
   @bindable public theme: UxTextAreaTheme;
   @bindable public variant: 'filled' | 'outline' = 'filled';
+  @bindable public dense: any = false;
 
   @observable({ initializer: () => '' })
   public rawValue: string;
@@ -39,6 +40,9 @@ export class UxTextArea implements UxComponent {
   public value: any = undefined;
 
   public textbox: HTMLTextAreaElement;
+
+  // will be set to true if no label or if label is given through the placeholder attribute
+  public placeholder: boolean = false;
 
   constructor(private element: UxTextAreaElement, private styleEngine: StyleEngine) {
     Object.setPrototypeOf(element, uxTextAreaElementProto);
@@ -57,10 +61,12 @@ export class UxTextArea implements UxComponent {
       const attributeValue = element.getAttribute('placeholder');
 
       if (attributeValue) {
-        // textbox.setAttribute('placeholder', attributeValue);
-        // element.removeAttribute('placeholder');
+        this.label = attributeValue;
+        this.placeholder = true;
       }
     }
+
+    this.dense = normalizeBooleanAttribute('dense', this.dense);
 
     if (this.cols) {
       textbox.setAttribute('cols', this.cols.toString());
@@ -82,6 +88,7 @@ export class UxTextArea implements UxComponent {
 
     this.themeChanged(this.theme);
     this.autocompleteChanged(this.autocomplete);
+    this.labelChanged();
   }
 
   public attached() {
@@ -176,6 +183,12 @@ export class UxTextArea implements UxComponent {
       this.element.style.backgroundColor = parentBackgroundColor || '#FFFFFF';
     } else {
       this.element.style.backgroundColor = '';
+    }
+  }
+
+  public labelChanged() {
+    if (typeof this.label !== 'string' || this.label.length === 0) {
+      this.placeholder = true;
     }
   }
 }

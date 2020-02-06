@@ -1,5 +1,5 @@
 <template role="textbox" 
-  class="ux-input-component ux-input-component--${variant} ${dense ? 'ux-input-component--dense' : ''} ux-textarea "
+  class="ux-input-component ux-input-component--${variant} ${dense ? 'ux-input-component--dense' : ''} ${placeholder ? 'ux-input-component--placeholder' : ''} ux-textarea "
   disabled.bind="disabled & booleanAttr"
   readonly.bind="readonly & booleanAttr"
   aria-disabled.bind="disabled & booleanAttr"
@@ -10,8 +10,8 @@
   <slot name="leading-icon"></slot>
 
   <span class="ux-input-component__content">
-    <div class="ux-input-component__label-background" if.bind="variant === 'outline' && (label || placeholder)" css="width: ${labelEl.offsetWidth + 6}px;"></div>
-    <div class="ux-input-component__label" ref="labelEl" if.bind="label || placeholder">${label || placeholder}</div>
+    <div class="ux-input-component__label-background" if.bind="variant === 'outline' && label" css="width: ${labelEl.offsetWidth + 6}px;"></div>
+    <div class="ux-input-component__label" ref="labelEl">${label}</div>
     <textarea ref="textbox"
       class="ux-input-component__inner-input"
       value.bind="rawValue"
