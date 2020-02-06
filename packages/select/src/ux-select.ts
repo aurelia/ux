@@ -15,7 +15,7 @@ import {
 } from 'aurelia-framework';
 
 import { getLogger } from 'aurelia-logging';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 
 import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
@@ -85,13 +85,12 @@ export class UxSelect implements UxComponent {
   public multiple: boolean | string;
 
   @bindable()
-  public placeholder: string;
-
-  @bindable()
   public label: string;
 
   @bindable()
   public variant: 'filled' | 'outline' = 'filled';
+  
+  @bindable public dense: any = false;
 
   public value: any;
   public displayValue: string;
@@ -100,6 +99,9 @@ export class UxSelect implements UxComponent {
   // Populated by Aurelia
   public readonly optionWrapperEl: HTMLElement;
   public readonly optionCtEl: UxOptionContainer;
+
+  // will be set to true if no label or if label is given through the placeholder attribute
+  public placeholder: boolean = false;
 
   constructor(
     public readonly element: UxSelectElement,
@@ -115,6 +117,19 @@ export class UxSelect implements UxComponent {
     if (bool(this.autofocus)) {
       // setTimeout(focusEl, 0, this.button);
     }
+
+    const element = this.element;
+    this.dense = normalizeBooleanAttribute('dense', this.dense);
+
+    if (element.hasAttribute('placeholder')) {
+      const attributeValue = element.getAttribute('placeholder');
+
+      if (attributeValue) {
+        this.label = attributeValue;
+        this.placeholder = true;
+      }
+    }
+
     if (this.isMultiple) {
       if (!this.value) {
         this.value = [];
@@ -127,6 +142,8 @@ export class UxSelect implements UxComponent {
     }
     // Initially Synchronize options with value of this element
     this.taskQueue.queueMicroTask(this);
+
+    this.labelChanged();
   }
 
   public attached() {
@@ -501,6 +518,12 @@ export class UxSelect implements UxComponent {
       this.element.style.backgroundColor = parentBackgroundColor || '#FFFFFF';
     } else {
       this.element.style.backgroundColor = '';
+    }
+  }
+
+  public labelChanged() {
+    if (typeof this.label !== 'string' || this.label.length === 0) {
+      this.placeholder = true;
     }
   }
 

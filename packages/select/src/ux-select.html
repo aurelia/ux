@@ -1,5 +1,5 @@
 <template
-  class="ux-input-component ux-input-component--${variant} ${dense ? 'ux-input-component--dense' : ''} ux-select ${multiple ? 'ux-select--multiple' : ''} ${expanded ? 'ux-input-component--focused':''}"
+  class="ux-input-component ux-input-component--${variant} ${dense ? 'ux-input-component--dense' : ''} ${placeholder ? 'ux-input-component--placeholder' : ''} ux-select ${multiple ? 'ux-select--multiple' : ''} ${expanded ? 'ux-input-component--focused':''}"
   tabindex="0"
   disabled.bind="disabled & booleanAttr"
   readonly.bind="readonly & booleanAttr"
@@ -15,8 +15,8 @@
   <slot name="leading-icon"></slot>
 
   <span class="ux-input-component__content">
-    <div class="ux-input-component__label-background" if.bind="variant === 'outline' && (label || placeholder)" css="width: ${labelEl.offsetWidth + 6}px;"></div>
-    <div class="ux-input-component__label" ref="labelEl" if.bind="label || placeholder">${label || placeholder}</div>
+    <div class="ux-input-component__label-background" if.bind="variant === 'outline' && label" css="width: ${labelEl.offsetWidth + 6}px;"></div>
+    <div class="ux-input-component__label" ref="labelEl">${label}</div>
   
     <div class="ux-input-component__inner-input ux-select__value">${displayValue}</div>
   </span>
