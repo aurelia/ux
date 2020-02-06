@@ -48,6 +48,8 @@
   border: none;
   flex-grow: 1;
   min-width: 180px;
+  width: auto;
+  padding: 0;
 }
 
 .ux-chip-input .ux-chip {
@@ -56,7 +58,11 @@
   background: var(--chip-background, #00000027);
 }
 
+.ux-chip-input.ux-input-component--has-value .ux-input-component__content {
+  padding-bottom: 6px;
+}
 
+.ux-chip-input.ux-input-component--placeholder.ux-input-component--has-value .ux-input-component__content,
 .ux-chip-input.ux-input-component--outline.ux-input-component--has-value .ux-input-component__content {
   padding-top: 6px;
 }

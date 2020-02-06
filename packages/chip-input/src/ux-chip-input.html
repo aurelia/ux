@@ -19,6 +19,7 @@
     </ux-chip>
 
     <input 
+      show.bind="focused"
       ref="textbox"
       class="ux-input-component__inner-input"
       keyup.delegate="handleKeyup($event)"
