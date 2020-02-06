@@ -241,3 +241,14 @@
   color: var(--disabled-foreground, #9E9E9E);
 }
 
+/* PLACEHOLDER LABEL */
+.ux-input-component--placeholder.ux-input-component--focused .ux-input-component__label,
+.ux-input-component--placeholder.ux-input-component--has-value .ux-input-component__label {
+  transform: translateY(var(--empty-label-translation, 13.6px));
+  opacity: 0;
+  min-height: calc(var(--label-font-size, 12px) * var(--label-line-height, 1.6));
+}
+.ux-input-component--placeholder.ux-input-component--focused .ux-input-component__inner-input,
+.ux-input-component--placeholder.ux-input-component--has-value .ux-input-component__inner-input {
+  transform: translateY(calc(var(--empty-label-translation, 13.6px) * -0.5 - var(--inner-input-v-padding) / 2));
+}
