@@ -2,7 +2,7 @@ import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/styles/ux-input-component.css';
@@ -30,6 +30,7 @@ export class UxInput implements UxComponent {
   @bindable public label: any;
   @bindable public type: any;
   @bindable public variant: 'filled' | 'outline' = 'filled';
+  @bindable public dense: any = false;
 
   @observable
   public rawValue: string = '';
@@ -39,6 +40,9 @@ export class UxInput implements UxComponent {
 
   public value: any;
   public textbox: HTMLInputElement;
+
+  // will be set to true if no label or if label is given through the placeholder attribute
+  public placeholder: boolean = false;
 
   constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
     Object.setPrototypeOf(element, uxInputElementProto);
@@ -57,6 +61,8 @@ export class UxInput implements UxComponent {
       this.focused = true;
     }
 
+    this.dense = normalizeBooleanAttribute('dense', this.dense);
+
     if (element.hasAttribute('id')) {
       const attributeValue = element.getAttribute('id');
 
@@ -71,6 +77,7 @@ export class UxInput implements UxComponent {
 
       if (attributeValue) {
         this.label = attributeValue;
+        this.placeholder = true;
       }
     }
 
@@ -103,6 +110,7 @@ export class UxInput implements UxComponent {
 
     this.autocompleteChanged(this.autocomplete);
     this.themeChanged(this.theme);
+    this.labelChanged();
   }
 
   public attached() {
@@ -217,6 +225,12 @@ export class UxInput implements UxComponent {
       this.element.style.backgroundColor = parentBackgroundColor || '#FFFFFF';
     } else {
       this.element.style.backgroundColor = '';
+    }
+  }
+
+  public labelChanged() {
+    if (typeof this.label !== 'string' || this.label.length === 0) {
+      this.placeholder = true;
     }
   }
 
