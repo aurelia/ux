@@ -50,7 +50,7 @@ export class UxIcon implements UxComponent {
       // after adding icon sets for said languages such as ios
       this.element.innerHTML = iconSet.material;
     } else {
-      this.logger.error('ux-icon: no matching icon found', this.element);
+      this.logger.warn('ux-icon: no matching icon found', this.element);
     }
   }
 }
