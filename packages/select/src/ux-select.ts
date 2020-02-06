@@ -148,11 +148,7 @@ export class UxSelect implements UxComponent {
 
     this.displayValue = values.join(', ');
 
-    if (this.displayValue.length > 0) {
-      this.element.classList.add('ux-select--has-value');
-    } else {
-      this.element.classList.remove('ux-select--has-value');
-    }
+    this.element.classList.toggle('ux-input-component--has-value', this.displayValue.length > 0);
   }
 
   private ignoreSelectEvent: boolean = true;
