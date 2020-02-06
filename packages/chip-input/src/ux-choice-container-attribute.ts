@@ -1,8 +1,8 @@
 import { UxChoiceAttribute } from './ux-choice-attribute';
-import { customAttribute, bindingMode, bindable, inject } from 'aurelia-framework';
+import { customAttribute, bindingMode, bindable, inject, TaskQueue } from 'aurelia-framework';
 
-@customAttribute('ux-choice-container', bindingMode.twoWay)
-@inject(Element)
+@customAttribute('ux-choice-container')
+@inject(Element, TaskQueue)
 export class UxChoiceContainerAttribute {
 
   @bindable({defaultBindingMode: bindingMode.twoWay, primaryProperty: true}) public value: any | any[];
@@ -10,9 +10,31 @@ export class UxChoiceContainerAttribute {
 
   public isMultiple: boolean = false;
   private choices: Array<UxChoiceAttribute> = [];
-  private processClick: (event: Event) => void;
 
-  constructor(private element: Element) {
+  private isQueued: boolean = false;
+
+  constructor(private element: Element, private taskQueue: TaskQueue) {
+  }
+
+  /* Event passed on the click eventListener */
+  public handleEvent(event: Event) {
+    if (event.target instanceof Element) {
+      const choiceElement: any = event.target.closest('.ux-choice');
+      if (
+        choiceElement !== null &&
+        choiceElement.au !== undefined &&
+        choiceElement.au['ux-choice'] !== undefined &&
+        choiceElement.au['ux-choice'].viewModel instanceof UxChoiceAttribute) {
+        const choice: UxChoiceAttribute = choiceElement.au['ux-choice'].viewModel;
+        this.toggleValue(choice.value);
+      }
+    }
+  }
+
+  /* Callback passed on the TaskQueue when registering child choices */
+  public call() {
+    this.isQueued = false;
+    this.processValue();
   }
 
   public bind() {
@@ -33,29 +55,19 @@ export class UxChoiceContainerAttribute {
 
   public attached() {
     this.element.classList.add('ux-choice-container');
-    this.processClick = (event: Event) => {
-      if (event.target instanceof Element) {
-        const choiceElement: any = event.target.closest('.ux-choice');
-        if (
-          choiceElement !== null &&
-          choiceElement.au !== undefined &&
-          choiceElement.au['ux-choice'] !== undefined &&
-          choiceElement.au['ux-choice'].viewModel instanceof UxChoiceAttribute) {
-          const choice: UxChoiceAttribute = choiceElement.au['ux-choice'].viewModel;
-          this.toggleValue(choice.value);
-        }
-      }
-    };
-    this.element.addEventListener('click', this.processClick, false);
+    this.element.addEventListener('click', this);
   }
 
   public detached() {
-    this.element.removeEventListener('click', this.processClick, false);
+    this.element.removeEventListener('click', this);
   }
 
   public registerChoice(choice: UxChoiceAttribute) {
     this.choices.push(choice);
-    this.processValue();
+    if (!this.isQueued) {
+      this.isQueued = true;
+      this.taskQueue.queueMicroTask(this);
+    }
   }
 
   public disposeChoice(choice: UxChoiceAttribute) {
@@ -92,6 +104,7 @@ export class UxChoiceContainerAttribute {
   }
 
   public processValue() {
+    console.log('**** processValue');
     if (this.isMultiple && Array.isArray(this.value)) {
       for (const choice of this.choices) {
         choice.selected = this.value.indexOf(choice.value) !== -1;

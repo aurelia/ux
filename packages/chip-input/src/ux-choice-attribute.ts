@@ -13,9 +13,6 @@ export class UxChoiceAttribute {
 
   public bind() {
     this.container.registerChoice(this);
-  }
-
-  public attached() {
     this.element.classList.add('ux-choice');
   }
 
@@ -27,14 +24,15 @@ export class UxChoiceAttribute {
     if (!this.container) {
       return;
     }
-    if (this.container.isMultiple && Array.isArray(this.container.value)) {
-      for (const index in this.container.value) {
-        if (this.container.value[index] === oldValue) {
-          this.container.value[index] = newValue;
+    const containerValue = this.container.value;
+    if (this.container.isMultiple && Array.isArray(containerValue)) {
+      for (let value of containerValue) {
+        if (value === oldValue) {
+          value = newValue;
           return;
         }
       }
-    } else if (!this.container.isMultiple && this.container.value === oldValue) {
+    } else if (!this.container.isMultiple && containerValue === oldValue) {
       this.container.value = newValue;
     }
   }
