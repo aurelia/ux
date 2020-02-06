@@ -69,6 +69,8 @@
 
 
 /* LEADING AND TRAILING SLOTS */
+.ux-input-component [slot="leading-icon"],
+.ux-input-component [slot="trailing-icon"],
 .ux-input-component__leading,
 .ux-input-component__trailing {
   flex-shrink: 0;
@@ -76,9 +78,11 @@
   display: inline-flex;
   align-items: center;
 }
+.ux-input-component [slot="leading-icon"],
 .ux-input-component__leading:not(empty) {
   margin-right: 8px;
 }
+.ux-input-component [slot="trailing-icon"],
 .ux-input-component__trailing:not(empty) {
   margin-left: 8px;
 }
