@@ -125,13 +125,13 @@
   transform: translateY(-2px);
   border-top: 5px solid lightgrey;
   border-top-color: #757575;
-  border-top-color: var(--aurelia-ux--select-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
+  border-top-color: var(--foreground, #757575);
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
 }
-.ux-select--has-error .ux-select__arrow:before {
+.ux-input-component--has-error .ux-select__arrow:before {
   border-top-color: #F44336;
-  border-top-color: var(--aurelia-ux--select-error, var(--aurelia-ux--design-error, #F44336));
+  border-top-color: var(--error, #F44336);
 }
 
 .ux-select:focus {
@@ -171,11 +171,11 @@
 .ux-select[disabled] .ux-select__arrow:before,
 .ux-select[readonly] .ux-select__arrow:before {
   border-top-color: #9E9E9E;
-  border-top-color: var(--aurelia-ux--select-disabled-foreground-label, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
+  border-top-color: var(--disabled-foreground, #9E9E9E);
 }
 
 .ux-select--outline[disabled] .ux-select__arrow:before,
 .ux-select--outline[readonly] .ux-select__arrow:before {
   border-top-color: #e1e1e1;
-  border-top-color: var(--aurelia-ux--select-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+  border-top-color: var(--disabled-background, #e1e1e1);
 }
