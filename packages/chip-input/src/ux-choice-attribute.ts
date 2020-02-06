@@ -1,9 +1,6 @@
 import { UxChoiceContainerAttribute } from './ux-choice-container-attribute';
 import { customAttribute, inject, observable, Optional } from 'aurelia-framework';
-import { getLogger } from 'aurelia-logging';
 import './ux-choice.css';
-
-const logger = getLogger('ux-choice');
 
 @customAttribute('ux-choice')
 @inject(Element, Optional.of(UxChoiceContainerAttribute))
@@ -14,9 +11,12 @@ export class UxChoiceAttribute {
 
   constructor(private element: Element, private container: UxChoiceContainerAttribute) {}
 
+  public bind() {
+    this.container.registerChoice(this);
+  }
+
   public attached() {
     this.element.classList.add('ux-choice');
-    this.container.registerChoice(this);
   }
 
   public detached() {
