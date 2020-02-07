@@ -110,12 +110,15 @@ export class UxChoiceContainerAttribute {
   }
 
   public processValue() {
+    const choicesLength = this.choices.length;
     if (this.isMultiple && Array.isArray(this.value)) {
-      for (const choice of this.choices) {
+      for (let index = 0; index < choicesLength; index++) {
+        const choice = this.choices[index];
         choice.selected = this.value.indexOf(choice.value) !== -1;
       }
     } else if (!this.isMultiple && typeof this.value === 'string') {
-      for (const choice of this.choices) {
+      for (let index = 0; index < choicesLength; index++) {
+        const choice = this.choices[index];
         choice.selected = this.value === choice.value;
       }
     }
