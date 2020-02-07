@@ -38,6 +38,7 @@ export class UxChoiceContainerAttribute {
   }
 
   public bind() {
+    this.element.classList.add('ux-choice-container');
     this.multipleChanged();
     this.valueChanged(this.value);
   }
@@ -54,7 +55,6 @@ export class UxChoiceContainerAttribute {
   }
 
   public attached() {
-    this.element.classList.add('ux-choice-container');
     this.element.addEventListener('click', this);
   }
 
@@ -62,18 +62,23 @@ export class UxChoiceContainerAttribute {
     this.element.removeEventListener('click', this);
   }
 
-  public registerChoice(choice: UxChoiceAttribute) {
-    this.choices.push(choice);
+  private requestProcessValue() {
     if (!this.isQueued) {
       this.isQueued = true;
       this.taskQueue.queueMicroTask(this);
     }
   }
 
+  public registerChoice(choice: UxChoiceAttribute) {
+    this.choices.push(choice);
+    this.requestProcessValue();
+  }
+
   public disposeChoice(choice: UxChoiceAttribute) {
     const index = this.choices.indexOf(choice);
     if (index !== -1) {
       this.choices.splice(index, 1);
+      this.requestProcessValue();
     }
   }
 
@@ -83,10 +88,11 @@ export class UxChoiceContainerAttribute {
     }
     if (this.isMultiple && typeof newValue === 'string') {
       this.value = [];
+      this.requestProcessValue();
     } else if (!this.isMultiple && Array.isArray(newValue)) {
       this.value = undefined;
+      this.requestProcessValue();
     }
-    this.processValue();
   }
 
   public toggleValue(value: string) {
