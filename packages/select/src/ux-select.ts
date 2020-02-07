@@ -15,7 +15,7 @@ import {
 } from 'aurelia-framework';
 
 import { getLogger } from 'aurelia-logging';
-import { StyleEngine, UxInputComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 
 import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
@@ -489,21 +489,9 @@ export class UxSelect implements UxInputComponent {
   }
 
   public variantChanged(newValue: string) {
-    if (newValue === 'outline') {
-      let parentBackgroundColor = '';
-      let el: HTMLElement = this.element;
-      while (parentBackgroundColor === '' && el.parentElement) {
-        let color = window.getComputedStyle(el.parentElement, null).getPropertyValue('background-color');
-        if (color.toString() === 'rgba(0, 0, 0, 0)') {
-          color = '';
-        }
-        parentBackgroundColor = color;
-        el = el.parentElement;
-      }
-      this.element.style.backgroundColor = parentBackgroundColor || '#FFFFFF';
-    } else {
-      this.element.style.backgroundColor = '';
-    }
+    this.element.style.backgroundColor = newValue === 'outline' ?
+      this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) : 
+      '';
   }
 
   @computedFrom('label')
