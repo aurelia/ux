@@ -131,7 +131,7 @@
   font-weight: 400;
 }
 
-.ux-input-component__border-bottom {
+.ux-input-component__border {
   height: var(---border-active-width, 2px);
   position: absolute;
   bottom: 0;
@@ -139,7 +139,7 @@
   right: 0;
 }
 
-.ux-input-component__border-bottom:before {
+.ux-input-component__border:before {
   display: block;
   content: '';
   height: 1px;
@@ -152,7 +152,7 @@
   right: 0;
 }
 
-.ux-input-component__border-bottom:after {
+.ux-input-component__border:after {
   display: block;
   content: '';
   height: var(--border-active-width, 2px);
@@ -195,7 +195,7 @@
 
 
 /* BORDER BOTTOM IN FOCUS STATE  */
-.ux-input-component--focused .ux-input-component__border-bottom:after {
+.ux-input-component--focused .ux-input-component__border:after {
   transform: scalex(1);
 }
 
@@ -205,14 +205,14 @@
   color: #F44336;
   color: var(--error, #F44336);
 }
-.ux-input-component--has-error:not(.ux-input-component--focused) .ux-input-component__border-bottom:after {
+.ux-input-component--has-error:not(.ux-input-component--focused) .ux-input-component__border:after {
   background-color: #F44336;
   background-color: var(--error, #F44336);
   transform: scalex(1);
 }
 
 /* HOVER STATE */
-.ux-input-component--filled:hover:not(.ux-input-component--disabled) {
+.ux-input-component--filled:hover:not(.ux-input-component--disabled):not([disabled]):not([readonly]) {
   background-color: #00000027;
   background-color: var(--background-hover, #00000027);
 }

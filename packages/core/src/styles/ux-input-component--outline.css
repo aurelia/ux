@@ -7,7 +7,7 @@
   --min-height: calc(
     1 * var(--line-height, 1.6) * var(--font-size, 16px) + 
     2 * var(--inner-input-v-padding, 12px) + 
-    2 * var(--border-width, 1px));
+    2 * var(--border-active-width, 2px));
   /* TRANSLATION OF LABEL WHEN INPUT IS EMPTY */
   --half-h: 25.8px;
   --half-h: calc(var(--min-height, 51.6px) / 2);
@@ -17,10 +17,10 @@
   --empty-label-translation: calc(var(--abs-empty-label-pos, 13px) - var(--border-width, 1px));
   /* TRANSLATION OF LABEL WHEN INPUT IS NOT EMPTY */
   --not-empty-label-translation: -10,1px;
-  --not-empty-label-translation: calc(var(--label-font-size, 12px) * var(--label-line-height, 1.6) / -2 - var(--border-width, 1px) / 2);
+  --not-empty-label-translation: calc(var(--label-font-size, 12px) * var(--label-line-height, 1.6) / -2 + var(--border-width, 1px) / 4  + var(--border-active-width, 2px) / 4);
   /* TRANSLATION OF LABEL WHEN INPUT HAS FOCUS */
   --focused-label-translation: -10.6px;
-  --focused-label-translation: calc(var(--label-font-size, 12px) * var(--label-line-height, 1.6) / -2 - var(--border-active-width, 2px) / 2);
+  --focused-label-translation: calc(var(--label-font-size, 12px) * var(--label-line-height, 1.6) / -2 + var(--border-width, 1px) / 4  + var(--border-active-width, 2px) / 4);
   /* EXTRA MARGIN AROUND THE OUTLINE WHEN BORDER IS INACTIVE */
   --inactive-extra-margin: 1px;
   --inactive-extra-margin: calc(var(--border-active-width, 2px) - var(--border-width, 1px));
@@ -33,14 +33,9 @@
 
 
 .ux-input-component--outline {
+  position: relative;
   background: inherit;
-  border-style: solid;
-  border-color: #757575;
-  border-width: 1px;
-  border-color: var(--foreground-label, #757575);
-  border-width: var(--border-width, 1px);
   min-height: var(--min-height, 51.6px);
-  margin: var(--inactive-extra-margin, 1px);
 }
 
 .ux-input-component--outline .ux-input-component__content {
@@ -59,20 +54,44 @@
   padding: var(--inner-input-v-padding, 12px) 0;
 }
 
-/* OUTLINE MAIN COMPONENT IN FOCUSED STATE */
-.ux-input-component--outline.ux-input-component--focused {
+.ux-input-component--outline .ux-input-component__border {
+  box-sizing: border-box;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(100% - 2 * var(--border-width));
+  border-radius: var(--border-radius);
+  border-style: solid;
+  border-color: #757575;
+  border-width: 1px;
+  border-color: var(--foreground-label, #757575);
+  border-width: var(--border-width, 1px);
+}
+
+.ux-input-component--outline .ux-input-component__border:before {
+  display: none;
+}
+
+.ux-input-component--outline .ux-input-component__border:after {
+  display: none;
+}
+
+/* OUTLINE LABEL AND CONTENT IN FOCUSED, HAS-VALUE STATE */
+.ux-input-component--outline.ux-input-component--focused .ux-input-component__border {
+  height: calc(100% - 2 * var(--border-active-width));
   border-width: 2px;
   border-width: var(--border-active-width, 2px);
   border-color: var(--active-color, #3F51B5);
-  margin: 0;
 }
-/* OUTLINE LABEL AND CONTENT IN FOCUSED, HAS-VALUE STATE */
+
 .ux-input-component--outline.ux-input-component--focused .ux-input-component__label-background,
 .ux-input-component--outline.ux-input-component--has-value .ux-input-component__label-background {
   position: absolute;
+  z-index: 1;
   transform: scaleX(0);
-  top: -1px;
-  top: calc(var(--border-width, 1px) * -1);
+  top: 0;
   height: 1px;
   height: var(--border-width, 1px);
   width: 0px;
@@ -82,6 +101,7 @@
 }
 .ux-input-component--outline.ux-input-component--focused .ux-input-component__label,
 .ux-input-component--outline.ux-input-component--has-value .ux-input-component__label {
+  z-index: 2;
   transform: translateY(var(--not-empty-label-translation, -10.1px));
   font-size: 12px;
   font-size: var(--label-font-size, 12px);
@@ -95,35 +115,38 @@
   transform: scaleX(1);
 }
 .ux-input-component--outline.ux-input-component--focused .ux-input-component__label-background {
-  top: -1px;
-  top: calc(var(--border-active-width, 1px) * -1);
-  height: 1px;
-  height: var(--border-active-width, 1px);
+  height: 2px;
+  height: var(--border-active-width, 2px);
 }
 
 /* ERROR STATE */
-.ux-input-component--has-error:not(.ux-input-component--focused).ux-input-component--outline {
+.ux-input-component--has-error:not(.ux-input-component--focused).ux-input-component--outline .ux-input-component__border {
   border-color: #F44336;
   border-color: var(--error, #F44336);
 }
 /* HOVER STATE */
-.ux-input-component--outline:hover:not(.ux-input-component--disabled):not(.ux-input-component--focused) {
+.ux-input-component--outline:hover:not(.ux-input-component--disabled):not([disabled]):not([readonly]):not(.ux-input-component--focused) .ux-input-component__border {
   border-color: #212121;
   border-color: var(--foreground, #212121);
 }
 
 /* DISABLED STATE */
 .ux-input-component--outline.ux-input-component--disabled,
-.ux-input--outline[disabled],
-.ux-input--outline[readonly] {
+.ux-input-component--outline[disabled],
+.ux-input-component--outline[readonly] {
   color: #e1e1e1;
   color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
-  border-color: #e1e1e1;
-  border-color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
 }
 .ux-input-component--outline.ux-input-component--disabled .ux-input__label,
-.ux-input--outline[disabled] .ux-input__label,
-.ux-input--outline[readonly] .ux-input__label {
+.ux-input-component--outline[disabled] .ux-input__label,
+.ux-input-component--outline[readonly] .ux-input__label {
   color: #e1e1e1;
   color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+}
+
+.ux-input-component--outline.ux-input-component--disabled .ux-input-component__border,
+.ux-input-component--outline[disabled]  .ux-input-component__border,
+.ux-input-component--outline[readonly] .ux-input-component__border {
+  border-color: #e1e1e1;
+  border-color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
 }

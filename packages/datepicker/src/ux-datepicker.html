@@ -29,7 +29,7 @@
     </svg>
   </span>
 
-  <div class="ux-input-component__border-bottom" show.bind="variant === 'filled' && !disabled"></div>
+  <div class="ux-input-component__border" show.bind="!(variant === 'filled' && disabled)"></div>
 
   <div class="ux-datepicker__overlay" if.bind="showDialog">
     <ux-picker-dialog 
