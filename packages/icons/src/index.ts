@@ -4,10 +4,10 @@ import { UxIcon } from './ux-icon';
 export { UxIconTheme } from './ux-icon-theme';
 export { UxIcon };
 
-import { UxIconMap } from './ux-icon-map';
-export { UxIconMap };
+import { UxIconMap, UxIconRegObject, UxIconRegArray } from './ux-icon-map';
+export { UxIconMap, UxIconRegObject, UxIconRegArray };
 
-export function configure(config: FrameworkConfiguration, icons?: Array<{name: string, material: string}>) {
+export function configure(config: FrameworkConfiguration, icons?: Array<UxIconRegObject>) {
   config.globalResources(PLATFORM.moduleName('./ux-icon'));
   if (Array.isArray(icons) && icons.length > 0) {
     config.container.get(UxIconMap).registerIcons(icons);

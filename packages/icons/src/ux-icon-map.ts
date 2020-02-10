@@ -1,7 +1,13 @@
-export interface UxIconReg {
+import { getLogger } from 'aurelia-logging';
+
+const logger = getLogger('ux-icon-map');
+
+export interface UxIconRegObject {
   name: string;
-  material: string;
+  svg: string;
 }
+
+export type UxIconRegArray = [string, string, number?, number?];
 
 export class UxIconMap {
 
@@ -9,14 +15,31 @@ export class UxIconMap {
     [key: string]: string;
   } = {};
 
-  public registerIcon(name: string, material: string) {
-    this.map[name] = material;
+  public registerIcon(nameOrIcon: string | UxIconRegArray | UxIconRegObject, svg?: string) {
+    let name: string;
+    if (Array.isArray(nameOrIcon) && nameOrIcon.length >= 2) {
+      svg = this.buildSvg(nameOrIcon);
+      name = nameOrIcon[0];
+    } else if (typeof nameOrIcon === 'object' && !Array.isArray(nameOrIcon)) {
+      svg = nameOrIcon.svg;
+      name = nameOrIcon.name;
+    } else if (typeof nameOrIcon === 'string' && typeof svg === 'string') {
+      name = nameOrIcon;
+    } else {
+      logger.warn('Invalid icon', nameOrIcon);
+      return;
+    }
+    this.map[name] = svg;
   }
 
-  public registerIcons(icons: Array<UxIconReg>) {
-    if (Array.isArray(icons) && icons.length > 0 && typeof icons[0].name === 'string' && typeof icons[0].material === 'string') {
-      icons.map(icon => this.registerIcon(icon.name, icon.material));
+  public registerIcons(icons: Array<UxIconRegArray | UxIconRegObject>) {
+    if (Array.isArray(icons)) {
+      icons.map(icon => this.registerIcon(icon));
     }
+  }
+
+  private buildSvg(icon: UxIconRegArray): string {
+    return `<svg viewBox=\"0 0 ${icon[2] || 24} ${icon[3] || 24}\">${icon[1]}</svg>`;
   }
 
   public has(name: string | string[]): boolean {
@@ -32,7 +55,7 @@ export class UxIconMap {
     return this.map[name];
   }
 
-  public getAll(): Array<UxIconReg> {
-    return Object.keys(this.map).map((name) => ({name, material: this.map[name]}));
+  public getAllKeys(): Array<string> {
+    return Object.keys(this.map);
   }
 }
