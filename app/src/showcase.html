@@ -34,14 +34,11 @@
           <ux-grid-cell sm="6">
             <ux-field>
               <label>Label Position</label>
-              <div class="ux-form__row">
-                <ux-radio name="labelPosition" model.bind="'floating'" checked.bind="labelPosition"></ux-radio>
-                <label>Floating</label>
-                <ux-radio name="labelPosition" model.bind="'placeholder'" checked.bind="labelPosition"></ux-radio>
-                <label>Placeholder</label>
-                <ux-radio name="labelPosition" model.bind="'top'" checked.bind="labelPosition"></ux-radio>
-                <label>On top of input</label>
-              </div>
+              <ux-chip-list ux-choice-container.bind="labelPosition">
+                <ux-chip ux-choice="floating">Floating</ux-chip>
+                <ux-chip ux-choice="placeholder">Placeholder</ux-chip>
+                <ux-chip ux-choice="top">On Top</ux-chip>
+              </ux-chip-list>
             </ux-field>
           </ux-grid-cell>
         </ux-grid>
