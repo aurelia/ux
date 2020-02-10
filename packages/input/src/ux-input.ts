@@ -5,9 +5,9 @@ import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
 // tslint:disable-next-line: no-submodule-imports
-import '@aurelia-ux/core/styles/ux-input-component.css';
+import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
-import '@aurelia-ux/core/styles/ux-input-component--outline.css';
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 
 export interface UxInputElement extends HTMLElement {
   value: any;

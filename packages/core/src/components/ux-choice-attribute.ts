@@ -2,7 +2,7 @@ import { UxChoiceContainerAttribute } from './ux-choice-container-attribute';
 import { customAttribute, inject, observable, Optional } from 'aurelia-framework';
 import './ux-choice.css';
 
-@customAttribute('ux-choice')
+@customAttribute('ux-choice', undefined, ['ux-choice-item', 'ux-choice-option'])
 @inject(Element, Optional.of(UxChoiceContainerAttribute))
 export class UxChoiceAttribute {
 

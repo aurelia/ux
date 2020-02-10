@@ -1,7 +1,7 @@
 import { UxChoiceAttribute } from './ux-choice-attribute';
 import { customAttribute, bindingMode, bindable, inject, TaskQueue } from 'aurelia-framework';
 
-@customAttribute('ux-choice-container')
+@customAttribute('ux-choice-container', undefined, ['ux-choice-value'])
 @inject(Element, TaskQueue)
 export class UxChoiceContainerAttribute {
 

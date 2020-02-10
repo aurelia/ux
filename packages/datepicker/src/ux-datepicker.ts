@@ -8,9 +8,9 @@ import { UxDatepickerTheme } from './ux-datepicker-theme';
 import { DOM } from 'aurelia-pal';
 import { moment } from './resources/moment-rexports';
 // tslint:disable-next-line: no-submodule-imports
-import '@aurelia-ux/core/styles/ux-input-component.css';
+import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
-import '@aurelia-ux/core/styles/ux-input-component--outline.css';
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 // import UX_DATEPICKER_VIEW from './ux-datepicker.html';
 // import { PLATFORM } from 'aurelia-pal';
 

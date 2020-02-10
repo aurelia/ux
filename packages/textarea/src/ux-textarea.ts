@@ -5,9 +5,9 @@ import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackground
 import { UxTextAreaTheme } from './ux-textarea-theme';
 import { observable, computedFrom } from 'aurelia-framework';
 // tslint:disable-next-line: no-submodule-imports
-import '@aurelia-ux/core/styles/ux-input-component.css';
+import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
-import '@aurelia-ux/core/styles/ux-input-component--outline.css';
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 
 export interface UxTextAreaElement extends HTMLElement {
   value: string;
