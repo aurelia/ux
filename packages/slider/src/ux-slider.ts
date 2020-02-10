@@ -8,6 +8,10 @@ export interface UxSliderElement extends HTMLElement {
   value: number;
 }
 
+export interface MouseOrTouchEvent extends MouseEvent {
+  touches?: Array<{clientX: number}>;
+}
+
 @inject(Element, StyleEngine)
 @customElement('ux-slider')
 export class UxSlider implements UxComponent {
@@ -108,44 +112,43 @@ export class UxSlider implements UxComponent {
     this.value = this.boundValue(steppedValue);
   }
 
-  public onTrackMouseDown(e: MouseEvent | TouchEvent) {
+  public onTrackMouseDown(e: MouseOrTouchEvent) {
     if (this.disabled) {
       return;
     }
 
     this.isActive = true;
-
+    const isMouseEvent = e instanceof MouseEvent;
+    const isTouchEvent = Array.isArray(e.touches) && e.touches.length > 0;
     const winEvents = new ElementEvents(window as any);
-    const upAction = (e: MouseEvent | TouchEvent | FocusEvent) => {
+    const upAction = (e: MouseOrTouchEvent) => {
       if (!this.isActive) {
         winEvents.disposeAll();
         return;
       }
-      const isMouseEvent = e instanceof MouseEvent;
       if (isMouseEvent) {
         this.updateValue((e as MouseEvent).clientX);
       }
-      const isTouchEvent = e instanceof TouchEvent && e.touches.length > 0;
       if (isTouchEvent) {
-        const touches = (e as TouchEvent).touches;
+        const touches = e.touches as Array<{clientX: number}>;
         if (touches.length === 1) {
-          this.updateValue((e as TouchEvent).touches[0].clientX);
+          this.updateValue(touches[0].clientX);
         }
       }
       this.isActive = false;
       winEvents.disposeAll();
     };
-    const moveAction = (e: MouseEvent | TouchEvent) => {
+    const moveAction = (e: MouseOrTouchEvent) => {
       if (!this.isActive) {
         return;
       }
-      this.updateValue(e instanceof MouseEvent ? e.clientX : e.touches[0].clientX);
+      this.updateValue(isMouseEvent ? e.clientX : (e.touches as Array<{clientX: number}>)[0].clientX);
     };
     winEvents.subscribe('blur', upAction, true);
-    if (e instanceof MouseEvent) {
+    if (isMouseEvent) {
       winEvents.subscribe('mouseup', upAction, true);
       winEvents.subscribe('mousemove', moveAction, true);
-    } else if (e instanceof TouchEvent) {
+    } else if (isTouchEvent) {
       winEvents.subscribe('touchend', upAction, true);
       winEvents.subscribe('touchmove', moveAction, true);
     }
