@@ -29,7 +29,6 @@
     "@aurelia-ux/switch": "file:../packages/switch",
     "@aurelia-ux/textarea": "file:../packages/textarea",
     "aurelia-logging-console": "^1.1.1",
-    "aurelia-validation": "^1.6.0",
     "moment": "^2.24.0"
   },
   "devDependencies": {
