@@ -7,9 +7,29 @@ export { UxIcon };
 import { UxIconMap, UxIconRegObject, UxIconRegArray } from './ux-icon-map';
 export { UxIconMap, UxIconRegObject, UxIconRegArray };
 
-export function configure(config: FrameworkConfiguration, icons?: Array<UxIconRegObject>) {
+export interface UxIconConfiguration {
+  icons?: Array<UxIconRegObject>;
+  defaultIconWidth?: number;
+  defaultIconHeight?: number;
+}
+
+export function configure(
+  config: FrameworkConfiguration, iconsOrConfig?: UxIconConfiguration | Array<UxIconRegObject>) {
   config.globalResources(PLATFORM.moduleName('./ux-icon'));
-  if (Array.isArray(icons) && icons.length > 0) {
-    config.container.get(UxIconMap).registerIcons(icons);
+  let uxConfig: UxIconConfiguration = {};
+  if (Array.isArray(iconsOrConfig) && iconsOrConfig.length > 0) {
+    uxConfig.icons = iconsOrConfig;
+  } else if (typeof iconsOrConfig === 'object') {
+    uxConfig = iconsOrConfig as UxIconConfiguration;
+  }
+  const uxIconMap = config.container.get(UxIconMap);
+  if (typeof uxConfig.defaultIconWidth === 'number') {
+    uxIconMap.defaultIconWidth = uxConfig.defaultIconWidth;
+  }
+  if (typeof uxConfig.defaultIconHeight === 'number') {
+    uxIconMap.defaultIconHeight = uxConfig.defaultIconHeight;
+  }
+  if (uxConfig.icons) {
+    uxIconMap.registerIcons(uxConfig.icons);
   }
 }

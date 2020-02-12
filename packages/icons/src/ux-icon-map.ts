@@ -11,6 +11,9 @@ export type UxIconRegArray = [string, string, number?, number?];
 
 export class UxIconMap {
 
+  public defaultIconWidth: number = 24;
+  public defaultIconHeight: number = 24;
+
   private map: {
     [key: string]: string;
   } = {};
@@ -39,7 +42,7 @@ export class UxIconMap {
   }
 
   private buildSvg(icon: UxIconRegArray): string {
-    return `<svg viewBox=\"0 0 ${icon[2] || 24} ${icon[3] || 24}\">${icon[1]}</svg>`;
+    return `<svg viewBox=\"0 0 ${icon[2] || this.defaultIconWidth} ${icon[3] || this.defaultIconHeight}\">${icon[1]}</svg>`;
   }
 
   public has(name: string | string[]): boolean {
