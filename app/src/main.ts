@@ -29,7 +29,7 @@ async function configure(aurelia: Aurelia): Promise<void> {
 
   await aurelia.start();
   await aurelia.setRoot(PLATFORM.moduleName('app'), document.body);
-};
+}
 
 (async () => {
   initialize();

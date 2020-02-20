@@ -28,7 +28,6 @@ export class UxCalendar {
     this.displayMonth = this.value.clone();
   }
 
-
   public previousMonth() {
     this.displayMonth = this.displayMonth.clone().subtract(1, 'month');
   }

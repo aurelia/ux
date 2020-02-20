@@ -75,7 +75,6 @@ export class UxChipInput implements UxInputComponent {
     }
   }
 
-
   public handleKeyup(event: KeyboardEvent) {
     const key = event.which || event.keyCode;
 
@@ -180,7 +179,7 @@ export class UxChipInput implements UxInputComponent {
 
   public variantChanged(newValue: string) {
     this.element.style.backgroundColor = newValue === 'outline' ?
-      this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) : 
+      this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) :
       '';
   }
 
