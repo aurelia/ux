@@ -1,0 +1,363 @@
+<template>
+  <require from="./theming.css"></require>
+  <section>
+    <h1>Showcase</h1>
+    <p>Find here common usecases and see how each Aurelia UX component fit with the others.</p>
+  </section>
+  <section>
+
+    <ux-card>
+      <ux-card-header>
+        <span class="ux-card__title">Basic forms exemples</span>
+      </ux-card-header>
+      <ux-card-content>
+        <ux-grid class="ux-grid--remove-padding">
+          <ux-grid-cell sm="3">
+            <ux-field>
+              <label>Variant</label>
+              <div class="ux-form__row">
+                <ux-radio name="variant" model.bind="'filled'" checked.bind="variant"></ux-radio>
+                <label>Filled</label>
+                <ux-radio name="variant" model.bind="'outline'" checked.bind="variant"></ux-radio>
+                <label>Outline</label>
+              </div>
+            </ux-field>
+          </ux-grid-cell>
+          <ux-grid-cell sm="2">
+            <ux-field>
+              <label>Dense</label>
+              <div class="ux-form__row">
+                <ux-switch checked.bind="dense">
+              </div>
+            </ux-field>
+          </ux-grid-cell>
+          <ux-grid-cell sm="6">
+            <ux-field>
+              <label>Label Position</label>
+              <ux-chip-list ux-choice-container.bind="labelPosition">
+                <ux-chip ux-choice="floating">Floating</ux-chip>
+                <ux-chip ux-choice="placeholder">Placeholder</ux-chip>
+                <ux-chip ux-choice="top">On Top</ux-chip>
+              </ux-chip-list>
+            </ux-field>
+          </ux-grid-cell>
+        </ux-grid>
+        
+      </ux-card-content>
+    </ux-card>
+
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-card sm="6">
+        <ux-card-header><span class="ux-card__title">Input components</span></ux-card-header>
+        <ux-card-content>
+          <ux-form>
+            <div class="ux-form__row">
+              <ux-field>
+                <label if.bind="labelPosition === 'top'">First Name</label>
+                <ux-input dense.bind="dense" label="${labelPosition === 'floating' ? 'First Name' : ''}" placeholder="${labelPosition === 'placeholder' ? 'First Name' : ''}" variant.bind="variant" maxlength="10" value.bind="firstName & validate"></ux-input>
+                <ux-input-info ux-input-counter>John</ux-input-info>
+              </ux-field>
+  
+              <ux-field>
+                <label if.bind="labelPosition === 'top'">Last Name</label>
+                <ux-input dense.bind="dense" label="${labelPosition === 'floating' ? 'Last Name' : ''}" placeholder="${labelPosition === 'placeholder' ? 'Last Name' : ''}" variant.bind="variant" maxlength="10" value.bind="lastName & validate"></ux-input>
+                <ux-input-info ux-input-counter>Doe</ux-input-info>
+              </ux-field>
+            </div>
+  
+            <ux-field>
+              <label if.bind="labelPosition === 'top'">Email Address</label>
+              <ux-input dense.bind="dense" label="${labelPosition === 'floating' ? 'Email Address' : ''}" placeholder="${labelPosition === 'placeholder' ? 'Email Address' : ''}" variant.bind="variant" type="email" value.bind="email & validate"></ux-input>
+              <ux-input-info>email@example.com</ux-input-info>
+            </ux-field>
+
+            <ux-field>
+              <label if.bind="labelPosition === 'top'">Birthdate</label>
+              <ux-datepicker dense.bind="dense" label="${labelPosition === 'floating' ? 'Birthdate' : ''}" placeholder="${labelPosition === 'placeholder' ? 'Birthdate' : ''}" variant.bind="variant" value.bind="birthdate & validate"></ux-datepicker>
+              <ux-input-info></ux-input-info>
+            </ux-field>
+
+            <ux-field>
+              <label if.bind="labelPosition === 'top'">Contact Type</label>
+              <ux-select dense.bind="dense" label="${labelPosition === 'floating' ? 'Contact Type' : ''}" placeholder="${labelPosition === 'placeholder' ? 'Contact Type' : ''}" variant.bind="variant" value.bind="contactType" placeholder="Choose an option">
+                <ux-option>Private</ux-option>
+                <ux-option>Professionnal</ux-option>
+              </ux-select>
+            </ux-field>
+  
+            <ux-field>
+              <label if.bind="labelPosition === 'top'">Biography</label>
+              <ux-textarea dense.bind="dense" label="${labelPosition === 'floating' ? 'Biography' : ''}" placeholder="${labelPosition === 'placeholder' ? 'Biography' : ''}" variant.bind="variant" auto-resize></ux-textarea>
+            </ux-field>
+
+            <ux-field>
+              <label if.bind="labelPosition === 'top'">Tags</label>
+              <ux-chip-input dense.bind="dense" label="${labelPosition === 'floating' ? 'Tags' : ''}" placeholder="${labelPosition === 'placeholder' ? 'Tags' : ''}" variant.bind="variant" chips.bind="tags"></ux-chip-input>
+            </ux-field>
+          </ux-form>
+        </ux-card-content>
+        <ux-card-separator no-margin></ux-card-separator>
+        <ux-card-footer>
+          <ux-card-action-row>
+            <ux-button click.delegate="submit()">Submit</ux-button>
+          </ux-card-action-row>
+        </ux-card-footer>
+      </ux-card>
+      <ux-card sm="6">
+        <ux-card-header><span class="ux-card__title">Controls</span></ux-card-header>
+        <ux-card-content>
+
+          <ux-form>
+
+            <div class="ux-form__row">
+              <ux-field>
+                <label>Interests</label>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'sport'"></ux-checkbox>
+                  <label>Sport</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'technology'"></ux-checkbox>
+                  <label>Technology</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'business'"></ux-checkbox>
+                  <label>Business</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'travel'"></ux-checkbox>
+                  <label>Travel</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'art'"></ux-checkbox>
+                  <label>Art</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-checkbox checked.bind="interests" model.bind="'politics'"></ux-checkbox>
+                  <label>Politics</label>
+                </div>
+              </ux-field>
+
+              <ux-field>
+                <label>Age Group</label>
+                <div class="ux-form__row">
+                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'0-10'"></ux-radio>
+                  <label>0-10</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'11-20'"></ux-radio>
+                  <label>11-20</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'21-30'"></ux-radio>
+                  <label>21-30</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'31-40'"></ux-radio>
+                  <label>31-40</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'41-50'"></ux-radio>
+                  <label>41-50</label>
+                </div>
+                <div class="ux-form__row">
+                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'51+'"></ux-radio>
+                  <label>51+</label>
+                </div>
+              </ux-field>
+            </div>
+
+            <ux-field>
+              <label>Color</label>
+              <div class="ux-form__row">
+                <ux-slider min="0" max="255" step="1" value.bind="sliderRValue" theme.bind="{background: 'red'}">
+                  <span slot="leading-icon">R</span>
+                  <span slot="trailing-icon">${sliderRValue}</span>
+                </ux-slider>
+              </div>
+              <div class="ux-form__row">
+                <ux-slider min="0" max="255" step="1" value.bind="sliderGValue" theme.bind="{background: 'green'}">
+                  <span slot="leading-icon">G</span>
+                  <span slot="trailing-icon">${sliderGValue}</span>
+                </ux-slider>
+              </div>
+              <div class="ux-form__row">
+                <ux-slider min="0" max="255" step="1" value.bind="sliderBValue" theme.bind="{background: 'blue'}">
+                  <span slot="leading-icon">B</span>
+                  <span slot="trailing-icon">${sliderBValue}</span>
+                </ux-slider>
+              </div>
+            </ux-field>
+
+          </ux-form>
+        </ux-card-content>
+        <ux-card-separator no-margin></ux-card-separator>
+        <ux-card-footer>
+          <ux-card-action-row>
+            <ux-button click.delegate="submit()">Submit</ux-button>
+          </ux-card-action-row>
+        </ux-card-footer>
+      </ux-card>
+    </ux-grid>
+  </section>
+
+  <section>
+    <ux-card>
+      <ux-card-header>
+        <span class="ux-card__title">Chip Choices</span>
+      </ux-card-header>
+      <ux-card-content>
+        <ux-form>
+          <ux-grid class="ux-grid--remove-padding">
+            <ux-grid-cell sm="8">
+              <ux-field>
+                <label>Brightness (inline)</label>
+                <div class="ux-form__row">
+                  <ux-chip-list type="inline" ux-choice-container.bind="brightness">
+                    <ux-chip variant.bind="variant" ux-choice="${option.value}" repeat.for="option of brightnessOptions">
+                      <ux-icon icon="brightness_${option.value}" slot="thumbnail"></ux-icon>${option.label}
+                    </ux-chip>
+                  </ux-chip-list>
+                </div>
+              </ux-field>
+        
+              <ux-field>
+                <label>Brightness (scroll)</label>
+                <div class="ux-form__row" style="max-width: 300px;">
+                  <ux-chip-list type="scroll" ux-choice-container.bind="brightness">
+                    <ux-chip variant.bind="variant" ux-choice="${option.value}" repeat.for="option of brightnessOptions">
+                      <ux-icon icon="brightness_${option.value}" slot="thumbnail"></ux-icon>${option.label}
+                    </ux-chip>
+                  </ux-chip-list>
+                </div>
+              </ux-field>
+
+              <div class="ux-card__separator" style="margin-top: 100px;"></div>
+    
+              <ux-field>
+                <label>Choose Region (multiple)</label>
+                <div class="ux-form__row">
+                  <ux-chip-list type="inline" ux-choice-container.bind="region" multiple>
+                    <ux-chip variant.bind="variant" ux-choice="basel"><ux-icon icon="person" slot="thumbnail"></ux-icon>Basel</ux-chip>
+                    <ux-chip variant.bind="variant" ux-choice="bern">Bern</ux-chip>
+                    <ux-chip variant.bind="variant" ux-choice="geneva">Geneva</ux-chip>
+                    <ux-chip variant.bind="variant" ux-choice="lausanne">Lausanne</ux-chip>
+                    <ux-chip variant.bind="variant" ux-choice="zurich">Zürich</ux-chip>
+                  </ux-chip-list>
+                </div>
+              </ux-field>
+            </ux-grid-cell>
+  
+            <ux-grid-cell sm="4">
+              <ux-field>
+                <label>Brightness (stack)</label>
+                <div class="ux-form__row">
+                  <ux-chip-list type="stack" ux-choice-container.bind="brightness">
+                    <ux-chip variant.bind="variant" ux-choice="${option.value}" repeat.for="option of brightnessOptions">
+                      <ux-icon icon="brightness_${option.value}" slot="thumbnail"></ux-icon>${option.label}
+                    </ux-chip>
+                  </ux-chip-list>
+                </div>
+              </ux-field>
+            </ux-grid-cell>
+  
+          </ux-grid>
+        </ux-form>
+      </ux-card-content>
+    </ux-card>
+  </section>
+
+
+  <section>
+    <ux-card>
+      <ux-card-header>
+        <span class="ux-card__title">List exemples</span>
+      </ux-card-header>
+      <ux-card-content>
+        <ux-field>
+          <label>Border</label>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="listBorder"></ux-checkbox>
+            <label>Enabled</label>
+          </div>
+        </ux-field>
+        <ux-field>
+          <label>Nb lines</label>
+          <div class="ux-form__row">
+            <ux-radio checked.bind="listNbLines" model.bind="'wrap'"></ux-radio>
+            <label>Unlimitted</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-radio checked.bind="listNbLines" model.bind="'two-line'"></ux-radio>
+            <label>2</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-radio checked.bind="listNbLines" model.bind="'three-line'"></ux-radio>
+            <label>3</label>
+          </div>
+        </ux-field>
+      </ux-card-content>
+    </ux-card>
+    
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-card sm="4" md="6">
+        <ux-card-header><span class="ux-card__title">Icon and chevron</span></ux-card-header>
+        <ux-card-content>
+          <ux-list class="${listBorder ? 'ux-list--border' : ''} ux-list--${listNbLines}">
+            <ux-list-item repeat.for="item of listPeople">
+              <ux-icon icon="${item.icon}" class="ux-list-item__detail"></ux-icon>
+              <div class="ux-list-item__content">
+                ${item.name}
+                <div class="ux-list-item__secondary-content">${item.secondary}</div>
+              </div>
+              <div class="ux-list-item__action-item">
+                <ux-icon icon="chevron_right"></ux-icon>
+              </div>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+      </ux-card>
+
+      <ux-card sm="4" md="6">
+        <ux-card-header><span class="ux-card__title">Settings</span></ux-card-header>
+        <ux-card-content>
+          <ux-list class="${listBorder ? 'ux-list--border' : ''} ux-list--${listNbLines}">
+            <ux-list-item repeat.for="item of listSettings">
+              <ux-icon icon="${item.icon}" class="ux-list-item__detail"></ux-icon>
+              <div class="ux-list-item__content">
+                ${item.setting}
+                <div class="ux-list-item__secondary-content">${item.description}</div>
+              </div>
+              <div class="ux-list-item__action-item">
+                <ux-switch></ux-switch>
+              </div>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+  </section>
+
+  <section>
+    <ux-card>
+      <ux-card-header>
+        <span class="ux-card__title">Hierachical Selection Controls</span>
+      </ux-card-header>
+      <ux-card-content>
+        <ux-field>
+          <label>Settings</label>
+          <div class="ux-form__row">
+            <ux-checkbox checked.to-view="emailsChecked" indeterminate.to-view="emailsIndeterminate" click.delegate="toggleEmails()"></ux-checkbox>
+            <label>Enabled</label>
+          </div>
+          <div class="ux-form__sub-row">
+            <div class="ux-form__row" repeat.for="email of emailsOptions">
+              <ux-checkbox checked.bind="emails" model.bind="email.value"></ux-checkbox>
+              <label>${email.label}</label>
+            </div>
+          </div>
+        </ux-field>
+      </ux-card-content>
+    </ux-card>
+  </section>
+</template>

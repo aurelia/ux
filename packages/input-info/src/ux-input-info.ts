@@ -2,11 +2,12 @@ import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { UxInputInfoTheme } from './ux-input-info-theme';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { computedFrom } from 'aurelia-binding';
 
 @inject(Element, StyleEngine)
 @customElement('ux-input-info')
 export class UxInputInfo implements UxComponent {
-  @bindable public target: Element;
+  @bindable public target: { element: Element, value: string, maxlength: number };
   @bindable public uxInputCounter = null;
   @bindable public theme: UxInputInfoTheme;
 
@@ -40,5 +41,23 @@ export class UxInputInfo implements UxComponent {
     if (inputElement.nodeName === 'UX-INPUT' || inputElement.nodeName === 'UX-TEXTAREA') {
       this.target = inputElement.au.controller.viewModel;
     }
+  }
+
+  @computedFrom('target.maxlength')
+  public get maxLength(): number {
+    const target = this.target;
+    if (target.element.tagName === 'UX-INPUT' || target.element.tagName === 'UX-TEXTAREA') {
+      return target.maxlength;
+    }
+    return 0;
+  }
+
+  @computedFrom('target.value')
+  public get length(): number {
+    const target = this.target;
+    if (target.element.tagName === 'UX-INPUT' || target.element.tagName === 'UX-TEXTAREA') {
+      return target.value.length;
+    }
+    return 0;
   }
 }

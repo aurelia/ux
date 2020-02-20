@@ -4,12 +4,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 /**@type {any} */
 const AureliaWebpackPlugin = require('aurelia-webpack-plugin');
 
+const outDir = path.resolve(__dirname, 'dist');
 /**
  * @returns {import('webpack').Configuration}
  */
 module.exports = function({ production = '' } = {}) {
   return {
     mode: production === 'production' ? 'production' : 'development',
+    output: {
+      path: outDir,
+      filename: production ? '[name].[chunkhash].bundle.js' : '[name].[hash].bundle.js',
+      sourceMapFilename: production ? '[name].[chunkhash].bundle.map' : '[name].[hash].bundle.map',
+      chunkFilename: production ? '[name].[chunkhash].chunk.js' : '[name].[hash].chunk.js'
+    },
     resolve: {
       extensions: ['.ts', '.js'],
       modules: [
@@ -123,6 +130,7 @@ module.exports = function({ production = '' } = {}) {
           './ux-card-content.html',
           './ux-card-footer.html',
           './ux-card-header.html',
+          './ux-card-separator.html',
           './ux-card.html'
         ],
         '@aurelia-ux/checkbox': [
@@ -130,6 +138,7 @@ module.exports = function({ production = '' } = {}) {
         ],
         '@aurelia-ux/chip-input': [
           './ux-chip-input.html',
+          './ux-chip-list.html',
           './ux-chip.html'
         ],
         "@aurelia-ux/datepicker": [

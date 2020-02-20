@@ -85,6 +85,7 @@
   },
   "dependencies": {
     "aurelia-binding": "^2.0.0",
+    "aurelia-logging": "^1.5.2",
     "aurelia-templating-resources": "^1.6.0"
   },
   "devDependencies": {

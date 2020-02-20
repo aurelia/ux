@@ -1,18 +1,28 @@
 import { customElement, bindable } from 'aurelia-templating';
-import { DOM } from 'aurelia-pal';
-import { bindingMode } from 'aurelia-binding';
+import { bindingMode, observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 import { UxChipInputTheme } from './ux-chip-input-theme';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 
 @inject(Element, StyleEngine)
 @customElement('ux-chip-input')
-export class UxChipInput implements UxComponent {
+export class UxChipInput implements UxInputComponent {
   @bindable public disabled: boolean | string = false;
   @bindable public readonly: boolean | string = false;
   @bindable public theme: UxChipInputTheme;
-  @bindable public label: any;
+  @bindable public label: string;
+  @bindable public placeholder: string;
   @bindable public separator: string = ', ';
+  @bindable public variant: 'filled' | 'outline' = 'filled';
+  @bindable public chipVariant: 'filled' | 'outline' = 'filled';
+  @bindable public dense: any = false;
+
+  @observable
+  public focused: boolean = false;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any = undefined;
@@ -29,14 +39,7 @@ export class UxChipInput implements UxComponent {
   public bind() {
     this.themeChanged(this.theme);
 
-    if (this.element.hasAttribute('placeholder')) {
-      const attributeValue = this.element.getAttribute('placeholder');
-
-      if (attributeValue) {
-        this.textbox.setAttribute('placeholder', attributeValue);
-        this.element.removeAttribute('placeholder');
-      }
-    }
+    this.dense = normalizeBooleanAttribute('dense', this.dense);
 
     if (this.value) {
       this.chips = this.value.split(this.separator);
@@ -53,35 +56,25 @@ export class UxChipInput implements UxComponent {
       this.chiprepeat.removeAttribute('deletable');
       this.tagrepeat.removeAttribute('deletable');
     }
+    this.chipsChanged();
   }
 
   public attached() {
-    const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-
-    this.textbox.addEventListener('focus', () => {
-      this.element.classList.add('ux-chip-input--focused');
-    });
-
-    this.textbox.addEventListener('blur', () => {
-      this.addChip();
-      this.element.classList.remove('ux-chip-input--focused');
-      this.element.dispatchEvent(blurEvent);
-    });
+    this.variantChanged(this.variant);
   }
 
-  public detached() {
-    const blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-
-    this.textbox.removeEventListener('focus', () => {
-      this.element.classList.add('ux-chip-input--focused');
-    });
-
-    this.textbox.removeEventListener('blur', () => {
-      this.addChip();
-      this.element.classList.remove('ux-chip-input--focused');
-      this.element.dispatchEvent(blurEvent);
-    });
+  public focus() {
+    this.focused = true;
   }
+
+  public focusedChanged() {
+    this.element.classList.toggle('ux-input-component--focused', this.focused);
+    if (!this.focused) {
+      // blur
+      this.addChip();
+    }
+  }
+
 
   public handleKeyup(event: KeyboardEvent) {
     const key = event.which || event.keyCode;
@@ -102,6 +95,9 @@ export class UxChipInput implements UxComponent {
   }
 
   public addChip() {
+    if (!this.textbox) {
+      return;
+    }
     if (this.textbox.value.length) {
       if (!this.chips) {
         this.chips = new Array<string>();
@@ -140,6 +136,8 @@ export class UxChipInput implements UxComponent {
     if (chipValue !== this.value) {
       this.value = chipValue;
     }
+
+    this.element.classList.toggle('ux-input-component--has-value', this.chips.length > 0);
   }
 
   public valueChanged(newValue: string) {
@@ -178,5 +176,20 @@ export class UxChipInput implements UxComponent {
     }
 
     this.styleEngine.applyTheme(newValue, this.element);
+  }
+
+  public variantChanged(newValue: string) {
+    this.element.style.backgroundColor = newValue === 'outline' ?
+      this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) : 
+      '';
+  }
+
+  @computedFrom('label')
+  get placeholderMode(): boolean {
+    return typeof this.label !== 'string' || this.label.length === 0;
+  }
+
+  public stopEvent(event: Event) {
+    event.stopPropagation();
   }
 }

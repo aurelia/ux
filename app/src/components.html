@@ -1,0 +1,338 @@
+<template>
+  <require from="./theming.css"></require>
+  <section>
+    <h1>Components</h1>
+    <p>Demo of each component and diverse styles and types</p>
+  </section>
+
+  <section>
+    <h2>Buttons</h2>
+  
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="4">
+        <h4>Primary (default)</h4>
+        <p><ux-button type="raised">Raised</ux-button></p>
+        <p><ux-button type="flat">Flat</ux-button></p>
+        <p><ux-button type="text">Text</ux-button></p>
+        <p><ux-button type="outline">Outline</ux-button></p>
+        <p><ux-button type="fab">Fab</ux-button></p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="4">
+        <h4>Accent (.ux-button--accent)</h4>
+        <p><ux-button class="ux-button--accent" type="raised">Raised</ux-button></p>
+        <p><ux-button class="ux-button--accent" type="flat">Flat</ux-button></p>
+        <p><ux-button class="ux-button--accent" type="text">Text</ux-button></p>
+        <p><ux-button class="ux-button--accent" type="outline">Outline</ux-button></p>
+        <p><ux-button class="ux-button--accent" type="fab">Fab</ux-button></p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="4">
+        <h4>Disabled (disabled)</h4>
+        <p><ux-button disabled type="raised">Raised</ux-button></p>
+        <p><ux-button disabled type="flat">Flat</ux-button></p>
+        <p><ux-button disabled type="text">Text</ux-button></p>
+        <p><ux-button disabled type="outline">Outline</ux-button></p>
+        <p><ux-button disabled type="fab">Fab</ux-button></p>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+  
+  <section>
+    <h2>Input & Input Info</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Default</h4>
+        <p><ux-input placeholder="With placeholder"></ux-input></p>
+        <p>
+          <ux-input label="With floating label" maxlength.bind="50"></ux-input>
+          <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
+        </p>
+        <p>
+          <ux-input class="ux-input-component--has-error" label="With error">
+              <ux-icon icon="error" slot="trailing-icon"></ux-icon>
+          </ux-input>
+          <ux-input-info>Error message</ux-input-info>
+        </p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>Icons</h4>
+        <p><ux-input label="With leading icon"><ux-icon icon="person" slot="leading-icon"></ux-icon></ux-input></p>
+        <p><ux-input label="With trailing icon"><ux-icon icon="remove_red_eye" slot="trailing-icon"></ux-icon></ux-input></p>
+        <h4>Outline</h4>
+        <p>
+          <ux-input variant="outline" label="With leading icon"><ux-icon icon="person" slot="leading-icon"></ux-icon></ux-input>
+          <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
+        </p>
+        <p>
+          <ux-input variant="outline" class="ux-input-component--has-error" label="With error"></ux-input>
+          <ux-input-info>Error message</ux-input-info>
+        </p>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>Textarea & Input Info</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Filled</h4>
+        <p><ux-textarea placeholder="With placeholder"></ux-textarea></p>
+        <p>
+          <ux-textarea label="With floating label" auto-resize></ux-textarea>
+        </p>
+        <p>
+          <ux-textarea class="ux-input-component--has-error" label="With error"></ux-textarea>
+        </p>
+        <p>
+          <ux-textarea auto-resize label="Auto Resize"></ux-textarea>
+        </p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>Outline</h4>
+        <p>
+          <ux-textarea variant="outline" label="Default"></ux-textarea>
+        </p>
+        <p>
+          <ux-textarea variant="outline" class="ux-input-component--has-error" label="With error"></ux-textarea>
+        </p>
+        <p>
+          <ux-textarea variant="outline" auto-resize label="Auto Resize"></ux-textarea>
+        </p>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>Select & Input Info</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Filled</h4>
+        <p><ux-select placeholder="Choose an option">
+          <ux-option>Option 1</ux-option>
+          <ux-option>Option 2</ux-option>
+          <ux-option>Option 3</ux-option>
+          <ux-option>Option 4</ux-option>
+          <ux-option>Option 5</ux-option>
+        </ux-select></p>
+        <p>
+          <ux-select label="With floating label">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
+        <p>
+          <ux-select class="ux-input-component--has-error" label="With error">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>Outline</h4>
+        <p><ux-select variant="outline" placeholder="Choose an option">
+          <ux-option>Option 1</ux-option>
+          <ux-option>Option 2</ux-option>
+          <ux-option>Option 3</ux-option>
+          <ux-option>Option 4</ux-option>
+          <ux-option>Option 5</ux-option>
+        </ux-select></p>
+        <p>
+          <ux-select label="With floating label" variant="outline">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
+        <p>
+          <ux-select class="ux-input-component--has-error" label="With error" variant="outline">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>Datepicker & Input Info</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Default</h4>
+        <p><ux-datepicker placeholder="With placeholder"></ux-datepicker></p>
+        <p>
+          <ux-datepicker label="With floating label"></ux-datepicker>
+          <ux-input-info>And helper text</ux-input-info>
+        </p>
+        <p>
+          <ux-datepicker label="With icon">
+            <ux-icon icon="person" slot="leading-icon"></ux-icon>
+          </ux-datepicker>
+          <ux-input-info>And helper text</ux-input-info>
+        </p>
+        <p>
+          <ux-datepicker class="ux-input-component--has-error" label="With error"></ux-datepicker>
+          <ux-input-info>Error message</ux-input-info>
+        </p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>Outline</h4>
+        <p>
+          <ux-datepicker variant="outline" label="Outline datepicker"></ux-datepicker>
+          <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
+        </p>
+        <p>
+          <ux-datepicker variant="outline" class="ux-input-component--has-error" label="With error"></ux-datepicker>
+          <ux-input-info>Error message</ux-input-info>
+        </p>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>Slider</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Slider (default)</h4>
+        <p><ux-slider min="0" max="100"></ux-slider></p>
+        <h4>With icons</h4>
+        <p><ux-slider min="0" max="100">
+          <ux-icon icon="volume_down" slot="leading-icon"></ux-icon>
+          <ux-icon icon="volume_up" slot="trailing-icon"></ux-icon>
+        </ux-slider></p>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>With value</h4>
+        <p>
+          <ux-slider min="0" max="255" step="1" value.bind="sliderRValue" theme.bind="{background: 'red'}">
+            <span slot="leading-icon">R</span>
+            <span slot="trailing-icon">${sliderRValue}</span>
+          </ux-slider>
+          <ux-slider min="0" max="255" step="1" value.bind="sliderGValue" theme.bind="{background: 'green'}">
+            <span slot="leading-icon">G</span>
+            <span slot="trailing-icon">${sliderGValue}</span>
+          </ux-slider>
+          <ux-slider min="0" max="255" step="1" value.bind="sliderBValue" theme.bind="{background: 'blue'}">
+            <span slot="leading-icon">B</span>
+            <span slot="trailing-icon">${sliderBValue}</span>
+          </ux-slider>
+        </p>
+        <p style="text-align: center;" css="color: rgb(${sliderRValue}, ${sliderGValue}, ${sliderBValue})">Look at my beautiful color !</p>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>Selection Controls: checkbox and radio</h2>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <h4>Checkbox</h4>
+        <ux-field>
+          <label>Interests</label>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="interests" model.bind="'sport'"></ux-checkbox>
+            <label>Sport</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="interests" model.bind="'technology'"></ux-checkbox>
+            <label>Technology</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="interests" model.bind="'business'"></ux-checkbox>
+            <label>Business</label>
+          </div>
+        </ux-field>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <h4>Radio</h4>
+        <ux-field>
+          <label>Age Group</label>
+          <div class="ux-form__row">
+            <ux-radio name="ageGroup" checked.bind="ageGroup" model.bind="'0-20'"></ux-radio>
+            <label>0-20</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-radio name="ageGroup" checked.bind="ageGroup" model.bind="'20-40'"></ux-radio>
+            <label>20-40</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-radio name="ageGroup" checked.bind="ageGroup" model.bind="'40+'"></ux-radio>
+            <label>40+</label>
+          </div>
+        </ux-field>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>Selection Controls: chips and lists</h2>
+    <h4>Chips</h4>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <ux-field>
+          <label>Interests</label>
+          <ux-chip-list ux-choice-container.bind="interests">
+            <ux-chip ux-choice="sport">Sport</ux-chip>
+            <ux-chip ux-choice="technology">Technology</ux-chip>
+            <ux-chip ux-choice="business">Business</ux-chip>
+          </ux-chip-list>
+        </ux-field>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <ux-field>
+          <label>Interests</label>
+          <ux-chip-list ux-choice-container.bind="ageGroup">
+            <ux-chip ux-choice="0-20"><ux-icon icon="looks_one" slot="thumbnail"></ux-icon>0 - 20</ux-chip>
+            <ux-chip ux-choice="20-40"><ux-icon icon="looks_two" slot="thumbnail"></ux-icon>20 - 40</ux-chip>
+            <ux-chip ux-choice="40+"><ux-icon icon="looks_3" slot="thumbnail"></ux-icon>40+</ux-chip>
+          </ux-chip-list>
+        </ux-field>
+      </ux-grid-cell>
+    </ux-grid>
+
+    <h4>List</h4>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-grid-cell sm="6">
+        <ux-field>
+          <label>Interests</label>
+          <div class="ux-form__row">
+            <ux-list class="ux-list--border" style="width: 100%;" ux-choice-container.bind="interests2">
+              <ux-list-item ux-choice="sport">
+                <div class="ux-list-item__content">Sport</div>
+              </ux-list-item>
+              <ux-list-item ux-choice="technology">
+                <div class="ux-list-item__content">Technology</div>
+              </ux-list-item>
+              <ux-list-item ux-choice="business">
+                <div class="ux-list-item__content">Business</div>
+              </ux-list-item>
+            </ux-list>
+          </div>
+        </ux-field>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <ux-field>
+          <label>Interests</label>
+          <div class="ux-form__row">
+            <ux-list class="ux-list--border" style="width: 100%;" ux-choice-container.bind="ageGroup2">
+              <ux-list-item ux-choice="0-20"><ux-icon icon="looks_one" slot="thumbnail"></ux-icon>0 - 20</ux-list-item>
+              <ux-list-item ux-choice="20-40"><ux-icon icon="looks_two" slot="thumbnail"></ux-icon>20 - 40</ux-list-item>
+              <ux-list-item ux-choice="40+"><ux-icon icon="looks_3" slot="thumbnail"></ux-icon>40+</ux-list-item>
+            </ux-list>
+          </div>
+        </ux-field>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section></section>
+</template>

@@ -8,8 +8,12 @@ export class MaterialDesign implements Design {
   public appBackground = swatches.grey.p50;
   public appForeground = swatches.grey.p900;
 
-  public controlBackground = swatches.white;
+  public surfaceBackground = swatches.grey.p100;
+  public surfaceForeground = swatches.grey.p900;
+
+  public controlBackground = swatches.grey.p300;
   public controlForeground = swatches.grey.p900;
+  public controlLabelColor = swatches.grey.p600;
 
   public primary = swatches.indigo.p500;
   public primaryForeground = swatches.white;
@@ -28,6 +32,12 @@ export class MaterialDesign implements Design {
 
   public accentDark = swatches.pink.a400;
   public accentDarkForeground = swatches.white;
+
+  public disabledBackground = swatches.grey.p500;
+  public disabledForeground = swatches.blueGrey.p100;
+
+  public error = swatches.red.p500;
+  public onError = swatches.white;
 
   public elevationNone = shadows.depth_0;
   public elevation2dp = shadows.depth_2dp;

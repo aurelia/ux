@@ -191,7 +191,9 @@ export class UxCheckbox implements UxComponent {
       winEvents.subscribe('mouseup', upAction, true);
     }
 
-    e.preventDefault();
+    // TODO: 6.2.2020 - Follow up to make sure we don't need to return false / preventDefault ?
+    // https://github.com/aurelia/ux/pull/232#discussion_r375815578
+    return true;
   }
 }
 

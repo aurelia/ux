@@ -8,6 +8,10 @@ export interface UxSliderElement extends HTMLElement {
   value: number;
 }
 
+export interface MouseOrTouchEvent extends MouseEvent {
+  touches?: Array<{clientX: number}>;
+}
+
 @inject(Element, StyleEngine)
 @customElement('ux-slider')
 export class UxSlider implements UxComponent {
@@ -98,8 +102,9 @@ export class UxSlider implements UxComponent {
   }
 
   public updateValue(currentMouseX: number) {
-    const normalizedMouseX = currentMouseX - this.element.offsetLeft;
-    const percentValue = normalizedMouseX / this.element.clientWidth;
+    const rect = this.element.getBoundingClientRect();
+    const normalizedMouseX = currentMouseX - rect.x;
+    const percentValue = normalizedMouseX / rect.width;
     const rawValue = ((this.max - this.min) * percentValue) + this.min;
     const numSteps = Math.round((rawValue - this.min) / this.step);
     const steppedValue = this.min + (this.step * numSteps);
@@ -107,27 +112,46 @@ export class UxSlider implements UxComponent {
     this.value = this.boundValue(steppedValue);
   }
 
-  public onTrackMouseDown() {
+  public onTrackMouseDown(e: MouseOrTouchEvent) {
     if (this.disabled) {
       return;
     }
 
     this.isActive = true;
-
+    const isMouseEvent = e instanceof MouseEvent;
+    const isTouchEvent = Array.isArray(e.touches) && e.touches.length > 0;
     const winEvents = new ElementEvents(window as any);
-    const upAction = (e: MouseEvent) => {
+    const upAction = (e: MouseOrTouchEvent) => {
+      if (!this.isActive) {
+        winEvents.disposeAll();
+        return;
+      }
+      if (isMouseEvent) {
+        this.updateValue((e as MouseEvent).clientX);
+      }
+      if (isTouchEvent) {
+        const touches = e.touches as Array<{clientX: number}>;
+        if (touches.length === 1) {
+          this.updateValue(touches[0].clientX);
+        }
+      }
+      this.isActive = false;
+      winEvents.disposeAll();
+    };
+    const moveAction = (e: MouseOrTouchEvent) => {
       if (!this.isActive) {
         return;
       }
-
-      this.updateValue(e.clientX);
-      this.isActive = false;
-
-      winEvents.disposeAll();
+      this.updateValue(isMouseEvent ? e.clientX : (e.touches as Array<{clientX: number}>)[0].clientX);
     };
     winEvents.subscribe('blur', upAction, true);
-    winEvents.subscribe('mouseup', upAction, true);
-    winEvents.subscribe('mousemove', this.onMouseMove.bind(this), true);
+    if (isMouseEvent) {
+      winEvents.subscribe('mouseup', upAction, true);
+      winEvents.subscribe('mousemove', moveAction, true);
+    } else if (isTouchEvent) {
+      winEvents.subscribe('touchend', upAction, true);
+      winEvents.subscribe('touchmove', moveAction, true);
+    }
   }
 
   public onKeyDown(e: KeyboardEvent) {
@@ -148,10 +172,6 @@ export class UxSlider implements UxComponent {
 
   public setValue(value: number) {
     this.value = value;
-  }
-
-  private onMouseMove(e: MouseEvent) {
-    this.updateValue(e.clientX);
   }
 
   private boundValue(potentialValue: number) {

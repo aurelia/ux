@@ -15,12 +15,17 @@ import {
 } from 'aurelia-framework';
 
 import { getLogger } from 'aurelia-logging';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 
 import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
 import { UxOptionElement } from './ux-option';
 import { getAuViewModel, bool } from './util';
+
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 
 declare module './ux-option' {
   interface UxOption {
@@ -57,7 +62,7 @@ export interface UxOptionContainer extends HTMLElement {
 @inject(Element, StyleEngine, ObserverLocator, TaskQueue)
 @processContent(ensureUxOptionOrUxOptGroup)
 @customElement('ux-select')
-export class UxSelect implements UxComponent {
+export class UxSelect implements UxInputComponent {
 
   private selectedOption: UxOptionElement | null = null;
 
@@ -79,8 +84,13 @@ export class UxSelect implements UxComponent {
   @bindable({ defaultValue: false })
   public multiple: boolean | string;
 
+  @bindable public label: string;
+  @bindable public placeholder: string;
+
   @bindable()
-  public placeholder: string;
+  public variant: 'filled' | 'outline' = 'filled';
+  
+  @bindable public dense: any = false;
 
   public value: any;
   public displayValue: string;
@@ -104,6 +114,9 @@ export class UxSelect implements UxComponent {
     if (bool(this.autofocus)) {
       // setTimeout(focusEl, 0, this.button);
     }
+
+    this.dense = normalizeBooleanAttribute('dense', this.dense);
+
     if (this.isMultiple) {
       if (!this.value) {
         this.value = [];
@@ -120,6 +133,7 @@ export class UxSelect implements UxComponent {
 
   public attached() {
     this.resolveDisplayValue();
+    this.variantChanged(this.variant);
   }
 
   public unbind() {
@@ -141,11 +155,7 @@ export class UxSelect implements UxComponent {
 
     this.displayValue = values.join(', ');
 
-    if (this.displayValue.length > 0) {
-      this.element.classList.add('ux-select--has-value');
-    } else {
-      this.element.classList.remove('ux-select--has-value');
-    }
+    this.element.classList.toggle('ux-input-component--has-value', this.displayValue.length > 0);
   }
 
   private ignoreSelectEvent: boolean = true;
@@ -476,6 +486,17 @@ export class UxSelect implements UxComponent {
         : null // Changing from multiple to single = reset value to null
       );
     }
+  }
+
+  public variantChanged(newValue: string) {
+    this.element.style.backgroundColor = newValue === 'outline' ?
+      this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) : 
+      '';
+  }
+
+  @computedFrom('label')
+  get placeholderMode(): boolean {
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 
   public get options(): UxOptionElement[] {

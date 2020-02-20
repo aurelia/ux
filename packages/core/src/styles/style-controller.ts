@@ -29,7 +29,11 @@ export class StyleController {
     } else if (element != null) {
       for (const key in theme) {
         if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
-          element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), (theme as any)[key]);
+          if ((theme as any)[key]) {
+            element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), (theme as any)[key]);
+          } else {
+            element.style.removeProperty(this.generateCssVariableName(theme.themeKey, key));
+          }
         }
       }
     } else {
@@ -68,6 +72,9 @@ export class StyleController {
   }
 
   public generateCssVariable(themeKey: string, propertyKey: string, value: string | number) {
+    if (value === undefined || value === 'undefined') {
+      return '';
+    }
     return `--aurelia-ux--${themeKey}-${kebabCase(propertyKey)}: ${value};`;
   }
 
@@ -94,7 +101,9 @@ export class StyleController {
     let designInnerHtml = '';
 
     for (const key of this.getThemeKeys(theme)) {
-      designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, (theme as any)[key])}\r\n`;
+      if ((theme as any)[key]) {
+        designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, (theme as any)[key])}\r\n`;
+      }
     }
 
     return designInnerHtml;

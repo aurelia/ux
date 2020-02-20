@@ -1,19 +1,31 @@
 <template
-  class="ux-select ${multiple ? 'ux-select--multiple' : ''}"
+  class="ux-input-component ux-input-component--${variant} ${dense ? 'ux-input-component--dense' : ''} ${placeholderMode ? 'ux-input-component--placeholder' : ''} ux-select ${multiple ? 'ux-select--multiple' : ''} ${expanded ? 'ux-input-component--focused':''}"
   tabindex="0"
   disabled.bind="disabled & booleanAttr"
+  readonly.bind="readonly & booleanAttr"
+  aria-disabled.bind="disabled & booleanAttr"
+  aria-readonly.bind="readonly & booleanAttr"
   aria-multiselectable.bind="multiple"
-  aria-disabled.bind="isDisabled"
   keydown.trigger="onKeyDown($event)"
   blur.trigger="onBlur() & debounce:1"
   click.trigger="onTriggerClick()">
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-select.css"></require>
 
-  <div class="ux-select__placeholder">${placeholder}</div>
-  <div class="ux-select__value">${displayValue}</div>
-  <div class="ux-select__arrow"></div>
-  <div class="ux-select__border-bottom"></div>
+  <slot name="leading-icon"></slot>
+
+  <span class="ux-input-component__content">
+    <div class="ux-input-component__label-background" if.bind="variant === 'outline' && (label || placeholder)" css="width: ${labelEl.offsetWidth + 6}px;"></div>
+    <div class="ux-input-component__label" ref="labelEl">${label || placeholder}</div>
+  
+    <div class="ux-input-component__inner-input ux-select__value">${displayValue}</div>
+  </span>
+
+  <span class="ux-input-component__trailing">
+    <div class="ux-select__arrow"></div>
+  </span>
+
+  <div class="ux-input-component__border" show.bind="!(variant === 'filled' && disabled)"></div>
   
   <div ref="optionWrapperEl"
     class="ux-select__list-wrapper"

@@ -10,6 +10,7 @@
         "../node_modules/aurelia-framework"
       ]
     },
+    "resolveJsonModule": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false
   },

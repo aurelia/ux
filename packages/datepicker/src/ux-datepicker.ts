@@ -1,11 +1,16 @@
 import { customElement, bindable, ViewResources } from 'aurelia-templating';
-import { bindingMode } from 'aurelia-binding';
+import { bindingMode, observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
+import { DOM } from 'aurelia-pal';
 import { moment } from './resources/moment-rexports';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 // import UX_DATEPICKER_VIEW from './ux-datepicker.html';
 // import { PLATFORM } from 'aurelia-pal';
 
@@ -15,7 +20,7 @@ import { moment } from './resources/moment-rexports';
 //   UX_DATEPICKER_VIEW,
 //   [PLATFORM.moduleName('@aurelia-ux/datepicker/ux-datepicker.css')]
 // )
-export class UxDatepicker implements UxComponent {
+export class UxDatepicker implements UxInputComponent {
   @bindable public theme: UxDatepickerTheme;
 
   @bindable public display = 'month';
@@ -25,8 +30,14 @@ export class UxDatepicker implements UxComponent {
   @bindable public maxTime: any;
   @bindable public minDate: any;
   @bindable public maxDate: any;
-  @bindable public placeholder: any;
   @bindable public config: DatepickerSettings;
+  @bindable public autofocus = null;
+  @bindable public disabled: any = false;
+  @bindable public readonly: any = false;
+  @bindable public label: string;
+  @bindable public placeholder: string;
+  @bindable public variant: 'filled' | 'outline' = 'filled';
+  @bindable public dense: any = false;
 
   @bindable public formatters = {
     date: 'L',
@@ -41,6 +52,9 @@ export class UxDatepicker implements UxComponent {
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any;
 
+  @observable
+  public focused: boolean = false;
+
   public textbox: HTMLInputElement;
   private textboxValue: string;
   private showDialog = false;
@@ -48,7 +62,12 @@ export class UxDatepicker implements UxComponent {
   constructor(public element: HTMLElement, public resources: ViewResources, public styleEngine: StyleEngine) { }
 
   public bind() {
-    this.processAttribute('placeholder');
+
+    if (this.autofocus || this.autofocus === '') {
+      this.focused = true;
+    }
+
+    this.dense = normalizeBooleanAttribute('dense', this.dense);
 
     if (this.initialDate != null) {
       const dateParse = moment(this.initialDate);
@@ -88,15 +107,35 @@ export class UxDatepicker implements UxComponent {
     this.themeChanged(this.theme);
   }
 
+  public attached() {
+    this.variantChanged(this.variant);
+  }
+
   public toggleDialog(display: string) {
     if (this.showDialog) {
       this.showDialog = false;
       return;
     }
 
+    if (this.disabled || this.readonly) {
+      return;
+    }
+
     this.display = display;
 
     this.showDialog = true;
+  }
+
+  public blur() {
+    if (this.showDialog) {
+      // if the dialog is opened, we consider that the most accurate value
+      // comes from the dialog and bring back its value
+      this.valueChanged(this.value);
+      return;
+    }
+    // if the dialog is not opened, the textbox has the most accurate value
+    // and therefore we validate it and assign it to component
+    this.changeTextboxValue();
   }
 
   public changeTextboxValue() {
@@ -134,8 +173,6 @@ export class UxDatepicker implements UxComponent {
     if (this.type.toLowerCase() === 'time') {
       this.textboxValue = moment(newValue).format(this.formatters.time);
     }
-
-    this.showDialog = false;
   }
 
   public minDateChanged(newValue: any) {
@@ -178,12 +215,22 @@ export class UxDatepicker implements UxComponent {
     this.styleEngine.applyTheme(newValue, this.element);
   }
 
-  private processAttribute(attributeName: string) {
-    const attributeValue = this.element.getAttribute('placeholder');
+  public focusedChanged(focused: boolean) {
+    this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
+  }
 
-    if (attributeValue) {
-      this.element.removeAttribute(attributeName);
-      this.textbox.setAttribute(attributeName, attributeValue)
-    }
+  public focusInput() {
+    this.textbox.focus();
+  }
+
+  public variantChanged(newValue: string) {
+    this.element.style.backgroundColor = newValue === 'outline' ?
+      this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) : 
+      '';
+  }
+
+  @computedFrom('label')
+  get placeholderMode(): boolean {
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 }

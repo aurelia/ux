@@ -1,4 +1,4 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, observable } from 'aurelia-framework';
 import { DOM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
@@ -9,13 +9,19 @@ import { UxChipTheme } from './ux-chip-theme';
 @customElement('ux-chip')
 export class UxChip implements UxComponent {
   @bindable public theme: UxChipTheme;
-  @bindable public type: any;
+  @bindable public variant: 'filled' | 'outline' = 'filled';
+  @bindable public selectedIcon: string = 'check';
+
+  @observable
+  public focused: boolean = false;
 
   @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public value: any = undefined;
+  public selected: any = undefined;
+
+  private isFocused: () => void;
 
   constructor(
-    private element: HTMLInputElement,
+    public element: HTMLInputElement,
     private styleEngine: StyleEngine) { }
 
   public bind() {
@@ -27,6 +33,19 @@ export class UxChip implements UxComponent {
     }
   }
 
+  public attached() {
+    this.isFocused = () => {
+      this.focused = document.activeElement === this.element;
+    };
+    window.addEventListener('focus', this.isFocused, true);
+    window.addEventListener('blur', this.isFocused, true);
+  }
+
+  public detached() {
+    window.removeEventListener('focus', this.isFocused, true);
+    window.removeEventListener('blur', this.isFocused, true);
+  }
+
   public themeChanged(newValue: UxChipTheme) {
     if (newValue != null && newValue.themeKey == null) {
       newValue.themeKey = 'chip';
@@ -35,7 +54,10 @@ export class UxChip implements UxComponent {
     this.styleEngine.applyTheme(newValue, this.element);
   }
 
-  public closeChip() {
+  public closeChip(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
     const closeEvent = DOM.createCustomEvent('close', { bubbles: false });
 
     this.element.dispatchEvent(closeEvent);

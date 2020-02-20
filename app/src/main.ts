@@ -25,6 +25,7 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/slider'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/switch'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/textarea'))
+    .plugin(PLATFORM.moduleName('aurelia-validation'));
 
   await aurelia.start();
   await aurelia.setRoot(PLATFORM.moduleName('app'), document.body);

@@ -3,30 +3,36 @@ import { UxTheme } from '@aurelia-ux/core';
 export class UxSelectTheme implements UxTheme {
   public themeKey = 'select';
 
-  public foreground: string;
-  public background: string;
+  public foreground?: string;
+  public foregroundLabel?: string;
+  public background?: string;
+  public backgroundHover?: string;
+  public activeColor?: string;
 
-  public triggerBorder: string;
-  public triggerBorderDisabled: string;
-  public triggerBorderFocused: string;
+  public fontSize?: string;
+  public letterSpacing?: string;
+  public labelFontSize?: string;
+  public labelLetterSpacing?: string;
+  public lineHeight?: string;
+  public labelLineHeight?: string;
 
-  public listMaxWidth: number;
-  public listMaxWidthPx: string;
-  public listMaxHeight: number;
-  public listMaxHeightPx: string;
-  public listBackground: string;
-  public listTransition: number;
-  public listTransitionS: string;
+  public borderColor?: string;
+  public borderRadius?: string;
+  public borderWidth?: string;
+  public borderActiveWidth?: string;
 
-  public optionHover: string;
-  public optionFocused: string;
-  public optionSelected: string;
+  public disabledForeground?: string;
+  public disabledBackground?: string;
 
-  public borderBottom: string;
-  public borderBottomHover: string;
-  public borderBottomSelected: string;
+  public error?: string;
 
-  public listboxShadow: string;
+  public listBackground?: string;
+  public listForeground?: string;
+  public listElevation?: string;
+  public listTransition?: number;
 
-  public error: string;
+  public optionHover?: string;
+  public optionFocused?: string;
+  public optionSelected?: string;
+
 }

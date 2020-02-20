@@ -1,0 +1,38 @@
+.theming h3 {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  cursor: pointer;
+}
+
+.theming .color-feedback {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+}
+
+.theming ux-field {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.ux-card-component__media {
+  min-height: 100px;
+  padding: 16px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.ux-card-component__media > * {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.component-selector {
+  margin: 16px 0;
+}
+.component-selector ux-chip {
+  cursor: pointer;
+}

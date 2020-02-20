@@ -1,52 +1,32 @@
 .ux-textarea {
-  display: flex;
-  position: relative;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  min-height: 56px;
-  padding: 0 16px;
-  padding-bottom: 5px;
-  color: inherit;
-  color: var(--aurelia-ux--textarea-foreground, inherit);
-  background-color: #00000011;
-  background-color: var(--aurelia-ux--textarea-background, #00000011);
-  border-radius: 4px;
-  border-radius: var(--aurelia-ux--textarea-border-radius, 4px);
+  --foreground: var(--aurelia-ux--textarea-foreground, var(--aurelia-ux--design-control-foreground, #212121));
+  --foreground-label: var(--aurelia-ux--textarea-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
+  --background: var(--aurelia-ux--textarea-background, var(--aurelia-ux--design-control-background, #E0E0E0));
+  --background-hover: var(--aurelia-ux--textarea-background-hover, #00000027);
+  --active-color: var(--aurelia-ux--textarea-active-color, var(--aurelia-ux--design-primary, #3F51B5));
+
+  --font-size: var(--aurelia-ux--textarea-font-size, 16px);
+  --letter-spacing: var(--aurelia-ux--textarea-letter-spacing, inherit);
+  --label-font-size: var(--aurelia-ux--textarea-label-font-size, 12px);
+  --label-letter-spacing: var(--aurelia-ux--textarea-label-letter-spacing, 0.5px);
+  --line-height: var(--aurelia-ux--textarea-line-height, 1.6);
+  --label-line-height: var(--aurelia-ux--textarea-label-line-height, 1.6);
+
+  --border-color: var(--aurelia-ux--textarea-border-color, var(--aurelia-ux--design-control-label-color, #757575));
+  --border-radius: var(--aurelia-ux--textarea-border-radius, 4px);
+  --border-width: var(--aurelia-ux--textarea-border-width, 1px);
+  --border-active-width: var(--aurelia-ux--textarea-border-active-width, 2px);
+
+  --disabled-foreground: var(--aurelia-ux--textarea-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
+  --disabled-background: var(--aurelia-ux--textarea-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+
+  --error: var(--aurelia-ux--textarea-error, var(--aurelia-ux--design-error, #F44336));
 }
 
-.ux-textarea__inner-textarea {
-  width: 100%;
-  padding: 6px 0 4px 0;
-  margin-bottom: 4px;
-  border: 0;
-  outline: none;
+.ux-textarea .ux-input-component__inner-input {
   resize: none;
-  padding-left: 0;
-  padding-right: 0;
-  transition: border-color 250ms ease;
-  color: inherit;
-  background-color: transparent;
 }
 
-.ux-textarea__bottom-border {
-  height: 2px;
-  background-color: #4043ff;
-  background-color: var(--aurelia-ux--chip-input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff));
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: scalex(0);
-  transition: ease 150ms;
-}
-
-.ux-textarea--show-grip .ux-textarea__inner-textarea {
+.ux-textarea--show-grip .ux-input-component__inner-input {
   resize: both;
-}
-
-.ux-textarea__inner-textarea:focus+.ux-textarea__bottom-border {
-  transform: scalex(1);
 }

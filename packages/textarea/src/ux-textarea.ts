@@ -1,9 +1,13 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 import { UxTextAreaTheme } from './ux-textarea-theme';
-import { observable } from 'aurelia-framework';
+import { observable, computedFrom } from 'aurelia-framework';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 
 export interface UxTextAreaElement extends HTMLElement {
   value: string;
@@ -11,7 +15,7 @@ export interface UxTextAreaElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-textarea')
-export class UxTextArea implements UxComponent {
+export class UxTextArea implements UxInputComponent {
   private ignoreRawChanges: boolean;
   private isAttached: boolean;
 
@@ -25,7 +29,11 @@ export class UxTextArea implements UxComponent {
   @bindable public minlength: number;
   @bindable public readonly: boolean | string = false;
   @bindable public rows: number;
+  @bindable public label: string;
+  @bindable public placeholder: string;
   @bindable public theme: UxTextAreaTheme;
+  @bindable public variant: 'filled' | 'outline' = 'filled';
+  @bindable public dense: any = false;
 
   @observable({ initializer: () => '' })
   public rawValue: string;
@@ -47,14 +55,7 @@ export class UxTextArea implements UxComponent {
       this.focus = true;
     }
 
-    if (element.hasAttribute('placeholder')) {
-      const attributeValue = element.getAttribute('placeholder');
-
-      if (attributeValue) {
-        textbox.setAttribute('placeholder', attributeValue);
-        element.removeAttribute('placeholder');
-      }
-    }
+    this.dense = normalizeBooleanAttribute('dense', this.dense);
 
     if (this.cols) {
       textbox.setAttribute('cols', this.cols.toString());
@@ -74,6 +75,7 @@ export class UxTextArea implements UxComponent {
       textbox.setAttribute('maxlength', this.maxlength.toString());
     }
 
+    this.themeChanged(this.theme);
     this.autocompleteChanged(this.autocomplete);
   }
 
@@ -86,6 +88,8 @@ export class UxTextArea implements UxComponent {
 
     textbox.addEventListener('change', stopEvent);
     textbox.addEventListener('input', stopEvent);
+
+    this.variantChanged(this.variant);
   }
 
   public detached() {
@@ -122,11 +126,13 @@ export class UxTextArea implements UxComponent {
     }
   }
 
-  public rawValueChanged(rawValue: string) {
+  public rawValueChanged(newValue: string) {
+    this.element.classList.toggle('ux-input-component--has-value', typeof newValue === 'string' && newValue.length > 0);
+
     if (this.ignoreRawChanges) {
       return;
     }
-    this.setValue(rawValue);
+    this.setValue(newValue);
   }
 
   public themeChanged(newValue: any) {
@@ -146,7 +152,19 @@ export class UxTextArea implements UxComponent {
 
   public focusChanged(focus: boolean | string) {
     focus = focus || focus === '' ? true : false;
+    this.element.classList.toggle('ux-input-component--focused', focus);
     this.element.dispatchEvent(DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
+  }
+
+  public variantChanged(newValue: string) {
+    this.element.style.backgroundColor = newValue === 'outline' ?
+      this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) : 
+      '';
+  }
+
+  @computedFrom('label')
+  get placeholderMode(): boolean {
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 }
 
