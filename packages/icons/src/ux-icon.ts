@@ -12,7 +12,7 @@ import { UxIconMap } from './ux-icon-map';
 export class UxIcon implements UxComponent {
   @bindable public size: string;
   @bindable public theme: UxIconTheme;
-
+  
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public icon: any = undefined;
 
@@ -24,15 +24,20 @@ export class UxIcon implements UxComponent {
   )  { }
 
   public bind() {
-    if (this.size) {
-      this.theme.size = this.size;
-    }
-
     if (this.icon) {
       this.changeIcon(this.icon);
     }
-
+    this.sizeChanged(this.size);
     this.themeChanged(this.theme);
+  }
+
+  public sizeChanged(newValue: string) {
+    if (this.size) {
+      if (this.theme === undefined) {
+        this.theme = new UxIconTheme();
+      }
+      this.theme.size = newValue;
+    }
   }
 
   public themeChanged(newValue: any) {
