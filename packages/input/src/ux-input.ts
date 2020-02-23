@@ -200,7 +200,7 @@ export class UxInput implements UxInputComponent {
 
   public variantChanged(newValue: string) {
     this.element.style.backgroundColor = newValue === 'outline' ?
-      this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) : 
+      this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) :
       '';
   }
 

@@ -4,7 +4,6 @@ import { ThemeService, ThemesSet } from './theme-service';
 import { inject } from 'aurelia-framework';
 import { AureliaUX, Design } from '@aurelia-ux/core';
 
-
 @inject(ThemeService, AureliaUX)
 export class Theming {
 
@@ -15,7 +14,7 @@ export class Theming {
   public buttonPreviewClass = '';
   public buttonPreviewType = 'raised';
   public buttonPreviewDisabled = false;
-  
+
   public inputPreviewType = 'text';
   public inputPreviewVariant = 'filled';
   public inputPreviewDisabled = false;

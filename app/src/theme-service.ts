@@ -52,7 +52,6 @@ export class ThemeService {
   @observable({changeHandler: 'checkboxVariableChanged'}) public checkboxBorderWidth: number = 2;
   @observable({changeHandler: 'radioVariableChanged'}) public radioBorderWidth: number = 2;
 
-
   constructor(private styleEngine: StyleEngine) {}
 
   public init() {
@@ -115,6 +114,7 @@ export class ThemeService {
       themeToApply = this.themesSets[theme].themes;
     }
     if (themeToApply === null) {
+      // tslint:disable-next-line: no-console
       console.warn('Theme to apply not found');
       if (setLightIfNotFound) {
         theme = 'light';

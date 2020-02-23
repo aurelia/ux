@@ -12,7 +12,7 @@ export {
   UxCardActionRow,
   UxCardContent,
   UxCardFooter
-}
+};
 
 export function configure(config: FrameworkConfiguration) {
   config.globalResources([

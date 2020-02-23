@@ -7,4 +7,4 @@ export function configure(config: FrameworkConfiguration) {
   config.globalResources(PLATFORM.moduleName('./ux-button'));
 }
 
-export { UxButton }
+export { UxButton };

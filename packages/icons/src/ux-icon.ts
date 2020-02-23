@@ -4,9 +4,9 @@ import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, processDesignAttributes } from '@aurelia-ux/core';
 import { UxIconTheme } from './ux-icon-theme';
-import IconMap from './ux-icon-map';
+import { UxIconMap } from './ux-icon-map';
 
-@inject(Element, StyleEngine, Logger)
+@inject(Element, UxIconMap, StyleEngine, Logger)
 @customElement('ux-icon')
 @processAttributes(processDesignAttributes)
 export class UxIcon implements UxComponent {
@@ -18,6 +18,7 @@ export class UxIcon implements UxComponent {
 
   constructor(
     private element: HTMLElement,
+    private iconMap: UxIconMap,
     private styleEngine: StyleEngine,
     private logger: Logger
   )  { }
@@ -43,12 +44,10 @@ export class UxIcon implements UxComponent {
   }
 
   private changeIcon(icon: string) {
-    const iconSet = IconMap.Map.find(set => set.name === icon);
+    const material = this.iconMap.get(icon);
 
-    if (iconSet) {
-      // todo: add logic to switch set being used based on design language
-      // after adding icon sets for said languages such as ios
-      this.element.innerHTML = iconSet.material;
+    if (material) {
+      this.element.innerHTML = material;
     } else {
       this.logger.warn('ux-icon: no matching icon found', this.element);
     }
