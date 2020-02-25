@@ -3,8 +3,11 @@ export declare class MaterialDesign implements Design {
     type: string;
     appBackground: any;
     appForeground: any;
+    surfaceBackground: any;
+    surfaceForeground: any;
     controlBackground: any;
     controlForeground: any;
+    controlLabelColor: any;
     primary: any;
     primaryForeground: any;
     primaryLight: any;
@@ -17,6 +20,10 @@ export declare class MaterialDesign implements Design {
     accentLightForeground: any;
     accentDark: any;
     accentDarkForeground: any;
+    disabledBackground: any;
+    disabledForeground: any;
+    error: any;
+    onError: any;
     elevationNone: string;
     elevation2dp: string;
     elevation3dp: string;

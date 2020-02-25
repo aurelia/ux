@@ -47,7 +47,7 @@ var DesignProcessor = /** @class */ (function () {
     DesignProcessor.prototype.buildInnerHTML = function (design) {
         var designInnerHtml = '';
         for (var key in design) {
-            if (design.hasOwnProperty(key)) {
+            if (design.hasOwnProperty(key) && typeof design[key] === 'string' && design[key] !== '') {
                 designInnerHtml += "  --aurelia-ux--design-" + kebabCase(key) + ": " + design[key] + ";\r\n";
             }
         }

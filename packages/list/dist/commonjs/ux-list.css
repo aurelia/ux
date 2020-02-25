@@ -14,8 +14,13 @@
   text-decoration: none;
 }
 
+.ux-list-item.ux-choice--selected {
+  background: #00000011;
+  background: var(--aurelia-ux--list-background-selected, #00000011);
+}
+
 .ux-list-item__detail {
-  margin-right: 32px;
+  margin-right: 16px;
 }
 
 .ux-list-item__detail--avatar {
@@ -70,14 +75,23 @@ a.ux-list-item__content {
   white-space: nowrap;
 }
 
-.ux-list--three-line .ux-list-item {
-  align-items: flex-start;
-}
-
 .ux-list--three-line .ux-list-item__secondary-content {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
   line-height: 1.2;
   height: 2.4em;
+}
+
+.ux-list--wrap .ux-list-item__content,
+.ux-list--wrap .ux-list-item__secondary-content {
+  white-space: normal;
+}
+
+/* add a border type of ux-list with border between items */
+.ux-list--border {
+  border-top: 1px solid var(--ux-swatch--grey-p300);
+}
+.ux-list--border .ux-list-item {
+  border-bottom: 1px solid var(--ux-swatch--grey-p300);
 }

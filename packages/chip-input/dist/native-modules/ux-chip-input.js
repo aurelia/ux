@@ -5,10 +5,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { customElement, bindable } from 'aurelia-templating';
-import { DOM } from 'aurelia-pal';
-import { bindingMode } from 'aurelia-binding';
+import { bindingMode, observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, normalizeBooleanAttribute } from '@aurelia-ux/core';
+import { StyleEngine, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 var UxChipInput = /** @class */ (function () {
     function UxChipInput(element, styleEngine) {
         this.element = element;
@@ -16,18 +19,16 @@ var UxChipInput = /** @class */ (function () {
         this.disabled = false;
         this.readonly = false;
         this.separator = ', ';
+        this.variant = 'filled';
+        this.chipVariant = 'filled';
+        this.dense = false;
+        this.focused = false;
         this.value = undefined;
         this.chips = new Array();
     }
     UxChipInput.prototype.bind = function () {
         this.themeChanged(this.theme);
-        if (this.element.hasAttribute('placeholder')) {
-            var attributeValue = this.element.getAttribute('placeholder');
-            if (attributeValue) {
-                this.textbox.setAttribute('placeholder', attributeValue);
-                this.element.removeAttribute('placeholder');
-            }
-        }
+        this.dense = normalizeBooleanAttribute('dense', this.dense);
         if (this.value) {
             this.chips = this.value.split(this.separator);
         }
@@ -41,30 +42,20 @@ var UxChipInput = /** @class */ (function () {
             this.chiprepeat.removeAttribute('deletable');
             this.tagrepeat.removeAttribute('deletable');
         }
+        this.chipsChanged();
     };
     UxChipInput.prototype.attached = function () {
-        var _this = this;
-        var blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-        this.textbox.addEventListener('focus', function () {
-            _this.element.classList.add('ux-chip-input--focused');
-        });
-        this.textbox.addEventListener('blur', function () {
-            _this.addChip();
-            _this.element.classList.remove('ux-chip-input--focused');
-            _this.element.dispatchEvent(blurEvent);
-        });
+        this.variantChanged(this.variant);
     };
-    UxChipInput.prototype.detached = function () {
-        var _this = this;
-        var blurEvent = DOM.createCustomEvent('blur', { bubbles: true });
-        this.textbox.removeEventListener('focus', function () {
-            _this.element.classList.add('ux-chip-input--focused');
-        });
-        this.textbox.removeEventListener('blur', function () {
-            _this.addChip();
-            _this.element.classList.remove('ux-chip-input--focused');
-            _this.element.dispatchEvent(blurEvent);
-        });
+    UxChipInput.prototype.focus = function () {
+        this.focused = true;
+    };
+    UxChipInput.prototype.focusedChanged = function () {
+        this.element.classList.toggle('ux-input-component--focused', this.focused);
+        if (!this.focused) {
+            // blur
+            this.addChip();
+        }
     };
     UxChipInput.prototype.handleKeyup = function (event) {
         var key = event.which || event.keyCode;
@@ -81,6 +72,9 @@ var UxChipInput = /** @class */ (function () {
         }
     };
     UxChipInput.prototype.addChip = function () {
+        if (!this.textbox) {
+            return;
+        }
         if (this.textbox.value.length) {
             if (!this.chips) {
                 this.chips = new Array();
@@ -112,6 +106,7 @@ var UxChipInput = /** @class */ (function () {
         if (chipValue !== this.value) {
             this.value = chipValue;
         }
+        this.element.classList.toggle('ux-input-component--has-value', this.chips.length > 0);
     };
     UxChipInput.prototype.valueChanged = function (newValue) {
         if (newValue && newValue !== this.chips.join(this.separator)) {
@@ -148,6 +143,21 @@ var UxChipInput = /** @class */ (function () {
         }
         this.styleEngine.applyTheme(newValue, this.element);
     };
+    UxChipInput.prototype.variantChanged = function (newValue) {
+        this.element.style.backgroundColor = newValue === 'outline' ?
+            this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) :
+            '';
+    };
+    Object.defineProperty(UxChipInput.prototype, "placeholderMode", {
+        get: function () {
+            return typeof this.label !== 'string' || this.label.length === 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    UxChipInput.prototype.stopEvent = function (event) {
+        event.stopPropagation();
+    };
     __decorate([
         bindable
     ], UxChipInput.prototype, "disabled", void 0);
@@ -162,13 +172,31 @@ var UxChipInput = /** @class */ (function () {
     ], UxChipInput.prototype, "label", void 0);
     __decorate([
         bindable
+    ], UxChipInput.prototype, "placeholder", void 0);
+    __decorate([
+        bindable
     ], UxChipInput.prototype, "separator", void 0);
+    __decorate([
+        bindable
+    ], UxChipInput.prototype, "variant", void 0);
+    __decorate([
+        bindable
+    ], UxChipInput.prototype, "chipVariant", void 0);
+    __decorate([
+        bindable
+    ], UxChipInput.prototype, "dense", void 0);
+    __decorate([
+        observable
+    ], UxChipInput.prototype, "focused", void 0);
     __decorate([
         bindable({ defaultBindingMode: bindingMode.twoWay })
     ], UxChipInput.prototype, "value", void 0);
     __decorate([
         bindable({ defaultBindingMode: bindingMode.twoWay })
     ], UxChipInput.prototype, "chips", void 0);
+    __decorate([
+        computedFrom('label')
+    ], UxChipInput.prototype, "placeholderMode", null);
     UxChipInput = __decorate([
         inject(Element, StyleEngine),
         customElement('ux-chip-input')

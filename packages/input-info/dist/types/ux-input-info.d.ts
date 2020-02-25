@@ -3,7 +3,11 @@ import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 export declare class UxInputInfo implements UxComponent {
     private element;
     styleEngine: StyleEngine;
-    target: Element;
+    target: {
+        element: Element;
+        value: string;
+        maxlength: number;
+    };
     uxInputCounter: null;
     theme: UxInputInfoTheme;
     inputElementModel: any;
@@ -11,4 +15,6 @@ export declare class UxInputInfo implements UxComponent {
     bind(): void;
     themeChanged(newValue: UxInputInfoTheme): void;
     private findAndSetTarget;
+    get maxLength(): number;
+    get length(): number;
 }

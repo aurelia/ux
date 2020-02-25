@@ -6,8 +6,11 @@ define(["require", "exports", "../colors/swatches", "../colors/shadows"], functi
             this.type = 'ios';
             this.appBackground = swatches_1.swatches.grey.p50;
             this.appForeground = swatches_1.swatches.grey.p900;
-            this.controlBackground = swatches_1.swatches.white;
+            this.surfaceBackground = swatches_1.swatches.grey.p100;
+            this.surfaceForeground = swatches_1.swatches.grey.p900;
+            this.controlBackground = swatches_1.swatches.grey.p300;
             this.controlForeground = swatches_1.swatches.grey.p900;
+            this.controlLabelColor = swatches_1.swatches.grey.p600;
             this.primary = swatches_1.swatches.indigo.p500;
             this.primaryForeground = swatches_1.swatches.white;
             this.primaryLight = swatches_1.swatches.indigo.p100;
@@ -20,6 +23,10 @@ define(["require", "exports", "../colors/swatches", "../colors/shadows"], functi
             this.accentLightForeground = swatches_1.swatches.white;
             this.accentDark = swatches_1.swatches.pink.a400;
             this.accentDarkForeground = swatches_1.swatches.white;
+            this.disabledBackground = swatches_1.swatches.grey.p500;
+            this.disabledForeground = swatches_1.swatches.blueGrey.p100;
+            this.error = swatches_1.swatches.red.p500;
+            this.onError = swatches_1.swatches.white;
             this.elevationNone = shadows_1.shadows.depth_0;
             this.elevation2dp = shadows_1.shadows.depth_2dp;
             this.elevation3dp = shadows_1.shadows.depth_3dp;

@@ -1,4 +1,6 @@
-<template class="ux-checkbox ${effect !== null ? effect : ''}">
+<template 
+  class="ux-checkbox ${effect !== null ? effect : ''} ${indeterminate ? 'ux-checkbox--indeterminate' : ''}"
+  >
   <require from="@aurelia-ux/core/effects/paper-ripple.css"></require>
   <require from="./ux-checkbox.css"></require>
   <div class="ripplecontainer">
@@ -18,8 +20,11 @@
 
   <div class="ux-checkbox__border">
     <div class="ux-checkbox__background-fill">
-      <svg viewBox="0 0 24 24" class="ux-checkbox__icon">
+      <svg viewBox="0 0 24 24" class="ux-checkbox__icon" if.bind="!indeterminate">
         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+      </svg>
+      <svg viewBox="0 0 24 24" class="ux-checkbox__indeterminate-icon" if.bind="indeterminate">
+        <path d="M19 13H5v-2h14v2z" />
       </svg>
     </div>
   </div>

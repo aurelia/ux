@@ -7,8 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from '@aurelia-ux/core';
-import { observable } from 'aurelia-framework';
+import { StyleEngine, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
+import { observable, computedFrom } from 'aurelia-framework';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 let UxTextArea = class UxTextArea {
     constructor(element, styleEngine) {
         this.element = element;
@@ -18,6 +22,8 @@ let UxTextArea = class UxTextArea {
         this.disabled = false;
         this.focus = false;
         this.readonly = false;
+        this.variant = 'filled';
+        this.dense = false;
         this.value = undefined;
         Object.setPrototypeOf(element, uxTextAreaElementProto);
     }
@@ -27,13 +33,7 @@ let UxTextArea = class UxTextArea {
         if (this.autofocus || this.autofocus === '') {
             this.focus = true;
         }
-        if (element.hasAttribute('placeholder')) {
-            const attributeValue = element.getAttribute('placeholder');
-            if (attributeValue) {
-                textbox.setAttribute('placeholder', attributeValue);
-                element.removeAttribute('placeholder');
-            }
-        }
+        this.dense = normalizeBooleanAttribute('dense', this.dense);
         if (this.cols) {
             textbox.setAttribute('cols', this.cols.toString());
             element.removeAttribute('cols');
@@ -48,6 +48,7 @@ let UxTextArea = class UxTextArea {
         if (this.maxlength) {
             textbox.setAttribute('maxlength', this.maxlength.toString());
         }
+        this.themeChanged(this.theme);
         this.autocompleteChanged(this.autocomplete);
     }
     attached() {
@@ -58,6 +59,7 @@ let UxTextArea = class UxTextArea {
         this.fitTextContent();
         textbox.addEventListener('change', stopEvent);
         textbox.addEventListener('input', stopEvent);
+        this.variantChanged(this.variant);
     }
     detached() {
         const textbox = this.textbox;
@@ -88,11 +90,12 @@ let UxTextArea = class UxTextArea {
             this.textbox.removeAttribute('autocomplete');
         }
     }
-    rawValueChanged(rawValue) {
+    rawValueChanged(newValue) {
+        this.element.classList.toggle('ux-input-component--has-value', typeof newValue === 'string' && newValue.length > 0);
         if (this.ignoreRawChanges) {
             return;
         }
-        this.setValue(rawValue);
+        this.setValue(newValue);
     }
     themeChanged(newValue) {
         if (newValue != null && newValue.themeKey == null) {
@@ -108,7 +111,16 @@ let UxTextArea = class UxTextArea {
     }
     focusChanged(focus) {
         focus = focus || focus === '' ? true : false;
+        this.element.classList.toggle('ux-input-component--focused', focus);
         this.element.dispatchEvent(DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
+    }
+    variantChanged(newValue) {
+        this.element.style.backgroundColor = newValue === 'outline' ?
+            this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) :
+            '';
+    }
+    get placeholderMode() {
+        return typeof this.label !== 'string' || this.label.length === 0;
     }
 };
 __decorate([
@@ -143,10 +155,25 @@ __decorate([
 ], UxTextArea.prototype, "rows", void 0);
 __decorate([
     bindable
+], UxTextArea.prototype, "label", void 0);
+__decorate([
+    bindable
+], UxTextArea.prototype, "placeholder", void 0);
+__decorate([
+    bindable
 ], UxTextArea.prototype, "theme", void 0);
+__decorate([
+    bindable
+], UxTextArea.prototype, "variant", void 0);
+__decorate([
+    bindable
+], UxTextArea.prototype, "dense", void 0);
 __decorate([
     observable({ initializer: () => '' })
 ], UxTextArea.prototype, "rawValue", void 0);
+__decorate([
+    computedFrom('label')
+], UxTextArea.prototype, "placeholderMode", null);
 UxTextArea = __decorate([
     inject(Element, StyleEngine),
     customElement('ux-textarea')

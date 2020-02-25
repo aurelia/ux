@@ -12,7 +12,8 @@ export function configure(config) {
         PLATFORM.moduleName('./ux-card-header'),
         PLATFORM.moduleName('./ux-card-action-row'),
         PLATFORM.moduleName('./ux-card-content'),
-        PLATFORM.moduleName('./ux-card-footer')
+        PLATFORM.moduleName('./ux-card-footer'),
+        PLATFORM.moduleName('./ux-card-separator')
     ]);
 }
 //# sourceMappingURL=index.js.map

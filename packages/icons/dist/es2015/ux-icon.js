@@ -9,22 +9,30 @@ import { Logger } from 'aurelia-logging';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, processDesignAttributes } from '@aurelia-ux/core';
-import IconMap from './ux-icon-map';
+import { UxIconTheme } from './ux-icon-theme';
+import { UxIconMap } from './ux-icon-map';
 let UxIcon = class UxIcon {
-    constructor(element, styleEngine, logger) {
+    constructor(element, iconMap, styleEngine, logger) {
         this.element = element;
+        this.iconMap = iconMap;
         this.styleEngine = styleEngine;
         this.logger = logger;
         this.icon = undefined;
     }
     bind() {
-        if (this.size) {
-            this.theme.size = this.size;
-        }
         if (this.icon) {
             this.changeIcon(this.icon);
         }
+        this.sizeChanged(this.size);
         this.themeChanged(this.theme);
+    }
+    sizeChanged(newValue) {
+        if (this.size) {
+            if (this.theme === undefined) {
+                this.theme = new UxIconTheme();
+            }
+            this.theme.size = newValue;
+        }
     }
     themeChanged(newValue) {
         this.styleEngine.applyTheme(newValue, this.element);
@@ -33,14 +41,12 @@ let UxIcon = class UxIcon {
         this.changeIcon(newValue);
     }
     changeIcon(icon) {
-        const iconSet = IconMap.Map.find(set => set.name === icon);
-        if (iconSet) {
-            // todo: add logic to switch set being used based on design language
-            // after adding icon sets for said languages such as ios
-            this.element.innerHTML = iconSet.material;
+        const material = this.iconMap.get(icon);
+        if (material) {
+            this.element.innerHTML = material;
         }
         else {
-            this.logger.error('ux-icon: no matching icon found', this.element);
+            this.logger.warn('ux-icon: no matching icon found', this.element);
         }
     }
 };
@@ -54,7 +60,7 @@ __decorate([
     bindable({ defaultBindingMode: bindingMode.twoWay })
 ], UxIcon.prototype, "icon", void 0);
 UxIcon = __decorate([
-    inject(Element, StyleEngine, Logger),
+    inject(Element, UxIconMap, StyleEngine, Logger),
     customElement('ux-icon'),
     processAttributes(processDesignAttributes)
 ], UxIcon);

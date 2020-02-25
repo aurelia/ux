@@ -10,6 +10,10 @@ var aurelia_framework_1 = require("aurelia-framework");
 var aurelia_logging_1 = require("aurelia-logging");
 var core_1 = require("@aurelia-ux/core");
 var util_1 = require("./util");
+// tslint:disable-next-line: no-submodule-imports
+require("@aurelia-ux/core/components/ux-input-component.css");
+// tslint:disable-next-line: no-submodule-imports
+require("@aurelia-ux/core/components/ux-input-component--outline.css");
 var UP = 38;
 // const RIGHT = 39;
 var DOWN = 40;
@@ -27,6 +31,8 @@ var UxSelect = /** @class */ (function () {
         this.observerLocator = observerLocator;
         this.taskQueue = taskQueue;
         this.selectedOption = null;
+        this.variant = 'filled';
+        this.dense = false;
         this.ignoreSelectEvent = true;
         // Only chrome persist the element prototype when cloning with clone node
         Object.setPrototypeOf(element, UxSelectElementProto);
@@ -35,6 +41,7 @@ var UxSelect = /** @class */ (function () {
         if (util_1.bool(this.autofocus)) {
             // setTimeout(focusEl, 0, this.button);
         }
+        this.dense = core_1.normalizeBooleanAttribute('dense', this.dense);
         if (this.isMultiple) {
             if (!this.value) {
                 this.value = [];
@@ -51,6 +58,7 @@ var UxSelect = /** @class */ (function () {
     };
     UxSelect.prototype.attached = function () {
         this.resolveDisplayValue();
+        this.variantChanged(this.variant);
     };
     UxSelect.prototype.unbind = function () {
         this.winEvents.disposeAll();
@@ -70,12 +78,7 @@ var UxSelect = /** @class */ (function () {
         })
             .map(function (t) { return t.innerText; });
         this.displayValue = values.join(', ');
-        if (this.displayValue.length > 0) {
-            this.element.classList.add('ux-select--has-value');
-        }
-        else {
-            this.element.classList.remove('ux-select--has-value');
-        }
+        this.element.classList.toggle('ux-input-component--has-value', this.displayValue.length > 0);
     };
     UxSelect.prototype.synchronizeOptions = function () {
         var value = this.value;
@@ -398,6 +401,18 @@ var UxSelect = /** @class */ (function () {
             );
         }
     };
+    UxSelect.prototype.variantChanged = function (newValue) {
+        this.element.style.backgroundColor = newValue === 'outline' ?
+            this.element.style.backgroundColor = core_1.getBackgroundColorThroughParents(this.element) :
+            '';
+    };
+    Object.defineProperty(UxSelect.prototype, "placeholderMode", {
+        get: function () {
+            return typeof this.label !== 'string' || this.label.length === 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(UxSelect.prototype, "options", {
         get: function () {
             if (!this.optionCtEl) {
@@ -454,8 +469,20 @@ var UxSelect = /** @class */ (function () {
         aurelia_framework_1.bindable({ defaultValue: false })
     ], UxSelect.prototype, "multiple", void 0);
     __decorate([
-        aurelia_framework_1.bindable()
+        aurelia_framework_1.bindable
+    ], UxSelect.prototype, "label", void 0);
+    __decorate([
+        aurelia_framework_1.bindable
     ], UxSelect.prototype, "placeholder", void 0);
+    __decorate([
+        aurelia_framework_1.bindable()
+    ], UxSelect.prototype, "variant", void 0);
+    __decorate([
+        aurelia_framework_1.bindable
+    ], UxSelect.prototype, "dense", void 0);
+    __decorate([
+        aurelia_framework_1.computedFrom('label')
+    ], UxSelect.prototype, "placeholderMode", null);
     __decorate([
         aurelia_framework_1.computedFrom('multiple')
     ], UxSelect.prototype, "isMultiple", null);

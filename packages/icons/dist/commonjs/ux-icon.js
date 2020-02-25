@@ -11,22 +11,30 @@ var aurelia_logging_1 = require("aurelia-logging");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
+var ux_icon_theme_1 = require("./ux-icon-theme");
 var ux_icon_map_1 = require("./ux-icon-map");
 var UxIcon = /** @class */ (function () {
-    function UxIcon(element, styleEngine, logger) {
+    function UxIcon(element, iconMap, styleEngine, logger) {
         this.element = element;
+        this.iconMap = iconMap;
         this.styleEngine = styleEngine;
         this.logger = logger;
         this.icon = undefined;
     }
     UxIcon.prototype.bind = function () {
-        if (this.size) {
-            this.theme.size = this.size;
-        }
         if (this.icon) {
             this.changeIcon(this.icon);
         }
+        this.sizeChanged(this.size);
         this.themeChanged(this.theme);
+    };
+    UxIcon.prototype.sizeChanged = function (newValue) {
+        if (this.size) {
+            if (this.theme === undefined) {
+                this.theme = new ux_icon_theme_1.UxIconTheme();
+            }
+            this.theme.size = newValue;
+        }
     };
     UxIcon.prototype.themeChanged = function (newValue) {
         this.styleEngine.applyTheme(newValue, this.element);
@@ -35,14 +43,12 @@ var UxIcon = /** @class */ (function () {
         this.changeIcon(newValue);
     };
     UxIcon.prototype.changeIcon = function (icon) {
-        var iconSet = ux_icon_map_1.default.Map.find(function (set) { return set.name === icon; });
-        if (iconSet) {
-            // todo: add logic to switch set being used based on design language
-            // after adding icon sets for said languages such as ios
-            this.element.innerHTML = iconSet.material;
+        var material = this.iconMap.get(icon);
+        if (material) {
+            this.element.innerHTML = material;
         }
         else {
-            this.logger.error('ux-icon: no matching icon found', this.element);
+            this.logger.warn('ux-icon: no matching icon found', this.element);
         }
     };
     __decorate([
@@ -55,7 +61,7 @@ var UxIcon = /** @class */ (function () {
         aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
     ], UxIcon.prototype, "icon", void 0);
     UxIcon = __decorate([
-        aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine, aurelia_logging_1.Logger),
+        aurelia_dependency_injection_1.inject(Element, ux_icon_map_1.UxIconMap, core_1.StyleEngine, aurelia_logging_1.Logger),
         aurelia_templating_1.customElement('ux-icon'),
         aurelia_templating_1.processAttributes(core_1.processDesignAttributes)
     ], UxIcon);

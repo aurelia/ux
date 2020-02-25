@@ -26,6 +26,7 @@ ux-button {
   overflow: hidden;
 }
 
+/* Button Sizes */
 .ux-button--small {
   font-size: 13px;
   height: 32px;
@@ -44,25 +45,27 @@ ux-button {
   line-height: 42px;
 }
 
-.ux-button--text {
-  border-radius: 2px;
-  background-color: transparent;
-  background-color: var(--aurelia-ux--button-text-background, transparent);
-  color: #3F51B5;
-  color: var(--aurelia-ux--button-text-foreground, var(--aurelia-ux--design-primary, #3F51B5));
-}
-
+/* Button Types, without colors */
+.ux-button--text,
+.ux-button--raised,
+.ux-button--flat,
 .ux-button--outline {
   min-width: 88px;
-  padding: 0 16px 0 16px;
-  background-color: transparent;
-  border-radius: 4px;
-  border: 1px solid rgba(124, 124, 124, 0.25);
-  border: var(--aurelia-ux--button-outline-foreground, 1px solid rgba(124, 124, 124, 0.25));
-  color: #3F51B5;
-  color: var(--aurelia-ux--button-outline-foreground, var(--aurelia-ux--design-primary, #3F51B5));
+  padding: 0 16px;
+  border-radius: var(--aurelia-ux--button-border-radius, '2px');
 }
-
+.ux-button--raised {
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.2s;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
+}
+.ux-button--outline {
+  background-color: transparent;
+}
+.ux-button--text {
+  background-color: transparent;
+}
 .ux-button--fab {
   border-radius: 50%;
   overflow: hidden;
@@ -72,29 +75,69 @@ ux-button {
   box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
 }
 
-.ux-button--raised {
-  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: 0.2s;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
-}
+/* Button Types Colors and variants */
 
-.ux-button--text,
 .ux-button--raised,
-.ux-button--flat {
-  min-width: 88px;
-  padding: 0 16px;
-  border-radius: 2px;
-}
-
 .ux-button--flat,
-.ux-button--raised,
 .ux-button--fab {
   background-color: #3F51B5;
   background-color: var(--aurelia-ux--button-background, var(--aurelia-ux--design-primary, #3F51B5));
   color: #fff;
   color: var(--aurelia-ux--button-foreground, var(--aurelia-ux--design-primary-foreground, #fff));
 }
+.ux-button--outline {
+  border: 1px solid #3F51B5;
+  border-width: var(--aurelia-ux--button-border-width, 1px);
+  border-color: var(--aurelia-ux--button-background, var(--aurelia-ux--design-primary, #3F51B5));
+  color: #3F51B5;
+  color: var(--aurelia-ux--button-background, var(--aurelia-ux--design-primary, #3F51B5));
+}
+.ux-button--text {
+  color: #3F51B5;
+  color: var(--aurelia-ux--button-background, var(--aurelia-ux--design-primary, #3F51B5));
+}
+
+.ux-button--accent > .ux-button--raised,
+.ux-button--accent > .ux-button--flat,
+.ux-button--accent > .ux-button--fab {
+  background-color: #FF4081;
+  background-color: var(--aurelia-ux--button-accent-background, var(--aurelia-ux--design-accent, #FF4081));
+  color: #fff;
+  color: var(--aurelia-ux--button-accent-foreground, var(--aurelia-ux--design-accent-foreground, #fff));
+}
+.ux-button--accent > .ux-button--outline {
+  border-color: #FF4081;
+  border-color: var(--aurelia-ux--button-accent-background, var(--aurelia-ux--accent-primary, #FF4081));
+  color: #FF4081;
+  color: var(--aurelia-ux--button-accent-background, var(--aurelia-ux--accent-primary, #FF4081));
+}
+.ux-button--accent > .ux-button--text {
+  color: #FF4081;
+  color: var(--aurelia-ux--button-accent-background, var(--aurelia-ux--accent-primary, #FF4081));
+}
+
+.ux-button--raised:disabled,
+.ux-button--flat:disabled,
+.ux-button--fab:disabled {
+  background-color: #9E9E9E;
+  background-color: var(--aurelia-ux--button-disabled-background, var(--aurelia-ux--design-disabled-background, #9E9E9E));
+  color: #CFD8DC;
+  color: var(--aurelia-ux--button-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #CFD8DC));
+}
+.ux-button--outline:disabled {
+  border-color: #9E9E9E;
+  border-color: var(--aurelia-ux--button-disabled-background, var(--aurelia-ux--disabled-primary, #9E9E9E));
+  color: #9E9E9E;
+  color: var(--aurelia-ux--button-disabled-background, var(--aurelia-ux--disabled-primary, #9E9E9E));
+}
+.ux-button--text:disabled {
+  color: #9E9E9E;
+  color: var(--aurelia-ux--button-disabled-background, var(--aurelia-ux--disabled-primary, #9E9E9E));
+}
+
+
+
+/* Button States */
 
 .ux-button::-moz-focus-inner {
   border: none;
@@ -126,59 +169,6 @@ ux-button {
   transition-delay: 0s;
 }
 
-.ux-button--flat:disabled,
-.ux-button--raised:disabled,
-.ux-button--fab:disabled {
-  background-color: #9E9E9E;
-  background-color: var(--aurelia-ux--button-background-disabled, #9E9E9E);
-  color: #CFD8DC;
-  color: var(--aurelia-ux--button-foreground-disabled, #CFD8DC);
-}
-
-.ux-button--text:disabled {
-  color: rgba(128, 128, 128, 0.5);
-  color: var(--aurelia-ux--button-foreground-disabled, rgba(128, 128, 128, 0.5));
-}
-
-.ux-button--accent > .ux-button {
-  background-color: #FF4081;
-  background-color: var(--aurelia-ux--button-accent-background, var(--aurelia-ux--design-accent, #FF4081));
-  color: #fff;
-  color: var(--aurelia-ux--button-accent-foreground, var(--aurelia-ux--design-accent-foreground, #fff));
-}
-
-.ux-button--accent > .ux-button--text {
-  background-color: transparent;
-  background-color: var(--aurelia-ux--button-accent-flat-background, transparent);
-  color: #FF4081;
-  color: var(--aurelia-ux--button-accent-flat-foreground, var(--aurelia-ux--design-accent, #FF4081));
-}
-
-.ux-button--text.ux-button--text-remove-padding {
-  min-width: auto;
-  padding: 0 8px;
-}
-
-.ux-fab-button {
-  height: auto;
-  width: auto;
-}
-
-.ux-button--small .ux-button--fab {
-  width: 40px;
-  height: 40px;
-}
-
-.ux-button--medium .ux-button--fab {
-  width: 56px;
-  height: 56px;
-}
-
-.ux-button--large .ux-button--fab {
-  width: 64px;
-  height: 64px;
-}
-
 .ux-button--fab:active {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   box-shadow: var(--aurelia-ux--design-elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2));
@@ -204,3 +194,32 @@ ux-button {
   box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
   transition-delay: 0s;
 }
+
+
+
+.ux-button--text.ux-button--text-remove-padding {
+  min-width: auto;
+  padding: 0 8px;
+}
+
+.ux-fab-button {
+  height: auto;
+  width: auto;
+}
+
+/* Button Sizes */
+.ux-button--small .ux-button--fab {
+  width: 40px;
+  height: 40px;
+}
+
+.ux-button--medium .ux-button--fab {
+  width: 56px;
+  height: 56px;
+}
+
+.ux-button--large .ux-button--fab {
+  width: 64px;
+  height: 64px;
+}
+

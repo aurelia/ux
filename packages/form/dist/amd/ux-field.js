@@ -14,6 +14,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-dependency-injectio
         UxField.prototype.attached = function () {
             if (this.label && !this.element.querySelector('label')) {
                 this.labelElement = document.createElement('label');
+                this.labelElement.classList.add('ux-field__label');
                 this.labelElement.textContent = this.label;
                 this.element.insertBefore(this.labelElement, this.element.firstChild);
             }

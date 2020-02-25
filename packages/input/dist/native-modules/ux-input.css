@@ -1,126 +1,24 @@
 .ux-input {
-  display: inline-flex;
-  width: 100%;
-  height: 56px;
-  padding: 0 16px;
-  align-items: center;
-  box-sizing: border-box;
-  position: relative;
-  cursor: text;
-  color: inherit;
-  color: var(--aurelia-ux--input-foreground, inherit);
-  background-color: #00000011;
-  background-color: var(--aurelia-ux--input-background, #00000011);
-  border-radius: 4px;
-  border-radius: var(--aurelia-ux--input-border-radius, 4px);
-}
+  --foreground: var(--aurelia-ux--input-foreground, var(--aurelia-ux--design-control-foreground, #212121));
+  --foreground-label: var(--aurelia-ux--input-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
+  --background: var(--aurelia-ux--input-background, var(--aurelia-ux--design-control-background, #E0E0E0));
+  --background-hover: var(--aurelia-ux--input-background-hover, #00000027);
+  --active-color: var(--aurelia-ux--input-active-color, var(--aurelia-ux--design-primary, #3F51B5));
 
-.ux-input__border-bottom {
-  height: 2px;
-  background-color: #4043ff;
-  background-color: var(--aurelia-ux--input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff));
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: scalex(0);
-  transition: transform ease 150ms;
-}
+  --font-size: var(--aurelia-ux--input-font-size, 16px);
+  --letter-spacing: var(--aurelia-ux--input-letter-spacing, inherit);
+  --label-font-size: var(--aurelia-ux--input-label-font-size, 12px);
+  --label-letter-spacing: var(--aurelia-ux--input-label-letter-spacing, 0.5px);
+  --line-height: var(--aurelia-ux--input-line-height, 1.6);
+  --label-line-height: var(--aurelia-ux--input-label-line-height, 1.6);
 
-.ux-input__inner-input {
-  width: 100%;
-  box-sizing: border-box;
-  font-size: inherit;
-  font-size: var(--aurelia-ux--input-font-size, inherit);
-  letter-spacing: inherit;
-  letter-spacing: var(--aurelia-ux--input-letter-spacing, inherit);
-  padding: 6px 0 4px 0;
-  padding-right: 0px;
-  padding-left: 0px;
-  border: 0;
-  color: inherit;
-  background-color: transparent;
-  outline: none;
-  padding-left: 0;
-  padding-right: 0;
-}
+  --border-color: var(--aurelia-ux--input-border-color, var(--aurelia-ux--design-control-label-color, #757575));
+  --border-radius: var(--aurelia-ux--input-border-radius, 4px);
+  --border-width: var(--aurelia-ux--input-border-width, 1px);
+  --border-active-width: var(--aurelia-ux--input-border-active-width, 2px);
 
-.ux-input__label {
-  position: absolute;
-  cursor: text;
-  font-size: 13px;
-  font-size: var(--aurelia-ux--input-label-font-size, 13px);
-  letter-spacing: 0.5px;
-  letter-spacing: var(--aurelia-ux--input-label-letter-spacing, 0.5px);
-  transition: transform ease 150ms;
-}
+  --disabled-foreground: var(--aurelia-ux--input-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
+  --disabled-background: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
 
-.ux-input :not(input) {
-  color: #808080;
-  color: var(--aurelia-ux--input-foreground-label, #808080);
-}
-
-.ux-input--has-error :not(input) {
-  color: #F44336;
-  color: var(--aurelia-ux--input-error, #F44336);
-}
-
-.ux-input:hover {
-  background-color: #00000027;
-  background-color: var(--aurelia-ux--input-background-hover, #00000027);
-}
-
-.ux-input--focused .ux-input__label {
-  color: #4043ff;
-  color: var(--aurelia-ux--input-border-focus, var(--aurelia-ux--design-primary, #4043ff));
-}
-
-.ux-input--has-value .ux-input__label,
-.ux-input--focused .ux-input__label {
-  transform: translateY(-1.3em);
-}
-
-.ux-input [slot="leading-icon"] {
-  margin-left: -8px;
-  margin-right: 8px;
-}
-
-.ux-input [slot="trailing-icon"] {
-  margin-left: 8px;
-  margin-right: -8px;
-}
-
-.ux-input--has-error .ux-input__inner-input {
-  box-shadow: none;
-}
-
-.ux-input--has-error .ux-input__border-bottom {
-  transform: scaleX(1);
-  background-color: #F44336;
-  background-color: var(--aurelia-ux--input-error, #F44336);
-}
-
-.ux-input[disabled],
-.ux-input[readonly] {
-  background-color: #e1e1e1;
-  background-color: var(--aurelia-ux--input-disabled-background, #e1e1e1);
-}
-
-.ux-input--has-value>[slot="leading-icon"]~.ux-input__label,
-.ux-input--focused>[slot="leading-icon"]~.ux-input__label {
-  transform: translateX(24px) translateY(-1.3em);
-}
-
-.ux-input [slot="leading-icon"]~.ux-input__label {
-  transform: translateX(24px);
-}
-
-.ux-input__inner-input:focus~.ux-input__border-bottom {
-  transform: scaleX(1);
-}
-
-.ux-input[disabled] .ux-input__border-bottom,
-.ux-input[readonly] .ux-input__border-bottom {
-  background-color: #989898;
-  background-color: var(--aurelia-ux--input-disabled-border, #989898);
+  --error: var(--aurelia-ux--input-error, var(--aurelia-ux--design-error, #F44336));
 }

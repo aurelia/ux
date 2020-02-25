@@ -32,5 +32,5 @@ export declare class UxCheckbox implements UxComponent {
     focusedChanged(newValue: boolean): void;
     themeChanged(newValue: UxCheckboxTheme): void;
     valueChanged(newValue: boolean): void;
-    onMouseDown(e: MouseEvent): void;
+    onMouseDown(e: MouseEvent): true | undefined;
 }

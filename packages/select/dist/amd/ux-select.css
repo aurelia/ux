@@ -1,31 +1,26 @@
 .ux-select {
-  display: inline-flex;
-  width: 100%;
-  height: 56px;
-  padding: 0 16px;
-  align-items: center;
-  box-sizing: border-box;
-  position: relative;
-  cursor: pointer;
-  color: inherit;
-  color: var(--aurelia-ux--select-foreground, inherit);
-  background-color: #00000011;
-  background-color: var(--aurelia-ux--select-background, #00000011);
-  border-radius: 4px;
-  border-radius: var(--aurelia-ux--select-border-radius, 4px);
-  line-height: normal;
-}
+  --foreground: var(--aurelia-ux--select-foreground, var(--aurelia-ux--design-control-foreground, #212121));
+  --foreground-label: var(--aurelia-ux--select-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
+  --background: var(--aurelia-ux--select-background, var(--aurelia-ux--design-control-background, #E0E0E0));
+  --background-hover: var(--aurelia-ux--select-background-hover, #00000027);
+  --active-color: var(--aurelia-ux--select-active-color, var(--aurelia-ux--design-primary, #3F51B5));
 
-.ux-select__border-bottom {
-  height: 2px;
-  background-color: #4043ff;
-  background-color: var(--aurelia-ux--input-border-bottom-focus, var(--aurelia-ux--design-primary, #4043ff));
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  transform: scalex(0);
-  transition: transform ease 150ms;
+  --font-size: var(--aurelia-ux--select-font-size, 16px);
+  --letter-spacing: var(--aurelia-ux--select-letter-spacing, inherit);
+  --label-font-size: var(--aurelia-ux--select-label-font-size, 12px);
+  --label-letter-spacing: var(--aurelia-ux--select-label-letter-spacing, 0.5px);
+  --line-height: var(--aurelia-ux--select-line-height, 1.6);
+  --label-line-height: var(--aurelia-ux--select-label-line-height, 1.6);
+
+  --border-color: var(--aurelia-ux--select-border-color, var(--aurelia-ux--design-control-label-color, #757575));
+  --border-radius: var(--aurelia-ux--select-border-radius, 4px);
+  --border-width: var(--aurelia-ux--select-border-width, 1px);
+  --border-active-width: var(--aurelia-ux--select-border-active-width, 2px);
+
+  --disabled-foreground: var(--aurelia-ux--select-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #9E9E9E));
+  --disabled-background: var(--aurelia-ux--select-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+
+  --error: var(--aurelia-ux--select-error, var(--aurelia-ux--design-error, #F44336));
 }
 
 .ux-select__value {
@@ -33,17 +28,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.ux-select__placeholder {
-  position: absolute;
-  font-size: inherit;
-  cursor: text;
-  transition: 150ms ease;
-  font-size: 13px;
-  font-size: var(--aurelia-ux--input-label-font-size, 13px);
-  letter-spacing: 0.5px;
-  letter-spacing: var(--aurelia-ux--input-label-letter-spacing, 0.5px);
+  font-weight: 400;
 }
 
 .ux-select__arrow {
@@ -64,7 +49,8 @@
   background-color: rgba(0, 0, 0, 0);
   opacity: 0;
   transform: scale(0.7, 0.7);
-  transition: 0.125s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: 125ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: var(--aurelia-ux--select-list-transition, 125ms);
 }
 
 .ux-select__list-wrapper--open {
@@ -73,10 +59,13 @@
 
 .ux-select__list-container--open {
   opacity: 1;
-  background-color: #f2f2f2;
-  background-color: var(--ux-select--list-background, var(--aurelia-ux--design-control-background, #f2f2f2));
+  background-color: #F5F5F5;
+  background-color: var(--aurelia-ux--select-list-background, var(--aurelia-ux--design-surface-background, #F5F5F5));
+  color: #212121;
+  color: var(--aurelia-ux--select-list-foreground, var(--aurelia-ux--design-surface-foreground, #212121));
   transform: scale(1, 1);
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: var(--aurelia-ux--select-list-elevation, var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)))
 }
 
 .ux-optgroup {
@@ -104,12 +93,16 @@
   cursor: pointer;
 }
 
+.ux-option:hover {
+  background-color: var(--aurelia-ux--select-option-hover, rgba(0, 0, 0, 0.05));
+}
+
 .ux-option--focused {
-  background-color: var(--aurelia-ux--select-option-focused);
+  background-color: var(--aurelia-ux--select-option-focused, rgba(0, 0, 0, 0.1));
 }
 
 .ux-option--selected {
-  background-color: var(--aurelia-ux--select-option-selected);
+  background-color: var(--aurelia-ux--select-option-selected, rgba(0, 0, 0, 0.1));
 }
 
 .ux-option--disabled {
@@ -129,27 +122,20 @@
 .ux-select__arrow:before {
   content: '';
   display: inline-block;
-  margin-top: 6px;
+  transform: translateY(-2px);
   border-top: 5px solid lightgrey;
+  border-top-color: #757575;
+  border-top-color: var(--foreground, #757575);
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
+}
+.ux-input-component--has-error .ux-select__arrow:before {
+  border-top-color: #F44336;
+  border-top-color: var(--error, #F44336);
 }
 
 .ux-select:focus {
   outline: none;
-}
-
-.ux-option:hover {
-  background-color: var(--aurelia-ux--select-option-hover);
-}
-
-.ux-select--focused .ux-select__placeholder {
-  color: #4043ff;
-  color: var(--aurelia-ux--input-border-focus, var(--aurelia-ux--design-primary, #4043ff));
-}
-
-.ux-select--has-value .ux-select__placeholder {
-  transform: translateY(-1.2em);
 }
 
 .ux-optgroup .ux-optgroup-label {
@@ -172,21 +158,24 @@
   border: 2px solid rgba(0, 0, 0, 0.5);
 }
 
-.ux-select--has-error .ux-select__border-bottom {
-  transform: scaleX(1);
-  background-color: #F44336;
-  background-color: var(--aurelia-ux--input-error, #F44336);
-}
-
 .ux-select--multiple .ux-option--elected {
   background-color: transparent;
   color: blue;
 }
 
-.ux-select:focus .ux-select__border-bottom {
-  transform: scaleX(1);
-}
 
 .ux-select:not(.ux-select--multiple) .ux-optgroup .ux-option {
   padding-left: 32px;
+}
+
+.ux-select[disabled] .ux-select__arrow:before,
+.ux-select[readonly] .ux-select__arrow:before {
+  border-top-color: #9E9E9E;
+  border-top-color: var(--disabled-foreground, #9E9E9E);
+}
+
+.ux-select--outline[disabled] .ux-select__arrow:before,
+.ux-select--outline[readonly] .ux-select__arrow:before {
+  border-top-color: #e1e1e1;
+  border-top-color: var(--disabled-background, #e1e1e1);
 }

@@ -9,22 +9,30 @@ import { Logger } from 'aurelia-logging';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, processDesignAttributes } from '@aurelia-ux/core';
-import IconMap from './ux-icon-map';
+import { UxIconTheme } from './ux-icon-theme';
+import { UxIconMap } from './ux-icon-map';
 var UxIcon = /** @class */ (function () {
-    function UxIcon(element, styleEngine, logger) {
+    function UxIcon(element, iconMap, styleEngine, logger) {
         this.element = element;
+        this.iconMap = iconMap;
         this.styleEngine = styleEngine;
         this.logger = logger;
         this.icon = undefined;
     }
     UxIcon.prototype.bind = function () {
-        if (this.size) {
-            this.theme.size = this.size;
-        }
         if (this.icon) {
             this.changeIcon(this.icon);
         }
+        this.sizeChanged(this.size);
         this.themeChanged(this.theme);
+    };
+    UxIcon.prototype.sizeChanged = function (newValue) {
+        if (this.size) {
+            if (this.theme === undefined) {
+                this.theme = new UxIconTheme();
+            }
+            this.theme.size = newValue;
+        }
     };
     UxIcon.prototype.themeChanged = function (newValue) {
         this.styleEngine.applyTheme(newValue, this.element);
@@ -33,14 +41,12 @@ var UxIcon = /** @class */ (function () {
         this.changeIcon(newValue);
     };
     UxIcon.prototype.changeIcon = function (icon) {
-        var iconSet = IconMap.Map.find(function (set) { return set.name === icon; });
-        if (iconSet) {
-            // todo: add logic to switch set being used based on design language
-            // after adding icon sets for said languages such as ios
-            this.element.innerHTML = iconSet.material;
+        var material = this.iconMap.get(icon);
+        if (material) {
+            this.element.innerHTML = material;
         }
         else {
-            this.logger.error('ux-icon: no matching icon found', this.element);
+            this.logger.warn('ux-icon: no matching icon found', this.element);
         }
     };
     __decorate([
@@ -53,7 +59,7 @@ var UxIcon = /** @class */ (function () {
         bindable({ defaultBindingMode: bindingMode.twoWay })
     ], UxIcon.prototype, "icon", void 0);
     UxIcon = __decorate([
-        inject(Element, StyleEngine, Logger),
+        inject(Element, UxIconMap, StyleEngine, Logger),
         customElement('ux-icon'),
         processAttributes(processDesignAttributes)
     ], UxIcon);
