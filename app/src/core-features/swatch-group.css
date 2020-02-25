@@ -1,0 +1,53 @@
+swatch-group {
+  display: block;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+swatch-group header {
+  margin: 0;
+  display: flex;
+  padding: 16px;
+  font-size: inherit;
+  font-weight: inherit;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 128px;
+}
+
+swatch-group header.light {
+  color: #333;
+}
+
+swatch-group header.dark {
+  color: #eee;
+}
+
+swatch-group ul li {
+  padding: 16px;
+}
+
+swatch-group ul li.light {
+  color: #333;
+}
+
+swatch-group ul li.dark {
+  color: #eee;
+}
+
+swatch-group.swatch-name {
+  padding: 10px 15px 11px;
+  font-size: 13px;
+  line-height: 24px;
+  margin-bottom: 53px;
+}
+
+styles.color-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 10px 15px 11px;
+  font-size: 13px;
+  line-height: 24px;
+}

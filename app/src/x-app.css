@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+body {
+  background: var(--aurelia-ux--design-app-background);
+  color: var(--aurelia-ux--design-app-foreground);
+
+}
+
+section {
+  max-width: 1024px;
+  margin: 0px auto;
+  padding: 20px 20px 40px 20px;
+}
+
+header.main-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  box-shadow: var(--aurelia-ux--design-elevation4dp);
+  background-color: var(--ux-swatch--grey-p200);
+  color: var(--ux-swatch--grey-p900);
+  z-index: 1;
+}
+
+header.main-header > * {
+  margin-right: 16px;
+}
+
+header.main-header > ux-chip {
+  cursor: pointer;
+}
+
+header.main-header > ux-chip.theme-toggler {
+  justify-self: flex-end;
+}
+
+router-view.page {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 16px;
+}

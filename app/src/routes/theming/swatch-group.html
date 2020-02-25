@@ -1,0 +1,20 @@
+<template>
+  <require from="./swatch-group.css"></require>
+
+  <header class="${value.p500Intensity}" css="background-color: ${value.p500};">
+
+    ${value.name}
+
+
+    <div class="color-row">
+      <span>p500</span>
+      <span>${value.p500}</span>
+    </div>
+  </header>
+  <ul>
+    <li repeat.for="color of value.colors" class="color-row ${color.intensity}" css="background: ${color.value};">
+      <span>${color.name}</span>
+      <span>${color.value}</span>
+    </li>
+  </ul>
+</template>

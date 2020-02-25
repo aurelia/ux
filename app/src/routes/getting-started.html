@@ -1,0 +1,118 @@
+<template>
+  <ux-grid fluid>
+    <ux-grid-cell>
+      <h1>What is Aurelia UX?</h1>
+  
+      <p>
+        Aurelia UX is a companion framework to Aurelia. While Aurelia focuses on being
+        a <em>front-end framework</em> by providing core capabilities you need to build apps, such as templating, binding and routing,
+        Aurelia UX focuses on being a <em>user experience framework</em> by providing
+        higher-level capabilities such as design languages, theming and components.
+      </p>
+  
+      <p>
+        Aurelia UX is still in a very early stage but we'd love for you to play with it
+        and consider contributing. We'll keep this app updated as we add new features
+        so it's easy for you to track our progress.
+      </p>
+
+      <h1>Setting Up Aurelia UX</h1>
+
+      <p>
+        Getting setup with Aurelia UX is a quick process, and depending on your bundler of choice can be ready to go with a quick
+        npm command and a couple lines of code.
+      </p>
+    
+      <h2>Available Packages</h2>
+    
+      <p>
+        Starting with <code>0.4.0</code>, Aurelia UX has moved to use a Monorepo approach. Using Lerna, we have been able to
+        split out the various components into self-contained packages within a single repository. To manage this, we've moved
+        to publishing all Aurelia UX packages under the aurelia-ux NPM organization. This makes it so you can easily pick
+        which ones you want to use. We've also split out the core so that you can use the style engine independently of the
+        components.
+      </p>
+    
+      <strong>@aurelia-ux/components package</strong>
+    
+      <p>
+        There is a components package that contains all of the standard UX components to help you get started faster.
+      </p>
+    
+      <h2>Installing Aurelia</h2>
+    
+      <h3>Webpack</h3>
+    
+      <p>
+        There is not much you are required to do to get Aurelia UX working with webpack.
+      </p>
+    
+      <strong>Install Aurelia UX Core and Components</strong>
+      <code-block type="shell">
+        npm install @aurelia-ux/core @aurelia-ux/components --save
+      </code-block>
+    
+      <strong>Setup the plugin in your application configuration</strong>
+      <code-block>
+        import {Aurelia} from 'aurelia-framework';
+        import {PLATFORM} from 'aurelia-pal';
+        import environment from './environment';
+      
+        export function configure(aurelia: Aurelia) {
+          aurelia.use
+            .standardConfiguration()
+            .feature(PLATFORM.moduleName('resources/index'));
+        
+            aurelia.use
+            .plugin(PLATFORM.moduleName('@aurelia-ux/core'))
+            .plugin(PLATFORM.moduleName('@aurelia-ux/components'));
+        
+          if (environment.debug) {
+            aurelia.use.developmentLogging();
+          }
+        
+          if (environment.testing) {
+            aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
+          }
+        
+          aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
+        }
+      </code-block>
+    
+      <p>And that is it, you are ready to start using Aurelia UX.</p>
+      <h3>Aurelia CLI</h3>
+    
+      <p>
+        Installing Aurelia UX with the Aurelia CLI has an extra step compared to Webpack.
+      </p>
+    
+      <strong>Updating the Aurelia Json</strong>
+    
+      <code-block type="json">
+        {
+          "name": "@aurelia-ux/core",
+          "path": "../node_modules/@aurelia-ux/core/dist/amd",
+          "main": "index",
+          "resources": ["**/*.{css,html}"]
+        },
+        {
+          "name": "@aurelia-ux/components",
+          "path": "../node_modules/@aurelia-ux/components/dist/amd",
+          "main": "index",
+          "resources": ["**/*.{css,html}"]
+        },
+        {
+          "name": "@aurelia-ux/input",
+          "path": "../node_modules/@aurelia-ux/input/dist/amd",
+          "main": "index",
+          "resources": ["**/*.{js,css,html}"]
+        },
+        ...
+        // Do this for each plugin so that all the modules can be resolved
+      </code-block>
+    
+      <p>And that is it, you are ready to start using Aurelia UX.</p>
+
+    </ux-grid-cell>
+  </ux-grid>
+</template>

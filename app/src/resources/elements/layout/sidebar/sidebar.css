@@ -1,0 +1,68 @@
+sidebar {
+  display: block;
+}
+
+.app-drawer .logo {
+  padding-left: 13px;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--aurelia-ux--drawer-selected-foreground, #fff);
+  display: flex;
+  align-items: center;
+  height: 52px;
+}
+
+ux-drawer.app-drawer aside {
+  background-color: var(--aurelia-ux--drawer-background, #fff);
+  color: var(--aurelia-ux--drawer-foreground, #fff);
+}
+
+.sidebar-menu__anchor {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  padding: 0 16px;
+  height: 52px;
+  border-top: 1px solid var(--aurelia-ux--drawer-border, #31313B);
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+}
+
+.sidebar-menu__anchor:last-of-type {
+  border-bottom: 1px solid var(--aurelia-ux--drawer-border, #31313B);
+}
+
+.sidebar-menu__anchor .detail {
+  margin-right: 8px;
+}
+
+.sidebar-menu__anchor.active {
+  color: var(--aurelia-ux--drawer-selected-foreground, #fff);
+}
+
+.sidebar-menu__bottom-actions {
+  display: flex;
+  border-top: 1px solid var(--aurelia-ux--drawer-border, #31313B);
+  flex-wrap: wrap;
+}
+
+.sidebar-menu__bottom-action {
+  user-select: none;
+  cursor: pointer;
+  text-align: right;
+  padding: 16px;
+  border-right: 1px solid var(--aurelia-ux--drawer-border, #31313B);
+  color: inherit;
+}
+
+.sidebar-menu__collapse-button {
+  flex: 1;
+  user-select: none;
+  cursor: pointer;
+  text-align: right;
+  padding: 16px;
+  border-top: none;
+}

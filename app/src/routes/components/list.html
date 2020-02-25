@@ -1,0 +1,327 @@
+<template>
+  <ux-grid fluid>
+    <ux-grid-cell>
+
+      <h1>
+        &lt;ux-list&gt;&lt;/ux-list&gt;
+      </h1>
+
+      <p>
+        <strong>Package:</strong> @aurelia-ux/list
+      </p>
+
+      <p>
+        <strong>Also in:</strong> @aurelia-ux/components
+      </p>
+
+      <p>
+        The
+        <code>ux-list</code> element allows users to create lists to display repeating data.
+      </p>
+
+      <h2>Classes</h2>
+
+      <strong>.detail.avatar</strong>
+      <p>
+        The
+        <code>.detail.avatar</code> class should be used when adding an image to a list, such as a profile picture in a list of people.
+      </p>
+
+
+      <strong>.action-item</strong>
+      <p>
+        The
+        <code>.action-item</code> class is used to add secondary actions. This class centers its content vertically and horizontally.
+      </p>
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <ux-list>
+          <ux-list-item>
+            List Item 1
+          </ux-list-item>
+          <ux-list-item>
+            List Item 2
+          </ux-list-item>
+          <ux-list-item>
+            List Item 3
+          </ux-list-item>
+        </ux-list>
+        <code-block type="html">
+          &lt;ux-list&gt;
+            &lt;ux-list-item&gt;
+              List Item 1
+            &lt;/ux-list-item&gt;
+            &lt;ux-list-item&gt;
+              List Item 2
+            &lt;/ux-list-item&gt;
+          &lt;/ux-list&gt;
+        </code-block>
+      </ux-card>
+
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <ux-list type="two-line">
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 1</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+          </ux-list-item>
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 2</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+          </ux-list-item>
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 3</span>
+              <div class="secondary">Secondary content that is very long, the purpose is to show content that would clip.</div>
+            </div>
+          </ux-list-item>
+
+        </ux-list>
+        <code-block type="html">
+          &lt;ux-list type="two-line"&gt;
+            &lt;ux-list-item&gt;
+              List Item 1
+            &lt;/ux-list-item&gt;
+            &lt;ux-list-item&gt;
+              List Item 2
+            &lt;/ux-list-item&gt;
+          &lt;/ux-list&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <ux-list type="three-line">
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 1</span>
+              <div class="secondary">Secondary content that is very long. The purpose is to show content that would clip. The three line item wraps
+                so the test content must be longer.</div>
+            </div>
+          </ux-list-item>
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 2</span>
+              <div class="secondary">Secondary content that is very long. The purpose is to show content that would clip. The three line item wraps
+                so the test content must be longer.</div>
+            </div>
+          </ux-list-item>
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 3</span>
+              <div class="secondary">Secondary content that is very long. The purpose is to show content that would clip. The three line item wraps
+                so the test content must be longer.</div>
+            </div>
+          </ux-list-item>
+
+        </ux-list>
+        <code-block type="html">
+          &lt;ux-list type="three-line"&gt;
+            &lt;ux-list-item&gt;
+              List Item 1
+            &lt;/ux-list-item&gt;
+            &lt;ux-list-item&gt;
+              List Item 2
+            &lt;/ux-list-item&gt;
+          &lt;/ux-list&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <ux-list type="two-line">
+
+          <ux-list-item>
+            <ux-icon icon="person"></ux-icon>
+            <div class="list-content">
+              <span>List Item 1</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+          </ux-list-item>
+
+          <ux-list-item>
+            <ux-icon icon="person"></ux-icon>
+            <div class="list-content">
+              <span>List Item 2</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+          </ux-list-item>
+
+          <ux-list-item>
+            <ux-icon icon="person"></ux-icon>
+            <div class="list-content">
+              <span>List Item 3</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+          </ux-list-item>
+
+        </ux-list>
+        <code-block type="html">
+          &lt;ux-list-item&gt;
+            &lt;ux-icon icon="person"&gt;&lt;/ux-icon&gt;
+            &lt;div class="list-content"&gt;
+              &lt;span&gt;List Item 2&lt;/span&gt;
+              &lt;div class="secondary"&gt;Secondary content&lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/ux-list-item&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <ux-list type="two-line">
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 1</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+            <ux-checkbox></ux-checkbox>
+          </ux-list-item>
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 2</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+            <ux-checkbox></ux-checkbox>
+          </ux-list-item>
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 3</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+            <ux-checkbox></ux-checkbox>
+          </ux-list-item>
+
+        </ux-list>
+        <code-block type="html">
+          &lt;ux-list-item&gt;
+            &lt;div class="list-content"&gt;
+              &lt;span&gt;List Item 1&lt;/span&gt;
+              &lt;div class="secondary"&gt;Secondary content&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;ux-checkbox&gt;&lt;/ux-checkbox&gt;
+          &lt;/ux-list-item&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+
+        <ux-list type="two-line">
+
+          <ux-list-item>
+            <!-- <img class="detail avatar" src="../../../images/aurelia-icon-128x128.png"> -->
+            <div class="list-content">
+              <span>List Item 1</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+          </ux-list-item>
+
+          <ux-list-item>
+            <!-- <img class="detail avatar" src="../../../images/aurelia-icon-128x128.png"> -->
+            <div class="list-content">
+              <span>List Item 2</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+          </ux-list-item>
+
+          <ux-list-item>
+            <!-- <img class="detail avatar" src="../../../images/aurelia-icon-128x128.png"> -->
+            <div class="list-content">
+              <span>List Item 3</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+          </ux-list-item>
+
+        </ux-list>
+        <code-block type="html">
+          &lt;img class="detail avatar"
+                  src="aurelia-icon-128x128.png"&gt;
+          &lt;ux-list-item&gt;
+            &lt;div class="list-content"&gt;
+              &lt;span&gt;List Item 1&lt;/span&gt;
+              &lt;div class="secondary"&gt;
+                Secondary content
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/ux-list-item&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <ux-list type="two-line">
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 1</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+            <div class="action-item">
+              <ux-icon icon="3d_rotation"></ux-icon>
+            </div>
+          </ux-list-item>
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 2</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+            <div class="action-item">
+              <ux-button>Edit</ux-button>
+            </div>
+          </ux-list-item>
+
+          <ux-list-item>
+            <div class="list-content">
+              <span>List Item 3</span>
+              <div class="secondary">Secondary content</div>
+            </div>
+            <div class="action-item">
+              <ux-checkbox></ux-checkbox>
+            </div>
+          </ux-list-item>
+
+        </ux-list>
+        <code-block type="html">
+          &lt;ux-list-item&gt;
+            &lt;div class="list-content"&gt;
+              &lt;span&gt;List Item 3&lt;/span&gt;
+              &lt;div class="secondary"&gt;Secondary content&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="action-item"&gt;
+              &lt;ux-checkbox&gt;&lt;/ux-checkbox&gt;
+            &lt;/div&gt;
+          &lt;/ux-list-item&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+  </ux-grid>
+</template>

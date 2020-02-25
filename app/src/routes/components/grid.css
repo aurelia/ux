@@ -1,0 +1,29 @@
+ux-grid.demo-grid {
+  color: #fff;
+  background: #333;
+  border: 1px dotted white;
+}
+
+ux-grid.demo-grid ux-grid-cell {
+  background: #555;
+  color: #fff;
+}
+
+ux-grid.demo-grid ux-grid {
+  background: #777;
+}
+
+ux-grid.demo-grid ux-grid ux-grid-cell {
+  background: #999;
+}
+
+.visibility-bar {
+  display: flex;
+  width: 100%;
+}
+
+.visibility-bar .indicator-box {
+  height: 50px;
+  width: 50px;
+  background-color: #ff00ea;
+}

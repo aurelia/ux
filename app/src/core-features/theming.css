@@ -1,0 +1,39 @@
+styles.properties {
+  margin-top: 40px;
+}
+
+styles.property-row {
+  margin: 24px 0;
+}
+
+styles.label {
+  display: block;
+  margin-bottom: 16px;
+}
+
+styles.themegroup {
+  display: flex;
+}
+
+styles.themecard {
+  width: 320px;
+  margin-right: 16px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  cursor: pointer;
+}
+
+styles.groupprimary {
+  padding: 16px;
+  height: 150px;
+}
+
+styles.groupsecondary {
+  display: flex;
+  height: 60px;
+}
+
+styles.groupsecondary > div {
+   flex-grow: 1;
+   padding: 16px;
+}

@@ -1,0 +1,164 @@
+<template>
+  <require from="./swatch-group"></require>
+  <require from="./theming.css"></require>
+
+  <ux-grid fluid>
+
+    <ux-grid-cell>
+      <h1>Design</h1>
+
+      <p>
+        All UX design properties are made available through the CSS Variable system and through the main AureliaUX class. CSS Variables make it easy to tie into
+        the theming system that Aurelia UX uses.
+      </p>
+          
+      <strong>Design CSS Variable Structure</strong>
+      <em>--aurelia-ux--design-property-name</em>
+      <code-block type="css">
+        --aurelia-ux--design-app-background
+        --aurelia-ux--design-app-foreground
+        --aurelia-ux--design-control-background
+        --aurelia-ux--design-control-foreground
+        --aurelia-ux--design-primary
+        --aurelia-ux--design-primary-foreground
+      </code-block>
+    </ux-grid-cell>
+
+    <ux-grid-cell md="3">
+      <div class="themecard">
+        <div class="groupprimary" css="background: ${ux.design.primary}; color: ${ux.design.primaryForeground};" click.trigger="currentProperty = 'primary'">
+          <span click.delegate="currentProperty = 'primaryForeground'">
+            Primary
+          </span>
+        </div>
+        <div class="groupsecondary" style="display:flex;">
+          <div css="background: ${ux.design.primaryLight}; color: ${ux.design.primaryLightForeground};" click.trigger="currentProperty = 'primaryLight'">
+            <span click.delegate="currentProperty = 'primaryLightForeground'">
+              Primary Light
+            </span>
+          </div>
+          <div css="background: ${ux.design.primaryDark}; color: ${ux.design.primaryDarkForeground};" click.trigger="currentProperty = 'primaryDark'">
+            <span click.delegate="currentProperty = 'primaryDarkForeground'">
+              Primary Dark
+            </span>
+          </div>
+        </div>
+      </div>
+    </ux-grid-cell>
+    <ux-grid-cell md="3">
+      <div class="themecard">
+        <div class="groupprimary" css="background: ${ux.design.accent}; color: ${ux.design.accentForeground};" click.trigger="currentProperty = 'accent'">
+          <span click.delegate="currentProperty = 'accentForeground'">
+            Accent
+          </span>
+        </div>
+        <div class="groupsecondary" style="display:flex;">
+          <div css="background: ${ux.design.accentLight}; color: ${ux.design.accentLightForeground};" click.trigger="currentProperty = 'accentLight'">
+            <span click.delegate="currentProperty = 'accentLightForeground'">
+              Accent Light
+            </span>
+          </div>
+          <div css="background: ${ux.design.accentDark}; color: ${ux.design.accentDarkForeground};" click.trigger="currentProperty = 'accentDark'">
+            <span click.delegate="currentProperty = 'accentDarkForeground'">
+              Accent Dark
+            </span>
+          </div>
+        </div>
+      </div>
+    </ux-grid-cell>
+    <ux-grid-cell md="3">
+      <div class="themecard">
+        <div class="groupprimary" css="background: ${ux.design.controlBackground}; color: ${ux.design.controlForeground};" click.trigger="currentProperty = 'controlBackground'">
+          <span click.delegate="currentProperty = 'controlForeground'">
+            Component Colors
+          </span>
+        </div>
+      </div>
+    </ux-grid-cell>
+
+    <ux-grid-cell md="3">
+      <div class="themecard">
+        <div class="groupprimary" css="background: ${ux.design.appBackground}; color: ${ux.design.appForeground};" click.trigger="currentProperty = 'appBackground'">
+          <span click.delegate="currentProperty = 'appForeground'">
+            App Colors
+          </span>
+        </div>
+      </div>
+    </ux-grid-cell>
+
+    <ux-grid-cell>
+      <p>
+        Click a section(for background) or title(for foreground) to select a property if you wish to change the color with the picker below.
+      </p>
+    </ux-grid-cell>
+    <ux-grid-cell>
+      <strong>Selected Property</strong>
+      <br>
+      <code>
+        design.${currentProperty}
+      </code>
+    </ux-grid-cell>
+    <ux-grid-cell>
+      <div class="theme-picker">
+        <input type="color" value.bind="ux.design[currentProperty]">
+        <ux-input value.bind="ux.design[currentProperty] & updateTrigger:'blur':'paste'"></ux-input>
+      </div>
+    </ux-grid-cell>
+
+    <ux-grid-cell>
+
+      <h1>Swatches</h1>
+
+      <p>
+        Swatches provide sets of colors, both primaries and accents, based on the color theory behind Material Design. It is recommended
+        that you select one primary and one accent color for your app, each with a normal, light and dark shade.
+      </p>
+
+      <p>
+        The swatches are all exposed in two ways. One is through the
+        <code>swatches</code> export on
+        <code>@aurelia-ux/core</code>. The other is through CSS Variables that are created and injected into the document when the application starts up.
+      </p>
+
+      <strong>CSS Examples</strong>
+      <em>--ux-swatch--color-value</em>
+      <code-block type="css">
+          --ux-swatch--blue-grey-p50
+          --ux-swatch--blue-grey-p100
+          --ux-swatch--blue-grey-p200
+          --ux-swatch--blue-grey-p300
+          --ux-swatch--blue-grey-p400
+          --ux-swatch--blue-grey-p500
+          --ux-swatch--blue-grey-p600
+          --ux-swatch--blue-grey-p700
+          --ux-swatch--blue-grey-p800
+          --ux-swatch--blue-grey-p900
+          ...
+          --ux-swatch--black
+          --ux-swatch--white
+      </code-block>
+
+      <strong>Javascript Example</strong>
+      <code-block>
+          swatches.blueGrey.p50
+          swatches.blueGrey.p100
+          swatches.blueGrey.p200
+          swatches.blueGrey.p300
+          swatches.blueGrey.p400
+          swatches.blueGrey.p500
+          swatches.blueGrey.p600
+          swatches.blueGrey.p700
+          swatches.blueGrey.p800
+          swatches.blueGrey.p900
+          swatches.blueGrey.a100
+          ...
+          swatches.black
+          swatches.white
+      </code-block>
+    </ux-grid-cell>
+
+    <ux-grid-cell xs="12" sm="6" md="4" lg="3" xl="2" repeat.for="swatch of swatches">
+      <swatch-group value.bind="swatch"></swatch-group>
+    </ux-grid-cell>
+  </ux-grid>
+</template>

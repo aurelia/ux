@@ -28,6 +28,8 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/textarea'))
     .plugin(PLATFORM.moduleName('aurelia-validation'));
 
+  aurelia.use.feature(PLATFORM.moduleName('resources/index'));
+
   await aurelia.start();
   await aurelia.setRoot(PLATFORM.moduleName('app'), document.body);
 }

@@ -1,0 +1,71 @@
+<template>
+  <ux-grid fluid>
+    <ux-grid-cell sm="6" lg="8">
+      <h1 class="section-title">
+        &lt;ux-radio&gt;&lt;/ux-radio&gt;
+      </h1>
+
+      <p>
+        <strong>Package:</strong> @aurelia-ux/radio
+      </p>
+
+      <p>
+        <strong>Also in:</strong> @aurelia-ux/components
+      </p>
+
+      <p>
+        The <code>ux-radio</code> allows the user to select one option from a set.
+      </p>
+
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <strong>Bind to String</strong>
+
+      <ux-card>
+        <div class="component-demo">
+          <div>
+            <ux-form>
+
+              <template repeat.for="product of products">
+                <div class="form-row">
+                  <ux-radio value.bind="product" checked.bind="selectedStringProducts"></ux-radio>
+                  <label>${product}</label>
+                </div>
+              </template>
+
+            </ux-form>
+          </div>
+        </div>
+        <ux-card-content>
+          <strong>Selected Products:</strong> ${selectedStringProducts}
+        </ux-card-content>
+      </ux-card>
+
+      <br>
+      <strong>Bind to Object</strong>
+
+      <ux-card>
+        <div class="component-demo">
+          <div>
+            <ux-form>
+
+              <template repeat.for="product of productObjects">
+                <div class="form-row">
+                  <ux-radio model.bind="product" checked.bind="selectedProductObjects"></ux-radio>
+                  <label>${product.id} - ${product.name}</label>
+                </div>
+              </template>
+
+            </ux-form>
+          </div>
+        </div>
+        <ux-card-content>
+          <strong>Selected Products:</strong> ${selectedProductObjects.id} - ${selectedProductObjects.name}
+        </ux-card-content>
+      </ux-card>
+
+    </ux-grid-cell>
+  </ux-grid>
+
+</template>

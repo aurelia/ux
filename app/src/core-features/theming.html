@@ -1,0 +1,68 @@
+<template>
+  <require from='../common.css'></require>
+  <require from="./theming.css"></require>
+
+  <main styles.main>
+    <p styles.description>
+      All UX styles can include binding expressions. They can be bound against your custom style models, and/or against generally
+      available properties such as platform and design language.
+    </p>
+
+    <section styles.themegroup>
+      <div styles.themecard>
+        <div styles.groupprimary css="background: ${ux.design.primary}; color: ${ux.design.primaryForeground};" click.trigger="currentProperty = 'primary'">
+          <span click.delegate="currentProperty = 'primaryForeground'">
+            Primary
+          </span>
+        </div>
+
+        <div styles.groupsecondary style="display:flex;">
+          <div css="background: ${ux.design.primaryLight}; color: ${ux.design.primaryLightForeground};" click.trigger="currentProperty = 'primaryLight'">
+            <span click.delegate="currentProperty = 'primaryLightForeground'">
+              Primary Light
+            </span>
+          </div>
+          <div css="background: ${ux.design.primaryDark}; color: ${ux.design.primaryDarkForeground};" click.trigger="currentProperty = 'primaryDark'">
+            <span click.delegate="currentProperty = 'primaryDarkForeground'">
+              Primary Dark
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div styles.themecard>
+        <div styles.groupprimary css="background: ${ux.design.accent}; color: ${ux.design.accentForeground};" click.trigger="currentProperty = 'accent'">
+          <span click.delegate="currentProperty = 'accentForeground'">
+            Accent
+          </span>
+        </div>
+
+        <div styles.groupsecondary style="display:flex;">
+          <div css="background: ${ux.design.accentLight}; color: ${ux.design.accentLightForeground};" click.trigger="currentProperty = 'accentLight'">
+            <span click.delegate="currentProperty = 'accentLightForeground'">
+            Accent Light
+            </span>
+          </div>
+          <div css="background: ${ux.design.accentDark}; color: ${ux.design.accentDarkForeground};" click.trigger="currentProperty = 'accentDark'">
+            <span click.delegate="currentProperty = 'accentDarkForeground'">
+            Accent Dark
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section styles.properties>
+
+      <p styles.description>
+        Click a section(for background) or title(for foreground) to select a property if you wish to change the color with the picker below.
+      </p>
+
+      <div styles.property-row>
+        <code>design.${currentProperty}</code> <br> <br>
+        <input type="color" value.bind="ux.design[currentProperty]">
+        ${ux.design[currentProperty]}
+      </div>
+    </section>
+  </main>
+</template>

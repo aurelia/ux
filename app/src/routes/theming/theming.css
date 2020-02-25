@@ -1,0 +1,91 @@
+swatch-group {
+  display: block;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+swatch-group header {
+  margin: 0;
+  display: flex;
+  padding: 16px;
+  font-size: inherit;
+  font-weight: inherit;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 128px;
+}
+
+swatch-group header.light {
+  color: #333;
+}
+
+swatch-group header.dark {
+  color: #eee;
+}
+
+swatch-group ul li {
+  padding: 16px;
+}
+
+swatch-group .color-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+swatch-group .color-row.light {
+  color: #000;
+}
+
+swatch-group .color-row.dark {
+  color: #fff;
+}
+
+swatch-group.swatch-name {
+  padding: 10px 15px 11px;
+  font-size: 13px;
+  line-height: 24px;
+  margin-bottom: 53px;
+}
+
+styles.color-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 10px 15px 11px;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+.themecard {
+  width: 320px;
+  margin-right: 16px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  cursor: pointer;
+}
+
+.groupprimary {
+  padding: 16px;
+  height: 150px;
+}
+
+.groupsecondary {
+  display: flex;
+  height: 60px;
+}
+
+.groupsecondary > div {
+   flex-grow: 1;
+   padding: 16px;
+}
+
+.theme-picker {
+  display: flex;
+  align-items: flex-end;
+  width: 450px;
+}
+
+.theme-picker>input[type=color] {
+  margin-right: 16px;
+}

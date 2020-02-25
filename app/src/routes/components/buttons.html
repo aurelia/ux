@@ -1,0 +1,101 @@
+<template>
+
+  <ux-grid fluid>
+    <ux-grid-cell sm="6" lg="8">
+      <h1 class="section-title">
+        &lt;ux-button&gt;&lt;/ux-button&gt;
+      </h1>
+
+      <p>
+        <strong>Package:</strong> @aurelia-ux/button
+      </p>
+
+      <p>
+        <strong>Also in:</strong> @aurelia-ux/components
+      </p>
+
+      <p>
+        The
+        <code>ux-button</code> element is used to indicate that a user can take an action. It comes in three types, which can be
+        configured on the button instance, using the
+        <em>type</em> property. Buttons also come in three sizes. These can be configured on the button instance using the
+        <em>size</em> property.
+      </p>
+
+      <p>
+        Material buttons have a ripple effect by default, however that can be turned off using the
+        <code>effect</code> property.
+      </p>
+
+      <strong>Types</strong>
+
+      <br>
+
+      <ux-tag>Raised (default)</ux-tag>
+      <ux-tag>Flat</ux-tag>
+      <ux-tag>Outline</ux-tag>
+      <ux-tag>Text</ux-tag>
+      <ux-tag>Fab</ux-tag>
+
+      <br>
+
+      <strong>Sizes</strong>
+
+      <br>
+
+      <ux-tag>Small</ux-tag>
+      <ux-tag>Medium (default)</ux-tag>
+      <ux-tag>Large</ux-tag>
+
+      <h2>Usage</h2>
+
+      <code-block type="html">
+        &lt;ux-button click.delegate="sayHello()"&gt;Say Hello&lt;/ux-button&gt;
+      </code-block>
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+          <template if.bind="buttontype == 'fab' || buttontype == 'icon'">
+            <ux-button type.bind="buttontype" size.bind="buttonsize">
+              <ux-icon icon="add"></ux-icon>
+            </ux-button>
+          </template>
+          <template else>
+            <ux-button type.bind="buttontype" size.bind="buttonsize">
+              Button
+            </ux-button>
+          </template>
+        </div>
+        <ux-card-content>
+          <ux-form>
+            <label>Button Type</label>
+            <div class="form-row">
+              
+              <ux-radio id="type-raised" model.bind="'raised'" checked.bind="buttontype"></ux-radio>
+              <label for="type-raised">Raised</label>
+              <ux-radio id="type-flat" model.bind="'flat'" checked.bind="buttontype"></ux-radio>
+              <label for="type-flat">Flat</label>
+              <ux-radio id="type-flat" model.bind="'text'" checked.bind="buttontype"></ux-radio>
+              <label for="type-flat">Text</label>
+              <ux-radio id="type-flat" model.bind="'outline'" checked.bind="buttontype"></ux-radio>
+              <label for="type-flat">Outline</label>
+              <ux-radio id="type-fab" model.bind="'fab'" checked.bind="buttontype"></ux-radio>
+              <label for="type-fab">Fab</label>
+            </div>
+            <label>Button Size</label>
+            <div class="form-row">
+              <ux-radio id="size-small" model.bind="'small'" checked.bind="buttonsize"></ux-radio>
+              <label for="size-small">Small</label>
+              <ux-radio id="size-medium" model.bind="'medium'" checked.bind="buttonsize"></ux-radio>
+              <label for="size-medium">Medium</label>
+              <ux-radio id="size-large" model.bind="'large'" checked.bind="buttonsize"></ux-radio>
+              <label for="size-large">Large</label>
+            </div>
+          </ux-form>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid-cell>
+  </ux-grid>
+</template>

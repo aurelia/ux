@@ -1,0 +1,16 @@
+/* header {
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 32px;
+  margin-bottom: 30px;
+  color: var(--aurelia-ux--design-primary);
+} */
+
+.description {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  max-width: 940px;
+  color: var(--ux-swatch--black);
+  margin-bottom: 40px;
+}

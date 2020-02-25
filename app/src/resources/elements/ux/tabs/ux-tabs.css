@@ -1,0 +1,43 @@
+ux-tabs .indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: var(--aurelia-ux--tabs-indicator-color, #fff);
+}
+
+.ux-tab {
+  display: block;
+  position: relative;
+}
+
+.ux-tab {
+  display: inline-block;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 14px 12px 20px 12px;
+  text-align: center;
+  color: var(--aurelia-ux--tabs-foreground, #fff);
+  background-color: var(--aurelia-ux--tabs-background-color, transparent);
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.003em;
+  text-decoration: none;
+  outline: none;
+}
+
+.ux-tab.disabled {
+  cursor: not-allowed;
+}
+
+.ux-tab:hover,
+.ux-tab:focus {
+  opacity: 1;
+}
+
+.ux-tab.active {
+  opacity: 1;
+  padding-bottom: 18px;
+  border-bottom: var(--aurelia-ux--tabs-indicator-color, #fff) solid 2px;
+}
