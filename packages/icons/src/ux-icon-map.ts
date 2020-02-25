@@ -1,4 +1,7 @@
 import { getLogger } from 'aurelia-logging';
+import { Loader } from 'aurelia-loader';
+import { PLATFORM } from 'aurelia-pal';
+import { inject } from 'aurelia-framework';
 
 const logger = getLogger('ux-icon-map');
 
@@ -9,10 +12,28 @@ export interface UxIconRegObject {
 
 export type UxIconRegArray = [string, string, number?, number?];
 
+@inject(Loader)
 export class UxIconMap {
 
   public defaultIconWidth: number = 24;
   public defaultIconHeight: number = 24;
+
+  constructor(private loader: Loader) {}
+
+  public loadFullSet() {
+    PLATFORM.moduleName('./full', {chunk: 'full-icon-set'});
+    const fullJsonPath = '@aurelia-ux/icons/full';
+    return this
+      .loader
+      .loadText(fullJsonPath)
+      .catch(err => {
+        logger.warn('Aurelia-UX Icons failed to load full-array.min.json, some visual errors may appear.', err);
+      })
+      .then((set: any) => {
+        console.log('set', set);
+        this.registerIcons(set.icons as UxIconRegArray[]);
+      });
+  }
 
   private map: {
     [key: string]: string;

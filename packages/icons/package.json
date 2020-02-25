@@ -135,7 +135,8 @@
   "aurelia": {
     "build": {
       "resources": [
-        "@aurelia-ux/icons/ux-icon"
+        "@aurelia-ux/icons/ux-icon",
+        "@aurelia-ux/icons/full"
       ]
     },
     "documentation": {

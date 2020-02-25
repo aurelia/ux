@@ -9,6 +9,7 @@ export { UxIconMap, UxIconRegObject, UxIconRegArray };
 
 export interface UxIconConfiguration {
   icons?: Array<UxIconRegObject>;
+  loadFullSet?: boolean;
   defaultIconWidth?: number;
   defaultIconHeight?: number;
 }
@@ -32,4 +33,8 @@ export function configure(
   if (uxConfig.icons) {
     uxIconMap.registerIcons(uxConfig.icons);
   }
+  if (uxConfig.loadFullSet) {
+    return uxIconMap.loadFullSet();
+  }
+  return;
 }
