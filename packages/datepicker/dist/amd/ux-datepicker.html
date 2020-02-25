@@ -1,18 +1,35 @@
-<template class="ux-datepicker">
+<template 
+  class="ux-input-component ux-input-component--${variant} ${dense ? 'ux-input-component--dense' : ''} ${placeholderMode ? 'ux-input-component--placeholder' : ''} ux-datepicker ${focused || showDialog ? 'ux-input-component--focused' : ''} ${textboxValue ? 'ux-input-component--has-value' : ''}"
+  disabled.bind="disabled & booleanAttr"
+  readonly.bind="readonly & booleanAttr"
+  aria-disabled.bind="disabled & booleanAttr"
+  aria-readonly.bind="readonly & booleanAttr"
+  click.trigger="focusInput()">
   <require from="./ux-datepicker.css"></require>
-  <input class="ux-datepicker__inner-input"
-    ref="textbox"
-    value.bind="textboxValue"
-    blur.trigger="changeTextboxValue()">
-  </input>
-  <div class="ux-datepicker__icon-container"
-    click.trigger="toggleDialog('month')"
-    if.bind="type !== 'time'">
+
+  <slot name="leading-icon"></slot>
+
+  <span class="ux-input-component__content">
+    <div class="ux-input-component__label-background" if.bind="variant === 'outline' && (label || placeholder)" css="width: ${labelEl.offsetWidth + 6}px;"></div>
+    <div class="ux-input-component__label" ref="labelEl">${label || placeholder}</div>
+  
+    <input class="ux-input-component__inner-input"
+      ref="textbox"
+      value.bind="textboxValue"
+      focus.bind="focused & debounce:100"
+      disabled.bind="disabled & booleanAttr"
+      readonly.bind="readonly & booleanAttr"
+      blur.trigger="blur()">
+    </input>
+  </span>
+
+  <span class="ux-input-component__trailing" click.trigger="toggleDialog('month')" if.bind="type !== 'time'">
     <svg viewBox="0 0 24 24" class="ux-datepicker__calendar-icon">
       <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"></path>
     </svg>
-  </div>
-  <div class="ux-datepicker__border-bottom"></div>
+  </span>
+
+  <div class="ux-input-component__border" show.bind="!(variant === 'filled' && disabled)"></div>
 
   <div class="ux-datepicker__overlay" if.bind="showDialog">
     <ux-picker-dialog 

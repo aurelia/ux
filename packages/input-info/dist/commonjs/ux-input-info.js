@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
+var aurelia_binding_1 = require("aurelia-binding");
 var UxInputInfo = /** @class */ (function () {
     function UxInputInfo(element, styleEngine) {
         this.element = element;
@@ -36,6 +37,28 @@ var UxInputInfo = /** @class */ (function () {
             this.target = inputElement.au.controller.viewModel;
         }
     };
+    Object.defineProperty(UxInputInfo.prototype, "maxLength", {
+        get: function () {
+            var target = this.target;
+            if (target.element.tagName === 'UX-INPUT' || target.element.tagName === 'UX-TEXTAREA') {
+                return target.maxlength;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(UxInputInfo.prototype, "length", {
+        get: function () {
+            var target = this.target;
+            if (target.element.tagName === 'UX-INPUT' || target.element.tagName === 'UX-TEXTAREA') {
+                return target.value.length;
+            }
+            return 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
     __decorate([
         aurelia_templating_1.bindable
     ], UxInputInfo.prototype, "target", void 0);
@@ -45,6 +68,12 @@ var UxInputInfo = /** @class */ (function () {
     __decorate([
         aurelia_templating_1.bindable
     ], UxInputInfo.prototype, "theme", void 0);
+    __decorate([
+        aurelia_binding_1.computedFrom('target.maxlength')
+    ], UxInputInfo.prototype, "maxLength", null);
+    __decorate([
+        aurelia_binding_1.computedFrom('target.value')
+    ], UxInputInfo.prototype, "length", null);
     UxInputInfo = __decorate([
         aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
         aurelia_templating_1.customElement('ux-input-info')

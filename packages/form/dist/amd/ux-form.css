@@ -7,7 +7,16 @@
 .ux-form__row {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  align-content: center;
   margin-top: 16px;
+}
+
+.ux-form__sub-row {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  margin-left: 16px;
 }
 
 .ux-form__field {

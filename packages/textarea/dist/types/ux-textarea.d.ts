@@ -1,9 +1,11 @@
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent } from '@aurelia-ux/core';
 import { UxTextAreaTheme } from './ux-textarea-theme';
+import '@aurelia-ux/core/components/ux-input-component.css';
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 export interface UxTextAreaElement extends HTMLElement {
     value: string;
 }
-export declare class UxTextArea implements UxComponent {
+export declare class UxTextArea implements UxInputComponent {
     private element;
     private styleEngine;
     private ignoreRawChanges;
@@ -18,7 +20,11 @@ export declare class UxTextArea implements UxComponent {
     minlength: number;
     readonly: boolean | string;
     rows: number;
+    label: string;
+    placeholder: string;
     theme: UxTextAreaTheme;
+    variant: 'filled' | 'outline';
+    dense: any;
     rawValue: string;
     value: any;
     textbox: HTMLTextAreaElement;
@@ -29,8 +35,10 @@ export declare class UxTextArea implements UxComponent {
     getValue(): any;
     setValue(value: any): void;
     autocompleteChanged(newValue: any): void;
-    rawValueChanged(rawValue: string): void;
+    rawValueChanged(newValue: string): void;
     themeChanged(newValue: any): void;
     fitTextContent(): void;
     focusChanged(focus: boolean | string): void;
+    variantChanged(newValue: string): void;
+    get placeholderMode(): boolean;
 }

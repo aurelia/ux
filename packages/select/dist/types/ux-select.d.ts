@@ -1,8 +1,10 @@
 import { ObserverLocator, TaskQueue } from 'aurelia-framework';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent } from '@aurelia-ux/core';
 import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
 import { UxOptionElement } from './ux-option';
+import '@aurelia-ux/core/components/ux-input-component.css';
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 declare module './ux-option' {
     interface UxOption {
         uxSelect: UxSelect;
@@ -20,7 +22,7 @@ export interface UxSelectElement<T = any> extends HTMLElement {
 export interface UxOptionContainer extends HTMLElement {
     children: HTMLCollectionOf<UxOptGroupElement | UxOptionElement>;
 }
-export declare class UxSelect implements UxComponent {
+export declare class UxSelect implements UxInputComponent {
     readonly element: UxSelectElement;
     private styleEngine;
     private observerLocator;
@@ -32,7 +34,10 @@ export declare class UxSelect implements UxComponent {
     autofocus: boolean | string;
     disabled: boolean | string;
     multiple: boolean | string;
+    label: string;
     placeholder: string;
+    variant: 'filled' | 'outline';
+    dense: any;
     value: any;
     displayValue: string;
     expanded: boolean;
@@ -70,6 +75,8 @@ export declare class UxSelect implements UxComponent {
     onKeyDown(event: KeyboardEvent): true | undefined;
     themeChanged(newValue: UxSelectTheme): void;
     multipleChanged(newValue: boolean | string, oldValue: boolean | string): void;
+    variantChanged(newValue: string): void;
+    get placeholderMode(): boolean;
     get options(): UxOptionElement[];
     getOptions(): UxOptionElement[];
     get isMultiple(): boolean;

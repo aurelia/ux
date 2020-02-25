@@ -6,9 +6,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { customElement, bindable } from 'aurelia-templating';
 import { DOM } from 'aurelia-pal';
-import { observable } from 'aurelia-binding';
+import { observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from '@aurelia-ux/core';
+import { StyleEngine, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 let UxInput = class UxInput {
     constructor(element, styleEngine) {
         this.element = element;
@@ -16,6 +20,8 @@ let UxInput = class UxInput {
         this.autofocus = null;
         this.disabled = false;
         this.readonly = false;
+        this.variant = 'filled';
+        this.dense = false;
         this.rawValue = '';
         this.focused = false;
         Object.setPrototypeOf(element, uxInputElementProto);
@@ -30,17 +36,12 @@ let UxInput = class UxInput {
         if (this.autofocus || this.autofocus === '') {
             this.focused = true;
         }
+        this.dense = normalizeBooleanAttribute('dense', this.dense);
         if (element.hasAttribute('id')) {
             const attributeValue = element.getAttribute('id');
             if (attributeValue) {
                 element.removeAttribute('id');
                 textbox.setAttribute('id', attributeValue);
-            }
-        }
-        if (element.hasAttribute('placeholder')) {
-            const attributeValue = element.getAttribute('placeholder');
-            if (attributeValue) {
-                this.label = attributeValue;
             }
         }
         if (element.hasAttribute('step')) {
@@ -50,17 +51,7 @@ let UxInput = class UxInput {
                 element.removeAttribute('step');
             }
         }
-        if ([
-            'text',
-            'password',
-            'number',
-            'email',
-            'url',
-            'tel',
-            'search'
-        ].includes(this.type)) {
-            textbox.setAttribute('type', this.type);
-        }
+        this.typeChanged(this.type);
         if (this.min) {
             textbox.setAttribute('min', this.min.toString());
         }
@@ -79,6 +70,7 @@ let UxInput = class UxInput {
     attached() {
         this.textbox.addEventListener('change', stopEvent);
         this.textbox.addEventListener('input', stopEvent);
+        this.variantChanged(this.variant);
     }
     detached() {
         this.textbox.removeEventListener('change', stopEvent);
@@ -118,10 +110,10 @@ let UxInput = class UxInput {
     }
     autocompleteChanged(newValue) {
         if (newValue == null) {
-            this.textbox.setAttribute('autocomplete', newValue);
+            this.textbox.removeAttribute('autocomplete');
         }
         else {
-            this.textbox.removeAttribute('autocomplete');
+            this.textbox.setAttribute('autocomplete', newValue);
         }
     }
     themeChanged(newValue) {
@@ -131,26 +123,26 @@ let UxInput = class UxInput {
         this.styleEngine.applyTheme(newValue, this.element);
     }
     focusedChanged(focused) {
-        if (focused === true) {
-            this.element.classList.add('ux-input--focused');
-        }
-        else {
-            this.element.classList.remove('ux-input--focused');
-        }
+        this.element.classList.toggle('ux-input-component--focused', focused);
         this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
     }
     typeChanged(newValue) {
-        if (newValue !== 'text' && newValue !== 'password' && newValue !== 'number') {
+        if (![
+            'text',
+            'password',
+            'number',
+            'email',
+            'url',
+            'tel',
+            'search'
+        ].includes(newValue)) {
             this.type = 'text';
+            return;
         }
+        this.textbox.setAttribute('type', this.type);
     }
     rawValueChanged(newValue) {
-        if (newValue.length > 0) {
-            this.element.classList.add('ux-input--has-value');
-        }
-        else {
-            this.element.classList.remove('ux-input--has-value');
-        }
+        this.element.classList.toggle('ux-input-component--has-value', newValue.length > 0);
         if (this.ignoreRawChanges) {
             return;
         }
@@ -158,6 +150,14 @@ let UxInput = class UxInput {
     }
     focusInput() {
         this.textbox.focus();
+    }
+    variantChanged(newValue) {
+        this.element.style.backgroundColor = newValue === 'outline' ?
+            this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) :
+            '';
+    }
+    get placeholderMode() {
+        return typeof this.label !== 'string' || this.label.length === 0;
     }
 };
 __decorate([
@@ -192,13 +192,25 @@ __decorate([
 ], UxInput.prototype, "label", void 0);
 __decorate([
     bindable
+], UxInput.prototype, "placeholder", void 0);
+__decorate([
+    bindable
 ], UxInput.prototype, "type", void 0);
+__decorate([
+    bindable
+], UxInput.prototype, "variant", void 0);
+__decorate([
+    bindable
+], UxInput.prototype, "dense", void 0);
 __decorate([
     observable
 ], UxInput.prototype, "rawValue", void 0);
 __decorate([
     observable
 ], UxInput.prototype, "focused", void 0);
+__decorate([
+    computedFrom('label')
+], UxInput.prototype, "placeholderMode", null);
 UxInput = __decorate([
     inject(Element, StyleEngine),
     customElement('ux-input')

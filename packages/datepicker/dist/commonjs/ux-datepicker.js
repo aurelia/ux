@@ -11,7 +11,12 @@ var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
 var datetime_utility_1 = require("./resources/datetime-utility");
+var aurelia_pal_1 = require("aurelia-pal");
 var moment_rexports_1 = require("./resources/moment-rexports");
+// tslint:disable-next-line: no-submodule-imports
+require("@aurelia-ux/core/components/ux-input-component.css");
+// tslint:disable-next-line: no-submodule-imports
+require("@aurelia-ux/core/components/ux-input-component--outline.css");
 // import UX_DATEPICKER_VIEW from './ux-datepicker.html';
 // import { PLATFORM } from 'aurelia-pal';
 var UxDatepicker = /** @class */ (function () {
@@ -21,6 +26,11 @@ var UxDatepicker = /** @class */ (function () {
         this.styleEngine = styleEngine;
         this.display = 'month';
         this.type = 'datetime';
+        this.autofocus = null;
+        this.disabled = false;
+        this.readonly = false;
+        this.variant = 'filled';
+        this.dense = false;
         this.formatters = {
             date: 'L',
             time: 'LT',
@@ -29,10 +39,14 @@ var UxDatepicker = /** @class */ (function () {
         this.parsers = {
             time: ['h:m a', 'H:m']
         };
+        this.focused = false;
         this.showDialog = false;
     }
     UxDatepicker.prototype.bind = function () {
-        this.processAttribute('placeholder');
+        if (this.autofocus || this.autofocus === '') {
+            this.focused = true;
+        }
+        this.dense = core_1.normalizeBooleanAttribute('dense', this.dense);
         if (this.initialDate != null) {
             var dateParse = moment_rexports_1.moment(this.initialDate);
             if (dateParse.isValid()) {
@@ -61,13 +75,30 @@ var UxDatepicker = /** @class */ (function () {
         this.valueChanged(this.value);
         this.themeChanged(this.theme);
     };
+    UxDatepicker.prototype.attached = function () {
+        this.variantChanged(this.variant);
+    };
     UxDatepicker.prototype.toggleDialog = function (display) {
         if (this.showDialog) {
             this.showDialog = false;
             return;
         }
+        if (this.disabled || this.readonly) {
+            return;
+        }
         this.display = display;
         this.showDialog = true;
+    };
+    UxDatepicker.prototype.blur = function () {
+        if (this.showDialog) {
+            // if the dialog is opened, we consider that the most accurate value
+            // comes from the dialog and bring back its value
+            this.valueChanged(this.value);
+            return;
+        }
+        // if the dialog is not opened, the textbox has the most accurate value
+        // and therefore we validate it and assign it to component
+        this.changeTextboxValue();
     };
     UxDatepicker.prototype.changeTextboxValue = function () {
         if (!this.textboxValue) {
@@ -98,7 +129,6 @@ var UxDatepicker = /** @class */ (function () {
         if (this.type.toLowerCase() === 'time') {
             this.textboxValue = moment_rexports_1.moment(newValue).format(this.formatters.time);
         }
-        this.showDialog = false;
     };
     UxDatepicker.prototype.minDateChanged = function (newValue) {
         if (newValue != null && newValue instanceof moment_rexports_1.moment === false) {
@@ -130,13 +160,24 @@ var UxDatepicker = /** @class */ (function () {
         }
         this.styleEngine.applyTheme(newValue, this.element);
     };
-    UxDatepicker.prototype.processAttribute = function (attributeName) {
-        var attributeValue = this.element.getAttribute('placeholder');
-        if (attributeValue) {
-            this.element.removeAttribute(attributeName);
-            this.textbox.setAttribute(attributeName, attributeValue);
-        }
+    UxDatepicker.prototype.focusedChanged = function (focused) {
+        this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
     };
+    UxDatepicker.prototype.focusInput = function () {
+        this.textbox.focus();
+    };
+    UxDatepicker.prototype.variantChanged = function (newValue) {
+        this.element.style.backgroundColor = newValue === 'outline' ?
+            this.element.style.backgroundColor = core_1.getBackgroundColorThroughParents(this.element) :
+            '';
+    };
+    Object.defineProperty(UxDatepicker.prototype, "placeholderMode", {
+        get: function () {
+            return typeof this.label !== 'string' || this.label.length === 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
     __decorate([
         aurelia_templating_1.bindable
     ], UxDatepicker.prototype, "theme", void 0);
@@ -163,10 +204,28 @@ var UxDatepicker = /** @class */ (function () {
     ], UxDatepicker.prototype, "maxDate", void 0);
     __decorate([
         aurelia_templating_1.bindable
+    ], UxDatepicker.prototype, "config", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
+    ], UxDatepicker.prototype, "autofocus", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
+    ], UxDatepicker.prototype, "disabled", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
+    ], UxDatepicker.prototype, "readonly", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
+    ], UxDatepicker.prototype, "label", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
     ], UxDatepicker.prototype, "placeholder", void 0);
     __decorate([
         aurelia_templating_1.bindable
-    ], UxDatepicker.prototype, "config", void 0);
+    ], UxDatepicker.prototype, "variant", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
+    ], UxDatepicker.prototype, "dense", void 0);
     __decorate([
         aurelia_templating_1.bindable
     ], UxDatepicker.prototype, "formatters", void 0);
@@ -176,6 +235,12 @@ var UxDatepicker = /** @class */ (function () {
     __decorate([
         aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
     ], UxDatepicker.prototype, "value", void 0);
+    __decorate([
+        aurelia_binding_1.observable
+    ], UxDatepicker.prototype, "focused", void 0);
+    __decorate([
+        aurelia_binding_1.computedFrom('label')
+    ], UxDatepicker.prototype, "placeholderMode", null);
     UxDatepicker = __decorate([
         aurelia_dependency_injection_1.inject(Element, aurelia_templating_1.ViewResources, core_1.StyleEngine),
         aurelia_templating_1.customElement('ux-datepicker')

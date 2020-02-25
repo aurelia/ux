@@ -75,31 +75,55 @@ define(["require", "exports", "aurelia-templating", "aurelia-dependency-injectio
                     : percentValue;
         };
         UxSlider.prototype.updateValue = function (currentMouseX) {
-            var normalizedMouseX = currentMouseX - this.element.offsetLeft;
-            var percentValue = normalizedMouseX / this.element.clientWidth;
+            var rect = this.element.getBoundingClientRect();
+            var normalizedMouseX = currentMouseX - rect.x;
+            var percentValue = normalizedMouseX / rect.width;
             var rawValue = ((this.max - this.min) * percentValue) + this.min;
             var numSteps = Math.round((rawValue - this.min) / this.step);
             var steppedValue = this.min + (this.step * numSteps);
             this.value = this.boundValue(steppedValue);
         };
-        UxSlider.prototype.onTrackMouseDown = function () {
+        UxSlider.prototype.onTrackMouseDown = function (e) {
             var _this = this;
             if (this.disabled) {
                 return;
             }
             this.isActive = true;
+            var isMouseEvent = e instanceof MouseEvent;
+            var isTouchEvent = Array.isArray(e.touches) && e.touches.length > 0;
             var winEvents = new aurelia_templating_1.ElementEvents(window);
             var upAction = function (e) {
                 if (!_this.isActive) {
+                    winEvents.disposeAll();
                     return;
                 }
-                _this.updateValue(e.clientX);
+                if (isMouseEvent) {
+                    _this.updateValue(e.clientX);
+                }
+                if (isTouchEvent) {
+                    var touches = e.touches;
+                    if (touches.length === 1) {
+                        _this.updateValue(touches[0].clientX);
+                    }
+                }
                 _this.isActive = false;
                 winEvents.disposeAll();
             };
+            var moveAction = function (e) {
+                if (!_this.isActive) {
+                    return;
+                }
+                _this.updateValue(isMouseEvent ? e.clientX : e.touches[0].clientX);
+            };
             winEvents.subscribe('blur', upAction, true);
-            winEvents.subscribe('mouseup', upAction, true);
-            winEvents.subscribe('mousemove', this.onMouseMove.bind(this), true);
+            if (isMouseEvent) {
+                winEvents.subscribe('mouseup', upAction, true);
+                winEvents.subscribe('mousemove', moveAction, true);
+            }
+            else if (isTouchEvent) {
+                winEvents.subscribe('touchend', upAction, true);
+                winEvents.subscribe('touchmove', moveAction, true);
+            }
         };
         UxSlider.prototype.onKeyDown = function (e) {
             var steppedValue = e.keyCode === 37 || e.keyCode === 40
@@ -115,9 +139,6 @@ define(["require", "exports", "aurelia-templating", "aurelia-dependency-injectio
         };
         UxSlider.prototype.setValue = function (value) {
             this.value = value;
-        };
-        UxSlider.prototype.onMouseMove = function (e) {
-            this.updateValue(e.clientX);
         };
         UxSlider.prototype.boundValue = function (potentialValue) {
             return potentialValue > this.max

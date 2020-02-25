@@ -1,5 +1,5 @@
 <template role="textbox"
-  class="ux-input ${focused ? 'ux-input--focused' : ''}"
+  class="ux-input-component ux-input-component--${variant} ${dense ? 'ux-input-component--dense' : ''} ${placeholderMode ? 'ux-input-component--placeholder' : ''} ux-input"
   disabled.bind="disabled & booleanAttr"
   readonly.bind="readonly & booleanAttr"
   aria-disabled.bind="disabled & booleanAttr"
@@ -7,20 +7,24 @@
   click.trigger="focusInput()">
   <require from="./ux-input.css"></require>
 
+  
   <slot name="leading-icon"></slot>
 
-  <label class="ux-input__label" if.bind="label || placeholder">${label || placeholder}</label>
-
-  <input
-    ref="textbox"
-    class="ux-input__inner-input"
-    value.bind="rawValue"
-    focus.bind="focused"
-    disabled.bind="disabled & booleanAttr"
-    readonly.bind="readonly & booleanAttr"
-    required.bind="required & booleanAttr">
+  <span class="ux-input-component__content">
+    <div class="ux-input-component__label-background" if.bind="variant === 'outline' && (label || placeholder)" css="width: ${labelEl.offsetWidth + 6}px;"></div>
+    <div class="ux-input-component__label" ref="labelEl">${label || placeholder}</div>
+  
+    <input
+      ref="textbox"
+      class="ux-input-component__inner-input"
+      value.bind="rawValue"
+      focus.bind="focused"
+      disabled.bind="disabled & booleanAttr"
+      readonly.bind="readonly & booleanAttr"
+      required.bind="required & booleanAttr">
+  </span>
 
   <slot name="trailing-icon"></slot>
 
-  <div class="ux-input__border-bottom"></div>
+  <div class="ux-input-component__border" show.bind="!(variant === 'filled' && disabled)"></div>
 </template>

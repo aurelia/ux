@@ -1,16 +1,22 @@
 import { UxTheme } from '@aurelia-ux/core';
 export declare class UxTextAreaTheme implements UxTheme {
     themeKey: string;
-    foreground: string;
-    background: string;
-    borderBottom: string;
-    borderBottomHover: string;
-    borderBottomSelected: string;
-    diabledForeground: string;
-    disabledBorderBottom: string;
-    fullWidthBorder: string;
-    fullWidthForeground: string;
-    fullWidthBackground: string;
-    fullWidthBackgroundDisabled: string;
-    error: string;
+    foreground?: string;
+    foregroundLabel?: string;
+    background?: string;
+    backgroundHover?: string;
+    activeColor?: string;
+    fontSize?: string;
+    letterSpacing?: string;
+    labelFontSize?: string;
+    labelLetterSpacing?: string;
+    lineHeight?: string;
+    labelLineHeight?: string;
+    borderColor?: string;
+    borderRadius?: string;
+    borderWidth?: string;
+    borderActiveWidth?: string;
+    disabledForeground?: string;
+    disabledBackground?: string;
+    error?: string;
 }

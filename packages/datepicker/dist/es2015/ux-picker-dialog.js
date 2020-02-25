@@ -41,6 +41,7 @@ class UxPickerDialog {
     selectDate() {
         if (this.selectedDate != null) {
             this.value = this.selectedDate.toDate();
+            this.closeDialog();
         }
     }
     changeView(view) {

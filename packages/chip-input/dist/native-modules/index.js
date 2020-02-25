@@ -7,6 +7,7 @@ export { UxChip, UxChipInput };
 export function configure(config) {
     config.globalResources([
         PLATFORM.moduleName('./ux-chip-input'),
+        PLATFORM.moduleName('./ux-chip-list'),
         PLATFORM.moduleName('./ux-chip')
     ]);
 }

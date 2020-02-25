@@ -4,7 +4,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-define(["require", "exports", "aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./util"], function (require, exports, aurelia_framework_1, aurelia_logging_1, core_1, util_1) {
+define(["require", "exports", "aurelia-framework", "aurelia-logging", "@aurelia-ux/core", "./util", "@aurelia-ux/core/components/ux-input-component.css", "@aurelia-ux/core/components/ux-input-component--outline.css"], function (require, exports, aurelia_framework_1, aurelia_logging_1, core_1, util_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var UP = 38;
@@ -24,6 +24,8 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "@aurelia-
             this.observerLocator = observerLocator;
             this.taskQueue = taskQueue;
             this.selectedOption = null;
+            this.variant = 'filled';
+            this.dense = false;
             this.ignoreSelectEvent = true;
             // Only chrome persist the element prototype when cloning with clone node
             Object.setPrototypeOf(element, UxSelectElementProto);
@@ -32,6 +34,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "@aurelia-
             if (util_1.bool(this.autofocus)) {
                 // setTimeout(focusEl, 0, this.button);
             }
+            this.dense = core_1.normalizeBooleanAttribute('dense', this.dense);
             if (this.isMultiple) {
                 if (!this.value) {
                     this.value = [];
@@ -48,6 +51,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "@aurelia-
         };
         UxSelect.prototype.attached = function () {
             this.resolveDisplayValue();
+            this.variantChanged(this.variant);
         };
         UxSelect.prototype.unbind = function () {
             this.winEvents.disposeAll();
@@ -67,12 +71,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "@aurelia-
             })
                 .map(function (t) { return t.innerText; });
             this.displayValue = values.join(', ');
-            if (this.displayValue.length > 0) {
-                this.element.classList.add('ux-select--has-value');
-            }
-            else {
-                this.element.classList.remove('ux-select--has-value');
-            }
+            this.element.classList.toggle('ux-input-component--has-value', this.displayValue.length > 0);
         };
         UxSelect.prototype.synchronizeOptions = function () {
             var value = this.value;
@@ -395,6 +394,18 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "@aurelia-
                 );
             }
         };
+        UxSelect.prototype.variantChanged = function (newValue) {
+            this.element.style.backgroundColor = newValue === 'outline' ?
+                this.element.style.backgroundColor = core_1.getBackgroundColorThroughParents(this.element) :
+                '';
+        };
+        Object.defineProperty(UxSelect.prototype, "placeholderMode", {
+            get: function () {
+                return typeof this.label !== 'string' || this.label.length === 0;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(UxSelect.prototype, "options", {
             get: function () {
                 if (!this.optionCtEl) {
@@ -451,8 +462,20 @@ define(["require", "exports", "aurelia-framework", "aurelia-logging", "@aurelia-
             aurelia_framework_1.bindable({ defaultValue: false })
         ], UxSelect.prototype, "multiple", void 0);
         __decorate([
-            aurelia_framework_1.bindable()
+            aurelia_framework_1.bindable
+        ], UxSelect.prototype, "label", void 0);
+        __decorate([
+            aurelia_framework_1.bindable
         ], UxSelect.prototype, "placeholder", void 0);
+        __decorate([
+            aurelia_framework_1.bindable()
+        ], UxSelect.prototype, "variant", void 0);
+        __decorate([
+            aurelia_framework_1.bindable
+        ], UxSelect.prototype, "dense", void 0);
+        __decorate([
+            aurelia_framework_1.computedFrom('label')
+        ], UxSelect.prototype, "placeholderMode", null);
         __decorate([
             aurelia_framework_1.computedFrom('multiple')
         ], UxSelect.prototype, "isMultiple", null);

@@ -46,7 +46,7 @@ let DesignProcessor = class DesignProcessor {
     buildInnerHTML(design) {
         let designInnerHtml = '';
         for (const key in design) {
-            if (design.hasOwnProperty(key)) {
+            if (design.hasOwnProperty(key) && typeof design[key] === 'string' && design[key] !== '') {
                 designInnerHtml += `  --aurelia-ux--design-${kebabCase(key)}: ${design[key]};\r\n`;
             }
         }

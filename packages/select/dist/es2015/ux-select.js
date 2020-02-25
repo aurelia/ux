@@ -6,8 +6,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { customElement, bindable, computedFrom, DOM, processContent, ElementEvents, inject, PLATFORM, ObserverLocator, TaskQueue, } from 'aurelia-framework';
 import { getLogger } from 'aurelia-logging';
-import { StyleEngine } from '@aurelia-ux/core';
+import { StyleEngine, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 import { getAuViewModel, bool } from './util';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 const UP = 38;
 // const RIGHT = 39;
 const DOWN = 40;
@@ -25,6 +29,8 @@ let UxSelect = class UxSelect {
         this.observerLocator = observerLocator;
         this.taskQueue = taskQueue;
         this.selectedOption = null;
+        this.variant = 'filled';
+        this.dense = false;
         this.ignoreSelectEvent = true;
         // Only chrome persist the element prototype when cloning with clone node
         Object.setPrototypeOf(element, UxSelectElementProto);
@@ -33,6 +39,7 @@ let UxSelect = class UxSelect {
         if (bool(this.autofocus)) {
             // setTimeout(focusEl, 0, this.button);
         }
+        this.dense = normalizeBooleanAttribute('dense', this.dense);
         if (this.isMultiple) {
             if (!this.value) {
                 this.value = [];
@@ -49,6 +56,7 @@ let UxSelect = class UxSelect {
     }
     attached() {
         this.resolveDisplayValue();
+        this.variantChanged(this.variant);
     }
     unbind() {
         this.winEvents.disposeAll();
@@ -65,12 +73,7 @@ let UxSelect = class UxSelect {
             option.value === this.value)
             .map(t => t.innerText);
         this.displayValue = values.join(', ');
-        if (this.displayValue.length > 0) {
-            this.element.classList.add('ux-select--has-value');
-        }
-        else {
-            this.element.classList.remove('ux-select--has-value');
-        }
+        this.element.classList.toggle('ux-input-component--has-value', this.displayValue.length > 0);
     }
     synchronizeOptions() {
         const value = this.value;
@@ -380,6 +383,14 @@ let UxSelect = class UxSelect {
             );
         }
     }
+    variantChanged(newValue) {
+        this.element.style.backgroundColor = newValue === 'outline' ?
+            this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) :
+            '';
+    }
+    get placeholderMode() {
+        return typeof this.label !== 'string' || this.label.length === 0;
+    }
     get options() {
         if (!this.optionCtEl) {
             return [];
@@ -425,8 +436,20 @@ __decorate([
     bindable({ defaultValue: false })
 ], UxSelect.prototype, "multiple", void 0);
 __decorate([
-    bindable()
+    bindable
+], UxSelect.prototype, "label", void 0);
+__decorate([
+    bindable
 ], UxSelect.prototype, "placeholder", void 0);
+__decorate([
+    bindable()
+], UxSelect.prototype, "variant", void 0);
+__decorate([
+    bindable
+], UxSelect.prototype, "dense", void 0);
+__decorate([
+    computedFrom('label')
+], UxSelect.prototype, "placeholderMode", null);
 __decorate([
     computedFrom('multiple')
 ], UxSelect.prototype, "isMultiple", null);

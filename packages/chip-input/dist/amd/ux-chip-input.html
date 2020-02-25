@@ -1,13 +1,35 @@
-<template role="textbox" class="ux-chip-input">
+<template role="textbox" 
+  class="ux-input-component ux-input-component--${variant} ${dense ? 'ux-input-component--dense' : ''} ${placeholderMode ? 'ux-input-component--placeholder' : ''} ux-chip-input"
+  click.delegate="focus()">
   <require from="./ux-chip-input.css"></require>
-  <ux-chip deletable
-    ref="chiprepeat"
-    close.trigger="removeChip(chip)"
-    dblclick.trigger="editChip(chip)"
-    repeat.for="chip of chips">
-    ${chip}
-  </ux-chip>
 
-  <input class="ux-chip-input__inner-input" ref="textbox" keyup.delegate="handleKeyup($event)">
-  <div class="ux-chip-input__bottom-border"></div>
+  <slot name="leading-icon"></slot>
+  <span class="ux-input-component__content">
+    <div class="ux-input-component__label-background" if.bind="variant === 'outline' && (label || placeholder)" css="width: ${labelEl.offsetWidth + 6}px;"></div>
+    <div class="ux-input-component__label" ref="labelEl">${label || placeholder}</div>
+  
+    <ux-chip deletable
+      variant="chipVariant"
+      ref="chiprepeat"
+      close.trigger="removeChip(chip)"
+      click.delegate="stopEvent($event)"
+      dblclick.trigger="editChip(chip)"
+      repeat.for="chip of chips">
+      ${chip}
+    </ux-chip>
+
+    <input 
+      show.bind="focused"
+      ref="textbox"
+      class="ux-input-component__inner-input"
+      keyup.delegate="handleKeyup($event)"
+      focus.bind="focused"
+      disabled.bind="disabled & booleanAttr"
+      readonly.bind="readonly & booleanAttr"
+      required.bind="required & booleanAttr">
+  </span>
+
+  <slot name="trailing-icon"></slot>
+
+  <div class="ux-input-component__border" show.bind="!(variant === 'filled' && disabled)"></div>
 </template>
