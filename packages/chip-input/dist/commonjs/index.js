@@ -12,6 +12,7 @@ exports.UxChipTheme = ux_chip_theme_1.UxChipTheme;
 function configure(config) {
     config.globalResources([
         aurelia_framework_1.PLATFORM.moduleName('./ux-chip-input'),
+        aurelia_framework_1.PLATFORM.moduleName('./ux-chip-list'),
         aurelia_framework_1.PLATFORM.moduleName('./ux-chip')
     ]);
 }

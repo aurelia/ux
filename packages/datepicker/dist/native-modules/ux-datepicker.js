@@ -5,11 +5,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { customElement, bindable, ViewResources } from 'aurelia-templating';
-import { bindingMode } from 'aurelia-binding';
+import { bindingMode, observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine } from '@aurelia-ux/core';
+import { StyleEngine, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 import { DatetimeUtility } from './resources/datetime-utility';
+import { DOM } from 'aurelia-pal';
 import { moment } from './resources/moment-rexports';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component.css';
+// tslint:disable-next-line: no-submodule-imports
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 // import UX_DATEPICKER_VIEW from './ux-datepicker.html';
 // import { PLATFORM } from 'aurelia-pal';
 var UxDatepicker = /** @class */ (function () {
@@ -19,6 +24,11 @@ var UxDatepicker = /** @class */ (function () {
         this.styleEngine = styleEngine;
         this.display = 'month';
         this.type = 'datetime';
+        this.autofocus = null;
+        this.disabled = false;
+        this.readonly = false;
+        this.variant = 'filled';
+        this.dense = false;
         this.formatters = {
             date: 'L',
             time: 'LT',
@@ -27,10 +37,14 @@ var UxDatepicker = /** @class */ (function () {
         this.parsers = {
             time: ['h:m a', 'H:m']
         };
+        this.focused = false;
         this.showDialog = false;
     }
     UxDatepicker.prototype.bind = function () {
-        this.processAttribute('placeholder');
+        if (this.autofocus || this.autofocus === '') {
+            this.focused = true;
+        }
+        this.dense = normalizeBooleanAttribute('dense', this.dense);
         if (this.initialDate != null) {
             var dateParse = moment(this.initialDate);
             if (dateParse.isValid()) {
@@ -59,13 +73,30 @@ var UxDatepicker = /** @class */ (function () {
         this.valueChanged(this.value);
         this.themeChanged(this.theme);
     };
+    UxDatepicker.prototype.attached = function () {
+        this.variantChanged(this.variant);
+    };
     UxDatepicker.prototype.toggleDialog = function (display) {
         if (this.showDialog) {
             this.showDialog = false;
             return;
         }
+        if (this.disabled || this.readonly) {
+            return;
+        }
         this.display = display;
         this.showDialog = true;
+    };
+    UxDatepicker.prototype.blur = function () {
+        if (this.showDialog) {
+            // if the dialog is opened, we consider that the most accurate value
+            // comes from the dialog and bring back its value
+            this.valueChanged(this.value);
+            return;
+        }
+        // if the dialog is not opened, the textbox has the most accurate value
+        // and therefore we validate it and assign it to component
+        this.changeTextboxValue();
     };
     UxDatepicker.prototype.changeTextboxValue = function () {
         if (!this.textboxValue) {
@@ -96,7 +127,6 @@ var UxDatepicker = /** @class */ (function () {
         if (this.type.toLowerCase() === 'time') {
             this.textboxValue = moment(newValue).format(this.formatters.time);
         }
-        this.showDialog = false;
     };
     UxDatepicker.prototype.minDateChanged = function (newValue) {
         if (newValue != null && newValue instanceof moment === false) {
@@ -128,13 +158,24 @@ var UxDatepicker = /** @class */ (function () {
         }
         this.styleEngine.applyTheme(newValue, this.element);
     };
-    UxDatepicker.prototype.processAttribute = function (attributeName) {
-        var attributeValue = this.element.getAttribute('placeholder');
-        if (attributeValue) {
-            this.element.removeAttribute(attributeName);
-            this.textbox.setAttribute(attributeName, attributeValue);
-        }
+    UxDatepicker.prototype.focusedChanged = function (focused) {
+        this.element.dispatchEvent(DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
     };
+    UxDatepicker.prototype.focusInput = function () {
+        this.textbox.focus();
+    };
+    UxDatepicker.prototype.variantChanged = function (newValue) {
+        this.element.style.backgroundColor = newValue === 'outline' ?
+            this.element.style.backgroundColor = getBackgroundColorThroughParents(this.element) :
+            '';
+    };
+    Object.defineProperty(UxDatepicker.prototype, "placeholderMode", {
+        get: function () {
+            return typeof this.label !== 'string' || this.label.length === 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
     __decorate([
         bindable
     ], UxDatepicker.prototype, "theme", void 0);
@@ -161,10 +202,28 @@ var UxDatepicker = /** @class */ (function () {
     ], UxDatepicker.prototype, "maxDate", void 0);
     __decorate([
         bindable
+    ], UxDatepicker.prototype, "config", void 0);
+    __decorate([
+        bindable
+    ], UxDatepicker.prototype, "autofocus", void 0);
+    __decorate([
+        bindable
+    ], UxDatepicker.prototype, "disabled", void 0);
+    __decorate([
+        bindable
+    ], UxDatepicker.prototype, "readonly", void 0);
+    __decorate([
+        bindable
+    ], UxDatepicker.prototype, "label", void 0);
+    __decorate([
+        bindable
     ], UxDatepicker.prototype, "placeholder", void 0);
     __decorate([
         bindable
-    ], UxDatepicker.prototype, "config", void 0);
+    ], UxDatepicker.prototype, "variant", void 0);
+    __decorate([
+        bindable
+    ], UxDatepicker.prototype, "dense", void 0);
     __decorate([
         bindable
     ], UxDatepicker.prototype, "formatters", void 0);
@@ -174,6 +233,12 @@ var UxDatepicker = /** @class */ (function () {
     __decorate([
         bindable({ defaultBindingMode: bindingMode.twoWay })
     ], UxDatepicker.prototype, "value", void 0);
+    __decorate([
+        observable
+    ], UxDatepicker.prototype, "focused", void 0);
+    __decorate([
+        computedFrom('label')
+    ], UxDatepicker.prototype, "placeholderMode", null);
     UxDatepicker = __decorate([
         inject(Element, ViewResources, StyleEngine),
         customElement('ux-datepicker')

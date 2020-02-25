@@ -11,6 +11,10 @@ var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
+// tslint:disable-next-line: no-submodule-imports
+require("@aurelia-ux/core/components/ux-input-component.css");
+// tslint:disable-next-line: no-submodule-imports
+require("@aurelia-ux/core/components/ux-input-component--outline.css");
 var UxInput = /** @class */ (function () {
     function UxInput(element, styleEngine) {
         this.element = element;
@@ -18,6 +22,8 @@ var UxInput = /** @class */ (function () {
         this.autofocus = null;
         this.disabled = false;
         this.readonly = false;
+        this.variant = 'filled';
+        this.dense = false;
         this.rawValue = '';
         this.focused = false;
         Object.setPrototypeOf(element, uxInputElementProto);
@@ -32,17 +38,12 @@ var UxInput = /** @class */ (function () {
         if (this.autofocus || this.autofocus === '') {
             this.focused = true;
         }
+        this.dense = core_1.normalizeBooleanAttribute('dense', this.dense);
         if (element.hasAttribute('id')) {
             var attributeValue = element.getAttribute('id');
             if (attributeValue) {
                 element.removeAttribute('id');
                 textbox.setAttribute('id', attributeValue);
-            }
-        }
-        if (element.hasAttribute('placeholder')) {
-            var attributeValue = element.getAttribute('placeholder');
-            if (attributeValue) {
-                this.label = attributeValue;
             }
         }
         if (element.hasAttribute('step')) {
@@ -52,17 +53,7 @@ var UxInput = /** @class */ (function () {
                 element.removeAttribute('step');
             }
         }
-        if ([
-            'text',
-            'password',
-            'number',
-            'email',
-            'url',
-            'tel',
-            'search'
-        ].includes(this.type)) {
-            textbox.setAttribute('type', this.type);
-        }
+        this.typeChanged(this.type);
         if (this.min) {
             textbox.setAttribute('min', this.min.toString());
         }
@@ -81,6 +72,7 @@ var UxInput = /** @class */ (function () {
     UxInput.prototype.attached = function () {
         this.textbox.addEventListener('change', stopEvent);
         this.textbox.addEventListener('input', stopEvent);
+        this.variantChanged(this.variant);
     };
     UxInput.prototype.detached = function () {
         this.textbox.removeEventListener('change', stopEvent);
@@ -120,10 +112,10 @@ var UxInput = /** @class */ (function () {
     };
     UxInput.prototype.autocompleteChanged = function (newValue) {
         if (newValue == null) {
-            this.textbox.setAttribute('autocomplete', newValue);
+            this.textbox.removeAttribute('autocomplete');
         }
         else {
-            this.textbox.removeAttribute('autocomplete');
+            this.textbox.setAttribute('autocomplete', newValue);
         }
     };
     UxInput.prototype.themeChanged = function (newValue) {
@@ -133,26 +125,26 @@ var UxInput = /** @class */ (function () {
         this.styleEngine.applyTheme(newValue, this.element);
     };
     UxInput.prototype.focusedChanged = function (focused) {
-        if (focused === true) {
-            this.element.classList.add('ux-input--focused');
-        }
-        else {
-            this.element.classList.remove('ux-input--focused');
-        }
+        this.element.classList.toggle('ux-input-component--focused', focused);
         this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent(focused ? 'focus' : 'blur', { bubbles: false }));
     };
     UxInput.prototype.typeChanged = function (newValue) {
-        if (newValue !== 'text' && newValue !== 'password' && newValue !== 'number') {
+        if (![
+            'text',
+            'password',
+            'number',
+            'email',
+            'url',
+            'tel',
+            'search'
+        ].includes(newValue)) {
             this.type = 'text';
+            return;
         }
+        this.textbox.setAttribute('type', this.type);
     };
     UxInput.prototype.rawValueChanged = function (newValue) {
-        if (newValue.length > 0) {
-            this.element.classList.add('ux-input--has-value');
-        }
-        else {
-            this.element.classList.remove('ux-input--has-value');
-        }
+        this.element.classList.toggle('ux-input-component--has-value', newValue.length > 0);
         if (this.ignoreRawChanges) {
             return;
         }
@@ -161,6 +153,18 @@ var UxInput = /** @class */ (function () {
     UxInput.prototype.focusInput = function () {
         this.textbox.focus();
     };
+    UxInput.prototype.variantChanged = function (newValue) {
+        this.element.style.backgroundColor = newValue === 'outline' ?
+            this.element.style.backgroundColor = core_1.getBackgroundColorThroughParents(this.element) :
+            '';
+    };
+    Object.defineProperty(UxInput.prototype, "placeholderMode", {
+        get: function () {
+            return typeof this.label !== 'string' || this.label.length === 0;
+        },
+        enumerable: true,
+        configurable: true
+    });
     __decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "autofocus", void 0);
@@ -193,13 +197,25 @@ var UxInput = /** @class */ (function () {
     ], UxInput.prototype, "label", void 0);
     __decorate([
         aurelia_templating_1.bindable
+    ], UxInput.prototype, "placeholder", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
     ], UxInput.prototype, "type", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
+    ], UxInput.prototype, "variant", void 0);
+    __decorate([
+        aurelia_templating_1.bindable
+    ], UxInput.prototype, "dense", void 0);
     __decorate([
         aurelia_binding_1.observable
     ], UxInput.prototype, "rawValue", void 0);
     __decorate([
         aurelia_binding_1.observable
     ], UxInput.prototype, "focused", void 0);
+    __decorate([
+        aurelia_binding_1.computedFrom('label')
+    ], UxInput.prototype, "placeholderMode", null);
     UxInput = __decorate([
         aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
         aurelia_templating_1.customElement('ux-input')

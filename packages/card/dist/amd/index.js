@@ -13,7 +13,8 @@ define(["require", "exports", "aurelia-framework", "./ux-card", "./ux-card-heade
             aurelia_framework_1.PLATFORM.moduleName('./ux-card-header'),
             aurelia_framework_1.PLATFORM.moduleName('./ux-card-action-row'),
             aurelia_framework_1.PLATFORM.moduleName('./ux-card-content'),
-            aurelia_framework_1.PLATFORM.moduleName('./ux-card-footer')
+            aurelia_framework_1.PLATFORM.moduleName('./ux-card-footer'),
+            aurelia_framework_1.PLATFORM.moduleName('./ux-card-separator')
         ]);
     }
     exports.configure = configure;

@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
+import { computedFrom } from 'aurelia-binding';
 let UxInputInfo = class UxInputInfo {
     constructor(element, styleEngine) {
         this.element = element;
@@ -34,6 +35,20 @@ let UxInputInfo = class UxInputInfo {
             this.target = inputElement.au.controller.viewModel;
         }
     }
+    get maxLength() {
+        const target = this.target;
+        if (target.element.tagName === 'UX-INPUT' || target.element.tagName === 'UX-TEXTAREA') {
+            return target.maxlength;
+        }
+        return 0;
+    }
+    get length() {
+        const target = this.target;
+        if (target.element.tagName === 'UX-INPUT' || target.element.tagName === 'UX-TEXTAREA') {
+            return target.value.length;
+        }
+        return 0;
+    }
 };
 __decorate([
     bindable
@@ -44,6 +59,12 @@ __decorate([
 __decorate([
     bindable
 ], UxInputInfo.prototype, "theme", void 0);
+__decorate([
+    computedFrom('target.maxlength')
+], UxInputInfo.prototype, "maxLength", null);
+__decorate([
+    computedFrom('target.value')
+], UxInputInfo.prototype, "length", null);
 UxInputInfo = __decorate([
     inject(Element, StyleEngine),
     customElement('ux-input-info')

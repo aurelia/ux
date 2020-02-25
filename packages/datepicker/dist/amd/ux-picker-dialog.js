@@ -36,6 +36,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-dependency-injectio
         UxPickerDialog.prototype.selectDate = function () {
             if (this.selectedDate != null) {
                 this.value = this.selectedDate.toDate();
+                this.closeDialog();
             }
         };
         UxPickerDialog.prototype.changeView = function (view) {

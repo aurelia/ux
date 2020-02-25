@@ -32,7 +32,12 @@ var StyleController = /** @class */ (function () {
         else if (element != null) {
             for (var key in theme) {
                 if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
-                    element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), theme[key]);
+                    if (theme[key]) {
+                        element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), theme[key]);
+                    }
+                    else {
+                        element.style.removeProperty(this.generateCssVariableName(theme.themeKey, key));
+                    }
                 }
             }
         }
@@ -60,6 +65,9 @@ var StyleController = /** @class */ (function () {
         return "--aurelia-ux--" + themeKey + "-" + kebabCase(propertyKey);
     };
     StyleController.prototype.generateCssVariable = function (themeKey, propertyKey, value) {
+        if (value === undefined || value === 'undefined') {
+            return '';
+        }
         return "--aurelia-ux--" + themeKey + "-" + kebabCase(propertyKey) + ": " + value + ";";
     };
     StyleController.prototype.setWatches = function (theme) {
@@ -83,7 +91,9 @@ var StyleController = /** @class */ (function () {
         var designInnerHtml = '';
         for (var _i = 0, _a = this.getThemeKeys(theme); _i < _a.length; _i++) {
             var key = _a[_i];
-            designInnerHtml += "  " + this.generateCssVariable(theme.themeKey, key, theme[key]) + "\r\n";
+            if (theme[key]) {
+                designInnerHtml += "  " + this.generateCssVariable(theme.themeKey, key, theme[key]) + "\r\n";
+            }
         }
         return designInnerHtml;
     };

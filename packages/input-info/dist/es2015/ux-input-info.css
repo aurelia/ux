@@ -3,8 +3,8 @@
   font-size: 14px;
   padding: 0 16px;
   width: 100%;
-  color: #909090;
-  color: var(--aurelia-ux--input-info-foreground, #909090);
+  color: #757575;
+  color: var(--aurelia-ux--input-info-foreground, var(--aurelia-ux--design-control-label-color, #757575));
   box-sizing: border-box;
   margin-top: 4px;
 }
@@ -22,8 +22,8 @@
 }
 
 .ux-input--has-error+.ux-input-info {
-  color:  #F44336;
-  color: var(--aurelia-ux--input-info-error, #F44336);
+  color: #F44336;
+  color: var(--aurelia-ux--input-info-error, var(--aurelia-ux--design-error, #F44336));
 }
 
 .ux-input[disabled]+.ux-input-info {
@@ -36,6 +36,6 @@
 }
 
 .ux-input--focused+.ux-input-info .ux-input-info__counter {
-  color: #FF4081;
-  color: var(--aurelia-ux--design-accent, #FF4081);
+  /* color: #FF4081;
+  color: var(--aurelia-ux--design-accent, #FF4081); */
 }

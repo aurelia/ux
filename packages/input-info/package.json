@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/input-info",
-  "version": "0.17.1",
+  "version": "0.18.0",
   "description": "Input-Info component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -85,7 +85,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.17.1",
+    "@aurelia-ux/core": "^0.18.0",
     "aurelia-binding": "^2.0.0",
     "moment": "^2.18.1"
   },

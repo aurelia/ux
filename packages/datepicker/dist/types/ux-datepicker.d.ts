@@ -1,8 +1,10 @@
 import { ViewResources } from 'aurelia-templating';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent } from '@aurelia-ux/core';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
-export declare class UxDatepicker implements UxComponent {
+import '@aurelia-ux/core/components/ux-input-component.css';
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
+export declare class UxDatepicker implements UxInputComponent {
     element: HTMLElement;
     resources: ViewResources;
     styleEngine: StyleEngine;
@@ -14,8 +16,14 @@ export declare class UxDatepicker implements UxComponent {
     maxTime: any;
     minDate: any;
     maxDate: any;
-    placeholder: any;
     config: DatepickerSettings;
+    autofocus: null;
+    disabled: any;
+    readonly: any;
+    label: string;
+    placeholder: string;
+    variant: 'filled' | 'outline';
+    dense: any;
     formatters: {
         date: string;
         time: string;
@@ -25,12 +33,15 @@ export declare class UxDatepicker implements UxComponent {
         time: string[];
     };
     value: any;
+    focused: boolean;
     textbox: HTMLInputElement;
     private textboxValue;
     private showDialog;
     constructor(element: HTMLElement, resources: ViewResources, styleEngine: StyleEngine);
     bind(): void;
+    attached(): void;
     toggleDialog(display: string): void;
+    blur(): void;
     changeTextboxValue(): void;
     valueChanged(newValue: Date): void;
     minDateChanged(newValue: any): void;
@@ -38,5 +49,8 @@ export declare class UxDatepicker implements UxComponent {
     minTimeChanged(newValue: any): void;
     maxTimeChanged(newValue: any): void;
     themeChanged(newValue: any): void;
-    private processAttribute;
+    focusedChanged(focused: boolean): void;
+    focusInput(): void;
+    variantChanged(newValue: string): void;
+    get placeholderMode(): boolean;
 }

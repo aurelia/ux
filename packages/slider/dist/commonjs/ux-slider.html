@@ -1,17 +1,17 @@
-<template class="ux-slider">
+<template class="ux-slider ${disabled ? 'ux-slider--disabled' : ''}">
   <require from="./ux-slider.css"></require>
-  <div class="ux-slider__container" 
-       class.bind="disabled ? 'ux-slider__container--disabled' : 'ux-slider__container--enabled'"
+  <slot name="leading-icon"></slot>
+  <div class="ux-slider__container ${disabled ? 'ux-slider__container--disabled' : 'ux-slider__container--enabled'}"
+       touchstart.trigger="onTrackMouseDown($event)"
        mousedown.delegate="onTrackMouseDown($event)">
-    <div class="ux-slider__track ux-slider__track-before" 
-         class.bind="isActive ? 'ux-slider__track--active' : 'ux-slider__track--inactive'"
+    <div class="ux-slider__track ux-slider__track-before ${isActive ? 'ux-slider__track--active' : 'ux-slider__track--inactive'}" 
          css="width: ${sliderBeforeWidth}%;"></div>
     <div class="ux-slider__thumb-container">
       <button class="ux-slider__thumb-button" keydown.delegate="onKeyDown($event)">
       </button>
     </div>
-    <div class="ux-slider__track ux-slider__track-after" 
-         class.bind="isActive ? 'ux-slider__track--active' : 'ux-slider__track--inactive'"
+    <div class="ux-slider__track ux-slider__track-after ${isActive ? 'ux-slider__track--active' : 'ux-slider__track--inactive'}" 
          css="width: ${sliderAfterWidth}%;"></div>
   </div>
+  <slot name="trailing-icon"></slot>
 </template>

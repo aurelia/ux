@@ -1,13 +1,20 @@
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent } from '@aurelia-ux/core';
 import { UxChipInputTheme } from './ux-chip-input-theme';
-export declare class UxChipInput implements UxComponent {
+import '@aurelia-ux/core/components/ux-input-component.css';
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
+export declare class UxChipInput implements UxInputComponent {
     private element;
     private styleEngine;
     disabled: boolean | string;
     readonly: boolean | string;
     theme: UxChipInputTheme;
-    label: any;
+    label: string;
+    placeholder: string;
     separator: string;
+    variant: 'filled' | 'outline';
+    chipVariant: 'filled' | 'outline';
+    dense: any;
+    focused: boolean;
     value: any;
     chips: string[];
     private textbox;
@@ -16,7 +23,8 @@ export declare class UxChipInput implements UxComponent {
     constructor(element: HTMLElement, styleEngine: StyleEngine);
     bind(): void;
     attached(): void;
-    detached(): void;
+    focus(): void;
+    focusedChanged(): void;
     handleKeyup(event: KeyboardEvent): void;
     addChip(): void;
     editChip(value: string): void;
@@ -26,4 +34,7 @@ export declare class UxChipInput implements UxComponent {
     disabledChanged(newValue: boolean | string): void;
     readonlyChanged(newValue: boolean | string): void;
     themeChanged(newValue: UxChipInputTheme): void;
+    variantChanged(newValue: string): void;
+    get placeholderMode(): boolean;
+    stopEvent(event: Event): void;
 }

@@ -1,3 +1,5 @@
+/* Styling is done for the main `filled` variant */
+/* Outline variant is done in the second part of the file */
 .ux-chip {
   display: inline-flex;
   align-items: center;
@@ -7,24 +9,36 @@
   height: 32px;
   border-radius: 100px;
 
-  background-color: rgba(132, 132, 132, 0.18);
-  background-color: var(--aurelia-ux--chip-background, rgba(132, 132, 132, 0.18));
-  color: #333;
-  color: var(--aurelia-ux--chip-foreground, var(--aurelia-ux--design-app-foreground, #333));
+  color: #212121;
+  color: var(--aurelia-ux--chip-foreground, var(--aurelia-ux--design-control-foreground, #212121));
+  background-color: #E0E0E0;
+  background-color: var(--aurelia-ux--chip-background, var(--aurelia-ux--design-control-background, #E0E0E0));
 }
 
 .ux-chip__content {
   margin: 0 12px;
 }
 
-.ux-chip__close {
+.ux-chip__thumbnail {
+  --aurelia-ux--icon-size: var(--aurelia-ux--chip-icon-size, 16px);
+  display: flex;
+}
+
+.ux-chip__thumbnail > * {
   display: none;
 }
 
-.ux-chip:focus {
-  outline: none;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  box-shadow: var(--aurelia-ux--design-elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2));
+.ux-chip__thumbnail > *:first-child {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.ux-chip__thumbnail > .ux_chip__selected_icon {
+  display: none;
+}
+
+.ux-chip__close {
+  display: none;
 }
 
 .ux-chip--deletable .ux-chip__content {
@@ -50,4 +64,44 @@
   content: '+';
   font-size: 24px;
   transform: rotate(45deg);
+}
+
+/* STATES */
+.ux-chip--focused {
+  outline: none;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--aurelia-ux--design-elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2));
+}
+
+.ux-chip--selected,
+.ux-chip.ux-choice--selected {
+  background-color: rgba(132, 132, 132, 0.5);
+  background-color: var(--aurelia-ux--chip-active-color, rgba(132, 132, 132, 0.5));
+}
+
+
+/* OUTLINE */
+.ux-chip--outline {
+  background: transparent;
+  border-style: solid;
+  border-color: #757575;
+  border-color: var(--aurelia-ux--input-foreground-label, var(--aurelia-ux--design-control-label-color, #757575));
+  border-width: var(--aurelia-ux--input-border-width, 1px);
+}
+.ux-chip--outline.ux-chip--selected
+.ux-chip--outline.ux-choice--selected {
+  background-color: rgba(132, 132, 132, 0.5);
+  background-color: var(--aurelia-ux--chip-active-color, rgba(132, 132, 132, 0.5));
+}
+
+
+/* DISPLAY CHECK ICON FOR MULTIPLE CHIP LIST */
+.ux-choice-container--multiple .ux-chip__thumbnail > *:first-child {
+  display: none;
+}
+
+.ux-choice-container--multiple .ux-choice--selected .ux-chip__thumbnail > .ux_chip__selected_icon,
+.ux-choice-container--multiple .ux-chip--selected .ux-chip__thumbnail > .ux_chip__selected_icon {
+  margin-left: 10px;
+  display: inline-block;
 }

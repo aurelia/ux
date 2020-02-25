@@ -1,9 +1,11 @@
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
+import '@aurelia-ux/core/components/ux-input-component.css';
+import '@aurelia-ux/core/components/ux-input-component--outline.css';
 export interface UxInputElement extends HTMLElement {
     value: any;
 }
-export declare class UxInput implements UxComponent {
+export declare class UxInput implements UxInputComponent {
     private element;
     styleEngine: StyleEngine;
     private ignoreRawChanges;
@@ -16,8 +18,11 @@ export declare class UxInput implements UxComponent {
     max: number;
     readonly: any;
     theme: UxInputTheme;
-    label: any;
+    label: string;
+    placeholder: string;
     type: any;
+    variant: 'filled' | 'outline';
+    dense: any;
     rawValue: string;
     focused: boolean;
     value: any;
@@ -35,4 +40,6 @@ export declare class UxInput implements UxComponent {
     typeChanged(newValue: any): void;
     rawValueChanged(newValue: string): void;
     focusInput(): void;
+    variantChanged(newValue: string): void;
+    get placeholderMode(): boolean;
 }

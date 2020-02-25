@@ -13,6 +13,12 @@ var paper_ripple_1 = require("./effects/paper-ripple");
 exports.PaperRipple = paper_ripple_1.PaperRipple;
 var html_attributes_1 = require("./components/html-attributes");
 exports.normalizeBooleanAttribute = html_attributes_1.normalizeBooleanAttribute;
+var background_color_parent_1 = require("./components/background-color-parent");
+exports.getBackgroundColorThroughParents = background_color_parent_1.getBackgroundColorThroughParents;
+var ux_choice_attribute_1 = require("./components/ux-choice-attribute");
+exports.UxChoiceAttribute = ux_choice_attribute_1.UxChoiceAttribute;
+var ux_choice_container_attribute_1 = require("./components/ux-choice-container-attribute");
+exports.UxChoiceContainerAttribute = ux_choice_container_attribute_1.UxChoiceContainerAttribute;
 var style_engine_1 = require("./styles/style-engine");
 exports.StyleEngine = style_engine_1.StyleEngine;
 var global_style_engine_1 = require("./styles/global-style-engine");
@@ -30,6 +36,10 @@ function configure(config, callback) {
     var boolAttr = new aurelia_framework_1.BindingBehaviorResource('');
     boolAttr.initialize(config.container, boolean_attr_binding_behavior_1.BooleanBB);
     boolAttr.register(config.aurelia.resources, 'booleanAttr');
+    config.globalResources([
+        aurelia_framework_1.PLATFORM.moduleName('./components/ux-choice-attribute'),
+        aurelia_framework_1.PLATFORM.moduleName('./components/ux-choice-container-attribute')
+    ]);
     if (typeof callback === 'function') {
         return uxCorePromise = Promise.resolve(callback(ux))
             .then(function () { return ux.start(config); });

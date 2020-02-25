@@ -30,7 +30,12 @@ let StyleController = class StyleController {
         else if (element != null) {
             for (const key in theme) {
                 if (theme.hasOwnProperty(key) && baseTheme.hasOwnProperty(key) === false) {
-                    element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), theme[key]);
+                    if (theme[key]) {
+                        element.style.setProperty(this.generateCssVariableName(theme.themeKey, key), theme[key]);
+                    }
+                    else {
+                        element.style.removeProperty(this.generateCssVariableName(theme.themeKey, key));
+                    }
                 }
             }
         }
@@ -58,6 +63,9 @@ let StyleController = class StyleController {
         return `--aurelia-ux--${themeKey}-${kebabCase(propertyKey)}`;
     }
     generateCssVariable(themeKey, propertyKey, value) {
+        if (value === undefined || value === 'undefined') {
+            return '';
+        }
         return `--aurelia-ux--${themeKey}-${kebabCase(propertyKey)}: ${value};`;
     }
     setWatches(theme) {
@@ -76,7 +84,9 @@ let StyleController = class StyleController {
     processInnerHtml(theme) {
         let designInnerHtml = '';
         for (const key of this.getThemeKeys(theme)) {
-            designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, theme[key])}\r\n`;
+            if (theme[key]) {
+                designInnerHtml += `  ${this.generateCssVariable(theme.themeKey, key, theme[key])}\r\n`;
+            }
         }
         return designInnerHtml;
     }

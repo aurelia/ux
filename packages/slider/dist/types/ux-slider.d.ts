@@ -3,6 +3,11 @@ import { UxSliderTheme } from './ux-slider-theme';
 export interface UxSliderElement extends HTMLElement {
     value: number;
 }
+export interface MouseOrTouchEvent extends MouseEvent {
+    touches?: Array<{
+        clientX: number;
+    }>;
+}
 export declare class UxSlider implements UxComponent {
     element: UxSliderElement;
     private styleEngine;
@@ -24,10 +29,9 @@ export declare class UxSlider implements UxComponent {
     maxChanged(): void;
     valueChanged(): void;
     updateValue(currentMouseX: number): void;
-    onTrackMouseDown(): void;
+    onTrackMouseDown(e: MouseOrTouchEvent): void;
     onKeyDown(e: KeyboardEvent): boolean;
     getValue(): number;
     setValue(value: number): void;
-    private onMouseMove;
     private boundValue;
 }
