@@ -17,6 +17,7 @@
 
 .ux-chip__content {
   margin: 0 12px;
+  white-space: nowrap;
 }
 
 .ux-chip__thumbnail {
