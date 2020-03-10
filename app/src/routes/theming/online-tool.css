@@ -1,21 +1,24 @@
-.theming h3 {
+/* .theming h3 {
   display: flex;
   align-items: center;
   align-content: center;
   cursor: pointer;
-}
+} */
 
-.color-feedback {
+/* .theming .color-feedback {
   display: inline-flex;
   width: 30px;
   height: 30px;
   border-radius: 3px;
-  border: 1px solid var(--ux-swatch--white);
-}
+} */
 
-.theming ux-field {
+/* .theming ux-field {
   display: block;
   margin-bottom: 8px;
+} */
+
+section {
+  padding: 16px;
 }
 
 .ux-card-component__media {

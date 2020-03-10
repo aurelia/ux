@@ -1,0 +1,989 @@
+<template>
+  <require from="./online-tool.css"></require>
+  <require from="../../theming.css"></require>
+  <require from="./pa-color"></require>
+
+  <section>
+    <h2>Pick your <i>Primary</i> and <i>Accent</i> colors</h2>
+    <p>You can let our online-tool set the <i>darken</i>, <i>lighten</i> and <i>foreground</i> values, or you can set them all by yourself. Your call!</p>
+    <div class="ux-form__row" style="margin-bottom: 16px;">
+      <ux-switch checked.bind="autoComputePrimaryAccent"></ux-switch>
+      <label>Enable Auto Compute</label>
+    </div>
+    <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
+      <ux-grid-cell md="6">
+        <pa-color type="primary" auto-compute.to-view="autoComputePrimaryAccent"></pa-color>
+      </ux-grid-cell>
+      <ux-grid-cell md="6">
+        <pa-color type="accent" auto-compute.to-view="autoComputePrimaryAccent"></pa-color>
+      </ux-grid-cell>
+    </ux-grid>
+    
+  </section>
+
+  <section>
+    <h2>Then set your <i>App</i> and <i>Surface</i> colors</h2>
+    <p>You can let our online-tool set the <i>foreground</i> values, or you can set them all by yourself. Your call!</p>
+    <div class="ux-form__row" style="margin-bottom: 16px;">
+      <ux-switch checked.bind="autoComputeAppSurface"></ux-switch>
+      <label>Enable Auto Compute</label>
+    </div>
+    <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
+      <ux-grid-cell md="6">
+        <pa-color type="app" auto-compute.to-view="autoComputeAppSurface"></pa-color>
+      </ux-grid-cell>
+      <ux-grid-cell md="6">
+        <pa-color type="surface" auto-compute.to-view="autoComputeAppSurface"></pa-color>
+      </ux-grid-cell>
+    </ux-grid>
+    
+  </section>
+
+
+  <section>
+
+    <ux-grid>
+      <ux-grid-cell md="5">
+
+        <h2>Customize your theme</h2>
+
+
+        <ux-card>
+          <ux-card-header>
+            <p>Select the properties you want to configure</p>
+            <ux-chip-list type="scroll" ux-choice-value.bind="part">
+              <ux-chip ux-choice-option="app">App & Controls</ux-chip>
+              <ux-chip ux-choice-option="primary">Primary</ux-chip>
+              <ux-chip ux-choice-option="accent">Accent</ux-chip>
+              <ux-chip ux-choice-option="state">State</ux-chip>
+              <ux-chip ux-choice-option="input">Input</ux-chip>
+            </ux-chip-list>
+          </ux-card-header>
+          <ux-card-separator></ux-card-separator>
+          <ux-card-content>
+            <ux-form show.bind="part === 'app'">
+              <ux-field repeat.for="prop of ['appBackground', 'appForeground', 'surfaceBackground', 'surfaceForeground', 'controlBackground', 'controlForeground', 'controlLabel']">
+                <ux-input label.bind="prop" value.bind="design[prop]">
+                  <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+                </ux-input>
+              </ux-field>
+            </ux-form>
+            <ux-form show.bind="part === 'primary'">
+              <ux-field repeat.for="prop of ['primary', 'primaryForeground', 'primaryDark', 'primaryDarkForeground', 'primaryLight', 'primaryLightForeground']">
+                <ux-input label.bind="prop" value.bind="design[prop]">
+                  <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+                </ux-input>
+              </ux-field>     
+            </ux-form>
+            <ux-form show.bind="part === 'accent'">
+              <ux-field repeat.for="prop of ['accent', 'accentForeground', 'accentDark', 'accentDarkForeground', 'accentLight', 'accentLightForeground']">
+                <ux-input label.bind="prop" value.bind="design[prop]">
+                  <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+                </ux-input>
+              </ux-field>     
+            </ux-form>
+            <ux-form show.bind="part === 'state'">
+              <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground', 'error', 'onError']">
+                <ux-input label.bind="prop" value.bind="design[prop]">
+                  <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+                </ux-input>
+              </ux-field>
+            </ux-form>
+          </ux-card-content>
+        </ux-card>
+      </ux-grid-cell>
+      <ux-grid-cell md="7">
+        <ux-card>
+          <ux-card-content>
+            <h3>Theme Preview</h3>
+            <ux-form>
+              <ux-field>
+                <ux-input label="First Name" variant.bind="variant" maxlength="14" value.bind="firstName & validate"></ux-input>
+                <ux-input-info ux-input-counter>John</ux-input-info>
+              </ux-field>
+              <ux-field>
+                <ux-datepicker label="Birthdate" variant.bind="variant" value.bind="birthdate & validate"></ux-datepicker>
+                <ux-input-info></ux-input-info>
+              </ux-field>
+              <ux-field>
+                <label>Volume</label>
+                <div class="ux-form__row">
+                  <ux-slider min="0" max="100" value.bind="volume">
+                    <ux-icon icon="volume_down" slot="leading-icon"></ux-icon>
+                    <ux-icon icon="volume_up" slot="trailing-icon"></ux-icon>
+                  </ux-slider>
+                </div>
+              </ux-field>
+              <div class="ux-form__row">
+                <ux-field>
+                  <label>Interests</label>
+                  <div class="ux-form__row">
+                    <ux-checkbox checked.bind="interests" model.bind="'sport'"></ux-checkbox>
+                    <label>Sport</label>
+                  </div>
+                  <div class="ux-form__row">
+                    <ux-checkbox checked.bind="interests" model.bind="'technology'"></ux-checkbox>
+                    <label>Technology</label>
+                  </div>
+                  <div class="ux-form__row">
+                    <ux-checkbox checked.bind="interests" model.bind="'business'"></ux-checkbox>
+                    <label>Business</label>
+                  </div>
+                  <div class="ux-form__row">
+                    <ux-checkbox checked.bind="interests" model.bind="'travel'"></ux-checkbox>
+                    <label>Travel</label>
+                  </div>
+                  <div class="ux-form__row">
+                    <ux-checkbox checked.bind="interests" model.bind="'art'"></ux-checkbox>
+                    <label>Art</label>
+                  </div>
+                  <div class="ux-form__row">
+                    <ux-checkbox checked.bind="interests" model.bind="'politics'"></ux-checkbox>
+                    <label>Politics</label>
+                  </div>
+                </ux-field>
+  
+                <ux-field>
+                  <label>Age Group</label>
+                  <div class="ux-form__row">
+                    <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'0-10'"></ux-radio>
+                    <label>0-10</label>
+                  </div>
+                  <div class="ux-form__row">
+                    <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'11-20'"></ux-radio>
+                    <label>11-20</label>
+                  </div>
+                  <div class="ux-form__row">
+                    <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'21-30'"></ux-radio>
+                    <label>21-30</label>
+                  </div>
+                  <div class="ux-form__row">
+                    <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'31-40'"></ux-radio>
+                    <label>31-40</label>
+                  </div>
+                  <div class="ux-form__row">
+                    <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'41-50'"></ux-radio>
+                    <label>41-50</label>
+                  </div>
+                  <div class="ux-form__row">
+                    <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'51+'"></ux-radio>
+                    <label>51+</label>
+                  </div>
+                </ux-field>
+              </div>
+            </ux-form>
+          </ux-card-content>
+          <ux-card-footer>
+            <ux-card-action-row>
+              <ux-button type="text">Cancel</ux-button>
+              <ux-button>Submit</ux-button>
+            </ux-card-action-row>
+          </ux-card-footer>
+        </ux-card>
+      </ux-grid-cell>
+    </ux-grid>
+
+
+
+    <h2>Customize the Design Properties</h2>
+    <ux-chip-list ux-choice-value.bind="design">
+      <ux-chip ux-choice-option="app">App</ux-chip>
+      <ux-chip ux-choice-option="app">Primary</ux-chip>
+      <ux-chip ux-choice-option="app">Secondary</ux-chip>
+      <ux-chip ux-choice-option="app">Controls</ux-chip>
+      <ux-chip ux-choice-option="app">State</ux-chip>
+    </ux-chip-list>
+
+    
+  </section>
+
+  <section>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </section>
+
+
+  <section>
+    <h2>1. Set up your themes</h2>
+    <p>This tool provides three themes by default (None, Light and Dark). You can use the (+) sign to create your own themes.</p>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-card sm="4" md="3">
+        <ux-card-header class="ux-card__title">None</ux-card-header>
+        <ux-card-content>Clear all theme variables</ux-card-content>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="selectTheme('none')" disabled.bind="themeService.currentTheme === 'none'">Select</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+      <ux-card sm="4" md="3">
+        <ux-card-header class="ux-card__title">Light</ux-card-header>
+        <ux-card-content>Default Light Theme</ux-card-content>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="selectTheme('light')" disabled.bind="themeService.currentTheme === 'light'">Select</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+      <ux-card sm="4" md="3">
+        <ux-card-header class="ux-card__title">Dark</ux-card-header>
+        <ux-card-content>Default Dark Theme</ux-card-content>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="selectTheme('dark')" disabled.bind="themeService.currentTheme === 'dark'">Select</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+      <ux-card sm="4" md="3" repeat.for="theme of themeService.themesSets">
+        <ux-card-header class="ux-card__title" contenteditable input.delegate="themeNameChanged(theme)" innerhtml.two-way="theme.name"></ux-card-header>
+        <ux-card-content>Default Dark Theme</ux-card-content>
+        <ux-card-action-row style="justify-content: space-between;">
+          <ux-button type="text" click.delegate="selectTheme($index)" disabled.bind="themeService.currentTheme === $index">Select</ux-button>
+          <ux-button type="text" click.delegate="saveTheme(theme)" if.bind="themeService.currentTheme === $index">Save</ux-button>
+          <ux-button type="text" click.delegate="deleteTheme($index)" if.bind="themeService.currentTheme !== $index"><ux-icon icon="delete"></ux-icon></ux-button>
+        </ux-card-action-row>
+      </ux-card>
+      <ux-grid-cell sm="4" md="3" class="ux-grid-cell--align-self-middle" style="text-align: center;">
+        <ux-button class="ux-button--accent" type="fab" click.delegate="newTheme()"><ux-icon icon="add"></ux-icon></ux-button>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>2. Set the Core Variables</h2>
+    <p>When you set these properties, they will be applied to all components as default values. They can then be over-ruled by component specific theme properties.</p>
+    <ux-grid class="ux-grid--remove-padding">
+      <ux-card sm="6" md="4">
+        <ux-card-header>
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Application Colors</span>
+            <span class="ux-card__sub-title">Set the backdrop and text color for main elements</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-field repeat.for="prop of ['appBackground', 'appForeground', 'surfaceBackground', 'surfaceForeground']">
+            <ux-input label.bind="prop" value.bind="design[prop]">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+            </ux-input>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+  
+      <ux-card sm="6" md="4">
+        <ux-card-header>
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Primary Colors</span>
+            <span class="ux-card__sub-title">The primary color should represent your brand</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-field repeat.for="prop of ['primary', 'primaryForeground']">
+            <ux-input label.bind="prop" value.bind="design[prop]">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+            </ux-input>
+          </ux-field>     
+          <template if.bind="showAdvancedPrimary">
+            <ux-field repeat.for="prop of ['primaryDark', 'primaryDarkForeground', 'primaryLight', 'primaryLightForeground']">
+              <ux-input label.bind="prop" value.bind="design[prop]">
+                <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+              </ux-input>
+            </ux-field>
+          </template>
+        </ux-card-content>
+        <div class="ux-card__separator"></div>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="showAdvancedPrimary = !showAdvancedPrimary">${showAdvancedPrimary ? 'Collapse':'Expand'}</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+  
+      <ux-card sm="6" md="4">
+        <ux-card-header>
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Accent Colors</span>
+            <span class="ux-card__sub-title">The accent color provides more ways to accent and distinguish your product</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-field repeat.for="prop of ['accent', 'accentForeground']">
+            <ux-input label.bind="prop" value.bind="design[prop]">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+            </ux-input>
+          </ux-field>     
+          <template if.bind="showAdvancedaccent">
+            <ux-field repeat.for="prop of ['accentDark', 'accentDarkForeground', 'accentLight', 'accentLightForeground']">
+              <ux-input label.bind="prop" value.bind="design[prop]">
+                <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+              </ux-input>
+            </ux-field>
+          </template>
+        </ux-card-content>
+        <div class="ux-card__separator"></div>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="showAdvancedAccent = !showAdvancedAccent">${showAdvancedAccent ? 'Collapse':'Expand'}</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+    
+      <ux-card sm="6" md="4">
+        <ux-card-header>
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Control Colors</span>
+            <span class="ux-card__sub-title">These colors will be the defaults for control elements such as ux-input, ux-textarea, etc...</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-grid-cell sm="3">
+            <ux-field repeat.for="prop of ['controlBackground', 'controlForeground', 'controlLabel']">
+              <ux-input label.bind="prop" value.bind="design[prop]">
+                <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+              </ux-input>
+            </ux-field>     
+          </ux-grid-cell>
+        </ux-card-content>
+      </ux-card>
+  
+      <ux-card sm="6" md="4">
+        <ux-card-header>
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">State Colors</span>
+            <span class="ux-card__sub-title">These colors help to unify different states that can be applied to elements such as buttons or controls</span>
+          </div>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-grid-cell sm="3">
+            <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground', 'error', 'errorContrast']">
+              <ux-input label.bind="prop" value.bind="design[prop]">
+                <span slot="trailing-icon" class="color-feedback" css="background-color:${design[prop]}"></span>
+              </ux-input>
+            </ux-field>     
+          </ux-grid-cell>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+  </section>
+
+  <section>
+    <h2>3. Customize Components Variables</h2>
+
+    <div class="component-selector">
+      <ux-chip click.delegate="selectComponent('button')" class="${selectedComponent === 'button' ? 'ux-chip--selected':''}">Button</ux-chip>
+      <ux-chip click.delegate="selectComponent('input')" class="${selectedComponent === 'input' ? 'ux-chip--selected':''}">Input</ux-chip>
+      <ux-chip click.delegate="selectComponent('textarea')" class="${selectedComponent === 'textarea' ? 'ux-chip--selected':''}">Textarea</ux-chip>
+      <ux-chip click.delegate="selectComponent('select')" class="${selectedComponent === 'select' ? 'ux-chip--selected':''}">Select</ux-chip>
+      <ux-chip click.delegate="selectComponent('datepicker')" class="${selectedComponent === 'datepicker' ? 'ux-chip--selected':''}">Datepicker</ux-chip>
+      <ux-chip click.delegate="selectComponent('chip-input')" class="${selectedComponent === 'chip-input' ? 'ux-chip--selected':''}">Chip Input</ux-chip>
+      <ux-chip click.delegate="selectComponent('slider')" class="${selectedComponent === 'slider' ? 'ux-chip--selected':''}">Slider</ux-chip>
+      <ux-chip click.delegate="selectComponent('checkbox')" class="${selectedComponent === 'checkbox' ? 'ux-chip--selected':''}">Checkbox</ux-chip>
+      <ux-chip click.delegate="selectComponent('radio')" class="${selectedComponent === 'radio' ? 'ux-chip--selected':''}">Radio</ux-chip>
+    </div>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'button'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Button</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-button class="${buttonPreviewClass}" type.bind="buttonPreviewType" disabled.bind="buttonPreviewDisabled">Exemple</ux-button>          
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Preview Style</label>
+            <ux-grid class="ux-grid--remove-padding">
+              <ux-grid-cell sm="6">
+                <ux-select value.bind="buttonPreviewClass">
+                  <ux-option value="">Default</ux-option>
+                  <ux-option value="ux-button--accent">Accent</ux-option>
+                </ux-select>
+              </ux-grid-cell>
+              <ux-grid-cell sm="6">
+                <ux-select value.bind="buttonPreviewType">
+                  <ux-option value="raised">Raised</ux-option>
+                  <ux-option value="flat">Flat</ux-option>
+                  <ux-option value="outline">Outline</ux-option>
+                  <ux-option value="text">Text</ux-option>
+                  <ux-option value="fab">Fab</ux-option>
+                </ux-select>
+              </ux-grid-cell>
+            </ux-grid>
+            <ux-field>
+              <label>Preview State</label>
+              <div class="ux-form__row">
+                <ux-checkbox checked.bind="buttonPreviewDisabled">Disabled</ux-checkbox>
+                <label>
+                  Disabled
+                </label>
+              </div>
+            </ux-field>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['background', 'foreground', 'accentBackground', 'accentForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.button[prop]" change.delegate="themeService.componentThemeChanged('button')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.button[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.button[prop]" change.delegate="themeService.componentThemeChanged('button')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.button[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <ux-field>
+            <label>Border Radius</label>
+            <br><ux-slider value.bind="themeService.buttonBorderRadius" min="0" max="10"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Width</label>
+            <br><ux-slider value.bind="themeService.buttonBorderWidth" min="0" max="5"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.button)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'input'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Input</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-field>
+            <ux-input label="Input label" type.bind="inputPreviewType" disabled.bind="inputPreviewDisabled" variant="filled" class="${inputPreviewError ? 'ux-input-component--has-error':''}"></ux-input>
+            <ux-input-info>Helper Text</ux-input-info>     
+          </ux-field>
+          <ux-field style="margin-top: 30px;">
+            <ux-input label="Input label" type.bind="inputPreviewType" disabled.bind="inputPreviewDisabled" variant="outline" class="${inputPreviewError ? 'ux-input-component--has-error':''}"></ux-input>
+            <ux-input-info>Helper Text</ux-input-info>     
+          </ux-field>
+        </ux-card-media>
+
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Preview Type</label>
+            <ux-select value.bind="inputPreviewType">
+              <ux-option value="text">text</ux-option>
+              <ux-option value="password">password</ux-option>
+              <ux-option value="email">email</ux-option>
+              <ux-option value="url">url</ux-option>
+              <ux-option value="tel">tel</ux-option>
+              <ux-option value="search">search</ux-option>
+              <ux-option value="number">number</ux-option>
+            </ux-select>
+          </ux-field>
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="inputPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+              <ux-checkbox checked.bind="inputPreviewError"></ux-checkbox>
+              <label>Error</label>
+            </div>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderColor']">
+            <ux-input label.bind="prop" value.bind="themeService.input[prop]" change.delegate="themeService.componentThemeChanged('input')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.input[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground', 'error']">
+            <ux-input label.bind="prop" value.bind="themeService.input[prop]" change.delegate="themeService.componentThemeChanged('input')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.input[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'line-height', 'labelFontSize', 'labelLetterSpacing', 'labelLineHeight']">
+            <ux-input label.bind="prop" value.bind="themeService.input[prop]" change.delegate="themeService.componentThemeChanged('input')"></ux-input>
+          </ux-field>  
+          <ux-field>
+            <label>Border Radius</label>
+            <br><ux-slider value.bind="themeService.inputBorderRadius" min="0" max="10" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Width</label>
+            <br><ux-slider value.bind="themeService.inputBorderWidth" min="0" max="5" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Active Width</label>
+            <br><ux-slider value.bind="themeService.inputBorderActiveWidth" min="0" max="5" step="1"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.input)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'textarea'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Textarea</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-field>
+            <ux-textarea label="Textarea label" disabled.bind="textareaPreviewDisabled" auto-resize.bind="textareaPreviewAutoResize" variant="filled" class="${textareaPreviewError ? 'ux-input-component--has-error':''}"></ux-textarea>
+            <ux-input-info>Helper Text</ux-input-info>       
+          </ux-field>
+          <ux-field style="margin-top: 30px;">
+            <ux-textarea label="Textarea label" disabled.bind="textareaPreviewDisabled" auto-resize.bind="textareaPreviewAutoResize" variant="outline" class="${textareaPreviewError ? 'ux-input-component--has-error':''}"></ux-textarea>
+            <ux-input-info>Helper Text</ux-input-info>     
+          </ux-field>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <div class="ux-form__row">
+            <label>Auto Resize</label>
+            <ux-switch checked.bind="textareaPreviewAutoResize"></ux-switch>
+          </div>
+
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="textareaPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+              <ux-checkbox checked.bind="textareaPreviewError"></ux-checkbox>
+              <label>Error</label>
+            </div>
+          </ux-field>
+
+
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderColor']">
+            <ux-input label.bind="prop" value.bind="themeService.textarea[prop]" change.delegate="themeService.componentThemeChanged('textarea')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.textarea[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground', 'error']">
+            <ux-input label.bind="prop" value.bind="themeService.textarea[prop]" change.delegate="themeService.componentThemeChanged('textarea')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.textarea[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'line-height', 'labelFontSize', 'labelLetterSpacing', 'labelLineHeight']">
+            <ux-input label.bind="prop" value.bind="themeService.textarea[prop]" change.delegate="themeService.componentThemeChanged('textarea')"></ux-input>
+          </ux-field>  
+          <ux-field>
+            <label>Border Radius</label>
+            <br><ux-slider value.bind="themeService.textareaBorderRadius" min="0" max="10" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Width</label>
+            <br><ux-slider value.bind="themeService.textareaBorderWidth" min="0" max="5" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Active Width</label>
+            <br><ux-slider value.bind="themeService.textareaBorderActiveWidth" min="0" max="5" step="1"></ux-slider>
+          </ux-field> 
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.textarea)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'select'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Select</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-field>
+            <ux-select label="Select label" disabled.bind="selectPreviewDisabled" variant="filled" class="${selectPreviewError ? 'ux-input-component--has-error':''}">
+              <ux-option>Value 1</ux-option>
+              <ux-option>Value 2</ux-option>
+              <ux-option>Value 3</ux-option>
+              <ux-option>Value 4</ux-option>
+            </ux-select>
+            <ux-input-info>Helper Text</ux-input-info>    
+          </ux-field>   
+          <ux-field style="margin-top: 30px;">
+            <ux-select label="Select label" disabled.bind="selectPreviewDisabled" variant="outline" class="${selectPreviewError ? 'ux-input-component--has-error':''}">
+              <ux-option>Value 1</ux-option>
+              <ux-option>Value 2</ux-option>
+              <ux-option>Value 3</ux-option>
+              <ux-option>Value 4</ux-option>
+            </ux-select>
+            <ux-input-info>Helper Text</ux-input-info>  
+          </ux-field>   
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="selectPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+              <ux-checkbox checked.bind="selectPreviewError"></ux-checkbox>
+              <label>Error</label>
+            </div>
+          </ux-field>
+
+
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderColor']">
+            <ux-input label.bind="prop" value.bind="themeService.select[prop]" change.delegate="themeService.componentThemeChanged('select')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.select[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground', 'error']">
+            <ux-input label.bind="prop" value.bind="themeService.select[prop]" change.delegate="themeService.componentThemeChanged('select')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.select[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['listBackground', 'listForeground', 'optionHover', 'optionFocused', 'optionSelected']">
+            <ux-input label.bind="prop" value.bind="themeService.select[prop]" change.delegate="themeService.componentThemeChanged('select')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.select[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'line-height', 'labelFontSize', 'labelLetterSpacing', 'labelLineHeight']">
+            <ux-input label.bind="prop" value.bind="themeService.select[prop]" change.delegate="themeService.componentThemeChanged('select')"></ux-input>
+          </ux-field>  
+          <ux-field>
+            <label>Border Radius</label>
+            <br><ux-slider value.bind="themeService.selectBorderRadius" min="0" max="10" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Width</label>
+            <br><ux-slider value.bind="themeService.selectBorderWidth" min="0" max="5" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Active Width</label>
+            <br><ux-slider value.bind="themeService.selectBorderActiveWidth" min="0" max="5" step="1"></ux-slider>
+          </ux-field> 
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.select)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'datepicker'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Datepicker</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-field>
+            <ux-datepicker label="Datepicker label" type.bind="datepickerPreviewType" disabled.bind="datepickerPreviewDisabled" variant="filled" class="${datepickerPreviewError ? 'ux-input-component--has-error':''}"></ux-datepicker>
+            <ux-input-info>Helper Text</ux-input-info>     
+          </ux-field>
+          <ux-field style="margin-top: 30px;">
+            <ux-datepicker label="Datepicker label" type.bind="datepickerPreviewType" disabled.bind="datepickerPreviewDisabled" variant="outline" class="${datepickerPreviewError ? 'ux-input-component--has-error':''}"></ux-datepicker>
+            <ux-input-info>Helper Text</ux-input-info>     
+          </ux-field>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Preview Type</label>
+            <ux-select value.bind="datepickerPreviewType">
+              <ux-option value="datetime">datetime</ux-option>
+              <ux-option value="password">date</ux-option>
+              <ux-option value="email">time</ux-option>
+            </ux-select>
+          </ux-field>
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="datepickerPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+              <ux-checkbox checked.bind="datepickerPreviewError"></ux-checkbox>
+              <label>Error</label>
+            </div>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderColor']">
+            <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.datepicker[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground', 'error']">
+            <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.datepicker[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'line-height', 'labelFontSize', 'labelLetterSpacing', 'labelLineHeight']">
+            <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')"></ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['headerForeground', 'headerBackground']">
+            <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.datepicker[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['weekdayForeground', 'selectedDayForeground', 'selectedDayBackground', 'outOfRangeForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.datepicker[prop]" change.delegate="themeService.componentThemeChanged('datepicker')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.datepicker[prop]}"></span>
+            </ux-input>
+          </ux-field>  
+          <ux-field>
+            <label>Border Radius</label>
+            <br><ux-slider value.bind="themeService.datepickerBorderRadius" min="0" max="10" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Width</label>
+            <br><ux-slider value.bind="themeService.datepickerBorderWidth" min="0" max="5" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Active Width</label>
+            <br><ux-slider value.bind="themeService.datepickerBorderActiveWidth" min="0" max="5" step="1"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.datepicker)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'chip-input'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Chip-Input</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-field>
+            <ux-chip-input label="Chip Input label" disabled.bind="chipInputPreviewDisabled" variant="filled" class="${chipInputPreviewError ? 'ux-input-component--has-error':''}"></ux-input>
+            <ux-input-info>Helper Text</ux-input-info>
+          </ux-field>     
+          <ux-field style="margin-top: 30px;">
+            <ux-chip-input label="Chip Input label" disabled.bind="chipInputPreviewDisabled" variant="outline" class="${chipInputPreviewError ? 'ux-input-component--has-error':''}"></ux-input>
+            <ux-input-info>Helper Text</ux-input-info>
+          </ux-field>     
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="chipInputPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+              <ux-checkbox checked.bind="chipInputPreviewError"></ux-checkbox>
+              <label>Error</label>
+            </div>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['background', 'foreground', 'activeColor', 'foregroundLabel', 'backgroundHover', 'borderColor']">
+            <ux-input label.bind="prop" value.bind="themeService.chipInput[prop]" change.delegate="themeService.componentThemeChanged('chip-input')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.chipInput[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['disabledBackground', 'disabledForeground', 'error']">
+            <ux-input label.bind="prop" value.bind="themeService.chipInput[prop]" change.delegate="themeService.componentThemeChanged('chip-input')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.chipInput[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['fontSize', 'letterSpacing', 'line-height', 'labelFontSize', 'labelLetterSpacing', 'labelLineHeight']">
+            <ux-input label.bind="prop" value.bind="themeService.chipInput[prop]" change.delegate="themeService.componentThemeChanged('chip-input')"></ux-input>
+          </ux-field>  
+          <ux-field>
+            <label>Border Radius</label>
+            <br><ux-slider value.bind="themeService.chipInputBorderRadius" min="0" max="10" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Width</label>
+            <br><ux-slider value.bind="themeService.chipInputBorderWidth" min="0" max="5" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Border Active Width</label>
+            <br><ux-slider value.bind="themeService.chipInputBorderActiveWidth" min="0" max="5" step="1"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.chipInput)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'slider'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Slider</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-slider if.bind="sliderPreviewType === 'default'" value.bind="sliderValue" disabled.bind="sliderPreviewDisabled"></ux-slider>
+          <ux-slider if.bind="sliderPreviewType === 'icons'" value.bind="sliderValue" disabled.bind="sliderPreviewDisabled">
+            <ux-icon icon="volume_down" slot="leading-icon"></ux-icon>
+            <ux-icon icon="volume_up" slot="trailing-icon"></ux-icon>
+          </ux-slider>
+          <ux-slider if.bind="sliderPreviewType === 'value'" value.bind="sliderValue" disabled.bind="sliderPreviewDisabled">
+            <span slot="leading-icon">R</span>
+            <span slot="trailing-icon">${sliderValue}</span>
+          </ux-slider>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Preview Type</label>
+            <ux-select value.bind="sliderPreviewType">
+              <ux-option value="default">Default</ux-option>
+              <ux-option value="icons">With icons</ux-option>
+              <ux-option value="value">With values</ux-option>
+            </ux-select>
+          </ux-field>
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="sliderPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+            </div>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['background', 'disabledBackground']">
+            <ux-input label.bind="prop" value.bind="themeService.slider[prop]" change.delegate="themeService.componentThemeChanged('slider')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.slider[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field>
+            <label>Thumb Diameter</label>
+            <br><ux-slider value.bind="themeService.sliderThumbDiameter" min="10" max="30" step="1"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Track Height</label>
+            <br><ux-slider value.bind="themeService.sliderTrackHeight" min="1" max="10" step="1"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.slider)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'checkbox'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Checkbox</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-checkbox value.bind="checkboxValue" indeterminate.bind="checkboxIndeterminate" disabled.bind="checkboxPreviewDisabled"></ux-checkbox>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="checkboxPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+            </div>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="checkboxIndeterminate"></ux-checkbox>
+              <label>Indeterminate</label>
+            </div>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['borderColor', 'activeColor', 'checkmarkColor', 'disabledBackground', 'disabledForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.checkbox[prop]" change.delegate="themeService.componentThemeChanged('checkbox')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.checkbox[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field>
+            <label>Border width</label>
+            <br><ux-slider value.bind="themeService.checkboxBorderWidth" min="1" max="5" step="1"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.checkbox)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'radio'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Radio</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-radio value.bind="radioValue" disabled.bind="radioPreviewDisabled"></ux-radio>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Preview State</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="radioPreviewDisabled"></ux-checkbox>
+              <label>Disabled</label>
+            </div>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field repeat.for="prop of ['borderColor', 'activeColor', 'checkmarkColor', 'disabledBackground', 'disabledForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.radio[prop]" change.delegate="themeService.componentThemeChanged('radio')">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.radio[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field>
+            <label>Border width</label>
+            <br><ux-slider value.bind="themeService.radioBorderWidth" min="1" max="5" step="1"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.radio)">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+  </section>
+
+</template>

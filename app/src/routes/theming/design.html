@@ -8,19 +8,79 @@
       <h1>Design</h1>
 
       <p>
-        All UX design properties are made available through the CSS Variable system and through the main AureliaUX class. CSS Variables make it easy to tie into
-        the theming system that Aurelia UX uses.
+        Aurelia UX ships with a set of what we call <strong>design properties</strong>. They are your entry point of stylisation. All other components will adjust their defaults 
+        colors based on these design properties.
       </p>
-          
-      <strong>Design CSS Variable Structure</strong>
-      <em>--aurelia-ux--design-property-name</em>
+
+      <p>
+        You can access the design properties either through <strong>CSS variables</strong> or the main <strong>AureliaUX</strong> javascript class.
+      </p>
+
+    </ux-grid-cell>
+
+    <ux-grid-cell md="6">
+      <strong>Design CSS Variables</strong>
       <code-block type="css">
         --aurelia-ux--design-app-background
         --aurelia-ux--design-app-foreground
+        --aurelia-ux--design-surface-background
+        --aurelia-ux--design-surface-foreground
         --aurelia-ux--design-control-background
         --aurelia-ux--design-control-foreground
+        --aurelia-ux--design-control-label-color
         --aurelia-ux--design-primary
         --aurelia-ux--design-primary-foreground
+        --aurelia-ux--design-primary-light
+        --aurelia-ux--design-primary-light-foreground
+        --aurelia-ux--design-primary-dark
+        --aurelia-ux--design-primary-dark-foreground
+        --aurelia-ux--design-accent
+        --aurelia-ux--design-accent-foreground
+        --aurelia-ux--design-accent-light
+        --aurelia-ux--design-accent-light-foreground
+        --aurelia-ux--design-accent-dark
+        --aurelia-ux--design-accent-dark-foreground
+        --aurelia-ux--design-disabled-background
+        --aurelia-ux--design-disabled-foreground
+        --aurelia-ux--design-error
+        --aurelia-ux--design-on-error
+      </code-block>
+    </ux-grid-cell>
+
+    <ux-grid-cell md="6">
+      <strong>Design Javascript Properties</strong>
+      <code-block type="ts">
+        // app.ts
+        import { AureliaUX } from '@aurelia-ux/core';
+
+        @inject(AureliaUX)
+        export class App {
+          constructor(private ux: AureliaUX) {
+            this.ux.design.appBackground;
+            this.ux.design.appForeground
+            this.ux.design.surfaceBackground
+            this.ux.design.surfaceForeground
+            this.ux.design.controlBackground
+            this.ux.design.controlForeground
+            this.ux.design.control-label-color
+            this.ux.design.primary
+            this.ux.design.primaryForeground
+            this.ux.design.primaryLight
+            this.ux.design.primaryLightForeground
+            this.ux.design.primaryDark
+            this.ux.design.primaryDarkForeground
+            this.ux.design.accent
+            this.ux.design.accentForeground
+            this.ux.design.accentLight
+            this.ux.design.accentLightForeground
+            this.ux.design.accentDark
+            this.ux.design.accentDarkForeground
+            this.ux.design.disabledBackground
+            this.ux.design.disabledForeground
+            this.ux.design.error
+            this.ux.design.onError
+          }
+        }
       </code-block>
     </ux-grid-cell>
 
@@ -103,62 +163,6 @@
         <input type="color" value.bind="ux.design[currentProperty]">
         <ux-input value.bind="ux.design[currentProperty] & updateTrigger:'blur':'paste'"></ux-input>
       </div>
-    </ux-grid-cell>
-
-    <ux-grid-cell>
-
-      <h1>Swatches</h1>
-
-      <p>
-        Swatches provide sets of colors, both primaries and accents, based on the color theory behind Material Design. It is recommended
-        that you select one primary and one accent color for your app, each with a normal, light and dark shade.
-      </p>
-
-      <p>
-        The swatches are all exposed in two ways. One is through the
-        <code>swatches</code> export on
-        <code>@aurelia-ux/core</code>. The other is through CSS Variables that are created and injected into the document when the application starts up.
-      </p>
-
-      <strong>CSS Examples</strong>
-      <em>--ux-swatch--color-value</em>
-      <code-block type="css">
-          --ux-swatch--blue-grey-p50
-          --ux-swatch--blue-grey-p100
-          --ux-swatch--blue-grey-p200
-          --ux-swatch--blue-grey-p300
-          --ux-swatch--blue-grey-p400
-          --ux-swatch--blue-grey-p500
-          --ux-swatch--blue-grey-p600
-          --ux-swatch--blue-grey-p700
-          --ux-swatch--blue-grey-p800
-          --ux-swatch--blue-grey-p900
-          ...
-          --ux-swatch--black
-          --ux-swatch--white
-      </code-block>
-
-      <strong>Javascript Example</strong>
-      <code-block>
-          swatches.blueGrey.p50
-          swatches.blueGrey.p100
-          swatches.blueGrey.p200
-          swatches.blueGrey.p300
-          swatches.blueGrey.p400
-          swatches.blueGrey.p500
-          swatches.blueGrey.p600
-          swatches.blueGrey.p700
-          swatches.blueGrey.p800
-          swatches.blueGrey.p900
-          swatches.blueGrey.a100
-          ...
-          swatches.black
-          swatches.white
-      </code-block>
-    </ux-grid-cell>
-
-    <ux-grid-cell xs="12" sm="6" md="4" lg="3" xl="2" repeat.for="swatch of swatches">
-      <swatch-group value.bind="swatch"></swatch-group>
     </ux-grid-cell>
   </ux-grid>
 </template>

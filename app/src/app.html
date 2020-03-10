@@ -3,7 +3,7 @@
   <require from="resources/elements/layout/sidebar/sidebar"></require>
 
   <aside class="sidebar">
-    <a route-href="gettingstarted">
+    <a route-href="aurelia">
       <header class="sidebar__header">
         <img style="width: 100%" src="/images/aurelia-icon-128x128.png">
         <h1>Aurelia UX</h1>
@@ -20,9 +20,9 @@
 
         <a href.bind="nav.href" repeat.for="nav of routes">
           <div class="ux-list-item sidebar__menu__item ${nav.isActive ? 'sidebar__menu__item--active' : ''}" >
-            <div class="ux-list-item__detail">
+            <!-- <div class="ux-list-item__detail">
               <ux-icon icon="${nav.settings.icon}" if.bind="nav.settings.icon"></ux-icon>
-            </div>
+            </div> -->
             <div class="ux-list-item__content" href.bind="nav.href">
               ${nav.title}
             </div>

@@ -1,0 +1,83 @@
+.pa-color--primary {
+  --main: var(--aurelia-ux--design-primary);
+  --main-foreground: var(--aurelia-ux--design-primary-foreground);
+  --light: var(--aurelia-ux--design-primary-light);
+  --light-foreground: var(--aurelia-ux--design-primary-light-foreground);
+  --dark: var(--aurelia-ux--design-primary-dark);
+  --dark-foreground: var(--aurelia-ux--design-primary-dark-foreground);
+}
+
+.pa-color--accent {
+  --main: var(--aurelia-ux--design-accent);
+  --main-foreground: var(--aurelia-ux--design-accent-foreground);
+  --light: var(--aurelia-ux--design-accent-light);
+  --light-foreground: var(--aurelia-ux--design-accent-light-foreground);
+  --dark: var(--aurelia-ux--design-accent-dark);
+  --dark-foreground: var(--aurelia-ux--design-accent-dark-foreground);
+}
+
+.pa-color--app {
+  --main: var(--aurelia-ux--design-app-background);
+  --main-foreground: var(--aurelia-ux--design-app-foreground);
+}
+.pa-color--surface {
+  --main: var(--aurelia-ux--design-surface-background);
+  --main-foreground: var(--aurelia-ux--design-surface-foreground);
+}
+
+.pa-color__main {
+  width: 100%;
+  height: 220px;
+}
+
+.pa-color__alternate {
+  display: flex;
+}
+
+.pa-color__light,
+.pa-color__dark {
+  width: 50%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.pa-color__box {
+  padding: 16px;
+}
+
+.pa-color__value {
+  margin-bottom: 16px;
+}
+
+.pa-color--primary .pa-color__main {
+  background: var(--aurelia-ux--design-primary);
+  color: var(--aurelia-ux--design-primary-foreground);
+}
+.pa-color--primary .pa-color__light {
+  background: var(--aurelia-ux--design-primary-light);
+  color: var(--aurelia-ux--design-primary-light-foreground);
+}
+.pa-color--primary .pa-color__dark {
+  background: var(--aurelia-ux--design-primary-dark);
+  color: var(--aurelia-ux--design-primary-dark-foreground);
+}
+.pa-color--accent .pa-color__main {
+  background: var(--aurelia-ux--design-accent);
+  color: var(--aurelia-ux--design-accent-foreground);
+}
+.pa-color--accent .pa-color__light {
+  background: var(--aurelia-ux--design-accent-light);
+  color: var(--aurelia-ux--design-accent-light-foreground);
+}
+.pa-color--accent .pa-color__dark {
+  background: var(--aurelia-ux--design-accent-dark);
+  color: var(--aurelia-ux--design-accent-dark-foreground);
+}
+.pa-color--app .pa-color__main {
+  background: var(--aurelia-ux--design-app-background);
+  color: var(--aurelia-ux--design-app-foreground);
+}
+.pa-color--surface .pa-color__main {
+  background: var(--aurelia-ux--design-surface-background);
+  color: var(--aurelia-ux--design-surface-foreground);
+}

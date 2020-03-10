@@ -2,9 +2,8 @@ import { AureliaUX, swatches } from '@aurelia-ux/core';
 import { inject } from 'aurelia-dependency-injection';
 
 @inject(AureliaUX)
-export class Theming {
+export class ColorSwatches {
   public swatches = makeSwatches();
-  public currentProperty = 'primary';
 
   constructor(public ux: AureliaUX) { }
 }
