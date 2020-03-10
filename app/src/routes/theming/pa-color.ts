@@ -8,12 +8,16 @@ const log = getLogger('pa-color');
 const white = new Color({r: 255, g: 255, b: 255});
 const black = new Color({r: 0, g: 0, b: 0});
 
+type Types = 'primary' | 'accent' | 'app' | 'surface' | 'control' | 'disabled' | 'error';
+type ColorNames = 'primary' | 'accent' | 'appBackground' | 'surfaceBackground' |
+                  'controlBackground' | 'disabledBackground' | 'error';
+
 @inject(AureliaUX, BindingEngine)
 export class PaColor {
-  @bindable public type: 'primary' | 'accent' | 'app' | 'surface' = 'primary';
+  @bindable public type: Types = 'primary';
   @bindable public autoCompute: boolean = true;
 
-  private colorName: 'primary' | 'accent' | 'appBackground' | 'surfaceBackground';
+  private colorName: ColorNames;
 
   private design: Design;
   public inputTheme: UxInputTheme = {
@@ -46,13 +50,17 @@ export class PaColor {
   }
 
   private setColorName() {
-    let colorName: 'primary' | 'accent' | 'appBackground' | 'surfaceBackground' = 'primary';
-    if (this.type === 'primary' || this.type === 'accent') {
+    let colorName: ColorNames = 'primary';
+    if (this.type === 'primary' || this.type === 'accent' || this.type === 'error') {
       colorName = this.type;
     } else if (this.type === 'app') {
       colorName = 'appBackground';
     } else if (this.type === 'surface') {
       colorName = 'surfaceBackground';
+    } else if (this.type === 'control') {
+      colorName = 'controlBackground';
+    } else if (this.type === 'disabled') {
+      colorName = 'disabledBackground';
     }
     this.colorName = colorName;
   }
@@ -81,7 +89,7 @@ export class PaColor {
     this.observers = [];
   }
 
-  private computeValues(type: 'primary' | 'accent' | 'app' | 'surface') {
+  private computeValues(type: Types) {
     let color: Color;
     try {
       color = new Color(this.design[this.colorName]);
@@ -119,6 +127,10 @@ export class PaColor {
       this.design.appForeground = foreground.hex();
     } else if (type === 'surface') {
       this.design.surfaceForeground = foreground.hex();
+    } else if (type === 'control') {
+      this.design.controlForeground = foreground.hex();
+    } else if (type === 'disabled') {
+      this.design.disabledForeground = foreground.hex();
     }
   }
 

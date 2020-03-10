@@ -1,3 +1,7 @@
+.pa-color {
+  display: block;
+  box-shadow: var(--aurelia-ux--design-elevation8dp);
+}
 .pa-color--primary {
   --main: var(--aurelia-ux--design-primary);
   --main-foreground: var(--aurelia-ux--design-primary-foreground);
@@ -23,6 +27,18 @@
 .pa-color--surface {
   --main: var(--aurelia-ux--design-surface-background);
   --main-foreground: var(--aurelia-ux--design-surface-foreground);
+}
+.pa-color--control {
+  --main: var(--aurelia-ux--design-control-background);
+  --main-foreground: var(--aurelia-ux--design-control-foreground);
+}
+.pa-color--disabled {
+  --main: var(--aurelia-ux--design-disabled-background);
+  --main-foreground: var(--aurelia-ux--design-disabled-foreground);
+}
+.pa-color--error {
+  --main: var(--aurelia-ux--design-error);
+  --main-foreground: var(--aurelia-ux--design-error-foreground);
 }
 
 .pa-color__main {
@@ -80,4 +96,16 @@
 .pa-color--surface .pa-color__main {
   background: var(--aurelia-ux--design-surface-background);
   color: var(--aurelia-ux--design-surface-foreground);
+}
+.pa-color--control .pa-color__main {
+  background: var(--aurelia-ux--design-control-background);
+  color: var(--aurelia-ux--design-control-foreground);
+}
+.pa-color--disabled .pa-color__main {
+  background: var(--aurelia-ux--design-disabled-background);
+  color: var(--aurelia-ux--design-disabled-foreground);
+}
+.pa-color--error .pa-color__main {
+  background: var(--aurelia-ux--design-error);
+  color: var(--aurelia-ux--design-error-foreground);
 }
