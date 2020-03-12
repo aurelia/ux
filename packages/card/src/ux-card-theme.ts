@@ -3,13 +3,13 @@ import { UxTheme } from '@aurelia-ux/core';
 export class UxCardTheme implements UxTheme {
   public themeKey = 'card';
 
-  public primaryHeaderForeground: string;
-  public primaryHeaderBackground: string;
-  public accentHeaderForeground: string;
-  public accentHeaderBackground: string;
-  public background: string;
-  public foreground: string;
-  public titleForeground: string;
-  public subTitleForeground: string;
-  public subTitleOpacity: string;
+  public primaryHeaderForeground?: string = void 0;
+  public primaryHeaderBackground?: string = void 0;
+  public accentHeaderForeground?: string = void 0;
+  public accentHeaderBackground?: string = void 0;
+  public background?: string = void 0;
+  public foreground?: string = void 0;
+  public titleForeground?: string = void 0;
+  public subTitleForeground?: string = void 0;
+  public subTitleOpacity?: string = void 0;
 }

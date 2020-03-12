@@ -3,19 +3,19 @@ import { UxTheme } from '@aurelia-ux/core';
 export class UxButtonTheme implements UxTheme {
   public themeKey = 'button';
 
-  public background?: string;
-  public foreground?: string;
+  public background?: string = void 0;
+  public foreground?: string = void 0;
 
-  public accentBackground?: string;
-  public accentForeground?: string;
+  public accentBackground?: string = void 0;
+  public accentForeground?: string = void 0;
 
-  public disabledBackground?: string;
-  public disabledForeground?: string;
+  public disabledBackground?: string = void 0;
+  public disabledForeground?: string = void 0;
 
-  public borderRadius?: string;
-  public borderWidth?: string;
-  public fontWeight?: string;
-  public fontSize?: string;
-  public letterSpacing?: string;
-  public textTransform?: string;
+  public borderRadius?: string = void 0;
+  public borderWidth?: string = void 0;
+  public fontWeight?: string = void 0;
+  public fontSize?: string = void 0;
+  public letterSpacing?: string = void 0;
+  public textTransform?: string = void 0;
 }
