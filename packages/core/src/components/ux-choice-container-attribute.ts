@@ -116,7 +116,7 @@ export class UxChoiceContainerAttribute {
         const choice = this.choices[index];
         choice.selected = this.value.indexOf(choice.value) !== -1;
       }
-    } else if (!this.isMultiple && typeof this.value === 'string') {
+    } else if (!this.isMultiple) {
       for (let index = 0; index < choicesLength; index++) {
         const choice = this.choices[index];
         choice.selected = this.value === choice.value;
