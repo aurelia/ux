@@ -16,6 +16,7 @@ type ColorNames = 'primary' | 'accent' | 'appBackground' | 'surfaceBackground'
 export class PaColor {
   @bindable public type: Types = 'primary';
   @bindable public autoCompute: boolean = true;
+  public extend: boolean = false;
 
   private colorName: ColorNames;
 
@@ -129,6 +130,8 @@ export class PaColor {
       this.design.surfaceForeground = foreground.hex();
     } else if (type === 'control') {
       this.design.controlForeground = foreground.hex();
+      // tslint:disable-next-line: max-line-length
+      this.design.controlLabelColor = diffWithWhite > diffWithBlack ? white.clone().darken(5).hex() : black.clone().lighten(5).hex();
     } else if (type === 'disabled') {
       this.design.disabledForeground = foreground.hex();
     }

@@ -13,9 +13,9 @@ body {
   font-size: 16px;
   line-height: 1.5;
   background-color: #FAFAFA;
-  background-color: var(--aurelia-ux--design-app-background, #FAFAFA);
+  /* background-color: var(--aurelia-ux--design-app-background, #FAFAFA); */
   color: #212121;
-  color: var(--aurelia-ux--design-app-foreground, #212121);
+  /* color: var(--aurelia-ux--design-app-foreground, #212121); */
 }
 
 body {

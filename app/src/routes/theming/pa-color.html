@@ -5,13 +5,18 @@
       <ux-icon slot="leading-icon" icon="color_lens"></ux-icon>
       <span slot="trailing-icon" class="color-feedback" css="background-color:${design[colorName]}"></span>
     </ux-input>
-    <ux-input theme.bind="inputTheme" label="${type}Foreground" class="pa-color__value" value.bind="design[type + 'Foreground']" disabled.bind="autoCompute">
+    <ux-input show.bind="extend" theme.bind="inputTheme" label="${type}Foreground" class="pa-color__value" value.bind="design[type + 'Foreground']" disabled.bind="autoCompute">
       <ux-icon slot="leading-icon" icon="autorenew" show.bind="autoCompute"></ux-icon>
       <ux-icon slot="leading-icon" icon="color_lens" show.bind="!autoCompute"></ux-icon>
       <span slot="trailing-icon" class="color-feedback" css="background-color:${design[type + 'Foreground']}"></span>
     </ux-input>
+    <ux-input show.bind="extend && type === 'control'" theme.bind="inputTheme" label="controlLabelColor" class="pa-color__value" value.bind="design.controlLabelColor" disabled.bind="autoCompute">
+      <ux-icon slot="leading-icon" icon="autorenew" show.bind="autoCompute"></ux-icon>
+      <ux-icon slot="leading-icon" icon="color_lens" show.bind="!autoCompute"></ux-icon>
+      <span slot="trailing-icon" class="color-feedback" css="background-color:${design.controlLabelColor}"></span>
+    </ux-input>
   </div>
-  <div class="pa-color__alternate" if.bind="type === 'primary' || type === 'accent'">
+  <div class="pa-color__alternate" if.bind="(type === 'primary' || type === 'accent') && extend">
     <div class="pa-color__light pa-color__box">
       <ux-input theme.bind="inputTheme" label="${type}Light" class="pa-color__value" value.bind="design[type + 'Light']" disabled.bind="autoCompute">
         <ux-icon slot="leading-icon" icon="autorenew" show.bind="autoCompute"></ux-icon>
@@ -35,6 +40,13 @@
         <ux-icon slot="leading-icon" icon="color_lens" show.bind="!autoCompute"></ux-icon>
         <span slot="trailing-icon" class="color-feedback" css="background-color:${design[type + 'DarkForeground']}"></span>
       </ux-input>
+    </div>
+  </div>
+  <div class="pa-color__footer">
+    <ux-button type="text" click.delegate="extend = !extend">${extend ? 'Collpase':'Extend'}</ux-button>
+    <div>
+      <label>Enable Auto Compute</label>
+      <ux-switch checked.bind="autoCompute"></ux-switch>
     </div>
   </div>
 </template>

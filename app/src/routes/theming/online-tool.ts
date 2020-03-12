@@ -1,7 +1,15 @@
+import { UxTextAreaTheme } from './../../../../packages/textarea/src/ux-textarea-theme';
+import { UxSelectTheme } from './../../../../packages/select/src/ux-select-theme';
+import { UxDatepickerTheme } from './../../../../packages/datepicker/src/ux-datepicker-theme';
+import { UxChipInputTheme } from './../../../../packages/chip-input/src/ux-chip-input-theme';
+import { UxSliderTheme } from './../../../../packages/slider/src/ux-slider-theme';
+import { UxCheckboxTheme } from './../../../../packages/checkbox/src/ux-checkbox-theme';
+import { UxRadioTheme } from './../../../../packages/radio/src/ux-radio-theme';
 import { UxTheme } from './../../../../packages/core/src/styles/ux-theme';
 import { ThemeService, ThemesSet } from '../../theme-service';
 import { inject } from 'aurelia-framework';
 import { AureliaUX, Design } from '@aurelia-ux/core';
+import { UxButtonTheme } from './../../../../packages/button/src/ux-button-theme';
 import {
   ValidationControllerFactory,
   ValidationController,
@@ -11,97 +19,55 @@ import { getLogger } from 'aurelia-logging';
 const log = getLogger('online-tool');
 
 import { AureliaUXFormRenderer } from '../../forms-form-renderer';
-import { Color } from '../../color';
 
 @inject(ThemeService, AureliaUX, ValidationControllerFactory)
 export class OnlineTool {
 
+  public preview: HTMLElement;
+
   public design: Design;
 
-  public part = 'app';
   public interests: Array<string> = ['technology'];
   public ageGroup: string = '21-30';
   public volume = 85;
 
-  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' = 'select';
-
-  public buttonPreviewClass = '';
-  public buttonPreviewType = 'raised';
-  public buttonPreviewDisabled = false;
-
-  public inputPreviewType = 'text';
-  public inputPreviewVariant = 'filled';
-  public inputPreviewDisabled = false;
-  public inputPreviewError = false;
-
-  public textareaPreviewVariant = 'filled';
-  public textareaPreviewAutoResize = true;
-  public textareaPreviewDisabled = false;
-  public textareaPreviewError = false;
-
-  public selectPreviewVariant = 'filled';
-  public selectPreviewDisabled = false;
-  public selectPreviewError = false;
-
-  public datepickerPreviewType = 'datetime';
-  public datepickerPreviewVariant = 'filled';
-  public datepickerPreviewDisabled = false;
-  public datepickerPreviewError = false;
-
-  public chipInputPreviewVariant = 'filled';
-  public chipInputPreviewDisabled = false;
-  public chipInputPreviewError = false;
-
-  public sliderPreviewType = 'default';
-  public sliderPreviewDisabled = false;
-
-  public checkboxIndeterminate = false;
-  public checkboxPreviewDisabled = false;
-
-  public radioPreviewDisabled = false;
+  private components = ['button', 'input', 'textarea', 'select', 'datepicker', 'chip-input', 'slider', 'checkbox', 'radio'];
+  private themes: {
+    [key: string]: UxTheme;
+  } = {};
+  public selectedComponent?: string;
 
   public controller: ValidationController;
 
   public autoComputePrimaryAccent: boolean = true;
   public autoComputeAppSurface: boolean = true;
   public autoComputeControlState: boolean = true;
-  
+
   // tslint:disable-next-line: max-line-length
   constructor(private themeService: ThemeService, private ux: AureliaUX, public controllerFactory: ValidationControllerFactory) {
     this.design = this.ux.design;
     this.controller = controllerFactory.createForCurrentScope();
     this.controller.addRenderer(new AureliaUXFormRenderer());
+    this.setThemes();
+  }
 
-    try {
-      const color = new Color('red');
-      log.debug('color', color);
-    } catch (error) {
-      log.debug('invalid color');
+  private setThemes() {
+    for (const component of this.components) {
+      switch (component) {
+        case 'button': this.themes[component] = new UxButtonTheme(); break;
+        case 'input': this.themes[component] = new UxChipInputTheme(); break;
+        case 'textarea': this.themes[component] = new UxTextAreaTheme(); break;
+        case 'select': this.themes[component] = new UxSelectTheme(); break;
+        case 'datepicker': this.themes[component] = new UxDatepickerTheme(); break;
+        case 'chip-input': this.themes[component] = new UxChipInputTheme(); break;
+        case 'slider': this.themes[component] = new UxSliderTheme(); break;
+        case 'checkbox': this.themes[component] = new UxCheckboxTheme(); break;
+        case 'radio': this.themes[component] = new UxRadioTheme(); break;
+      }
     }
   }
 
-  public selectTheme(theme: 'light' | 'dark' | number) {
-    this.themeService.apply(theme);
-  }
-
-  public newTheme() {
-    this.themeService.newThemeSet();
-  }
-
-  public themeNameChanged(theme: ThemesSet) {
-    this.saveTheme(theme);
-  }
-
-  public saveTheme(theme: ThemesSet) {
-    this.themeService.saveThemesSet();
-  }
-
-  public deleteTheme(index: number) {
-    this.themeService.themesSets.splice(index, 1);
-    this.themeService.saveThemesSet();
-  }
-
-  public selectComponent(component: 'button' | 'input' | 'textarea' | 'select') {
+  public selectComponent(component: string) {
     this.selectedComponent = component;
   }
 

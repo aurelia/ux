@@ -2,6 +2,45 @@
   display: block;
   box-shadow: var(--aurelia-ux--design-elevation8dp);
 }
+
+.pa-color__main {
+  width: 100%;
+}
+
+.pa-color__alternate {
+  display: flex;
+}
+
+.pa-color__light,
+.pa-color__dark {
+  width: 50%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.pa-color__box {
+  padding: 16px;
+}
+
+.pa-color__value {
+  margin-bottom: 16px;
+}
+
+.pa-color__value[disabled] > *:not(.color-feedback) {
+  opacity: 0.5;
+}
+.pa-color__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+.pa-color__footer > div {
+  display: flex;
+  align-items: center;
+}
+
+
 .pa-color--primary {
   --main: var(--aurelia-ux--design-primary);
   --main-foreground: var(--aurelia-ux--design-primary-foreground);
@@ -39,30 +78,6 @@
 .pa-color--error {
   --main: var(--aurelia-ux--design-error);
   --main-foreground: var(--aurelia-ux--design-error-foreground);
-}
-
-.pa-color__main {
-  width: 100%;
-  height: 220px;
-}
-
-.pa-color__alternate {
-  display: flex;
-}
-
-.pa-color__light,
-.pa-color__dark {
-  width: 50%;
-  height: 150px;
-  overflow: hidden;
-}
-
-.pa-color__box {
-  padding: 16px;
-}
-
-.pa-color__value {
-  margin-bottom: 16px;
 }
 
 .pa-color--primary .pa-color__main {
