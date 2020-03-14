@@ -47,10 +47,6 @@ export class OnlineTool {
 
   public controller: ValidationController;
 
-  public autoComputePrimaryAccent: boolean = true;
-  public autoComputeAppSurface: boolean = true;
-  public autoComputeControlState: boolean = true;
-
   // tslint:disable-next-line: max-line-length
   constructor(private themeService: ThemeService, private ux: AureliaUX, public controllerFactory: ValidationControllerFactory) {
     this.design = this.ux.design;

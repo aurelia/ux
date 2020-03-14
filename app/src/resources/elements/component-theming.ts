@@ -10,6 +10,7 @@ interface Prop {
   max?: number;
   step?: number;
   options?: Array<string>;
+  suffix?: string;
 }
 
 @inject(BindingEngine)
@@ -76,7 +77,7 @@ export class ComponentTheming {
         name,
         type: 'text'
       };
-      if (name.match(/color|foreground|background/i)) {
+      if (name.match(/color|foreground|background/i) || name === 'error') {
         prop.type = 'color';
       }
       if (name.match(/width|radius/i)) {
@@ -84,6 +85,7 @@ export class ComponentTheming {
         prop.min = 0;
         prop.max = 10;
         prop.step = 0.5;
+        prop.suffix = 'px';
       }
       if (name.match(/fontWeight/i)) {
         prop.type = 'select';
@@ -94,18 +96,21 @@ export class ComponentTheming {
         prop.min = 0;
         prop.max = 48;
         prop.step = 1;
+        prop.suffix = 'px';
       }
       if (name.match(/letterSpacing/i)) {
         prop.type = 'slider';
         prop.min = 0;
         prop.max = 5;
         prop.step = 0.1;
+        prop.suffix = 'px';
       }
       if (name.match(/lineHeight/i)) {
         prop.type = 'slider';
         prop.min = 0;
         prop.max = 2;
         prop.step = 0.1;
+        prop.suffix = '';
       }
       if (name.match(/textTransform/i)) {
         prop.type = 'select';
@@ -113,5 +118,20 @@ export class ComponentTheming {
       }
       return prop;
     });
+  }
+}
+
+export class SuffixValueConverter {
+  public toView(value: string, suffix: string) {
+    if (!value) { return '0'; }
+    const index = value.indexOf(suffix);
+    if (index === value.length - suffix.length) {
+      value = value.substr(0, index);
+    }
+    return value;
+  }
+
+  public fromView(value: string, suffix: string) {
+    return value + suffix;
   }
 }

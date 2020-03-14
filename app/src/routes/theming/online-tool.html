@@ -4,17 +4,12 @@
 
   <section>
     <h2>Pick your <i>Primary</i> and <i>Accent</i> colors</h2>
-    <p>You can let our online-tool set the <i>darken</i>, <i>lighten</i> and <i>foreground</i> values, or you can set them all by yourself. Your call!</p>
-    <div class="ux-form__row" style="margin-bottom: 16px;">
-      <ux-switch checked.bind="autoComputePrimaryAccent"></ux-switch>
-      <label>Enable Auto Compute</label>
-    </div>
     <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
       <ux-grid-cell md="6">
-        <color-tool type="primary" auto-compute.to-view="autoComputePrimaryAccent"></color-tool>
+        <color-tool type="primary"></color-tool>
       </ux-grid-cell>
       <ux-grid-cell md="6">
-        <color-tool type="accent" auto-compute.to-view="autoComputePrimaryAccent"></color-tool>
+        <color-tool type="accent"></color-tool>
       </ux-grid-cell>
     </ux-grid>
     
@@ -22,17 +17,12 @@
 
   <section>
     <h2>Then set your <i>App</i> and <i>Surface</i> colors</h2>
-    <p>You can let our online-tool set the <i>foreground</i> values, or you can set them all by yourself. Your call!</p>
-    <div class="ux-form__row" style="margin-bottom: 16px;">
-      <ux-switch checked.bind="autoComputeAppSurface"></ux-switch>
-      <label>Enable Auto Compute</label>
-    </div>
     <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
       <ux-grid-cell md="6">
-        <color-tool type="app" auto-compute.to-view="autoComputeAppSurface"></color-tool>
+        <color-tool type="app"></color-tool>
       </ux-grid-cell>
       <ux-grid-cell md="6">
-        <color-tool type="surface" auto-compute.to-view="autoComputeAppSurface"></color-tool>
+        <color-tool type="surface"></color-tool>
       </ux-grid-cell>
     </ux-grid>
     
@@ -40,19 +30,15 @@
 
   <section>
     <h2>Now it's time to set your <i>Control</i>, <i>Disabled</i> and <i>Error</i> colors</h2>
-    <div class="ux-form__row" style="margin-bottom: 16px;">
-      <ux-switch checked.bind="autoComputeControlState"></ux-switch>
-      <label>Enable Auto Compute</label>
-    </div>
     <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
       <ux-grid-cell md="4">
-        <color-tool type="control" auto-compute.to-view="autoComputeControlState"></color-tool>
+        <color-tool type="control"></color-tool>
       </ux-grid-cell>
       <ux-grid-cell md="4">
-        <color-tool type="disabled" auto-compute.to-view="autoComputeControlState"></color-tool>
+        <color-tool type="disabled"></color-tool>
       </ux-grid-cell>
       <ux-grid-cell md="4">
-        <color-tool type="error" auto-compute.to-view="autoComputeControlState"></color-tool>
+        <color-tool type="error"></color-tool>
       </ux-grid-cell>
     </ux-grid>
     
