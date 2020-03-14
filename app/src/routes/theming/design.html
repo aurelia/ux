@@ -1,7 +1,4 @@
 <template>
-  <require from="./swatch-group"></require>
-  <require from="./theming.css"></require>
-
   <ux-grid fluid>
 
     <ux-grid-cell>
@@ -82,87 +79,6 @@
           }
         }
       </code-block>
-    </ux-grid-cell>
-
-    <ux-grid-cell md="3">
-      <div class="themecard">
-        <div class="groupprimary" css="background: ${ux.design.primary}; color: ${ux.design.primaryForeground};" click.trigger="currentProperty = 'primary'">
-          <span click.delegate="currentProperty = 'primaryForeground'">
-            Primary
-          </span>
-        </div>
-        <div class="groupsecondary" style="display:flex;">
-          <div css="background: ${ux.design.primaryLight}; color: ${ux.design.primaryLightForeground};" click.trigger="currentProperty = 'primaryLight'">
-            <span click.delegate="currentProperty = 'primaryLightForeground'">
-              Primary Light
-            </span>
-          </div>
-          <div css="background: ${ux.design.primaryDark}; color: ${ux.design.primaryDarkForeground};" click.trigger="currentProperty = 'primaryDark'">
-            <span click.delegate="currentProperty = 'primaryDarkForeground'">
-              Primary Dark
-            </span>
-          </div>
-        </div>
-      </div>
-    </ux-grid-cell>
-    <ux-grid-cell md="3">
-      <div class="themecard">
-        <div class="groupprimary" css="background: ${ux.design.accent}; color: ${ux.design.accentForeground};" click.trigger="currentProperty = 'accent'">
-          <span click.delegate="currentProperty = 'accentForeground'">
-            Accent
-          </span>
-        </div>
-        <div class="groupsecondary" style="display:flex;">
-          <div css="background: ${ux.design.accentLight}; color: ${ux.design.accentLightForeground};" click.trigger="currentProperty = 'accentLight'">
-            <span click.delegate="currentProperty = 'accentLightForeground'">
-              Accent Light
-            </span>
-          </div>
-          <div css="background: ${ux.design.accentDark}; color: ${ux.design.accentDarkForeground};" click.trigger="currentProperty = 'accentDark'">
-            <span click.delegate="currentProperty = 'accentDarkForeground'">
-              Accent Dark
-            </span>
-          </div>
-        </div>
-      </div>
-    </ux-grid-cell>
-    <ux-grid-cell md="3">
-      <div class="themecard">
-        <div class="groupprimary" css="background: ${ux.design.controlBackground}; color: ${ux.design.controlForeground};" click.trigger="currentProperty = 'controlBackground'">
-          <span click.delegate="currentProperty = 'controlForeground'">
-            Component Colors
-          </span>
-        </div>
-      </div>
-    </ux-grid-cell>
-
-    <ux-grid-cell md="3">
-      <div class="themecard">
-        <div class="groupprimary" css="background: ${ux.design.appBackground}; color: ${ux.design.appForeground};" click.trigger="currentProperty = 'appBackground'">
-          <span click.delegate="currentProperty = 'appForeground'">
-            App Colors
-          </span>
-        </div>
-      </div>
-    </ux-grid-cell>
-
-    <ux-grid-cell>
-      <p>
-        Click a section(for background) or title(for foreground) to select a property if you wish to change the color with the picker below.
-      </p>
-    </ux-grid-cell>
-    <ux-grid-cell>
-      <strong>Selected Property</strong>
-      <br>
-      <code>
-        design.${currentProperty}
-      </code>
-    </ux-grid-cell>
-    <ux-grid-cell>
-      <div class="theme-picker">
-        <input type="color" value.bind="ux.design[currentProperty]">
-        <ux-input value.bind="ux.design[currentProperty] & updateTrigger:'blur':'paste'"></ux-input>
-      </div>
     </ux-grid-cell>
   </ux-grid>
 </template>

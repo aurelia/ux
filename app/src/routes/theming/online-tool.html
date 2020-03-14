@@ -1,8 +1,6 @@
 <template>
+  <require from="../../showcase"></require>
   <require from="./online-tool.css"></require>
-  <require from="../../theming.css"></require>
-  <require from="./pa-color"></require>
-  <require from="./component-theming"></require>
 
   <section>
     <h2>Pick your <i>Primary</i> and <i>Accent</i> colors</h2>
@@ -13,10 +11,10 @@
     </div>
     <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
       <ux-grid-cell md="6">
-        <pa-color type="primary" auto-compute.to-view="autoComputePrimaryAccent"></pa-color>
+        <color-tool type="primary" auto-compute.to-view="autoComputePrimaryAccent"></color-tool>
       </ux-grid-cell>
       <ux-grid-cell md="6">
-        <pa-color type="accent" auto-compute.to-view="autoComputePrimaryAccent"></pa-color>
+        <color-tool type="accent" auto-compute.to-view="autoComputePrimaryAccent"></color-tool>
       </ux-grid-cell>
     </ux-grid>
     
@@ -31,10 +29,10 @@
     </div>
     <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
       <ux-grid-cell md="6">
-        <pa-color type="app" auto-compute.to-view="autoComputeAppSurface"></pa-color>
+        <color-tool type="app" auto-compute.to-view="autoComputeAppSurface"></color-tool>
       </ux-grid-cell>
       <ux-grid-cell md="6">
-        <pa-color type="surface" auto-compute.to-view="autoComputeAppSurface"></pa-color>
+        <color-tool type="surface" auto-compute.to-view="autoComputeAppSurface"></color-tool>
       </ux-grid-cell>
     </ux-grid>
     
@@ -48,13 +46,13 @@
     </div>
     <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
       <ux-grid-cell md="4">
-        <pa-color type="control" auto-compute.to-view="autoComputeControlState"></pa-color>
+        <color-tool type="control" auto-compute.to-view="autoComputeControlState"></color-tool>
       </ux-grid-cell>
       <ux-grid-cell md="4">
-        <pa-color type="disabled" auto-compute.to-view="autoComputeControlState"></pa-color>
+        <color-tool type="disabled" auto-compute.to-view="autoComputeControlState"></color-tool>
       </ux-grid-cell>
       <ux-grid-cell md="4">
-        <pa-color type="error" auto-compute.to-view="autoComputeControlState"></pa-color>
+        <color-tool type="error" auto-compute.to-view="autoComputeControlState"></color-tool>
       </ux-grid-cell>
     </ux-grid>
     
@@ -71,15 +69,14 @@
         </ux-chip-list>
       </ux-card-header>
       <ux-card-separator if.bind="selectedComponent !== undefined"></ux-card-separator>
-      <ux-card-content if.bind="selectedComponent !== undefined">
-        <component-theming component.bind="selectedComponent" theme.bind="themes[selectedComponent]"></component-theming>
+      <ux-card-content if.bind="selectedComponent !== undefined && themes[selectedComponent]">
+        <component-theming theme.bind="themes[selectedComponent]"></component-theming>
       </ux-card-content>
     </ux-card>
 
   </section>
 
   <section class="app-preview" ref="preview">
-    <require from="../../showcase"></require>
     <showcase></showcase>
   </section>
 

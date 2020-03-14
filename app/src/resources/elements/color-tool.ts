@@ -3,7 +3,7 @@ import { AureliaUX, Design } from '@aurelia-ux/core';
 import { UxInputTheme } from '@aurelia-ux/input';
 import { Color } from '../../color';
 import { getLogger } from 'aurelia-logging';
-const log = getLogger('pa-color');
+const log = getLogger('color-tool');
 
 const white = new Color({r: 255, g: 255, b: 255});
 const black = new Color({r: 0, g: 0, b: 0});
@@ -13,7 +13,7 @@ type ColorNames = 'primary' | 'accent' | 'appBackground' | 'surfaceBackground'
                   'controlBackground' | 'disabledBackground' | 'error';
 
 @inject(AureliaUX, BindingEngine)
-export class PaColor {
+export class ColorTool {
   @bindable public type: Types = 'primary';
   @bindable public autoCompute: boolean = true;
   public extend: boolean = false;

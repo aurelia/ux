@@ -24,16 +24,25 @@ swatch-group header.dark {
   color: #eee;
 }
 
+swatch-group ul {
+  padding: 0;
+}
+
 swatch-group ul li {
   padding: 16px;
 }
 
-swatch-group ul li.light {
-  color: #333;
+swatch-group .color-row {
+  display: flex;
+  justify-content: space-between;
 }
 
-swatch-group ul li.dark {
-  color: #eee;
+swatch-group .color-row.light {
+  color: #000;
+}
+
+swatch-group .color-row.dark {
+  color: #fff;
 }
 
 swatch-group.swatch-name {
@@ -43,7 +52,7 @@ swatch-group.swatch-name {
   margin-bottom: 53px;
 }
 
-styles.color-row {
+.color-row {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;

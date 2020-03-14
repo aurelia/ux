@@ -1,47 +1,47 @@
-.pa-color {
+.color-tool {
   display: block;
   box-shadow: var(--aurelia-ux--design-elevation8dp);
 }
 
-.pa-color__main {
+.color-tool__main {
   width: 100%;
 }
 
-.pa-color__alternate {
+.color-tool__alternate {
   display: flex;
 }
 
-.pa-color__light,
-.pa-color__dark {
+.color-tool__light,
+.color-tool__dark {
   width: 50%;
   height: 150px;
   overflow: hidden;
 }
 
-.pa-color__box {
+.color-tool__box {
   padding: 16px;
 }
 
-.pa-color__value {
+.color-tool__value {
   margin-bottom: 16px;
 }
 
-.pa-color__value[disabled] > *:not(.color-feedback) {
+.color-tool__value[disabled] > *:not(.color-feedback) {
   opacity: 0.5;
 }
-.pa-color__footer {
+.color-tool__footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
 }
-.pa-color__footer > div {
+.color-tool__footer > div {
   display: flex;
   align-items: center;
 }
 
 
-.pa-color--primary {
+.color-tool--primary {
   --main: var(--aurelia-ux--design-primary);
   --main-foreground: var(--aurelia-ux--design-primary-foreground);
   --light: var(--aurelia-ux--design-primary-light);
@@ -50,7 +50,7 @@
   --dark-foreground: var(--aurelia-ux--design-primary-dark-foreground);
 }
 
-.pa-color--accent {
+.color-tool--accent {
   --main: var(--aurelia-ux--design-accent);
   --main-foreground: var(--aurelia-ux--design-accent-foreground);
   --light: var(--aurelia-ux--design-accent-light);
@@ -59,68 +59,68 @@
   --dark-foreground: var(--aurelia-ux--design-accent-dark-foreground);
 }
 
-.pa-color--app {
+.color-tool--app {
   --main: var(--aurelia-ux--design-app-background);
   --main-foreground: var(--aurelia-ux--design-app-foreground);
 }
-.pa-color--surface {
+.color-tool--surface {
   --main: var(--aurelia-ux--design-surface-background);
   --main-foreground: var(--aurelia-ux--design-surface-foreground);
 }
-.pa-color--control {
+.color-tool--control {
   --main: var(--aurelia-ux--design-control-background);
   --main-foreground: var(--aurelia-ux--design-control-foreground);
 }
-.pa-color--disabled {
+.color-tool--disabled {
   --main: var(--aurelia-ux--design-disabled-background);
   --main-foreground: var(--aurelia-ux--design-disabled-foreground);
 }
-.pa-color--error {
+.color-tool--error {
   --main: var(--aurelia-ux--design-error);
   --main-foreground: var(--aurelia-ux--design-error-foreground);
 }
 
-.pa-color--primary .pa-color__main {
+.color-tool--primary .color-tool__main {
   background: var(--aurelia-ux--design-primary);
   color: var(--aurelia-ux--design-primary-foreground);
 }
-.pa-color--primary .pa-color__light {
+.color-tool--primary .color-tool__light {
   background: var(--aurelia-ux--design-primary-light);
   color: var(--aurelia-ux--design-primary-light-foreground);
 }
-.pa-color--primary .pa-color__dark {
+.color-tool--primary .color-tool__dark {
   background: var(--aurelia-ux--design-primary-dark);
   color: var(--aurelia-ux--design-primary-dark-foreground);
 }
-.pa-color--accent .pa-color__main {
+.color-tool--accent .color-tool__main {
   background: var(--aurelia-ux--design-accent);
   color: var(--aurelia-ux--design-accent-foreground);
 }
-.pa-color--accent .pa-color__light {
+.color-tool--accent .color-tool__light {
   background: var(--aurelia-ux--design-accent-light);
   color: var(--aurelia-ux--design-accent-light-foreground);
 }
-.pa-color--accent .pa-color__dark {
+.color-tool--accent .color-tool__dark {
   background: var(--aurelia-ux--design-accent-dark);
   color: var(--aurelia-ux--design-accent-dark-foreground);
 }
-.pa-color--app .pa-color__main {
+.color-tool--app .color-tool__main {
   background: var(--aurelia-ux--design-app-background);
   color: var(--aurelia-ux--design-app-foreground);
 }
-.pa-color--surface .pa-color__main {
+.color-tool--surface .color-tool__main {
   background: var(--aurelia-ux--design-surface-background);
   color: var(--aurelia-ux--design-surface-foreground);
 }
-.pa-color--control .pa-color__main {
+.color-tool--control .color-tool__main {
   background: var(--aurelia-ux--design-control-background);
   color: var(--aurelia-ux--design-control-foreground);
 }
-.pa-color--disabled .pa-color__main {
+.color-tool--disabled .color-tool__main {
   background: var(--aurelia-ux--design-disabled-background);
   color: var(--aurelia-ux--design-disabled-foreground);
 }
-.pa-color--error .pa-color__main {
+.color-tool--error .color-tool__main {
   background: var(--aurelia-ux--design-error);
   color: var(--aurelia-ux--design-error-foreground);
 }

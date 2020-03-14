@@ -12,13 +12,13 @@ import { AureliaUX, Design } from '@aurelia-ux/core';
 import { UxButtonTheme } from './../../../../packages/button/src/ux-button-theme';
 import {
   ValidationControllerFactory,
-  ValidationController,
-  ValidationRules
+  ValidationController
 } from 'aurelia-validation';
 import { getLogger } from 'aurelia-logging';
 const log = getLogger('online-tool');
 
 import { AureliaUXFormRenderer } from '../../forms-form-renderer';
+import { UxInputTheme } from '@aurelia-ux/input';
 
 @inject(ThemeService, AureliaUX, ValidationControllerFactory)
 export class OnlineTool {
@@ -32,10 +32,18 @@ export class OnlineTool {
   public volume = 85;
 
   private components = ['button', 'input', 'textarea', 'select', 'datepicker', 'chip-input', 'slider', 'checkbox', 'radio'];
-  private themes: {
-    [key: string]: UxTheme;
-  } = {};
-  public selectedComponent?: string;
+  private themes = {
+    'button': new UxButtonTheme(),
+    'input': new UxInputTheme(),
+    'textarea': new UxTextAreaTheme(),
+    'select': new UxSelectTheme(),
+    'datepicker': new UxDatepickerTheme(),
+    'chip-input': new UxChipInputTheme(),
+    'slider': new UxSliderTheme(),
+    'checkbox': new UxCheckboxTheme(),
+    'radio': new UxRadioTheme()
+  };
+  public selectedComponent?: string = '';
 
   public controller: ValidationController;
 
@@ -48,23 +56,6 @@ export class OnlineTool {
     this.design = this.ux.design;
     this.controller = controllerFactory.createForCurrentScope();
     this.controller.addRenderer(new AureliaUXFormRenderer());
-    this.setThemes();
-  }
-
-  private setThemes() {
-    for (const component of this.components) {
-      switch (component) {
-        case 'button': this.themes[component] = new UxButtonTheme(); break;
-        case 'input': this.themes[component] = new UxChipInputTheme(); break;
-        case 'textarea': this.themes[component] = new UxTextAreaTheme(); break;
-        case 'select': this.themes[component] = new UxSelectTheme(); break;
-        case 'datepicker': this.themes[component] = new UxDatepickerTheme(); break;
-        case 'chip-input': this.themes[component] = new UxChipInputTheme(); break;
-        case 'slider': this.themes[component] = new UxSliderTheme(); break;
-        case 'checkbox': this.themes[component] = new UxCheckboxTheme(); break;
-        case 'radio': this.themes[component] = new UxRadioTheme(); break;
-      }
-    }
   }
 
   public selectComponent(component: string) {

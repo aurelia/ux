@@ -155,3 +155,11 @@ small {
 table.attribute-table {
   min-width: 400px;
 }
+
+.color-feedback {
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid var(--ux-swatch--white);
+}
