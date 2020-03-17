@@ -7,6 +7,10 @@
   position: relative;
 }
 
+.ux-checkbox~label[for] {
+  cursor: pointer;
+}
+
 .ux-checkbox__inner-input {
   position: absolute;
   top: 0;

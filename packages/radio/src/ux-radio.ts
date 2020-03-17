@@ -22,7 +22,6 @@ export class UxRadio implements UxComponent {
 
   @bindable public disabled: boolean | string = false;
   @bindable public effect = 'ripple';
-  @bindable public id: string;
   @bindable public theme: UxRadioTheme;
 
   public checked: boolean = false;
