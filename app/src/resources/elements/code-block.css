@@ -1,3 +1,21 @@
 code-block > pre[class*="language-"] {
   margin: 0;
 }
+
+.code-block--max300 {
+  display: block;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.code-block--max400 {
+  display: block;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.code-block--max500 {
+  display: block;
+  max-height: 500px;
+  overflow-y: auto;
+}

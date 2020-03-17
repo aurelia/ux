@@ -1,4 +1,4 @@
-import { bindable, inject } from "aurelia-framework";
+import { bindable, inject } from 'aurelia-framework';
 import prism from 'prismjs';
 
 @inject(Element)
@@ -9,9 +9,8 @@ export class CodeBlock {
 
   constructor(public element: Element) { }
 
-  public async bind() {
+  public async attached() {
     await prism.highlightAllUnder(this.element);
-
     this.fixRenderedHtml();
   }
 
