@@ -1,0 +1,7 @@
+.showcase {
+  display: block;
+}
+
+.showcase > section {
+  padding: 16px;
+}

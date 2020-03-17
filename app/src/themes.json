@@ -35,7 +35,7 @@
       "appForeground": "#212121",
       "surfaceBackground": "#FFFFFF",
       "surfaceForeground": "#212121",
-      "disabledBackground": "#EFEFEF",
+      "disabledBackground": "#9E9E9E",
       "disabledForeground": "#BBBBBB",
       "error": "#F44336",
       "errorContrast": "#FFFFFF",

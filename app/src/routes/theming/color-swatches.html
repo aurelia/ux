@@ -16,27 +16,42 @@
         <code>swatches</code> export on
         <code>@aurelia-ux/core</code>. The other is through CSS Variables that are created and injected into the document when the application starts up.
       </p>
+    </ux-grid-cell>
 
-      <strong>CSS Examples</strong>
-      <em>--ux-swatch--color-value</em>
-      <code-block type="css">
-          --ux-swatch--blue-grey-p50
-          --ux-swatch--blue-grey-p100
-          --ux-swatch--blue-grey-p200
-          --ux-swatch--blue-grey-p300
-          --ux-swatch--blue-grey-p400
-          --ux-swatch--blue-grey-p500
-          --ux-swatch--blue-grey-p600
-          --ux-swatch--blue-grey-p700
-          --ux-swatch--blue-grey-p800
-          --ux-swatch--blue-grey-p900
-          ...
-          --ux-swatch--black
-          --ux-swatch--white
-      </code-block>
+    <ux-card md="6">
+      <ux-card-header>
+        CSS Variables
+        <br><em>--ux-swatch--color-value</em>
+      </ux-card-header>
+      <ux-card-content>
+        <code-block type="css" class="code-block--max300">
+            --ux-swatch--blue-grey-p50
+            --ux-swatch--blue-grey-p100
+            --ux-swatch--blue-grey-p200
+            --ux-swatch--blue-grey-p300
+            --ux-swatch--blue-grey-p400
+            --ux-swatch--blue-grey-p500
+            --ux-swatch--blue-grey-p600
+            --ux-swatch--blue-grey-p700
+            --ux-swatch--blue-grey-p800
+            --ux-swatch--blue-grey-p900
+            ...
+            --ux-swatch--black
+            --ux-swatch--white
+        </code-block>
+      </ux-card-content>
+    </ux-card>
 
-      <strong>Javascript Example</strong>
-      <code-block>
+    <ux-card md="6">
+      <ux-card-header>
+        Javascript Example
+        <br><em>swatches.color.value</em>
+      </ux-card-header>
+      <ux-card-content>
+        <code-block type="ts" class="code-block--max300">
+          // app.ts
+          import { swatches } from '@aurelia-ux/core';
+
           swatches.blueGrey.p50
           swatches.blueGrey.p100
           swatches.blueGrey.p200
@@ -51,8 +66,10 @@
           ...
           swatches.black
           swatches.white
-      </code-block>
-    </ux-grid-cell>
+        </code-block>
+      </ux-card-content>
+    </ux-card>
+
 
     <ux-grid-cell xs="12" sm="6" md="4" lg="3" xl="2" repeat.for="swatch of swatches">
       <swatch-group value.bind="swatch"></swatch-group>

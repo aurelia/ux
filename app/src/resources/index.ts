@@ -5,6 +5,7 @@ export function configure(config: FrameworkConfiguration) {
     PLATFORM.moduleName('./elements/code-block'),
     PLATFORM.moduleName('./elements/color-tool'),
     PLATFORM.moduleName('./elements/component-theming'),
+    PLATFORM.moduleName('./elements/showcase'),
     PLATFORM.moduleName('./elements/swatch-group'),
 
     // UX Components in development

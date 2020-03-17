@@ -1,34 +1,8 @@
 .app-preview {
-  margin: 48px 0;
-  padding: 16px;
   background-color: #FAFAFA;
   background-color: var(--aurelia-ux--design-app-background, #FAFAFA);
   color: #212121;
   color: var(--aurelia-ux--design-app-foreground, #212121);
-}
-
-
-/* .theming h3 {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  cursor: pointer;
-} */
-
-/* .theming .color-feedback {
-  display: inline-flex;
-  width: 30px;
-  height: 30px;
-  border-radius: 3px;
-} */
-
-/* .theming ux-field {
-  display: block;
-  margin-bottom: 8px;
-} */
-
-section {
-  padding: 16px;
 }
 
 .ux-card-component__media {

@@ -6,7 +6,7 @@ import { UxSliderTheme } from './../../../../packages/slider/src/ux-slider-theme
 import { UxCheckboxTheme } from './../../../../packages/checkbox/src/ux-checkbox-theme';
 import { UxRadioTheme } from './../../../../packages/radio/src/ux-radio-theme';
 import { UxTheme } from './../../../../packages/core/src/styles/ux-theme';
-import { ThemeService, ThemesSet } from '../../theme-service';
+import { ThemeService } from '../../theme-service';
 import { inject } from 'aurelia-framework';
 import { AureliaUX, Design } from '@aurelia-ux/core';
 import { UxButtonTheme } from './../../../../packages/button/src/ux-button-theme';
@@ -63,6 +63,66 @@ export class OnlineTool {
       .stringify(theme, null, 2)
       .replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br>$2')
       .replace(/\s/g, '&nbsp;');
+  }
+
+  public setPAPreset(preset: string) {
+    if (preset === 'default') {
+      this.design.primary = '#3F51B5';
+      this.design.accent = '#FF4081';
+    }
+    if (preset === 'light') {
+      this.design.primary = '#90A4AE';
+      this.design.accent = '#BDBDBD';
+    }
+    if (preset === 'dark') {
+      this.design.primary = '#37474F';
+      this.design.accent = '#616161';
+    }
+    if (preset === 'ocean') {
+      this.design.primary = '#1565C0';
+      this.design.accent = '#283593';
+    }
+  }
+
+  public setASPreset(preset: string) {
+    if (preset === 'default') {
+      this.design.appBackground = '#FAFAFA';
+      this.design.surfaceBackground = '#FFFFFF';
+    }
+    if (preset === 'light') {
+      this.design.appBackground = '#90A4AE';
+      this.design.surfaceBackground = '#BDBDBD';
+    }
+    if (preset === 'dark') {
+      this.design.appBackground = '#37474F';
+      this.design.surfaceBackground = '#616161';
+    }
+    if (preset === 'ocean') {
+      this.design.appBackground = '#1565C0';
+      this.design.surfaceBackground = '#283593';
+    }
+  }
+
+  public setCDEPreset(preset: string) {
+    if (preset === 'default') {
+      this.design.controlBackground = '#EFEFEF';
+      this.design.disabledBackground = '#9E9E9E';
+      this.design.error = '#F44336';
+    }
+    if (preset === 'light') {
+      this.design.controlBackground = '#FFFFFF';
+      this.design.disabledBackground = '#CCCCCC';
+      this.design.error = '#E57373';
+    }
+    if (preset === 'dark') {
+      this.design.controlBackground = '#333';
+      this.design.disabledBackground = '#777777';
+      this.design.error = '#B71C1C';
+    }
+    if (preset === 'ocean') {
+      this.design.controlBackground = '#9FA8DA';
+      this.design.disabledBackground = '#C5CAE9';
+    }
   }
 
 }

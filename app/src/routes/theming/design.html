@@ -15,70 +15,79 @@
 
     </ux-grid-cell>
 
-    <ux-grid-cell md="6">
-      <strong>Design CSS Variables</strong>
-      <code-block type="css">
-        --aurelia-ux--design-app-background
-        --aurelia-ux--design-app-foreground
-        --aurelia-ux--design-surface-background
-        --aurelia-ux--design-surface-foreground
-        --aurelia-ux--design-control-background
-        --aurelia-ux--design-control-foreground
-        --aurelia-ux--design-control-label-color
-        --aurelia-ux--design-primary
-        --aurelia-ux--design-primary-foreground
-        --aurelia-ux--design-primary-light
-        --aurelia-ux--design-primary-light-foreground
-        --aurelia-ux--design-primary-dark
-        --aurelia-ux--design-primary-dark-foreground
-        --aurelia-ux--design-accent
-        --aurelia-ux--design-accent-foreground
-        --aurelia-ux--design-accent-light
-        --aurelia-ux--design-accent-light-foreground
-        --aurelia-ux--design-accent-dark
-        --aurelia-ux--design-accent-dark-foreground
-        --aurelia-ux--design-disabled-background
-        --aurelia-ux--design-disabled-foreground
-        --aurelia-ux--design-error
-        --aurelia-ux--design-on-error
-      </code-block>
-    </ux-grid-cell>
+    <ux-card md="6">
+      <ux-card-header>
+        CSS Variables
+      </ux-card-header>
+      <ux-card-content>
+        <code-block type="css" class="code-block--max400">
+          --aurelia-ux--design-app-background
+          --aurelia-ux--design-app-foreground
+          --aurelia-ux--design-surface-background
+          --aurelia-ux--design-surface-foreground
+          --aurelia-ux--design-control-background
+          --aurelia-ux--design-control-foreground
+          --aurelia-ux--design-control-label-color
+          --aurelia-ux--design-primary
+          --aurelia-ux--design-primary-foreground
+          --aurelia-ux--design-primary-light
+          --aurelia-ux--design-primary-light-foreground
+          --aurelia-ux--design-primary-dark
+          --aurelia-ux--design-primary-dark-foreground
+          --aurelia-ux--design-accent
+          --aurelia-ux--design-accent-foreground
+          --aurelia-ux--design-accent-light
+          --aurelia-ux--design-accent-light-foreground
+          --aurelia-ux--design-accent-dark
+          --aurelia-ux--design-accent-dark-foreground
+          --aurelia-ux--design-disabled-background
+          --aurelia-ux--design-disabled-foreground
+          --aurelia-ux--design-error
+          --aurelia-ux--design-on-error
+        </code-block>
+      </ux-card-content>
+    </ux-card>
 
-    <ux-grid-cell md="6">
-      <strong>Design Javascript Properties</strong>
-      <code-block type="ts">
-        // app.ts
-        import { AureliaUX } from '@aurelia-ux/core';
+    <ux-card md="6">
+      <ux-card-header>
+        Design Javascript Properties
+      </ux-card-header>
+      <ux-card-content>
+        <code-block type="ts" class="code-block--max400">
+          // app.ts
+          import { AureliaUX } from '@aurelia-ux/core';
 
-        @inject(AureliaUX)
-        export class App {
-          constructor(private ux: AureliaUX) {
-            this.ux.design.appBackground;
-            this.ux.design.appForeground
-            this.ux.design.surfaceBackground
-            this.ux.design.surfaceForeground
-            this.ux.design.controlBackground
-            this.ux.design.controlForeground
-            this.ux.design.control-label-color
-            this.ux.design.primary
-            this.ux.design.primaryForeground
-            this.ux.design.primaryLight
-            this.ux.design.primaryLightForeground
-            this.ux.design.primaryDark
-            this.ux.design.primaryDarkForeground
-            this.ux.design.accent
-            this.ux.design.accentForeground
-            this.ux.design.accentLight
-            this.ux.design.accentLightForeground
-            this.ux.design.accentDark
-            this.ux.design.accentDarkForeground
-            this.ux.design.disabledBackground
-            this.ux.design.disabledForeground
-            this.ux.design.error
-            this.ux.design.onError
+          @inject(AureliaUX)
+          export class App {
+            constructor(private ux: AureliaUX) {
+              this.ux.design.appBackground;
+              this.ux.design.appForeground
+              this.ux.design.surfaceBackground
+              this.ux.design.surfaceForeground
+              this.ux.design.controlBackground
+              this.ux.design.controlForeground
+              this.ux.design.control-label-color
+              this.ux.design.primary
+              this.ux.design.primaryForeground
+              this.ux.design.primaryLight
+              this.ux.design.primaryLightForeground
+              this.ux.design.primaryDark
+              this.ux.design.primaryDarkForeground
+              this.ux.design.accent
+              this.ux.design.accentForeground
+              this.ux.design.accentLight
+              this.ux.design.accentLightForeground
+              this.ux.design.accentDark
+              this.ux.design.accentDarkForeground
+              this.ux.design.disabledBackground
+              this.ux.design.disabledForeground
+              this.ux.design.error
+              this.ux.design.onError
+            }
           }
-        }
-      </code-block>
-    </ux-grid-cell>
+        </code-block>
+      </ux-card-content>
+    </ux-card>
+
   </ux-grid>
 </template>

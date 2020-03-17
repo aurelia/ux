@@ -4,14 +4,19 @@ import {
   ValidationRules
 } from 'aurelia-validation';
 
-import { AureliaUXFormRenderer } from './forms-form-renderer';
+import { AureliaUXFormRenderer } from '../../forms-form-renderer';
 import { inject } from 'aurelia-dependency-injection';
-import listPeople from './list-people.json';
-import listSettings from './list-settings.json';
+import listPeople from '../../list-people.json';
+import listSettings from '../../list-settings.json';
 import { computedFrom } from 'aurelia-binding';
+import { bindable } from 'aurelia-framework';
 
 @inject(ValidationControllerFactory)
 export class Showcase {
+
+  // This prefix is used for checkbox/radio ids when the showcase is used several
+  // times on the same page
+  @bindable prefix: string = '';
 
   public labelPosition = 'floating';
 

@@ -1,126 +1,124 @@
 <template>
-  <ux-grid fluid>
-    <ux-grid-cell>
+  <section>
 
-      <h1>Setting Up Aurelia UX</h1>
+    <h1>Setting Up Aurelia UX</h1>
 
-      <p>
-        Getting setup with Aurelia UX is a quick process, and depending on your bundler of choice can be ready to go with a quick
-        npm command and a couple lines of code.
-      </p>
-    
-      <h2>Available Packages</h2>
-    
-      <p>
-        Aurelia is organized by components and you can easily pick which ones you want to use.
-        The only required package is <strong>@aurelia-ux/core</strong>. Then you can either only
-        pick a few or install a combo called <strong>@aurelia-ux/components</strong> which includes
-        all components at once.
-      </p>
-    
-      <ul>
-        <li><strong>@aurelia-ux/core</strong> (required)</li>
-        <li><strong>@aurelia-ux/components</strong> (all in one)</li>
-        <li><strong>@aurelia-ux/button</strong></li>
-        <li><strong>@aurelia-ux/card</strong></li>
-        <li><strong>@aurelia-ux/checkbox</strong></li>
-        <li><strong>@aurelia-ux/chip-input</strong> (include ux-chip, ux-chip-list and ux-chip-input)</li>
-        <li><strong>@aurelia-ux/datepicker</strong></li>
-        <li><strong>@aurelia-ux/form</strong></li>
-        <li><strong>@aurelia-ux/grid</strong></li>
-        <li><strong>@aurelia-ux/icons</strong> (not yet included in components)</li>
-        <li><strong>@aurelia-ux/input</strong></li>
-        <li><strong>@aurelia-ux/input-info</strong></li>
-        <li><strong>@aurelia-ux/list</strong></li>
-        <li><strong>@aurelia-ux/radio</strong></li>
-        <li><strong>@aurelia-ux/select</strong></li>
-        <li><strong>@aurelia-ux/slider</strong></li>
-        <li><strong>@aurelia-ux/switch</strong></li>
-        <li><strong>@aurelia-ux/textarea</strong></li>
-      </ul>
+    <p>
+      Getting setup with Aurelia UX is a quick process, and depending on your bundler of choice can be ready to go with a quick
+      npm command and a couple lines of code.
+    </p>
+  
+    <h2>Available Packages</h2>
+  
+    <p>
+      Aurelia is organized by components and you can easily pick which ones you want to use.
+      The only required package is <strong>@aurelia-ux/core</strong>. Then you can either only
+      pick a few or install a combo called <strong>@aurelia-ux/components</strong> which includes
+      all components at once.
+    </p>
+  
+    <ul>
+      <li><strong>@aurelia-ux/core</strong> (required)</li>
+      <li><strong>@aurelia-ux/components</strong> (all in one)</li>
+      <li><strong>@aurelia-ux/button</strong></li>
+      <li><strong>@aurelia-ux/card</strong></li>
+      <li><strong>@aurelia-ux/checkbox</strong></li>
+      <li><strong>@aurelia-ux/chip-input</strong> (include ux-chip, ux-chip-list and ux-chip-input)</li>
+      <li><strong>@aurelia-ux/datepicker</strong></li>
+      <li><strong>@aurelia-ux/form</strong></li>
+      <li><strong>@aurelia-ux/grid</strong></li>
+      <li><strong>@aurelia-ux/icons</strong> (not yet included in components)</li>
+      <li><strong>@aurelia-ux/input</strong></li>
+      <li><strong>@aurelia-ux/input-info</strong></li>
+      <li><strong>@aurelia-ux/list</strong></li>
+      <li><strong>@aurelia-ux/radio</strong></li>
+      <li><strong>@aurelia-ux/select</strong></li>
+      <li><strong>@aurelia-ux/slider</strong></li>
+      <li><strong>@aurelia-ux/switch</strong></li>
+      <li><strong>@aurelia-ux/textarea</strong></li>
+    </ul>
 
-      <h3>And more coming soon such as:</h3>
+    <h3>And more coming soon such as:</h3>
 
-      <ul>
-        <li><strong>@aurelia-ux/tabs</strong></li>
-        <li><strong>@aurelia-ux/drawer</strong></li>        
-        <li><strong>@aurelia-ux/menu</strong></li>        
-      </ul>
+    <ul>
+      <li><strong>@aurelia-ux/tabs</strong></li>
+      <li><strong>@aurelia-ux/drawer</strong></li>        
+      <li><strong>@aurelia-ux/menu</strong></li>        
+    </ul>
+  
+    <h2>Installing Aurelia</h2>
+  
+    <h3>Webpack</h3>
+  
+    <p>
+      There is not much you are required to do to get Aurelia UX working with webpack.
+    </p>
+  
+    <strong>Install Aurelia UX Core and Components</strong>
+    <code-block type="shell">
+      npm install @aurelia-ux/core @aurelia-ux/components --save
+    </code-block>
+  
+    <strong>Setup the plugin in your application configuration</strong>
+    <code-block>
+      import {Aurelia} from 'aurelia-framework';
+      import {PLATFORM} from 'aurelia-pal';
+      import environment from './environment';
     
-      <h2>Installing Aurelia</h2>
-    
-      <h3>Webpack</h3>
-    
-      <p>
-        There is not much you are required to do to get Aurelia UX working with webpack.
-      </p>
-    
-      <strong>Install Aurelia UX Core and Components</strong>
-      <code-block type="shell">
-        npm install @aurelia-ux/core @aurelia-ux/components --save
-      </code-block>
-    
-      <strong>Setup the plugin in your application configuration</strong>
-      <code-block>
-        import {Aurelia} from 'aurelia-framework';
-        import {PLATFORM} from 'aurelia-pal';
-        import environment from './environment';
+      export function configure(aurelia: Aurelia) {
+        aurelia.use
+          .standardConfiguration()
+          .feature(PLATFORM.moduleName('resources/index'));
       
-        export function configure(aurelia: Aurelia) {
           aurelia.use
-            .standardConfiguration()
-            .feature(PLATFORM.moduleName('resources/index'));
-        
-            aurelia.use
-            .plugin(PLATFORM.moduleName('@aurelia-ux/core'))
-            .plugin(PLATFORM.moduleName('@aurelia-ux/components'));
-        
-          if (environment.debug) {
-            aurelia.use.developmentLogging();
-          }
-        
-          if (environment.testing) {
-            aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
-          }
-        
-          aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
+          .plugin(PLATFORM.moduleName('@aurelia-ux/core'))
+          .plugin(PLATFORM.moduleName('@aurelia-ux/components'));
+      
+        if (environment.debug) {
+          aurelia.use.developmentLogging();
         }
-      </code-block>
-    
-      <p>And that is it, you are ready to start using Aurelia UX.</p>
-      <h3>Aurelia CLI</h3>
-    
-      <p>
-        Installing Aurelia UX with the Aurelia CLI has an extra step compared to Webpack.
-      </p>
-    
-      <strong>Updating the Aurelia Json</strong>
-    
-      <code-block type="json">
-        {
-          "name": "@aurelia-ux/core",
-          "path": "../node_modules/@aurelia-ux/core/dist/amd",
-          "main": "index",
-          "resources": ["**/*.{css,html}"]
-        },
-        {
-          "name": "@aurelia-ux/components",
-          "path": "../node_modules/@aurelia-ux/components/dist/amd",
-          "main": "index",
-          "resources": ["**/*.{css,html}"]
-        },
-        {
-          "name": "@aurelia-ux/input",
-          "path": "../node_modules/@aurelia-ux/input/dist/amd",
-          "main": "index",
-          "resources": ["**/*.{js,css,html}"]
-        },
-        ...
-        // Do this for each plugin so that all the modules can be resolved
-      </code-block>
-    
-      <p>And that is it, you are ready to start using Aurelia UX.</p>
+      
+        if (environment.testing) {
+          aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
+        }
+      
+        aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
+      }
+    </code-block>
+  
+    <p>And that is it, you are ready to start using Aurelia UX.</p>
+    <h3>Aurelia CLI</h3>
+  
+    <p>
+      Installing Aurelia UX with the Aurelia CLI has an extra step compared to Webpack.
+    </p>
+  
+    <strong>Updating the Aurelia Json</strong>
+  
+    <code-block type="json">
+      {
+        "name": "@aurelia-ux/core",
+        "path": "../node_modules/@aurelia-ux/core/dist/amd",
+        "main": "index",
+        "resources": ["**/*.{css,html}"]
+      },
+      {
+        "name": "@aurelia-ux/components",
+        "path": "../node_modules/@aurelia-ux/components/dist/amd",
+        "main": "index",
+        "resources": ["**/*.{css,html}"]
+      },
+      {
+        "name": "@aurelia-ux/input",
+        "path": "../node_modules/@aurelia-ux/input/dist/amd",
+        "main": "index",
+        "resources": ["**/*.{js,css,html}"]
+      },
+      ...
+      // Do this for each plugin so that all the modules can be resolved
+    </code-block>
+  
+    <p>And that is it, you are ready to start using Aurelia UX.</p>
 
-    </ux-grid-cell>
-  </ux-grid>
+  </section>>
 </template>

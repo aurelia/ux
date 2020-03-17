@@ -16,16 +16,27 @@ body {
   /* background-color: var(--aurelia-ux--design-app-background, #FAFAFA); */
   color: #212121;
   /* color: var(--aurelia-ux--design-app-foreground, #212121); */
+  --app-primary: var(--ux-swatch--indigo-p500);
+  --app-accent: var(--ux-swatch--pink-a200);
+  --app-background: var(--ux-swatch--white);
+  --app-foreground: var(--ux-swatch--grey-p900);
+  --app-surface: var(--ux-swatch--blue-grey-p50);
 }
 
 body {
   display: flex;
   flex-direction: row;
+  background: var(--app-background);
+  color: var(--app-foreground);
 }
 
 ul, ol {
   list-style: initial;
   padding-left: 32px;
+}
+
+section {
+  padding: 32px;
 }
 
 code {
@@ -42,6 +53,7 @@ em {
   left: 0;
   width: 250px;
   bottom: 0;
+  background: var(--app-surface);
   box-shadow: var(--aurelia-ux--design-elevation4dp);
 }
 
@@ -108,10 +120,12 @@ h1, h2, h3 {
 
 h1 {
   font-size: 38px;
+  color: var(--app-primary);
 }
 
 h2 {
   font-size: 32px;
+  color: var(--app-primary);
 }
 
 h3 {
