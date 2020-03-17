@@ -2,6 +2,7 @@ import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxGridTheme } from './ux-grid-theme';
+import { computedFrom } from 'aurelia-framework';
 
 @inject(Element, StyleEngine)
 @customElement('ux-grid')
@@ -52,5 +53,36 @@ export class UxGrid implements UxComponent {
     if (newValue != null) {
       this.element.style.setProperty('grid-template-columns', `repeat(${newValue}, 1fr)`);
     }
+  }
+
+  @computedFrom('element.offsetWidth')
+  public get elSize(): string {
+    const w = this.element.offsetWidth;
+    let elSize = '';
+    if (w <= 480) {
+      elSize += ' ux-grid--xs ux-grid--current-xs';
+    }
+    if (w > 480) {
+      elSize += ' ux-grid--sm';
+      if (w <= 960) {
+        elSize += ' ux-grid--current-sm';
+      }
+    }
+    if (w > 960) {
+      elSize += ' ux-grid--md';
+      if (w <= 1280) {
+        elSize += ' ux-grid--current-md';
+      }
+    }
+    if (w > 1280) {
+      elSize += ' ux-grid--lg';
+      if (w <= 1925) {
+        elSize += ' ux-grid--current-lg';
+      }
+    }
+    if (w > 1925) {
+      elSize += ' ux-grid--xl ux-grid--current-xl';
+    }
+    return elSize;
   }
 }

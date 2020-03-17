@@ -51,13 +51,17 @@ export class UxCard implements UxComponent {
     for (let i = 0; i < 10; i++) {
       this.element.classList.remove(`ux-card--${size}-${i}`);
       this.element.classList.remove(`ux-card--order-${this.order}-${size}-${i}`);
+      this.element.classList.remove(`ux-grid-cell--${size}-${i}`);
+      this.element.classList.remove(`ux-grid-cell--order-${this.order}-${size}-${i}`);
     }
 
     if (typeof value === 'string') {
       this.element.classList.add(`ux-card--${size}-${value}`);
+      this.element.classList.add(`ux-grid-cell--${size}-${value}`);
 
       if (typeof this.order === 'string') {
         this.element.classList.add(`ux-card--order-${this.order}-${size}-${value}`);
+        this.element.classList.add(`ux-grid-cell--order-${this.order}-${size}-${value}`);
       }
     }
   }
