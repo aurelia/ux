@@ -1,0 +1,30 @@
+<template 
+  class="mockup mockup--${mode} mockup--${type}" 
+  css="
+    box-shadow: var(--aurelia-ux--design-elevation${elevation}dp); 
+    height: ${contentHeight}; 
+    width: ${contentWidth};
+    transform: scale(${theScale});
+    margin: ${vMargin}px ${hMargin}px;">
+  <require from="./mockup.css"></require>
+  <div class="mockup__header">
+    <span class="mockup__header-bullet"></span>
+    <span class="mockup__header-bullet"></span>
+    <span class="mockup__header-bullet"></span>
+    <span class="mockup__header-input"></span>
+    <span class="mockup__header-burger" if.bind="!displayModeSwitcher">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+
+    <ux-chip-list style="flex-shrink: 0" ux-choice-container.bind="mode">
+      <ux-chip ux-choice="light">Light</ux-chip>
+      <ux-chip ux-choice="dark">Dark</ux-chip>
+    </ux-chip-list>
+
+  </div>
+  <div class="mockup__content">
+    <slot></slot>
+  </div>
+</template>

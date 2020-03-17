@@ -29,6 +29,7 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('aurelia-validation'));
 
   aurelia.use.feature(PLATFORM.moduleName('resources/index'));
+  aurelia.use.feature(PLATFORM.moduleName('components/index'));
 
   await aurelia.start();
   await aurelia.setRoot(PLATFORM.moduleName('app'), document.body);
