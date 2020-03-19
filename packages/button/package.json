@@ -20,6 +20,7 @@
     "bigopon <bigopon.777@gmail.com>"
   ],
   "main": "dist/commonjs/index.js",
+  "module": "dist/native-modules/index.js",
   "typings": "dist/types/index.d.ts",
   "repository": {
     "type": "git",
