@@ -132,7 +132,7 @@
 }
 
 .ux-input-component__border {
-  height: var(---border-active-width, 2px);
+  height: var(--border-active-width, 2px);
   position: absolute;
   bottom: 0;
   left: 0;
