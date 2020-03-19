@@ -45,16 +45,9 @@
       <li><strong>@aurelia-ux/drawer</strong></li>        
       <li><strong>@aurelia-ux/menu</strong></li>        
     </ul>
+
   
-    <h2>Installing Aurelia</h2>
-  
-    <h3>Webpack</h3>
-  
-    <p>
-      There is not much you are required to do to get Aurelia UX working with webpack.
-    </p>
-  
-    <strong>Install Aurelia UX Core and Components</strong>
+    <h2>Install Aurelia UX Core and Components</h2>
     <code-block type="shell">
       npm install @aurelia-ux/core @aurelia-ux/components --save
     </code-block>
@@ -84,38 +77,6 @@
       
         aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
       }
-    </code-block>
-  
-    <p>And that is it, you are ready to start using Aurelia UX.</p>
-    <h3>Aurelia CLI</h3>
-  
-    <p>
-      Installing Aurelia UX with the Aurelia CLI has an extra step compared to Webpack.
-    </p>
-  
-    <strong>Updating the Aurelia Json</strong>
-  
-    <code-block type="json">
-      {
-        "name": "@aurelia-ux/core",
-        "path": "../node_modules/@aurelia-ux/core/dist/amd",
-        "main": "index",
-        "resources": ["**/*.{css,html}"]
-      },
-      {
-        "name": "@aurelia-ux/components",
-        "path": "../node_modules/@aurelia-ux/components/dist/amd",
-        "main": "index",
-        "resources": ["**/*.{css,html}"]
-      },
-      {
-        "name": "@aurelia-ux/input",
-        "path": "../node_modules/@aurelia-ux/input/dist/amd",
-        "main": "index",
-        "resources": ["**/*.{js,css,html}"]
-      },
-      ...
-      // Do this for each plugin so that all the modules can be resolved
     </code-block>
   
     <p>And that is it, you are ready to start using Aurelia UX.</p>
