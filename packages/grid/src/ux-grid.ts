@@ -2,13 +2,15 @@ import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxGridTheme } from './ux-grid-theme';
-import { computedFrom } from 'aurelia-framework';
+import ResizeObserver from 'resize-observer-polyfill';
 
 @inject(Element, StyleEngine)
 @customElement('ux-grid')
 export class UxGrid implements UxComponent {
   @bindable public theme: UxGridTheme;
   @bindable public columns: null | number;
+
+  public elSize: string = 'ux-grid--xs ux-grid--current-xs';
 
   constructor(
     public element: HTMLElement,
@@ -22,6 +24,19 @@ export class UxGrid implements UxComponent {
     }
 
     this.processAttributes();
+  }
+
+  private observer: ResizeObserver;
+  public attached() {
+    this.setElSize(this.element.offsetWidth);
+    this.observer = new ResizeObserver((entries) => {
+      this.setElSize(entries[0].contentRect.width);
+    });
+    this.observer.observe(this.element);
+  }
+
+  public detached() {
+    this.observer.disconnect();
   }
 
   public processAttributes() {
@@ -55,9 +70,8 @@ export class UxGrid implements UxComponent {
     }
   }
 
-  @computedFrom('element.offsetWidth')
-  public get elSize(): string {
-    const w = this.element.offsetWidth;
+  public setElSize(w: number) {
+    // const w = this.element.offsetWidth;
     let elSize = '';
     if (w <= 480) {
       elSize += ' ux-grid--xs ux-grid--current-xs';
@@ -83,6 +97,6 @@ export class UxGrid implements UxComponent {
     if (w > 1925) {
       elSize += ' ux-grid--xl ux-grid--current-xl';
     }
-    return elSize;
+    this.elSize = elSize;
   }
 }
