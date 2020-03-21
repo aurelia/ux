@@ -89,8 +89,7 @@
   },
   "dependencies": {
     "@aurelia-ux/core": "^0.18.0",
-    "aurelia-binding": "^2.0.0",
-    "resize-observer-polyfill": "^1.5.1"
+    "aurelia-binding": "^2.0.0"
   },
   "devDependencies": {
     "@types/jasmine": "^2.8.6",

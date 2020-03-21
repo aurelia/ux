@@ -1,8 +1,8 @@
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxComponent, Size } from '@aurelia-ux/core';
 import { UxGridTheme } from './ux-grid-theme';
-import ResizeObserver from 'resize-observer-polyfill';
+import { observable } from 'aurelia-binding';
 
 @inject(Element, StyleEngine)
 @customElement('ux-grid')
@@ -10,6 +10,7 @@ export class UxGrid implements UxComponent {
   @bindable public theme: UxGridTheme;
   @bindable public columns: null | number;
 
+  @observable private size: Size = { width: 0, height: 0};
   public elSize: string = 'ux-grid--xs ux-grid--current-xs';
 
   constructor(
@@ -26,17 +27,12 @@ export class UxGrid implements UxComponent {
     this.processAttributes();
   }
 
-  private observer: ResizeObserver;
-  public attached() {
-    this.setElSize(this.element.offsetWidth);
-    this.observer = new ResizeObserver((entries) => {
-      this.setElSize(entries[0].contentRect.width);
-    });
-    this.observer.observe(this.element);
+  public sizeChanged() {
+    this.setElSize(this.size.width);
   }
 
-  public detached() {
-    this.observer.disconnect();
+  public attached() {
+    this.setElSize(this.element.offsetWidth);
   }
 
   public processAttributes() {
