@@ -15,6 +15,7 @@ export { UxComponent } from './components/ux-component';
 export { UxInputComponent } from './components/ux-input-component';
 export { UxChoiceAttribute } from './components/ux-choice-attribute';
 export { UxChoiceContainerAttribute } from './components/ux-choice-container-attribute';
+export { Size, SizeCustomAttribute } from './components/size-attribute';
 
 export { Design } from './designs/design';
 export { UxTheme } from './styles/ux-theme';
@@ -37,7 +38,8 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
   boolAttr.register(config.aurelia.resources, 'booleanAttr');
   config.globalResources([
     PLATFORM.moduleName('./components/ux-choice-attribute'),
-    PLATFORM.moduleName('./components/ux-choice-container-attribute')
+    PLATFORM.moduleName('./components/ux-choice-container-attribute'),
+    PLATFORM.moduleName('./components/size-attribute')
   ]);
 
   if (typeof callback === 'function') {
