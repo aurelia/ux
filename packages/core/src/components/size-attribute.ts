@@ -34,16 +34,16 @@ export class SizeCustomAttribute {
     if (typeof PLATFORM.global.ResizeObserver === 'function') {
       return new PLATFORM.global.ResizeObserver((records: Array<{contentRect: DOMRectReadOnly}>) => {
         const rect = records[0].contentRect;
-        this.sizeChanged({ width: rect.width, height: rect.height });
+        this.value = { width: rect.width, height: rect.height };
       });
     } else {
       return new ElementSizeDirtyChecker((size) => {
-        this.sizeChanged(size);
+        this.value = size;
       });
     }
   }
 
-  private sizeChanged(size: Size) {
+  public valueChanged(size: Size) {
     this.value = size;
     this.width = size.width;
     this.height = size.height;
