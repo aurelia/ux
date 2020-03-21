@@ -16,9 +16,9 @@ Check out the [showcase application](https://github.com/aurelia/app-ux-showcase)
 
 **Before The First Build**
 
-`npm ci`: installs dependencies for the base Aurelia UX project
-`npm run bootstrap`: sets up a symlink between all of the packages in the monorepo
-`npm run build`: builds all of the mono repo projects.
+* `npm ci` installs dependencies for the base Aurelia UX project
+* `npm run bootstrap` sets up a symlink between all of the packages in the monorepo
+* `npm run build` builds all of the mono repo projects.
 
 >Note: `npm run build` is very CPU intensive and takes a small period of time on most machines. If you are working within a single component, you might try `npm run build` instead at the component package level.
 

@@ -18,6 +18,7 @@
     "Zach Hollingshead <zach.hollingshead@gmail.com>"
   ],
   "main": "dist/commonjs/index.js",
+  "module": "dist/native-modules/index.js",
   "typings": "dist/commonjs/index.d.ts",
   "repository": {
     "type": "git",
