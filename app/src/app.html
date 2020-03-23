@@ -1,9 +1,53 @@
 <template>
   <require from="./app.css"></require>
+  <require from="resources/elements/layout/sidebar/sidebar"></require>
 
-  <header class="main-header">
-    <ux-chip tabindex="0" theme.bind="{background: '#666', foreground: '#ccc', activeColor: '#333'}" class="${nav.isActive ? 'ux-chip--selected':''}" repeat.for="nav of router.navigation" click.delegate="router.navigateToRoute(nav.config.route)">${nav.title}</ux-chip>
-  </header>
-  <router-view class="page"></router-view>
+  <aside class="sidebar">
+    <a route-href="aurelia">
+      <header class="sidebar__header">
+        <img style="width: 100%" src="/images/aurelia-icon-128x128.png">
+        <h1>Aurelia UX</h1>
+      </header>
+    </a>
 
+    <ux-list class="sidebar__menu">
+
+      <template repeat.for="[category, routes] of router.navigation | categories">
+
+        <div class="ux-list-item sidebar__menu__header">
+          ${category}
+        </div>
+
+        <a href.bind="nav.href" repeat.for="nav of routes">
+          <div class="ux-list-item sidebar__menu__item ${nav.isActive ? 'sidebar__menu__item--active' : ''}" >
+            <!-- <div class="ux-list-item__detail">
+              <ux-icon icon="${nav.settings.icon}" if.bind="nav.settings.icon"></ux-icon>
+            </div> -->
+            <div class="ux-list-item__content" href.bind="nav.href">
+              ${nav.title}
+            </div>
+            <div class="ux-list-item__action-item">
+              <ux-icon icon="chevron_right" ></ux-icon>
+            </div>
+          </div>
+        </a>
+      </template>
+
+    </ux-list>
+
+  </aside>
+
+  <main>
+    <!-- <ux-toolbar>
+      <div class="toolbar-row">
+        <span class="title">
+          ${router.currentInstruction.config.navModel.title}
+        </span>
+        <span class="spacer"></span>
+        <span click.delegate="toggleTheme()" style="cursor: pointer;">Toggle Theme</span>
+      </div>
+    </ux-toolbar> -->
+
+    <router-view class="page"></router-view>
+  </main>
 </template>

@@ -1,0 +1,445 @@
+<template>
+  <require from="./grid.css"></require>
+
+  <ux-grid fluid>
+    <ux-grid-cell>
+      <h1 class="section-title">
+        &lt;ux-grid&gt;&lt;/ux-grid&gt;
+      </h1>
+
+      <p>
+        <strong>Package:</strong> @aurelia-ux/grid
+      </p>
+
+      <p>
+        <strong>Also in:</strong> @aurelia-ux/components
+      </p>
+    </ux-grid-cell>
+
+    <ux-grid-cell>
+      <h2>Breakpoints</h2>
+
+      <p>
+        The UX Grid system is based on a set of breakpoints at which the layouts will shift and adapt. The breakpoints cover from
+        phones to ultra wide displays.
+      </p>
+
+      <table>
+        <tr>
+          <td>
+            <strong>Extra Small</strong>
+          </td>
+          <td>
+            XS
+          </td>
+          <td>
+            < 480px </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Extra Small</strong>
+          </td>
+          <td>
+            md
+          </td>
+          <td>
+            < 480px </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Small</strong>
+          </td>
+          <td>
+            sm
+          </td>
+          <td>
+            > 480px &&
+            < 960px </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Medium</strong>
+          </td>
+          <td>
+            md
+          </td>
+          <td>
+            > 960px &&
+            < 1280px </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Large</strong>
+          </td>
+          <td>
+            lg
+          </td>
+          <td>
+            > 1280px &&
+            < 1920px </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Extra Large</strong>
+          </td>
+          <td>
+            xl
+          </td>
+          <td>
+            > 1920px
+          </td>
+        </tr>
+      </table>
+    </ux-grid-cell>
+
+    <ux-grid-cell>
+      <h2>Responsive Utilities</h2>
+
+      <p>
+        Included with the grid component is a class that can be injected into any of your pages that listens for resize events and
+        provides a list of variables that indicate the current screen size and which breakpoints have been hit. All of the
+        available properties on this class are listed below, alongside an implimentation listing the current values of this
+        page. Go ahead and resize the window a bit to try it out and see how it changes.
+      </p>
+
+      <table class="attribute-table">
+        <tr>
+          <td>
+            <strong>Property</strong>
+          </td>
+          <td>
+            <strong>Live Value</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>height</strong>
+          </td>
+          <td> ${uxResponsive.height} </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>width </strong>
+          </td>
+          <td> ${uxResponsive.width} </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>xs </strong>
+          </td>
+          <td> ${uxResponsive.xs} </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>sm </strong>
+          </td>
+          <td> ${uxResponsive.sm} </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>md </strong>
+          </td>
+          <td> ${uxResponsive.md} </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>lg </strong>
+          </td>
+          <td> ${uxResponsive.lg} </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>xl </strong>
+          </td>
+          <td> ${uxResponsive.xl} </td>
+        </tr>
+      </table>
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="4" if.bind="uxResponsive.xs">
+      <code-block type="html">
+        &lt;div if.bind="uxResponsive.xs"&gt;
+      </code-block>
+    </ux-grid-cell>
+    <ux-grid-cell sm="4" if.bind="uxResponsive.sm">
+      <code-block type="html">
+        &lt;div if.bind="uxResponsive.sm"&gt;
+      </code-block>
+    </ux-grid-cell>
+    <ux-grid-cell sm="4" if.bind="uxResponsive.md">
+      <code-block type="html">
+        &lt;div if.bind="uxResponsive.md"&gt;
+      </code-block>
+    </ux-grid-cell>
+    <ux-grid-cell sm="4" if.bind="uxResponsive.lg">
+      <code-block type="html">
+        &lt;div if.bind="uxResponsive.lg"&gt;
+      </code-block>
+    </ux-grid-cell>
+    <ux-grid-cell sm="4" if.bind="uxResponsive.xl">
+      <code-block type="html">
+        &lt;div if.bind="uxResponsive.xl"&gt;
+      </code-block>
+    </ux-grid-cell>
+    <ux-grid-cell sm="8" if.bind="uxResponsive.xs || uxResponsive.sm">
+      <code-block type="html">
+        &lt;div if.bind="uxResponsive.xs || uxResponsive.sm"&gt;
+      </code-block>
+    </ux-grid-cell>
+    <ux-grid-cell sm="8" if.bind="uxResponsive.md || uxResponsive.lg || uxResponsive.xl">
+      <code-block type="html">
+        &lt;div if.bind="uxResponsive.md || uxResponsive.lg || uxResponsive.xl"&gt;
+      </code-block>
+
+    </ux-grid-cell>
+
+
+    <ux-grid-cell>
+      <h2>Layout Grid</h2>
+
+      <p>
+        The largest piece of this package is the layout grid component, which utilizes CSS Grid layout to make a 12 column grid.
+        The grid component accepts cells that can take in multiple attributes that define the sizes that the cell will take
+        on at various screen sizes. These properties are the two letter shorthand that are listed in the breakpoints section
+        above. To use these simply add the attribute to the cell and give it a value between one and twelve.
+      </p>
+
+      <strong>Usage</strong>
+
+      <code-block class="html">
+        &lt;ux-grid class="demo-grid"&gt;
+          &lt;ux-grid-cell xs="6"&gt;
+            .cell[xs="6"]
+          &lt;/ux-grid-cell&gt;
+          &lt;ux-grid-cell xs="6"&gt;
+            .cell[xs="6"]
+          &lt;/ux-grid-cell&gt;
+        &lt;/ux-grid&gt;
+      </code-block>
+    </ux-grid-cell>
+
+    <ux-grid-cell>
+      <ux-grid fluid class="demo-grid">
+        <ux-grid-cell xs="6">
+          .cell[xs="6"]
+        </ux-grid-cell>
+        <ux-grid-cell xs="6">
+          .cell[xs="6"]
+        </ux-grid-cell>
+        <ux-grid-cell sm="6">
+          .cell[sm="6"]
+        </ux-grid-cell>
+        <ux-grid-cell sm="6">
+          .cell[sm="6"]
+        </ux-grid-cell>
+        <ux-grid-cell md="6">
+          .cell[md="6"]
+        </ux-grid-cell>
+        <ux-grid-cell md="6">
+          .cell[md="6"]
+        </ux-grid-cell>
+        <ux-grid-cell lg="6">
+          .cell[lg="6"]
+        </ux-grid-cell>
+        <ux-grid-cell lg="6">
+          .cell[lg="6"]
+        </ux-grid-cell>
+        <ux-grid-cell xl="6">
+          .cell[xl="6"]
+        </ux-grid-cell>
+        <ux-grid-cell xl="6">
+          .cell[xl="6"]
+        </ux-grid-cell>
+
+        <ux-grid-cell xs="12">
+          Grid within a grid.
+        </ux-grid-cell>
+
+        <ux-grid-cell xs="12">
+          <ux-grid fluid>
+            <ux-grid-cell xs="12">
+              .cell[xs="12"]
+            </ux-grid-cell>
+            <ux-grid-cell xs="6">
+              .cell[xs="6"]
+            </ux-grid-cell>
+            <ux-grid-cell xs="6">
+              .cell[xs="6"]
+            </ux-grid-cell>
+          </ux-grid>
+        </ux-grid-cell>
+        <ux-grid-cell xs="12">
+          Subgrid with .remove-padding class applied to remove all padding from around the columns.
+        </ux-grid-cell>
+        <ux-grid-cell xs="12">
+          <ux-grid fluid class="remove-padding">
+            <ux-grid-cell xs="3">
+              .cell[xs="3"]
+            </ux-grid-cell>
+            <ux-grid-cell xs="3">
+              .cell[xs="3"]
+            </ux-grid-cell>
+            <ux-grid-cell xs="3">
+              .cell[xs="3"]
+            </ux-grid-cell>
+            <ux-grid-cell xs="3">
+              .cell[xs="3"]
+            </ux-grid-cell>
+            <ux-grid-cell xs="12">
+              .cell[xs="12"]
+            </ux-grid-cell>
+            <ux-grid-cell xs="6">
+              .cell[xs="6"]
+            </ux-grid-cell>
+            <ux-grid-cell xs="6">
+              .cell[xs="6"]
+            </ux-grid-cell>
+          </ux-grid>
+        </ux-grid-cell>
+      </ux-grid>
+    </ux-grid-cell>
+
+    <ux-grid-cell>
+      <strong>Two Grids Next To Eachother</strong>
+      <ux-grid fluid class="demo-grid">
+        <ux-grid-cell xs="6">
+          .cell[xs="6"]
+        </ux-grid-cell>
+        <ux-grid-cell xs="6">
+          .cell[xs="6"]
+        </ux-grid-cell>
+      </ux-grid>
+      <ux-grid fluid class="demo-grid">
+        <ux-grid-cell xs="6">
+          .cell[xs="6"]
+        </ux-grid-cell>
+        <ux-grid-cell xs="6">
+          .cell[xs="6"]
+        </ux-grid-cell>
+      </ux-grid>
+    </ux-grid-cell>
+    <ux-grid-cell>
+      <h2>Cell Ordering</h2>
+      
+      <p>
+        One of the utility attributes you can use with the grid is the <code>order-{size}</code> attribute.
+        This will allow you to change the order in which the columns appear on the grid. You can set this
+        attributes value from -1 to 10. For example, if you want a column normally displayed on the right of
+        the page, but on a small screen have it expand to fill all twelve columns and come first, you can do
+        that with the order attribute.
+      </p>
+
+      <code-block type="html">
+        &lt;ux-grid class="demo-grid"&gt;
+          &lt;ux-grid-cell order-md="1" md="6&gt;
+            .cell[md="6"] order-md="1"
+          &lt;/ux-grid-cell&gt;
+          &lt;ux-grid-cell order-md="3" md="6"&gt;
+            .cell[md="6"] order-md="3"
+          &lt;/ux-grid-cell&gt;
+          &lt;ux-grid-cell order-md="-1" md="6&gt;
+            .cell[md="6"] order-md="-1"
+          &lt;/ux-grid-cell&gt;
+          &lt;ux-grid-cell order-md="2" md="6"&gt;
+            .cell[md="6"] order-md="2"
+          &lt;/ux-grid-cell&gt;
+        &lt;/ux-grid&gt;
+      </code-block>
+
+      <ux-grid fluid class="demo-grid">
+        <ux-grid-cell order-md="1" md="6">
+          order-md="1"
+        </ux-grid-cell>
+        <ux-grid-cell order-md="3" md="6">
+          order-md="3"
+        </ux-grid-cell>
+        <ux-grid-cell order-md="-1" md="6">
+          order-md="-1"
+        </ux-grid-cell>
+        <ux-grid-cell order-md="2" md="6">
+          order-md="2"
+        </ux-grid-cell>
+      </ux-grid>
+
+    </ux-grid-cell>
+    <ux-grid-cell>
+      <h2>Fluid</h2>
+      
+      <p>
+        All of the grids displayed on this page use a fluid layout. This means they expand to fill the entire width of the page.
+        To add this functionality simply add the <code>fluid</code> attribute or class to any grid element you wish to do this to.
+        Below is an example of a grid without the fluid attribute.
+      </p>
+
+      <ux-grid class="demo-grid">
+        <ux-grid-cell xs="6">
+          .cell[xs="6"]
+        </ux-grid-cell>
+        <ux-grid-cell xs="6">
+          .cell[xs="6"]
+        </ux-grid-cell>
+        <ux-grid-cell xs="6">
+          .cell[xs="6"]
+        </ux-grid-cell>
+        <ux-grid-cell xs="6">
+          .cell[xs="6"]
+        </ux-grid-cell>
+      </ux-grid>
+
+    </ux-grid-cell>
+    <ux-grid-cell>
+      <h2>Align Content</h2>
+      
+      <p>
+        UX Grid comes with a set of utilities that can be used to change the alignment of content. By default the grid stretches
+        each cell to fill the entire width of the row (it is still up to inner content to expand to fill this space). To change this
+        the following classes can be applied to the grid which change the default alignment. <code>align-cells-top</code>, 
+        <code>align-cells-middle</code>, <code>align-cells-bottom</code>. 
+      </p>
+
+      <p>
+        You may also change the alignment of the cells on a cell-by-cell basis by adding similar class or attributes to an individual cell
+        component. These class/attributes are: <code>align-self-top</code>, <code>align-self-middle</code>, <code>align-self-bottom</code>,
+        <code>align-self-stretch</code>.
+      </p>
+
+      <code-block type="html">
+        &lt;ux-grid fluid align-cells-middle&gt;
+          &lt;ux-grid-cell sm="3" style="min-height: 480px;"&gt;
+            .cell[sm="3"] height: 480px;
+          &lt;/ux-grid-cell&gt;
+          &lt;ux-grid-cell class="cell align-self-top" sm="2" style="min-height: 240px;"&gt;
+            .cell[sm="2"] align-self-top
+          &lt;/ux-grid-cell&gt;
+          &lt;ux-grid-cell class="cell align-self-middle" sm="2" style="min-height: 240px;"&gt;
+            .cell[sm="2"] align-self-middle
+          &lt;/ux-grid-cell&gt;
+          &lt;ux-grid-cell class="cell align-self-bottom" sm="2" style="min-height: 240px;"&gt;
+            .cell[sm="2"] align-self-bottom
+          &lt;/ux-grid-cell&gt;
+          &lt;ux-grid-cell align-self-stretch sm="3" style="min-height: 240px;"&gt;
+            .cell[sm="3"] align-self-stretch
+          &lt;/ux-grid-cell&gt;
+        &lt;/ux-grid&gt;
+      </code-block>
+      <ux-grid class="demo-grid" fluid align-cells-middle>
+        <ux-grid-cell sm="3" style="min-height: 480px;">
+          .cell[sm="3"] height: 480px;
+        </ux-grid-cell>
+        <ux-grid-cell class="cell align-self-top" sm="2" style="min-height: 240px;">
+          .cell[sm="2"] align-self-top
+        </ux-grid-cell>
+        <ux-grid-cell class="cell align-self-middle" sm="2" style="min-height: 240px;">
+          .cell[sm="2"] align-self-middle
+        </ux-grid-cell>
+        <ux-grid-cell class="cell align-self-bottom" sm="2" style="min-height: 240px;">
+          .cell[sm="2"] align-self-bottom
+        </ux-grid-cell>
+        <ux-grid-cell align-self-stretch sm="3" style="min-height: 240px;">
+          .cell[sm="3"] align-self-stretch
+        </ux-grid-cell>
+      </ux-grid>
+    </ux-grid-cell>
+    </ux-grid>
+
+</template>

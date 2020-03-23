@@ -1,0 +1,19 @@
+<template class="sidebar-menu-group">
+  <require from="./sidebar-menu-group.css"></require>
+
+  <div class="sidebar-menu-group__summary">
+    <div class="sidebar-menu-group__summary-contents">
+      <span class="sidebar-menu-group__summary-title">${category}</span>
+      <span class="sidebar-menu-group__sub-routes">
+        <slot name="sub-routes"></slot>
+      </span>
+    </div>
+    <div class="sidebar-menu-group__spacer"></div>
+    <ux-icon class="sidebar-menu-group__open-indicator" icon="keyboard_arrow_down"></ux-icon>
+  </div>
+  <div class="sidebar-menu-group__details">
+    <div class="sidebar-menu-group__content-wrapper">
+      <slot name="content"></slot>
+    </div>
+  </div>
+</template>

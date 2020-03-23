@@ -1,0 +1,41 @@
+<template class="component-theming">
+  <require from="./component-theming.css"></require>
+
+  <ux-grid theme.bind="{outerPadding: '0px'}">
+    <ux-grid-cell md="6">
+      <ux-card>
+        <ux-card-content class="component-theming__preview">
+          <div if.bind="theme.themeKey === 'button'">
+            <ux-button theme.bind="theme">Button</ux-button>
+            <ux-button class="ux-button--accent" theme.bind="theme">Accent Button</ux-button>
+            <br>
+            <ux-button theme.bind="theme" type="outline">Button</ux-button>
+            <ux-button class="ux-button--accent" theme.bind="theme" type="outline">Accent Button</ux-button>
+            <br>
+            <ux-button theme.bind="theme" type="text">Button</ux-button>
+            <ux-button class="ux-button--accent" theme.bind="theme" type="text">Accent Button</ux-button>
+          </div>
+          <div if.bind="theme.themeKey === 'input'">
+            <ux-input theme.bind="theme" label="Filled input"></ux-input>
+            <ux-input variant="outline" theme.bind="theme" label="Outline input"></ux-input>
+          </div>
+          <div if.bind="theme.themeKey === 'textarea'">
+            <ux-textarea theme.bind="theme"></ux-textarea>
+          </div>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid-cell>
+    <ux-grid-cell md="6">
+      <ux-form class="component-theming__properties">
+        <ux-field repeat.for="prop of props">
+          <label if.bind="prop.type !== 'input' && prop.type !== 'color'">${prop.name}</label>
+          <ux-input dense label="${prop.name}" if.bind="prop.type === 'input' || prop.type === 'color'" value.bind="theme[prop.name]">
+            <ux-icon slot="leading-icon" icon="color_lens" show.bind="prop.type === 'color'"></ux-icon>
+            <span slot="trailing-icon" class="color-feedback" css="background-color:${theme[prop.name]}" show.bind="prop.type === 'color'"></span>
+          </ux-input>
+          <ux-slider if.bind="prop.type === 'slider'" value.bind="theme[prop.name] | suffix:prop.suffix" min.bind="prop.min || 0" max.bind="prop.max || 10" step.bind="prop.step || 1"></ux-slider>
+        </ux-field>
+      </ux-form>
+    </ux-grid-cell>
+  </ux-grid>
+</template>

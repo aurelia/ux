@@ -111,6 +111,7 @@ module.exports = function({ production = '' } = {}) {
           // because Aurelia would try to require it again in runtime
           use: ['css-loader']
         },
+        { test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: { limit: 8192 } },
       ]
     },
     plugins: [

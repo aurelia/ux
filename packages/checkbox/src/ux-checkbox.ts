@@ -24,7 +24,6 @@ export class UxCheckbox implements UxComponent {
 
   @bindable public disabled: boolean | string = false;
   @bindable public effect = 'ripple';
-  @bindable public id: string;
   @bindable public theme: UxCheckboxTheme;
 
   @observable()
@@ -63,6 +62,8 @@ export class UxCheckbox implements UxComponent {
       if (attributeValue != null) {
         checkbox.setAttribute('id', attributeValue);
       }
+
+      element.removeAttribute('id');
     }
 
     if (element.hasAttribute('tabindex')) {

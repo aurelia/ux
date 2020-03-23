@@ -1,0 +1,78 @@
+<template>
+
+  <ux-grid fluid>
+
+    <ux-grid-cell>
+
+      <h1>Swatches</h1>
+
+      <p>
+        Swatches provide sets of colors, both primaries and accents, based on the color theory behind Material Design. It is recommended
+        that you select one primary and one accent color for your app, each with a normal, light and dark shade.
+      </p>
+
+      <p>
+        The swatches are all exposed in two ways. One is through the
+        <code>swatches</code> export on
+        <code>@aurelia-ux/core</code>. The other is through CSS Variables that are created and injected into the document when the application starts up.
+      </p>
+    </ux-grid-cell>
+
+    <ux-card md="6">
+      <ux-card-header>
+        CSS Variables
+        <br><em>--ux-swatch--color-value</em>
+      </ux-card-header>
+      <ux-card-content>
+        <code-block type="css" class="code-block--max300">
+            --ux-swatch--blue-grey-p50
+            --ux-swatch--blue-grey-p100
+            --ux-swatch--blue-grey-p200
+            --ux-swatch--blue-grey-p300
+            --ux-swatch--blue-grey-p400
+            --ux-swatch--blue-grey-p500
+            --ux-swatch--blue-grey-p600
+            --ux-swatch--blue-grey-p700
+            --ux-swatch--blue-grey-p800
+            --ux-swatch--blue-grey-p900
+            ...
+            --ux-swatch--black
+            --ux-swatch--white
+        </code-block>
+      </ux-card-content>
+    </ux-card>
+
+    <ux-card md="6">
+      <ux-card-header>
+        Javascript Example
+        <br><em>swatches.color.value</em>
+      </ux-card-header>
+      <ux-card-content>
+        <code-block type="ts" class="code-block--max300">
+          // app.ts
+          import { swatches } from '@aurelia-ux/core';
+
+          swatches.blueGrey.p50
+          swatches.blueGrey.p100
+          swatches.blueGrey.p200
+          swatches.blueGrey.p300
+          swatches.blueGrey.p400
+          swatches.blueGrey.p500
+          swatches.blueGrey.p600
+          swatches.blueGrey.p700
+          swatches.blueGrey.p800
+          swatches.blueGrey.p900
+          swatches.blueGrey.a100
+          ...
+          swatches.black
+          swatches.white
+        </code-block>
+      </ux-card-content>
+    </ux-card>
+
+
+    <ux-grid-cell xs="12" sm="6" md="4" lg="3" xl="2" repeat.for="swatch of swatches">
+      <swatch-group value.bind="swatch"></swatch-group>
+    </ux-grid-cell>
+  </ux-grid>
+</template>

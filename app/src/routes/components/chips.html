@@ -1,0 +1,106 @@
+<template>
+
+  <ux-grid fluid>
+    <ux-grid-cell sm="6" lg="8">
+      <h1 class="section-title">
+        &lt;ux-chip&gt;&lt;/ux-chip&gt; & &lt;ux-tag&gt;&lt;/ux-tag&gt;
+      </h1>
+
+      <p>
+        <strong>Package:</strong> @aurelia-ux/chips
+      </p>
+
+      <p>
+        <strong>Also in:</strong> @aurelia-ux/components
+      </p>
+
+      <p>
+        The
+        <code>ux-chip</code> element is used to display information in a compact area.
+      </p>
+      <p>
+        The
+        <code>ux-chip</code> and
+        <code>ux-tag</code> elements both have a
+        <code>deletable</code> attribute that can be added to show an X to the right of the chip. Clicking this X fires off a
+        <code>close</code> event that can be used with close.trigger.
+
+      </p>
+
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+          <ux-chip>
+            Text Content
+          </ux-chip>
+        </div>
+        <code-block type="html">
+          &lt;ux-chip&gt;&lt;/ux-chip&gt;
+        </code-block>
+      </ux-card>
+      <br>
+      <ux-card>
+        <div class="component-demo">
+          <ux-tag>
+            Text Content
+          </ux-tag>
+        </div>
+        <code-block type="html">
+          &lt;ux-tag&gt;&lt;/ux-tag&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+  </ux-grid>
+
+  <ux-grid fluid>
+    <ux-grid-cell sm="6" lg="8">
+      <h1 class="section-title">
+          &lt;ux-chip-input&gt;&lt;/ux-chip-input&gt;
+      </h1>
+
+      <p>
+        <strong>Package:</strong> @aurelia-ux/chips
+      </p>
+
+      <p>
+          The
+          <code>ux-chip-input</code> element is an easy to use editor to edit an array of chips or tags. This element can be used by binding
+          to its value to get a comma delimited list, or by binding to the chips attribute, which exposes an array of chips. Loosing
+          focus or pressing the enter key causes the input to add the current text to the chip list. Pressing the left arrow key
+          will let the user edit the last chip input. Double clicking a chip will let the user edit that specific chip.
+      </p>
+      
+<p>
+    The
+    <code>ux-chip-input</code> element has a separator attribute that allows the standard seperator used to be changed. The default
+    seperator is ', '.
+  </p>
+
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+            <ux-chip-input type.bind="type"></ux-chip-input>
+        </div>
+        <ux-card-content>
+          <ux-form>
+            <label>Input Type</label>
+            <div class="form-row">
+              <ux-radio id="tag" model.bind="'tag'" checked.bind="type"></ux-radio>
+              <label for="chip">Tag</label>
+              <ux-radio id="chip" model.bind="'chip'" checked.bind="type"></ux-radio>
+              <label for="chip">Chip</label>
+            </div>
+          </ux-form>
+        </ux-card-content>
+        <code-block type="html">
+            &lt;ux-chip-input&gt;&lt;/ux-chip-input&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+  </ux-grid>
+
+</template>

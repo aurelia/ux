@@ -1,0 +1,8 @@
+.component-theming__preview > div > * {
+  margin: 16px 0;
+}
+
+.component-theming__properties {
+  max-height: 300px;
+  overflow-y: auto;
+}

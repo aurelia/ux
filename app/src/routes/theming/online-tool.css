@@ -1,0 +1,26 @@
+.app-preview {
+  background-color: #FAFAFA;
+  background-color: var(--aurelia-ux--design-app-background, #FAFAFA);
+  color: #212121;
+  color: var(--aurelia-ux--design-app-foreground, #212121);
+}
+
+.ux-card-component__media {
+  min-height: 100px;
+  padding: 16px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.ux-card-component__media > * {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.component-selector {
+  margin: 16px 0;
+}
+.component-selector ux-chip {
+  cursor: pointer;
+}

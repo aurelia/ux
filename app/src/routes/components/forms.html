@@ -1,0 +1,86 @@
+<template>
+  
+  <ux-grid fluid>
+    <ux-grid-cell sm="6" lg="8">
+      <h1 class="section-title">
+        &lt;ux-form&gt;&lt;/ux-form&gt;
+      </h1>
+
+      <p>
+        <strong>Package:</strong> @aurelia-ux/form
+      </p>
+
+      <p>
+        <strong>Also in:</strong> @aurelia-ux/components
+      </p>
+
+      <p>
+        The
+        <code>ux-form</code> element is used to quickly create and lay out forms.
+      </p>
+
+      <h2>Layout Classes</h2>
+
+      <strong>Ux Field</strong>
+      <p>
+        The
+        <code>ux-field</code> component is part of the form development and takes care of stylng labels with inputs and other controls.
+      </p>
+
+      <strong>.form-row</strong>
+      <p>
+        The
+        <code>form-row</code> class is used to place multiple controls or
+        <code>ux-field</code> components on one line.
+      </p>
+      <p>
+        Bringing all of these together allows the creation of forms quickly.
+      </p>
+
+      <h2>Usage</h2>
+
+      <code-block>
+        &lt;ux-form&gt; &lt;div class="form-row"&gt; &lt;ux-field label="First Name"&gt;&lt;/ux-field&gt; &lt;ux-field label="First
+        Name"&gt;&lt;/ux-field&gt; &lt;/div&gt; &lt;ux-field label="Email Address"&gt;&lt;/ux-field&gt; &lt;ux-field label="Biography"&gt;&lt;/ux-field&gt;
+        &lt;/ux-form&gt;
+      </code-block>
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <ux-card-content>
+          <ux-form>
+
+            <div class="form-row">
+
+              <ux-field label="First Name">
+                <ux-input maxlength="10" value.bind="firstName & validate"></ux-input>
+                <ux-input-info ux-input-counter>John</ux-input-info>
+              </ux-field>
+
+              <ux-field label="Last Name">
+                <ux-input maxlength="10" value.bind="lastName & validate"></ux-input>
+                <ux-input-info ux-input-counter>Doe</ux-input-info>
+              </ux-field>
+
+            </div>
+
+            <ux-field label="Email Address">
+              <ux-input type="email" value.bind="email & validate"></ux-input>
+              <ux-input-info>email@example.com</ux-input-info>
+            </ux-field>
+
+            <ux-field label="Biography">
+              <ux-textarea auto-resize></ux-textarea>
+            </ux-field>
+
+            <ux-button click.delegate="submit()">Submit</ux-button>
+
+          </ux-form>
+
+        </ux-card-content>
+      </ux-card>
+    </ux-grid-cell>
+  </ux-grid>
+
+</template>

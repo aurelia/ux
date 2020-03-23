@@ -3,36 +3,36 @@ import { UxTheme } from '@aurelia-ux/core';
 export class UxSelectTheme implements UxTheme {
   public themeKey = 'select';
 
-  public foreground?: string;
-  public foregroundLabel?: string;
-  public background?: string;
-  public backgroundHover?: string;
-  public activeColor?: string;
+  public foreground?: string = void 0;
+  public foregroundLabel?: string = void 0;
+  public background?: string = void 0;
+  public backgroundHover?: string = void 0;
+  public activeColor?: string = void 0;
 
-  public fontSize?: string;
-  public letterSpacing?: string;
-  public labelFontSize?: string;
-  public labelLetterSpacing?: string;
-  public lineHeight?: string;
-  public labelLineHeight?: string;
+  public fontSize?: string = void 0;
+  public letterSpacing?: string = void 0;
+  public labelFontSize?: string = void 0;
+  public labelLetterSpacing?: string = void 0;
+  public lineHeight?: string = void 0;
+  public labelLineHeight?: string = void 0;
 
-  public borderColor?: string;
-  public borderRadius?: string;
-  public borderWidth?: string;
-  public borderActiveWidth?: string;
+  public borderColor?: string = void 0;
+  public borderRadius?: string = void 0;
+  public borderWidth?: string = void 0;
+  public borderActiveWidth?: string = void 0;
 
-  public disabledForeground?: string;
-  public disabledBackground?: string;
+  public disabledForeground?: string = void 0;
+  public disabledBackground?: string = void 0;
 
-  public error?: string;
+  public error?: string = void 0;
 
-  public listBackground?: string;
-  public listForeground?: string;
-  public listElevation?: string;
-  public listTransition?: number;
+  public listBackground?: string = void 0;
+  public listForeground?: string = void 0;
+  public listElevation?: string = void 0;
+  public listTransition?: number = void 0;
 
-  public optionHover?: string;
-  public optionFocused?: string;
-  public optionSelected?: string;
+  public optionHover?: string = void 0;
+  public optionFocused?: string = void 0;
+  public optionSelected?: string = void 0;
 
 }

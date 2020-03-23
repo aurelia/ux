@@ -1,0 +1,34 @@
+<template>
+  <section>
+    <h1>What is Aurelia UX?</h1>
+
+    <p>
+      Aurelia UX is a companion framework to Aurelia. While Aurelia focuses on being
+      a <em>front-end framework</em> by providing core capabilities you need to build apps, such as templating, binding and routing,
+      Aurelia UX focuses on being a <em>user experience framework</em> by providing
+      higher-level capabilities such as design languages, theming and components.
+    </p>
+
+    <p>
+      Aurelia UX is still in a very early stage but we'd love for you to play with it
+      and consider contributing. We'll keep this app updated as we add new features
+      so it's easy for you to track our progress.
+    </p>
+  </section>
+
+  <section>
+    <ux-grid>
+      <ux-grid-cell sm="6" md="8">
+        <mockup scale="1">
+          <showcase></showcase>
+        </mockup>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6" md="4" style="display: flex;justify-content: center;">
+        <mockup scale="0.7" type="phone">
+          <showcase prefix="2"></showcase>
+        </mockup>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+</template>

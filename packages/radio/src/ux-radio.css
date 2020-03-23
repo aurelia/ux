@@ -7,6 +7,10 @@
   position: relative;
 }
 
+.ux-radio~label[for] {
+  cursor: pointer;
+}
+
 .ux-radio--disabled {
   pointer-events: none;
   cursor: default;

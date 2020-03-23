@@ -1,0 +1,116 @@
+ux-drawer .backdrop {
+  display: none;
+}
+
+ux-drawer header {
+  padding: 16px;
+  text-align: center;
+  margin: 0;
+}
+
+ux-drawer[type=temporary] aside {
+  position: fixed;
+  z-index: 100;
+  background-color: #fff;
+  background-color: var(--aurelia-ux--design-control-background, #fff);
+  color: #212121;
+  color: var(--aurelia-ux--design-control-foreground, #212121);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: 250ms;
+}
+
+ux-drawer[type=temporary].left aside {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+ux-drawer[type=temporary].right aside {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+ux-drawer[type=temporary] aside header {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #0094ff;
+  color: #fff;
+  padding: 16px;
+  font-size: 28px;
+  font-weight: 300;
+}
+
+ux-drawer[type=temporary].open .backdrop {
+  display: block;
+  content: '';
+  position: fixed;
+  z-index: 99;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+ux-drawer[type=temporary].open aside {
+  transform: translate3d(0, 0, 0);
+}
+
+ux-drawer[type=permanent] aside {
+  position: relative;
+  background-color: #fff;
+  background-color: var(--aurelia-ux--design-control-background, #fff);
+  color: #212121;
+  color: var(--aurelia-ux--design-control-foreground, #212121);
+  width: 280px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: 250ms;
+  box-shadow: var(--aurelia-ux--design-elevation2dp);
+}
+
+ux-drawer[type=permanent] aside ux-list {
+  background-color: #fff;
+  background-color: var(--aurelia-ux--design-control-background, #fff);
+  color: #212121;
+  color: var(--aurelia-ux--design-control-foreground, #212121);
+}
+
+ux-drawer[type=permanent] aside ux-list > .ux-list-item, ux-list > ux-list-item {
+  color: #212121;
+  color: var(--aurelia-ux--design-control-foreground, #212121);
+}
+
+ux-drawer ux-list.drawer-menu {
+  overflow-y: auto;
+}
+
+ux-drawer ux-list.drawer-menu .ux-list-item {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+ux-drawer ux-list.drawer-menu a,
+ux-drawer ux-list.drawer-menu a:visited {
+  color: inherit;
+}
+
+ux-drawer ux-list.drawer-menu .ux-list-item.header {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+ux-drawer ux-list.drawer-menu .ux-list-item.active,
+ux-drawer ux-list.drawer-menu .ux-list-item.active > .list-content {
+  color: var(--aurelia-ux--design-primary, #0094ff);
+}

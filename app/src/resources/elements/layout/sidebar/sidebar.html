@@ -1,0 +1,40 @@
+<template>
+  <require from="./sidebar.css"></require>
+  <require from="./sidebar-menu-group"></require>
+  <require from="./sidenav-categories"></require>
+
+  <ux-drawer ref="drawer" type="temporary" position="left" collapsible="partial" open.bind="open" class="app-drawer">
+
+    <header>
+      <span class="logo">
+        <img style="margin-right: 10px; height: 40px;" src="/images/aurelia-icon-128x128.png">
+        <span class="ux-drawer__hide-on-collapse">Aurelia UX</span>
+      </span>
+    </header>
+
+    <div class="drawer-menu drawer-menu--expanding">
+      <template repeat.for="[category, routes] of router.navigation | sidenavCategories">
+
+        <sidebar-menu-group category.bind="category" if.bind="category != null">
+          <span slot="sub-routes">
+            <template repeat.for="route of routes">
+              <template if.bind="!route.settings.hideFromSummary">
+                ${route.title},
+              </template>
+            </template>
+          </span>
+          <a slot="content" class="${route.isActive ? 'active' : ''} sidebar-menu-group__details-anchor" href.bind="route.href" repeat.for="route of routes">
+            ${route.title}
+          </a>
+        </sidebar-menu-group>
+
+        <template if.bind="!category">
+          <a class="${route.isActive ? 'active' : ''} sidebar-menu__anchor" href.bind="route.href" repeat.for="route of routes">
+            ${route.title}
+          </a>
+        </template>
+
+      </template>
+    </div>
+  </ux-drawer>
+</template>

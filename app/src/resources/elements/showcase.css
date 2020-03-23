@@ -1,0 +1,15 @@
+.showcase {
+  display: block;
+}
+
+.showcase > section {
+  padding: 16px;
+}
+
+.showcase input::-webkit-contacts-auto-fill-button, 
+.showcase input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}

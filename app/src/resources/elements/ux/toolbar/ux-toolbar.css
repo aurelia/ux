@@ -1,0 +1,49 @@
+ux-toolbar {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  background-color: #333235;
+  background-color: var(--aurelia-ux--toolbar-background, #333235);
+  color: #fff;
+  color: var(--aurelia-ux--toolbar-foreground, #fff);
+  position: relative;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: var(--aurelia-ux--toolbar-shadow, var(--ux-design--elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)));
+}
+
+ux-toolbar .toolbar-row {
+  display: flex;
+  height: 72px;
+  align-items: center;
+}
+
+ux-toolbar .toolbar-row .title {
+  color: #fff;
+  color: var(--aurelia-ux--toolbar-foreground, #fff);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 26px;
+  font-weight: 300;
+  letter-spacing: .02em;
+  text-decoration: inherit;
+  text-transform: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-flex-item-align: center;
+  margin-left: 24px;
+  margin-right: 16px;
+  line-height: 1.5rem;
+}
+
+ux-toolbar .toolbar-row :first-child {
+  margin-left: 16px;
+}
+
+ux-toolbar .toolbar-row :last-child {
+  margin-right: 16px;
+}
+
+ux-toolbar .toolbar-row .spacer {
+  flex: 1;
+}

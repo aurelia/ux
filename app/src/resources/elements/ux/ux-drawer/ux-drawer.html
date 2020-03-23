@@ -1,0 +1,10 @@
+<template>
+  <require from="./ux-drawer.css"></require>
+
+  <div class="backdrop" click.trigger="close()" if.bind="showBackdrop"></div>
+
+  <aside>
+    <slot></slot>
+  </aside>
+
+</template>

@@ -1,0 +1,262 @@
+<template>
+
+  <ux-grid fluid>
+    <ux-grid-cell sm="6" lg="8">
+      <h1 class="section-title">
+        &lt;ux-input&gt;&lt;/ux-input&gt;
+      </h1>
+
+      <p>
+        <strong>Package:</strong> @aurelia-ux/input
+      </p>
+
+      <p>
+        <strong>Also in:</strong> @aurelia-ux/components
+      </p>
+
+      <p>
+        The
+        <code>ux-input</code> element allows users to input data and extends many native functions of the standard input control.
+      </p>
+
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <ux-card-content>
+          <form submit.delegate="submit()">
+
+            <ux-input class="form-control" validation-errors.bind="firstNameErrors" class.bind="firstNameErrors.length ? 'has-error' : ''"
+              view-model.ref="errorDemo1" placeholder="First Name" value.bind="firstName & validate"></ux-input>
+            <ux-input-info target.bind="errorDemo1">
+              <span if.bind="firstNameErrors.length">${firstNameErrors[0].error.message}</span>
+            </ux-input-info>
+
+            <ux-input type="email" validation-errors.bind="emailErrors" class.bind="emailErrors.length ? 'has-error' : ''" view-model.ref="errorDemo2"
+              class="form-control" placeholder="Email" value.bind="email & validate"></ux-input>
+            <ux-input-info target.bind="errorDemo2">
+              <span if.bind="emailErrors.length">${emailErrors[0].error.message}</span>
+              <span if.bind="!emailErrors.length">john@example.com</span>
+            </ux-input-info>
+
+
+            <ux-button type="raised">Submit</ux-button>
+          </form>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+          <ux-input disabled placeholder="Disabled Input">disabled</ux-input>
+        </div>
+        <code-block type="html">
+          &lt;ux-input value.bind="myValue" disabled&gt; &lt;/ux-input&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+          <ux-input readonly placeholder="Read Only Input"></ux-input>
+        </div>
+        <code-block type="html">
+          &lt;ux-input readonly&gt; &lt;/ux-input&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+          <ux-input placeholder="Text goes in this field"></ux-input>
+        </div>
+        <code-block type="html">
+          &lt;ux-input placeholder="myValue"&gt; &lt;/ux-input&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+          <ux-input value="Password" type="password"></ux-input>
+        </div>
+        <code-block type="html">
+          &lt;ux-input type="password"&gt; &lt;/ux-input&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+          <ux-input type="number"></ux-input>
+        </div>
+        <code-block type="html">
+          &lt;ux-input type="number"/&gt; &lt;/ux-input&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+          <ux-input class="has-error" value="Error!"></ux-input>
+        </div>
+        <code-block type="html">
+          &lt;ux-input class="has-error"/&gt; &lt;/ux-input&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+          <ux-input class="full-width" placeholder="full width"></ux-input>
+        </div>
+        <code-block type="html">
+          &lt;ux-input class="full-width"/&gt; &lt;/ux-input&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+  </ux-grid>
+
+
+  <ux-grid fluid>
+    <ux-grid-cell>
+      <h1 class="section-title">
+        Input Info Box & Input Counter
+      </h1>
+
+      <p>
+        <strong>Package:</strong> @aurelia-ux/input-info
+      </p>
+
+      <p>
+        The
+        <code>ux-input</code> has a sibling element that will display the current character count or current characters remaining.
+        If a max attribute is present on the
+        <code>ux-input</code> element then the counter will display the total characters remaining, otherwise it will default to
+        displaying the total characters. This element can also display hint text or error text as well.
+      </p>
+
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <ux-card>
+        <div class="component-demo">
+          <ux-form>
+            <div class="ux-form-row">
+              <ux-form-control>
+                <ux-input></ux-input>
+                <ux-input-info ux-input-counter></ux-input-info>
+              </ux-form-control>
+            </div>
+          </ux-form>
+        </div>
+        <code-block type="html">
+          &lt;ux-input-info input-counter&gt;
+          &lt;ux-input-info&gt;
+        </code-block>
+      </ux-card>
+    </ux-grid-cell>
+    
+
+    <ux-grid-cell sm="6" lg="4">
+        <ux-card>
+          <div class="component-demo">
+            <ux-form>
+              <div class="ux-form-row">
+                <ux-form-control>
+                  <ux-input maxlength="10"></ux-input>
+                  <ux-input-info ux-input-counter></ux-input-info>
+                </ux-form-control>
+              </div>
+            </ux-form>
+          </div>
+          <code-block type="html">
+            &lt;ux-input maxlength="10"&gt;&lt;/ux-input&gt;
+            &lt;ux-input-info input-counter&gt;
+            &lt;/ux-input-info&gt;
+          </code-block>
+        </ux-card>
+      </ux-grid-cell>
+      
+
+    <ux-grid-cell sm="6" lg="4">
+        <ux-card>
+          <div class="component-demo">
+            <ux-form>
+              <div class="ux-form-row">
+                <ux-form-control>
+                  <ux-input></ux-input>
+                  <ux-input-info>I am a message</ux-input-info>
+                </ux-form-control>
+              </div>
+            </ux-form>
+          </div>
+          <code-block type="html">
+            &lt;ux-input-info&gt;
+              I am a message
+            &lt;/ux-input-info&gt;
+          </code-block>
+        </ux-card>
+      </ux-grid-cell>
+  </ux-grid>
+
+</template>
+
+
+
+
+
+<h2 styles.header></h2>
+<p styles.description>
+
+</p>
+
+<section styles.feature>
+
+  <figure styles.figure class="add-padding">
+    <div class="add-padding">
+      <ux-input view-model.ref="ibicDemo1"></ux-input>
+      <ux-input-info ux-input-counter target.bind="ibicDemo1"></ux-input-info>
+    </div>
+
+    <code>
+      &lt;ux-input-info input-counter /&gt;
+    </code>
+  </figure>
+
+  <figure styles.figure>
+    <div class="add-padding">
+      <ux-input view-model.ref="ibicDemo2" maxlength="10"></ux-input>
+      <ux-input-info ux-input-counter target.bind="ibicDemo2"></ux-input-info>
+    </div>
+
+    <code>
+      &lt;ux-input-info input-counter maxlength="10" /&gt;
+    </code>
+  </figure>
+
+  <figure styles.figure>
+    <div class="add-padding">
+      <ux-input view-model.ref="ibicDemo3"></ux-input>
+      <ux-input-info target.bind="ibicDemo3">I am a message</ux-input-info>
+    </div>
+
+    <code>
+      &lt;ux-input-info&gt;message&lt;/ux-input-info&gt;
+    </code>
+  </figure>
+
+</section>
+</main>

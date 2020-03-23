@@ -1,0 +1,70 @@
+<template>
+  <ux-grid fluid>
+    <ux-grid-cell sm="6" lg="8">
+      <h1 class="section-title">
+        &lt;ux-switch&gt;&lt;/ux-switch&gt;
+      </h1>
+
+      <p>
+        <strong>Package:</strong> @aurelia-ux/checkbox
+      </p>
+
+      <p>
+        <strong>Also in:</strong> @aurelia-ux/components
+      </p>
+
+      <p>
+        The
+        <code>ux-switch</code> component toggles the state of a single option.
+        <code>checked.bind</code> is used to bind to the switches value.
+      </p>
+
+      <ux-switch></ux-switch> Unchecked
+      <br>
+      <ux-switch checked="true"></ux-switch> Checked
+      <br>
+      <ux-switch disabled></ux-switch> Unchecked - disabled
+      <br>
+      <ux-switch disabled checked="true"></ux-switch> Checked - disabled
+
+    </ux-grid-cell>
+
+    <ux-grid-cell sm="6" lg="4">
+      <strong>Bind to String</strong>
+
+      <ux-card>
+        <ux-list>
+          <div class="ux-list-item">
+            <span class="list-content">
+              Enable WiFi
+            </span>
+            <div class="action-item">
+              <ux-switch></ux-switch>
+            </div>
+          </div>
+          <div class="ux-list-item">
+            <span class="list-content">
+              Enable Roaming Data
+            </span>
+            <div class="action-item">
+              <ux-switch></ux-switch>
+            </div>
+          </div>
+          <div class="ux-list-item">
+            <span class="list-content">
+              Enable Airplane Mode
+            </span>
+            <div class="action-item">
+              <ux-switch checked="true"></ux-switch>
+            </div>
+          </div>
+        </ux-list>
+        <code-block type="html">
+          &lt;ux-switch value.bind="myValue"&gt;&lt;/ux-switch&gt;
+        </code-block>
+      </ux-card>
+
+    </ux-grid-cell>
+  </ux-grid>
+
+</template>

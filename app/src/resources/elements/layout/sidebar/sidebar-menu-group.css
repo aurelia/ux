@@ -1,0 +1,118 @@
+.sidebar-menu-group {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--aurelia-ux--drawer-border, #31313B);
+  color: var(--aurelia-ux--drawer-foreground, #fff);
+}
+
+.sidebar-menu-group--open {
+  background-color: var(--aurelia-ux--drawer-selected-background, #1E1E23);
+}
+
+.sidebar-menu-group--inactive {
+  touch-action: none;
+  pointer-events: none;
+  color: #ffffff55;
+  background-color: transparent;
+}
+
+.sidebar-menu-group__summary {
+  user-select: none;
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.sidebar-menu-group__summary-contents {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-menu-group__sub-routes {
+  transition: 150ms ease;
+  margin-top: 8px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.sidebar-menu-group__summary-title {
+  color: var(--aurelia-ux--drawer-foreground, #fff);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.sidebar-menu-group__open-indicator {
+  opacity: 0;
+  user-select: none;
+  align-self: flex-start;
+  transition: ease 250ms;
+}
+
+.sidebar-menu-group__details {
+  overflow: hidden;
+  transition: all 150ms ease 0s;
+  height: 0;
+}
+
+.sidebar-menu-group__spacer {
+  flex: 1;
+}
+
+.sidebar-menu-group__content-wrapper {
+  padding-bottom: 16px;
+}
+
+.sidebar-menu-group__details-anchor {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  padding: 8px 16px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+}
+
+.sidebar-menu-group:last-of-type {
+  border-bottom: 1px solid var(--aurelia-ux--drawer-border, #31313B);
+}
+
+.sidebar-menu-group__details-anchor:hover {
+  background-color: rgba(255, 255, 255, .1);
+}
+
+.sidebar-menu-group--open .sidebar-menu-group__open-indicator {
+  transform: rotate(180deg);
+}
+
+.sidebar-menu-group--open .sidebar-menu-group__sub-routes {
+  display: none;
+}
+
+.sidebar-menu-group--inactive .sidebar-menu-group__summary-title {
+  color: #ffffffaa;
+}
+
+.sidebar-menu-group--inactive .sidebar-menu-group__sub-routes {
+  opacity: 1;
+}
+
+.sidebar-menu-group--inactive .sidebar-menu-group__details {
+  height: 0 !important;
+}
+
+.sidebar-menu-group__details-anchor .detail {
+  margin-right: 8px;
+}
+
+.sidebar-menu-group__details-anchor.active {
+  color: var(--aurelia-ux--drawer-active-foreground,#fff);
+}
+
+.sidebar-menu-group__summary:hover .sidebar-menu-group__open-indicator {
+  opacity: 1;
+}

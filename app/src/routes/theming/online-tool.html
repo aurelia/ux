@@ -1,0 +1,113 @@
+<template>
+  <require from="./online-tool.css"></require>
+
+  <section>
+    <h1>Online Theming Tool</h1>
+    <p>Use the following sections to create your own theme. You can check at any time how it actually look like on the <a route-href="showcase">showcase page</a>.</p>
+  </section>
+
+  <section>
+    <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
+      <ux-grid-cell md="6">
+        <h3>Pick your Primary and Accent colors</h3>
+        <p>Following <a href="https://material.io/design/color/the-color-system.html#color-theme-creation">Materal Design guidelines</a>, Aurelia UX provides declinaison of primary and accent (secondary) colors.</p>
+        <ux-form>
+          <ux-field>
+            <label>Select a preset</label>
+            <ux-chip-list>
+              <ux-chip click.delegate="setPAPreset('default')">Default</ux-chip>
+              <ux-chip click.delegate="setPAPreset('dark')">Dark</ux-chip>
+              <ux-chip click.delegate="setPAPreset('light')">Light</ux-chip>
+              <ux-chip click.delegate="setPAPreset('ocean')">Ocean</ux-chip>
+            </ux-chip-list>
+          </ux-field>
+        </ux-form>
+      </ux-grid-cell>
+      <ux-grid-cell md="6">
+        <color-tool type="primary"></color-tool>
+        <color-tool type="accent"></color-tool>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+
+  <section>
+    <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
+      <ux-grid-cell md="6">
+        <h3>Then set your App and Surface colors</h3>
+        <p>Choose your main app background with its text color. Also, in order to make elements such as cards standout, set here a different surface background/foreground.</p>
+        <ux-form>
+          <ux-field>
+            <label>Select a preset</label>
+            <ux-chip-list>
+              <ux-chip click.delegate="setASPreset('default')">Default</ux-chip>
+              <ux-chip click.delegate="setASPreset('dark')">Dark</ux-chip>
+              <ux-chip click.delegate="setASPreset('light')">Light</ux-chip>
+              <ux-chip click.delegate="setASPreset('ocean')">Ocean</ux-chip>
+            </ux-chip-list>
+          </ux-field>
+        </ux-form>
+      </ux-grid-cell>
+      <ux-grid-cell md="6">
+        <color-tool type="app"></color-tool>
+        <color-tool type="surface"></color-tool>
+      </ux-grid-cell>
+    </ux-grid>
+    
+  </section>
+
+  <section>
+    <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
+      <ux-grid-cell md="6">
+        <h3>Complete your theme with Control, Disabled and Error colors.</h3>
+        <ux-form>
+          <ux-field>
+            <label>Select a preset</label>
+            <ux-chip-list>
+              <ux-chip click.delegate="setCDEPreset('default')">Default</ux-chip>
+              <ux-chip click.delegate="setCDEPreset('dark')">Dark</ux-chip>
+              <ux-chip click.delegate="setCDEPreset('light')">Light</ux-chip>
+              <ux-chip click.delegate="setCDEPreset('ocean')">Ocean</ux-chip>
+            </ux-chip-list>
+          </ux-field>
+        </ux-form>
+      </ux-grid-cell>
+      <ux-grid-cell md="6">
+        <color-tool type="control"></color-tool>
+        <color-tool type="disabled"></color-tool>
+        <color-tool type="error"></color-tool>
+      </ux-grid-cell>
+    </ux-grid>
+    
+  </section>
+
+  <!-- The section below will not stay on this route. It will be better to offer component customization on another page to keep this one nice and simple -->
+  <!-- <section>
+    <ux-grid theme.bind="{outerPadding: '0', gutter: '16px'}">
+      <ux-grid-cell md="6">
+        <h3>Customize individual components</h3>
+        <ux-form>
+          <ux-field>
+            <label>Select a composant</label>
+            <ux-chip-list ux-choice-value.bind="selectedComponent">
+              <ux-chip ux-choice-option="${component}" repeat.for="component of components">${component}</ux-chip>
+            </ux-chip-list>
+          </ux-field>
+        </ux-form>
+      </ux-grid-cell>
+      <ux-grid-cell md="6">
+        <component-theming theme.bind="themes[selectedComponent]" if.bind="selectedComponent !== undefined && themes[selectedComponent]"></component-theming>
+      </ux-grid-cell>
+    </ux-grid>
+    
+  </section> -->
+
+  <section>
+    <h3>Preview your theme</h3>
+    <p>Observe how your theme looks like in the mockup below. You can even choose between a light or dark browser mode.</p>
+    <mockup mode="dark" height="800" elevation="4">
+
+      <showcase class="app-preview"></showcase>
+    </mockup>
+  </section>
+
+</template>

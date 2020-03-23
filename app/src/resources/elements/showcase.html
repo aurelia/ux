@@ -1,11 +1,7 @@
-<template>
-  <require from="./theming.css"></require>
+<template class="showcase">
+  <require from="./showcase.css"></require>
+  
   <section>
-    <h1>Showcase</h1>
-    <p>Find here common usecases and see how each Aurelia UX component fit with the others.</p>
-  </section>
-  <section>
-
     <ux-card>
       <ux-card-header>
         <span class="ux-card__title">Basic forms exemples</span>
@@ -16,10 +12,10 @@
             <ux-field>
               <label>Variant</label>
               <div class="ux-form__row">
-                <ux-radio name="variant" model.bind="'filled'" checked.bind="variant"></ux-radio>
-                <label>Filled</label>
-                <ux-radio name="variant" model.bind="'outline'" checked.bind="variant"></ux-radio>
-                <label>Outline</label>
+                <ux-radio id="${prefix}filled" name="variant" model.bind="'filled'" checked.bind="variant"></ux-radio>
+                <label for="${prefix}filled">Filled</label>
+                <ux-radio id="${prefix}outline" name="variant" model.bind="'outline'" checked.bind="variant"></ux-radio>
+                <label for="${prefix}outline">Outline</label>
               </div>
             </ux-field>
           </ux-grid-cell>
@@ -113,56 +109,56 @@
               <ux-field>
                 <label>Interests</label>
                 <div class="ux-form__row">
-                  <ux-checkbox checked.bind="interests" model.bind="'sport'"></ux-checkbox>
-                  <label>Sport</label>
+                  <ux-checkbox id="${prefix}sport" checked.bind="interests" model.bind="'sport'"></ux-checkbox>
+                  <label for="${prefix}sport">Sport</label>
                 </div>
                 <div class="ux-form__row">
-                  <ux-checkbox checked.bind="interests" model.bind="'technology'"></ux-checkbox>
-                  <label>Technology</label>
+                  <ux-checkbox id="${prefix}technology" checked.bind="interests" model.bind="'technology'"></ux-checkbox>
+                  <label for="${prefix}technology">Technology</label>
                 </div>
                 <div class="ux-form__row">
-                  <ux-checkbox checked.bind="interests" model.bind="'business'"></ux-checkbox>
-                  <label>Business</label>
+                  <ux-checkbox id="${prefix}business" checked.bind="interests" model.bind="'business'"></ux-checkbox>
+                  <label for="${prefix}business">Business</label>
                 </div>
                 <div class="ux-form__row">
-                  <ux-checkbox checked.bind="interests" model.bind="'travel'"></ux-checkbox>
-                  <label>Travel</label>
+                  <ux-checkbox id="${prefix}travel" checked.bind="interests" model.bind="'travel'"></ux-checkbox>
+                  <label for="${prefix}travel">Travel</label>
                 </div>
                 <div class="ux-form__row">
-                  <ux-checkbox checked.bind="interests" model.bind="'art'"></ux-checkbox>
-                  <label>Art</label>
+                  <ux-checkbox id="${prefix}art" checked.bind="interests" model.bind="'art'"></ux-checkbox>
+                  <label for="${prefix}art">Art</label>
                 </div>
                 <div class="ux-form__row">
-                  <ux-checkbox checked.bind="interests" model.bind="'politics'"></ux-checkbox>
-                  <label>Politics</label>
+                  <ux-checkbox id="${prefix}politics" checked.bind="interests" model.bind="'politics'"></ux-checkbox>
+                  <label for="${prefix}politics">Politics</label>
                 </div>
               </ux-field>
 
               <ux-field>
                 <label>Age Group</label>
                 <div class="ux-form__row">
-                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'0-10'"></ux-radio>
-                  <label>0-10</label>
+                  <ux-radio id="${prefix}0-10" name="ageGroup2" checked.bind="ageGroup" model.bind="'0-10'"></ux-radio>
+                  <label for="${prefix}0-10">0-10</label>
                 </div>
                 <div class="ux-form__row">
-                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'11-20'"></ux-radio>
-                  <label>11-20</label>
+                  <ux-radio id="${prefix}11-20" name="ageGroup2" checked.bind="ageGroup" model.bind="'11-20'"></ux-radio>
+                  <label for="${prefix}11-20">11-20</label>
                 </div>
                 <div class="ux-form__row">
-                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'21-30'"></ux-radio>
-                  <label>21-30</label>
+                  <ux-radio id="${prefix}21-30" name="ageGroup2" checked.bind="ageGroup" model.bind="'21-30'"></ux-radio>
+                  <label for="${prefix}21-30">21-30</label>
                 </div>
                 <div class="ux-form__row">
-                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'31-40'"></ux-radio>
-                  <label>31-40</label>
+                  <ux-radio id="${prefix}31-40" name="ageGroup2" checked.bind="ageGroup" model.bind="'31-40'"></ux-radio>
+                  <label for="${prefix}31-40">31-40</label>
                 </div>
                 <div class="ux-form__row">
-                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'41-50'"></ux-radio>
-                  <label>41-50</label>
+                  <ux-radio id="${prefix}41-50" name="ageGroup2" checked.bind="ageGroup" model.bind="'41-50'"></ux-radio>
+                  <label for="${prefix}41-50">41-50</label>
                 </div>
                 <div class="ux-form__row">
-                  <ux-radio name="ageGroup2" checked.bind="ageGroup" model.bind="'51+'"></ux-radio>
-                  <label>51+</label>
+                  <ux-radio id="${prefix}51+" name="ageGroup2" checked.bind="ageGroup" model.bind="'51+'"></ux-radio>
+                  <label for="${prefix}51+">51+</label>
                 </div>
               </ux-field>
             </div>
@@ -277,23 +273,23 @@
         <ux-field>
           <label>Border</label>
           <div class="ux-form__row">
-            <ux-checkbox checked.bind="listBorder"></ux-checkbox>
-            <label>Enabled</label>
+            <ux-checkbox id="${prefix}listborder" checked.bind="listBorder"></ux-checkbox>
+            <label for="${prefix}listborder">Enabled</label>
           </div>
         </ux-field>
         <ux-field>
           <label>Nb lines</label>
           <div class="ux-form__row">
-            <ux-radio checked.bind="listNbLines" model.bind="'wrap'"></ux-radio>
-            <label>Unlimitted</label>
+            <ux-radio id="${prefix}linesunlimitted" checked.bind="listNbLines" model.bind="'wrap'"></ux-radio>
+            <label for="${prefix}linesunlimitted">Unlimitted</label>
           </div>
           <div class="ux-form__row">
-            <ux-radio checked.bind="listNbLines" model.bind="'two-line'"></ux-radio>
-            <label>2</label>
+            <ux-radio id="${prefix}lines2" checked.bind="listNbLines" model.bind="'two-line'"></ux-radio>
+            <label for="${prefix}lines2">2</label>
           </div>
           <div class="ux-form__row">
-            <ux-radio checked.bind="listNbLines" model.bind="'three-line'"></ux-radio>
-            <label>3</label>
+            <ux-radio id="${prefix}lines3" checked.bind="listNbLines" model.bind="'three-line'"></ux-radio>
+            <label for="${prefix}lines3">3</label>
           </div>
         </ux-field>
       </ux-card-content>
@@ -347,13 +343,13 @@
         <ux-field>
           <label>Settings</label>
           <div class="ux-form__row">
-            <ux-checkbox checked.to-view="emailsChecked" indeterminate.to-view="emailsIndeterminate" click.delegate="toggleEmails()"></ux-checkbox>
-            <label>Enabled</label>
+            <ux-checkbox id="${prefix}h-all" checked.to-view="emailsChecked" indeterminate.to-view="emailsIndeterminate" click.delegate="toggleEmails()"></ux-checkbox>
+            <label for="${prefix}h-all">All</label>
           </div>
           <div class="ux-form__sub-row">
             <div class="ux-form__row" repeat.for="email of emailsOptions">
-              <ux-checkbox checked.bind="emails" model.bind="email.value"></ux-checkbox>
-              <label>${email.label}</label>
+              <ux-checkbox id="${prefix}h-${$index}" checked.bind="emails" model.bind="email.value"></ux-checkbox>
+              <label for="${prefix}h-${$index}">${email.label}</label>
             </div>
           </div>
         </ux-field>
