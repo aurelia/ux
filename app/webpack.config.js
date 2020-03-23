@@ -67,6 +67,7 @@ module.exports = function({ production = '' } = {}) {
           'chip-input',
           'core',
           'datepicker',
+          'drawer',
           'form',
           'grid',
           'icons',
@@ -146,6 +147,9 @@ module.exports = function({ production = '' } = {}) {
           "./ux-datepicker.html",
           "./ux-picker-dialog.html",
           "./ux-year-list.html",
+        ],
+        "@aurelia-ux/drawer": [
+          "./ux-drawer.html"
         ],
         '@aurelia-ux/form': [
           './ux-field.html',

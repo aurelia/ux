@@ -1,0 +1,116 @@
+<template>
+  <require from="./drawer-comp.css"></require>
+  <section>
+    <ux-icon icon="clear" dismiss-drawer></ux-icon>
+    <h1>Drawer Exemples</h1>
+
+    <ux-card>
+      <ux-card-header>
+        <h2>Drawer Settings</h2>
+        <p>These settings apply to all drawer below</p>
+      </ux-card-header>
+      <ux-card-content>
+        <ux-form>
+          <ux-field>
+            <label>Drawer Position</label>
+            <ux-chip-list ux-choice-container.bind="position">
+              <ux-chip ux-choice="bottom">bottom</ux-chip>
+              <ux-chip ux-choice="left">left</ux-chip>
+              <ux-chip ux-choice="right">right</ux-chip>
+              <ux-chip ux-choice="top">top</ux-chip>
+              <ux-chip ux-choice="center">center</ux-chip>
+            </ux-chip-list>
+          </ux-field>
+          <ux-field>
+            <label>Drawer Overlay Hue</label>
+            <ux-chip-list ux-choice-container.bind="hue">
+              <ux-chip ux-choice="black">black</ux-chip>
+              <ux-chip ux-choice="red">red</ux-chip>
+              <ux-chip ux-choice="green">green</ux-chip>
+            </ux-chip-list>
+          </ux-field>
+          <ux-field>
+            <label>Drawer Transition Duration</label>
+            <ux-chip-list ux-choice-container.bind="duration">
+              <ux-chip ux-choice="250ms">250ms</ux-chip>
+              <ux-chip ux-choice="1000ms">1000ms</ux-chip>
+              <ux-chip ux-choice="5s">5s</ux-chip>
+            </ux-chip-list>
+          </ux-field>
+        </ux-form>
+        <p>There are more settings, here are just a few to test out.</p>
+      </ux-card-content>
+    </ux-card>
+
+    <ux-card>
+      <ux-card-header>
+        <h2>Inline Usage</h2>
+      </ux-card-header>
+      <ux-card-content>
+        <p>Click the button below and enter something in the prompt.</p>
+        <p if.bind="inlinePromptResult">The result of the prompt is: <strong>${inlinePromptResult}</strong></p>
+      </ux-card-content>
+      <ux-card-footer>
+        <ux-button click.delegate="showDrawer = true">Open Drawer</ux-button>
+      </ux-card-footer>
+    </ux-card>
+
+    <ux-drawer 
+      theme.bind="{borderRadius: '10px', overlayColor: hue, transitionDuration: duration}" 
+      drawer-id="my-drawer" 
+      if.bind="showDrawer" 
+      position.bind="position" 
+      dismiss.delegate="showDrawer = false"
+      ok.delegate="save($event)">
+      <ux-card>
+        <ux-card-header>
+          <h2>Hello from inline !</h2>
+        </ux-card-header>
+        <ux-card-separator class="ux-card__separator--no-margin"></ux-card-separator>
+        <ux-card-content>
+          <form submit.trigger="closeDrawer()">
+            <ux-form>
+              <ux-field>
+                <ux-input label="What's your name ?" value.bind="drawerPrompt"></ux-input>
+              </ux-field>
+            </ux-form>
+          </form>
+        </ux-card-content>
+        <ux-card-separator class="ux-card__separator--no-margin"></ux-card-separator>
+        <ux-card-footer>
+          <ux-button type="text" dismiss-drawer>Cancel</ux-button>
+          <ux-button type="raised" ok-drawer.bind="drawerPrompt">Save</ux-button>
+        </ux-card-footer>
+      </ux-card>
+    </ux-drawer>
+
+    <ux-card>
+      <ux-card-header>
+        <h2>Service Usage</h2>
+      </ux-card-header>
+      <ux-card-content>
+        <p>Click the button below and enter something in the prompt.</p>
+        <p if.bind="servicePromptResult">The result of the prompt is: <strong>${servicePromptResult}</strong></p>
+      </ux-card-content>
+      <ux-card-footer>
+        <ux-button click.delegate="openDrawer()">Open Drawer</ux-button>
+      </ux-card-footer>
+    </ux-card>
+
+    <ux-card>
+      <ux-card-header>
+        <h2>Go Crazy</h2>
+      </ux-card-header>
+      <ux-card-content>
+        <p>Why don't we mix it up a bit ?</p>
+        <p>Try to open this drawer from the left, and then again from the right and so on... have fun !</p>
+      </ux-card-content>
+      <ux-card-footer>
+        <ux-button click.delegate="openDrawer2()">Open Drawer</ux-button>
+      </ux-card-footer>
+    </ux-card>
+
+    
+
+  </section>
+</template>
