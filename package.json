@@ -12,6 +12,7 @@
     "Fred Kleuver <https://github.com/fkleuver>"
   ],
   "main": "dist/commonjs/index.js",
+  "module": "dist/native-modules/index.js",
   "typings": "dist/commonjs/index.d.ts",
   "repository": {
     "type": "git",

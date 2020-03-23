@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "esnext",
+    "esModuleInterop": true,
     "rootDir": "src",
     "outDir": "dist/test",
     "noImplicitAny": true,
