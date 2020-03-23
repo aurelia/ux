@@ -1,0 +1,140 @@
+.ux-drawer__overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  background: var(--aurelia-ux--drawer-overlay-color, #333333);
+  transition: all ease 250ms;
+  transition-duration: var(--aurelia-ux--drawer-overlay-transition-duration, var(--aurelia-ux--drawer-transition-duration, 250ms))
+}
+
+.ux-drawer__content {
+  transition: all ease 250ms;
+  transition-duration: var(--aurelia-ux--drawer-content-transition-duration, var(--aurelia-ux--drawer-transition-duration, 250ms));
+  max-height: 100%;
+}
+
+.ux-drawer--opened .ux-drawer__overlay {
+  opacity: var(--aurelia-ux--drawer-overlay-opacity, 0.3);
+}
+
+.ux-drawer__content-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ux-drawer__content {
+  background: var(--aurelia-ux--drawer-background, var(--aurelia-ux--design-surface-background));
+  color: var(--aurelia-ux--drawer-foreground, var(--aurelia-ux--design-surface-foreground));
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+/* MOBILE */
+.ux-drawer--mobile .ux-drawer__content {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  min-width: none;
+}
+
+/* DESKTOP */
+.ux-drawer--desktop.ux-drawer--center .ux-drawer__content,
+.ux-drawer--desktop.ux-drawer--left .ux-drawer__content,
+.ux-drawer--desktop.ux-drawer--right .ux-drawer__content {
+  min-width: var(--aurelia-ux--drawer-min-width, 300px);
+}
+.ux-drawer--desktop.ux-drawer--center .ux-drawer__content {
+  border-radius: var(--aurelia-ux--drawer-border-radius, 5px);
+}
+
+/* BOTTOM */
+.ux-drawer--bottom .ux-drawer__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+}
+.ux-drawer--bottom.ux-drawer--opened .ux-drawer__content {
+  transform: translateY(0);
+}
+
+/* TOP */
+.ux-drawer--top .ux-drawer__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-100%);
+}
+.ux-drawer--top.ux-drawer--opened .ux-drawer__content {
+  transform: translateY(0);
+}
+
+/* LEFT */
+.ux-drawer--left .ux-drawer__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  transform: translateX(-100%);
+}
+.ux-drawer--left.ux-drawer--opened .ux-drawer__content {
+  transform: translateX(0);
+}
+
+/* RIGHT */
+.ux-drawer--right .ux-drawer__content {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+}
+.ux-drawer--right.ux-drawer--opened .ux-drawer__content {
+  transform: translateX(0);
+}
+
+/* CENTER */
+.ux-drawer--center .ux-drawer__content {
+  opacity: 0;
+}
+.ux-drawer--center.ux-drawer--opened .ux-drawer__content {
+  opacity: 1;
+}
+
+/* CARD AS DIALOG */
+
+.ux-drawer__content > .ux-card,
+.ux-drawer__content > compose > .ux-card {
+  height: 100%;
+  margin: 0;
+}
+
+.ux-drawer__content > .ux-card > *,
+.ux-drawer__content > compose > .ux-card > * {
+  flex-shrink: 0;
+}
+
+.ux-drawer__content > .ux-card > .ux-card__content,
+.ux-drawer__content > compose > .ux-card > .ux-card__content {
+  display: block;
+  flex-shrink: 1;
+  height: 100%;
+}
+
+.ux-drawer__content > .ux-card > .ux-card__footer,
+.ux-drawer__content > compose > .ux-card > .ux-card__footer {
+  justify-content: flex-end;
+}
+
+
