@@ -1,3 +1,4 @@
+import { DefaultDrawerConfiguration } from './../../packages/drawer/src/drawer-configuration';
 import 'aurelia-polyfills';
 import { initialize } from 'aurelia-pal-browser';
 import { Aurelia, PLATFORM } from 'aurelia-framework';
@@ -15,7 +16,10 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/checkbox'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/chip-input'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/datepicker'))
-    .plugin(PLATFORM.moduleName('@aurelia-ux/drawer'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/drawer'), (config: DefaultDrawerConfiguration) => {
+      config.position = 'top';
+      config.overlayDismiss = true;
+    })
     .plugin(PLATFORM.moduleName('@aurelia-ux/form'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/grid'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/icons'), {icons: icons})

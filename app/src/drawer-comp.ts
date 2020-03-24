@@ -1,14 +1,14 @@
-import { DrawerPosition } from './../../packages/drawer/src/ux-drawer';
-import { ModalService } from '@aurelia-ux/drawer';
+import { ModalService, DrawerPosition } from '@aurelia-ux/drawer';
 import { Hello } from './hello';
 import { inject } from 'aurelia-framework';
 
 @inject(ModalService)
 export class DrawerComp {
 
-  public position: DrawerPosition = 'bottom';
-  public hue = 'black';
-  public duration = '250ms';
+  public host: '' | '.drawer-host' = '';
+  public position: DrawerPosition = 'top';
+  public hue = '';
+  public duration = '';
   public drawerPrompt: string = '';
   public inlinePromptResult: string = '';
   public servicePromptResult: string = '';
@@ -29,6 +29,7 @@ export class DrawerComp {
   public openDrawer() {
     const drawer = this.modalService.open({
       viewModel: Hello,
+      host: this.host,
       position: this.position,
       theme: {
         themeKey: 'drawer',
@@ -45,6 +46,7 @@ export class DrawerComp {
   public openDrawer2() {
     this.modalService.open({
       viewModel: this,
+      host: this.host,
       position: this.position,
       theme: {
         themeKey: 'drawer',
