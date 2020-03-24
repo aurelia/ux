@@ -1,5 +1,5 @@
 .ux-drawer__overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
@@ -21,7 +21,7 @@
 }
 
 .ux-drawer__content-wrapper {
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
