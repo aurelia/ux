@@ -233,8 +233,8 @@ export class UxDrawer implements UxComponent {
     return this.viewportType === 'mobile' ? 'modal' : this.type;
   }
 
-  public overlayClick(event: Event & {path: HTMLElement[]}): any {
-    for (let element of event.path || []) {
+  public overlayClick(event: Event): any {
+    for (let element of event.composedPath() ) {
       if (element === this.contentElement) {
         return true; // this allow normal behvior when clicking on elements inside the drawer
       }
