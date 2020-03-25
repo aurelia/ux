@@ -8,7 +8,15 @@
       <form submit.trigger="modalService.ok(drawerPrompt)">
         <ux-form>
           <ux-field>
-            <ux-input label="What's your name ?" value.bind="drawerPrompt"></ux-input>
+            <ux-input label="What's your name ?" value.bind="drawerPrompt & validate"></ux-input>
+            <ux-input-info></ux-input-info>
+          </ux-field>
+          <ux-field>
+            <label>Can deactivate ?</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="okToClose & validate"></ux-checkbox>
+              <label>Yes</label>
+            </div>
           </ux-field>
         </ux-form>
       </form>

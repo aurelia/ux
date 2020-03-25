@@ -19,7 +19,7 @@ export class DrawerComp {
 
   public closeDrawer() {
     // closeLastDrawer is a quick API usefull when used inline
-    this.modalService.closeLastDrawer(this.drawerPrompt);
+    this.modalService.ok(this.drawerPrompt);
   }
   
   public save(event: CustomEvent) {
@@ -29,8 +29,13 @@ export class DrawerComp {
   public openDrawer() {
     const drawer = this.modalService.open({
       viewModel: Hello,
+      model: {hello: 'world'},
       host: this.host,
       position: this.position,
+      restoreFocus: (element) => {
+        console.log('restoring focus to ', element);
+        element.focus();
+      },
       theme: {
         themeKey: 'drawer',
         overlayColor: this.hue,
