@@ -3,6 +3,7 @@ import { FrameworkConfiguration, PLATFORM } from 'aurelia-framework';
 
 export function configure(frameworkConfig: FrameworkConfiguration, callback?: (config: DefaultDrawerConfiguration) => void) {
   frameworkConfig.globalResources([
+    PLATFORM.moduleName('./resources/attach-focus-drawer-attribute'),
     PLATFORM.moduleName('./resources/dismiss-drawer-attribute'),
     PLATFORM.moduleName('./resources/ok-drawer-attribute'),
     PLATFORM.moduleName('./ux-drawer'),

@@ -1,9 +1,16 @@
-<template class="ux-drawer ux-drawer--${computedType} ux-drawer--${viewportType} ux-drawer--${position} ${animate ? 'ux-drawer--animate':''} ${showed ? 'ux-drawer--opened':''}">
+<template 
+  class="ux-drawer ux-drawer--${computedType} ux-drawer--${viewportType} ux-drawer--${position} ${animate ? 'ux-drawer--animate':''} ${showed ? 'ux-drawer--opened':''}">
   <require from="./ux-drawer.css"></require>
   <div class="ux-drawer__overlay" ref="overlayElement">
   </div>
-  <div class="ux-drawer__content-wrapper" ref="contentWrapperElement" click.delegate="overlayClick($event)">
-    <div class="ux-drawer__content" ref="contentElement" click.delegate="stop($event)">
+  <div 
+    role="${role || 'dialog'}"
+    aria-labelledby="ariaLabelledBy"
+    aria-describedby="ariaDescribedBy"
+    class="ux-drawer__content-wrapper" 
+    ref="contentWrapperElement" 
+    click.delegate="overlayClick($event)">
+    <div class="ux-drawer__content" ref="contentElement">
       <slot></slot>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { ModalService } from './ux-modal-service';
+import { ModalService, ModalServiceResult } from './ux-modal-service';
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
@@ -6,7 +6,10 @@ import { UxDrawerTheme } from './ux-drawer-theme';
 import { computedFrom } from 'aurelia-binding';
 import { TaskQueue } from 'aurelia-framework';
 import { PLATFORM, DOM } from 'aurelia-pal';
+import { getLogger } from 'aurelia-logging';
 import { DrawerPosition, DrawerKeybord, DefaultDrawerConfiguration } from './drawer-configuration';
+
+const log = getLogger('ux-drawer');
 
 @inject(Element, StyleEngine, ModalService, TaskQueue, DefaultDrawerConfiguration)
 @customElement('ux-drawer')
@@ -20,6 +23,16 @@ export class UxDrawer implements UxComponent {
   @bindable public theme: UxDrawerTheme;
   @bindable public overlayDismiss: boolean = true;
   @bindable public keyboard: DrawerKeybord = ['Escape'];
+  @bindable public restoreFocus?: (lastActiveElement: HTMLElement) => void= (lastActiveElement: HTMLElement) => {
+    lastActiveElement.focus();
+  }
+
+  // Aria attributes
+  @bindable public role: 'dialog' | 'alertdialog' = 'dialog';
+  @bindable public ariaLabelledby: string = '';
+  @bindable public ariaDescribedby: string = '';
+
+  public lastActiveElement?: HTMLElement;
 
   private handlingEvent: boolean = false;
   private viewportType: 'mobile' | 'desktop' = 'desktop';
@@ -55,8 +68,9 @@ export class UxDrawer implements UxComponent {
         this.theme = this.defaultConfig.theme
       }
     }
-
-  public bind() {
+  private bindingContext: any;
+  public bind(bindingContext: any) {
+    this.bindingContext = bindingContext;
     this.themeChanged(this.theme);
     this.setViewportType();
     window.addEventListener('resize', this);
@@ -119,8 +133,11 @@ export class UxDrawer implements UxComponent {
 
   private show() {
     if (this.showing && this.showed) {return;}
+    if(DOM.activeElement instanceof HTMLElement) {
+      this.lastActiveElement = DOM.activeElement;
+    }
     this.showing = true;
-    this.modalService.addLayer(this);
+    this.modalService.addLayer(this, this.bindingContext);
     this.setZindex();
     this.taskQueue.queueTask(() => {
       this.showed = true;
@@ -136,6 +153,9 @@ export class UxDrawer implements UxComponent {
       setTimeout(() => {
         this.modalService.removeLayer(this);
         this.hiding = false;
+        if (this.lastActiveElement && typeof this.restoreFocus === 'function') {
+          this.restoreFocus(this.lastActiveElement);
+        }
         resolve();
       }, duration + 10);
     });
@@ -213,18 +233,25 @@ export class UxDrawer implements UxComponent {
     return this.viewportType === 'mobile' ? 'modal' : this.type;
   }
 
-  public overlayClick(event?: Event) {
-    if (event) {
+  public overlayClick(event: Event & {path: HTMLElement[]}): any {
+    for (let element of event.path || []) {
+      if (element === this.contentElement) {
+        return true; // this allow normal behvior when clicking on elements inside the drawer
+      }
+    }
+    if (!this.overlayDismiss) {
       event.stopPropagation();
+      return;
     }
-    if (this.overlayDismiss) {
-      this.dismiss();
-    }
+    this.dismiss();
   }
 
   public async dismiss(event?: Event) {
     if (event) {
       event.stopPropagation();
+    }
+    if (!await this.prepareClosing(true)) {
+      return;
     }
     await this.hide();
     const dismissEvent = DOM.createCustomEvent('dismiss', {bubbles: true});
@@ -235,9 +262,31 @@ export class UxDrawer implements UxComponent {
     if (event) {
       event.stopPropagation();
     }
+    if (!await this.prepareClosing(false, result)) {
+      return;
+    }
     await this.hide();
     const okEvent = DOM.createCustomEvent('ok', {bubbles: true, detail: result});
     this.element.dispatchEvent(okEvent);
+  }
+
+  private async prepareClosing(wasCancelled: boolean, output?: any): Promise<boolean> {
+    const layer = this.modalService.getLayer(this);
+    const result: ModalServiceResult = {
+      wasCancelled,
+      output
+    };
+    if (layer) {
+      if (!await this.modalService.callCanDeactivate(layer, result)) {
+        return false;
+      }
+      try {
+        await this.modalService.callDeactivate(layer, result);
+      } catch (error) {
+        log.error(error);
+      } 
+    }
+    return true;
   }
 
   public stop(event: Event) {

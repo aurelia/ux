@@ -15,6 +15,7 @@ export interface ModalServiceOptions {
   model?: any;
   overlayDismiss?: boolean;
   keyboard?: DrawerKeybord;
+  restoreFocus?: (lastActiveElement: HTMLElement) => void;
 }
 
 export interface ModalServiceResult {
@@ -26,11 +27,34 @@ export interface ModalServiceDrawer {
   whenClosed: () => Promise<ModalServiceResult>
 }
 
+interface ModalBindingContext {
+  composeViewModel?: {
+    viewModel?: any;
+    view?: any;
+    model?: any;
+    currentViewModel?: {
+      canDeactivate?: (result: any) => any;
+      deactivate?: (result: any) => any;
+    };
+  };
+  theme?: UxDrawerTheme;
+  keyboard?: DrawerKeybord;
+  restoreFocus?: (lastActiveElement: HTMLElement) => void;
+  host?: HTMLElement;
+  dismiss?: () => void;
+  ok?: (event: Event) => void;
+}
+
+interface ModalLayer {
+  bindingContext?: ModalBindingContext;
+  drawer: UxDrawer;
+}
+
 @inject(TemplatingEngine, EventAggregator, DefaultDrawerConfiguration)
 export class ModalService {
 
   public startingZIndex: number = 200;
-  public modalLayers: Array<UxDrawer> = [];
+  public modalLayers: Array<ModalLayer> = [];
   public drawerIndex: number = 0;
 
   constructor(
@@ -40,15 +64,26 @@ export class ModalService {
 
   }
 
-  public addLayer(drawer: UxDrawer) {
-    this.modalLayers.push(drawer);
+  public addLayer(drawer: UxDrawer, bindingContext: ModalBindingContext) {
+    this.modalLayers.push({
+      bindingContext: bindingContext,
+      drawer: drawer
+    });
     if (this.modalLayers.length === 1) {
       this.setKeyListener();
     }
   }
 
+  public getLayer(drawer: UxDrawer): ModalLayer | undefined {
+    const index = this.modalLayers.map(i => i.drawer).indexOf(drawer);
+    if (index !== -1) {
+      return this.modalLayers[index];
+    }
+    return undefined;
+  }
+
   public removeLayer(drawer: UxDrawer) {
-    const index = this.modalLayers.indexOf(drawer);
+    const index = this.modalLayers.map(i => i.drawer).indexOf(drawer);
     if (index !== -1) {
       this.modalLayers.splice(index, 1);
     }
@@ -68,7 +103,7 @@ export class ModalService {
   public handleEvent(event: KeyboardEvent) {
     const key = this.getActionKey(event);
     if (key === undefined) { return; }
-    const activeLayer = this.getLastLayer();
+    const activeLayer = this.getLastDrawer();
     const keyboard = activeLayer.keyboard;
     if (key === 'Escape'
       && (keyboard === true || keyboard === key || (Array.isArray(keyboard) && keyboard.indexOf(key) > -1))) {
@@ -88,16 +123,12 @@ export class ModalService {
     return undefined;
   }
 
-  public getLastLayer(): UxDrawer {
+  public getLastLayer(): ModalLayer {
     return this.modalLayers[this.modalLayers.length - 1];
   }
 
-  public dismissLastDrawer() {
-    this.getLastLayer().dismiss();
-  }
-
-  public closeLastDrawer(result: any) {
-    this.getLastLayer().ok(result);
+  public getLastDrawer(): UxDrawer {
+    return this.getLastLayer().drawer;
   }
 
   public get zIndex() {
@@ -105,24 +136,10 @@ export class ModalService {
   }
 
   public open(options: ModalServiceOptions): UxDrawer & ModalServiceDrawer {
-    console.log('given options', options);
     // const defaultConfig = this.container.get(DefaultDrawerConfiguration);
     options = Object.assign({}, this.defaultConfig, options);
-    console.log('compiled options', options);
     this.drawerIndex++;
-    const bindingContext: {
-      compose?: {
-        viewModel?: any;
-        view?: any;
-        model?: any;
-      },
-      theme?: UxDrawerTheme,
-      keyboard?: DrawerKeybord,
-      host?: HTMLElement,
-      dismiss?: () => void,
-      ok?: (event: Event) => void
-    } = {
-    };
+    const bindingContext: ModalBindingContext = {};
     if (!options.viewModel && !options.view) {
       throw new Error('Invalid Drawer Settings. You must provide "viewModel", "view" or both.');
     }
@@ -145,6 +162,10 @@ export class ModalService {
       bindingContext.keyboard = options.keyboard;
       element.setAttribute('keyboard.bind', 'keyboard');
     }
+    if (typeof options.restoreFocus === 'function') {
+      bindingContext.restoreFocus = options.restoreFocus;
+      element.setAttribute('restore-focus.bind', 'restoreFocus');
+    }
     
     element.setAttribute('host.bind', 'false');
     
@@ -153,7 +174,7 @@ export class ModalService {
       element.setAttribute('theme.bind', `theme`);
     }
     const compose = document.createElement('compose');
-    compose.setAttribute('view-model.ref', 'compose');
+    compose.setAttribute('view-model.ref', 'composeViewModel');
     element.innerHTML = compose.outerHTML;
     if (!options.host || options.host === 'body') {
       options.host = document.body;
@@ -162,16 +183,17 @@ export class ModalService {
     }
     options.host.appendChild(element);
     let childView = this.templatingEngine.enhance({ element: element, bindingContext: bindingContext });
-    if (options.viewModel && bindingContext.compose) {
-      bindingContext.compose.viewModel = options.viewModel;
+    
+    if (options.viewModel && bindingContext.composeViewModel) {
+      bindingContext.composeViewModel.viewModel = options.viewModel;
     }
-    if (options.view && bindingContext.compose) {
-      bindingContext.compose.view = options.view;
+    if (options.view && bindingContext.composeViewModel) {
+      bindingContext.composeViewModel.view = options.view;
     }
-    if (options.model && bindingContext.compose) {
-      bindingContext.compose.model = options.model;
+    if (options.model && bindingContext.composeViewModel) {
+      bindingContext.composeViewModel.model = options.model;
     }
-    childView.attached();
+
     const controllers = (childView as any).controllers as Controller[];
     
     const drawer: UxDrawer =  controllers[0].viewModel as UxDrawer;
@@ -206,14 +228,41 @@ export class ModalService {
     return (drawer as UxDrawer & ModalServiceDrawer);
   }
 
-  public cancel() {
-    const drawer = this.getLastLayer();
-    drawer.dismiss();
+  public async callCanDeactivate(layer: ModalLayer, result: ModalServiceResult): Promise<boolean> {
+    if (layer.bindingContext && layer.bindingContext.composeViewModel && layer.bindingContext.composeViewModel.currentViewModel) {
+      const vm = layer.bindingContext.composeViewModel.currentViewModel;
+      if (typeof vm.canDeactivate === 'function') {
+        try {
+          const can = (await vm.canDeactivate.call(vm, result) === false) ? false : true;
+          return can;
+        } catch (error) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
-  public ok(result: any) {
-    const drawer = this.getLastLayer();
-    drawer.ok(result);
+  public async callDeactivate(layer: ModalLayer, result: ModalServiceResult): Promise<void> {
+    if (layer.bindingContext && layer.bindingContext.composeViewModel && layer.bindingContext.composeViewModel.currentViewModel) {
+      const vm = layer.bindingContext.composeViewModel.currentViewModel;
+      if (typeof vm.deactivate === 'function') {
+        await vm.deactivate.call(vm, result);
+      }
+    }
+    return;
+  }
+
+  public async cancel(drawer?: UxDrawer) {
+    const layer = drawer ? this.getLayer(drawer) : this.getLastLayer();
+    if (!layer) return;
+    layer.drawer.dismiss();
+  }
+
+  public async ok(result?: any, drawer?: UxDrawer) {
+    const layer = drawer ? this.getLayer(drawer) : this.getLastLayer();
+    if (!layer) return;
+    layer.drawer.ok(result);
   }
 
 }
