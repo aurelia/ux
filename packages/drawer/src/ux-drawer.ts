@@ -281,6 +281,7 @@ export class UxDrawer implements UxComponent {
         return false;
       }
       try {
+        await this.modalService.callDetached(layer);
         await this.modalService.callDeactivate(layer, result);
       } catch (error) {
         log.error(error);

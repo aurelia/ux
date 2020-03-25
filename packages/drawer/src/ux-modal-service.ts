@@ -35,6 +35,7 @@ interface ModalBindingContext {
     currentViewModel?: {
       canDeactivate?: (result: any) => any;
       deactivate?: (result: any) => any;
+      detached?: (result: any) => any;
     };
   };
   theme?: UxDrawerTheme;
@@ -208,6 +209,7 @@ export class ModalService {
       return whenClosed;
     }
     bindingContext.dismiss = () => {
+      drawer.detached();
       const parent = drawer.element.parentNode;
       if (!parent) { return; }
       parent.removeChild(drawer.element);
@@ -217,6 +219,7 @@ export class ModalService {
       });
     }
     bindingContext.ok = (event: CustomEvent) => {
+      drawer.detached();
       const parent = drawer.element.parentNode;
       if (!parent) { return; }
       parent.removeChild(drawer.element);
@@ -241,6 +244,16 @@ export class ModalService {
       }
     }
     return true;
+  }
+
+  public async callDetached(layer: ModalLayer): Promise<void> {
+    if (layer.bindingContext && layer.bindingContext.composeViewModel && layer.bindingContext.composeViewModel.currentViewModel) {
+      const vm = layer.bindingContext.composeViewModel.currentViewModel;
+      if (typeof vm.detached === 'function') {
+        await vm.detached.call(vm);
+      }
+    }
+    return;
   }
 
   public async callDeactivate(layer: ModalLayer, result: ModalServiceResult): Promise<void> {
