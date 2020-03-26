@@ -9,7 +9,6 @@ export interface ModalServiceOptions {
   view?: any;
   host?: Element| 'body' | string;
   position?: DrawerPosition;
-  drawerId?: string;
   moveToBodyTag?: boolean;
   theme?: UxDrawerTheme;
   model?: any;
@@ -147,9 +146,6 @@ export class ModalService {
     const element = document.createElement('ux-drawer');
     element.setAttribute('dismiss.delegate', 'dismiss()');
     element.setAttribute('ok.delegate', 'ok($event)');
-    if (options.drawerId !== undefined) {
-      element.setAttribute('drawer-id', options.drawerId);
-    }
     if (options.position !== undefined) {
       element.setAttribute('position', options.position);
     }

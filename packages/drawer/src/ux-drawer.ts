@@ -17,7 +17,6 @@ export class UxDrawer implements UxComponent {
 
   @bindable public type: 'standard' | 'modal';
   @bindable public position: DrawerPosition = 'center';
-  @bindable public drawerId: string;
   @bindable public host: 'body' | HTMLElement | false | string = 'body';
   @bindable public modalBreakpoint: number = 768;
   @bindable public theme: UxDrawerTheme;
