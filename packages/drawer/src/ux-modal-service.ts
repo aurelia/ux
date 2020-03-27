@@ -2,7 +2,9 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { UxDrawerTheme } from './ux-drawer-theme';
 import { UxDrawer } from './ux-drawer';
 import { DrawerPosition, DrawerKeybord, DefaultDrawerConfiguration } from './drawer-configuration';
-import { inject, TemplatingEngine, Controller } from 'aurelia-framework';
+import { inject, Controller, Container } from 'aurelia-framework';
+import { CompositionContext, TemplatingEngine, CompositionEngine, ViewSlot } from 'aurelia-templating';
+import { invokeLifecycle } from './lifecycle';
 
 export interface ModalServiceOptions {
   viewModel?: any;
@@ -27,15 +29,10 @@ export interface ModalServiceDrawer {
 }
 
 interface ModalBindingContext {
-  composeViewModel?: {
-    viewModel?: any;
-    view?: any;
-    model?: any;
-    currentViewModel?: {
-      canDeactivate?: (result: any) => any;
-      deactivate?: (result: any) => any;
-      detached?: (result: any) => any;
-    };
+  currentViewModel?: {
+    canDeactivate?: (result: any) => any;
+    deactivate?: (result: any) => any;
+    detached?: (result: any) => any;
   };
   theme?: UxDrawerTheme;
   keyboard?: DrawerKeybord;
@@ -50,7 +47,7 @@ interface ModalLayer {
   drawer: UxDrawer;
 }
 
-@inject(TemplatingEngine, EventAggregator, DefaultDrawerConfiguration)
+@inject(TemplatingEngine, CompositionEngine, EventAggregator, DefaultDrawerConfiguration)
 export class ModalService {
 
   public startingZIndex: number = 200;
@@ -59,6 +56,7 @@ export class ModalService {
 
   constructor(
     private templatingEngine: TemplatingEngine, 
+    private compositionEngine: CompositionEngine,
     private eventAggregator: EventAggregator,
     private defaultConfig: DefaultDrawerConfiguration) {
 
@@ -169,7 +167,33 @@ export class ModalService {
     return element;
   }
 
-  public open(options: ModalServiceOptions): UxDrawer & ModalServiceDrawer {
+  private createCompositionContext(
+    container: any, 
+    host: Element, 
+    bindingContext: ModalBindingContext, 
+    settings: {model?: any, view?: any, viewModel?: any},
+    slot? : ViewSlot
+    ): CompositionContext {
+    return {
+      container,
+      bindingContext: settings.viewModel ? null : bindingContext,
+      viewResources: null as any,
+      model: settings.model,
+      view: settings.view,
+      viewModel: settings.viewModel,
+      viewSlot: slot || new ViewSlot(host, true),
+      host
+    };
+  }
+
+  private ensureViewModel(compositionContext: CompositionContext): Promise<CompositionContext> {
+    if (typeof compositionContext.viewModel === 'object') {
+      return Promise.resolve(compositionContext);
+    }
+    return this.compositionEngine.ensureViewModel(compositionContext);
+  }
+
+  public async open(options: ModalServiceOptions): Promise<UxDrawer & ModalServiceDrawer> {
     options = Object.assign({}, this.defaultConfig, options);
     if (!options.viewModel && !options.view) {
       throw new Error('Invalid Drawer Settings. You must provide "viewModel", "view" or both.');
@@ -178,7 +202,6 @@ export class ModalService {
     const bindingContext: ModalBindingContext = {};
     const element = this.createDrawerElement(options, bindingContext);
     
-    element.innerHTML = `<compose view-model.ref=composeViewModel>`;
     if (!options.host || options.host === 'body') {
       options.host = document.body;
     } else if (typeof options.host === 'string') {
@@ -186,20 +209,40 @@ export class ModalService {
     }
     options.host.appendChild(element);
     let childView = this.templatingEngine.enhance({ element: element, bindingContext: bindingContext });
-    
-    if (options.viewModel && bindingContext.composeViewModel) {
-      bindingContext.composeViewModel.viewModel = options.viewModel;
-    }
-    if (options.view && bindingContext.composeViewModel) {
-      bindingContext.composeViewModel.view = options.view;
-    }
-    if (options.model && bindingContext.composeViewModel) {
-      bindingContext.composeViewModel.model = options.model;
+
+    let slot: ViewSlot;
+    const controllers = (childView as any).controllers as Controller[];
+    const drawer: UxDrawer =  controllers[0].viewModel as UxDrawer;
+    try {
+      const view: any = controllers[0].view;
+      slot = new ViewSlot(view.slots['__au-default-slot-key__'].anchor, false);
+    } catch (_error) {
+      this.cancelOpening(drawer);
+      throw 'Missing slot in drawer';
     }
 
-    const controllers = (childView as any).controllers as Controller[];
-    
-    const drawer: UxDrawer =  controllers[0].viewModel as UxDrawer;
+    let compositionContext = this.createCompositionContext(childView.container as any, element, bindingContext, {
+      viewModel: options.viewModel,
+      view: options.view,
+      model: options.model
+    }, slot);
+
+    compositionContext = await this.ensureViewModel(compositionContext);
+
+    try {
+      const canActivate = await invokeLifecycle(compositionContext.viewModel, 'canActivate', options.model);
+      if (!canActivate) {
+        throw new Error('Drawer cannot be opened');
+      }
+    } catch (error) {
+      this.cancelOpening(drawer);
+      throw error;
+    }
+
+    this.compositionEngine.compose(compositionContext).then((controller) => {
+      bindingContext.currentViewModel = (controller as Controller).viewModel;
+    });
+
     const drawerIndex = this.drawerIndex;
     const whenClosed: Promise<ModalServiceResult> = new Promise((resolve) => {
       this.eventAggregator.subscribeOnce(`drawer-${drawerIndex}-resolve`, (result: ModalServiceResult) => {
@@ -211,24 +254,16 @@ export class ModalService {
       return whenClosed;
     }
     bindingContext.dismiss = () => {
+      drawer.element.remove();
       drawer.detached();
-      const parent = drawer.element.parentNode;
-      if (!parent) {
-        return;
-      }
-      parent.removeChild(drawer.element);
       this.eventAggregator.publish(`drawer-${drawerIndex}-resolve`, {
         wasCancelled: true,
         output: null
       });
     }
     bindingContext.ok = (event: CustomEvent) => {
+      drawer.element.remove();
       drawer.detached();
-      const parent = drawer.element.parentNode;
-      if (!parent) {
-        return;
-      }
-      parent.removeChild(drawer.element);
       this.eventAggregator.publish(`drawer-${drawerIndex}-resolve`, {
         wasCancelled: false,
         output: event.detail
@@ -237,9 +272,14 @@ export class ModalService {
     return (drawer as UxDrawer & ModalServiceDrawer);
   }
 
+  private cancelOpening(drawer: UxDrawer) {
+    drawer.element.remove();
+    drawer.detached();
+  }
+
   public async callCanDeactivate(layer: ModalLayer, result: ModalServiceResult): Promise<boolean> {
-    if (layer.bindingContext && layer.bindingContext.composeViewModel && layer.bindingContext.composeViewModel.currentViewModel) {
-      const vm = layer.bindingContext.composeViewModel.currentViewModel;
+    if (layer.bindingContext && layer.bindingContext.currentViewModel) {
+      const vm = layer.bindingContext.currentViewModel;
       if (typeof vm.canDeactivate === 'function') {
         try {
           const can = (await vm.canDeactivate.call(vm, result) === false) ? false : true;
@@ -253,8 +293,8 @@ export class ModalService {
   }
 
   public async callDetached(layer: ModalLayer): Promise<void> {
-    if (layer.bindingContext && layer.bindingContext.composeViewModel && layer.bindingContext.composeViewModel.currentViewModel) {
-      const vm = layer.bindingContext.composeViewModel.currentViewModel;
+    if (layer.bindingContext && layer.bindingContext.currentViewModel) {
+      const vm = layer.bindingContext.currentViewModel;
       if (typeof vm.detached === 'function') {
         await vm.detached.call(vm);
       }
@@ -263,8 +303,8 @@ export class ModalService {
   }
 
   public async callDeactivate(layer: ModalLayer, result: ModalServiceResult): Promise<void> {
-    if (layer.bindingContext && layer.bindingContext.composeViewModel && layer.bindingContext.composeViewModel.currentViewModel) {
-      const vm = layer.bindingContext.composeViewModel.currentViewModel;
+    if (layer.bindingContext && layer.bindingContext.currentViewModel) {
+      const vm = layer.bindingContext.currentViewModel;
       if (typeof vm.deactivate === 'function') {
         await vm.deactivate.call(vm, result);
       }
