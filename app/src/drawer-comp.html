@@ -1,6 +1,7 @@
 <template>
   <require from="./drawer-comp.css"></require>
   <require from="./hello"></require>
+  <require from="./hello-view.html"></require>
   <section class="drawer-host">
     <ux-icon icon="clear" dismiss-drawer></ux-icon>
     <h1>Drawer Exemples</h1>
@@ -50,6 +51,14 @@
                 <ux-chip ux-choice="5s">5s</ux-chip>
               </ux-chip-list>
             </ux-field>
+            <ux-field>
+              <div class="ux-form-row">
+                <label>
+                  <ux-checkbox checked.bind="cannotActivate"></ux-checkbox>
+                  Prevent Hello Drawer from activating
+                </label>
+              </div>
+            </ux-field>
           </ux-form>
           <p>There are more settings, here are just a few to test out.</p>
         </ux-card-content>
@@ -60,13 +69,15 @@
           <p>Click the buttons below and enter something in the prompt.</p>
         </ux-card-header>
         <ux-card-content>
-          <ux-button click.delegate="showDrawer = true">Open Inline Drawer</ux-button>
+          <ux-button type="text" size="small" click.delegate="showDrawer = true">Open Inline Drawer</ux-button>
           <p if.bind="inlinePromptResult">The result of the prompt is: <strong>${inlinePromptResult}</strong></p>
           <ux-card-separator></ux-card-separator>
-          <ux-button click.delegate="openDrawer()">Open Drawer</ux-button>
+          <ux-button type="text" size="small" click.delegate="openHello()">Open Hello Class</ux-button>
+          <br /><ux-button type="text" size="small" click.delegate="openHelloPath()">Open Hello Path</ux-button>
+          <br /><ux-button type="text" size="small" click.delegate="openHelloView()">Open Hello View Only</ux-button>
           <p if.bind="servicePromptResult">The result of the prompt is: <strong>${servicePromptResult}</strong></p>
           <ux-card-separator></ux-card-separator>
-          <ux-button click.delegate="openDrawer2()">Go Crazy</ux-button>
+          <ux-button type="text" size="small" click.delegate="openMe()">Go Crazy</ux-button>
         </ux-card-content>
       </ux-card>
     </ux-grid>

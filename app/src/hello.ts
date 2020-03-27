@@ -29,12 +29,10 @@ export class Hello {
     console.log('bind called when opening the drawer');
   }
 
-  // UNFORTUNATELLY, the canActivate lifecycle DO NOT EXISTS with this implementation of drawer/dialog
-  // We should create the VM/V before the <compose> element (and not rely on compose probably) if this
-  // lifecycle is important to keep.
-  // public canActivate(params: any) {
-  //   
-  // }
+  public canActivate(params: any) {
+    console.log('canActivate', params);
+    return params ? !params.cannotActivate : true;
+  }
 
   public activate(params: any) {
     console.log('activate called when opening the drawer', params);
