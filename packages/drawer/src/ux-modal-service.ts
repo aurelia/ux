@@ -102,7 +102,9 @@ export class ModalService {
 
   public handleEvent(event: KeyboardEvent) {
     const key = this.getActionKey(event);
-    if (key === undefined) { return; }
+    if (key === undefined) {
+      return;
+    }
     const activeLayer = this.getLastDrawer();
     const keyboard = activeLayer.keyboard;
     if (key === 'Escape'
@@ -207,7 +209,9 @@ export class ModalService {
     bindingContext.dismiss = () => {
       drawer.detached();
       const parent = drawer.element.parentNode;
-      if (!parent) { return; }
+      if (!parent) {
+        return;
+      }
       parent.removeChild(drawer.element);
       this.eventAggregator.publish(`drawer-${drawerIndex}-resolve`, {
         wasCancelled: true,
@@ -217,7 +221,9 @@ export class ModalService {
     bindingContext.ok = (event: CustomEvent) => {
       drawer.detached();
       const parent = drawer.element.parentNode;
-      if (!parent) { return; }
+      if (!parent) {
+        return;
+      }
       parent.removeChild(drawer.element);
       this.eventAggregator.publish(`drawer-${drawerIndex}-resolve`, {
         wasCancelled: false,
@@ -265,13 +271,13 @@ export class ModalService {
   public async cancel(drawer?: UxDrawer) {
     const layer = drawer ? this.getLayer(drawer) : this.getLastLayer();
     if (!layer) return;
-    layer.drawer.dismiss();
+    await layer.drawer.dismiss();
   }
 
   public async ok(result?: any, drawer?: UxDrawer) {
     const layer = drawer ? this.getLayer(drawer) : this.getLastLayer();
     if (!layer) return;
-    layer.drawer.ok(result);
+    await layer.drawer.ok(result);
   }
 
 }

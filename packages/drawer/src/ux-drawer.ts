@@ -132,12 +132,17 @@ export class UxDrawer implements UxComponent {
 
   private show() {
     if (this.showing && this.showed) {return;}
-    if(DOM.activeElement instanceof HTMLElement) {
-      this.lastActiveElement = DOM.activeElement;
+    if(document.activeElement instanceof HTMLElement) {
+      this.lastActiveElement = document.activeElement;
     }
     this.showing = true;
     this.modalService.addLayer(this, this.bindingContext);
     this.setZindex();
+    // We rely on `queueTask()` here to make sure the 
+    // element is completely ready with all CSS set
+    // before to set `showed = true` which will start
+    // the CSS transition to bring the drawer to the
+    // screen
     this.taskQueue.queueTask(() => {
       this.showed = true;
     });
@@ -156,7 +161,7 @@ export class UxDrawer implements UxComponent {
           this.restoreFocus(this.lastActiveElement);
         }
         resolve();
-      }, duration + 10);
+      }, duration);
     });
   }
 
@@ -167,13 +172,17 @@ export class UxDrawer implements UxComponent {
 
   private moveToHost() {
     const host = this.getHost();
-    if (!host) { return };
+    if (!host) {
+      return
+    };
     host.appendChild(this.element);
   }
 
   private removeFromHost() {
     const host = this.getHost();
-    if (!host) { return };
+    if (!host) {
+      return
+    };
     try {
       host.removeChild(this.element);
     } catch (e) {
