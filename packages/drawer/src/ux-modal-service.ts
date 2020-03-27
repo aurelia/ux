@@ -65,13 +65,7 @@ export class ModalService {
   }
 
   public addLayer(drawer: UxDrawer, bindingContext: ModalBindingContext) {
-    const layerCount = this.modalLayers.push({
-      bindingContext: bindingContext,
-      drawer: drawer
-    });
-    if (layerCount === 1) {
-      this.setKeyListener();
-    }
+    this.modalLayers.push({
       bindingContext: bindingContext,
       drawer: drawer
     });
