@@ -137,17 +137,10 @@ export class ModalService {
     return this.startingZIndex + this.modalLayers.length;
   }
 
-  public open(options: ModalServiceOptions): UxDrawer & ModalServiceDrawer {
-    // const defaultConfig = this.container.get(DefaultDrawerConfiguration);
-    options = Object.assign({}, this.defaultConfig, options);
-    this.drawerIndex++;
-    const bindingContext: ModalBindingContext = {};
-    if (!options.viewModel && !options.view) {
-      throw new Error('Invalid Drawer Settings. You must provide "viewModel", "view" or both.');
-    }
+  private createDrawerElement(options: ModalServiceOptions, bindingContext: ModalBindingContext): HTMLElement {
     const element = document.createElement('ux-drawer');
-    element.setAttribute('dismiss.delegate', 'dismiss()');
-    element.setAttribute('ok.delegate', 'ok($event)');
+    element.setAttribute('dismiss.trigger', 'dismiss()');
+    element.setAttribute('ok.trigger', 'ok($event)');
     if (options.position !== undefined) {
       element.setAttribute('position', options.position);
     }
@@ -172,9 +165,20 @@ export class ModalService {
       bindingContext.theme = options.theme;
       element.setAttribute('theme.bind', `theme`);
     }
-    const compose = document.createElement('compose');
-    compose.setAttribute('view-model.ref', 'composeViewModel');
-    element.innerHTML = compose.outerHTML;
+
+    return element;
+  }
+
+  public open(options: ModalServiceOptions): UxDrawer & ModalServiceDrawer {
+    options = Object.assign({}, this.defaultConfig, options);
+    if (!options.viewModel && !options.view) {
+      throw new Error('Invalid Drawer Settings. You must provide "viewModel", "view" or both.');
+    }
+    this.drawerIndex++;
+    const bindingContext: ModalBindingContext = {};
+    const element = this.createDrawerElement(options, bindingContext);
+    
+    element.innerHTML = `<compose view-model.ref=composeViewModel>`;
     if (!options.host || options.host === 'body') {
       options.host = document.body;
     } else if (typeof options.host === 'string') {
