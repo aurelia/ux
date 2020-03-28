@@ -1,7 +1,7 @@
 <template>
   <ux-card>
     <ux-card-header>
-      <h2>Hello from service !</h2>
+      <h2>Hello</h2>
     </ux-card-header>
     <ux-card-separator class="ux-card__separator--no-margin"></ux-card-separator>
     <ux-card-content>
@@ -17,6 +17,13 @@
               <ux-checkbox checked.bind="okToClose & validate"></ux-checkbox>
               <label>Yes</label>
             </div>
+          </ux-field>
+          <ux-field>
+            <label>Are choices attribute working ?</label>
+            <ux-chip-list ux-choice-container.bind="working">
+              <ux-chip ux-choice="yes">Yes</ux-chip>
+              <ux-chip ux-choice="no">No</ux-chip>
+            </ux-chip-list>
           </ux-field>
         </ux-form>
       </form>

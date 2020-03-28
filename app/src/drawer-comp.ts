@@ -35,7 +35,7 @@ export class DrawerComp {
         host: this.host,
         position: this.position,
         restoreFocus: (element) => {
-          console.log('restoring focus to ', element);
+          // console.log('restoring focus to ', element);
           element.focus();
         },
         theme: {

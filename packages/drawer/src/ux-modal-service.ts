@@ -212,7 +212,7 @@ export class ModalService {
     }
     options.host.appendChild(element);
     let childView = this.templatingEngine.enhance({ element: element, bindingContext: bindingContext });
-
+    console.log('ux-drawer childView', childView);
     let slot: ViewSlot;
     const controllers = (childView as any).controllers as Controller[];
     const drawer: UxDrawer =  controllers[0].viewModel as UxDrawer;
@@ -232,6 +232,8 @@ export class ModalService {
 
     compositionContext = await this.ensureViewModel(compositionContext);
 
+    console.log('compositionContext', compositionContext);
+
     try {
       const canActivate = compositionContext.viewModel ? await invokeLifecycle(compositionContext.viewModel, 'canActivate', options.model) : true;
       if (!canActivate) {
@@ -243,6 +245,7 @@ export class ModalService {
     }
 
     this.compositionEngine.compose(compositionContext).then((controller) => {
+      console.log('controller resolved by compose', compositionContext);
       bindingContext.currentViewModel = (controller as Controller).viewModel;
     });
 

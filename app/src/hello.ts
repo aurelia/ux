@@ -22,28 +22,28 @@ export class Hello {
   }
 
   public created() {
-    console.log('created called when opening the drawer');
+    // console.log('Hello created');
   }
 
   public bind() {
-    console.log('bind called when opening the drawer');
+    // console.log('Hello bind');
   }
 
   public canActivate(params: any) {
-    console.log('canActivate', params);
+    // console.log('Hello canActivate', params);
     return params ? !params.cannotActivate : true;
   }
 
   public activate(params: any) {
-    console.log('activate called when opening the drawer', params);
+    // console.log('Hello activate', params);
   }
 
   public attached() {
-    console.log('attached called when opening the drawer');
+    // console.log('Hello attached');
   }
 
   public detached() {
-    console.log('detached called when closing the drawer');
+    // console.log('Hello detached');
   }
 
   public canDeactivate(result: ModalServiceResult) {
@@ -51,18 +51,16 @@ export class Hello {
       return true;
     }
     return this.controller.validate().then((value) => {
-      console.log('validation value', value);
       return value.valid;
     });
   }
 
   public unbind() {
-    console.log('unbind called when closing the drawer');
+    // console.log('Hello unbind');
   }
 
   public deactivate(result: ModalServiceResult) {
-    console.log('deactivate called when closing the drawer', result);
-    console.log('this', this);
+    // console.log('Hello deactivate', result);
   }
 }
 
