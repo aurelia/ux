@@ -187,6 +187,9 @@ export class ModalService {
   }
 
   private ensureViewModel(compositionContext: CompositionContext): Promise<CompositionContext> {
+    if (compositionContext.viewModel === undefined) {
+      return Promise.resolve(compositionContext);
+    }
     if (typeof compositionContext.viewModel === 'object') {
       return Promise.resolve(compositionContext);
     }
@@ -230,7 +233,7 @@ export class ModalService {
     compositionContext = await this.ensureViewModel(compositionContext);
 
     try {
-      const canActivate = await invokeLifecycle(compositionContext.viewModel, 'canActivate', options.model);
+      const canActivate = compositionContext.viewModel ? await invokeLifecycle(compositionContext.viewModel, 'canActivate', options.model) : true;
       if (!canActivate) {
         throw new Error('Drawer cannot be opened');
       }
