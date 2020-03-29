@@ -10,6 +10,6 @@ export function configure(config: FrameworkConfiguration) {
   config.globalResources([
     PLATFORM.moduleName('./ux-form'),
     PLATFORM.moduleName('./ux-field'),
-    PLATFORM.moduleName('./ux-submit-attribute'),
+    UxSubmitCustomAttribute
   ]);
 }
