@@ -2,7 +2,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { UxDrawerTheme } from './ux-drawer-theme';
 import { UxDrawer } from './ux-drawer';
 import { DrawerPosition, DrawerKeybord, DefaultDrawerConfiguration } from './drawer-configuration';
-import { inject, Controller, Container } from 'aurelia-framework';
+import { inject, Controller, ViewResources } from 'aurelia-framework';
 import { CompositionContext, TemplatingEngine, CompositionEngine, ViewSlot, ShadowDOM } from 'aurelia-templating';
 import { invokeLifecycle } from './lifecycle';
 
@@ -47,7 +47,7 @@ interface ModalLayer {
   drawer: UxDrawer;
 }
 
-@inject(TemplatingEngine, CompositionEngine, EventAggregator, DefaultDrawerConfiguration)
+@inject(TemplatingEngine, CompositionEngine, ViewResources, EventAggregator, DefaultDrawerConfiguration)
 export class ModalService {
 
   public startingZIndex: number = 200;
@@ -57,6 +57,7 @@ export class ModalService {
   constructor(
     private templatingEngine: TemplatingEngine, 
     private compositionEngine: CompositionEngine,
+    private viewResources: ViewResources,
     private eventAggregator: EventAggregator,
     private defaultConfig: DefaultDrawerConfiguration) {
 
@@ -177,7 +178,7 @@ export class ModalService {
     return {
       container,
       bindingContext: settings.viewModel ? null : bindingContext,
-      viewResources: null as any,
+      viewResources: this.viewResources,
       model: settings.model,
       view: settings.view,
       viewModel: settings.viewModel,
