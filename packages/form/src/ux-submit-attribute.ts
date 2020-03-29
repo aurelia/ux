@@ -1,6 +1,7 @@
-import { inject } from 'aurelia-dependency-injection';
+import { inject, customAttribute } from 'aurelia-framework';
 import { DOM } from 'aurelia-pal';
 
+@customAttribute('ux-submit')
 @inject(Element)
 export class UxSubmitCustomAttribute {
   public submitEvent: CustomEvent;
