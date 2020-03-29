@@ -3,7 +3,7 @@ import { UxDrawerTheme } from './ux-drawer-theme';
 import { UxDrawer } from './ux-drawer';
 import { DrawerPosition, DrawerKeybord, DefaultDrawerConfiguration } from './drawer-configuration';
 import { inject, Controller, Container } from 'aurelia-framework';
-import { CompositionContext, TemplatingEngine, CompositionEngine, ViewSlot } from 'aurelia-templating';
+import { CompositionContext, TemplatingEngine, CompositionEngine, ViewSlot, ShadowDOM } from 'aurelia-templating';
 import { invokeLifecycle } from './lifecycle';
 
 export interface ModalServiceOptions {
@@ -190,8 +190,15 @@ export class ModalService {
     if (compositionContext.viewModel === undefined) {
       return Promise.resolve(compositionContext);
     }
-    if (typeof compositionContext.viewModel === 'object') {
-      return Promise.resolve(compositionContext);
+    // if (typeof compositionContext.viewModel === 'object') {
+    //   return Promise.resolve(compositionContext);
+    // }
+    const viewModel = compositionContext.viewModel;
+    if (typeof viewModel === 'object') {
+      // emulate an anonymous class that always return the view model object above
+      compositionContext.viewModel = function() {
+        return viewModel;
+      };
     }
     return this.compositionEngine.ensureViewModel(compositionContext);
   }
@@ -201,6 +208,7 @@ export class ModalService {
     if (!options.viewModel && !options.view) {
       throw new Error('Invalid Drawer Settings. You must provide "viewModel", "view" or both.');
     }
+    // Each drawer has an index to keep track of it
     this.drawerIndex++;
     const bindingContext: ModalBindingContext = {};
     const element = this.createDrawerElement(options, bindingContext);
@@ -213,15 +221,26 @@ export class ModalService {
     options.host.appendChild(element);
     let childView = this.templatingEngine.enhance({ element: element, bindingContext: bindingContext });
     console.log('ux-drawer childView', childView);
+
+    // We need to get the slot anchor from the drawer
+    // so that the composed VM/M will be placed in the
+    // right place in the DOM once the compositionEngine
+    // has finished its work
     let slot: ViewSlot;
     const controllers = (childView as any).controllers as Controller[];
     const drawer: UxDrawer =  controllers[0].viewModel as UxDrawer;
     try {
       const view: any = controllers[0].view;
-      slot = new ViewSlot(view.slots['__au-default-slot-key__'].anchor, false);
+      // ShadowDOM.defaultSlotKey refers to the name of the default
+      // slot if the view.
+      slot = new ViewSlot(view.slots[ShadowDOM.defaultSlotKey].anchor, false);
     } catch (_error) {
+      // This catch => throw here might not be necessary
+      // in the future once the modal service is finished
+      // I have ideas on how to move from here but I would need
+      // to fix the composition issue first.
       this.cancelOpening(drawer);
-      throw 'Missing slot in drawer';
+      throw new Error('Missing slot in drawer');
     }
 
     let compositionContext = this.createCompositionContext(childView.container as any, element, bindingContext, {
@@ -275,7 +294,7 @@ export class ModalService {
         output: event.detail
       });
     }
-    return (drawer as UxDrawer & ModalServiceDrawer);
+    return drawer as UxDrawer & ModalServiceDrawer;
   }
 
   private cancelOpening(drawer: UxDrawer) {
