@@ -50,7 +50,7 @@
 .ux-drawer--desktop.ux-drawer--center .ux-drawer__content,
 .ux-drawer--desktop.ux-drawer--left .ux-drawer__content,
 .ux-drawer--desktop.ux-drawer--right .ux-drawer__content {
-  min-width: var(--aurelia-ux--drawer-min-width, 300px);
+  min-width: var(--aurelia-ux--drawer-min-width, 730px);
 }
 .ux-drawer--desktop.ux-drawer--center .ux-drawer__content {
   border-radius: var(--aurelia-ux--drawer-border-radius, 5px);
