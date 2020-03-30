@@ -2,7 +2,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { UxDrawerTheme } from './ux-drawer-theme';
 import { UxDrawer } from './ux-drawer';
 import { DrawerPosition, DrawerKeybord, DefaultDrawerConfiguration } from './drawer-configuration';
-import { inject, Controller, ViewResources } from 'aurelia-framework';
+import { inject, Controller, ViewResources, Container } from 'aurelia-framework';
 import { CompositionContext, TemplatingEngine, CompositionEngine, ViewSlot, ShadowDOM } from 'aurelia-templating';
 import { invokeLifecycle } from './lifecycle';
 
@@ -169,7 +169,7 @@ export class ModalService {
   }
 
   private createCompositionContext(
-    container: any, 
+    container: any, // there is a TS error if this is not any ?
     host: Element, 
     bindingContext: ModalBindingContext, 
     settings: {model?: any, view?: any, viewModel?: any},
@@ -178,7 +178,7 @@ export class ModalService {
     return {
       container,
       bindingContext: settings.viewModel ? null : bindingContext,
-      viewResources: this.viewResources,
+      viewResources: this.viewResources as any, // there is a TS error if this is not any ?
       model: settings.model,
       view: settings.view,
       viewModel: settings.viewModel,
@@ -191,15 +191,8 @@ export class ModalService {
     if (compositionContext.viewModel === undefined) {
       return Promise.resolve(compositionContext);
     }
-    // if (typeof compositionContext.viewModel === 'object') {
-    //   return Promise.resolve(compositionContext);
-    // }
-    const viewModel = compositionContext.viewModel;
-    if (typeof viewModel === 'object') {
-      // emulate an anonymous class that always return the view model object above
-      compositionContext.viewModel = function() {
-        return viewModel;
-      };
+    if (typeof compositionContext.viewModel === 'object') {
+      return Promise.resolve(compositionContext);
     }
     return this.compositionEngine.ensureViewModel(compositionContext);
   }
@@ -221,7 +214,6 @@ export class ModalService {
     }
     options.host.appendChild(element);
     let childView = this.templatingEngine.enhance({ element: element, bindingContext: bindingContext });
-    console.log('ux-drawer childView', childView);
 
     // We need to get the slot anchor from the drawer
     // so that the composed VM/M will be placed in the
@@ -243,16 +235,15 @@ export class ModalService {
       this.cancelOpening(drawer);
       throw new Error('Missing slot in drawer');
     }
+    slot.attached();
 
-    let compositionContext = this.createCompositionContext(childView.container as any, element, bindingContext, {
+    let compositionContext = this.createCompositionContext(childView.container, element, bindingContext, {
       viewModel: options.viewModel,
       view: options.view,
       model: options.model
     }, slot);
 
     compositionContext = await this.ensureViewModel(compositionContext);
-
-    console.log('compositionContext', compositionContext);
 
     try {
       const canActivate = compositionContext.viewModel ? await invokeLifecycle(compositionContext.viewModel, 'canActivate', options.model) : true;
@@ -265,7 +256,6 @@ export class ModalService {
     }
 
     this.compositionEngine.compose(compositionContext).then((controller) => {
-      console.log('controller resolved by compose', compositionContext);
       bindingContext.currentViewModel = (controller as Controller).viewModel;
     });
 
