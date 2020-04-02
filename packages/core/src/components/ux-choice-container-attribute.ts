@@ -1,8 +1,6 @@
 import { UxChoiceAttribute } from './ux-choice-attribute';
 import { customAttribute, bindingMode, bindable, inject, TaskQueue } from 'aurelia-framework';
 
-let increment = 0;
-
 @customAttribute('ux-choice-container', undefined, ['ux-choice-value'])
 @inject(Element, TaskQueue)
 export class UxChoiceContainerAttribute {
@@ -10,16 +8,12 @@ export class UxChoiceContainerAttribute {
   @bindable({defaultBindingMode: bindingMode.twoWay, primaryProperty: true}) public value: any | any[];
   @bindable public multiple: boolean | 'auto' = 'auto';
 
-  public index: number;
-
   public isMultiple: boolean = false;
   private choices: Array<UxChoiceAttribute> = [];
 
   private isQueued: boolean = false;
 
   constructor(private element: Element, private taskQueue: TaskQueue) {
-    this.index = increment;
-    increment++;
   }
 
   /* Event passed on the click eventListener */
@@ -61,12 +55,10 @@ export class UxChoiceContainerAttribute {
   }
 
   public attached() {
-    console.log('attached', this.index);
     this.element.addEventListener('click', this);
   }
 
   public detached() {
-    console.log('detached', this.index);
     this.element.removeEventListener('click', this);
   }
 
