@@ -21,11 +21,13 @@ export class UxModal implements UxComponent {
   @bindable public modalBreakpoint: number = 768;
   @bindable public theme: UxModalTheme;
   @bindable public overlayDismiss: boolean = true;
+  @bindable public outsideDismiss: boolean = true;
   @bindable public lock: boolean = true;
   @bindable public keyboard: ModalKeybord = ['Escape'];
   @bindable public restoreFocus?: (lastActiveElement: HTMLElement) => void= (lastActiveElement: HTMLElement) => {
     lastActiveElement.focus();
   }
+  @bindable public openingCallback?: (contentWrapperElement?: HTMLElement, overlayElement?: HTMLElement) => void;
 
   // Aria attributes
   @bindable public role: 'dialog' | 'alertdialog' = 'dialog';
@@ -38,7 +40,7 @@ export class UxModal implements UxComponent {
   private viewportType: 'mobile' | 'desktop' = 'desktop';
   private overlayElement: HTMLElement;
   private contentWrapperElement: HTMLElement;
-  private contentElement: HTMLElement;
+  public contentElement: HTMLElement;
   private showed: boolean = false;
   private showing: boolean = false;
   private hiding: boolean = false;
@@ -57,6 +59,9 @@ export class UxModal implements UxComponent {
       }
       if (this.defaultConfig.overlayDismiss !== undefined) {
         this.overlayDismiss = this.defaultConfig.overlayDismiss
+      }
+      if (this.defaultConfig.outsideDismiss !== undefined) {
+        this.outsideDismiss = this.defaultConfig.outsideDismiss
       }
       if (this.defaultConfig.lock !== undefined) {
         this.lock = this.defaultConfig.lock
@@ -81,6 +86,7 @@ export class UxModal implements UxComponent {
     this.modalBreakpointChanged();
     this.hostChanged();
     this.overlayDismissChanged();
+    this.outsideDismissChanged();
     this.lockChanged();
     this.keyboardChanged();
   }
@@ -116,10 +122,17 @@ export class UxModal implements UxComponent {
     }
   }
 
+  public outsideDismissChanged() {
+    if (!this.outsideDismiss && this.defaultConfig.outsideDismiss) {
+      this.outsideDismiss = this.defaultConfig.outsideDismiss;
+    }
+  }
+
   public lockChanged() {
-    if (!this.lock && this.defaultConfig.lock) {
+    if (!this.lock && this.defaultConfig.lock !== undefined) {
       this.lock = this.defaultConfig.lock;
     }
+    this.setZindex();
   }
 
   public keyboardChanged() {
@@ -145,6 +158,9 @@ export class UxModal implements UxComponent {
     if (this.showing && this.showed) {return;}
     if(document.activeElement instanceof HTMLElement) {
       this.lastActiveElement = document.activeElement;
+    }
+    if (this.openingCallback) {
+      this.openingCallback.call(this, this.contentWrapperElement, this.overlayElement);
     }
     this.showing = true;
     this.modalService.addLayer(this, this.bindingContext);
@@ -177,7 +193,9 @@ export class UxModal implements UxComponent {
   }
 
   private setZindex() {
-    this.overlayElement.style.zIndex = `${this.modalService.zIndex}`;
+    if (this.overlayElement) {
+      this.overlayElement.style.zIndex = `${this.modalService.zIndex}`;
+    }
     this.contentWrapperElement.style.zIndex = `${this.modalService.zIndex}`;
   }
 
@@ -318,8 +336,8 @@ export class UxModal implements UxComponent {
   }
 
   private getAnimationDuration() {
-    const overlayElementDuration: string = window.getComputedStyle(this.overlayElement).transitionDuration || '';
-    const contentDuration: string = window.getComputedStyle(this.contentElement).transitionDuration || '';
+    const overlayElementDuration: string = this.overlayElement ? window.getComputedStyle(this.overlayElement).transitionDuration || '0' : '0';
+    const contentDuration: string = window.getComputedStyle(this.contentElement).transitionDuration || '0';
     // overlayElementDuration and contentDuration are string like '0.25s'
     return Math.max(parseFloat(overlayElementDuration), parseFloat(contentDuration)) * 1000;
   }

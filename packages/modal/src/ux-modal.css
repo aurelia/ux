@@ -29,9 +29,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
+}
+.ux-modal--lock .ux-modal__content-wrapper {
+  pointer-events: auto;
 }
 
 .ux-modal__content {
+  pointer-events: auto;
   background: var(--aurelia-ux--modal-background, var(--aurelia-ux--design-surface-background));
   color: var(--aurelia-ux--modal-foreground, var(--aurelia-ux--design-surface-foreground));
   -webkit-overflow-scrolling: touch;
@@ -109,6 +114,16 @@
   opacity: 0;
 }
 .ux-modal--center.ux-modal--opened .ux-modal__content {
+  opacity: 1;
+}
+
+/* ABSOLUTE */
+.ux-modal--absolute .ux-modal__content {
+  position: absolute;
+  opacity: 0;
+  transition-property: opacity;
+}
+.ux-modal--absolute.ux-modal--opened .ux-modal__content {
   opacity: 1;
 }
 

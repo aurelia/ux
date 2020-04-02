@@ -1,7 +1,6 @@
 import { customAttribute } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { findModal } from './modal-util';
-
 @inject(Element)
 @customAttribute('dismiss-modal')
 export class DismissModalAttribute {

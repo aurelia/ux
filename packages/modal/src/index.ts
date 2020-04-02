@@ -8,7 +8,7 @@ export function configure(frameworkConfig: FrameworkConfiguration, callback?: (c
   frameworkConfig.globalResources([
     AttachFocusAttribute,
     DismissModalAttribute,
-    OkModalAttribute,
+    OkModalAttribute, 
     PLATFORM.moduleName('./ux-modal'),
   ]);
   const config = frameworkConfig.container.get(DefaultModalConfiguration);
