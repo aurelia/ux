@@ -82,7 +82,7 @@ export class UxChoiceContainerAttribute {
     }
   }
 
-  public valueChanged(newValue: string | string []) {
+  public valueChanged(newValue: string | string[], oldValue?: string | string[]) {
     if (this.multiple === 'auto') {
       this.multipleChanged(); // call this to ensure isMultiple respect value type
     }
@@ -91,6 +91,8 @@ export class UxChoiceContainerAttribute {
       this.requestProcessValue();
     } else if (!this.isMultiple && Array.isArray(newValue)) {
       this.value = undefined;
+      this.requestProcessValue();
+    } else if (!oldValue || newValue !== oldValue) {
       this.requestProcessValue();
     }
   }
