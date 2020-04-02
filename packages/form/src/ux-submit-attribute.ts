@@ -1,5 +1,6 @@
-import { inject, customAttribute } from 'aurelia-framework';
+import { inject } from 'aurelia-dependency-injection';
 import { DOM } from 'aurelia-pal';
+import { customAttribute } from 'aurelia-templating';
 
 @customAttribute('ux-submit')
 @inject(Element)
