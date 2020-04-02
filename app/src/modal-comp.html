@@ -1,29 +1,29 @@
 <template>
-  <require from="./drawer-comp.css"></require>
+  <require from="./modal-comp.css"></require>
   <require from="./hello"></require>
   <require from="./hello-view.html"></require>
-  <section class="drawer-host">
-    <ux-icon icon="clear" dismiss-drawer></ux-icon>
-    <h1>Drawer Exemples</h1>
+  <section class="modal-host">
+    <ux-icon icon="clear" dismiss-modal></ux-icon>
+    <h1>Modal Exemples</h1>
 
     <ux-grid theme.bind="{outerPadding: 0}">
       <ux-card sm="6">
         <ux-card-header>
-          <h2>Drawer Settings</h2>
-          <p>These settings apply to all drawer below</p>
+          <h2>Modal Settings</h2>
+          <p>These settings apply to all modal below</p>
         </ux-card-header>
         <ux-card-content>
           <ux-form>
             <ux-field>
-              <label>Drawer Host</label>
+              <label>Modal Host</label>
               <ux-chip-list ux-choice-container.bind="host">
                 <ux-chip ux-choice="">default</ux-chip>
                 <ux-chip ux-choice="body">body</ux-chip>
-                <ux-chip ux-choice=".drawer-host">.drawer-host</ux-chip>
+                <ux-chip ux-choice=".modal-host">.modal-host</ux-chip>
               </ux-chip-list>
             </ux-field>
             <ux-field>
-              <label>Drawer Position</label>
+              <label>Modal Position</label>
               <ux-chip-list ux-choice-container.bind="position">
                 <ux-chip ux-choice="">default</ux-chip>
                 <ux-chip ux-choice="bottom">bottom</ux-chip>
@@ -34,7 +34,7 @@
               </ux-chip-list>
             </ux-field>
             <ux-field>
-              <label>Drawer Overlay Hue</label>
+              <label>Modal Overlay Hue</label>
               <ux-chip-list ux-choice-container.bind="hue">
                 <ux-chip ux-choice="">default</ux-chip>
                 <ux-chip ux-choice="black">black</ux-chip>
@@ -43,7 +43,7 @@
               </ux-chip-list>
             </ux-field>
             <ux-field>
-              <label>Drawer Transition Duration</label>
+              <label>Modal Transition Duration</label>
               <ux-chip-list ux-choice-container.bind="duration">
                 <ux-chip ux-choice="">default</ux-chip>
                 <ux-chip ux-choice="250ms">250ms</ux-chip>
@@ -55,7 +55,7 @@
               <div class="ux-form-row">
                 <label>
                   <ux-checkbox checked.bind="cannotActivate"></ux-checkbox>
-                  Prevent Hello Drawer from activating
+                  Prevent Hello Modal from activating
                 </label>
               </div>
             </ux-field>
@@ -65,11 +65,11 @@
       </ux-card>
       <ux-card sm="6">
         <ux-card-header>
-          <h2>Test Drawers</h2>
+          <h2>Test Modals</h2>
           <p>Click the buttons below and enter something in the prompt.</p>
         </ux-card-header>
         <ux-card-content>
-          <ux-button type="text" size="small" click.delegate="showDrawer = true">Open Inline Drawer</ux-button>
+          <ux-button type="text" size="small" click.delegate="showModal = true">Open Inline Modal</ux-button>
           <p if.bind="inlinePromptResult">The result of the prompt is: <strong>${inlinePromptResult}</strong></p>
           <ux-card-separator></ux-card-separator>
           <ux-button type="text" size="small" click.delegate="openHello()">Open Hello Class</ux-button>
@@ -82,13 +82,13 @@
       </ux-card>
     </ux-grid>
 
-    <ux-drawer 
+    <ux-modal 
       theme.bind="{borderRadius: '10px', overlayColor: hue, transitionDuration: duration}" 
-      drawer-id="my-drawer" 
-      if.bind="showDrawer" 
+      modal-id="my-modal" 
+      if.bind="showModal" 
       host.bind="host"
       position.bind="position" 
-      dismiss.delegate="showDrawer = false"
+      dismiss.delegate="showModal = false"
       ok.delegate="save($event)">
       <!-- <ux-card>
         <ux-card-header>
@@ -96,22 +96,22 @@
         </ux-card-header>
         <ux-card-separator class="ux-card__separator--no-margin"></ux-card-separator>
         <ux-card-content>
-          <form submit.trigger="closeDrawer()">
+          <form submit.trigger="closeModal()">
             <ux-form>
               <ux-field>
-                <ux-input label="What's your name ?" value.bind="drawerPrompt"></ux-input>
+                <ux-input label="What's your name ?" value.bind="modalPrompt"></ux-input>
               </ux-field>
             </ux-form>
           </form>
         </ux-card-content>
         <ux-card-separator class="ux-card__separator--no-margin"></ux-card-separator>
         <ux-card-footer>
-          <ux-button type="text" dismiss-drawer>Cancel</ux-button>
-          <ux-button type="raised" ok-drawer.bind="drawerPrompt">Save</ux-button>
+          <ux-button type="text" dismiss-modal>Cancel</ux-button>
+          <ux-button type="raised" ok-modal.bind="modalPrompt">Save</ux-button>
         </ux-card-footer>
       </ux-card> -->
       <hello></hello>
-    </ux-drawer>
+    </ux-modal>
 
   </section>
 </template>

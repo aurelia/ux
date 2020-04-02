@@ -7,5 +7,5 @@ export let routes = [
   // tslint:disable-next-line: max-line-length
   { route: 'components', moduleId: PLATFORM.moduleName('components'), name: 'components', title: 'Components', nav: true },
   { route: 'showcase', moduleId: PLATFORM.moduleName('showcase'), name: 'showcase', title: 'Showcase', nav: true },
-  { route: 'drawer', moduleId: PLATFORM.moduleName('drawer-comp'), name: 'drawer', title: 'Drawer', nav: true }
+  { route: 'modal', moduleId: PLATFORM.moduleName('modal-comp'), name: 'modal', title: 'Modal', nav: true }
 ];

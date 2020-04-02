@@ -1,4 +1,5 @@
 import { DefaultDrawerConfiguration } from './../../packages/drawer/src/drawer-configuration';
+import { DefaultModalConfiguration } from './../../packages/modal/src/modal-configuration';
 import 'aurelia-polyfills';
 import { initialize } from 'aurelia-pal-browser';
 import { Aurelia, PLATFORM } from 'aurelia-framework';
@@ -26,6 +27,10 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/input'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/input-info'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/list'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/modal'), (config: DefaultModalConfiguration) => {
+      config.position = 'top';
+      config.overlayDismiss = true;
+    })
     .plugin(PLATFORM.moduleName('@aurelia-ux/radio'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/select'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/slider'))

@@ -1,8 +1,8 @@
-ux-icon[dismiss-drawer] {
+ux-icon[dismiss-modal] {
   display: none;
 }
 
-.ux-drawer ux-icon[dismiss-drawer] {
+.ux-modal ux-icon[dismiss-modal] {
   display: block;
   position: absolute;
   top: 16px;

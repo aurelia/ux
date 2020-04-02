@@ -1,15 +1,15 @@
-import { ModalService, DrawerPosition } from '@aurelia-ux/drawer';
+import { ModalService, ModalPosition } from '@aurelia-ux/modal';
 import { Hello } from './hello';
 import { inject } from 'aurelia-framework';
 
 @inject(ModalService)
-export class DrawerComp {
+export class ModalComp {
 
-  public host: '' | '.drawer-host' = '';
-  public position: DrawerPosition = 'top';
+  public host: '' | '.modal-host' = '';
+  public position: ModalPosition = 'top';
   public hue = '';
   public duration = '';
-  public drawerPrompt: string = '';
+  public modalPrompt: string = '';
   public inlinePromptResult: string = '';
   public servicePromptResult: string = '';
   public cannotActivate: boolean = false;
@@ -18,9 +18,9 @@ export class DrawerComp {
 
   }
 
-  public closeDrawer() {
-    // closeLastDrawer is a quick API usefull when used inline
-    this.modalService.ok(this.drawerPrompt);
+  public closeModal() {
+    // closeLastModal is a quick API usefull when used inline
+    this.modalService.ok(this.modalPrompt);
   }
   
   public save(event: CustomEvent) {
@@ -29,7 +29,7 @@ export class DrawerComp {
 
   public async openHello() {
     try {
-      const drawer = await this.modalService.open({
+      const modal = await this.modalService.open({
         viewModel: Hello,
         model: {hello: 'world', cannotActivate: this.cannotActivate},
         host: this.host,
@@ -39,11 +39,11 @@ export class DrawerComp {
           element.focus();
         },
         theme: {
-          themeKey: 'drawer',
+          themeKey: 'modal',
           overlayColor: this.hue,
           transitionDuration: this.duration
       }});
-      drawer.whenClosed().then((result) => {
+      modal.whenClosed().then((result) => {
         if (!result.wasCancelled) {
           this.servicePromptResult = result.output;
         }
@@ -59,7 +59,7 @@ export class DrawerComp {
       host: this.host,
       position: this.position,
       theme: {
-        themeKey: 'drawer',
+        themeKey: 'modal',
         overlayColor: this.hue,
         transitionDuration: this.duration
       }});
@@ -71,7 +71,7 @@ export class DrawerComp {
       host: this.host,
       position: this.position,
       theme: {
-        themeKey: 'drawer',
+        themeKey: 'modal',
         overlayColor: this.hue,
         transitionDuration: this.duration
       }});
@@ -83,7 +83,7 @@ export class DrawerComp {
       host: this.host,
       position: this.position,
       theme: {
-        themeKey: 'drawer',
+        themeKey: 'modal',
         overlayColor: this.hue,
         transitionDuration: this.duration
       }});
