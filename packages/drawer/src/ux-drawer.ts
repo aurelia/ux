@@ -258,7 +258,11 @@ export class UxDrawer implements UxComponent {
     if (event) {
       event.stopPropagation();
     }
-    if (!await this.prepareClosing(true)) {
+    const result: ModalServiceResult = {
+      wasCancelled: true,
+      output: undefined
+    };
+    if (!await this.prepareClosing(result)) {
       return;
     }
     await this.hide();
@@ -266,24 +270,24 @@ export class UxDrawer implements UxComponent {
     this.element.dispatchEvent(dismissEvent);
   }
 
-  public async ok(result?: any, event?: Event) {
+  public async ok(output?: any, event?: Event) {
     if (event) {
       event.stopPropagation();
     }
-    if (!await this.prepareClosing(false, result)) {
+    const result: ModalServiceResult = {
+      wasCancelled: false,
+      output
+    };
+    if (!await this.prepareClosing(result)) {
       return;
     }
     await this.hide();
-    const okEvent = DOM.createCustomEvent('ok', {bubbles: true, detail: result});
+    const okEvent = DOM.createCustomEvent('ok', {bubbles: true, detail: result.output});
     this.element.dispatchEvent(okEvent);
   }
 
-  private async prepareClosing(wasCancelled: boolean, output?: any): Promise<boolean> {
+  private async prepareClosing(result: ModalServiceResult): Promise<boolean> {
     const layer = this.modalService.getLayer(this);
-    const result: ModalServiceResult = {
-      wasCancelled,
-      output
-    };
     if (layer) {
       if (!await this.modalService.callCanDeactivate(layer, result)) {
         return false;
