@@ -1,7 +1,7 @@
 {
-  "name": "@aurelia-ux/COMPONENT_NAME_HERE",
+  "name": "@aurelia-ux/Drawer",
   "version": "0.4.0",
-  "description": "COMPONENT_DESCRIPTION_HERE",
+  "description": "Drawer component for Aurelia UX",
   "keywords": [
     "aurelia",
     "styles",
