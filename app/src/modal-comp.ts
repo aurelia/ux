@@ -14,6 +14,16 @@ export class ModalComp {
   public servicePromptResult: string = '';
   public cannotActivate: boolean = false;
 
+  public anchor: string = 'anchor1';
+  public menuPosition: 'left' | 'right' | 'top' | 'bottom' = 'bottom';
+  public lock: boolean = true;
+  public outsideDismiss: boolean = true;
+  public overlay: boolean = true;
+  public anchor1: HTMLElement;
+  public anchor2: HTMLElement;
+  public anchor3: HTMLElement;
+  public anchor4: HTMLElement;
+
   constructor(private modalService: ModalService) {
 
   }
@@ -87,6 +97,19 @@ export class ModalComp {
         overlayColor: this.hue,
         transitionDuration: this.duration
       }});
+  }
+
+  public openMenu() {
+    const anchor = (this as any)[this.anchor];
+    this.modalService.open({
+      viewModel: Hello,
+      position: 'absolute',
+      lock: this.lock,
+      outsideDismiss: this.outsideDismiss,
+      openingCallback: (contentWrapperElement: HTMLElement, _overlayElement: HTMLElement) => {
+        this.modalService.positionModalWithAnchor(anchor, contentWrapperElement, {preferedPosition: this.menuPosition});
+      },
+    });
   }
 
 }

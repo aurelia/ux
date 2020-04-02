@@ -90,28 +90,65 @@
       position.bind="position" 
       dismiss.delegate="showModal = false"
       ok.delegate="save($event)">
-      <!-- <ux-card>
-        <ux-card-header>
-          <h2>Hello from inline !</h2>
-        </ux-card-header>
-        <ux-card-separator class="ux-card__separator--no-margin"></ux-card-separator>
-        <ux-card-content>
-          <form submit.trigger="closeModal()">
-            <ux-form>
-              <ux-field>
-                <ux-input label="What's your name ?" value.bind="modalPrompt"></ux-input>
-              </ux-field>
-            </ux-form>
-          </form>
-        </ux-card-content>
-        <ux-card-separator class="ux-card__separator--no-margin"></ux-card-separator>
-        <ux-card-footer>
-          <ux-button type="text" dismiss-modal>Cancel</ux-button>
-          <ux-button type="raised" ok-modal.bind="modalPrompt">Save</ux-button>
-        </ux-card-footer>
-      </ux-card> -->
       <hello></hello>
     </ux-modal>
+
+  </section>
+
+  <section class="anchor-section">
+    <ux-icon ref="anchor1" class="anchor1" icon="looks_one" ></ux-icon>
+    <ux-icon ref="anchor2" class="anchor2" icon="looks_two" ></ux-icon>
+    <ux-icon ref="anchor3" class="anchor3" icon="looks_3" ></ux-icon>
+    <ux-icon ref="anchor4" class="anchor4" icon="looks_4" ></ux-icon>
+    <ux-grid theme.bind="{outerPadding: 0}">
+      <ux-card sm="6">
+        <ux-card-header>
+          <h2>Modal as Menu</h2>
+          <p>The Modals can be used to display contextual menus. This is achieved by settings the modal position to absolute and using the openingCallback to set the right position. The modalService offers a positionModalWithAnchor method that take care of the calculation for you.</p>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-form>
+            <ux-field>
+              <label>Choose your anchor</label>
+              <ux-chip-list ux-choice-container.bind="anchor">
+                <ux-chip ux-choice="anchor1">Anchor 1</ux-chip>
+                <ux-chip ux-choice="anchor2">Anchor 2</ux-chip>
+                <ux-chip ux-choice="anchor3">Anchor 3</ux-chip>
+                <ux-chip ux-choice="anchor4">Anchor 4</ux-chip>
+              </ux-chip-list>
+            </ux-field>
+            <ux-field>
+              <label>Your prefered menu position</label>
+              <ux-chip-list ux-choice-container.bind="menuPosition">
+                <ux-chip ux-choice="bottom">bottom</ux-chip>
+                <ux-chip ux-choice="left">left</ux-chip>
+                <ux-chip ux-choice="right">right</ux-chip>
+                <ux-chip ux-choice="top">top</ux-chip>
+              </ux-chip-list>
+              <ux-input-info>It is called prefered because it will choose the best position according to screen real estate</ux-input-info>
+            </ux-field>
+            <ux-field>
+              <label>Lock</label>
+              <ux-switch checked.bind="lock"></ux-switch>
+              <ux-input-info>This option is available for all modals</ux-input-info>
+            </ux-field>
+            <ux-field>
+              <label>Outside click dismiss the menu</label>
+              <ux-switch checked.bind="outsideDismiss"></ux-switch>
+              <ux-input-info>This option is available for all modals</ux-input-info>
+            </ux-field>
+          </ux-form>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="6">
+        <ux-card-header>
+          <h2>Test Menu</h2>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-button type="text" size="small" click.delegate="openMenu()">Open Menu</ux-button>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
 
   </section>
 </template>

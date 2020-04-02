@@ -9,3 +9,26 @@ ux-icon[dismiss-modal] {
   right: 16px;
   cursor: pointer;
 }
+.anchor-section {
+  position: relative;
+}
+.anchor1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.anchor2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.anchor3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.anchor4 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
