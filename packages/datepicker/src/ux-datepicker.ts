@@ -45,10 +45,6 @@ export class UxDatepicker implements UxInputComponent {
     datetime: 'L LT'
   };
 
-  @bindable public parsers = {
-    time: ['h:m a', 'H:m']
-  };
-
   @bindable({ defaultBindingMode: bindingMode.twoWay })
   public value: any;
 
@@ -92,18 +88,18 @@ export class UxDatepicker implements UxInputComponent {
     }
 
     if (this.minTime != null) {
-      const dateParse = moment(this.minTime, this.parsers.time);
+      const dateParse = moment(this.minTime, this.formatters.time);
 
       this.minTime = dateParse.isValid() ? dateParse : null;
     }
 
     if (this.maxTime != null) {
-      const dateParse = moment(this.maxTime, this.parsers.time);
+      const dateParse = moment(this.maxTime, this.formatters.time);
 
       this.maxTime = dateParse.isValid() ? dateParse : null;
     }
 
-    this.valueChanged(this.value);
+    this.typeChanged(this.type);
     this.themeChanged(this.theme);
   }
 
@@ -146,7 +142,13 @@ export class UxDatepicker implements UxInputComponent {
 
     let parseValue;
 
-    parseValue = this.type === 'time' ? moment(this.textboxValue, this.parsers.time) : moment(this.textboxValue);
+    if (this.type === 'date') {
+      parseValue = moment(this.textboxValue, this.formatters.date);
+    } else if (this.type === 'time') {
+      parseValue = moment(this.textboxValue, this.formatters.time);
+    } else {
+      parseValue = moment(this.textboxValue, this.formatters.datetime);
+    }
 
     if (parseValue.isValid() &&
       DatetimeUtility.dateOutOfRange(parseValue, this.minDate, this.maxDate, this.config) === false) {
@@ -157,20 +159,32 @@ export class UxDatepicker implements UxInputComponent {
     }
   }
 
+  public typeChanged(newValue: string) {
+    newValue = newValue.toLowerCase();
+    if (newValue === 'time') {
+      this.type = newValue;
+    } else if (newValue === 'date') {
+      this.type = newValue;
+    } else {
+      this.type = 'datetime';
+    }
+    this.valueChanged(this.value);
+  }
+
   public valueChanged(newValue: Date) {
     if (newValue == null) {
       return;
     }
 
-    if (this.type.toLowerCase() === 'datetime') {
+    if (this.type === 'datetime') {
       this.textboxValue = moment(newValue).format(this.formatters.datetime);
     }
 
-    if (this.type.toLowerCase() === 'date') {
+    if (this.type === 'date') {
       this.textboxValue = moment(newValue).format(this.formatters.date);
     }
 
-    if (this.type.toLowerCase() === 'time') {
+    if (this.type === 'time') {
       this.textboxValue = moment(newValue).format(this.formatters.time);
     }
   }
@@ -193,7 +207,7 @@ export class UxDatepicker implements UxInputComponent {
 
   public minTimeChanged(newValue: any) {
     if (newValue != null && newValue instanceof moment === false) {
-      const dateParse = moment(newValue, this.parsers.time);
+      const dateParse = moment(newValue, this.formatters.time);
 
       this.minTime = dateParse.isValid() ? dateParse : null;
     }
@@ -201,7 +215,7 @@ export class UxDatepicker implements UxInputComponent {
 
   public maxTimeChanged(newValue: any) {
     if (newValue != null && newValue instanceof moment === false) {
-      const dateParse = moment(newValue, this.parsers.time);
+      const dateParse = moment(newValue, this.formatters.time);
 
       this.maxTime = dateParse.isValid() ? dateParse : null;
     }

@@ -32,6 +32,7 @@ export class UxDatepickerTheme implements UxTheme {
   // datepicker modal
   public headerForeground?: string;
   public headerBackground?: string;
+  public pickerBackground?: string;
 
   // calendar properties
   public weekdayForeground?: string;
