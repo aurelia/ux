@@ -90,8 +90,10 @@ export class UxChoiceContainerAttribute {
     // it's the proper type according to `isMultiple`
     if (this.isMultiple && typeof newValue === 'string') {
       this.value = [];
+      return;
     } else if (!this.isMultiple && Array.isArray(newValue)) {
       this.value = undefined;
+      return;
     }
     // By using requestProcessValue we avoid too many
     // process in case the value changes quickly
