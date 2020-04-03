@@ -104,7 +104,6 @@
       <ux-card sm="6">
         <ux-card-header>
           <h2>Modal as Menu</h2>
-          <p>The Modals can be used to display contextual menus. This is achieved by settings the modal position to absolute and using the openingCallback to set the right position. The modalService offers a positionModalWithAnchor method that take care of the calculation for you.</p>
         </ux-card-header>
         <ux-card-content>
           <ux-form>
@@ -128,14 +127,16 @@
               <ux-input-info>It is called prefered because it will choose the best position according to screen real estate</ux-input-info>
             </ux-field>
             <ux-field>
-              <label>Lock</label>
-              <ux-switch checked.bind="lock"></ux-switch>
-              <ux-input-info>This option is available for all modals</ux-input-info>
-            </ux-field>
-            <ux-field>
-              <label>Outside click dismiss the menu</label>
-              <ux-switch checked.bind="outsideDismiss"></ux-switch>
-              <ux-input-info>This option is available for all modals</ux-input-info>
+              <ux-grid theme.bind="{outerPadding: '0px'}">
+                <ux-grid-cell sm="6">
+                  <label>Lock</label>
+                  <ux-switch checked.bind="lock"></ux-switch>
+                </ux-grid-cell>
+                <ux-grid-cell sm="6">
+                  <label>Outside click dismiss the menu</label>
+                  <ux-switch checked.bind="outsideDismiss"></ux-switch>
+                </ux-grid-cell>
+              </ux-grid>
             </ux-field>
           </ux-form>
         </ux-card-content>
@@ -143,6 +144,7 @@
       <ux-card sm="6">
         <ux-card-header>
           <h2>Test Menu</h2>
+          <p>The Modals can be used to display contextual menus. This is achieved by settings the modal position to absolute and using the openingCallback to set the right position. The modalService offers a positionModalWithAnchor method that take care of the calculation for you.</p>
         </ux-card-header>
         <ux-card-content>
           <ux-button type="text" size="small" click.delegate="openMenu()">Open Menu</ux-button>
