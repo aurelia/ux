@@ -65,7 +65,7 @@ export class ModalComp {
 
   public openMe() {
     this.modalService.open({
-      viewModel: this,
+      viewModel: ModalComp,
       host: this.host,
       position: this.position,
       theme: {
