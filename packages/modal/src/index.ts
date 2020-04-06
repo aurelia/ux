@@ -22,3 +22,5 @@ export { UxModalTheme } from './ux-modal-theme';
 export { UxModal } from './ux-modal';
 export * from './ux-modal-service';
 export * from './modal-configuration';
+export * from './positioning/interfaces';
+export * from './positioning/ux-modal-positioning';
