@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { inject } from 'aurelia-dependency-injection';
 import { DOM } from 'aurelia-pal';
+import { customAttribute } from 'aurelia-templating';
 var UxSubmitCustomAttribute = /** @class */ (function () {
     function UxSubmitCustomAttribute(element) {
         this.element = element;
@@ -35,6 +36,7 @@ var UxSubmitCustomAttribute = /** @class */ (function () {
         }
     };
     UxSubmitCustomAttribute = __decorate([
+        customAttribute('ux-submit'),
         inject(Element)
     ], UxSubmitCustomAttribute);
     return UxSubmitCustomAttribute;
