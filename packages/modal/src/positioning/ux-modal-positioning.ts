@@ -1,4 +1,4 @@
-import { PositioningOptions, Placement, MissingSpaceStrategy } from './interfaces';
+import { UxPositioningOptions, UxModalPlacement, UxModalMissingSpaceStrategy } from './interfaces';
 import { inject, TaskQueue } from 'aurelia-framework';
 import { getLogger } from 'aurelia-logging';
 const log = getLogger('ux-modal-positioning');
@@ -18,8 +18,8 @@ export class UxModalPositioning {
   public anchor: HTMLElement;
   public element: HTMLElement;
   public constraintElement: HTMLElement | Window;
-  public preferedPlacement: Placement = 'auto';
-  public missingSpaceStrategy: MissingSpaceStrategy = 'flip';
+  public preferedPlacement: UxModalPlacement = 'auto';
+  public missingSpaceStrategy: UxModalMissingSpaceStrategy = 'flip';
   public offsetX: number = 5;
   public offsetY: number = 5;
   public windowMarginX: number = 5;
@@ -27,7 +27,7 @@ export class UxModalPositioning {
 
   constructor(public taskQueue: TaskQueue) {}
 
-  public getInstance(anchor: HTMLElement, element: HTMLElement, options?: PositioningOptions) {
+  public getInstance(anchor: HTMLElement, element: HTMLElement, options?: UxPositioningOptions) {
     const instance = new UxModalPositioning(this.taskQueue);
     instance.anchor = anchor;
     instance.element = element;
@@ -59,6 +59,7 @@ export class UxModalPositioning {
   }
 
   private init() {
+    log.info('init');
     // We use queueTask here because queueMicroTask
     // resolves too early
     const rect = this.element.getBoundingClientRect();
@@ -72,23 +73,28 @@ export class UxModalPositioning {
   }
 
   public async update() {
+    log.info('update');
     this.resetElement();
     // await new Promise(resolve => this.taskQueue.queueTask(resolve));
 
     // try the prefered placement
     const mainPlacement = this.getMainPlacement();
+    log.info('mainPlacement', mainPlacement);
     if (!this.placeMain(mainPlacement)) {
       const alternativePlacement = flip[mainPlacement];
+      log.info('alternativePlacement', mainPlacement);
       if (!this.placeMain(alternativePlacement)) {
         // TODO: handle this case
       }
     }
 
     const secondaryPlacement = this.getSecondaryPlacement(mainPlacement);
+    log.info('secondaryPlacement', secondaryPlacement);
     this.placeSecondary(secondaryPlacement);
   }
 
   private resetElement() {
+    log.info('reset');
     this.element.style.position = 'absolute';
     this.element.style.top = '0';
     this.element.style.left = '0';

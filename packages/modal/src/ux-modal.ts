@@ -1,4 +1,4 @@
-import { ModalService, ModalServiceResult } from './ux-modal-service';
+import { UxModalService, UxModalServiceResult } from './ux-modal-service';
 import { customElement, bindable } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
@@ -7,23 +7,23 @@ import { computedFrom } from 'aurelia-binding';
 import { TaskQueue } from 'aurelia-framework';
 import { PLATFORM, DOM } from 'aurelia-pal';
 import { getLogger } from 'aurelia-logging';
-import { ModalPosition, ModalKeybord, DefaultModalConfiguration } from './modal-configuration';
+import { UxModalPosition, UxModalKeybord, UxDefaultModalConfiguration } from './ux-modal-configuration';
 
 const log = getLogger('ux-modal');
 
-@inject(Element, StyleEngine, ModalService, TaskQueue, DefaultModalConfiguration)
+@inject(Element, StyleEngine, UxModalService, TaskQueue, UxDefaultModalConfiguration)
 @customElement('ux-modal')
 export class UxModal implements UxComponent {
 
   @bindable public type: 'standard' | 'modal';
-  @bindable public position: ModalPosition = 'center';
+  @bindable public position:  UxModalPosition = 'center';
   @bindable public host: 'body' | HTMLElement | false | string = 'body';
   @bindable public modalBreakpoint: number = 768;
   @bindable public theme: UxModalTheme;
   @bindable public overlayDismiss: boolean = true;
   @bindable public outsideDismiss: boolean = true;
   @bindable public lock: boolean = true;
-  @bindable public keyboard: ModalKeybord = ['Escape'];
+  @bindable public keyboard: UxModalKeybord = ['Escape'];
   @bindable public restoreFocus?: (lastActiveElement: HTMLElement) => void= (lastActiveElement: HTMLElement) => {
     lastActiveElement.focus();
   }
@@ -48,9 +48,9 @@ export class UxModal implements UxComponent {
   constructor(
     public element: HTMLElement,
     private styleEngine: StyleEngine,
-    private modalService: ModalService,
+    private modalService: UxModalService,
     private taskQueue: TaskQueue,
-    private defaultConfig: DefaultModalConfiguration) {
+    private defaultConfig: UxDefaultModalConfiguration) {
       if (this.defaultConfig.modalBreakpoint !== undefined) {
         this.modalBreakpoint = this.defaultConfig.modalBreakpoint
       }
@@ -287,7 +287,7 @@ export class UxModal implements UxComponent {
     if (event) {
       event.stopPropagation();
     }
-    const result: ModalServiceResult = {
+    const result: UxModalServiceResult = {
       wasCancelled: true,
       output: undefined
     };
@@ -303,7 +303,7 @@ export class UxModal implements UxComponent {
     if (event) {
       event.stopPropagation();
     }
-    const result: ModalServiceResult = {
+    const result: UxModalServiceResult = {
       wasCancelled: false,
       output
     };
@@ -315,7 +315,7 @@ export class UxModal implements UxComponent {
     this.element.dispatchEvent(okEvent);
   }
 
-  private async prepareClosing(result: ModalServiceResult): Promise<boolean> {
+  private async prepareClosing(result: UxModalServiceResult): Promise<boolean> {
     const layer = this.modalService.getLayer(this);
     if (layer) {
       if (!await this.modalService.callCanDeactivate(layer, result)) {

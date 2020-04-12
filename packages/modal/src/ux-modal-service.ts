@@ -1,34 +1,34 @@
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { UxModalTheme } from './ux-modal-theme';
 import { UxModal } from './ux-modal';
-import { ModalPosition, ModalKeybord, DefaultModalConfiguration } from './modal-configuration';
+import { UxModalPosition, UxModalKeybord, UxDefaultModalConfiguration } from './ux-modal-configuration';
 import { inject, Container, Controller, ViewResources, TaskQueue } from 'aurelia-framework';
 import { CompositionContext, TemplatingEngine, CompositionEngine, ViewSlot, ShadowDOM } from 'aurelia-templating';
 import { invokeLifecycle } from './lifecycle';
 
-export interface ModalServiceOptions {
+export interface UxModalServiceOptions {
   viewModel?: any;
   view?: any;
   host?: Element| 'body' | string;
-  position?: ModalPosition;
+  position?: UxModalPosition;
   moveToBodyTag?: boolean;
   theme?: UxModalTheme;
   model?: any;
   overlayDismiss?: boolean;
   outsideDismiss?: boolean;
   lock?: boolean;
-  keyboard?: ModalKeybord;
+  keyboard?: UxModalKeybord;
   restoreFocus?: (lastActiveElement: HTMLElement) => void;
   openingCallback?: (contentWrapperElement?: HTMLElement, overlayElement?: HTMLElement) => void;
 }
 
-export interface ModalServiceResult {
+export interface UxModalServiceResult {
   wasCancelled: boolean;
   output: any;
 }
 
-export interface ModalServiceModal {
-  whenClosed: () => Promise<ModalServiceResult>
+export interface UxModalServiceModal {
+  whenClosed: () => Promise<UxModalServiceResult>
 }
 
 export interface ModalAnchorPositionOptions {
@@ -37,14 +37,14 @@ export interface ModalAnchorPositionOptions {
   preferedPosition?: 'bottom' | 'top' | 'left' | 'right';
 }
 
-interface ModalBindingContext {
+interface UxModalBindingContext {
   currentViewModel?: {
     canDeactivate?: (result: any) => any;
     deactivate?: (result: any) => any;
     detached?: (result: any) => any;
   };
   theme?: UxModalTheme;
-  keyboard?: ModalKeybord;
+  keyboard?: UxModalKeybord;
   restoreFocus?: (lastActiveElement: HTMLElement) => void;
   openingCallback?: (contentWrapperElement?: HTMLElement, overlayElement?: HTMLElement) => void;
   host?: HTMLElement;
@@ -52,16 +52,16 @@ interface ModalBindingContext {
   ok?: (event: Event) => void;
 }
 
-interface ModalLayer {
-  bindingContext?: ModalBindingContext;
+interface UxModalLayer {
+  bindingContext?: UxModalBindingContext;
   modal: UxModal;
 }
 
-@inject(Container, TemplatingEngine, CompositionEngine, ViewResources, EventAggregator, DefaultModalConfiguration)
-export class ModalService {
+@inject(Container, TemplatingEngine, CompositionEngine, ViewResources, EventAggregator, UxDefaultModalConfiguration)
+export class UxModalService {
 
   public startingZIndex: number = 200;
-  public modalLayers: Array<ModalLayer> = [];
+  public modalLayers: Array<UxModalLayer> = [];
   public modalIndex: number = 0;
 
   private handleDocumentClick: (event: Event) => void;
@@ -72,14 +72,14 @@ export class ModalService {
     private compositionEngine: CompositionEngine,
     private viewResources: ViewResources,
     private eventAggregator: EventAggregator,
-    private defaultConfig: DefaultModalConfiguration) {
+    private defaultConfig: UxDefaultModalConfiguration) {
     this.handleDocumentClick = (event: Event) => {
       // the purpose of this handler is to close all modals that are
       // - not locked
       // - have outsideDismiss === true
       // - placed above the last locked layer
       // - and if the click is outside the modal
-      let concernedLayers: Array<ModalLayer> = [];
+      let concernedLayers: Array<UxModalLayer> = [];
       for (let layer of this.modalLayers) {
         if (layer.modal.lock || !layer.modal.outsideDismiss) {
           concernedLayers = [];
@@ -102,7 +102,7 @@ export class ModalService {
     };
   }
 
-  public addLayer(modal: UxModal, bindingContext: ModalBindingContext) {
+  public addLayer(modal: UxModal, bindingContext: UxModalBindingContext) {
     const layerCount = this.modalLayers.push({
       bindingContext: bindingContext,
       modal: modal
@@ -112,7 +112,7 @@ export class ModalService {
     }
   }
 
-  public getLayer(modal: UxModal): ModalLayer | undefined {
+  public getLayer(modal: UxModal): UxModalLayer | undefined {
     const index = this.modalLayers.map(i => i.modal).indexOf(modal);
     if (index !== -1) {
       return this.modalLayers[index];
@@ -155,7 +155,7 @@ export class ModalService {
     }
   }
 
-  private getActionKey(event: KeyboardEvent): ModalKeybord | undefined {
+  private getActionKey(event: KeyboardEvent): UxModalKeybord | undefined {
     if ((event.code || event.key) === 'Escape' || event.keyCode === 27) {
       return 'Escape';
     }
@@ -165,7 +165,7 @@ export class ModalService {
     return undefined;
   }
 
-  public getLastLayer(): ModalLayer {
+  public getLastLayer(): UxModalLayer {
     return this.modalLayers[this.modalLayers.length - 1];
   }
 
@@ -177,7 +177,7 @@ export class ModalService {
     return this.startingZIndex + this.modalLayers.length;
   }
 
-  private createModalElement(options: ModalServiceOptions, bindingContext: ModalBindingContext): HTMLElement {
+  private createModalElement(options: UxModalServiceOptions, bindingContext: UxModalBindingContext): HTMLElement {
     const element = document.createElement('ux-modal');
     element.setAttribute('dismiss.trigger', 'dismiss()');
     element.setAttribute('ok.trigger', 'ok($event)');
@@ -222,7 +222,7 @@ export class ModalService {
   private createCompositionContext(
     container: any, // there is a TS error if this is not any ?
     host: Element, 
-    bindingContext: ModalBindingContext, 
+    bindingContext: UxModalBindingContext, 
     settings: {model?: any, view?: any, viewModel?: any},
     slot? : ViewSlot
     ): CompositionContext {
@@ -248,14 +248,14 @@ export class ModalService {
     return this.compositionEngine.ensureViewModel(compositionContext);
   }
 
-  public async open(options: ModalServiceOptions): Promise<UxModal & ModalServiceModal> {
+  public async open(options: UxModalServiceOptions): Promise<UxModal & UxModalServiceModal> {
     options = Object.assign({}, this.defaultConfig, options);
     if (!options.viewModel && !options.view) {
       throw new Error('Invalid modal Settings. You must provide "viewModel", "view" or both.');
     }
     // Each modal has an index to keep track of it
     this.modalIndex++;
-    const bindingContext: ModalBindingContext = {};
+    const bindingContext: UxModalBindingContext = {};
     const element = this.createModalElement(options, bindingContext);
     
     if (!options.host || options.host === 'body') {
@@ -311,13 +311,13 @@ export class ModalService {
     });
 
     const modalIndex = this.modalIndex;
-    const whenClosed: Promise<ModalServiceResult> = new Promise((resolve) => {
-      this.eventAggregator.subscribeOnce(`modal-${modalIndex}-resolve`, (result: ModalServiceResult) => {
+    const whenClosed: Promise<UxModalServiceResult> = new Promise((resolve) => {
+      this.eventAggregator.subscribeOnce(`modal-${modalIndex}-resolve`, (result: UxModalServiceResult) => {
         resolve(result);
       });      
     });
 
-    (modal as UxModal & ModalServiceModal).whenClosed = () => {
+    (modal as UxModal & UxModalServiceModal).whenClosed = () => {
       return whenClosed;
     }
     bindingContext.dismiss = () => {
@@ -336,7 +336,7 @@ export class ModalService {
         output: event.detail
       });
     }
-    return modal as UxModal & ModalServiceModal;
+    return modal as UxModal & UxModalServiceModal;
   }
 
   private cancelOpening(modal: UxModal) {
@@ -344,7 +344,7 @@ export class ModalService {
     modal.detached();
   }
 
-  public async callCanDeactivate(layer: ModalLayer, result: ModalServiceResult): Promise<boolean> {
+  public async callCanDeactivate(layer: UxModalLayer, result: UxModalServiceResult): Promise<boolean> {
     if (layer.bindingContext && layer.bindingContext.currentViewModel) {
       const vm = layer.bindingContext.currentViewModel;
       if (typeof vm.canDeactivate === 'function') {
@@ -359,7 +359,7 @@ export class ModalService {
     return true;
   }
 
-  public async callDetached(layer: ModalLayer): Promise<void> {
+  public async callDetached(layer: UxModalLayer): Promise<void> {
     if (layer.bindingContext && layer.bindingContext.currentViewModel) {
       const vm = layer.bindingContext.currentViewModel;
       if (typeof vm.detached === 'function') {
@@ -369,7 +369,7 @@ export class ModalService {
     return;
   }
 
-  public async callDeactivate(layer: ModalLayer, result: ModalServiceResult): Promise<void> {
+  public async callDeactivate(layer: UxModalLayer, result: UxModalServiceResult): Promise<void> {
     if (layer.bindingContext && layer.bindingContext.currentViewModel) {
       const vm = layer.bindingContext.currentViewModel;
       if (typeof vm.deactivate === 'function') {
@@ -391,103 +391,103 @@ export class ModalService {
     await layer.modal.ok(result);
   }
 
-  public positionModalWithAnchor(anchor: HTMLElement, contentWrapperElement: HTMLElement, options?: ModalAnchorPositionOptions) {
-    // We use queueTask here because queueMicroTask
-    // resolves too early
-    const contentElement = contentWrapperElement.querySelector('.ux-modal__content') as HTMLElement;
-    contentElement.style.top = `0`;
-    contentElement.style.left = `0`;
-    contentElement.style.right = `auto`;
-    contentElement.style.bottom = `auto`;
+  // public positionModalWithAnchor(anchor: HTMLElement, contentWrapperElement: HTMLElement, options?: ModalAnchorPositionOptions) {
+  //   // We use queueTask here because queueMicroTask
+  //   // resolves too early
+  //   const contentElement = contentWrapperElement.querySelector('.ux-modal__content') as HTMLElement;
+  //   contentElement.style.top = `0`;
+  //   contentElement.style.left = `0`;
+  //   contentElement.style.right = `auto`;
+  //   contentElement.style.bottom = `auto`;
 
-    this.container.get(TaskQueue).queueTask(() => {
-      const anchorRect = anchor.getBoundingClientRect();
-      const contentWrapperRect = contentWrapperElement.getBoundingClientRect();
+  //   this.container.get(TaskQueue).queueTask(() => {
+  //     const anchorRect = anchor.getBoundingClientRect();
+  //     const contentWrapperRect = contentWrapperElement.getBoundingClientRect();
     
-      const offsetY = (options && options.offsetY) ? options.offsetY : 0;
-      const offsetX = (options && options.offsetX) ? options.offsetX : 0;
-      const originalTop = anchorRect.top - contentWrapperRect.top + offsetX;
-      const originalLeft = anchorRect.left - contentWrapperRect.left + offsetY;
+  //     const offsetY = (options && options.offsetY) ? options.offsetY : 0;
+  //     const offsetX = (options && options.offsetX) ? options.offsetX : 0;
+  //     const originalTop = anchorRect.top - contentWrapperRect.top + offsetX;
+  //     const originalLeft = anchorRect.left - contentWrapperRect.left + offsetY;
        
-      if (contentElement.offsetWidth > window.innerWidth) {
-        contentElement.style.width = `${window.innerWidth}px`;
-      }
-      if (contentElement.offsetHeight > window.innerHeight) {
-        contentElement.style.height = `${window.innerHeight}px`;
-      }
+  //     if (contentElement.offsetWidth > window.innerWidth) {
+  //       contentElement.style.width = `${window.innerWidth}px`;
+  //     }
+  //     if (contentElement.offsetHeight > window.innerHeight) {
+  //       contentElement.style.height = `${window.innerHeight}px`;
+  //     }
     
-      let positions = ['bottom', 'top', 'left', 'right', 'full'];
-      if (options && options.preferedPosition) {
-        positions.splice(positions.indexOf(options.preferedPosition), 1)
-        positions.unshift(options.preferedPosition);
-      }
+  //     let positions = ['bottom', 'top', 'left', 'right', 'full'];
+  //     if (options && options.preferedPosition) {
+  //       positions.splice(positions.indexOf(options.preferedPosition), 1)
+  //       positions.unshift(options.preferedPosition);
+  //     }
     
-      let modalTop = originalTop;
-      let modalLeft = originalLeft;
+  //     let modalTop = originalTop;
+  //     let modalLeft = originalLeft;
     
-      for (let position of positions) {
-        modalTop = originalTop;
-        modalLeft = originalLeft;
-        if (position === 'bottom') {
-          modalTop += anchorRect.height;
-          if (modalTop + contentElement.offsetHeight < window.innerHeight - window.scrollY) {
-            // we have enough height !
-            const rightDiff = modalLeft + contentElement.offsetWidth - window.innerWidth - window.scrollX;
-            if (rightDiff > 0) {
-              modalLeft -= rightDiff;
-            }
-            break;
-          }
-        }
-        if (position === 'top') {
-          modalTop -= contentElement.offsetHeight;
-          if (modalTop > window.scrollY) {
-            // we have enough height !
-            const rightDiff = modalLeft + contentElement.offsetWidth - window.innerWidth - window.scrollX;
-            if (rightDiff > 0) {
-              modalLeft -= rightDiff;
-            }
-            break;
-          }
-        }
-        if (position === 'left') {
-          modalLeft -= contentElement.offsetWidth;
-          if (modalLeft > 0) {
-            // we have enough width !
-            modalTop = modalTop + (anchorRect.height / 2) - (contentElement.offsetHeight / 2);
-            const topDiff = modalTop + contentElement.offsetHeight - window.innerHeight - window.scrollY;
-            if (topDiff > 0) {
-              modalTop -= topDiff;
-            }
-            break;
-          }
-        }
-        if (position === 'right') {
-          modalLeft += anchorRect.width;
-          if (modalLeft + contentElement.offsetWidth < window.innerWidth) {
-            // we have enough height !
-            modalTop = modalTop + (anchorRect.height / 2) - (contentElement.offsetHeight / 2);
-            const topDiff = modalTop + contentElement.offsetHeight - window.innerHeight - window.scrollY;
-            if (topDiff > 0) {
-              modalTop -= topDiff;
-            }
-            break;
-          }
-        }
-        if (position === 'full') {
-          modalTop = 0;
-          modalLeft = 0;
-          contentElement.style.width = `${window.innerWidth}px`;
-          contentElement.style.height = `${window.innerHeight}px`;
-        }
-      }
+  //     for (let position of positions) {
+  //       modalTop = originalTop;
+  //       modalLeft = originalLeft;
+  //       if (position === 'bottom') {
+  //         modalTop += anchorRect.height;
+  //         if (modalTop + contentElement.offsetHeight < window.innerHeight - window.scrollY) {
+  //           // we have enough height !
+  //           const rightDiff = modalLeft + contentElement.offsetWidth - window.innerWidth - window.scrollX;
+  //           if (rightDiff > 0) {
+  //             modalLeft -= rightDiff;
+  //           }
+  //           break;
+  //         }
+  //       }
+  //       if (position === 'top') {
+  //         modalTop -= contentElement.offsetHeight;
+  //         if (modalTop > window.scrollY) {
+  //           // we have enough height !
+  //           const rightDiff = modalLeft + contentElement.offsetWidth - window.innerWidth - window.scrollX;
+  //           if (rightDiff > 0) {
+  //             modalLeft -= rightDiff;
+  //           }
+  //           break;
+  //         }
+  //       }
+  //       if (position === 'left') {
+  //         modalLeft -= contentElement.offsetWidth;
+  //         if (modalLeft > 0) {
+  //           // we have enough width !
+  //           modalTop = modalTop + (anchorRect.height / 2) - (contentElement.offsetHeight / 2);
+  //           const topDiff = modalTop + contentElement.offsetHeight - window.innerHeight - window.scrollY;
+  //           if (topDiff > 0) {
+  //             modalTop -= topDiff;
+  //           }
+  //           break;
+  //         }
+  //       }
+  //       if (position === 'right') {
+  //         modalLeft += anchorRect.width;
+  //         if (modalLeft + contentElement.offsetWidth < window.innerWidth) {
+  //           // we have enough height !
+  //           modalTop = modalTop + (anchorRect.height / 2) - (contentElement.offsetHeight / 2);
+  //           const topDiff = modalTop + contentElement.offsetHeight - window.innerHeight - window.scrollY;
+  //           if (topDiff > 0) {
+  //             modalTop -= topDiff;
+  //           }
+  //           break;
+  //         }
+  //       }
+  //       if (position === 'full') {
+  //         modalTop = 0;
+  //         modalLeft = 0;
+  //         contentElement.style.width = `${window.innerWidth}px`;
+  //         contentElement.style.height = `${window.innerHeight}px`;
+  //       }
+  //     }
     
-      contentElement.style.top = `${modalTop}px`;
-      contentElement.style.left = `${modalLeft}px`;
-      contentElement.style.right = `auto`;
-      contentElement.style.bottom = `auto`;
-    });
-  }
+  //     contentElement.style.top = `${modalTop}px`;
+  //     contentElement.style.left = `${modalLeft}px`;
+  //     contentElement.style.right = `auto`;
+  //     contentElement.style.bottom = `auto`;
+  //   });
+  // }
   
 
 }
