@@ -35,6 +35,10 @@
   pointer-events: auto;
 }
 
+.ux-modal--unlocked .ux-modal__content {
+  box-shadow: var(--aurelia-ux--modal-unlocked-elevation, var(--aurelia-ux--design-elevation4dp));
+}
+
 .ux-modal__content {
   pointer-events: auto;
   background: var(--aurelia-ux--modal-background, var(--aurelia-ux--design-surface-background));

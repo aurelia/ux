@@ -12,4 +12,5 @@ export class UxModalTheme implements UxTheme {
   public foreground?: string = void 0;
   public borderRadius?: string = void 0;
   public minWidth?: string = void 0;
+  public unlocked?: string = void 0;
 }

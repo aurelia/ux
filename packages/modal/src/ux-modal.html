@@ -1,5 +1,5 @@
 <template 
-  class="ux-modal ux-modal--${computedType} ux-modal--${viewportType} ux-modal--${position} ${showed ? 'ux-modal--opened':''} ux-modal--${lock ? 'lock':''}">
+  class="ux-modal ux-modal--${computedType} ux-modal--${viewportType} ux-modal--${position} ${showed ? 'ux-modal--opened':''} ux-modal--${lock ? 'lock':'unlocked'}">
   <require from="./ux-modal.css"></require>
   <div class="ux-modal__overlay" ref="overlayElement" if.bind="lock">
   </div>
