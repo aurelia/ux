@@ -1,12 +1,12 @@
-import { ModalService, ModalPosition } from '@aurelia-ux/modal';
+import { UxModalService, UxModalPosition, UxModalPositioning, UxModalPlacement, UxPositioningOptions } from '@aurelia-ux/modal';
 import { Hello } from './hello';
 import { inject } from 'aurelia-framework';
 
-@inject(ModalService)
+@inject(UxModalService, UxModalPositioning)
 export class ModalComp {
 
   public host: '' | '.modal-host' = '';
-  public position: ModalPosition = 'top';
+  public position: UxModalPosition = 'top';
   public hue = '';
   public duration = '';
   public modalPrompt: string = '';
@@ -24,7 +24,7 @@ export class ModalComp {
   public anchor3: HTMLElement;
   public anchor4: HTMLElement;
 
-  constructor(private modalService: ModalService) {
+  constructor(private modalService: UxModalService, private modalPositioning: UxModalPositioning) {
 
   }
 
@@ -99,17 +99,51 @@ export class ModalComp {
       }});
   }
 
-  public openMenu() {
+  public positionning: UxModalPositioning;
+
+  public async openMenu() {
     const anchor = (this as any)[this.anchor];
-    this.modalService.open({
+    const modal = await this.modalService.open({
       viewModel: Hello,
       position: 'absolute',
       lock: this.lock,
       outsideDismiss: this.outsideDismiss,
       openingCallback: (contentWrapperElement: HTMLElement, _overlayElement: HTMLElement) => {
-        this.modalService.positionModalWithAnchor(anchor, contentWrapperElement, {preferedPosition: this.menuPosition});
+        const contentElement = contentWrapperElement.querySelector('.ux-modal__content') as HTMLElement;
+        this.positionning = this.modalPositioning.getInstance(anchor, contentElement, {
+          placement: this.menuPosition,
+          offsetX: 0,
+          offsetY: 0,
+          windowMarginX: 0,
+          windowMarginY: 0,
+        });
+        this.setScrollListener();
       },
     });
+    modal.whenClosed().then(() => {
+      this.unsetScrollListener();
+    });
+  }
+
+  private setScrollListener() {
+    const routerView = document.querySelector('router-view');
+    if (routerView instanceof HTMLElement) {
+      routerView.addEventListener('scroll', this);
+    }
+  }
+
+  private unsetScrollListener() {
+    const routerView = document.querySelector('router-view');
+    if (routerView instanceof HTMLElement) {
+      routerView.removeEventListener('scroll', this);
+    }
+  }
+
+  public handleEvent(_event: Event) {
+    console.log('handleEvent');
+    if (this.positionning) {
+      this.positionning.update();
+    }
   }
 
 }

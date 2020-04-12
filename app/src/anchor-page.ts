@@ -1,8 +1,8 @@
-import { Placement } from './../../packages/modal/src/positioning/interfaces';
-import { ModalService, UxModalPositioning } from '@aurelia-ux/modal';
+import { UxModalPlacement } from './../../packages/modal/src/positioning/interfaces';
+import { UxModalService, UxModalPositioning } from '@aurelia-ux/modal';
 import { inject, observable } from 'aurelia-framework';
 
-@inject( ModalService, UxModalPositioning)
+@inject( UxModalService, UxModalPositioning)
 export class AnchorPage {
 
   private anchor: HTMLElement;
@@ -10,7 +10,7 @@ export class AnchorPage {
   private anchorZone: HTMLElement;
   private anchorZone2: HTMLElement;
   private positioning: UxModalPositioning;
-  @observable private placement: Placement = 'left';
+  @observable private placement: UxModalPlacement = 'left';
   @observable private constraint: string = 'parent';
 
   private dragging: boolean = false;
@@ -21,7 +21,7 @@ export class AnchorPage {
   private anchorXStart: number;
   private anchorYStart: number;
 
-  constructor(private modalService: ModalService, private modalPositioning: UxModalPositioning) {
+  constructor(private UxModalService: UxModalService, private modalPositioning: UxModalPositioning) {
 
   }
 
