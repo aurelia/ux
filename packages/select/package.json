@@ -82,12 +82,14 @@
       "aurelia-framework": "^1.0.0",
       "aurelia-metadata": "^1.0.0",
       "aurelia-path": "^1.0.0",
-      "@aurelia-ux/core": "^0.3.0"
+      "@aurelia-ux/core": "^0.3.0",
+      "@aurelia-ux/modal": "^0.3.0"
     },
     "devDependencies": {}
   },
   "dependencies": {
     "@aurelia-ux/core": "^0.18.0",
+    "@aurelia-ux/modal": "^0.18.0",
     "aurelia-binding": "^2.0.0"
   },
   "devDependencies": {

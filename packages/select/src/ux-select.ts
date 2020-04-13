@@ -16,6 +16,7 @@ import {
 
 import { getLogger } from 'aurelia-logging';
 import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
+import { UxModalPositioning } from '@aurelia-ux/modal';
 
 import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
@@ -59,7 +60,7 @@ export interface UxOptionContainer extends HTMLElement {
   children: HTMLCollectionOf<UxOptGroupElement | UxOptionElement>;
 }
 
-@inject(Element, StyleEngine, ObserverLocator, TaskQueue)
+@inject(Element, StyleEngine, ObserverLocator, TaskQueue, UxModalPositioning)
 @processContent(ensureUxOptionOrUxOptGroup)
 @customElement('ux-select')
 export class UxSelect implements UxInputComponent {
@@ -100,11 +101,14 @@ export class UxSelect implements UxInputComponent {
   public readonly optionWrapperEl: HTMLElement;
   public readonly optionCtEl: UxOptionContainer;
 
+  private positioning: UxModalPositioning;
+
   constructor(
     public readonly element: UxSelectElement,
     private styleEngine: StyleEngine,
     private observerLocator: ObserverLocator,
-    private taskQueue: TaskQueue
+    private taskQueue: TaskQueue,
+    private modalPositioning: UxModalPositioning
   ) {
     // Only chrome persist the element prototype when cloning with clone node
     Object.setPrototypeOf(element, UxSelectElementProto);
@@ -134,6 +138,10 @@ export class UxSelect implements UxInputComponent {
   public attached() {
     this.resolveDisplayValue();
     this.variantChanged(this.variant);
+    this.positioning = this.modalPositioning.getInstance(this.element, this.optionWrapperEl, {
+      placement: 'bottom-start',
+      constraintElement: window
+    });
   }
 
   public unbind() {
@@ -235,27 +243,16 @@ export class UxSelect implements UxInputComponent {
     }
   }
 
-  private setupListAnchor() {
-    this.calcAnchorPosition();
-    this.winEvents.subscribe('wheel', (e: WheelEvent) => {
+  private setupListListeners() {
+    this.winEvents.subscribe('scroll', (_e: Event) => {
       if (this.expanded) {
-        if (e.target === PLATFORM.global || !this.optionWrapperEl.contains(e.target as HTMLElement)) {
-          this.collapse();
-        }
+        this.positioning.update();
       }
     }, true);
   }
 
-  private unsetupListAnchor() {
-    this.listAnchor = null;
+  private unsetupListListeners() {
     this.winEvents.disposeAll();
-  }
-
-  public listAnchor: { x: number | string, y: number | string } | null;
-  private calcAnchorPosition() {
-    const elDim = this.element.getBoundingClientRect();
-    const offsetY = (48 - elDim.height) / 2;
-    this.listAnchor = { x: elDim.left, y: elDim.top - offsetY };
   }
 
   private onKeyboardSelect() {
@@ -324,8 +321,9 @@ export class UxSelect implements UxInputComponent {
       this.isExpanding = false;
       this.expanded = true;
       this.setFocusedOption(this.selectedOption);
+      this.positioning.update();
     }, 0);
-    this.setupListAnchor();
+    this.setupListListeners();
   }
 
   private isCollapsing: boolean;
@@ -340,7 +338,7 @@ export class UxSelect implements UxInputComponent {
       this.isCollapsing = false;
       this.expanded = false;
       this.setFocusedOption(null);
-      this.unsetupListAnchor();
+      this.unsetupListListeners();
     }, this.theme && this.theme.listTransition || 125);
   }
 
