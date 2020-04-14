@@ -80,6 +80,7 @@ export class UxChipInput implements UxInputComponent {
 
     if (key === 13) {
       this.addChip();
+      event.stopImmediatePropagation();
     }
 
     if (key === 37) {
@@ -90,6 +91,7 @@ export class UxChipInput implements UxInputComponent {
           this.textbox.value = chip;
         }
       }
+      event.stopImmediatePropagation();
     }
   }
 
