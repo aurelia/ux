@@ -37,16 +37,16 @@ export class UxModalPositioning {
     if (options && options.missingSpaceStrategy) {
       instance.missingSpaceStrategy = options.missingSpaceStrategy;
     }
-    if (options && options.offsetX) {
+    if (options && options.offsetX !== undefined) {
       instance.offsetX = options.offsetX;
     }
-    if (options && options.offsetY) {
+    if (options && options.offsetY !== undefined) {
       instance.offsetY = options.offsetY;
     }
-    if (options && options.windowMarginX) {
+    if (options && options.windowMarginX !== undefined) {
       instance.windowMarginX = options.windowMarginX;
     }
-    if (options && options.windowMarginY) {
+    if (options && options.windowMarginY !== undefined) {
       instance.windowMarginY = options.windowMarginY;
     }
     if (options && options.constraintElement) {
