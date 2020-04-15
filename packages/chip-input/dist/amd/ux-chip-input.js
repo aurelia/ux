@@ -56,6 +56,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             var key = event.which || event.keyCode;
             if (key === 13) {
                 this.addChip();
+                event.stopImmediatePropagation();
             }
             if (key === 37) {
                 if (this.chips && this.textbox.value === '') {
@@ -64,6 +65,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                         this.textbox.value = chip;
                     }
                 }
+                event.stopImmediatePropagation();
             }
         };
         UxChipInput.prototype.addChip = function () {
