@@ -1,6 +1,10 @@
 import { UxModalPlacement } from './../../packages/modal/src/positioning/interfaces';
-import { UxModalService, UxModalPositioning } from '@aurelia-ux/modal';
+import { UxModalService, UxModalPositioning, UxModalMissingSpaceStrategy } from '@aurelia-ux/modal';
 import { inject, observable } from 'aurelia-framework';
+
+export interface MouseOrTouchEvent extends MouseEvent {
+  touches?: Array<{clientX: number, clientY: number}>;
+}
 
 @inject( UxModalService, UxModalPositioning)
 export class AnchorPage {
@@ -12,10 +16,11 @@ export class AnchorPage {
   private positioning: UxModalPositioning;
   @observable private placement: UxModalPlacement = 'left';
   @observable private constraint: string = 'parent';
+  @observable private missingSpaceStrategy: UxModalMissingSpaceStrategy = 'flip';
 
   private dragging: boolean = false;
-  private anchorX: number = 45;
-  private anchorY: number = 45;
+  private anchorX: number = 130;
+  private anchorY: number = 120;
   private dragXStart: number;
   private dragYStart: number;
   private anchorXStart: number;
@@ -27,7 +32,8 @@ export class AnchorPage {
 
   public attached() {
     this.positioning = this.modalPositioning.getInstance(this.anchor, this.element, {
-      placement: this.placement
+      placement: this.placement,
+      missingSpaceStrategy: this.missingSpaceStrategy
     });
   }
 
@@ -55,18 +61,34 @@ export class AnchorPage {
     this.positioning.update();
   }
 
-  public startDrag(event: MouseEvent) {
+  public missingSpaceStrategyChanged() {
+    if (!this.positioning) {
+      return;
+    }
+    this.positioning.missingSpaceStrategy = this.missingSpaceStrategy;
+    this.positioning.update();
+  }
+
+  public startDrag(event: MouseOrTouchEvent) {
     this.anchorXStart = this.anchorX;
     this.anchorYStart = this.anchorY;
-    this.dragXStart = event.clientX;
-    this.dragYStart = event.clientY;
+    const pos = this.getEventPos(event);
+    if (!pos) {
+      return;
+    }
+    this.dragXStart = pos.x;
+    this.dragYStart = pos.y;
     this.dragging = true;
   }
 
-  public drag(event: MouseEvent) {
+  public drag(event: MouseOrTouchEvent) {
     if (this.dragging) {
-      const offsetX = event.clientX - this.dragXStart;
-      const offsetY = event.clientY - this.dragYStart;
+      const pos = this.getEventPos(event);
+      if (!pos) {
+        return;
+      }
+      const offsetX = pos.x - this.dragXStart;
+      const offsetY = pos.y - this.dragYStart;
       this.anchorX = this.anchorXStart + offsetX;
       this.anchorY = this.anchorYStart + offsetY;
       this.anchor.style.left = `${this.anchorX}px`;
@@ -77,5 +99,23 @@ export class AnchorPage {
 
   public endDrag(event: MouseEvent) {
     this.dragging = false;
+  }
+
+  public getEventPos(event: MouseOrTouchEvent): {x: number, y: number} | null {
+    if (event.touches && event.touches.length > 0) {
+      const touches = event.touches;
+      if (touches.length === 1) {
+        return {
+          x: touches[0].clientX,
+          y: touches[0].clientY
+        };
+      }
+    } else if (event instanceof MouseEvent) {
+      return {
+        x: event.clientX,
+        y: event.clientY
+      };
+    }
+    return null;
   }
 }

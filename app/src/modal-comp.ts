@@ -114,8 +114,8 @@ export class ModalComp {
           placement: this.menuPosition,
           offsetX: 0,
           offsetY: 0,
-          windowMarginX: 0,
-          windowMarginY: 0,
+          constraintMarginX: 0,
+          constraintMarginY: 0,
         });
         this.setScrollListener();
       },

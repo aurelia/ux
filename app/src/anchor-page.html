@@ -2,48 +2,54 @@
   <require from="./anchor-page.css"></require>
   <section>
     <h2>Placement Demo</h2>
-    <p>The element is a <strong>child of the <span style="color:green;">green</span> DOM</strong> container.<br>However, you can choose to request positioning constraint from <strong>any DOM element</strong>, or the screen.</p>
-
     <ux-grid  theme.bind="{outerPadding: '0'}">
-      <ux-grid-cell sm="6">
-        <p>Select the element <strong>placement</strong></p>
-        <ux-chip-list ux-choice-container.bind="placement">
-          <ux-chip ux-choice="left">left</ux-chip>
-          <ux-chip ux-choice="left-start">left-start</ux-chip>
-          <ux-chip ux-choice="left-end">left-end</ux-chip>
-          <ux-chip ux-choice="right">right</ux-chip>
-          <ux-chip ux-choice="right-start">right-start</ux-chip>
-          <ux-chip ux-choice="right-end">right-end</ux-chip>
-          <ux-chip ux-choice="top">top</ux-chip>
-          <ux-chip ux-choice="top-start">top-start</ux-chip>
-          <ux-chip ux-choice="top-end">top-end</ux-chip>
-          <ux-chip ux-choice="bottom">bottom</ux-chip>
-          <ux-chip ux-choice="bottom-start">bottom-start</ux-chip>
-          <ux-chip ux-choice="bottom-end">bottom-end</ux-chip>
-        </ux-chip-list>
-      </ux-grid-cell>
       <ux-grid-cell sm="6">
         <p>Select the <strong>constraint</strong> container</p>
         <ux-chip-list ux-choice-container.bind="constraint">
-          <ux-chip ux-choice="parent">parent (default)</ux-chip>
-          <ux-chip ux-choice="window">screen</ux-chip>
-          <ux-chip ux-choice="blue">blue</ux-chip>
-          <ux-chip ux-choice="brown">brown</ux-chip>
+          <ux-chip ux-choice="window">Screen</ux-chip>
+          <ux-chip ux-choice="blue">Ancestor</ux-chip>
+          <ux-chip ux-choice="parent">Parent</ux-chip>
+          <ux-chip ux-choice="brown">Arbitrary</ux-chip>
         </ux-chip-list>
-        <p>Try to <strong>drag</strong> the anchor and see what happens.
-        <br><small>Desktop only</small></p>
-
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <p>Select the <strong>missing space strategy</strong></p>
+        <ux-chip-list ux-choice-container.bind="missingSpaceStrategy">
+          <ux-chip ux-choice="flip">Flip</ux-chip>
+          <ux-chip ux-choice="ignore">Ignore</ux-chip>
+          <ux-chip ux-choice="hide">Hide</ux-chip>
+          <ux-chip ux-choice="over">Over</ux-chip>
+        </ux-chip-list>
       </ux-grid-cell>
     </ux-grid>
   </section>
-  <section class="anchor-zone" mousemove.delegate="drag($event) & debounce:10" mouseup.delegate="endDrag($event)" ref="anchorZone">
+  <section class="anchor-zone" mousemove.delegate="drag($event) & debounce:10" mouseup.delegate="endDrag($event)" touchmove.trigger="drag($event) & debounce:10" touchend.trigger="endDrag($event)" ref="anchorZone">
+    <label class="anchor-zone__label">Larger ancestor</label>
     <div class="anchor-container">
-      <div class="anchor-zone2" ref="anchorZone2"></div>
-      <div class="anchor" ref="anchor" mousedown.delegate="startDrag($event)" >I'm an anchor</div>
+      <label class="anchor-zone__label">Anchor's parent</label>
+      <div class="anchor-zone2" ref="anchorZone2">
+        <label class="anchor-zone__label">Arbitrary element</label>
+      </div>
+      <div class="anchor" ref="anchor" mousedown.delegate="startDrag($event)" touchstart.trigger="startDrag($event)" ux-choice-container.bind="placement">
+        <span class="anchor_zone-selector anchor_top-start" ux-choice="top-start"></span>
+        <span class="anchor_zone-selector anchor_top" ux-choice="top"></span>
+        <span class="anchor_zone-selector anchor_top-end" ux-choice="top-end"></span>
+        <span class="anchor_zone-selector anchor_right-start" ux-choice="right-start"></span>
+        <span class="anchor_zone-selector anchor_right" ux-choice="right"></span>
+        <span class="anchor_zone-selector anchor_right-end" ux-choice="right-end"></span>
+        <span class="anchor_zone-selector anchor_bottom-start" ux-choice="bottom-start"></span>
+        <span class="anchor_zone-selector anchor_bottom" ux-choice="bottom"></span>
+        <span class="anchor_zone-selector anchor_bottom-end" ux-choice="bottom-end"></span>
+        <span class="anchor_zone-selector anchor_left-start" ux-choice="left-start"></span>
+        <span class="anchor_zone-selector anchor_left" ux-choice="left"></span>
+        <span class="anchor_zone-selector anchor_left-end" ux-choice="left-end"></span>
+        I'm an anchor
+        <br><small>(Drag me)</small>
+      </div>
       <div class="element" ref="element">Element</div>
     </div>
   </section>
   <section class="spacer">
-    <p>I'm only a spacer here, so that you can try with some scrolling and see what happens.</p>
+  
   </section>
 </template>
