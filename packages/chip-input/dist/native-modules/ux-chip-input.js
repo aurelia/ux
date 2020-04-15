@@ -61,6 +61,7 @@ var UxChipInput = /** @class */ (function () {
         var key = event.which || event.keyCode;
         if (key === 13) {
             this.addChip();
+            event.stopImmediatePropagation();
         }
         if (key === 37) {
             if (this.chips && this.textbox.value === '') {
@@ -69,6 +70,7 @@ var UxChipInput = /** @class */ (function () {
                     this.textbox.value = chip;
                 }
             }
+            event.stopImmediatePropagation();
         }
     };
     UxChipInput.prototype.addChip = function () {

@@ -61,6 +61,7 @@ let UxChipInput = class UxChipInput {
         const key = event.which || event.keyCode;
         if (key === 13) {
             this.addChip();
+            event.stopImmediatePropagation();
         }
         if (key === 37) {
             if (this.chips && this.textbox.value === '') {
@@ -69,6 +70,7 @@ let UxChipInput = class UxChipInput {
                     this.textbox.value = chip;
                 }
             }
+            event.stopImmediatePropagation();
         }
     }
     addChip() {

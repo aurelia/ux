@@ -29,9 +29,6 @@ export declare class UxDatepicker implements UxInputComponent {
         time: string;
         datetime: string;
     };
-    parsers: {
-        time: string[];
-    };
     value: any;
     focused: boolean;
     textbox: HTMLInputElement;
@@ -43,6 +40,7 @@ export declare class UxDatepicker implements UxInputComponent {
     toggleDialog(display: string): void;
     blur(): void;
     changeTextboxValue(): void;
+    typeChanged(newValue: string): void;
     valueChanged(newValue: Date): void;
     minDateChanged(newValue: any): void;
     maxDateChanged(newValue: any): void;

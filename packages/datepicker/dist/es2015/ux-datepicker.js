@@ -39,9 +39,6 @@ class UxDatepicker {
             time: 'LT',
             datetime: 'L LT'
         };
-        this.parsers = {
-            time: ['h:m a', 'H:m']
-        };
         this.focused = false;
         this.showDialog = false;
     }
@@ -68,14 +65,14 @@ class UxDatepicker {
             this.maxDate = dateParse.isValid() ? dateParse : null;
         }
         if (this.minTime != null) {
-            const dateParse = moment(this.minTime, this.parsers.time);
+            const dateParse = moment(this.minTime, this.formatters.time);
             this.minTime = dateParse.isValid() ? dateParse : null;
         }
         if (this.maxTime != null) {
-            const dateParse = moment(this.maxTime, this.parsers.time);
+            const dateParse = moment(this.maxTime, this.formatters.time);
             this.maxTime = dateParse.isValid() ? dateParse : null;
         }
-        this.valueChanged(this.value);
+        this.typeChanged(this.type);
         this.themeChanged(this.theme);
     }
     attached() {
@@ -109,7 +106,15 @@ class UxDatepicker {
             return;
         }
         let parseValue;
-        parseValue = this.type === 'time' ? moment(this.textboxValue, this.parsers.time) : moment(this.textboxValue);
+        if (this.type === 'date') {
+            parseValue = moment(this.textboxValue, this.formatters.date);
+        }
+        else if (this.type === 'time') {
+            parseValue = moment(this.textboxValue, this.formatters.time);
+        }
+        else {
+            parseValue = moment(this.textboxValue, this.formatters.datetime);
+        }
         if (parseValue.isValid() &&
             DatetimeUtility.dateOutOfRange(parseValue, this.minDate, this.maxDate, this.config) === false) {
             this.value = parseValue.toDate();
@@ -119,17 +124,30 @@ class UxDatepicker {
             this.textboxValue = '';
         }
     }
+    typeChanged(newValue) {
+        newValue = newValue.toLowerCase();
+        if (newValue === 'time') {
+            this.type = newValue;
+        }
+        else if (newValue === 'date') {
+            this.type = newValue;
+        }
+        else {
+            this.type = 'datetime';
+        }
+        this.valueChanged(this.value);
+    }
     valueChanged(newValue) {
         if (newValue == null) {
             return;
         }
-        if (this.type.toLowerCase() === 'datetime') {
+        if (this.type === 'datetime') {
             this.textboxValue = moment(newValue).format(this.formatters.datetime);
         }
-        if (this.type.toLowerCase() === 'date') {
+        if (this.type === 'date') {
             this.textboxValue = moment(newValue).format(this.formatters.date);
         }
-        if (this.type.toLowerCase() === 'time') {
+        if (this.type === 'time') {
             this.textboxValue = moment(newValue).format(this.formatters.time);
         }
     }
@@ -147,13 +165,13 @@ class UxDatepicker {
     }
     minTimeChanged(newValue) {
         if (newValue != null && newValue instanceof moment === false) {
-            const dateParse = moment(newValue, this.parsers.time);
+            const dateParse = moment(newValue, this.formatters.time);
             this.minTime = dateParse.isValid() ? dateParse : null;
         }
     }
     maxTimeChanged(newValue) {
         if (newValue != null && newValue instanceof moment === false) {
-            const dateParse = moment(newValue, this.parsers.time);
+            const dateParse = moment(newValue, this.formatters.time);
             this.maxTime = dateParse.isValid() ? dateParse : null;
         }
     }
@@ -229,9 +247,6 @@ __decorate([
 __decorate([
     bindable
 ], UxDatepicker.prototype, "formatters", void 0);
-__decorate([
-    bindable
-], UxDatepicker.prototype, "parsers", void 0);
 __decorate([
     bindable({ defaultBindingMode: bindingMode.twoWay })
 ], UxDatepicker.prototype, "value", void 0);

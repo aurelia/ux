@@ -77,14 +77,21 @@ let UxChoiceContainerAttribute = class UxChoiceContainerAttribute {
         if (this.multiple === 'auto') {
             this.multipleChanged(); // call this to ensure isMultiple respect value type
         }
+        // Before to process the value, let's make
+        // it's the proper type according to `isMultiple`
         if (this.isMultiple && typeof newValue === 'string') {
             this.value = [];
-            this.requestProcessValue();
+            return;
         }
         else if (!this.isMultiple && Array.isArray(newValue)) {
             this.value = undefined;
-            this.requestProcessValue();
+            return;
         }
+        // By using requestProcessValue we avoid too many
+        // process in case the value changes quickly
+        // This can happen if the value type must be fixed (above)
+        // or if there are several choice registration in a row
+        this.requestProcessValue();
     }
     toggleValue(value) {
         if (this.isMultiple && Array.isArray(this.value)) {

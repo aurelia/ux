@@ -2,7 +2,7 @@ ux-picker-dialog {
   color: #262626;
   color: var(--aurelia-ux--design-control-foreground, #262626);
   background-color: #FFF;
-  background-color: var(--aurelia-ux--design-control-background, #FFF);
+  background-color: var(--aurelia-ux--calendar-picker-background, #FFF);
   width: 300px;
   
   user-select: none;

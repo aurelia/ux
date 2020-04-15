@@ -23,6 +23,7 @@ export declare class UxDatepickerTheme implements UxTheme {
     calendarIcon?: string;
     headerForeground?: string;
     headerBackground?: string;
+    pickerBackground?: string;
     weekdayForeground?: string;
     selectedDayForeground?: string;
     selectedDayBackground?: string;

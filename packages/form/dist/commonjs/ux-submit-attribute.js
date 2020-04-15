@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_pal_1 = require("aurelia-pal");
+var aurelia_templating_1 = require("aurelia-templating");
 var UxSubmitCustomAttribute = /** @class */ (function () {
     function UxSubmitCustomAttribute(element) {
         this.element = element;
@@ -37,6 +38,7 @@ var UxSubmitCustomAttribute = /** @class */ (function () {
         }
     };
     UxSubmitCustomAttribute = __decorate([
+        aurelia_templating_1.customAttribute('ux-submit'),
         aurelia_dependency_injection_1.inject(Element)
     ], UxSubmitCustomAttribute);
     return UxSubmitCustomAttribute;

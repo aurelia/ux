@@ -26,9 +26,6 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                 time: 'LT',
                 datetime: 'L LT'
             };
-            this.parsers = {
-                time: ['h:m a', 'H:m']
-            };
             this.focused = false;
             this.showDialog = false;
         }
@@ -55,14 +52,14 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                 this.maxDate = dateParse.isValid() ? dateParse : null;
             }
             if (this.minTime != null) {
-                var dateParse = moment_rexports_1.moment(this.minTime, this.parsers.time);
+                var dateParse = moment_rexports_1.moment(this.minTime, this.formatters.time);
                 this.minTime = dateParse.isValid() ? dateParse : null;
             }
             if (this.maxTime != null) {
-                var dateParse = moment_rexports_1.moment(this.maxTime, this.parsers.time);
+                var dateParse = moment_rexports_1.moment(this.maxTime, this.formatters.time);
                 this.maxTime = dateParse.isValid() ? dateParse : null;
             }
-            this.valueChanged(this.value);
+            this.typeChanged(this.type);
             this.themeChanged(this.theme);
         };
         UxDatepicker.prototype.attached = function () {
@@ -96,7 +93,15 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                 return;
             }
             var parseValue;
-            parseValue = this.type === 'time' ? moment_rexports_1.moment(this.textboxValue, this.parsers.time) : moment_rexports_1.moment(this.textboxValue);
+            if (this.type === 'date') {
+                parseValue = moment_rexports_1.moment(this.textboxValue, this.formatters.date);
+            }
+            else if (this.type === 'time') {
+                parseValue = moment_rexports_1.moment(this.textboxValue, this.formatters.time);
+            }
+            else {
+                parseValue = moment_rexports_1.moment(this.textboxValue, this.formatters.datetime);
+            }
             if (parseValue.isValid() &&
                 datetime_utility_1.DatetimeUtility.dateOutOfRange(parseValue, this.minDate, this.maxDate, this.config) === false) {
                 this.value = parseValue.toDate();
@@ -106,17 +111,30 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
                 this.textboxValue = '';
             }
         };
+        UxDatepicker.prototype.typeChanged = function (newValue) {
+            newValue = newValue.toLowerCase();
+            if (newValue === 'time') {
+                this.type = newValue;
+            }
+            else if (newValue === 'date') {
+                this.type = newValue;
+            }
+            else {
+                this.type = 'datetime';
+            }
+            this.valueChanged(this.value);
+        };
         UxDatepicker.prototype.valueChanged = function (newValue) {
             if (newValue == null) {
                 return;
             }
-            if (this.type.toLowerCase() === 'datetime') {
+            if (this.type === 'datetime') {
                 this.textboxValue = moment_rexports_1.moment(newValue).format(this.formatters.datetime);
             }
-            if (this.type.toLowerCase() === 'date') {
+            if (this.type === 'date') {
                 this.textboxValue = moment_rexports_1.moment(newValue).format(this.formatters.date);
             }
-            if (this.type.toLowerCase() === 'time') {
+            if (this.type === 'time') {
                 this.textboxValue = moment_rexports_1.moment(newValue).format(this.formatters.time);
             }
         };
@@ -134,13 +152,13 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
         };
         UxDatepicker.prototype.minTimeChanged = function (newValue) {
             if (newValue != null && newValue instanceof moment_rexports_1.moment === false) {
-                var dateParse = moment_rexports_1.moment(newValue, this.parsers.time);
+                var dateParse = moment_rexports_1.moment(newValue, this.formatters.time);
                 this.minTime = dateParse.isValid() ? dateParse : null;
             }
         };
         UxDatepicker.prototype.maxTimeChanged = function (newValue) {
             if (newValue != null && newValue instanceof moment_rexports_1.moment === false) {
-                var dateParse = moment_rexports_1.moment(newValue, this.parsers.time);
+                var dateParse = moment_rexports_1.moment(newValue, this.formatters.time);
                 this.maxTime = dateParse.isValid() ? dateParse : null;
             }
         };
@@ -219,9 +237,6 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
         __decorate([
             aurelia_templating_1.bindable
         ], UxDatepicker.prototype, "formatters", void 0);
-        __decorate([
-            aurelia_templating_1.bindable
-        ], UxDatepicker.prototype, "parsers", void 0);
         __decorate([
             aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
         ], UxDatepicker.prototype, "value", void 0);
