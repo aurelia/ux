@@ -15,15 +15,14 @@ export type UxModalPlacement =
   | 'left-start'
   | 'left-end';
 
-export type UxModalMissingSpaceStrategy = 'flip' | 'hover';
+export type UxModalMissingSpaceStrategy = 'flip' | 'ignore' | 'hide' | 'over';
 
 export interface UxPositioningOptions {
   placement?: UxModalPlacement;
   offsetX?: number;
   offsetY?: number;
-  windowMarginX?: number;
-  windowMarginY?: number;
-  missingSpaceStrategy?: UxModalMissingSpaceStrategy;
-  ignoreScroll?: boolean;
   constraintElement?: HTMLElement | Window; // defaults as element.parentElement or window if not provided
+  constraintMarginX?: number;
+  constraintMarginY?: number;
+  missingSpaceStrategy?: UxModalMissingSpaceStrategy;
 }

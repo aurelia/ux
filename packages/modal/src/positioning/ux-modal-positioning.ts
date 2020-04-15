@@ -1,6 +1,7 @@
 import { UxPositioningOptions, UxModalPlacement, UxModalMissingSpaceStrategy } from './interfaces';
 import { inject, TaskQueue } from 'aurelia-framework';
 import { getLogger } from 'aurelia-logging';
+import './ux-modal-positioning.css';
 const log = getLogger('ux-modal-positioning');
 
 type MainPlacement = 'left' | 'right' | 'bottom' | 'top';
@@ -22,8 +23,9 @@ export class UxModalPositioning {
   public missingSpaceStrategy: UxModalMissingSpaceStrategy = 'flip';
   public offsetX: number = 5;
   public offsetY: number = 5;
-  public windowMarginX: number = 5;
-  public windowMarginY: number = 5;
+  public constraintMarginX: number = 5;
+  public constraintMarginY: number = 5;
+  public hiddenClass = 'ux-positioning--hidden';
 
   constructor(public taskQueue: TaskQueue) {}
 
@@ -43,11 +45,11 @@ export class UxModalPositioning {
     if (options && options.offsetY !== undefined) {
       instance.offsetY = options.offsetY;
     }
-    if (options && options.windowMarginX !== undefined) {
-      instance.windowMarginX = options.windowMarginX;
+    if (options && options.constraintMarginX !== undefined) {
+      instance.constraintMarginX = options.constraintMarginX;
     }
-    if (options && options.windowMarginY !== undefined) {
-      instance.windowMarginY = options.windowMarginY;
+    if (options && options.constraintMarginY !== undefined) {
+      instance.constraintMarginY = options.constraintMarginY;
     }
     if (options && options.constraintElement) {
       instance.constraintElement = options.constraintElement;
@@ -73,19 +75,37 @@ export class UxModalPositioning {
   }
 
   public async update() {
-    log.info('update');
+    log.info('-------------------------------');
+    log.info('update', this.missingSpaceStrategy);
     this.resetElement();
     // await new Promise(resolve => this.taskQueue.queueTask(resolve));
 
     // try the prefered placement
     const mainPlacement = this.getMainPlacement();
     log.info('mainPlacement', mainPlacement);
-    if (!this.placeMain(mainPlacement)) {
-      const alternativePlacement = flip[mainPlacement];
-      log.info('alternativePlacement', mainPlacement);
-      if (!this.placeMain(alternativePlacement)) {
-        // TODO: handle this case
+    const force = this.missingSpaceStrategy === 'ignore';
+    log.info('force', force);
+    let hide = false;
+    if (!this.placeMain(mainPlacement, this.missingSpaceStrategy)) {
+      log.info('missing space for main');
+      if (this.missingSpaceStrategy === 'flip') {
+        log.info('flipping');
+        const alternativePlacement = flip[mainPlacement];
+        log.info('alternativePlacement', alternativePlacement);
+        if (!this.placeMain(alternativePlacement)) {
+          log.info('alternate not enough space => force', mainPlacement);
+          // if flip doesn't work either, then we force the main placement
+          this.placeMain(mainPlacement, 'ignore');
+        }
+      } else if (this.missingSpaceStrategy === 'hide') {
+        hide = true;
       }
+    }
+
+    log.info('hide', hide);
+    this.element.classList.toggle(this.hiddenClass, hide);
+    if (hide) {
+      return;
     }
 
     const secondaryPlacement = this.getSecondaryPlacement(mainPlacement);
@@ -120,7 +140,7 @@ export class UxModalPositioning {
     return `${prefix}${suffix}` as SecondaryPlacement;
   }
 
-  private placeMain(placement: 'left' | 'right' | 'top' | 'bottom'): boolean {
+  private placeMain(placement: 'left' | 'right' | 'top' | 'bottom', missingSpaceStrategy: UxModalMissingSpaceStrategy = 'flip'): boolean {
     const anchorRect = this.anchor.getBoundingClientRect();
     const elementRect = this.element.getBoundingClientRect();
     
@@ -146,34 +166,80 @@ export class UxModalPositioning {
       }
     }
 
-    const requiredWidth = elementRect.width + this.offsetX + this.windowMarginX;
-    const requiredHeight = elementRect.height + this.offsetY + this.windowMarginY;
+    const requiredWidth = elementRect.width + this.offsetX + this.constraintMarginX;
+    const requiredHeight = elementRect.height + this.offsetY + this.constraintMarginY;
 
     // if the constraints is an HTMLElement, we include it here in the space check
     let constraintX = 0;
     let constraintY = 0;
     let constraintHeight = 0;
+    let constraintWidth = window.innerWidth;
     if (this.constraintElement instanceof HTMLElement) {
       const rect = this.constraintElement.getBoundingClientRect();
       constraintX = rect.left;
       constraintY = rect.top;
       constraintHeight = rect.height;
+      constraintWidth = rect.width;
     }
 
-    if (placement === 'left' && anchorRect.left - constraintX - this.windowMarginX < requiredWidth) {
-      return false;
-    }
-    if (placement === 'right' && window.innerWidth - window.scrollX - anchorRect.width - anchorRect.left - constraintX - this.windowMarginX < requiredWidth) {
-      return false;
-    }
-    if (placement === 'top' && anchorRect.top - constraintY - this.windowMarginY < requiredHeight) {
-      return false;
-    }
-    if (placement === 'bottom') {
-      if (this.constraintElement === window && window.innerHeight - window.scrollY - anchorRect.height - anchorRect.top - constraintY < requiredHeight) {
-        return false;
-      } else if (this.constraintElement instanceof HTMLElement && constraintY + constraintHeight - anchorRect.height - anchorRect.top - this.windowMarginY < requiredHeight) {
-        return false;
+    if (missingSpaceStrategy !== 'ignore') {
+      const flipOrHide = missingSpaceStrategy === 'flip' || missingSpaceStrategy === 'hide';
+      // if !force => we check if there is enough space for placing the element
+      if (placement === 'left' && anchorRect.left - constraintX - this.constraintMarginX < requiredWidth) {
+        if (flipOrHide) {
+          return false;
+        } else {
+          this.element.style.left = `${constraintX + hostOffsetX + this.constraintMarginX}px`;
+          this.element.style.top = `${anchorRect.top + hostOffsetY}px`;
+          return true;
+        }
+      }
+      if (placement === 'right') {
+        if (this.constraintElement === window && window.innerWidth - window.scrollX - anchorRect.width - anchorRect.left - constraintX - this.constraintMarginX < requiredWidth) {
+          if (flipOrHide) {
+            return false;
+          } else {
+            this.element.style.left = `${window.innerWidth - elementRect.width - this.constraintMarginX + hostOffsetX}px`;
+            this.element.style.top = `${anchorRect.top + hostOffsetY}px`;
+            return true;
+          }
+        } else if (this.constraintElement instanceof HTMLElement && constraintX + constraintWidth - anchorRect.width - anchorRect.left - this.constraintMarginX < requiredWidth) {
+          if (flipOrHide) {
+            return false;
+          } else {
+            this.element.style.left = `${constraintX + constraintWidth - elementRect.width - this.constraintMarginX + hostOffsetX}px`;
+            this.element.style.top = `${anchorRect.top + hostOffsetY}px`;
+            return true;
+          }
+        }
+      }
+      if (placement === 'top' && anchorRect.top - constraintY - this.constraintMarginY < requiredHeight) {
+        if (flipOrHide) {
+          return false;
+        } else {
+          this.element.style.left = `${anchorRect.left + hostOffsetX}px`;
+          this.element.style.top = `${constraintY + hostOffsetY + this.constraintMarginY}px`;
+          return true;
+        }
+      }
+      if (placement === 'bottom') {
+        if (this.constraintElement === window && window.innerHeight - window.scrollY - anchorRect.height - anchorRect.top - constraintY < requiredHeight) {
+          if (flipOrHide) {
+            return false;
+          } else {
+            this.element.style.left = `${anchorRect.left + hostOffsetX}px`;
+            this.element.style.top = `${window.innerHeight - elementRect.height - this.constraintMarginY + hostOffsetY}px`;
+            return true;
+          }
+        } else if (this.constraintElement instanceof HTMLElement && constraintY + constraintHeight - anchorRect.height - anchorRect.top - this.constraintMarginY < requiredHeight) {
+          if (flipOrHide) {
+            return false;
+          } else {
+            this.element.style.left = `${anchorRect.left + hostOffsetX}px`;
+            this.element.style.top = `${constraintY + constraintHeight - elementRect.height - this.constraintMarginY + hostOffsetY}px`;
+            return true;
+          }
+        }
       }
     }
 
@@ -231,23 +297,23 @@ export class UxModalPositioning {
       // We do this check in second as then it takes priority and if the element
       // must overflow, then it will be on the right
       if (this.constraintElement === window) {
-        const xExtraRight = left + elementRect.width - window.innerWidth - window.scrollX + this.windowMarginX - hostOffsetX;
+        const xExtraRight = left + elementRect.width - window.innerWidth - window.scrollX + this.constraintMarginX - hostOffsetX;
         if (xExtraRight > 0) {
           left -= xExtraRight;
         }
-        if (left < this.windowMarginX + hostOffsetX) {
-          left = this.windowMarginX + hostOffsetX;
+        if (left < this.constraintMarginX + hostOffsetX) {
+          left = this.constraintMarginX + hostOffsetX;
         }
       } else if (this.constraintElement instanceof HTMLElement) {
         const constraintRect = this.constraintElement.getBoundingClientRect();
         const constraintMaxX = constraintRect.left + constraintRect.width;
-        const elementMaxX = left + elementRect.width - hostOffsetX + this.windowMarginX;
+        const elementMaxX = left + elementRect.width - hostOffsetX + this.constraintMarginX;
         const xExtraRight = elementMaxX - constraintMaxX;
         if (xExtraRight > 0) {
           left -= xExtraRight;
         }
-        if (left < constraintRect.left + hostOffsetX + this.windowMarginX) {
-          left = constraintRect.left + hostOffsetX + this.windowMarginX;
+        if (left < constraintRect.left + hostOffsetX + this.constraintMarginX) {
+          left = constraintRect.left + hostOffsetX + this.constraintMarginX;
         }
       }
 
@@ -270,23 +336,23 @@ export class UxModalPositioning {
       // We do this check in second as then it takes priority and if the element
       // must overflow, then it will be on the right
       if (this.constraintElement === window) {
-        const yExtraBottom = top + elementRect.height - window.innerHeight - window.scrollY + this.windowMarginY - hostOffsetY;
+        const yExtraBottom = top + elementRect.height - window.innerHeight - window.scrollY + this.constraintMarginY - hostOffsetY;
         if (yExtraBottom > 0) {
           top -= yExtraBottom;
         }
-        if (top < this.windowMarginY + hostOffsetY) {
-          top = this.windowMarginY + hostOffsetY;
+        if (top < this.constraintMarginY + hostOffsetY) {
+          top = this.constraintMarginY + hostOffsetY;
         }
       } else if (this.constraintElement instanceof HTMLElement) {
         const constraintRect = this.constraintElement.getBoundingClientRect();
         const constraintMaxY = constraintRect.top + constraintRect.height;
-        const elementMaxY = top + elementRect.height - hostOffsetY + this.windowMarginY;
+        const elementMaxY = top + elementRect.height - hostOffsetY + this.constraintMarginY;
         const yExtraBottom = elementMaxY - constraintMaxY;
         if (yExtraBottom > 0) {
           top -= yExtraBottom;
         }
-        if (top < constraintRect.top + hostOffsetY + this.windowMarginY) {
-          top = constraintRect.top + hostOffsetY + this.windowMarginY;
+        if (top < constraintRect.top + hostOffsetY + this.constraintMarginY) {
+          top = constraintRect.top + hostOffsetY + this.constraintMarginY;
         }
       }
 
