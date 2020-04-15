@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/button",
-  "version": "0.18.1",
+  "version": "0.19.0",
   "description": "Button component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -88,7 +88,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.18.1",
+    "@aurelia-ux/core": "^0.19.0",
     "aurelia-binding": "^2.0.0"
   },
   "devDependencies": {
