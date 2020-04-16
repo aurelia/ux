@@ -57,9 +57,12 @@
   background: #FAA;
   opacity: 0.8;
   transition: transform 100ms ease-out;
+  cursor: pointer;
 }
-.anchor_zone-selector:hover {
-  transform: scale(1.4);
+@media (hover: hover) {
+  .anchor_zone-selector:hover {
+    transform: scale(1.4);
+  } 
 }
 .anchor_zone-selector.ux-choice--selected {
   background: #fff;

@@ -1,6 +1,7 @@
 import { UxModalPlacement } from './../../packages/modal/src/positioning/interfaces';
 import { UxModalService, UxModalPositioning, UxModalMissingSpaceStrategy } from '@aurelia-ux/modal';
 import { inject, observable } from 'aurelia-framework';
+import { DOM } from 'aurelia-pal';
 
 export interface MouseOrTouchEvent extends MouseEvent {
   touches?: Array<{clientX: number, clientY: number}>;
@@ -117,5 +118,13 @@ export class AnchorPage {
       };
     }
     return null;
+  }
+
+  public stop(event: Event) {
+    event.stopPropagation();
+    if (event.target) {
+      const customEvent = DOM.createCustomEvent('click', {bubbles: true});
+      event.target.dispatchEvent(customEvent);
+    }
   }
 }

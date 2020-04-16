@@ -31,18 +31,18 @@
         <label class="anchor-zone__label">Arbitrary element</label>
       </div>
       <div class="anchor" ref="anchor" mousedown.delegate="startDrag($event)" touchstart.trigger="startDrag($event)" ux-choice-container.bind="placement">
-        <span class="anchor_zone-selector anchor_top-start" ux-choice="top-start"></span>
-        <span class="anchor_zone-selector anchor_top" ux-choice="top"></span>
-        <span class="anchor_zone-selector anchor_top-end" ux-choice="top-end"></span>
-        <span class="anchor_zone-selector anchor_right-start" ux-choice="right-start"></span>
-        <span class="anchor_zone-selector anchor_right" ux-choice="right"></span>
-        <span class="anchor_zone-selector anchor_right-end" ux-choice="right-end"></span>
-        <span class="anchor_zone-selector anchor_bottom-start" ux-choice="bottom-start"></span>
-        <span class="anchor_zone-selector anchor_bottom" ux-choice="bottom"></span>
-        <span class="anchor_zone-selector anchor_bottom-end" ux-choice="bottom-end"></span>
-        <span class="anchor_zone-selector anchor_left-start" ux-choice="left-start"></span>
-        <span class="anchor_zone-selector anchor_left" ux-choice="left"></span>
-        <span class="anchor_zone-selector anchor_left-end" ux-choice="left-end"></span>
+        <span class="anchor_zone-selector anchor_top-start" ux-choice="top-start" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_top" ux-choice="top" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_top-end" ux-choice="top-end" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_right-start" ux-choice="right-start" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_right" ux-choice="right" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_right-end" ux-choice="right-end" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_bottom-start" ux-choice="bottom-start" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_bottom" ux-choice="bottom" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_bottom-end" ux-choice="bottom-end" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_left-start" ux-choice="left-start" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_left" ux-choice="left" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_left-end" ux-choice="left-end" touchstart.trigger="stop($event)"></span>
         I'm an anchor
         <br><small>(Drag me)</small>
       </div>
