@@ -1,6 +1,7 @@
 import { UxPositioningOptions, UxModalPlacement, UxModalMissingSpaceStrategy } from './interfaces';
 import { inject, TaskQueue } from 'aurelia-framework';
 import { getLogger } from 'aurelia-logging';
+// import this CSS for the default hidden class `.ux-positioning--hidden`
 import './ux-modal-positioning.css';
 const log = getLogger('ux-modal-positioning');
 
@@ -38,6 +39,9 @@ export class UxModalPositioning {
     }
     if (options && options.missingSpaceStrategy) {
       instance.missingSpaceStrategy = options.missingSpaceStrategy;
+    }
+    if (options && options.hiddenClass) {
+      instance.hiddenClass = options.hiddenClass;
     }
     if (options && options.offsetX !== undefined) {
       instance.offsetX = options.offsetX;

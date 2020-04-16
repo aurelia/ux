@@ -25,4 +25,5 @@ export interface UxPositioningOptions {
   constraintMarginX?: number;
   constraintMarginY?: number;
   missingSpaceStrategy?: UxModalMissingSpaceStrategy;
+  hiddenClass?: string;
 }
