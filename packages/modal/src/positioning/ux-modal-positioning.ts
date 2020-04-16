@@ -296,7 +296,9 @@ export class UxModalPositioning {
       // Second we check if the element overflow on the left of the screen
       // We do this check in second as then it takes priority and if the element
       // must overflow, then it will be on the right
-      if (this.constraintElement === window) {
+      if (this.missingSpaceStrategy === 'ignore') {
+        // do nothing
+      } else if (this.constraintElement === window) {
         const xExtraRight = left + elementRect.width - window.innerWidth - window.scrollX + this.constraintMarginX - hostOffsetX;
         if (xExtraRight > 0) {
           left -= xExtraRight;
@@ -335,7 +337,9 @@ export class UxModalPositioning {
       // Second we check if the element overflow on the left of the screen
       // We do this check in second as then it takes priority and if the element
       // must overflow, then it will be on the right
-      if (this.constraintElement === window) {
+      if (this.missingSpaceStrategy === 'ignore') {
+        // do nothing
+      } else if (this.constraintElement === window) {
         const yExtraBottom = top + elementRect.height - window.innerHeight - window.scrollY + this.constraintMarginY - hostOffsetY;
         if (yExtraBottom > 0) {
           top -= yExtraBottom;
