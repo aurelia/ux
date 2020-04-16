@@ -130,11 +130,72 @@ export class UxModalPositioning {
 
   private getMainPlacement(): MainPlacement {
     if (this.preferedPlacement === 'auto' || this.preferedPlacement === 'auto-end' || this.preferedPlacement === 'auto-start') {
-      // todo: implement a detection method for auto placement
-      // tmp: return left to start somewhere
-      return 'left';
+      return this.getAutoPlacement();
     }
     return this.preferedPlacement.split('-')[0] as 'left' | 'right' | 'top' | 'bottom';
+  }
+
+  private getAutoPlacement(): 'left' | 'right' | 'top' | 'bottom' {
+    // TODO: implement a detection method for auto placement
+    // tmp: return left to start somewhere
+
+    const anchorRect = this.anchor.getBoundingClientRect();
+    
+    let hostOffsetX = 0;
+    let hostOffsetY = 0;
+    if (this.element.parentElement) {
+      // set the host to relative if static
+      const style = window.getComputedStyle(this.element.parentElement);
+      if (style.position === 'static') {
+        this.element.parentElement.style.position = 'relative';
+      }
+      const rect = this.element.parentElement.getBoundingClientRect();
+      hostOffsetX = rect.left * -1;
+      hostOffsetY = rect.top * -1;
+      // If the host container has borders, they need to be offseted
+      // Important: this suppose a border-box box-sizing
+      // The reason is because the border is included in the sizing of the 
+      // host (width and height) but not included when it comes to positioning
+      // the child element (top:0, left:0 start inside the element)
+      if (style.borderLeftWidth) {
+        hostOffsetX = hostOffsetX - parseFloat(style.borderLeftWidth);
+      }
+      if (style.borderTopWidth) {
+        hostOffsetY = hostOffsetY - parseFloat(style.borderTopWidth);
+      }
+    }
+
+
+    // if the constraints is an HTMLElement, we include it here in the space check
+    let constraintX = 0;
+    let constraintY = 0;
+    let constraintHeight = 0;
+    let constraintWidth = window.innerWidth;
+    if (this.constraintElement instanceof HTMLElement) {
+      const rect = this.constraintElement.getBoundingClientRect();
+      constraintX = rect.left;
+      constraintY = rect.top;
+      constraintHeight = rect.height;
+      constraintWidth = rect.width;
+    }
+
+    const left = anchorRect.left - constraintX - this.constraintMarginX;
+    const right = this.constraintElement === window ?
+      window.innerWidth - window.scrollX - anchorRect.width - anchorRect.left - constraintX - this.constraintMarginX :
+      constraintX + constraintWidth - anchorRect.width - anchorRect.left - this.constraintMarginX;
+    const top = anchorRect.top - constraintY - this.constraintMarginY;
+    const bottom = this.constraintElement === window ?
+      window.innerHeight - window.scrollY - anchorRect.height - anchorRect.top - constraintY :
+      constraintY + constraintHeight - anchorRect.height - anchorRect.top - this.constraintMarginY;
+    
+    if (left > right && left > top && left > bottom) {
+      return 'left';
+    } else if (right > top && right > bottom) {
+      return 'right';
+    } else if (top > bottom) {
+      return 'top';
+    } 
+    return 'bottom';
   }
 
   private getSecondaryPlacement(mainPlacement: MainPlacement): SecondaryPlacement {
