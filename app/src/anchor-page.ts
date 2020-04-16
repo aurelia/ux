@@ -15,7 +15,7 @@ export class AnchorPage {
   private anchorZone: HTMLElement;
   private anchorZone2: HTMLElement;
   private positioning: UxModalPositioning;
-  @observable private placement: UxModalPlacement = 'left';
+  @observable private placement: UxModalPlacement = 'auto';
   @observable private constraint: string = 'parent';
   @observable private missingSpaceStrategy: UxModalMissingSpaceStrategy = 'flip';
 
