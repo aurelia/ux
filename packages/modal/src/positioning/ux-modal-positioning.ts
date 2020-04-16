@@ -1,9 +1,9 @@
 import { UxPositioningOptions, UxModalPlacement, UxModalMissingSpaceStrategy } from './interfaces';
 import { inject, TaskQueue } from 'aurelia-framework';
-import { getLogger } from 'aurelia-logging';
 // import this CSS for the default hidden class `.ux-positioning--hidden`
 import './ux-modal-positioning.css';
-const log = getLogger('ux-modal-positioning');
+// import { getLogger } from 'aurelia-logging';
+// const log = getLogger('ux-modal-positioning');
 
 type MainPlacement = 'left' | 'right' | 'bottom' | 'top';
 type SecondaryPlacement = 'vstart' | 'vcenter' | 'vend' | 'hstart' | 'hcenter' | 'hend';
@@ -65,7 +65,6 @@ export class UxModalPositioning {
   }
 
   private init() {
-    log.info('init');
     // We use queueTask here because queueMicroTask
     // resolves too early
     const rect = this.element.getBoundingClientRect();
@@ -79,25 +78,17 @@ export class UxModalPositioning {
   }
 
   public async update() {
-    log.info('-------------------------------');
-    log.info('update', this.missingSpaceStrategy);
     this.resetElement();
-    // await new Promise(resolve => this.taskQueue.queueTask(resolve));
 
     // try the prefered placement
     const mainPlacement = this.getMainPlacement();
-    log.info('mainPlacement', mainPlacement);
-    const force = this.missingSpaceStrategy === 'ignore';
-    log.info('force', force);
     let hide = false;
     if (!this.placeMain(mainPlacement, this.missingSpaceStrategy)) {
-      log.info('missing space for main');
+      // placeMain returns false if the placement could not be ideally done
+      // with the requested strategy
       if (this.missingSpaceStrategy === 'flip') {
-        log.info('flipping');
         const alternativePlacement = flip[mainPlacement];
-        log.info('alternativePlacement', alternativePlacement);
         if (!this.placeMain(alternativePlacement)) {
-          log.info('alternate not enough space => force', mainPlacement);
           // if flip doesn't work either, then we force the main placement
           this.placeMain(mainPlacement, 'ignore');
         }
@@ -106,19 +97,16 @@ export class UxModalPositioning {
       }
     }
 
-    log.info('hide', hide);
     this.element.classList.toggle(this.hiddenClass, hide);
     if (hide) {
       return;
     }
 
     const secondaryPlacement = this.getSecondaryPlacement(mainPlacement);
-    log.info('secondaryPlacement', secondaryPlacement);
     this.placeSecondary(secondaryPlacement);
   }
 
   private resetElement() {
-    log.info('reset');
     this.element.style.position = 'absolute';
     this.element.style.top = '0';
     this.element.style.left = '0';
@@ -220,9 +208,11 @@ export class UxModalPositioning {
       const rect = this.element.parentElement.getBoundingClientRect();
       hostOffsetX = rect.left * -1;
       hostOffsetY = rect.top * -1;
-      // TODO: evaluate if this border compensation is really needed ?
-      // from the doc it seems that border should be included in
-      // getBoundingClientRect (but not margin)
+      // If the host container has borders, they need to be offseted
+      // Important: this suppose a border-box box-sizing
+      // The reason is because the border is included in the sizing of the 
+      // host (width and height) but not included when it comes to positioning
+      // the child element (top:0, left:0 start inside the element)
       if (style.borderLeftWidth) {
         hostOffsetX = hostOffsetX - parseFloat(style.borderLeftWidth);
       }
