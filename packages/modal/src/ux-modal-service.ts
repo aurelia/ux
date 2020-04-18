@@ -146,6 +146,9 @@ export class UxModalService {
       return;
     }
     const activeLayer = this.getLastModal();
+    if (activeLayer === null) {
+      return;
+    }
     const keyboard = activeLayer.keyboard;
     if (key === 'Escape'
       && (keyboard === true || keyboard === key || (Array.isArray(keyboard) && keyboard.indexOf(key) > -1))) {
@@ -165,12 +168,13 @@ export class UxModalService {
     return undefined;
   }
 
-  public getLastLayer(): UxModalLayer {
-    return this.modalLayers[this.modalLayers.length - 1];
+  public getLastLayer(): UxModalLayer | null {
+    return this.modalLayers.length > 0 ? this.modalLayers[this.modalLayers.length - 1] : null;
   }
 
-  public getLastModal(): UxModal {
-    return this.getLastLayer().modal;
+  public getLastModal(): UxModal | null {
+    const lastLayer = this.getLastLayer();
+    return lastLayer !== null ? lastLayer.modal : null;
   }
 
   public get zIndex() {

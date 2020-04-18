@@ -11,8 +11,8 @@ export function configure(frameworkConfig: FrameworkConfiguration, callback?: (c
     OkModalAttribute, 
     PLATFORM.moduleName('./ux-modal'),
   ]);
-  const config = frameworkConfig.container.get(UxDefaultModalConfiguration);
   if (typeof callback === 'function') {
+    const config = frameworkConfig.container.get(UxDefaultModalConfiguration);
     callback(config);
   }
 

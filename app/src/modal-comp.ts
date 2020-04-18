@@ -5,7 +5,7 @@ import { inject } from 'aurelia-framework';
 @inject(UxModalService, UxModalPositioning)
 export class ModalComp {
 
-  public host: '' | '.modal-host' = '';
+  public host: string = '';
   public position: UxModalPosition = 'top';
   public hue = '';
   public duration = '';

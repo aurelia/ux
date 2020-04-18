@@ -2,8 +2,8 @@ import { UxPositioningOptions, UxModalPlacement, UxModalMissingSpaceStrategy } f
 import { inject, TaskQueue } from 'aurelia-framework';
 // import this CSS for the default hidden class `.ux-positioning--hidden`
 import './ux-modal-positioning.css';
-import { getLogger } from 'aurelia-logging';
-const log = getLogger('ux-modal-positioning');
+// import { getLogger } from 'aurelia-logging';
+// const log = getLogger('ux-modal-positioning');
 
 type MainPlacement = 'left' | 'right' | 'bottom' | 'top';
 type SecondaryPlacement = 'vstart' | 'vcenter' | 'vend' | 'hstart' | 'hcenter' | 'hend';
@@ -92,9 +92,12 @@ export class UxModalPositioning {
     } else {
       // We use queueTask here because queueMicroTask
       // resolves too early in several occasions
-      this.taskQueue.queueTask(() => {
+      // this.taskQueue.queueTask(() => {
+      //   this.update();
+      // });
+      setTimeout(() => {
         this.update();
-      });
+      }, 0);
     }
   }
 
@@ -128,13 +131,14 @@ export class UxModalPositioning {
   }
 
   private resetElement() {
-    this.element.style.position = 'absolute';
-    this.element.style.top = '0';
-    this.element.style.left = '0';
-    this.element.style.right = 'auto';
-    this.element.style.bottom = 'auto';
-    this.element.style.width = 'unset';
-    this.element.style.height = 'unset';
+    const style = this.element.style;
+    style.position = 'absolute';
+    style.top = '0';
+    style.left = '0';
+    style.right = 'auto';
+    style.bottom = 'auto';
+    style.width = 'unset';
+    style.height = 'unset';
   }
 
   private getMainPlacement(): MainPlacement {
@@ -201,9 +205,9 @@ export class UxModalPositioning {
     if (this.spaceRight !== undefined) {
       return this.spaceRight;
     }
-    this.spaceRight = this.constraintElement === window ?
-      window.innerWidth - window.scrollX - this.anchorRect.width - this.anchorRect.left - this.constraintX - this.constraintMarginX :
-      this.constraintX + this.constraintWidth - this.anchorRect.width - this.anchorRect.left - this.constraintMarginX;
+    this.spaceRight = this.constraintElement === window
+      ? window.innerWidth - window.scrollX - this.anchorRect.width - this.anchorRect.left - this.constraintX - this.constraintMarginX
+      : this.constraintX + this.constraintWidth - this.anchorRect.width - this.anchorRect.left - this.constraintMarginX;
     return this.spaceRight;
   }
   
@@ -211,9 +215,9 @@ export class UxModalPositioning {
     if (this.spaceBottom !== undefined) {
       return this.spaceBottom;
     }
-    this.spaceBottom = this.constraintElement === window ?
-      window.innerHeight - window.scrollY - this.anchorRect.height - this.anchorRect.top - this.constraintY :
-      this.constraintY + this.constraintHeight - this.anchorRect.height - this.anchorRect.top - this.constraintMarginY;
+    this.spaceBottom = this.constraintElement === window 
+      ? window.innerHeight - window.scrollY - this.anchorRect.height - this.anchorRect.top - this.constraintY
+      : this.constraintY + this.constraintHeight - this.anchorRect.height - this.anchorRect.top - this.constraintMarginY;
     return this.spaceBottom;
   }
 
@@ -252,7 +256,7 @@ export class UxModalPositioning {
   }
 
   private placeMain(placement: 'left' | 'right' | 'top' | 'bottom', missingSpaceStrategy: UxModalMissingSpaceStrategy = 'flip'): boolean {
-    
+    const style = this.element.style;    
     const requiredWidth = this.elementRect.width + this.offsetX + this.constraintMarginX;
     const requiredHeight = this.elementRect.height + this.offsetY + this.constraintMarginY;
 
@@ -263,8 +267,8 @@ export class UxModalPositioning {
         if (flipOrHide) {
           return false;
         } else {
-          this.element.style.left = `${this.constraintX + this.hostOffsetX + this.constraintMarginX}px`;
-          this.element.style.top = `${this.anchorRect.top + this.hostOffsetY}px`;
+          style.left = `${this.constraintX + this.hostOffsetX + this.constraintMarginX}px`;
+          style.top = `${this.anchorRect.top + this.hostOffsetY}px`;
           return true;
         }
       }
@@ -273,11 +277,11 @@ export class UxModalPositioning {
           return false;
         } else {
           if (this.constraintElement === window) {
-            this.element.style.left = `${window.innerWidth - this.elementRect.width - this.constraintMarginX + this.hostOffsetX}px`;
+            style.left = `${window.innerWidth - this.elementRect.width - this.constraintMarginX + this.hostOffsetX}px`;
           } else {
-            this.element.style.left = `${this.constraintX + this.constraintWidth - this.elementRect.width - this.constraintMarginX + this.hostOffsetX}px`;
+            style.left = `${this.constraintX + this.constraintWidth - this.elementRect.width - this.constraintMarginX + this.hostOffsetX}px`;
           }
-          this.element.style.top = `${this.anchorRect.top + this.hostOffsetY}px`;
+          style.top = `${this.anchorRect.top + this.hostOffsetY}px`;
           return true;
         }
       }
@@ -285,8 +289,8 @@ export class UxModalPositioning {
         if (flipOrHide) {
           return false;
         } else {
-          this.element.style.left = `${this.anchorRect.left + this.hostOffsetX}px`;
-          this.element.style.top = `${this.constraintY + this.hostOffsetY + this.constraintMarginY}px`;
+          style.left = `${this.anchorRect.left + this.hostOffsetX}px`;
+          style.top = `${this.constraintY + this.hostOffsetY + this.constraintMarginY}px`;
           return true;
         }
       }
@@ -294,11 +298,11 @@ export class UxModalPositioning {
         if (flipOrHide) {
           return false;
         } else {
-          this.element.style.left = `${this.anchorRect.left + this.hostOffsetX}px`;
+          style.left = `${this.anchorRect.left + this.hostOffsetX}px`;
           if (this.constraintElement === window) {
-            this.element.style.top = `${window.innerHeight - this.elementRect.height - this.constraintMarginY + this.hostOffsetY}px`;
+            style.top = `${window.innerHeight - this.elementRect.height - this.constraintMarginY + this.hostOffsetY}px`;
           } else {
-            this.element.style.top = `${this.constraintY + this.constraintHeight - this.elementRect.height - this.constraintMarginY + this.hostOffsetY}px`;
+            style.top = `${this.constraintY + this.constraintHeight - this.elementRect.height - this.constraintMarginY + this.hostOffsetY}px`;
           }
           return true;
         }
@@ -306,26 +310,27 @@ export class UxModalPositioning {
     }
 
     if (placement === 'left') {
-      this.element.style.left = `${this.anchorRect.left - this.elementRect.width - this.offsetX + this.hostOffsetX}px`;
-      this.element.style.top = `${this.anchorRect.top + this.hostOffsetY}px`;
+      style.left = `${this.anchorRect.left - this.elementRect.width - this.offsetX + this.hostOffsetX}px`;
+      style.top = `${this.anchorRect.top + this.hostOffsetY}px`;
     }
     if (placement === 'right') {
-      this.element.style.left = `${this.anchorRect.left + this.anchorRect.width + this.offsetX + this.hostOffsetX}px`;
-      this.element.style.top = `${this.anchorRect.top + this.hostOffsetY}px`;
+      style.left = `${this.anchorRect.left + this.anchorRect.width + this.offsetX + this.hostOffsetX}px`;
+      style.top = `${this.anchorRect.top + this.hostOffsetY}px`;
     }
     if (placement === 'top') {
-      this.element.style.top = `${this.anchorRect.top - this.elementRect.height - this.offsetY + this.hostOffsetY}px`;
-      this.element.style.left = `${this.anchorRect.left + this.hostOffsetX}px`;
+      style.top = `${this.anchorRect.top - this.elementRect.height - this.offsetY + this.hostOffsetY}px`;
+      style.left = `${this.anchorRect.left + this.hostOffsetX}px`;
     }
     if (placement === 'bottom') {
-      this.element.style.top = `${this.anchorRect.top + this.anchorRect.height + this.offsetY + this.hostOffsetY}px`;
-      this.element.style.left = `${this.anchorRect.left + this.hostOffsetX}px`;
+      style.top = `${this.anchorRect.top + this.anchorRect.height + this.offsetY + this.hostOffsetY}px`;
+      style.left = `${this.anchorRect.left + this.hostOffsetX}px`;
     }
     
     return true;
   }
 
   private placeSecondary(placement: SecondaryPlacement) {
+    const style = this.element.style;
     if (placement === 'hstart' || placement === 'hcenter' || placement === 'hend') {
       let left: number = 0;
       if (placement === 'hstart') {
@@ -363,7 +368,7 @@ export class UxModalPositioning {
         }
       }
 
-      this.element.style.left = `${left}px`;
+      style.left = `${left}px`;
     }
 
     if (placement === 'vstart' || placement === 'vcenter' || placement === 'vend') {
@@ -403,7 +408,7 @@ export class UxModalPositioning {
         }
       }
 
-      this.element.style.top = `${top}px`;
+      style.top = `${top}px`;
     }
   }
 }

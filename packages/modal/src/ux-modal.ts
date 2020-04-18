@@ -38,12 +38,16 @@ export class UxModal implements UxComponent {
 
   private handlingEvent: boolean = false;
   private viewportType: 'mobile' | 'desktop' = 'desktop';
+
+  // Will be populated by `ref="...."` in template
   private overlayElement: HTMLElement;
   private contentWrapperElement: HTMLElement;
   public contentElement: HTMLElement;
+
   private showed: boolean = false;
   private showing: boolean = false;
   private hiding: boolean = false;
+  private bindingContext: any;
 
   constructor(
     public element: HTMLElement,
@@ -51,32 +55,32 @@ export class UxModal implements UxComponent {
     private modalService: UxModalService,
     private taskQueue: TaskQueue,
     private defaultConfig: UxDefaultModalConfiguration) {
-      if (this.defaultConfig.modalBreakpoint !== undefined) {
-        this.modalBreakpoint = this.defaultConfig.modalBreakpoint
-      }
-      if (this.defaultConfig.host !== undefined) {
-        this.host = this.defaultConfig.host
-      }
-      if (this.defaultConfig.overlayDismiss !== undefined) {
-        this.overlayDismiss = this.defaultConfig.overlayDismiss
-      }
-      if (this.defaultConfig.outsideDismiss !== undefined) {
-        this.outsideDismiss = this.defaultConfig.outsideDismiss
-      }
-      if (this.defaultConfig.lock !== undefined) {
-        this.lock = this.defaultConfig.lock
-      }
-      if (this.defaultConfig.position !== undefined) {
-        this.position = this.defaultConfig.position
-      }
-      if (this.defaultConfig.keyboard !== undefined) {
-        this.keyboard = this.defaultConfig.keyboard
-      }
-      if (this.defaultConfig.theme !== undefined) {
-        this.theme = this.defaultConfig.theme
-      }
+    if (this.defaultConfig.modalBreakpoint !== undefined) {
+      this.modalBreakpoint = this.defaultConfig.modalBreakpoint
     }
-  private bindingContext: any;
+    if (this.defaultConfig.host !== undefined) {
+      this.host = this.defaultConfig.host;
+    }
+    if (this.defaultConfig.overlayDismiss !== undefined) {
+      this.overlayDismiss = this.defaultConfig.overlayDismiss;
+    }
+    if (this.defaultConfig.outsideDismiss !== undefined) {
+      this.outsideDismiss = this.defaultConfig.outsideDismiss;
+    }
+    if (this.defaultConfig.lock !== undefined) {
+      this.lock = this.defaultConfig.lock;
+    }
+    if (this.defaultConfig.position !== undefined) {
+      this.position = this.defaultConfig.position;
+    }
+    if (this.defaultConfig.keyboard !== undefined) {
+      this.keyboard = this.defaultConfig.keyboard;
+    }
+    if (this.defaultConfig.theme !== undefined) {
+      this.theme = this.defaultConfig.theme;
+    }
+  }
+
   public bind(bindingContext: any) {
     this.bindingContext = bindingContext;
     this.themeChanged(this.theme);
@@ -208,7 +212,10 @@ export class UxModal implements UxComponent {
   }
 
   private removeFromHost() {
-    const host = this.getHost();
+    // TODO: make sure we dont' need to bring back the element to its original position
+    // before to remove it. Seems ok to keep it like this, but we decided to keep
+    // an eye on it. See GH comment (18.04.2020 : https://github.com/aurelia/ux/pull/246#discussion_r410664303)
+    const host = this.getHost();  
     if (!host) {
       return
     };
@@ -219,15 +226,15 @@ export class UxModal implements UxComponent {
     }
   }
 
-  private getHost(): Element | undefined {
+  private getHost(): Element | null {
     if (this.host === 'body') {
       return document.body;
     } else if (this.host instanceof HTMLElement) {
       return this.host;
     } else if (typeof this.host === 'string') {
-      return document.querySelector(this.host) || undefined;
+      return document.querySelector(this.host);
     }
-    return undefined;
+    return null;
   }
 
   public unbind() {
@@ -267,7 +274,7 @@ export class UxModal implements UxComponent {
 
   @computedFrom('type', 'viewportType')
   public get computedType(): 'standard' | 'modal' {
-    return this.viewportType === 'mobile' ? 'modal' : this.type;
+    return this.viewportType === 'mobile' ? 'modal' : 'standard';
   }
 
   public overlayClick(event: Event): any {
@@ -336,6 +343,12 @@ export class UxModal implements UxComponent {
   }
 
   private getAnimationDuration() {
+    // In order to allow precise animation we allow different duration
+    // value for animating the overlay and the drawer. In most cases it will
+    // be the same value but we can imagine a fast overlay and slower modal
+    // apearence for exemple
+    // Because the duration is used to determine when we can safely assume the
+    // modal disappeard, we only keep the maximum value.
     const overlayElementDuration: string = this.overlayElement ? window.getComputedStyle(this.overlayElement).transitionDuration || '0' : '0';
     const contentDuration: string = window.getComputedStyle(this.contentElement).transitionDuration || '0';
     // overlayElementDuration and contentDuration are string like '0.25s'
