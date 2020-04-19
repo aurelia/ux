@@ -14,6 +14,7 @@
     "packages/input",
     "packages/input-info",
     "packages/list",
+    "packages/positioning",
     "packages/radio",
     "packages/select",
     "packages/slider",
