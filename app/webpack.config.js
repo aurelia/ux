@@ -73,6 +73,7 @@ module.exports = function({ production = '' } = {}) {
           'input',
           'input-info',
           'list',
+          'positioning',
           'radio',
           'select',
           'slider',

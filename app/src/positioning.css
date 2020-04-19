@@ -1,0 +1,129 @@
+.anchor-zone {
+  height: 600px;
+  margin: 20px 40px;
+  border: 3px solid black;
+  border-radius: 10px;
+  /* overflow: hidden; */
+  padding: 50px;
+  position: relative;
+  background: #555;
+}
+.anchor-container {
+  border: 1px dashed white;
+  height: 100%;
+  position: relative;
+}
+.anchor-zone2 {
+  border: 1px dashed white;
+  border-radius: 10px;
+  width: 400px;
+  height: 300px;
+  margin: 30px 0 0 50px;
+  position: relative;
+}
+.anchor-zone__label {
+  position: absolute;
+  padding: 3px;
+  background: white;
+  color: black;
+  font-size: 12px;
+  top: 3px;
+  left: 3px;
+  border-radius: 3px;
+}
+.anchor {
+  width: 200px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  background: red;
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  position: absolute;
+  top: 130px;
+  left: 120px;
+  z-index: 1000;
+  flex-direction: column;
+}
+.anchor_zone-selector {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  border: 2px solid white;
+  background: #FAA;
+  opacity: 0.8;
+  transition: transform 100ms ease-out;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .anchor_zone-selector:hover {
+    transform: scale(1.4);
+  } 
+}
+.anchor_zone-selector.ux-choice--selected {
+  background: #fff;
+  opacity: 1;
+}
+.anchor_top-start {
+  top: 3px;
+  left: 18px;
+}
+.anchor_top {
+  top: 3px;
+  left: 90px;
+}
+.anchor_top-end {
+  top: 3px;
+  right: 18px;
+}
+.anchor_right-start {
+  right: 3px;
+  top: 18px;
+}
+.anchor_right {
+  right: 3px;
+  top: 56px;
+}
+.anchor_right-end {
+  right: 3px;
+  bottom: 18px;
+}
+.anchor_bottom-start {
+  bottom: 3px;
+  left: 18px;
+}
+.anchor_bottom {
+  bottom: 3px;
+  left: 90px;
+}
+.anchor_bottom-end {
+  bottom: 3px;
+  right: 18px;
+}
+.anchor_left-start {
+  left: 3px;
+  top: 18px;
+}
+.anchor_left {
+  left: 3px;
+  top: 56px;
+}
+.anchor_left-end {
+  left: 3px;
+  bottom: 18px;
+}
+.element {
+  display: inline-flex;
+  padding: 3px;
+  background: black;
+  color: white;
+  border-radius: 3px;
+  z-index: 1000;
+}
+.spacer {
+  height: 500px;
+}

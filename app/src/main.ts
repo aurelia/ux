@@ -2,6 +2,7 @@ import 'aurelia-polyfills';
 import { initialize } from 'aurelia-pal-browser';
 import { Aurelia, PLATFORM } from 'aurelia-framework';
 import { WebpackLoader } from 'aurelia-loader-webpack';
+import { UxPositioningConfiguration } from '@aurelia-ux/positioning';
 import icons from './../../packages/icons/sets/full-array.json';
 
 async function configure(aurelia: Aurelia): Promise<void> {
@@ -21,6 +22,10 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/input'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/input-info'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/list'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/positioning'), (config: UxPositioningConfiguration) => {
+      config.offsetX = 10;
+      config.offsetY = 10;
+    })
     .plugin(PLATFORM.moduleName('@aurelia-ux/radio'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/select'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/slider'))
