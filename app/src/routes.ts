@@ -6,5 +6,6 @@ export let routes = [
   { route: 'theming', moduleId: PLATFORM.moduleName('theming'), name: 'theming', title: 'Theming', nav: true },
   // tslint:disable-next-line: max-line-length
   { route: 'components', moduleId: PLATFORM.moduleName('components'), name: 'components', title: 'Components', nav: true },
-  { route: 'showcase', moduleId: PLATFORM.moduleName('showcase'), name: 'showcase', title: 'Showcase', nav: true }
+  { route: 'showcase', moduleId: PLATFORM.moduleName('showcase'), name: 'showcase', title: 'Showcase', nav: true },
+  { route: 'positioning', moduleId: PLATFORM.moduleName('positioning'), name: 'positioning', title: 'Positioning', nav: true }
 ];

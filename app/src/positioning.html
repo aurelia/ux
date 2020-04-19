@@ -1,0 +1,55 @@
+<template>
+  <require from="./positioning.css"></require>
+  <section>
+    <h2>Placement Demo</h2>
+    <ux-grid  theme.bind="{outerPadding: '0'}">
+      <ux-grid-cell sm="6">
+        <p>Select the <strong>constraint</strong> container</p>
+        <ux-chip-list ux-choice-container.bind="constraint">
+          <ux-chip ux-choice="window">Screen</ux-chip>
+          <ux-chip ux-choice="blue">Ancestor</ux-chip>
+          <ux-chip ux-choice="parent">Parent</ux-chip>
+          <ux-chip ux-choice="brown">Arbitrary</ux-chip>
+        </ux-chip-list>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <p>Select the <strong>missing space strategy</strong></p>
+        <ux-chip-list ux-choice-container.bind="missingSpaceStrategy">
+          <ux-chip ux-choice="flip">Flip</ux-chip>
+          <ux-chip ux-choice="ignore">Ignore</ux-chip>
+          <ux-chip ux-choice="hide">Hide</ux-chip>
+          <ux-chip ux-choice="over">Over</ux-chip>
+        </ux-chip-list>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+  <section class="anchor-zone" mousemove.delegate="drag($event) & debounce:10" mouseup.delegate="endDrag($event)" touchmove.trigger="drag($event) & debounce:10" touchend.trigger="endDrag($event)" ref="anchorZone">
+    <label class="anchor-zone__label">Larger ancestor</label>
+    <div class="anchor-container">
+      <label class="anchor-zone__label">Anchor's parent</label>
+      <div class="anchor-zone2" ref="anchorZone2">
+        <label class="anchor-zone__label">Arbitrary element</label>
+      </div>
+      <div class="anchor" ref="anchor" mousedown.delegate="startDrag($event)" touchstart.trigger="startDrag($event)" ux-choice-container.bind="placement">
+        <span class="anchor_zone-selector anchor_top-start" ux-choice="top-start" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_top" ux-choice="top" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_top-end" ux-choice="top-end" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_right-start" ux-choice="right-start" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_right" ux-choice="right" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_right-end" ux-choice="right-end" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_bottom-start" ux-choice="bottom-start" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_bottom" ux-choice="bottom" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_bottom-end" ux-choice="bottom-end" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_left-start" ux-choice="left-start" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_left" ux-choice="left" touchstart.trigger="stop($event)"></span>
+        <span class="anchor_zone-selector anchor_left-end" ux-choice="left-end" touchstart.trigger="stop($event)"></span>
+        I'm an anchor
+        <br><small>(Drag me)</small>
+      </div>
+      <div class="element" ref="element">Element</div>
+    </div>
+  </section>
+  <section class="spacer">
+  
+  </section>
+</template>
