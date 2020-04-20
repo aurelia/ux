@@ -73,6 +73,7 @@ module.exports = function({ production = '' } = {}) {
           'input',
           'input-info',
           'list',
+          'modal',
           'positioning',
           'radio',
           'select',
@@ -168,6 +169,9 @@ module.exports = function({ production = '' } = {}) {
         '@aurelia-ux/list': [
           './ux-list-item.html',
           './ux-list.html'
+        ],
+        "@aurelia-ux/modal": [
+          "./ux-modal.html"
         ],
         '@aurelia-ux/radio': [
           './ux-radio.html'
