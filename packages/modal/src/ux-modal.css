@@ -59,7 +59,7 @@
 .ux-modal--desktop.ux-modal--center .ux-modal__content,
 .ux-modal--desktop.ux-modal--left .ux-modal__content,
 .ux-modal--desktop.ux-modal--right .ux-modal__content {
-  min-width: var(--aurelia-ux--modal-min-width, 730px);
+  min-width: var(--aurelia-ux--modal-min-width, 320px);
 }
 .ux-modal--desktop.ux-modal--center .ux-modal__content {
   border-radius: var(--aurelia-ux--modal-border-radius, 5px);
@@ -155,6 +155,16 @@
 .ux-modal__content > .ux-card > .ux-card__footer,
 .ux-modal__content > compose > .ux-card > .ux-card__footer {
   justify-content: flex-end;
+}
+
+.ux-modal--mobile .ux-modal__content > .ux-card > .ux-card__header, 
+.ux-modal--mobile .ux-modal__content > compose > .ux-card > .ux-card__header {
+  margin-top: constant(safe-area-inset-top, 20px);
+  margin-top: env(safe-area-inset-top, 20px);
+}
+
+.ux-modal--mobile .ux-modal__content > .ux-card > .ux-card__footer,
+.ux-modal--mobile .ux-modal__content > compose > .ux-card > .ux-card__footer {
   margin-bottom: constant(safe-area-inset-bottom, 20px);
   margin-bottom: env(safe-area-inset-bottom, 20px);
 }
