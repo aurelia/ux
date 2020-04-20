@@ -18,6 +18,7 @@ export interface UxModalServiceOptions {
   outsideDismiss?: boolean;
   lock?: boolean;
   keyboard?: UxModalKeybord;
+  modalBreakpoint?: number;
   restoreFocus?: (lastActiveElement: HTMLElement) => void;
   openingCallback?: (contentWrapperElement?: HTMLElement, overlayElement?: HTMLElement) => void;
 }
@@ -207,6 +208,9 @@ export class UxModalService {
     if (typeof options.openingCallback === 'function') {
       bindingContext.openingCallback = options.openingCallback;
       element.setAttribute('opening-callback.bind', 'openingCallback');
+    }
+    if (typeof options.modalBreakpoint === 'number') {
+      element.setAttribute('modal-breakpoint.bind', `${options.modalBreakpoint}`);
     }
 
     element.setAttribute('host.bind', 'false');

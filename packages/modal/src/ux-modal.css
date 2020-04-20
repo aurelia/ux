@@ -149,11 +149,12 @@
   display: block;
   flex-shrink: 1;
   height: 100%;
+  overflow: auto;
 }
 
 .ux-modal__content > .ux-card > .ux-card__footer,
 .ux-modal__content > compose > .ux-card > .ux-card__footer {
   justify-content: flex-end;
+  margin-bottom: constant(safe-area-inset-bottom, 20px);
+  margin-bottom: env(safe-area-inset-bottom, 20px);
 }
-
-
