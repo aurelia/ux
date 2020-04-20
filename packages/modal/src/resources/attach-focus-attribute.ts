@@ -1,7 +1,7 @@
 import { customAttribute, inject } from "aurelia-framework";
 
 @inject(Element)
-@customAttribute('attach-focus')
+@customAttribute('ux-attach-focus')
 export class AttachFocusAttribute {
 
   public value: boolean | string;
