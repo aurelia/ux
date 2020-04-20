@@ -9,7 +9,7 @@ export class AttachFocusAttribute {
   constructor(private element: HTMLElement) {}
 
   public attached() {
-    if (this.value === '' || this.value === 'attach-focus' || (this.value && this.value !== 'false')) {
+    if (this.value === '' || (this.value && this.value !== 'false')) {
       this.element.focus();
     }
   }

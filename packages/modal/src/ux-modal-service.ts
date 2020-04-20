@@ -187,9 +187,6 @@ export class UxModalService {
     if (options.position !== undefined) {
       element.setAttribute('position', options.position);
     }
-    if (options.moveToBodyTag === false) {
-      element.setAttribute('move-to-body-tag.bind', 'false');
-    }
     if (options.overlayDismiss === false) {
       element.setAttribute('overlay-dismiss.bind', 'false');
     }
