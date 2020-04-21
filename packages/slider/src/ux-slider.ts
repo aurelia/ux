@@ -25,6 +25,9 @@ export class UxSlider implements UxComponent {
   @bindable public disabled: boolean;
   @bindable public step: number;
 
+  // Will be populated by ref="" in the template view
+  private sliderContainer: HTMLElement;
+
   constructor(
     public element: UxSliderElement,
     private styleEngine: StyleEngine) {
@@ -102,7 +105,7 @@ export class UxSlider implements UxComponent {
   }
 
   public updateValue(currentMouseX: number) {
-    const rect = this.element.getBoundingClientRect();
+    const rect = this.sliderContainer.getBoundingClientRect();
     const normalizedMouseX = currentMouseX - rect.x;
     const percentValue = normalizedMouseX / rect.width;
     const rawValue = ((this.max - this.min) * percentValue) + this.min;
