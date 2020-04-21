@@ -122,7 +122,7 @@ export class UxSlider implements UxComponent {
 
     this.isActive = true;
     const isMouseEvent = e instanceof MouseEvent;
-    const isTouchEvent = e.touches instanceof TouchList && e.touches.length > 0;
+    const isTouchEvent = e instanceof TouchEvent;
     const winEvents = new ElementEvents(window as any);
     const upAction = (e: MouseOrTouchEvent) => {
       if (!this.isActive) {
