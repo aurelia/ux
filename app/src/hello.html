@@ -1,0 +1,37 @@
+<template>
+  <ux-card style="min-width: 300px;">
+    <ux-card-header>
+      <h2>Hello</h2>
+    </ux-card-header>
+    <ux-card-separator class="ux-card__separator--no-margin"></ux-card-separator>
+    <ux-card-content>
+      <form submit.trigger="modalService.ok(drawerPrompt)">
+        <ux-form>
+          <ux-field>
+            <ux-input label="What's your name ?" value.bind="drawerPrompt & validate"></ux-input>
+            <ux-input-info></ux-input-info>
+          </ux-field>
+          <ux-field>
+            <label>Can deactivate ?</label>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="okToClose & validate"></ux-checkbox>
+              <label>Yes</label>
+            </div>
+          </ux-field>
+          <ux-field>
+            <label>Are choices attribute working ?</label>
+            <ux-chip-list ux-choice-container.bind="working">
+              <ux-chip ux-choice="yes">Yes</ux-chip>
+              <ux-chip ux-choice="no">No</ux-chip>
+            </ux-chip-list>
+          </ux-field>
+        </ux-form>
+      </form>
+    </ux-card-content>
+    <ux-card-separator class="ux-card__separator--no-margin"></ux-card-separator>
+    <ux-card-footer>
+      <ux-button type="text" dismiss-modal>Cancel</ux-button>
+      <ux-button type="raised" ok-modal.bind="drawerPrompt">Save</ux-button>
+    </ux-card-footer>
+  </ux-card>
+</template>
