@@ -9,7 +9,7 @@ export interface UxSliderElement extends HTMLElement {
 }
 
 export interface MouseOrTouchEvent extends MouseEvent {
-  touches?: Array<{clientX: number}>;
+  touches?: TouchList;
 }
 
 @inject(Element, StyleEngine)
@@ -119,7 +119,7 @@ export class UxSlider implements UxComponent {
 
     this.isActive = true;
     const isMouseEvent = e instanceof MouseEvent;
-    const isTouchEvent = Array.isArray(e.touches) && e.touches.length > 0;
+    const isTouchEvent = e.touches instanceof TouchList && e.touches.length > 0;
     const winEvents = new ElementEvents(window as any);
     const upAction = (e: MouseOrTouchEvent) => {
       if (!this.isActive) {
@@ -130,7 +130,7 @@ export class UxSlider implements UxComponent {
         this.updateValue((e as MouseEvent).clientX);
       }
       if (isTouchEvent) {
-        const touches = e.touches as Array<{clientX: number}>;
+        const touches = e.touches as TouchList;
         if (touches.length === 1) {
           this.updateValue(touches[0].clientX);
         }
@@ -142,7 +142,7 @@ export class UxSlider implements UxComponent {
       if (!this.isActive) {
         return;
       }
-      this.updateValue(isMouseEvent ? e.clientX : (e.touches as Array<{clientX: number}>)[0].clientX);
+      this.updateValue(isMouseEvent ? e.clientX : (e.touches  as TouchList)[0].clientX);
     };
     winEvents.subscribe('blur', upAction, true);
     if (isMouseEvent) {
