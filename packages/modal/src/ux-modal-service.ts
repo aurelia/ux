@@ -65,41 +65,12 @@ export class UxModalService {
   public modalLayers: Array<UxModalLayer> = [];
   public modalIndex: number = 0;
 
-  private handleDocumentClick: (event: Event) => void;
-
   constructor(
     private templatingEngine: TemplatingEngine,
     private compositionEngine: CompositionEngine,
     private viewResources: ViewResources,
     private eventAggregator: EventAggregator,
     private defaultConfig: UxDefaultModalConfiguration) {
-    this.handleDocumentClick = (event: Event) => {
-      // the purpose of this handler is to close all modals that are
-      // - not locked
-      // - have outsideDismiss === true
-      // - placed above the last locked layer
-      // - and if the click is outside the modal
-      let concernedLayers: Array<UxModalLayer> = [];
-      for (const layer of this.modalLayers) {
-        if (layer.modal.lock || !layer.modal.outsideDismiss) {
-          concernedLayers = [];
-          continue; // we ignore locks
-        }
-        concernedLayers.push(layer);
-      }
-      // now we have all the layers above the last locked in the concernedLayers array
-      // let's check if the click is outside of any
-      layerloop: for (const layer of concernedLayers) {
-        const modalContentElement = layer.modal.contentElement;
-        for (const element of (event as any).composedPath() ) {
-          if (element === modalContentElement) {
-            continue layerloop; // click is on the modal, do not hide
-          }
-        }
-        layer.modal.dismiss();
-      }
-      return true; // this allow normal behvior with this click for other purposes
-    };
   }
 
   public addLayer(modal: UxModal, bindingContext: UxModalBindingContext) {
@@ -131,16 +102,24 @@ export class UxModalService {
   }
 
   private setListener() {
-    window.addEventListener('keyup', this);
-    document.addEventListener('click', this.handleDocumentClick);
+    document.addEventListener('keyup', this);
+    document.addEventListener('click', this);
   }
 
   private removeListener() {
-    window.removeEventListener('keyup', this);
-    document.removeEventListener('click', this.handleDocumentClick);
+    document.removeEventListener('keyup', this);
+    document.removeEventListener('click', this);
   }
 
-  public handleEvent(event: KeyboardEvent) {
+  public handleEvent(event: KeyboardEvent | MouseEvent) {
+    if (event instanceof KeyboardEvent) {
+      this.handleKeyEvent(event);
+    } else {
+      this.handleDocumentClick(event);
+    }
+  }
+
+  private handleKeyEvent(event: KeyboardEvent) {
     const key = this.getActionKey(event);
     if (key === undefined) {
       return;
@@ -156,6 +135,34 @@ export class UxModalService {
     } else if (key === 'Enter' && (keyboard === key || (Array.isArray(keyboard) && keyboard.indexOf(key) > -1))) {
       activeLayer.ok();
     }
+  }
+
+  private handleDocumentClick(event: MouseEvent) {
+    // the purpose of this handler is to close all modals that are
+    // - not locked
+    // - have outsideDismiss === true
+    // - placed above the last locked layer
+    // - and if the click is outside the modal
+    let concernedLayers: Array<UxModalLayer> = [];
+    for (const layer of this.modalLayers) {
+      if (layer.modal.lock || !layer.modal.outsideDismiss) {
+        concernedLayers = [];
+        continue; // we ignore locks
+      }
+      concernedLayers.push(layer);
+    }
+    // now we have all the layers above the last locked in the concernedLayers array
+    // let's check if the click is outside of any
+    layerloop: for (const layer of concernedLayers) {
+      const modalContentElement = layer.modal.contentElement;
+      for (const element of (event as any).composedPath() ) {
+        if (element === modalContentElement) {
+          continue layerloop; // click is on the modal, do not hide
+        }
+      }
+      layer.modal.dismiss();
+    }
+    return true; // this allow normal behvior with this click for other purposes
   }
 
   private getActionKey(event: KeyboardEvent): UxModalKeybord | undefined {
