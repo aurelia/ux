@@ -122,7 +122,6 @@ export class UxSlider implements UxComponent {
 
     this.isActive = true;
     const isMouseEvent = e instanceof MouseEvent;
-    const isTouchEvent = e instanceof TouchEvent;
     const winEvents = new ElementEvents(window as any);
     const upAction = (e: MouseOrTouchEvent) => {
       if (!this.isActive) {
@@ -131,8 +130,7 @@ export class UxSlider implements UxComponent {
       }
       if (isMouseEvent) {
         this.updateValue((e as MouseEvent).clientX);
-      }
-      if (isTouchEvent) {
+      } else {
         const touches = e.touches as TouchList;
         if (touches.length === 1) {
           this.updateValue(touches[0].clientX);
@@ -151,7 +149,7 @@ export class UxSlider implements UxComponent {
     if (isMouseEvent) {
       winEvents.subscribe('mouseup', upAction, true);
       winEvents.subscribe('mousemove', moveAction, true);
-    } else if (isTouchEvent) {
+    } else {
       winEvents.subscribe('touchend', upAction, true);
       winEvents.subscribe('touchmove', moveAction, true);
     }
