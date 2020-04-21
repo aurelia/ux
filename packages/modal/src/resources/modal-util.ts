@@ -3,11 +3,11 @@ import { UxModal } from '../ux-modal';
 export function findModal(item: HTMLElement | null): UxModal | null {
   let element = item;
   if (element === null) return null;
-  while (element.tagName !== 'BODY' && element.tagName !== 'UX-DRAWER') {
+  while (element.tagName !== 'BODY') {
     element = element.parentElement;
-    const isModaleElement = element ? modalViewModelFromElement(element) : null;
-    if (isModaleElement !== null) {
-      return isModaleElement;
+    const isModalElement = element ? modalViewModelFromElement(element) : null;
+    if (isModalElement !== null) {
+      return isModalElement;
     }
     if (element === null) return null;
   }
