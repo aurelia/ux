@@ -4,9 +4,7 @@ export interface UxSliderElement extends HTMLElement {
     value: number;
 }
 export interface MouseOrTouchEvent extends MouseEvent {
-    touches?: Array<{
-        clientX: number;
-    }>;
+    touches?: TouchList;
 }
 export declare class UxSlider implements UxComponent {
     element: UxSliderElement;
@@ -19,6 +17,7 @@ export declare class UxSlider implements UxComponent {
     max: number;
     disabled: boolean;
     step: number;
+    private sliderContainer;
     constructor(element: UxSliderElement, styleEngine: StyleEngine);
     get sliderBeforeWidth(): number;
     get sliderAfterWidth(): number;

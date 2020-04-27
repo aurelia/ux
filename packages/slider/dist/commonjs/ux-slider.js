@@ -78,7 +78,7 @@ var UxSlider = /** @class */ (function () {
                 : percentValue;
     };
     UxSlider.prototype.updateValue = function (currentMouseX) {
-        var rect = this.element.getBoundingClientRect();
+        var rect = this.sliderContainer.getBoundingClientRect();
         var normalizedMouseX = currentMouseX - rect.x;
         var percentValue = normalizedMouseX / rect.width;
         var rawValue = ((this.max - this.min) * percentValue) + this.min;
@@ -93,7 +93,6 @@ var UxSlider = /** @class */ (function () {
         }
         this.isActive = true;
         var isMouseEvent = e instanceof MouseEvent;
-        var isTouchEvent = Array.isArray(e.touches) && e.touches.length > 0;
         var winEvents = new aurelia_templating_1.ElementEvents(window);
         var upAction = function (e) {
             if (!_this.isActive) {
@@ -103,7 +102,7 @@ var UxSlider = /** @class */ (function () {
             if (isMouseEvent) {
                 _this.updateValue(e.clientX);
             }
-            if (isTouchEvent) {
+            else {
                 var touches = e.touches;
                 if (touches.length === 1) {
                     _this.updateValue(touches[0].clientX);
@@ -123,7 +122,7 @@ var UxSlider = /** @class */ (function () {
             winEvents.subscribe('mouseup', upAction, true);
             winEvents.subscribe('mousemove', moveAction, true);
         }
-        else if (isTouchEvent) {
+        else {
             winEvents.subscribe('touchend', upAction, true);
             winEvents.subscribe('touchmove', moveAction, true);
         }

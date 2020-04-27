@@ -68,7 +68,7 @@ let UxSlider = class UxSlider {
                 : percentValue;
     }
     updateValue(currentMouseX) {
-        const rect = this.element.getBoundingClientRect();
+        const rect = this.sliderContainer.getBoundingClientRect();
         const normalizedMouseX = currentMouseX - rect.x;
         const percentValue = normalizedMouseX / rect.width;
         const rawValue = ((this.max - this.min) * percentValue) + this.min;
@@ -82,7 +82,6 @@ let UxSlider = class UxSlider {
         }
         this.isActive = true;
         const isMouseEvent = e instanceof MouseEvent;
-        const isTouchEvent = Array.isArray(e.touches) && e.touches.length > 0;
         const winEvents = new ElementEvents(window);
         const upAction = (e) => {
             if (!this.isActive) {
@@ -92,7 +91,7 @@ let UxSlider = class UxSlider {
             if (isMouseEvent) {
                 this.updateValue(e.clientX);
             }
-            if (isTouchEvent) {
+            else {
                 const touches = e.touches;
                 if (touches.length === 1) {
                     this.updateValue(touches[0].clientX);
@@ -112,7 +111,7 @@ let UxSlider = class UxSlider {
             winEvents.subscribe('mouseup', upAction, true);
             winEvents.subscribe('mousemove', moveAction, true);
         }
-        else if (isTouchEvent) {
+        else {
             winEvents.subscribe('touchend', upAction, true);
             winEvents.subscribe('touchmove', moveAction, true);
         }
