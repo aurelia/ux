@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/list",
-  "version": "0.20.0",
+  "version": "0.19.0",
   "description": "List component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -87,7 +87,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/core": "^0.20.0",
+    "@aurelia-ux/core": "^0.19.0",
     "aurelia-binding": "^2.0.0",
     "moment": "^2.18.1"
   },
