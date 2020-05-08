@@ -1,0 +1,60 @@
+@keyframes ux-progress-linear-rotate {
+  0% {
+    transform: rotate(0deg)
+  }
+
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes ux-progress-stroke-rotate-fallback {
+  0% {
+    transform: rotate(0deg)
+  }
+
+  25% {
+    transform: rotate(1170deg)
+  }
+
+  50% {
+    transform: rotate(2340deg)
+  }
+
+  75% {
+    transform: rotate(3510deg)
+  }
+
+  100% {
+    transform: rotate(4680deg)
+  }
+}
+
+ux-progress {
+  display: block;
+}
+
+ux-progress svg {
+  transform: rotate(-90deg);
+  transform-origin: center;
+  overflow: visible;
+}
+
+ux-progress circle {
+  fill: transparent;
+  stroke: #3F51B5;
+  stroke: var(--aurelia-ux--progress-stroke, var(--aurelia-ux--design-primary, #3F51B5));
+  transform-origin: center;
+  transition: stroke-dashoffset 225ms linear;
+}
+
+ux-progress.ux-progress--indeterminate {
+  animation: ux-progress-linear-rotate 2000ms linear infinite;
+}
+
+ux-progress.ux-progress--indeterminate circle {
+  transition-property: stroke;
+  animation-duration: 4000ms;
+  animation-timing-function: cubic-bezier(0.35, 0, 0.25, 1);
+  animation-iteration-count: infinite;
+}
