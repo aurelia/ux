@@ -16,7 +16,8 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "noEmitHelpers": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "newLine": "lf"
   },
   "exclude": [
     ".vscode",

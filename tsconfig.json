@@ -18,7 +18,8 @@
     "experimentalDecorators": true,
     "noEmitHelpers": false,
     "skipLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "newLine": "lf"
   },
   "exclude": [
     ".vscode",

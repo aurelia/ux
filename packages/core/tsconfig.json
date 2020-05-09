@@ -18,7 +18,8 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "lib": ["es2017", "dom"],
-    "sourceMap": true
+    "sourceMap": true,
+    "newLine": "lf"
   },
   "exclude": [
     ".vscode",
