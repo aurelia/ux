@@ -31,6 +31,7 @@ async function configure(aurelia: Aurelia): Promise<void> {
       config.offsetX = 10;
       config.offsetY = 10;
     })
+    .plugin(PLATFORM.moduleName('@aurelia-ux/progress'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/radio'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/select'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/slider'))

@@ -75,6 +75,7 @@ module.exports = function({ production = '' } = {}) {
           'list',
           'modal',
           'positioning',
+          'progress',
           'radio',
           'select',
           'slider',
@@ -172,6 +173,9 @@ module.exports = function({ production = '' } = {}) {
         ],
         "@aurelia-ux/modal": [
           "./ux-modal.html"
+        ],
+        '@aurelia-ux/progress': [
+          './ux-progress.html'
         ],
         '@aurelia-ux/radio': [
           './ux-radio.html'
