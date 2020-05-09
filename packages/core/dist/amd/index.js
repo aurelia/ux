@@ -6,6 +6,7 @@ define(["require", "exports", "aurelia-framework", "./aurelia-ux", "./components
     exports.processDesignAttributes = design_attributes_1.processDesignAttributes;
     exports.PaperRipple = paper_ripple_1.PaperRipple;
     exports.normalizeBooleanAttribute = html_attributes_1.normalizeBooleanAttribute;
+    exports.normalizeNumberAttribute = html_attributes_1.normalizeNumberAttribute;
     exports.getBackgroundColorThroughParents = background_color_parent_1.getBackgroundColorThroughParents;
     exports.UxChoiceAttribute = ux_choice_attribute_1.UxChoiceAttribute;
     exports.UxChoiceContainerAttribute = ux_choice_container_attribute_1.UxChoiceContainerAttribute;

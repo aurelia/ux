@@ -13,6 +13,7 @@ var paper_ripple_1 = require("./effects/paper-ripple");
 exports.PaperRipple = paper_ripple_1.PaperRipple;
 var html_attributes_1 = require("./components/html-attributes");
 exports.normalizeBooleanAttribute = html_attributes_1.normalizeBooleanAttribute;
+exports.normalizeNumberAttribute = html_attributes_1.normalizeNumberAttribute;
 var background_color_parent_1 = require("./components/background-color-parent");
 exports.getBackgroundColorThroughParents = background_color_parent_1.getBackgroundColorThroughParents;
 var ux_choice_attribute_1 = require("./components/ux-choice-attribute");

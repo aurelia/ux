@@ -18,4 +18,15 @@ export function normalizeBooleanAttribute(attributeName, value) {
     }
     return ret;
 }
+export function normalizeNumberAttribute(val) {
+    if (val === undefined || val === '' || val === 'undefined' || val === 'NaN') {
+        return undefined;
+    }
+    else if (val === null || val === 'null') {
+        return null;
+    }
+    else {
+        return Number(val);
+    }
+}
 //# sourceMappingURL=html-attributes.js.map
