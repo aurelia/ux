@@ -8,4 +8,3 @@
  * @returns {boolean}
  */
 export declare function normalizeBooleanAttribute(attributeName: string, value: boolean | string): boolean;
-export declare function normalizeNumberAttribute(val: number | string): number | undefined | null;

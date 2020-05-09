@@ -4,7 +4,7 @@ export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
 export { processDesignAttributes } from './designs/design-attributes';
 export { PaperRipple } from './effects/paper-ripple';
-export { normalizeBooleanAttribute, normalizeNumberAttribute } from './components/html-attributes';
+export { normalizeBooleanAttribute } from './components/html-attributes';
 export { getBackgroundColorThroughParents } from './components/background-color-parent';
 export { UxComponent } from './components/ux-component';
 export { UxInputComponent } from './components/ux-input-component';

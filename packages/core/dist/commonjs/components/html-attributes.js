@@ -21,16 +21,4 @@ function normalizeBooleanAttribute(attributeName, value) {
     return ret;
 }
 exports.normalizeBooleanAttribute = normalizeBooleanAttribute;
-function normalizeNumberAttribute(val) {
-    if (val === undefined || val === '' || val === 'undefined' || val === 'NaN') {
-        return undefined;
-    }
-    else if (val === null || val === 'null') {
-        return null;
-    }
-    else {
-        return Number(val);
-    }
-}
-exports.normalizeNumberAttribute = normalizeNumberAttribute;
 //# sourceMappingURL=html-attributes.js.map
