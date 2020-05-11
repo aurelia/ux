@@ -5,6 +5,8 @@ ux-sidenav-drawer {
   top: 0;
   bottom: 0;
   z-index: 2;
+  background-color: var(--aurelia-ux--design-control-background, white);
+  color: var(--aurelia-ux--design-control-foreground, black);
 
   transition: {
     duration: $duration;

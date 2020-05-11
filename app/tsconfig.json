@@ -9,7 +9,8 @@
         "../node_modules/aurelia-framework"
       ],
       "@aurelia-ux/modal": ["../packages/modal/src"],
-      "@aurelia-ux/positioning": ["../packages/positioning/src"]
+      "@aurelia-ux/positioning": ["../packages/positioning/src"],
+      "@aurelia-ux/sidenav": ["../packages/sidenav/src"]
     },
     "resolveJsonModule": true,
     "noUnusedLocals": false,

@@ -1,5 +1,4 @@
-$duration: 400ms;
-$timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+$backdropColor: rgba(0,0,0,0.6);
 
 ux-sidenav {
   display: block;
@@ -12,6 +11,8 @@ ux-sidenav {
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0,0,0,0.6);
+    background: $backdropColor;
+    background: var(--aurelia-ux--sidenav-backdrop-color, $backdropColor);
+    z-index: 2;
   }
 }
