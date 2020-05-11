@@ -1,4 +1,4 @@
-import { customElement, useView, inject, child, TaskQueue, PLATFORM, bindable } from "aurelia-framework";
+import { customElement, useView, inject, TaskQueue, PLATFORM, bindable } from "aurelia-framework";
 import { UxSidenavContent } from "../ux-sidenav-content/ux-sidenav-content";
 import { UxSidenavDrawer, OPEN_CHANGED } from "../ux-sidenav-drawer/ux-sidenav-drawer";
 import { UxSidenavTheme } from "./ux-sidenav-theme";
@@ -13,28 +13,9 @@ export class UxSidenav {
   leftSidenavWidth: number;
   backdrop: boolean = false;
 
-  @child('ux-sidenav-drawer[side="left"]')
   leftDrawer: UxSidenavDrawer;
-  leftDrawerChanged() {
-    this.leftDrawer.element.addEventListener(OPEN_CHANGED, this.leftDrawerOpenChanged);
-  }
-
-  @child('ux-sidenav-drawer[side="right"]')
   rightDrawer: UxSidenavDrawer;
-  rightDrawerChanged() {
-    this.rightDrawer.element.addEventListener(OPEN_CHANGED, this.rightDrawerOpenChanged);
-  }
-
-  @child('ux-sidenav-content')
   content: UxSidenavContent;
-  contentChanged() {
-    if (this.leftDrawer) {
-      this.updateMargin(this.leftDrawer);
-    }
-    if (this.rightDrawer) {
-      this.updateMargin(this.rightDrawer);
-    }
-  }
 
   @bindable
   public theme: UxSidenavTheme;
@@ -47,6 +28,9 @@ export class UxSidenav {
   }
 
   attached() {
+    this.content = (this.element.querySelector('ux-sidenav-content') as any)?.au['ux-sidenav-content']?.viewModel;
+    this.leftDrawer = (this.element.querySelector('ux-sidenav-drawer[side="left"]') as any)?.au['ux-sidenav-drawer']?.viewModel;
+    this.rightDrawer = (this.element.querySelector('ux-sidenav-drawer[side="right"]') as any)?.au['ux-sidenav-drawer'].viewModel;
     if (this.leftDrawer) {
       this.updateMargin(this.leftDrawer);
       this.leftDrawer.element.addEventListener(OPEN_CHANGED, this.leftDrawerOpenChanged);
