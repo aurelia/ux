@@ -7,47 +7,6 @@
     <p>Demo of each component and diverse styles and types</p>
   </section>
 
-  <section class="components">
-    <h2>Sidenav</h2>
-    <ux-sidenav>
-      <ux-sidenav-drawer side="left" view-model.ref="leftDrawer" backdrop.bind="leftDrawerBackdrop"
-        over.bind="leftDrawerOver" open>Left drawer</ux-sidenav-drawer>
-      <ux-sidenav-content>
-        <div>
-          <div class="ux-form__row">
-            <ux-checkbox checked.bind="leftDrawerOver" model.bind="true"></ux-checkbox>
-            <label>over</label>
-          </div>
-          <div class="ux-form__row">
-            <ux-checkbox checked.bind="leftDrawerBackdrop" model.bind="true"></ux-checkbox>
-            <label>backdrop</label>
-          </div>
-          <div class="ux-form__row">
-            <ux-button click.delegate="leftDrawer.toggle()">Toggle left</ux-button>
-          </div>
-        </div>
-        <div></div>
-        <div>
-          <div>
-            <div class="ux-form__row">
-              <ux-checkbox checked.bind="rightDrawerOver" model.bind="true"></ux-checkbox>
-              <label>over</label>
-            </div>
-            <div class="ux-form__row">
-              <ux-checkbox checked.bind="rightDrawerBackdrop" model.bind="true"></ux-checkbox>
-              <label>backdrop</label>
-            </div>
-            <div class="ux-form__row">
-              <ux-button click.delegate="rightDrawer.toggle()">Toggle right</ux-button>
-            </div>
-          </div>
-        </div>
-      </ux-sidenav-content>
-      <ux-sidenav-drawer side="right" view-model.ref="rightDrawer" backdrop.bind="rightDrawerBackdrop"
-        over.bind="rightDrawerOver">Right drawer</ux-sidenav-drawer>
-    </ux-sidenav>
-  </section>
-
   <section>
     <h2>Buttons</h2>
 
@@ -444,5 +403,45 @@
     </ux-grid>
   </section>
 
+  <section class="components">
+    <h2>Sidenav</h2>
+    <ux-sidenav>
+      <ux-sidenav-drawer side="left" view-model.ref="leftDrawer" backdrop.bind="leftDrawerBackdrop"
+        over.bind="leftDrawerOver">Left drawer</ux-sidenav-drawer>
+      <ux-sidenav-content>
+        <div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="leftDrawerOver" model.bind="true"></ux-checkbox>
+            <label>over</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="leftDrawerBackdrop" model.bind="true"></ux-checkbox>
+            <label>backdrop</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-button click.delegate="leftDrawer.toggle()">Toggle left</ux-button>
+          </div>
+        </div>
+        <div></div>
+        <div>
+          <div>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="rightDrawerOver" model.bind="true"></ux-checkbox>
+              <label>over</label>
+            </div>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="rightDrawerBackdrop" model.bind="true"></ux-checkbox>
+              <label>backdrop</label>
+            </div>
+            <div class="ux-form__row">
+              <ux-button click.delegate="rightDrawer.toggle()">Toggle right</ux-button>
+            </div>
+          </div>
+        </div>
+      </ux-sidenav-content>
+      <ux-sidenav-drawer side="right" view-model.ref="rightDrawer" backdrop.bind="rightDrawerBackdrop"
+        over.bind="rightDrawerOver">Right drawer</ux-sidenav-drawer>
+    </ux-sidenav>
+  </section>
 
 </template>
