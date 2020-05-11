@@ -1,0 +1,29 @@
+ux-sidenav-drawer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  -webkit-transition-duration: 400ms;
+          transition-duration: 400ms;
+  -webkit-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+          transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+}
+
+ux-sidenav-drawer.ux-sidenav-drawer--left.ux-sidenav-drawer--closed {
+  -webkit-transform: translate3d(-100%, 0, 0);
+          transform: translate3d(-100%, 0, 0);
+}
+
+ux-sidenav-drawer.ux-sidenav-drawer--right {
+  right: 0;
+}
+
+ux-sidenav-drawer.ux-sidenav-drawer--right.ux-sidenav-drawer--closed {
+  -webkit-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}
+/*# sourceMappingURL=ux-sidenav-drawer.css.map */

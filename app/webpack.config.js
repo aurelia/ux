@@ -8,7 +8,7 @@ const outDir = path.resolve(__dirname, 'dist');
 /**
  * @returns {import('webpack').Configuration}
  */
-module.exports = function({ production = '' } = {}) {
+module.exports = function ({ production = '' } = {}) {
   return {
     mode: production === 'production' ? 'production' : 'development',
     output: {
@@ -77,6 +77,7 @@ module.exports = function({ production = '' } = {}) {
           'positioning',
           'radio',
           'select',
+          'sidenav',
           'slider',
           'switch',
           'textarea',

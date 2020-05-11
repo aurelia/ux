@@ -1,0 +1,17 @@
+$duration: 400ms;
+$timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+
+ux-sidenav {
+  display: block;
+  overflow: hidden;
+  position: relative;
+
+  >.ux-sidenav__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.6);
+  }
+}

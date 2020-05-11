@@ -33,6 +33,7 @@ async function configure(aurelia: Aurelia): Promise<void> {
     })
     .plugin(PLATFORM.moduleName('@aurelia-ux/radio'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/select'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/sidenav'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/slider'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/switch'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/textarea'))

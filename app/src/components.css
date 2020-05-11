@@ -1,0 +1,24 @@
+ux-sidenav {
+  border: 1px solid black;
+}
+
+ux-sidenav ux-sidenav-content {
+  padding: 100px;
+  display: flex;
+}
+
+ux-sidenav ux-sidenav-content div {
+  flex: 1;
+}
+
+ux-sidenav-drawer[side="left"] {
+  border-right: 1px solid rgba(0, 0, 0, .12);
+  background: white;
+  padding: 20px;
+}
+
+ux-sidenav-drawer[side="right"] {
+  border-left: 1px solid rgba(0, 0, 0, .12);
+  background: white;
+  padding: 20px;
+}

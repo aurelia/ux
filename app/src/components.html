@@ -1,5 +1,7 @@
 <template>
   <require from="./theming.css"></require>
+  <require from="./components.css"></require>
+
   <section>
     <h1>Components</h1>
     <p>Demo of each component and diverse styles and types</p>
@@ -7,59 +9,101 @@
 
   <section>
     <h2>Buttons</h2>
-  
+
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="4">
         <h4>Primary (default)</h4>
-        <p><ux-button type="raised">Raised</ux-button></p>
-        <p><ux-button type="flat">Flat</ux-button></p>
-        <p><ux-button type="text">Text</ux-button></p>
-        <p><ux-button type="outline">Outline</ux-button></p>
-        <p><ux-button type="fab">Fab</ux-button></p>
+        <p>
+          <ux-button type="raised">Raised</ux-button>
+        </p>
+        <p>
+          <ux-button type="flat">Flat</ux-button>
+        </p>
+        <p>
+          <ux-button type="text">Text</ux-button>
+        </p>
+        <p>
+          <ux-button type="outline">Outline</ux-button>
+        </p>
+        <p>
+          <ux-button type="fab">Fab</ux-button>
+        </p>
       </ux-grid-cell>
       <ux-grid-cell sm="4">
         <h4>Accent (.ux-button--accent)</h4>
-        <p><ux-button class="ux-button--accent" type="raised">Raised</ux-button></p>
-        <p><ux-button class="ux-button--accent" type="flat">Flat</ux-button></p>
-        <p><ux-button class="ux-button--accent" type="text">Text</ux-button></p>
-        <p><ux-button class="ux-button--accent" type="outline">Outline</ux-button></p>
-        <p><ux-button class="ux-button--accent" type="fab">Fab</ux-button></p>
+        <p>
+          <ux-button class="ux-button--accent" type="raised">Raised</ux-button>
+        </p>
+        <p>
+          <ux-button class="ux-button--accent" type="flat">Flat</ux-button>
+        </p>
+        <p>
+          <ux-button class="ux-button--accent" type="text">Text</ux-button>
+        </p>
+        <p>
+          <ux-button class="ux-button--accent" type="outline">Outline</ux-button>
+        </p>
+        <p>
+          <ux-button class="ux-button--accent" type="fab">Fab</ux-button>
+        </p>
       </ux-grid-cell>
       <ux-grid-cell sm="4">
         <h4>Disabled (disabled)</h4>
-        <p><ux-button disabled type="raised">Raised</ux-button></p>
-        <p><ux-button disabled type="flat">Flat</ux-button></p>
-        <p><ux-button disabled type="text">Text</ux-button></p>
-        <p><ux-button disabled type="outline">Outline</ux-button></p>
-        <p><ux-button disabled type="fab">Fab</ux-button></p>
+        <p>
+          <ux-button disabled type="raised">Raised</ux-button>
+        </p>
+        <p>
+          <ux-button disabled type="flat">Flat</ux-button>
+        </p>
+        <p>
+          <ux-button disabled type="text">Text</ux-button>
+        </p>
+        <p>
+          <ux-button disabled type="outline">Outline</ux-button>
+        </p>
+        <p>
+          <ux-button disabled type="fab">Fab</ux-button>
+        </p>
       </ux-grid-cell>
     </ux-grid>
   </section>
-  
+
   <section>
     <h2>Input & Input Info</h2>
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="6">
         <h4>Default</h4>
-        <p><ux-input placeholder="With placeholder"></ux-input></p>
+        <p>
+          <ux-input placeholder="With placeholder"></ux-input>
+        </p>
         <p>
           <ux-input label="With floating label" maxlength.bind="50"></ux-input>
           <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
         </p>
         <p>
           <ux-input class="ux-input-component--has-error" label="With error">
-              <ux-icon icon="error" slot="trailing-icon"></ux-icon>
+            <ux-icon icon="error" slot="trailing-icon"></ux-icon>
           </ux-input>
           <ux-input-info>Error message</ux-input-info>
         </p>
       </ux-grid-cell>
       <ux-grid-cell sm="6">
         <h4>Icons</h4>
-        <p><ux-input label="With leading icon"><ux-icon icon="person" slot="leading-icon"></ux-icon></ux-input></p>
-        <p><ux-input label="With trailing icon"><ux-icon icon="remove_red_eye" slot="trailing-icon"></ux-icon></ux-input></p>
+        <p>
+          <ux-input label="With leading icon">
+            <ux-icon icon="person" slot="leading-icon"></ux-icon>
+          </ux-input>
+        </p>
+        <p>
+          <ux-input label="With trailing icon">
+            <ux-icon icon="remove_red_eye" slot="trailing-icon"></ux-icon>
+          </ux-input>
+        </p>
         <h4>Outline</h4>
         <p>
-          <ux-input variant="outline" label="With leading icon"><ux-icon icon="person" slot="leading-icon"></ux-icon></ux-input>
+          <ux-input variant="outline" label="With leading icon">
+            <ux-icon icon="person" slot="leading-icon"></ux-icon>
+          </ux-input>
           <ux-input-info ux-input-counter="true">And helper text</ux-input-info>
         </p>
         <p>
@@ -75,7 +119,9 @@
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="6">
         <h4>Filled</h4>
-        <p><ux-textarea placeholder="With placeholder"></ux-textarea></p>
+        <p>
+          <ux-textarea placeholder="With placeholder"></ux-textarea>
+        </p>
         <p>
           <ux-textarea label="With floating label" auto-resize></ux-textarea>
         </p>
@@ -106,13 +152,15 @@
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="6">
         <h4>Filled</h4>
-        <p><ux-select placeholder="Choose an option">
-          <ux-option>Option 1</ux-option>
-          <ux-option>Option 2</ux-option>
-          <ux-option>Option 3</ux-option>
-          <ux-option>Option 4</ux-option>
-          <ux-option>Option 5</ux-option>
-        </ux-select></p>
+        <p>
+          <ux-select placeholder="Choose an option">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
         <p>
           <ux-select label="With floating label">
             <ux-option>Option 1</ux-option>
@@ -134,13 +182,15 @@
       </ux-grid-cell>
       <ux-grid-cell sm="6">
         <h4>Outline</h4>
-        <p><ux-select variant="outline" placeholder="Choose an option">
-          <ux-option>Option 1</ux-option>
-          <ux-option>Option 2</ux-option>
-          <ux-option>Option 3</ux-option>
-          <ux-option>Option 4</ux-option>
-          <ux-option>Option 5</ux-option>
-        </ux-select></p>
+        <p>
+          <ux-select variant="outline" placeholder="Choose an option">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
         <p>
           <ux-select label="With floating label" variant="outline">
             <ux-option>Option 1</ux-option>
@@ -168,7 +218,9 @@
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="6">
         <h4>Default</h4>
-        <p><ux-datepicker placeholder="With placeholder"></ux-datepicker></p>
+        <p>
+          <ux-datepicker placeholder="With placeholder"></ux-datepicker>
+        </p>
         <p>
           <ux-datepicker label="With floating label"></ux-datepicker>
           <ux-input-info>And helper text</ux-input-info>
@@ -203,12 +255,16 @@
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="6">
         <h4>Slider (default)</h4>
-        <p><ux-slider min="0" max="100"></ux-slider></p>
+        <p>
+          <ux-slider min="0" max="100"></ux-slider>
+        </p>
         <h4>With icons</h4>
-        <p><ux-slider min="0" max="100">
-          <ux-icon icon="volume_down" slot="leading-icon"></ux-icon>
-          <ux-icon icon="volume_up" slot="trailing-icon"></ux-icon>
-        </ux-slider></p>
+        <p>
+          <ux-slider min="0" max="100">
+            <ux-icon icon="volume_down" slot="leading-icon"></ux-icon>
+            <ux-icon icon="volume_up" slot="trailing-icon"></ux-icon>
+          </ux-slider>
+        </p>
       </ux-grid-cell>
       <ux-grid-cell sm="6">
         <h4>With value</h4>
@@ -226,7 +282,8 @@
             <span slot="trailing-icon">${sliderBValue}</span>
           </ux-slider>
         </p>
-        <p style="text-align: center;" css="color: rgb(${sliderRValue}, ${sliderGValue}, ${sliderBValue})">Look at my beautiful color !</p>
+        <p style="text-align: center;" css="color: rgb(${sliderRValue}, ${sliderGValue}, ${sliderBValue})">Look at my
+          beautiful color !</p>
       </ux-grid-cell>
     </ux-grid>
   </section>
@@ -291,9 +348,15 @@
         <ux-field>
           <label>Interests</label>
           <ux-chip-list ux-choice-container.bind="ageGroup">
-            <ux-chip ux-choice="0-20"><ux-icon icon="looks_one" slot="thumbnail"></ux-icon>0 - 20</ux-chip>
-            <ux-chip ux-choice="20-40"><ux-icon icon="looks_two" slot="thumbnail"></ux-icon>20 - 40</ux-chip>
-            <ux-chip ux-choice="40+"><ux-icon icon="looks_3" slot="thumbnail"></ux-icon>40+</ux-chip>
+            <ux-chip ux-choice="0-20">
+              <ux-icon icon="looks_one" slot="thumbnail"></ux-icon>0 - 20
+            </ux-chip>
+            <ux-chip ux-choice="20-40">
+              <ux-icon icon="looks_two" slot="thumbnail"></ux-icon>20 - 40
+            </ux-chip>
+            <ux-chip ux-choice="40+">
+              <ux-icon icon="looks_3" slot="thumbnail"></ux-icon>40+
+            </ux-chip>
           </ux-chip-list>
         </ux-field>
       </ux-grid-cell>
@@ -324,9 +387,15 @@
           <label>Interests</label>
           <div class="ux-form__row">
             <ux-list class="ux-list--border" style="width: 100%;" ux-choice-container.bind="ageGroup2">
-              <ux-list-item ux-choice="0-20"><ux-icon icon="looks_one" slot="thumbnail"></ux-icon>0 - 20</ux-list-item>
-              <ux-list-item ux-choice="20-40"><ux-icon icon="looks_two" slot="thumbnail"></ux-icon>20 - 40</ux-list-item>
-              <ux-list-item ux-choice="40+"><ux-icon icon="looks_3" slot="thumbnail"></ux-icon>40+</ux-list-item>
+              <ux-list-item ux-choice="0-20">
+                <ux-icon icon="looks_one" slot="thumbnail"></ux-icon>0 - 20
+              </ux-list-item>
+              <ux-list-item ux-choice="20-40">
+                <ux-icon icon="looks_two" slot="thumbnail"></ux-icon>20 - 40
+              </ux-list-item>
+              <ux-list-item ux-choice="40+">
+                <ux-icon icon="looks_3" slot="thumbnail"></ux-icon>40+
+              </ux-list-item>
             </ux-list>
           </div>
         </ux-field>
@@ -334,5 +403,45 @@
     </ux-grid>
   </section>
 
-  <section></section>
+  <section>
+    <h2>Sidenav</h2>
+    <ux-sidenav>
+      <ux-sidenav-drawer side="left" view-model.ref="leftDrawer" backdrop.bind="leftDrawerBackdrop"
+        over.bind="leftDrawerOver">Left drawer</ux-sidenav-drawer>
+      <ux-sidenav-content>
+        <div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="leftDrawerOver" model.bind="true"></ux-checkbox>
+            <label>over</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="leftDrawerBackdrop" model.bind="true"></ux-checkbox>
+            <label>backdrop</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-button click.delegate="leftDrawer.toggle()">Toggle left</ux-button>
+          </div>
+        </div>
+        <div></div>
+        <div>
+          <div>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="rightDrawerOver" model.bind="true"></ux-checkbox>
+              <label>over</label>
+            </div>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="rightDrawerBackdrop" model.bind="true"></ux-checkbox>
+              <label>backdrop</label>
+            </div>
+            <div class="ux-form__row">
+              <ux-button click.delegate="rightDrawer.toggle()">Toggle right</ux-button>
+            </div>
+          </div>
+        </div>
+      </ux-sidenav-content>
+      <ux-sidenav-drawer side="right" view-model.ref="rightDrawer" backdrop.bind="rightDrawerBackdrop"
+        over.bind="rightDrawerOver">Right drawer</ux-sidenav-drawer>
+    </ux-sidenav>
+  </section>
+
 </template>

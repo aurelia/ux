@@ -1,17 +1,20 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es5",
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
       "aurelia-framework": [
         "../node_modules/aurelia-framework"
-      ]
+      ],
+      "@aurelia-ux/modal": ["../packages/modal/src"],
+      "@aurelia-ux/positioning": ["../packages/positioning/src"]
     },
     "resolveJsonModule": true,
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "newLine": "lf"
   },
   "exclude": []
 }

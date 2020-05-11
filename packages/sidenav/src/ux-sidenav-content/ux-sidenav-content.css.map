@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,kBAAkB,CAAC;EACjB,OAAO,EAAE,KAAK;CASf;;AAVD,AAGE,kBAHgB,AAGf,+BAA+B,CAAC;EAE7B,mBAAQ,ECPH,KAAK;EDQV,0BAAe,ECPH,gCAAgC;EDQ5C,mBAAQ,EAAE,yBAAyB;CAEtC",
+    "sources": [
+        "ux-sidenav-content.scss",
+        "../common.scss"
+    ],
+    "names": [],
+    "file": "ux-sidenav-content.css"
+}

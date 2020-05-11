@@ -18,6 +18,7 @@
     "packages/positioning",
     "packages/radio",
     "packages/select",
+    "packages/sidenav",
     "packages/slider",
     "packages/switch",
     "packages/tabs",

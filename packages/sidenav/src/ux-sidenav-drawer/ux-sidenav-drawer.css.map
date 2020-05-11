@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,iBAAiB,CAAC;EAChB,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,CAAC;EACN,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EAGR,mBAAQ,ECTD,KAAK;EDUZ,0BAAe,ECTD,gCAAgC;EDU9C,mBAAQ,EAAE,SAAS;CAiBtB;;AA1BD,AAaI,iBAba,AAYd,wBAAwB,AACtB,0BAA0B,CAAC;EAC1B,SAAS,EAAE,wBAAwB;CACpC;;AAfL,AAmBE,iBAnBe,AAmBd,yBAAyB,CAAC;EACzB,KAAK,EAAE,CAAC;CAKT;;AAzBH,AAsBI,iBAtBa,AAmBd,yBAAyB,AAGvB,0BAA0B,CAAC;EAC1B,SAAS,EAAE,uBAAuB;CACnC",
+    "sources": [
+        "ux-sidenav-drawer.scss",
+        "../common.scss"
+    ],
+    "names": [],
+    "file": "ux-sidenav-drawer.css"
+}
