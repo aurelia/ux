@@ -5,7 +5,9 @@ import { copy, html, typings, buildCopyInstruction } from '../../rollup.plugins'
 const FILE_NAME_ENTRY = 'src/index.ts';
 const FILE_NAME_OUTPUT = 'index.js';
 const FILE_NAME_CSS = [
-  'ux-sidenav.css'
+  'ux-sidenav/ux-sidenav.css',
+  'ux-sidenav-content/ux-sidenav-content.css',
+  'ux-sidenav-drawer/ux-sidenav-drawer.css'
 ];
 const TARGET_DIR = process.env.target_dir || 'dist';
 
