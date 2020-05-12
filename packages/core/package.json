@@ -89,6 +89,9 @@
     "aurelia-logging": "^1.5.2",
     "aurelia-templating-resources": "^1.6.0"
   },
+  "peerDependencies": {
+    "tslib": "^1.11.2"
+  },
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
     "@types/karma": "^1.7.3",
@@ -125,6 +128,7 @@
     "ts-loader": "^6.2.1",
     "ts-node": "^5.0.1",
     "tsconfig-paths": "^3.9.0",
+    "tslib": "^1.11.2",
     "tslint": "^5.20.1",
     "typedoc": "^0.9.0",
     "typescript": "^3.7.2",
