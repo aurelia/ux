@@ -32,7 +32,7 @@
     "build-ts:cjs": "tsc -p tsconfig.build.json -t es5 -m commonjs --outDir dist/commonjs",
     "build-ts:ntv": "tsc -p tsconfig.build.json -t es5 -m es6      --outDir dist/native-modules",
     "build-ts:es6": "tsc -p tsconfig.build.json -t es6 -m es6      --outDir dist/es2015",
-    "build-ts:types": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+    "build-ts:types": "tsc -p tsconfig.build.json --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
     "prebuild": "rimraf dist",
     "build": "concurrently \"npm:build-ts:*\"",
     "build:typings": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
