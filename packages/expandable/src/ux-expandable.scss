@@ -1,0 +1,48 @@
+$duration: 400ms;
+$timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+
+ux-expandable {
+  display: block;
+  border-radius: var(--aurelia-ux--expandable-border-radius, 2px);
+  background: white;
+  box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
+
+  .ux-expandable__header {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 24px;
+    border-radius: inherit;
+
+    &.ux-expandable__header--open {
+      height: 64px;
+    }
+
+    &.ux-expandable__header--closed {
+      height: 48px;
+    }
+
+    &:hover:not(.ux-expandable__header--open) {
+      background: #00000027;
+    }
+
+    transition: {
+      duration: $duration;
+      timing-function: $timing-function;
+      property: height;
+    }
+
+  }
+
+  .ux-expandable__content-container {
+    height: 0;
+    overflow: hidden;
+
+    transition: {
+      duration: $duration;
+      timing-function: $timing-function;
+      property: height;
+    }
+  }
+}

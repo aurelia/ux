@@ -17,6 +17,7 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/checkbox'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/chip-input'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/datepicker'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/expandable'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/form'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/grid'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/icons'), {icons: icons})
