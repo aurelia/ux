@@ -1,10 +1,12 @@
 .components ux-sidenav {
   border: 1px solid black;
+  height: 300px;
 }
 
 .components ux-sidenav ux-sidenav-content {
-  padding: 100px;
   display: flex;
+  align-items: center;
+  margin: 0 100px;
 }
 
 .components ux-sidenav ux-sidenav-content div {
@@ -18,5 +20,10 @@
 
 .components ux-sidenav-drawer[side="right"] {
   border-left: 1px solid rgba(0, 0, 0, .12);
+  padding: 20px;
+}
+
+.components ux-sidenav-drawer[side="bottom"] {
+  border-top: 1px solid rgba(0, 0, 0, .12);
   padding: 20px;
 }

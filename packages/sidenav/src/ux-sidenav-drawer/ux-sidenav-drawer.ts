@@ -10,7 +10,7 @@ export class UxSidenavDrawer {
   constructor(public element: HTMLElement) { }
 
   @bindable
-  side: 'left' | 'right' = 'left';
+  side: 'left' | 'right' | 'bottom' = 'left';
 
   public openBoolean: boolean = false;
   @bindable

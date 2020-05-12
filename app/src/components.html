@@ -422,7 +422,19 @@
             <ux-button click.delegate="leftDrawer.toggle()">Toggle left</ux-button>
           </div>
         </div>
-        <div></div>
+        <div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="bottomDrawerOver" model.bind="true"></ux-checkbox>
+            <label>over</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="bottomDrawerBackdrop" model.bind="true"></ux-checkbox>
+            <label>backdrop</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-button click.delegate="bottomDrawer.toggle()">Toggle bottom</ux-button>
+          </div>
+        </div>
         <div>
           <div>
             <div class="ux-form__row">
@@ -441,6 +453,8 @@
       </ux-sidenav-content>
       <ux-sidenav-drawer side="right" view-model.ref="rightDrawer" backdrop.bind="rightDrawerBackdrop"
         over.bind="rightDrawerOver">Right drawer</ux-sidenav-drawer>
+      <ux-sidenav-drawer side="bottom" view-model.ref="bottomDrawer" backdrop.bind="bottomDrawerBackdrop"
+        over.bind="bottomDrawerOver"><div style="height: 100px">Bottom drawer</div></ux-sidenav-drawer>
     </ux-sidenav>
   </section>
 

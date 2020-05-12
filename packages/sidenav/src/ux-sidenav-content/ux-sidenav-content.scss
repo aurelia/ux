@@ -1,13 +1,4 @@
-@import '../common.scss';
-
 ux-sidenav-content {
   display: block;
-  
-  &.ux-sidenav-content--transition {
-    transition: {
-      duration: $duration;
-      timing-function: $timing-function;
-      property: margin-left, margin-right;
-    }
-  }
+  height: 100%;
 }

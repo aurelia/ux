@@ -1,7 +1,5 @@
 ux-sidenav-drawer {
   position: absolute;
-  top: 0;
-  bottom: 0;
   z-index: 2;
   background-color: var(--aurelia-ux--design-control-background, white);
   color: var(--aurelia-ux--design-control-foreground, black);
@@ -15,17 +13,36 @@ ux-sidenav-drawer {
   transition-property: transform, -webkit-transform;
 }
 
+ux-sidenav-drawer.ux-sidenav-drawer--left {
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
 ux-sidenav-drawer.ux-sidenav-drawer--left.ux-sidenav-drawer--closed {
   -webkit-transform: translate3d(-100%, 0, 0);
           transform: translate3d(-100%, 0, 0);
 }
 
 ux-sidenav-drawer.ux-sidenav-drawer--right {
+  top: 0;
+  bottom: 0;
   right: 0;
 }
 
 ux-sidenav-drawer.ux-sidenav-drawer--right.ux-sidenav-drawer--closed {
   -webkit-transform: translate3d(100%, 0, 0);
           transform: translate3d(100%, 0, 0);
+}
+
+ux-sidenav-drawer.ux-sidenav-drawer--bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+ux-sidenav-drawer.ux-sidenav-drawer--bottom.ux-sidenav-drawer--closed {
+  -webkit-transform: translate3d(0, 100%, 0);
+          transform: translate3d(0, 100%, 0);
 }
 /*# sourceMappingURL=ux-sidenav-drawer.css.map */

@@ -1,13 +1,5 @@
 ux-sidenav-content {
   display: block;
-}
-
-ux-sidenav-content.ux-sidenav-content--transition {
-  -webkit-transition-duration: 400ms;
-          transition-duration: 400ms;
-  -webkit-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-          transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-  -webkit-transition-property: margin-left, margin-right;
-  transition-property: margin-left, margin-right;
+  height: 100%;
 }
 /*# sourceMappingURL=ux-sidenav-content.css.map */
