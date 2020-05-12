@@ -1,1 +1,0 @@
-{"version":3,"file":"ux-list-item.js","sourceRoot":"","sources":["../../src/ux-list-item.ts"],"names":[],"mappings":";;;;;;AAAA,OAAO,EAAE,aAAa,EAAE,QAAQ,EAAE,MAAM,oBAAoB,CAAC;AAG7D,IAAa,UAAU,GAAvB,MAAa,UAAU;IAAvB;QACmB,UAAK,GAAG,IAAI,CAAC;IAChC,CAAC;CAAA,CAAA;AADW;IAAT,QAAQ;yCAAqB;AADnB,UAAU;IADtB,aAAa,CAAC,cAAc,CAAC;GACjB,UAAU,CAEtB;SAFY,UAAU"}
