@@ -10,6 +10,7 @@ import {
   Disposable,
   BindingEngine,
   processAttributes,
+  useView,
 } from 'aurelia-framework';
 
 import {
@@ -34,6 +35,7 @@ export interface UxOptionSelectEvent extends Event {
 
 @inject(DOM.Element, BindingEngine)
 @customElement('ux-option')
+@useView(PLATFORM.moduleName('./ux-option.html'))
 @processAttributes(convertTextToAttr)
 export class UxOption {
 

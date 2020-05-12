@@ -1,8 +1,10 @@
 import { inject } from 'aurelia-dependency-injection';
-import { bindable, customElement } from 'aurelia-templating';
+import { bindable, customElement, useView } from 'aurelia-templating';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element)
 @customElement('ux-card-header')
+@useView(PLATFORM.moduleName('./ux-card-header.html'))
 export class UxCardHeader {
   @bindable public color: string;
 

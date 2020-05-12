@@ -1,5 +1,5 @@
-import { customElement, bindable, observable } from 'aurelia-framework';
-import { DOM } from 'aurelia-pal';
+import { customElement, bindable, observable, useView } from 'aurelia-framework';
+import { DOM, PLATFORM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
@@ -7,6 +7,7 @@ import { UxChipTheme } from './ux-chip-theme';
 
 @inject(Element, StyleEngine)
 @customElement('ux-chip')
+@useView(PLATFORM.moduleName('./ux-chip.html'))
 export class UxChip implements UxComponent {
   @bindable public theme: UxChipTheme;
   @bindable public variant: 'filled' | 'outline' = 'filled';

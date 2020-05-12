@@ -12,6 +12,7 @@ import {
   InternalCollectionObserver,
   ObserverLocator,
   TaskQueue,
+  useView,
 } from 'aurelia-framework';
 
 import { getLogger } from 'aurelia-logging';
@@ -62,6 +63,7 @@ export interface UxOptionContainer extends HTMLElement {
 @inject(Element, StyleEngine, ObserverLocator, TaskQueue)
 @processContent(ensureUxOptionOrUxOptGroup)
 @customElement('ux-select')
+@useView(PLATFORM.moduleName('./ux-select.html'))
 export class UxSelect implements UxInputComponent {
 
   private selectedOption: UxOptionElement | null = null;

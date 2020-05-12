@@ -3,7 +3,7 @@ import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxSwitchTheme } from './ux-switch-theme';
-import { DOM, ElementEvents } from 'aurelia-framework';
+import { DOM, ElementEvents, useView, PLATFORM } from 'aurelia-framework';
 
 export interface UxSwitchElement extends HTMLElement {
   type: 'checkbox';
@@ -12,6 +12,7 @@ export interface UxSwitchElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-switch')
+@useView(PLATFORM.moduleName('./ux-switch.html'))
 export class UxSwitch implements UxComponent {
   private ignoreValueChanges: boolean;
 
