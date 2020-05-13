@@ -12,4 +12,3 @@ dist/doc-temp
 dist/test
 coverage
 app/dist
-/packages/*/dist
