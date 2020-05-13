@@ -1,0 +1,264 @@
+/* CUSTOMIZABLE VARIABLES */
+.ux-input-component {
+  --foreground: var(--aurelia-ux--design-control-foreground, #212121);
+  --foreground-label: var(--aurelia-ux--design-control-label-color, #757575);
+  --background: var(--aurelia-ux--design-control-background, #E0E0E0);
+  --background-hover: #00000027;
+  --active-color: var(--aurelia-ux--design-primary, #3F51B5);
+
+  --font-size: 16px;
+  --letter-spacing: inherit;
+  --label-font-size: 12px;
+  --label-letter-spacing: 0.5px;
+  --line-height: 1.6;
+  --label-line-height: 1.6;
+
+  --border-color: var(--aurelia-ux--design-control-label-color, #757575);
+  --border-radius: 4px;
+  --border-width: 1px;
+  --border-active-width: 2px;
+
+  --disabled-foreground: var(--aurelia-ux--design-disabled-foreground, #9E9E9E);
+  --disabled-background: var(--aurelia-ux--design-disabled-background, #e1e1e1);
+
+  --error: var(--aurelia-ux--design-error, #F44336);
+}
+
+/* CALCULATIONS */
+.ux-input-component {
+  --label-v-padding: 6px;
+  --inner-input-v-padding: 6px;
+  /* MIN HEIGHT OF OUTER COMPONENT */
+  --min-height: 58.8px;
+  --min-height: calc(
+    1 * var(--line-height, 1.6) * var(--font-size, 16px) +
+    1 * var(--label-line-height, 1.6) * var(--label-font-size, 12px) +
+    1 * var(--label-v-padding, 6px) + 
+    1 * var(--inner-input-v-padding, 6px) + 
+    2 * var(--border-width, 1px));
+  /* TRANSLATION OF LABEL WHEN INPUT IS EMPTY */
+  --half-h: 29.4px;
+  --half-h: calc(var(--min-height, 58.8px) / 2);
+  --abs-empty-label-pos: 13.6px;
+  --abs-empty-label-pos: calc(var(--half-h, 29.4px) - var(--font-size, 16px) * var(--line-height, 1.6) / 2 - var(--label-v-padding, 6px));
+  --empty-label-translation: 13.6px;
+  --empty-label-translation: calc(var(--abs-empty-label-pos, 13.6px));
+}
+.ux-input-component--dense.ux-input-component {
+  --label-v-padding: 2px;
+  --inner-input-v-padding: 2px;
+}
+
+/* OUTER DIV COMPONENT */
+.ux-input-component {
+  display: flex;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 16px;
+  align-items: flex-start;
+  box-sizing: border-box;
+  position: relative;
+  color: #212121;
+  background-color: #E0E0E0;
+  border-radius: 4px;
+  color: var(--foreground, #E0E0E0);
+  background-color: var(--background, #212121);
+  border-radius: var(--border-radius, 4px);
+  min-height: var(--min-height, 58.8px);
+}
+
+
+/* LEADING AND TRAILING SLOTS */
+.ux-input-component [slot="leading-icon"],
+.ux-input-component [slot="trailing-icon"],
+.ux-input-component__leading,
+.ux-input-component__trailing {
+  flex-shrink: 0;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+}
+.ux-input-component [slot="leading-icon"],
+.ux-input-component__leading:not(empty) {
+  margin-right: 8px;
+}
+.ux-input-component [slot="trailing-icon"],
+.ux-input-component__trailing:not(empty) {
+  margin-left: 8px;
+}
+
+/* MAIN INPUT AREA */
+.ux-input-component__content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* INPUT LABEL */
+.ux-input-component__label {
+  position: relative;
+  align-self: flex-start;
+  z-index: 1;
+  cursor: text;
+  font-size: inherit;
+  font-size: var(--font-size, 16px);
+  line-height: 1.6;
+  line-height: var(--line-height, 1.6);
+  letter-spacing: 0.5px;
+  letter-spacing: var(--label-letter-spacing, 0.5px);
+  color: #757575;
+  color: var(--foreground-label, #757575);
+  transition: all ease 150ms;
+  transform: translateY(var(--empty-label-translation, 13.6px));
+  padding: var(--label-v-padding, 6px) 0 0 0;
+}
+
+.ux-input-component__inner-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: -10px; /* trick to make the inner input not resizing the outer box when not in focused and without value */
+  line-height: 1.6;
+  line-height: var(--line-height, 1.6);
+  letter-spacing: inherit;
+  letter-spacing: var(--letter-spacing, inherit);
+  padding: 0 0 var(--inner-input-v-padding, 6px) 0;
+  border: 0;
+  color: inherit;
+  background-color: transparent;
+  outline: none;
+  font-weight: 400;
+}
+
+.ux-input-component__border {
+  height: var(---border-active-width, 2px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.ux-input-component__border:before {
+  display: block;
+  content: '';
+  height: 1px;
+  height: var(--border-width, 1px);
+  background-color: #757575;
+  background-color: var(--border-color, #757575);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.ux-input-component__border:after {
+  display: block;
+  content: '';
+  height: var(--border-active-width, 2px);
+  background-color: #3F51B5;
+  background-color: var(--active-color, #3F51B5);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: scalex(0);
+  transition: transform ease 150ms;
+}
+
+.ux-input-component--focused .input_component__border-bottom:after {
+  transform: scaleX(1);
+}
+
+
+/* INPUT VARIANTS - IN DEFAULT STATE */
+.ux-input-component--filled {
+  border: 0px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+
+
+
+/* OTHER STATES (--focused, --has-value, --error, :hover)*/
+
+/* LABEL AND CONTENT IN FOCUSED, HAS-VALUE STATE */
+.ux-input-component--focused .ux-input-component__label,
+.ux-input-component--has-value .ux-input-component__label {
+  transform: translateY(0px);
+  font-size: 12px;
+  font-size: var(--label-font-size, 12px);
+  line-height: 1.6;
+  line-height: var(--label-line-height, 1.6);
+}
+
+
+/* BORDER BOTTOM IN FOCUS STATE  */
+.ux-input-component--focused .ux-input-component__border:after {
+  transform: scalex(1);
+}
+
+
+/* ERROR STATE */
+.ux-input-component--has-error:not(.ux-input-component--focused) .ux-input-component__label {
+  color: #F44336;
+  color: var(--error, #F44336);
+}
+.ux-input-component--has-error:not(.ux-input-component--focused) .ux-input-component__border:after {
+  background-color: #F44336;
+  background-color: var(--error, #F44336);
+  transform: scalex(1);
+}
+
+/* HOVER STATE */
+.ux-input-component--filled:hover:not(.ux-input-component--disabled):not([disabled]):not([readonly]) {
+  background-color: #00000027;
+  background-color: var(--background-hover, #00000027);
+}
+
+/* DISABLED STATE */
+.ux-input-component--filled.ux-input-component--disabled,
+.ux-input-component--filled[disabled],
+.ux-input-component--filled[readonly] {
+  color: #9E9E9E;
+  color: var(--disabled-foreground, #9E9E9E);
+  background-color: #e1e1e1;
+  background-color: var(--disabled-background, #9E9E9E);
+}
+.ux-input-component--filled.ux-input-component--disabled, .ux-input__label,
+.ux-input-component--filled[disabled] .ux-input__label,
+.ux-input-component--filled[readonly] .ux-input__label {
+  color: #9E9E9E;
+  color: var(--disabled-foreground, #9E9E9E);
+}
+
+/* PLACEHOLDER LABEL */
+.ux-input-component--placeholder {
+  --inner-input-v-padding: 12px;
+  --min-height: calc(
+    1 * var(--line-height, 1.6) * var(--font-size, 16px) +
+    2 * var(--inner-input-v-padding, 6px) + 
+    2 * var(--border-width, 1px));
+}
+.ux-input-component--placeholder.ux-input-component--dense {
+  --inner-input-v-padding: 6px;
+}
+.ux-input-component--placeholder .ux-input-component__label {
+  position: absolute;
+  font-size: var(--font-size, 16px);
+  line-height: var(--line-height, 1.6);
+  transform: none;
+  padding: var(--inner-input-v-padding) 0;
+}
+.ux-input-component--placeholder.ux-input-component--focused .ux-input-component__label,
+.ux-input-component--placeholder.ux-input-component--has-value .ux-input-component__label {
+  transform: none;
+}
+.ux-input-component--placeholder.ux-input-component--filled.ux-input-component--has-value .ux-input-component__label {
+  opacity: 0;
+}
+.ux-input-component--placeholder .ux-input-component__inner-input {
+  padding: var(--inner-input-v-padding) 0;
+  font-size: var(--font-size, 16px);
+}

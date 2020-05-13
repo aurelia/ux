@@ -1,0 +1,225 @@
+ux-button {
+  display: inline-block;
+  position: relative;
+}
+
+.ux-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0 8px;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+  font-family: var(--aurelia-ux--button-font-family, inherit);
+  font-weight: 600;
+  font-weight: var(--aurelia-ux--button-font-weight, 600);
+  text-transform: uppercase;
+  text-transform: var(--aurelia-ux--button-text-transform, uppercase);
+  letter-spacing: 0.5px;
+  letter-spacing: var(--aurelia-ux--button-letter-spacing, 0.5px);
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+/* Button Sizes */
+.ux-button--small {
+  font-size: 13px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.ux-button--medium {
+  font-size: 14px;
+  height: 36px;
+  line-height: 36px;
+}
+
+.ux-button--large {
+  font-size: 16px;
+  height: 42px;
+  line-height: 42px;
+}
+
+/* Button Types, without colors */
+.ux-button--text,
+.ux-button--raised,
+.ux-button--flat,
+.ux-button--outline {
+  min-width: 88px;
+  padding: 0 16px;
+  border-radius: var(--aurelia-ux--button-border-radius, '2px');
+}
+.ux-button--raised {
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.2s;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
+}
+.ux-button--outline {
+  background-color: transparent;
+}
+.ux-button--text {
+  background-color: transparent;
+}
+.ux-button--fab {
+  border-radius: 50%;
+  overflow: hidden;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.2s;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
+}
+
+/* Button Types Colors and variants */
+
+.ux-button--raised,
+.ux-button--flat,
+.ux-button--fab {
+  background-color: #3F51B5;
+  background-color: var(--aurelia-ux--button-background, var(--aurelia-ux--design-primary, #3F51B5));
+  color: #fff;
+  color: var(--aurelia-ux--button-foreground, var(--aurelia-ux--design-primary-foreground, #fff));
+}
+.ux-button--outline {
+  border: 1px solid #3F51B5;
+  border-width: var(--aurelia-ux--button-border-width, 1px);
+  border-color: var(--aurelia-ux--button-background, var(--aurelia-ux--design-primary, #3F51B5));
+  color: #3F51B5;
+  color: var(--aurelia-ux--button-background, var(--aurelia-ux--design-primary, #3F51B5));
+}
+.ux-button--text {
+  color: #3F51B5;
+  color: var(--aurelia-ux--button-background, var(--aurelia-ux--design-primary, #3F51B5));
+}
+
+.ux-button--accent > .ux-button--raised,
+.ux-button--accent > .ux-button--flat,
+.ux-button--accent > .ux-button--fab {
+  background-color: #FF4081;
+  background-color: var(--aurelia-ux--button-accent-background, var(--aurelia-ux--design-accent, #FF4081));
+  color: #fff;
+  color: var(--aurelia-ux--button-accent-foreground, var(--aurelia-ux--design-accent-foreground, #fff));
+}
+.ux-button--accent > .ux-button--outline {
+  border-color: #FF4081;
+  border-color: var(--aurelia-ux--button-accent-background, var(--aurelia-ux--accent-primary, #FF4081));
+  color: #FF4081;
+  color: var(--aurelia-ux--button-accent-background, var(--aurelia-ux--accent-primary, #FF4081));
+}
+.ux-button--accent > .ux-button--text {
+  color: #FF4081;
+  color: var(--aurelia-ux--button-accent-background, var(--aurelia-ux--accent-primary, #FF4081));
+}
+
+.ux-button--raised:disabled,
+.ux-button--flat:disabled,
+.ux-button--fab:disabled {
+  background-color: #9E9E9E;
+  background-color: var(--aurelia-ux--button-disabled-background, var(--aurelia-ux--design-disabled-background, #9E9E9E));
+  color: #CFD8DC;
+  color: var(--aurelia-ux--button-disabled-foreground, var(--aurelia-ux--design-disabled-foreground, #CFD8DC));
+}
+.ux-button--outline:disabled {
+  border-color: #9E9E9E;
+  border-color: var(--aurelia-ux--button-disabled-background, var(--aurelia-ux--disabled-primary, #9E9E9E));
+  color: #9E9E9E;
+  color: var(--aurelia-ux--button-disabled-background, var(--aurelia-ux--disabled-primary, #9E9E9E));
+}
+.ux-button--text:disabled {
+  color: #9E9E9E;
+  color: var(--aurelia-ux--button-disabled-background, var(--aurelia-ux--disabled-primary, #9E9E9E));
+}
+
+
+
+/* Button States */
+
+.ux-button::-moz-focus-inner {
+  border: none;
+}
+
+.ux-button--text:hover {
+  background-color: rgba(124, 124, 124, 0.25);
+}
+
+.ux-button--text:focus {
+  background-color: rgba(124, 124, 124, 0.30);
+}
+
+.ux-button--outline:focus {
+  border: 1px solid #3F51B5;
+  border: 1px solid var(--aurelia-ux--design-primary, #3F51B5);
+}
+
+.ux-button--flat:focus,
+.ux-button--raised:focus {
+  box-shadow: 0 0 8px rgba(0, 0, 0, .18), 0 8px 16px rgba(0, 0, 0, .36);
+  box-shadow: var(--aurelia-ux--design-elevationFocus, 0 0 8px rgba(0, 0, 0, .18), 0 8px 16px rgba(0, 0, 0, .36));
+  transition-delay: 0s;
+}
+
+.ux-button--raised:active {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--aurelia-ux--design-elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2));
+  transition-delay: 0s;
+}
+
+.ux-button--fab:active {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--aurelia-ux--design-elevation4dp, 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2));
+  transition-delay: 0s;
+}
+
+.ux-button--fab:focus {
+  box-shadow: 0 0 8px rgba(0, 0, 0, .18), 0 8px 16px rgba(0, 0, 0, .36);
+  box-shadow: var(--aurelia-ux--design-elevation-focus, 0 0 8px rgba(0, 0, 0, .18), 0 8px 16px rgba(0, 0, 0, .36));
+  transition-delay: 0s;
+}
+
+.ux-button--raised:disabled:focus,
+.ux-button--fab:disabled:focus {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
+  transition-delay: 0s;
+}
+
+.ux-button--raised:disabled:active,
+.ux-button--fab:disabled:active {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12));
+  transition-delay: 0s;
+}
+
+
+
+.ux-button--text.ux-button--text-remove-padding {
+  min-width: auto;
+  padding: 0 8px;
+}
+
+.ux-fab-button {
+  height: auto;
+  width: auto;
+}
+
+/* Button Sizes */
+.ux-button--small .ux-button--fab {
+  width: 40px;
+  height: 40px;
+}
+
+.ux-button--medium .ux-button--fab {
+  width: 56px;
+  height: 56px;
+}
+
+.ux-button--large .ux-button--fab {
+  width: 64px;
+  height: 64px;
+}
+
