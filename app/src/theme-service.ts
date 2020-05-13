@@ -10,6 +10,7 @@ import { UxInputTheme } from '@aurelia-ux/input';
 import { UxChipInputTheme } from '@aurelia-ux/chip-input';
 import { UxButtonTheme } from '@aurelia-ux/button';
 import { UxExpandableTheme } from '@aurelia-ux/expandable';
+import { Theming } from './theming';
 
 export interface ThemesSet {
   name: string;
@@ -31,7 +32,7 @@ export class ThemeService {
   public datepicker: UxDatepickerTheme = { themeKey: 'datepicker' };
   public chipInput: UxChipInputTheme = { themeKey: 'chip-input' };
   public slider: UxSliderTheme = { themeKey: 'slider' };
-  public expandable = new UxExpandableTheme();
+  public expandable: UxExpandableTheme;
   @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderRadius: number = 2;
   @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderWidth: number = 1;
   @observable({ changeHandler: 'inputVariableChanged' }) public inputBorderRadius: number = 2;
@@ -53,7 +54,6 @@ export class ThemeService {
   @observable({ changeHandler: 'sliderVariableChanged' }) public sliderTrackHeight: number = 4;
   @observable({ changeHandler: 'checkboxVariableChanged' }) public checkboxBorderWidth: number = 2;
   @observable({ changeHandler: 'radioVariableChanged' }) public radioBorderWidth: number = 2;
-  @observable({ changeHandler: 'expandableVariableChanged' }) public expandableBorderRadius: number = 2;
 
   constructor(private styleEngine: StyleEngine) { }
 
@@ -84,7 +84,7 @@ export class ThemeService {
     const name = `New theme ${this.themesSets.length + 1}`;
     this.themesSets.push({
       name,
-      themes: this.light
+      themes: [...this.light, this.expandable]
     });
     localStorage.setItem('themes', JSON.stringify(this.themesSets));
   }
@@ -128,6 +128,12 @@ export class ThemeService {
     }
     this.currentTheme = theme;
     localStorage.setItem('currentTheme', this.currentTheme.toString());
+    let expandable = themeToApply.find(x => x.themeKey === 'expandable');
+    if (!expandable) {
+      expandable = new UxExpandableTheme();
+      themeToApply.push(expandable);
+    }
+    this.expandable = expandable;
     this.styleEngine.applyThemeGroup(themeToApply);
   }
 
@@ -233,13 +239,5 @@ export class ThemeService {
     }
     this.radio.borderWidth = `${this.radioBorderWidth}px`;
     this.componentThemeChanged('radio');
-  }
-
-  public expandableVariableChanged() {
-    if (!this.expandable) {
-      return;
-    }
-    this.expandable.borderRadius = `${this.expandableBorderRadius}px`;
-    this.componentThemeChanged('expandable');
   }
 }

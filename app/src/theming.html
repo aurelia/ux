@@ -1,5 +1,6 @@
 <template>
   <require from="./theming.css"></require>
+  <require from="./pixels-to-number-converter"></require>
 
   <section>
     <h2>1. Set up your themes</h2>
@@ -799,13 +800,13 @@
         <ux-card-content>
           <ux-field>
             <label>Border radius</label>
-            <br><ux-slider value.bind="themeService.expandableBorderRadius" min="1" max="20" step="1"></ux-slider>
+            <br><ux-slider value.bind="themeService.expandable.borderRadius | pixelsToNumber" min="1" max="20" step="1"
+              mouseup.delegate="expandableChanged()"></ux-slider>
           </ux-field>
         </ux-card-content>
       </ux-card>
       <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
-        <ux-card-content innerhtml.bind="json(themeService.expandable)">
-        </ux-card-content>
+        <ux-card-content innerhtml.bind="json(themeService.expandable) & signal:'expandable-changed'"></ux-card-content>
       </ux-card>
     </ux-grid>
   </section>
