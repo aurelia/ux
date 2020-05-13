@@ -1,14 +1,15 @@
-import { UxCheckboxTheme } from './../../packages/checkbox/src/ux-checkbox-theme';
-import { UxRadioTheme } from './../../packages/radio/src/ux-radio-theme';
-import { UxSliderTheme } from './../../packages/slider/src/ux-slider-theme';
-import { UxDatepickerTheme } from './../../packages/datepicker/src/ux-datepicker-theme';
-import { UxTextAreaTheme } from './../../packages/textarea/src/ux-textarea-theme';
+import { UxCheckboxTheme } from '@aurelia-ux/checkbox';
+import { UxRadioTheme } from '@aurelia-ux/radio';
+import { UxSliderTheme } from '@aurelia-ux/slider';
+import { UxDatepickerTheme } from '@aurelia-ux/datepicker';
+import { UxTextAreaTheme } from '@aurelia-ux/textarea';
 import { StyleEngine, UxTheme } from '@aurelia-ux/core';
 import * as themes from './themes.json';
 import { inject, observable } from 'aurelia-framework';
-import { UxInputTheme } from '@aurelia-ux/input';
-import { UxChipInputTheme } from '@aurelia-ux/chip-input';
+import { UxInputTheme } from '@aurelia-ux/input';
+import { UxChipInputTheme } from '@aurelia-ux/chip-input';
 import { UxButtonTheme } from '@aurelia-ux/button';
+import { UxExpandableTheme } from '@aurelia-ux/expandable';
 
 export interface ThemesSet {
   name: string;
@@ -21,38 +22,40 @@ export class ThemeService {
   public themesSets: Array<ThemesSet>;
   public currentTheme: 'none' | 'light' | 'dark' | number;
 
-  public button: UxButtonTheme = {themeKey: 'button'};
-  public input: UxInputTheme = {themeKey: 'input'};
-  public textarea: UxTextAreaTheme = {themeKey: 'textarea'};
-  public select: UxTextAreaTheme = {themeKey: 'select'};
-  public checkbox: UxCheckboxTheme = {themeKey: 'checkbox'};
-  public radio: UxRadioTheme = {themeKey: 'radio'};
-  public datepicker: UxDatepickerTheme = {themeKey: 'datepicker'};
-  public chipInput: UxChipInputTheme = {themeKey: 'chip-input'};
-  public slider: UxSliderTheme = {themeKey: 'slider'};
-  @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderRadius: number = 2;
-  @observable({changeHandler: 'buttonVariableChanged'}) public buttonBorderWidth: number = 1;
-  @observable({changeHandler: 'inputVariableChanged'}) public inputBorderRadius: number = 2;
-  @observable({changeHandler: 'inputVariableChanged'}) public inputBorderWidth: number = 1;
-  @observable({changeHandler: 'inputVariableChanged'}) public inputBorderActiveWidth: number = 2;
-  @observable({changeHandler: 'textareaVariableChanged'}) public textareaBorderRadius: number = 2;
-  @observable({changeHandler: 'textareaVariableChanged'}) public textareaBorderWidth: number = 1;
-  @observable({changeHandler: 'textareaVariableChanged'}) public textareaBorderActiveWidth: number = 2;
-  @observable({changeHandler: 'selectVariableChanged'}) public selectBorderRadius: number = 2;
-  @observable({changeHandler: 'selectVariableChanged'}) public selectBorderWidth: number = 1;
-  @observable({changeHandler: 'selectVariableChanged'}) public selectBorderActiveWidth: number = 2;
-  @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderRadius: number = 2;
-  @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderWidth: number = 1;
-  @observable({changeHandler: 'datepickerVariableChanged'}) public datepickerBorderActiveWidth: number = 2;
-  @observable({changeHandler: 'chipInputVariableChanged'}) public chipInputBorderRadius: number = 2;
-  @observable({changeHandler: 'chipInputVariableChanged'}) public chipInputBorderWidth: number = 1;
-  @observable({changeHandler: 'chipInputVariableChanged'}) public chipInputBorderActiveWidth: number = 2;
-  @observable({changeHandler: 'sliderVariableChanged'}) public sliderThumbDiameter: number = 18;
-  @observable({changeHandler: 'sliderVariableChanged'}) public sliderTrackHeight: number = 4;
-  @observable({changeHandler: 'checkboxVariableChanged'}) public checkboxBorderWidth: number = 2;
-  @observable({changeHandler: 'radioVariableChanged'}) public radioBorderWidth: number = 2;
+  public button: UxButtonTheme = { themeKey: 'button' };
+  public input: UxInputTheme = { themeKey: 'input' };
+  public textarea: UxTextAreaTheme = { themeKey: 'textarea' };
+  public select: UxTextAreaTheme = { themeKey: 'select' };
+  public checkbox: UxCheckboxTheme = { themeKey: 'checkbox' };
+  public radio: UxRadioTheme = { themeKey: 'radio' };
+  public datepicker: UxDatepickerTheme = { themeKey: 'datepicker' };
+  public chipInput: UxChipInputTheme = { themeKey: 'chip-input' };
+  public slider: UxSliderTheme = { themeKey: 'slider' };
+  public expandable = new UxExpandableTheme();
+  @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderRadius: number = 2;
+  @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderWidth: number = 1;
+  @observable({ changeHandler: 'inputVariableChanged' }) public inputBorderRadius: number = 2;
+  @observable({ changeHandler: 'inputVariableChanged' }) public inputBorderWidth: number = 1;
+  @observable({ changeHandler: 'inputVariableChanged' }) public inputBorderActiveWidth: number = 2;
+  @observable({ changeHandler: 'textareaVariableChanged' }) public textareaBorderRadius: number = 2;
+  @observable({ changeHandler: 'textareaVariableChanged' }) public textareaBorderWidth: number = 1;
+  @observable({ changeHandler: 'textareaVariableChanged' }) public textareaBorderActiveWidth: number = 2;
+  @observable({ changeHandler: 'selectVariableChanged' }) public selectBorderRadius: number = 2;
+  @observable({ changeHandler: 'selectVariableChanged' }) public selectBorderWidth: number = 1;
+  @observable({ changeHandler: 'selectVariableChanged' }) public selectBorderActiveWidth: number = 2;
+  @observable({ changeHandler: 'datepickerVariableChanged' }) public datepickerBorderRadius: number = 2;
+  @observable({ changeHandler: 'datepickerVariableChanged' }) public datepickerBorderWidth: number = 1;
+  @observable({ changeHandler: 'datepickerVariableChanged' }) public datepickerBorderActiveWidth: number = 2;
+  @observable({ changeHandler: 'chipInputVariableChanged' }) public chipInputBorderRadius: number = 2;
+  @observable({ changeHandler: 'chipInputVariableChanged' }) public chipInputBorderWidth: number = 1;
+  @observable({ changeHandler: 'chipInputVariableChanged' }) public chipInputBorderActiveWidth: number = 2;
+  @observable({ changeHandler: 'sliderVariableChanged' }) public sliderThumbDiameter: number = 18;
+  @observable({ changeHandler: 'sliderVariableChanged' }) public sliderTrackHeight: number = 4;
+  @observable({ changeHandler: 'checkboxVariableChanged' }) public checkboxBorderWidth: number = 2;
+  @observable({ changeHandler: 'radioVariableChanged' }) public radioBorderWidth: number = 2;
+  @observable({ changeHandler: 'expandableVariableChanged' }) public expandableBorderRadius: number = 2;
 
-  constructor(private styleEngine: StyleEngine) {}
+  constructor(private styleEngine: StyleEngine) { }
 
   public init() {
     let storageThemes: Array<any> = [];
@@ -70,7 +73,7 @@ export class ThemeService {
       localStorage.setItem('themes', JSON.stringify(storageThemes));
     }
     this.themesSets = storageThemes;
-    let currentTheme: string | number = localStorage.getItem('currentTheme') || 'light';
+    let currentTheme: string | number = localStorage.getItem('currentTheme') || 'light';
     if (currentTheme !== 'none' && currentTheme !== 'light' && currentTheme !== 'dark') {
       currentTheme = parseInt(currentTheme, 10);
     }
@@ -94,7 +97,7 @@ export class ThemeService {
     return themes.none;
   }
 
-  get light() {
+  get light() {
     return themes.light;
   }
 
@@ -119,7 +122,7 @@ export class ThemeService {
       if (setLightIfNotFound) {
         theme = 'light';
         themeToApply = this.light;
-      } else {
+      } else {
         return;
       }
     }
@@ -130,7 +133,7 @@ export class ThemeService {
 
   public resetComponentTheme(key: string) {
     let theme: any = (this as any)[key];
-    theme = {...theme};
+    theme = { ...theme };
     Object.keys(theme).forEach(key => key !== 'key' ? delete theme[key] : '');
     (this as any)[key] = theme;
 
@@ -142,7 +145,7 @@ export class ThemeService {
 
   public componentThemeChanged(key: string) {
     let theme: any = (this as any)[key];
-    theme = {...theme};
+    theme = { ...theme };
     Object.keys(theme).forEach(key => !theme[key] ? delete theme[key] : '');
     (this as any)[key] = theme;
     this.styleEngine.applyTheme(theme);
@@ -230,5 +233,13 @@ export class ThemeService {
     }
     this.radio.borderWidth = `${this.radioBorderWidth}px`;
     this.componentThemeChanged('radio');
+  }
+
+  public expandableVariableChanged() {
+    if (!this.expandable) {
+      return;
+    }
+    this.expandable.borderRadius = `${this.expandableBorderRadius}px`;
+    this.componentThemeChanged('expandable');
   }
 }

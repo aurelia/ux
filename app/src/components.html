@@ -7,8 +7,16 @@
 
   <section class="components">
     <h2>Expandable</h2>
+    <ux-expandable accordion>
+      <div slot="header">I'm an accordion 1</div>
+      Content
+    </ux-expandable>
+    <ux-expandable accordion>
+      <div slot="header">I'm an accordion 2</div>
+      Content
+    </ux-expandable>
     <ux-expandable>
-      <div slot="header">Click me</div>
+      <div slot="header">I'm not an accordion</div>
       Content
     </ux-expandable>
   </section>

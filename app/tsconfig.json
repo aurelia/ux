@@ -4,9 +4,8 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "aurelia-framework": [
-        "../node_modules/aurelia-framework"
-      ]
+      "aurelia-framework": ["../node_modules/aurelia-framework"],
+      "@aurelia-ux/*": ["../packages/*/src"]
     },
     "resolveJsonModule": true,
     "noUnusedLocals": false,
