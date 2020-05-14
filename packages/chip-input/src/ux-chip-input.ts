@@ -1,4 +1,4 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, useView } from 'aurelia-templating';
 import { bindingMode, observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
@@ -7,9 +7,11 @@ import { UxChipInputTheme } from './ux-chip-input-theme';
 import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component--outline.css';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element, StyleEngine)
 @customElement('ux-chip-input')
+@useView(PLATFORM.moduleName('./ux-chip-input.html'))
 export class UxChipInput implements UxInputComponent {
   @bindable public disabled: boolean | string = false;
   @bindable public readonly: boolean | string = false;

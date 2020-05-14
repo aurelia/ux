@@ -1,9 +1,9 @@
 import { customElement, bindable } from 'aurelia-templating';
-import { DOM } from 'aurelia-pal';
+import { DOM, PLATFORM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 import { UxTextAreaTheme } from './ux-textarea-theme';
-import { observable, computedFrom } from 'aurelia-framework';
+import { observable, computedFrom, useView } from 'aurelia-framework';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
@@ -15,6 +15,7 @@ export interface UxTextAreaElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-textarea')
+@useView(PLATFORM.moduleName('./ux-textarea.html'))
 export class UxTextArea implements UxInputComponent {
   private ignoreRawChanges: boolean;
   private isAttached: boolean;

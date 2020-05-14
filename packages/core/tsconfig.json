@@ -1,32 +1,5 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
-    "esModuleInterop": true,
-    "rootDir": "src",
-    "outDir": "dist/test",
-    "noImplicitAny": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "strictNullChecks": true,
-    "declaration": true,
-    "declarationDir": "dist/types",
-    "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "noEmitHelpers": false,
-    "skipLibCheck": true,
-    "moduleResolution": "node",
-    "lib": ["es2017", "dom"],
-    "sourceMap": true,
+  "extends": "../../tsconfig.build.json",
+  "include": ["src"]
     "newLine": "lf"
-  },
-  "exclude": [
-    ".vscode",
-    "dist",
-    "doc",
-    "node_modules",
-    "karma.conf.ts",
-    "test"
-  ]
 }

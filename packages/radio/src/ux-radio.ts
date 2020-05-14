@@ -8,7 +8,7 @@ import {
   normalizeBooleanAttribute
 } from '@aurelia-ux/core';
 import { UxRadioTheme } from './ux-radio-theme';
-import { ElementEvents, DOM } from 'aurelia-framework';
+import { ElementEvents, DOM, useView, PLATFORM } from 'aurelia-framework';
 
 export interface UxRadioElement extends HTMLElement {
   type: 'radio';
@@ -17,6 +17,7 @@ export interface UxRadioElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-radio')
+@useView(PLATFORM.moduleName('./ux-radio.html'))
 export class UxRadio implements UxComponent {
   private ignoreValueChanges: boolean;
 

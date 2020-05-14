@@ -1,11 +1,11 @@
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
+import { customElement, bindable, ViewResources, useView } from 'aurelia-templating';
 import { bindingMode, observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 import { DatetimeUtility } from './resources/datetime-utility';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { UxDatepickerTheme } from './ux-datepicker-theme';
-import { DOM } from 'aurelia-pal';
+import { DOM, PLATFORM } from 'aurelia-pal';
 import { moment } from './resources/moment-rexports';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component.css';
@@ -16,6 +16,7 @@ import '@aurelia-ux/core/components/ux-input-component--outline.css';
 
 @inject(Element, ViewResources, StyleEngine)
 @customElement('ux-datepicker')
+@useView(PLATFORM.moduleName('./ux-datepicker.html'))
 // @inlineView(
 //   UX_DATEPICKER_VIEW,
 //   [PLATFORM.moduleName('@aurelia-ux/datepicker/ux-datepicker.css')]

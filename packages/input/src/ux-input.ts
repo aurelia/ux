@@ -1,5 +1,5 @@
-import { customElement, bindable } from 'aurelia-templating';
-import { DOM } from 'aurelia-pal';
+import { customElement, bindable, useView } from 'aurelia-templating';
+import { DOM, PLATFORM } from 'aurelia-pal';
 import { observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
@@ -15,6 +15,7 @@ export interface UxInputElement extends HTMLElement {
 
 @inject(Element, StyleEngine)
 @customElement('ux-input')
+@useView(PLATFORM.moduleName('./ux-input.html'))
 export class UxInput implements UxInputComponent {
   private ignoreRawChanges: boolean;
 
