@@ -6,5 +6,4 @@
       "@aurelia-ux/*": ["*/src"]
     }
   }
-    "newLine": "lf"
 }
