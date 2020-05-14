@@ -1,9 +1,9 @@
-import { customElement, useView, inject, PLATFORM, bindable, DOM } from 'aurelia-framework';
+import { customElement, useView, inject, PLATFORM, bindable } from 'aurelia-framework';
 import { UxProgressTheme } from './ux-progress-theme';
-import { StyleEngine, normalizeNumberAttribute } from '@aurelia-ux/core';
+import { StyleEngine, normalizeNumberAttribute, GlobalStyleEngine } from '@aurelia-ux/core';
 
 const INDETERMINATE_ANIMATION_TEMPLATE = `
-@keyframes ux-progress-stroke-rotate-DIAMETER {
+@keyframes ux-progress-stroke-rotate-DIAMETER-STROKE-WIDTH {
    0%      { stroke-dashoffset: START_VALUE;  transform: rotate(0); }
    12.5%   { stroke-dashoffset: END_VALUE;    transform: rotate(0); }
    12.5001%  { stroke-dashoffset: END_VALUE;    transform: rotateX(180deg) rotate(72.5deg); }
@@ -22,11 +22,11 @@ const INDETERMINATE_ANIMATION_TEMPLATE = `
    100%    { stroke-dashoffset: START_VALUE;  transform: rotateX(180deg) rotate(341.5deg); }
  }`;
 
-@inject(Element, StyleEngine)
+@inject(Element, StyleEngine, GlobalStyleEngine)
 @customElement('ux-progress')
 @useView(PLATFORM.moduleName('./ux-progress.html'))
 export class UxProgress {
-  constructor(public element: HTMLElement, private styleEngine: StyleEngine) { }
+  constructor(public element: HTMLElement, private styleEngine: StyleEngine, private globalStyleEngine: GlobalStyleEngine) { }
 
   public strokeDashOffset: number;
   public valueNumber: number | null | undefined;
@@ -51,7 +51,7 @@ export class UxProgress {
     this.styleEngine.applyTheme(newValue, this.element);
   }
 
-  private diameterNumber: number | null | undefined;
+  private diameterNumber: number | null | undefined = 100;
   @bindable
   public diameter: number | string = 100;
   public diameterChanged() {
@@ -59,7 +59,7 @@ export class UxProgress {
     this.update();
   }
 
-  private strokeWidthNumber: number | null | undefined;
+  private strokeWidthNumber: number | null | undefined = 10;
   @bindable
   public strokeWidth: number | string = 10;
   public strokeWidthChanged() {
@@ -79,16 +79,12 @@ export class UxProgress {
     if (this.valueNumber === undefined || this.valueNumber === null) {
       this.strokeDashOffset = 0;
       const styleId = `ux-progress-animation-template-${this.diameter}-${this.strokeWidthNumber}`;
-      let style = DOM.querySelector(`style[id='${styleId}']`);
-      if (!style) {
-        style = DOM.createElement('style');
-        style.id = styleId;
-        style.textContent = INDETERMINATE_ANIMATION_TEMPLATE
+      this.globalStyleEngine.addOrUpdateGlobalStyle(styleId,
+        INDETERMINATE_ANIMATION_TEMPLATE
           .replace(/START_VALUE/g, `${0.95 * this.strokeCircumference}`)
           .replace(/END_VALUE/g, `${0.2 * this.strokeCircumference}`)
-          .replace(/DIAMETER/g, `${this.diameter}`);
-        DOM.appendNode(style, document.head);
-      }
+          .replace(/DIAMETER/g, `${this.diameter}`)
+          .replace(/STROKE-WIDTH/g, `${this.strokeWidthNumber}`));
     } else {
       this.strokeDashOffset = this.strokeCircumference * (1 - this.valueNumber / 100);
       this.viewBox = `0 0 ${this.diameterNumber} ${this.diameterNumber}`;
