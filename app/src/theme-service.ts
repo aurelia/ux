@@ -30,7 +30,7 @@ export class ThemeService {
   public radio: UxRadioTheme = { themeKey: 'radio' };
   public datepicker: UxDatepickerTheme = { themeKey: 'datepicker' };
   public chipInput: UxChipInputTheme = { themeKey: 'chip-input' };
-  public sidenav: UxSidenavTheme = { themeKey: 'sidenav' };
+  public sidenav: UxSidenavTheme;
   public slider: UxSliderTheme = { themeKey: 'slider' };
   @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderRadius: number = 2;
   @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderWidth: number = 1;
@@ -53,7 +53,6 @@ export class ThemeService {
   @observable({ changeHandler: 'sliderVariableChanged' }) public sliderTrackHeight: number = 4;
   @observable({ changeHandler: 'checkboxVariableChanged' }) public checkboxBorderWidth: number = 2;
   @observable({ changeHandler: 'radioVariableChanged' }) public radioBorderWidth: number = 2;
-  @observable({ changeHandler: 'sidenavVariableChanged' }) public sidenavBackdropColor: string = 'rgba(0,0,0,0.6)';
 
   constructor(private styleEngine: StyleEngine) { }
 
@@ -84,7 +83,7 @@ export class ThemeService {
     const name = `New theme ${this.themesSets.length + 1}`;
     this.themesSets.push({
       name,
-      themes: this.light
+      themes: [...this.light, this.sidenav]
     });
     localStorage.setItem('themes', JSON.stringify(this.themesSets));
   }
@@ -128,6 +127,12 @@ export class ThemeService {
     }
     this.currentTheme = theme;
     localStorage.setItem('currentTheme', this.currentTheme.toString());
+    let sidenav = themeToApply.find(x => x.themeKey === 'sidenav') as UxSidenavTheme;
+    if (!sidenav) {
+      sidenav = new UxSidenavTheme();
+      themeToApply.push(sidenav);
+    }
+    this.sidenav = sidenav;    
     this.styleEngine.applyThemeGroup(themeToApply);
   }
 
@@ -233,13 +238,5 @@ export class ThemeService {
     }
     this.radio.borderWidth = `${this.radioBorderWidth}px`;
     this.componentThemeChanged('radio');
-  }
-
-  public sidenavVariableChanged() {
-    if (!this.sidenav) {
-      return;
-    }
-    this.sidenav.backdropColor = this.sidenavBackdropColor;
-    this.componentThemeChanged('sidenav');
   }
 }
