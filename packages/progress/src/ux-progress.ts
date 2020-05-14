@@ -78,7 +78,7 @@ export class UxProgress {
     this.strokeCircumference = ((this.diameterNumber ?? 0) - (this.strokeWidthNumber ?? 0)) * 3.14;
     if (this.valueNumber === undefined || this.valueNumber === null) {
       this.strokeDashOffset = 0;
-      const styleId = `ux-progress-animation-template-${this.diameter}-${this.strokeWidthNumber}`;
+      const styleId = `ux-progress-animation-template`;
       this.globalStyleEngine.addOrUpdateGlobalStyle(styleId,
         INDETERMINATE_ANIMATION_TEMPLATE
           .replace(/START_VALUE/g, `${0.95 * this.strokeCircumference}`)
