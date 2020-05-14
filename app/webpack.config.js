@@ -123,9 +123,6 @@ module.exports = function ({ production = '' } = {}) {
         dist: 'es2015',
       }),
       new HtmlWebpackPlugin({ template: './index.ejs' })
-        ],
-        '@aurelia-ux/progress': [
-          './ux-progress.html'
     ]
   }
 }
