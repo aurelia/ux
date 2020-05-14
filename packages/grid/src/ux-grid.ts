@@ -1,10 +1,12 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, useView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxGridTheme } from './ux-grid-theme';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element, StyleEngine)
 @customElement('ux-grid')
+@useView(PLATFORM.moduleName('./ux-grid.html'))
 export class UxGrid implements UxComponent {
   @bindable public theme: UxGridTheme;
   @bindable public columns: null | number;

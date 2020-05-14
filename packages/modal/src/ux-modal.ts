@@ -1,5 +1,5 @@
 import { UxModalService, UxModalServiceResult } from './ux-modal-service';
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, useView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxModalTheme } from './ux-modal-theme';
@@ -12,6 +12,7 @@ const log = getLogger('ux-modal');
 
 @inject(Element, StyleEngine, UxModalService, TaskQueue, UxDefaultModalConfiguration)
 @customElement('ux-modal')
+@useView(PLATFORM.moduleName('./ux-modal.html'))
 export class UxModal implements UxComponent {
 
   @bindable public position: UxModalPosition = 'center';

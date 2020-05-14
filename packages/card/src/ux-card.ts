@@ -1,10 +1,12 @@
 import { inject } from 'aurelia-dependency-injection';
-import { bindable, customElement } from 'aurelia-templating';
+import { bindable, customElement, useView } from 'aurelia-templating';
 import { UxComponent, StyleEngine } from '@aurelia-ux/core';
 import { UxCardTheme } from './ux-card-theme';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element, StyleEngine)
 @customElement('ux-card')
+@useView(PLATFORM.moduleName('./ux-card.html'))
 export class UxCard implements UxComponent {
   @bindable public xs?: string;
   @bindable public sm?: string;

@@ -1,12 +1,14 @@
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
+import { customElement, bindable, ViewResources, useView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { DatepickerSettings } from './resources/datepicker-settings';
 import { moment, Moment } from './resources/moment-rexports';
+import { PLATFORM } from 'aurelia-pal';
 // import UX_PICKER_DIALOG_VIEW from './ux-picker-dialog.html';
 // import { PLATFORM } from 'aurelia-pal';
 
 @inject(ViewResources)
 @customElement('ux-picker-dialog')
+@useView(PLATFORM.moduleName('./ux-picker-dialog.html'))
 // @inlineView(
 //   UX_PICKER_DIALOG_VIEW,
 //   [PLATFORM.moduleName('@aurelia-ux/datepicker/ux-picker-dialog.css')]
