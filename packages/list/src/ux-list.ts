@@ -1,10 +1,12 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, useView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { UxComponent, StyleEngine } from '@aurelia-ux/core';
 import { UxListTheme } from './ux-list-theme';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element, StyleEngine)
 @customElement('ux-list')
+@useView(PLATFORM.moduleName('./ux-list.html'))
 export class UxList implements UxComponent {
   @bindable public theme: UxListTheme;
   @bindable public type: string;

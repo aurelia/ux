@@ -1,29 +1,9 @@
 {
+  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "module": "amd",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "target": "es5",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "strictNullChecks": true,
-    "declaration": true,
-    "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "noEmitHelpers": false,
-    "skipLibCheck": true,
-    "sourceMap": true
-  },
-  "exclude": [
-    ".vscode",
-    "dist",
-    "doc",
-    "node_modules"
-  ]
+    "baseUrl": "./packages",
+    "paths": {
+      "@aurelia-ux/*": ["*/src"]
+    }
+  }
 }

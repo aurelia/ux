@@ -1,8 +1,10 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, useView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element)
 @customElement('ux-grid-cell')
+@useView(PLATFORM.moduleName('./ux-grid-cell.html'))
 export class UxGridCell {
   @bindable public xs?: string;
   @bindable public sm?: string;

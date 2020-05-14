@@ -26,11 +26,11 @@
     "url": "https://github.com/aurelia/ux"
   },
   "scripts": {
-    "build-ts:amd": "tsc -p tsconfig.json -t es5 -m amd      --outDir dist/amd",
-    "build-ts:cjs": "tsc -p tsconfig.json -t es5 -m commonjs --outDir dist/commonjs",
-    "build-ts:ntv": "tsc -p tsconfig.json -t es5 -m es6      --outDir dist/native-modules",
-    "build-ts:es6": "tsc -p tsconfig.json -t es6 -m es6      --outDir dist/es2015",
-    "build-ts:types": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+    "build-ts:amd": "tsc -p tsconfig.build.json -t es5 -m amd      --outDir dist/amd",
+    "build-ts:cjs": "tsc -p tsconfig.build.json -t es5 -m commonjs --outDir dist/commonjs",
+    "build-ts:ntv": "tsc -p tsconfig.build.json -t es5 -m es6      --outDir dist/native-modules",
+    "build-ts:es6": "tsc -p tsconfig.build.json -t es6 -m es6      --outDir dist/es2015",
+    "build-ts:types": "tsc -p tsconfig.build.json --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
     "build-assets:amd": "copyfiles -u 1 src/**/*.html src/**/*.css dist/amd",
     "build-assets:cjs": "copyfiles -u 1 src/**/*.html src/**/*.css dist/commonjs",
     "build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",

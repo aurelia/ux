@@ -1,11 +1,13 @@
-import { customElement, bindable } from 'aurelia-templating';
+import { customElement, bindable, useView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { UxInputInfoTheme } from './ux-input-info-theme';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { computedFrom } from 'aurelia-binding';
+import { PLATFORM } from 'aurelia-pal';
 
 @inject(Element, StyleEngine)
 @customElement('ux-input-info')
+@useView(PLATFORM.moduleName('./ux-input-info.html'))
 export class UxInputInfo implements UxComponent {
   @bindable public target: { element: Element, value: string, maxlength: number };
   @bindable public uxInputCounter = null;

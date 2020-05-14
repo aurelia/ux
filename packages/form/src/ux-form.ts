@@ -1,11 +1,12 @@
-import { customElement, bindable } from 'aurelia-templating';
-import { DOM } from 'aurelia-pal';
+import { customElement, bindable, useView } from 'aurelia-templating';
+import { DOM, PLATFORM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxFormTheme } from './ux-form-theme';
 
 @inject(Element, StyleEngine)
 @customElement('ux-form')
+@useView(PLATFORM.moduleName('./ux-form.html'))
 export class UxForm implements UxComponent {
   @bindable public theme: UxFormTheme;
   @bindable public submitOnEnter: any;

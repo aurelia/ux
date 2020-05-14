@@ -1,8 +1,9 @@
-import { customElement, bindable, ElementEvents } from 'aurelia-templating';
+import { customElement, bindable, ElementEvents, useView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, UxComponent } from '@aurelia-ux/core';
 import { UxSliderTheme } from './ux-slider-theme';
 import { computedFrom, bindingMode } from 'aurelia-binding';
+import { PLATFORM } from 'aurelia-pal';
 
 export interface UxSliderElement extends HTMLElement {
   value: number;
@@ -14,6 +15,7 @@ export interface MouseOrTouchEvent extends MouseEvent {
 
 @inject(Element, StyleEngine)
 @customElement('ux-slider')
+@useView(PLATFORM.moduleName('./ux-slider.html'))
 export class UxSlider implements UxComponent {
   private isActive: boolean;
   private percentValue: number;

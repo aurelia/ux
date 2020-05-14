@@ -1,8 +1,9 @@
-import { inject } from 'aurelia-framework';
+import { inject, useView, PLATFORM } from 'aurelia-framework';
 import { customElement } from 'aurelia-templating';
 
 @inject(Element)
 @customElement('ux-card-separator')
+@useView(PLATFORM.moduleName('./ux-card-separator.html'))
 export class UxCardSeparator {
 
   constructor(

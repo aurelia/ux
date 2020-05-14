@@ -8,6 +8,8 @@ import {
   inject,
   BindingEngine,
   Disposable,
+  useView,
+  PLATFORM,
 } from 'aurelia-framework';
 
 import { UxOptionElement } from './ux-option';
@@ -31,6 +33,7 @@ export interface OptGroupOptionsCt extends HTMLElement {
 @inject(DOM.Element, BindingEngine)
 @processContent(ensureOnlyUxOption)
 @customElement('ux-optgroup')
+@useView(PLATFORM.moduleName('./ux-optgroup.html'))
 export class UxOptGroup {
 
   private subscriptions: Disposable[];
