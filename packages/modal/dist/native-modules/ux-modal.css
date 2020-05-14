@@ -1,0 +1,170 @@
+.ux-modal__overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  background: var(--aurelia-ux--modal-overlay-color, #333333);
+  transition: all ease 250ms;
+  transition-duration: var(--aurelia-ux--modal-overlay-transition-duration, var(--aurelia-ux--modal-transition-duration, 250ms))
+}
+
+.ux-modal__content {
+  transition: all ease 250ms;
+  transition-duration: var(--aurelia-ux--modal-content-transition-duration, var(--aurelia-ux--modal-transition-duration, 250ms));
+  max-height: 100%;
+}
+
+.ux-modal--opened .ux-modal__overlay {
+  opacity: var(--aurelia-ux--modal-overlay-opacity, 0.3);
+}
+
+.ux-modal__content-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.ux-modal--lock .ux-modal__content-wrapper {
+  pointer-events: auto;
+}
+
+.ux-modal--unlocked .ux-modal__content {
+  box-shadow: var(--aurelia-ux--modal-unlocked-elevation, var(--aurelia-ux--design-elevation4dp));
+}
+
+.ux-modal__content {
+  pointer-events: auto;
+  background: var(--aurelia-ux--modal-background, var(--aurelia-ux--design-surface-background));
+  color: var(--aurelia-ux--modal-foreground, var(--aurelia-ux--design-surface-foreground));
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}
+
+/* MOBILE */
+.ux-modal--mobile .ux-modal__content {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  min-width: none;
+}
+
+/* DESKTOP */
+.ux-modal--desktop.ux-modal--center .ux-modal__content,
+.ux-modal--desktop.ux-modal--left .ux-modal__content,
+.ux-modal--desktop.ux-modal--right .ux-modal__content {
+  min-width: var(--aurelia-ux--modal-min-width, 320px);
+}
+.ux-modal--desktop.ux-modal--center .ux-modal__content {
+  border-radius: var(--aurelia-ux--modal-border-radius, 5px);
+}
+
+/* BOTTOM */
+.ux-modal--bottom .ux-modal__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+}
+.ux-modal--bottom.ux-modal--opened .ux-modal__content {
+  transform: translateY(0);
+}
+
+/* TOP */
+.ux-modal--top .ux-modal__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-100%);
+}
+.ux-modal--top.ux-modal--opened .ux-modal__content {
+  transform: translateY(0);
+}
+
+/* LEFT */
+.ux-modal--left .ux-modal__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  transform: translateX(-100%);
+}
+.ux-modal--left.ux-modal--opened .ux-modal__content {
+  transform: translateX(0);
+}
+
+/* RIGHT */
+.ux-modal--right .ux-modal__content {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  transform: translateX(100%);
+}
+.ux-modal--right.ux-modal--opened .ux-modal__content {
+  transform: translateX(0);
+}
+
+/* CENTER */
+.ux-modal--center .ux-modal__content {
+  opacity: 0;
+}
+.ux-modal--center.ux-modal--opened .ux-modal__content {
+  opacity: 1;
+}
+
+/* ABSOLUTE */
+.ux-modal--absolute .ux-modal__content {
+  position: absolute;
+  opacity: 0;
+  transition-property: opacity;
+}
+.ux-modal--absolute.ux-modal--opened .ux-modal__content {
+  opacity: 1;
+}
+
+/* CARD AS DIALOG */
+
+.ux-modal__content > .ux-card,
+.ux-modal__content > compose > .ux-card {
+  height: 100%;
+  margin: 0;
+}
+
+.ux-modal__content > .ux-card > *,
+.ux-modal__content > compose > .ux-card > * {
+  flex-shrink: 0;
+}
+
+.ux-modal__content > .ux-card > .ux-card__content,
+.ux-modal__content > compose > .ux-card > .ux-card__content {
+  display: block;
+  flex-shrink: 1;
+  height: 100%;
+  overflow: auto;
+}
+
+.ux-modal__content > .ux-card > .ux-card__footer,
+.ux-modal__content > compose > .ux-card > .ux-card__footer {
+  justify-content: flex-end;
+}
+
+.ux-modal--mobile .ux-modal__content > .ux-card > .ux-card__header, 
+.ux-modal--mobile .ux-modal__content > compose > .ux-card > .ux-card__header {
+  margin-top: constant(safe-area-inset-top, 20px);
+  margin-top: env(safe-area-inset-top, 20px);
+}
+
+.ux-modal--mobile .ux-modal__content > .ux-card > .ux-card__footer,
+.ux-modal--mobile .ux-modal__content > compose > .ux-card > .ux-card__footer {
+  margin-bottom: constant(safe-area-inset-bottom, 20px);
+  margin-bottom: env(safe-area-inset-bottom, 20px);
+}

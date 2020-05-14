@@ -1,0 +1,103 @@
+.ux-switch {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.ux-switch--disabled {
+  opacity: 0.5;
+}
+
+.ux-switch__inner-input {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.ux-switch__track {
+  margin: 6px 5px;
+  height: 12px;
+  width: 32px;
+  border: none;
+  border-radius: 6px;
+  background-color: #E0E0E0;
+  background-color: var(--aurelia-ux--switch-ux-switch__track, #E0E0E0);
+  transition: background-color 150ms ease-in-out;
+  position: relative;
+}
+
+.ux-switch__indicator {
+  position: relative;
+  left: -3px;
+  top: -3px;
+  height: 18px;
+  width: 18px;
+  background-color: #FFF;
+  background-color: var(--aurelia-ux--switch-indicator, #FFF);
+  border-radius: 50%;
+  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.6);
+  transition: left .1s ease-in-out, background-color .1s ease-in-out;
+}
+
+.ux-switch:focus {
+  outline: none;
+}
+
+.ux-switch__inner-input:disabled {
+  cursor: default;
+}
+
+.ux-switch--checked .ux-switch__track {
+  background-color: #6776cc;
+  background-color: var(--aurelia-ux--switch-ux-switch__track-active, var(--aurelia-ux--design-primary-light, #6776cc));
+}
+
+.ux-switch--checked .ux-switch__indicator {
+  left: calc(100% - 14px);
+  background-color: #3F51B5;
+  background-color: var(--aurelia-ux--switch-indicator-active, var(--aurelia-ux--design-primary, #3F51B5));
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+.ux-switch .ripplecontainer {
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+.ux-switch .paper-ripple {
+  top: -11px;
+  left: -11px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.ux-switch .ripple {
+  position: absolute;
+  top: -11px;
+  left: -11px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  pointer-events: none;
+  background-color: rgba(132, 132, 132, 0.25);
+  transition: transform 100ms ease-in-out;
+  transform: scale3d(0, 0, 0);
+}
+
+.ux-switch--focused .ripple {
+  transform: scale3d(1, 1, 1);
+}
+
+.ux-switch--disabled.ux-switch--focused .ripple {
+  transform: scale3d(0, 0, 0);
+}
+

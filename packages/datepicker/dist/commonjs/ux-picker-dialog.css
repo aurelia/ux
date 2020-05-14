@@ -1,0 +1,65 @@
+ux-picker-dialog {
+  color: #262626;
+  color: var(--aurelia-ux--design-control-foreground, #262626);
+  background-color: #FFF;
+  background-color: var(--aurelia-ux--calendar-picker-background, #FFF);
+  width: 300px;
+  
+  user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+
+  animation-duration: 250ms;
+  animation-name: datepicker-dialog-grow;
+}
+
+ux-picker-dialog header {
+  width: auto;
+  height: 124px;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  color: #FFF;
+  color: var(--aurelia-ux--datepicker-header-foreground, var(--aurelia-ux--design-primary-foreground, #FFF));
+  background: #3F51B5;
+  background: var(--aurelia-ux--datepicker-header-background, var(--aurelia-ux--design-primary, #3F51B5));
+}
+
+ux-picker-dialog header > div.year,
+ux-picker-dialog header > div.date {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+ux-picker-dialog header div.year {
+  font-size: 1.1em;
+}
+
+  ux-picker-dialog header div.year.active {
+    opacity: 1;
+  }
+
+ux-picker-dialog header div.date {
+  font-size: 2em;
+  font-weight: 400;
+}
+
+  ux-picker-dialog header div.date.active {
+    opacity: 1;
+  }
+
+ux-picker-dialog footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@keyframes datepicker-dialog-grow {
+  from {
+    transform: scale3d(0, 0, 0);
+  }
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
