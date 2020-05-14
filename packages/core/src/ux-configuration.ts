@@ -16,7 +16,7 @@ export class UXConfiguration {
   }
 
   public cssNormalize() {
-    PLATFORM.moduleName('./styles/normalize.css');
+    PLATFORM.moduleName('!css-loader!./styles/normalize.css');
     const fullCssPath = '@aurelia-ux/core/styles/normalize.css';
     this
       .loader
@@ -25,7 +25,7 @@ export class UXConfiguration {
         this.logger.warn('Aurelia-UX Core failed to load normalize.css, some visual errors may appear.', err);
       })
       .then(text => {
-        if (text) {
+        if (text && typeof (text) === 'string') {
           this.globalStyleEngine.addOrUpdateGlobalStyle(fullCssPath, text);
         }
       });
