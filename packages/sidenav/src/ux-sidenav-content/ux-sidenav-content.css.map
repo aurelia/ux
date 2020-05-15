@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,kBAAkB,CAAC;EACjB,OAAO,EAAE,KAAK;EACd,MAAM,EAAE,IAAI;CACb",
-    "sources": [
-        "ux-sidenav-content.scss"
-    ],
-    "names": [],
-    "file": "ux-sidenav-content.css"
-}
