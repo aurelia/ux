@@ -128,12 +128,8 @@ export class ThemeService {
     }
     this.currentTheme = theme;
     localStorage.setItem('currentTheme', this.currentTheme.toString());
-    let expandable = themeToApply.find(x => x.themeKey === 'expandable');
-    if (!expandable) {
-      expandable = new UxExpandableTheme();
-      themeToApply.push(expandable);
-    }
-    this.expandable = expandable;
+    this.expandable = { ...new UxExpandableTheme(), ...themeToApply.find(x => x.themeKey === 'expandable') };
+    themeToApply.push(this.expandable);
     this.styleEngine.applyThemeGroup(themeToApply);
   }
 
