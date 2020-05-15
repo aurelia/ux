@@ -17,7 +17,8 @@
   "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
   "contributors": [
     "Zach Hollingshead <zach.hollingshead@gmail.com>",
-    "bigopon <bigopon.777@gmail.com>"
+    "bigopon <bigopon.777@gmail.com>",
+    "Maxim Balaganskiy <m.balaganskiy@gmai.com>"
   ],
   "main": "dist/commonjs/index.js",
   "module": "dist/native-modules/index.js",
@@ -132,15 +133,5 @@
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
-  },
-  "aurelia": {
-    "build": {
-      "resources": [
-        "@aurelia-ux/progress/ux-progress"
-      ]
-    },
-    "documentation": {
-      "articles": []
-    }
   }
 }
