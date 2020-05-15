@@ -3,14 +3,14 @@ import { UxTheme } from './../../packages/core/src/styles/ux-theme';
 import { ThemeService, ThemesSet } from './theme-service';
 import { inject } from 'aurelia-framework';
 import { AureliaUX, Design } from '@aurelia-ux/core';
-import {BindingSignaler} from 'aurelia-templating-resources';
+import { BindingSignaler } from 'aurelia-templating-resources';
 
 @inject(ThemeService, AureliaUX, BindingSignaler)
 export class Theming {
 
   public design: Design;
 
-  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' | 'expandable' = 'select';
+  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' | 'expandable' = 'select';
 
   public buttonPreviewClass = '';
   public buttonPreviewType = 'raised';
@@ -51,7 +51,7 @@ export class Theming {
     this.design = this.ux.design;
   }
 
-  public selectTheme(theme: 'light' | 'dark' | number) {
+  public selectTheme(theme: 'light' | 'dark' | number) {
     this.themeService.apply(theme);
   }
 
