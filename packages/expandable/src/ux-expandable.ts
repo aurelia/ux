@@ -8,7 +8,7 @@ import { UxExpandableTheme } from './ux-expandable-theme';
 export class UxExpandable implements UxComponent {
   constructor(public element: HTMLElement, private styleEngine: StyleEngine, private taskQueue: TaskQueue) { }
 
-  static OPEN_CHANGED = 'open-changed';
+  static OPEN_CHANGED_EVENT = 'open-changed';
 
   header: HTMLElement;
   content: HTMLElement;
@@ -30,16 +30,24 @@ export class UxExpandable implements UxComponent {
   openChanged() {
     this.openBoolean = normalizeBooleanAttribute('open', this.open);
     this.updateContainerHeight();
-    this.element.dispatchEvent(new CustomEvent(UxExpandable.OPEN_CHANGED, { detail: this.openBoolean }));
+    this.element.dispatchEvent(new CustomEvent(UxExpandable.OPEN_CHANGED_EVENT, { detail: { component: this, open: this.openBoolean } }));
   }
 
   @bindable
   accordion: boolean | string = false;
 
-  setContentContainerHeightToAuto = () => {
+  handleEvent(e: Event) {
+    switch (e.type) {
+      case 'transitionend':
+        this.setContentContainerHeightToAuto();
+        break;
+    }
+  }
+
+  setContentContainerHeightToAuto() {
     this.content.style.overflow = "visible";
     this.content.style.height = "auto";
-    this.content.removeEventListener("transitionend", this.setContentContainerHeightToAuto);
+    this.content.removeEventListener("transitionend", this);
   }
 
   bind() { }
@@ -51,7 +59,7 @@ export class UxExpandable implements UxComponent {
   updateContainerHeight() {
     if (this.openBoolean) {
       // after transition set body height to auto so that expandable children are visible
-      this.contentContainer.addEventListener("transitionend", this.setContentContainerHeightToAuto);
+      this.contentContainer.addEventListener("transitionend", this);
       this.contentContainer.style.height = this.content.clientHeight + "px";
     } else {
       // the following line is needed because height has been restored to auto"
