@@ -127,12 +127,8 @@ export class ThemeService {
     }
     this.currentTheme = theme;
     localStorage.setItem('currentTheme', this.currentTheme.toString());
-    let sidenav = themeToApply.find(x => x.themeKey === 'sidenav') as UxSidenavTheme;
-    if (!sidenav) {
-      sidenav = new UxSidenavTheme();
-      themeToApply.push(sidenav);
-    }
-    this.sidenav = sidenav;    
+    this.sidenav = {...new UxSidenavTheme(), ...themeToApply.find(x => x.themeKey === 'sidenav') as UxSidenavTheme};    
+    themeToApply.push(this.sidenav);
     this.styleEngine.applyThemeGroup(themeToApply);
   }
 

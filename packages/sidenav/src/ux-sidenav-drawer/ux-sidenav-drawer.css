@@ -1,8 +1,8 @@
 ux-sidenav-drawer {
   position: absolute;
   z-index: 3;
-  background-color: var(--aurelia-ux--design-control-background, white);
-  color: var(--aurelia-ux--design-control-foreground, black);
+  background-color: var(--aurelia-ux--sidenav-drawer-background, var(--aurelia-ux--design-control-background, white));
+  color: var(--aurelia-ux--sidenav-drawer-foreground, var(--aurelia-ux--design-control-foreground, black));
   -webkit-transition-duration: 400ms;
           transition-duration: 400ms;
   -webkit-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);

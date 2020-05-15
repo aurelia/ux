@@ -797,7 +797,7 @@
       </ux-card>
       <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
         <ux-card-content>
-          <ux-field repeat.for="prop of ['backdropColor']">
+          <ux-field repeat.for="prop of ['backdropColor', 'drawerBackground', 'drawerForeground']">
             <ux-input label.bind="prop" value.bind="themeService.sidenav[prop]" change.delegate="sidenavChanged()">
               <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.sidenav[prop]}"></span>
             </ux-input>
@@ -805,7 +805,7 @@
         </ux-card-content>
       </ux-card>
       <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
-        <ux-card-content innerhtml.bind="json(themeService.sidenav) & signal:'sidenav-changed'"">
+        <ux-card-content innerhtml.bind="json(themeService.sidenav) & signal:'sidenav-changed'">
         </ux-card-content>
       </ux-card>
     </ux-grid>

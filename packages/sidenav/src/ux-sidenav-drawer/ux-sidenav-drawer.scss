@@ -3,8 +3,8 @@
 ux-sidenav-drawer {
   position: absolute;
   z-index: 3;
-  background-color: var(--aurelia-ux--design-control-background, white);
-  color: var(--aurelia-ux--design-control-foreground, black);
+  background-color: var(--aurelia-ux--sidenav-drawer-background, var(--aurelia-ux--design-control-background, white));
+  color: var(--aurelia-ux--sidenav-drawer-foreground, var(--aurelia-ux--design-control-foreground, black));
 
   transition: {
     duration: $duration;
