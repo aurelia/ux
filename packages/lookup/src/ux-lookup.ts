@@ -22,7 +22,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
   static SELECTED_EVENT = 'selected';
 
   private inputElement: UxInputElement | undefined | null;
-  public anchor: { x: number, y: number, maxHeight: number, width: number } | null;
+  public anchor: { left: number, top: string | undefined, bottom: string | undefined, maxHeight: number, width: number } | null;
   public isOpen: boolean = false;
   public optionsArray: unknown[];
   public focusedOption: unknown = undefined;
@@ -143,17 +143,35 @@ export class UxLookup implements UxComponent, EventListenerObject {
     if (this.isOpen) {
       return;
     }
-    if (this.inputElement) {
-      const inputRect = this.inputElement.getBoundingClientRect();
+    this.updateAnchor();
+    window.addEventListener('wheel', this);
+    this.taskQueue.queueTask(() => this.isOpen = true);
+  }
+
+  updateAnchor() {
+    if (!this.inputElement) {
+      return;
+    }
+    const inputRect = this.inputElement.getBoundingClientRect();
+    let availableHeight = window.innerHeight - inputRect.top - inputRect.height + document.body.scrollTop - 5;
+    if (availableHeight > 100) {
       this.anchor = {
-        x: inputRect.left,
-        y: inputRect.top + inputRect.height + 3,
-        maxHeight: window.innerHeight - inputRect.top - inputRect.height + document.body.scrollTop - 5,
+        left: inputRect.left,
+        top: `${inputRect.top + inputRect.height + 3}px`,
+        bottom: undefined,
+        maxHeight: availableHeight,
         width: inputRect.width
       };
-      window.addEventListener('wheel', this);
+    } else {
+      availableHeight = inputRect.top - document.body.scrollTop - 5;
+      this.anchor = {
+        left: inputRect.left,
+        top: undefined,
+        bottom: `${window.innerHeight - availableHeight + 3}px`,
+        maxHeight: availableHeight,
+        width: inputRect.width
+      };
     }
-    this.taskQueue.queueTask(() => this.isOpen = true);
   }
 
   close() {
@@ -213,6 +231,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
       this.searchPromise = new DiscardablePromise(this.getOptions(this.inputElement?.value, undefined));
       this.optionsArray = await this.searchPromise;
       this.notFound = !this.optionsArray?.length;
+      this.updateAnchor();
     }
     catch (e) {
       if (e !== DiscardablePromise.discarded) {

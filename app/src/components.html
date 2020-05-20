@@ -349,5 +349,16 @@
     </ux-grid>
   </section>
 
-  <section></section>
+  <section>
+    <h2>Lookup</h2>
+    <p>
+      <ux-input label="Lookup"></ux-input>
+      <ux-lookup options.bind="lookupOptions" display-field="name" value.bind="lookupValue">
+        <!-- <template replace-part="option">
+
+        </template> -->
+      </ux-lookup>
+    </p>
+    <p innerhtml.bind="lookupValue | json"></p>
+  </section>
 </template>
