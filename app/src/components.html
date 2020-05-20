@@ -8,6 +8,15 @@
   </section>
 
   <section>
+    <h2>Lookup</h2>
+    <p>
+      <ux-input label="Lookup"></ux-input>
+      <ux-lookup options.bind="lookupOptions" display-field="name" value.bind="lookupValue"> </ux-lookup>
+    </p>
+    <p innerhtml.bind="lookupValue | json"></p>
+  </section>
+
+  <section>
     <h2>Buttons</h2>
   
     <ux-grid class="ux-grid--remove-padding">

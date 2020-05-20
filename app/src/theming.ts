@@ -1,10 +1,10 @@
 import { UxTheme } from './../../packages/core/src/styles/ux-theme';
-// import { Design } from './../../packages/core/src/designs/design';
 import { ThemeService, ThemesSet } from './theme-service';
 import { inject } from 'aurelia-framework';
 import { AureliaUX, Design } from '@aurelia-ux/core';
+import { BindingSignaler } from 'aurelia-templating-resources';
 
-@inject(ThemeService, AureliaUX)
+@inject(ThemeService, AureliaUX, BindingSignaler)
 export class Theming {
 
   public design: Design;
@@ -46,7 +46,7 @@ export class Theming {
 
   public radioPreviewDisabled = false;
 
-  constructor(private themeService: ThemeService, private ux: AureliaUX) {
+  constructor(private themeService: ThemeService, private ux: AureliaUX, private signaler: BindingSignaler) {
     this.design = this.ux.design;
   }
 
@@ -80,6 +80,10 @@ export class Theming {
       .stringify(theme, null, 2)
       .replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br>$2')
       .replace(/\s/g, '&nbsp;');
+  }
+
+  public lookupChanged() {
+    this.signaler.signal('lookup-changed');
   }
 
 }

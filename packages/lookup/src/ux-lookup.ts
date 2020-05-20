@@ -1,8 +1,9 @@
 import { customElement, useView, bindable, inject, PLATFORM, TaskQueue, bindingMode } from 'aurelia-framework';
 import { UxInputElement } from '@aurelia-ux/input';
-import { UxComponent, UxTheme, StyleEngine, normalizeNumberAttribute } from '@aurelia-ux/core';
+import { UxComponent, StyleEngine, normalizeNumberAttribute } from '@aurelia-ux/core';
 import { DiscardablePromise, discard } from './discardable-promise';
 import { UxDefaultLookupConfiguration } from './ux-lookup-configuration';
+import { UxLookupTheme } from './ux-lookup-theme';
 
 const UP = 38;
 const DOWN = 40;
@@ -61,8 +62,6 @@ export class UxLookup implements UxComponent, EventListenerObject {
   @bindable
   options: ((filter: string, value: unknown) => Promise<unknown[]>) | unknown[] | undefined;
   optionsChanged() {
-    console.log(this.options);
-
     if (this.options instanceof Function) {
       this.getOptions = this.options;
     } else {
@@ -101,10 +100,10 @@ export class UxLookup implements UxComponent, EventListenerObject {
   }
 
   @bindable
-  theme: UxTheme;
+  theme: UxLookupTheme;
   public themeChanged(newValue: any) {
-    if (newValue != null && newValue.themeKey == null) {
-      newValue.themeKey = 'modal';
+    if (newValue && newValue.themeKey == null) {
+      newValue.themeKey = 'lookup';
     }
 
     this.styleEngine.applyTheme(newValue, this.element);
@@ -118,6 +117,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
   }
 
   bind() {
+    this.themeChanged(this.theme);
     this.valueFieldChanged();
     this.displayFieldChanged();
     this.optionsChanged();
@@ -126,7 +126,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
   attached() {
     this.inputElement = this.element.parentElement?.querySelector<UxInputElement>('ux-input');
     if (this.inputElement) {
-      ['click', 'blur', 'change', 'keydown'].map(x => this.inputElement!.addEventListener(x, this));
+      ['click', 'blur', 'change', 'keydown', 'scroll'].map(x => this.inputElement!.addEventListener(x, this));
     }
     ['blur', 'keydown'].map(x => this.element.addEventListener(x, this));
     this.valueChanged();
@@ -134,7 +134,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
 
   detached() {
     if (this.inputElement) {
-      ['click', 'blur', 'change', 'keydown'].map(x => this.inputElement!.removeEventListener(x, this));
+      ['click', 'blur', 'change', 'keydown', 'scroll'].map(x => this.inputElement!.removeEventListener(x, this));
     }
     ['blur', 'keydown'].map(x => this.element.removeEventListener(x, this));
   }
@@ -144,7 +144,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
       return;
     }
     this.updateAnchor();
-    window.addEventListener('wheel', this);
+    ['wheel', 'scroll'].map(x => window.addEventListener(x, this));
     this.taskQueue.queueTask(() => this.isOpen = true);
   }
 
@@ -153,21 +153,25 @@ export class UxLookup implements UxComponent, EventListenerObject {
       return;
     }
     const inputRect = this.inputElement.getBoundingClientRect();
-    let availableHeight = window.innerHeight - inputRect.top - inputRect.height + document.body.scrollTop - 5;
-    if (availableHeight > 100) {
+    const style = getComputedStyle(this.element);
+    const inputDistance = parseInt(style.getPropertyValue('--aurelia-ux--lookup-input-distance') ?? UxLookupTheme.DEFAULT_INPUT_DISTANCE.toString());
+    const windowEdgeDistance = parseInt(style.getPropertyValue('--aurelia-ux--lookup-window-edge-distance') ?? UxLookupTheme.DEFAULT_WINDOW_EDGE_DISTANCE.toString());
+    const bottomHeightThreshold = parseInt(style.getPropertyValue('--aurelia-ux--lookup-bottom-height-threshold') ?? UxLookupTheme.DEFAULT_BOTTOM_HEIGHT_THRESHOLD.toString());
+    let availableHeight = document.body.scrollTop + window.innerHeight - inputRect.bottom - inputDistance - windowEdgeDistance;
+    if (availableHeight > bottomHeightThreshold) {
       this.anchor = {
         left: inputRect.left,
-        top: `${inputRect.top + inputRect.height + 3}px`,
+        top: `${inputRect.top + inputRect.height + inputDistance}px`,
         bottom: undefined,
         maxHeight: availableHeight,
         width: inputRect.width
       };
     } else {
-      availableHeight = inputRect.top - document.body.scrollTop - 5;
+      availableHeight = inputRect.top - document.body.scrollTop - inputDistance - windowEdgeDistance;
       this.anchor = {
         left: inputRect.left,
         top: undefined,
-        bottom: `${window.innerHeight - availableHeight + 3}px`,
+        bottom: `${window.innerHeight - availableHeight - windowEdgeDistance}px`,
         maxHeight: availableHeight,
         width: inputRect.width
       };
@@ -177,7 +181,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
   close() {
     this.isOpen = false;
     this.focusedOption = undefined;
-    window.removeEventListener('wheel', this);
+    ['wheel', 'scroll'].map(x => window.addEventListener(x, this));
   }
 
   handleEvent(evt: Event): void {
@@ -187,9 +191,12 @@ export class UxLookup implements UxComponent, EventListenerObject {
         case 'blur': this.onInputBlur(); break;
         case 'change': this.filterChanged(); break;
         case 'keydown': this.onInputKeydown(evt as KeyboardEvent); break;
+        case 'scroll': console.log('scroll'); break;
+        
       }
     } else if (evt.currentTarget === window) {
       switch (evt.type) {
+        case 'scroll':
         case 'wheel': this.onWindowWheel(evt); break;
       }
     } else if (evt.currentTarget === this.element) {
