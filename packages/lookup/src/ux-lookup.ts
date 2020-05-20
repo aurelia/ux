@@ -1,27 +1,34 @@
 import { customElement, useView, bindable, inject, PLATFORM, TaskQueue, bindingMode } from 'aurelia-framework';
 import { UxInputElement } from '@aurelia-ux/input';
-import { UxComponent, UxTheme } from '@aurelia-ux/core';
+import { UxComponent, UxTheme, StyleEngine, normalizeNumberAttribute } from '@aurelia-ux/core';
 import { DiscardablePromise, discard } from './discardable-promise';
+import { UxDefaultLookupConfiguration } from './ux-lookup-configuration';
 
 const UP = 38;
 const DOWN = 40;
 const ENTER = 13;
 
-@inject(Element, TaskQueue)
+@inject(Element, TaskQueue, UxDefaultLookupConfiguration, StyleEngine)
 @customElement('ux-lookup')
 @useView(PLATFORM.moduleName('./ux-lookup.html'))
 export class UxLookup implements UxComponent, EventListenerObject {
-  constructor(private element: HTMLElement, private taskQueue: TaskQueue) { }
+  constructor(private element: HTMLElement, private taskQueue: TaskQueue, public defaultConfiguration: UxDefaultLookupConfiguration,
+    private styleEngine: StyleEngine) {
+    if (this.defaultConfiguration.theme) {
+      this.theme = this.defaultConfiguration.theme;
+    }
+  }
 
   static SELECTED_EVENT = 'selected';
-
-  theme: UxTheme;
 
   private inputElement: UxInputElement | undefined | null;
   public anchor: { x: number, y: number, maxHeight: number, width: number } | null;
   public isOpen: boolean = false;
   public optionsArray: unknown[];
   public focusedOption: unknown = undefined;
+  public searching: boolean = false;
+  public errorMessage: string | undefined = undefined;
+  public notFound: boolean = false;
 
   @bindable
   displayField: ((option: unknown) => string) | string | undefined;
@@ -65,7 +72,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
 
   getOptions: (filter: string | undefined, value: unknown) => Promise<unknown[]>;
 
-  getOptionsDefault(filter: string, value: unknown): Promise<unknown[]> {
+  async getOptionsDefault(filter: string, value: unknown): Promise<unknown[]> {
     const options = this.options as unknown[];
     if (value) {
       return Promise.resolve([options.find(x => this.getValue(x) === value)]);
@@ -83,6 +90,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
       return;
     }
     await this.updateFilterBasedOnValue();
+    this.element.dispatchEvent(new CustomEvent('change', { detail: { value: this.value } }))
   }
   setValue(value: unknown) {
     if (this.value === value) {
@@ -90,6 +98,23 @@ export class UxLookup implements UxComponent, EventListenerObject {
     }
     this.suppressValueChanged = true;
     this.value = value;
+  }
+
+  @bindable
+  theme: UxTheme;
+  public themeChanged(newValue: any) {
+    if (newValue != null && newValue.themeKey == null) {
+      newValue.themeKey = 'modal';
+    }
+
+    this.styleEngine.applyTheme(newValue, this.element);
+  }
+
+  debounceNumber: number | null | undefined = this.defaultConfiguration.debounce;
+  @bindable
+  debounce: number | string | undefined = this.defaultConfiguration.debounce;
+  debounceChanged() {
+    this.debounceNumber = normalizeNumberAttribute(this.debounce);
   }
 
   bind() {
@@ -157,6 +182,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
     }
   }
 
+  debouncePromise: DiscardablePromise<void>;
   searchPromise: DiscardablePromise<unknown[]>;
   suppressFilterChanged: boolean;
   async filterChanged() {
@@ -164,17 +190,37 @@ export class UxLookup implements UxComponent, EventListenerObject {
       this.suppressFilterChanged = false;
       return;
     }
+
+    discard(this.debouncePromise);
+    this.debouncePromise = new DiscardablePromise(new Promise(r => setTimeout(() => r(), this.debounceNumber ?? 0)));
+    try {
+      await this.debouncePromise;
+    }
+    catch (e) {
+      return;
+    }
     this.setValue(undefined);
     discard(this.searchPromise);
+    if (!this.isOpen) {
+      this.open();
+    }
+    this.searching = true;
+    this.errorMessage = undefined;
+    this.notFound = false;
+
+    this.optionsArray = [];
     try {
       this.searchPromise = new DiscardablePromise(this.getOptions(this.inputElement?.value, undefined));
       this.optionsArray = await this.searchPromise;
+      this.notFound = !this.optionsArray?.length;
     }
     catch (e) {
       if (e !== DiscardablePromise.discarded) {
-        //TODO: indicate an error
-        // this.options = [MdLookup.error, e.message];
+        this.errorMessage = e.message;
       }
+    }
+    finally {
+      this.searching = false;
     }
   }
 
