@@ -1,9 +1,24 @@
 <template>
   <require from="./theming.css"></require>
+  <require from='./json-converter'></require>
+
   <section>
     <h1>Components</h1>
     <p>Demo of each component and diverse styles and types</p>
   </section>
+
+  <section>
+    <h2>Lookup</h2>
+    <p>
+      <ux-input label="Lookup"></ux-input>
+      <ux-lookup options.bind="lookupOptions" display-field="name" value.bind="lookupValue">
+        <!-- <template replace-part="option">
+
+        </template> -->
+      </ux-lookup>
+    </p>
+    <p innerhtml.bind="lookupValue | json"></p>
+</section>
 
   <section>
     <h2>Buttons</h2>

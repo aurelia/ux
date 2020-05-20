@@ -11,6 +11,7 @@ const outDir = path.resolve(__dirname, 'dist');
 module.exports = function ({ production = '' } = {}) {
   return {
     mode: production === 'production' ? 'production' : 'development',
+    devtool: production ? false : 'source-map',
     output: {
       path: outDir,
       filename: production ? '[name].[chunkhash].bundle.js' : '[name].[hash].bundle.js',
@@ -73,6 +74,7 @@ module.exports = function ({ production = '' } = {}) {
           'input',
           'input-info',
           'list',
+          'lookup',
           'modal',
           'positioning',
           'radio',

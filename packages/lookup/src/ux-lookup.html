@@ -1,0 +1,12 @@
+<template class="ux-lookup--${isOpen ? 'open' : 'closed'}"
+  css="top: ${anchor.y}px; left: ${anchor.x}px; max-height: ${anchor.maxHeight}px; width: ${anchor.width}px" tabindex="0">
+  <require from="./ux-lookup.css"></require>
+
+  <div repeat.for="option of optionsArray"
+    class="ux-lookup__option ${option===focusedOption ? 'ux-lookup__option--focused' : ''}"
+    mousedown.delegate="select(option)">
+    <template replaceable part="option">
+      ${getDisplay(option)}
+    </template>
+  </div>
+</template>

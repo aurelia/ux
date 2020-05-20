@@ -1,12 +1,13 @@
 {
-  "name": "@aurelia-ux/components",
+  "name": "@aurelia-ux/lookup",
   "version": "0.20.0",
-  "description": "Official components made with Aurelia UX",
+  "description": "Lookup component for Aurelia UX",
   "keywords": [
     "aurelia",
     "styles",
     "components",
-    "ux"
+    "ux",
+    "lookup"
   ],
   "homepage": "http://aurelia.io",
   "bugs": {
@@ -15,7 +16,9 @@
   "license": "MIT",
   "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
   "contributors": [
-    "Zach Hollingshead <zach.hollingshead@gmail.com>"
+    "Zach Hollingshead <zach.hollingshead@gmail.com>",
+    "bigopon <bigopon.777@gmail.com>",
+    "Maxim Balaganskiy <m.balaganskiY@gmail.com>"
   ],
   "main": "dist/commonjs/index.js",
   "module": "dist/native-modules/index.js",
@@ -33,9 +36,12 @@
     "build-ts:ntv": "tsc -p tsconfig.build.json -t es5 -m es6      --outDir dist/native-modules",
     "build-ts:es6": "tsc -p tsconfig.build.json -t es6 -m es6      --outDir dist/es2015",
     "build-ts:types": "tsc -p tsconfig.build.json --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+    "build-assets:amd": "copyfiles -u 1 src/**/*.html src/**/*.css dist/amd",
+    "build-assets:cjs": "copyfiles -u 1 src/**/*.html src/**/*.css dist/commonjs",
+    "build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",
+    "build-assets:es6": "copyfiles -u 1 src/**/*.html src/**/*.css dist/es2015",
     "prebuild": "rimraf dist",
-    "build": "concurrently \"npm:build-ts:*\"",
-    "build:typings": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+    "build": "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\"",
     "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
     "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
     "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",
@@ -64,7 +70,7 @@
       "aurelia-framework": "^1.0.0",
       "aurelia-metadata": "^1.0.0",
       "aurelia-path": "^1.0.0",
-      "@aurelia-ux/core": "^0.4.0"
+      "@aurelia-ux/core": "^0.3.0"
     },
     "dependencies": {
       "aurelia-binding": "^2.0.0",
@@ -78,42 +84,16 @@
       "aurelia-framework": "^1.0.0",
       "aurelia-metadata": "^1.0.0",
       "aurelia-path": "^1.0.0",
-      "@aurelia-ux/button": "^0.6.0",
-      "@aurelia-ux/checkbox": "^0.6.1",
-      "@aurelia-ux/chip-input": "^0.6.0",
-      "@aurelia-ux/core": "^0.6.0",
-      "@aurelia-ux/datepicker": "^0.6.0",
-      "@aurelia-ux/grid": "^0.6.1",
-      "@aurelia-ux/form": "^0.6.0",
-      "@aurelia-ux/input": "^0.6.0",
-      "@aurelia-ux/input-info": "^0.6.0",
-      "@aurelia-ux/list": "^0.6.0",
-      "@aurelia-ux/lookup": "^0.6.0",
-      "@aurelia-ux/radio": "^0.6.0",
-      "@aurelia-ux/slider": "^0.6.0",
-      "@aurelia-ux/switch": "^0.6.0",
-      "@aurelia-ux/textarea": "^0.6.0"
+      "@aurelia-ux/core": "^0.3.0",
+      "@aurelia-ux/input": "^0.3.0",
+      "@aurelia-ux/select": "^0.3.0"
     },
     "devDependencies": {}
   },
   "dependencies": {
-    "@aurelia-ux/button": "^0.20.0",
-    "@aurelia-ux/card": "^0.20.0",
-    "@aurelia-ux/checkbox": "^0.20.0",
-    "@aurelia-ux/chip-input": "^0.20.0",
     "@aurelia-ux/core": "^0.20.0",
-    "@aurelia-ux/datepicker": "^0.20.0",
-    "@aurelia-ux/form": "^0.20.0",
-    "@aurelia-ux/grid": "^0.20.0",
     "@aurelia-ux/input": "^0.20.0",
-    "@aurelia-ux/input-info": "^0.20.0",
-    "@aurelia-ux/list": "^0.20.0",
-    "@aurelia-ux/lookup": "^0.20.0",
-    "@aurelia-ux/radio": "^0.20.0",
     "@aurelia-ux/select": "^0.20.0",
-    "@aurelia-ux/slider": "^0.20.0",
-    "@aurelia-ux/switch": "^0.20.0",
-    "@aurelia-ux/textarea": "^0.20.0",
     "aurelia-binding": "^2.0.0"
   },
   "devDependencies": {
@@ -157,13 +137,5 @@
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
-  },
-  "aurelia": {
-    "build": {
-      "resources": []
-    },
-    "documentation": {
-      "articles": []
-    }
   }
 }
