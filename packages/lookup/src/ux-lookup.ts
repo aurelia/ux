@@ -126,7 +126,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
   attached() {
     this.inputElement = this.element.parentElement?.querySelector<UxInputElement>('ux-input');
     if (this.inputElement) {
-      ['click', 'blur', 'change', 'keydown', 'scroll'].map(x => this.inputElement!.addEventListener(x, this));
+      ['click', 'blur', 'change', 'keydown'].map(x => this.inputElement!.addEventListener(x, this));
     }
     ['blur', 'keydown'].map(x => this.element.addEventListener(x, this));
     this.valueChanged();
@@ -134,7 +134,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
 
   detached() {
     if (this.inputElement) {
-      ['click', 'blur', 'change', 'keydown', 'scroll'].map(x => this.inputElement!.removeEventListener(x, this));
+      ['click', 'blur', 'change', 'keydown'].map(x => this.inputElement!.removeEventListener(x, this));
     }
     ['blur', 'keydown'].map(x => this.element.removeEventListener(x, this));
   }
@@ -144,8 +144,14 @@ export class UxLookup implements UxComponent, EventListenerObject {
       return;
     }
     this.updateAnchor();
-    ['wheel', 'scroll'].map(x => window.addEventListener(x, this));
+    ['wheel', 'scroll'].map(x => window.addEventListener(x, this, true));
     this.taskQueue.queueTask(() => this.isOpen = true);
+  }
+
+  close() {
+    this.isOpen = false;
+    this.focusedOption = undefined;
+    ['wheel', 'scroll'].map(x => window.addEventListener(x, this, true));
   }
 
   updateAnchor() {
@@ -178,12 +184,6 @@ export class UxLookup implements UxComponent, EventListenerObject {
     }
   }
 
-  close() {
-    this.isOpen = false;
-    this.focusedOption = undefined;
-    ['wheel', 'scroll'].map(x => window.addEventListener(x, this));
-  }
-
   handleEvent(evt: Event): void {
     if (evt.currentTarget === this.inputElement) {
       switch (evt.type) {
@@ -192,7 +192,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
         case 'change': this.filterChanged(); break;
         case 'keydown': this.onInputKeydown(evt as KeyboardEvent); break;
         case 'scroll': console.log('scroll'); break;
-        
+
       }
     } else if (evt.currentTarget === window) {
       switch (evt.type) {
