@@ -85,15 +85,13 @@
       "aurelia-metadata": "^1.0.0",
       "aurelia-path": "^1.0.0",
       "@aurelia-ux/core": "^0.3.0",
-      "@aurelia-ux/input": "^0.3.0",
-      "@aurelia-ux/select": "^0.3.0"
+      "@aurelia-ux/input": "^0.3.0"
     },
     "devDependencies": {}
   },
   "dependencies": {
     "@aurelia-ux/core": "^0.20.0",
     "@aurelia-ux/input": "^0.20.0",
-    "@aurelia-ux/select": "^0.20.0",
     "aurelia-binding": "^2.0.0"
   },
   "devDependencies": {
