@@ -16,6 +16,7 @@
     "packages/list",
     "packages/modal",
     "packages/positioning",
+    "packages/progress",
     "packages/radio",
     "packages/select",
     "packages/sidenav",

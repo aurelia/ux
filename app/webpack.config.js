@@ -75,6 +75,7 @@ module.exports = function ({ production = '' } = {}) {
           'list',
           'modal',
           'positioning',
+          'progress',
           'radio',
           'select',
           'sidenav',
