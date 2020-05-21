@@ -171,6 +171,7 @@
       <ux-chip click.delegate="selectComponent('slider')" class="${selectedComponent === 'slider' ? 'ux-chip--selected':''}">Slider</ux-chip>
       <ux-chip click.delegate="selectComponent('checkbox')" class="${selectedComponent === 'checkbox' ? 'ux-chip--selected':''}">Checkbox</ux-chip>
       <ux-chip click.delegate="selectComponent('radio')" class="${selectedComponent === 'radio' ? 'ux-chip--selected':''}">Radio</ux-chip>
+      <ux-chip click.delegate="selectComponent('sidenav')" class="${selectedComponent === 'sidenav' ? 'ux-chip--selected':''}">Sidenav</ux-chip>
     </div>
 
     <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'button'">
@@ -182,7 +183,7 @@
           </div>
         </ux-card-header>
         <ux-card-media class="ux-card-component__media">
-          <ux-button class="${buttonPreviewClass}" type.bind="buttonPreviewType" disabled.bind="buttonPreviewDisabled">Exemple</ux-button>          
+          <ux-button class="${buttonPreviewClass}" type.bind="buttonPreviewType" disabled.bind="buttonPreviewDisabled">Example</ux-button>          
         </ux-card-media>
       </ux-card>
       <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
@@ -776,6 +777,39 @@
         </ux-card-content>
       </ux-card>
     </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" show.bind="selectedComponent === 'sidenav'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Sidenav</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-sidenav class="theming">
+            <ux-sidenav-drawer side="left" view-model.ref="drawer" backdrop over open>Drawer</ux-sidenav-drawer>
+            <ux-sidenav-content>
+              <ux-button click.delegate="drawer.toggle()">Toggle</ux-button>
+            </ux-sidenav-content>
+          </ux-sidenav>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field repeat.for="prop of ['backdropColor', 'drawerBackground', 'drawerForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.sidenav[prop]" change.delegate="sidenavChanged()">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.sidenav[prop]}"></span>
+            </ux-input>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.sidenav) & signal:'sidenav-changed'">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
   </section>
 
 </template>

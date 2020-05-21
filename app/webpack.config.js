@@ -17,14 +17,6 @@ module.exports = function ({ production = '' } = {}) {
       sourceMapFilename: production ? '[name].[chunkhash].bundle.map' : '[name].[hash].bundle.map',
       chunkFilename: production ? '[name].[chunkhash].chunk.js' : '[name].[hash].chunk.js'
     },
-    resolveLoader: {
-      alias: {
-        // Alias loader because we aliased ux packages.
-        // Without this it is impossible to specify css-loader in an import statement in ux-configuration
-        // because webpack starts looking for css-loader in core/src folder.
-        'css-loader': path.resolve(__dirname, './node_modules/css-loader')
-      }
-    },
     resolve: {
       extensions: ['.ts', '.js'],
       modules: [
@@ -86,6 +78,7 @@ module.exports = function ({ production = '' } = {}) {
           'progress',
           'radio',
           'select',
+          'sidenav',
           'slider',
           'switch',
           'textarea',

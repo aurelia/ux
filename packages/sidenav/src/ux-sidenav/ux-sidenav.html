@@ -1,0 +1,5 @@
+<template size="width.bind: width">
+  <require from="./ux-sidenav.css"></require>
+  <slot></slot>
+  <div class="ux-sidenav__backdrop" if.bind="backdrop" click.delegate="close()"></div>
+</template>

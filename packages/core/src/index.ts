@@ -3,6 +3,7 @@ import { BindingBehaviorResource, FrameworkConfiguration, PLATFORM } from 'aurel
 import { AureliaUX } from './aurelia-ux';
 import { BooleanBB } from './components/boolean-attr-binding-behavior';
 
+export { Size, SizeCustomAttribute } from './attributes/size-attribute';
 export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
 export { processDesignAttributes } from './designs/design-attributes';
@@ -15,6 +16,7 @@ export { UxComponent } from './components/ux-component';
 export { UxInputComponent } from './components/ux-input-component';
 export { UxChoiceAttribute } from './components/ux-choice-attribute';
 export { UxChoiceContainerAttribute } from './components/ux-choice-container-attribute';
+export { IController } from './components/i-controller';
 
 export { Design } from './designs/design';
 export { UxTheme } from './styles/ux-theme';
@@ -36,6 +38,7 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Au
   boolAttr.initialize(config.container, BooleanBB);
   boolAttr.register(config.aurelia.resources, 'booleanAttr');
   config.globalResources([
+    PLATFORM.moduleName('./attributes/size-attribute'),
     PLATFORM.moduleName('./components/ux-choice-attribute'),
     PLATFORM.moduleName('./components/ux-choice-container-attribute')
   ]);

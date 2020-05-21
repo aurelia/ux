@@ -2,9 +2,10 @@ import 'aurelia-polyfills';
 import { initialize } from 'aurelia-pal-browser';
 import { Aurelia, PLATFORM } from 'aurelia-framework';
 import { WebpackLoader } from 'aurelia-loader-webpack';
-import { UxDefaultModalConfiguration } from '@aurelia-ux/modal';
-import { UxPositioningConfiguration } from '@aurelia-ux/positioning';
+import { UxDefaultModalConfiguration } from '@aurelia-ux/modal';
+import { UxPositioningConfiguration } from '@aurelia-ux/positioning';
 import icons from './../../packages/icons/sets/full-array.json';
+import { UxDefaultSidenavConfiguration } from '../../packages/sidenav/src/ux-default-sidenav-configuration';
 
 async function configure(aurelia: Aurelia): Promise<void> {
   aurelia
@@ -19,7 +20,7 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/datepicker'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/form'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/grid'))
-    .plugin(PLATFORM.moduleName('@aurelia-ux/icons'), {icons: icons})
+    .plugin(PLATFORM.moduleName('@aurelia-ux/icons'), { icons: icons })
     .plugin(PLATFORM.moduleName('@aurelia-ux/input'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/input-info'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/list'))
@@ -34,6 +35,11 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/progress'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/radio'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/select'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/sidenav'), (config: UxDefaultSidenavConfiguration) => {
+      config.modalBreakpoint = 600;
+      config.backdrop = false;
+      config.over = false;
+    })
     .plugin(PLATFORM.moduleName('@aurelia-ux/slider'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/switch'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/textarea'))

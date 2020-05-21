@@ -12,3 +12,4 @@ dist/doc-temp
 dist/test
 coverage
 app/dist
+*.css.map
