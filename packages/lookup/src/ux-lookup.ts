@@ -185,25 +185,29 @@ export class UxLookup implements UxComponent, EventListenerObject {
   }
 
   handleEvent(evt: Event): void {
-    if (evt.currentTarget === this.inputElement) {
-      switch (evt.type) {
-        case 'click': this.open(); break;
-        case 'blur': this.onInputBlur(); break;
-        case 'change': this.filterChanged(); break;
-        case 'keydown': this.onInputKeydown(evt as KeyboardEvent); break;
-        case 'scroll': console.log('scroll'); break;
+    switch (evt.currentTarget) {
+      case this.inputElement:
+        switch (evt.type) {
+          case 'click': this.open(); break;
+          case 'blur': this.onInputBlur(); break;
+          case 'change': this.filterChanged(); break;
+          case 'keydown': this.onInputKeydown(evt as KeyboardEvent); break;
+          case 'scroll': console.log('scroll'); break;
 
-      }
-    } else if (evt.currentTarget === window) {
-      switch (evt.type) {
-        case 'scroll':
-        case 'wheel': this.onWindowWheel(evt); break;
-      }
-    } else if (evt.currentTarget === this.element) {
-      switch (evt.type) {
-        case 'blur': this.onBlur(); break;
-        case 'keydown': this.onKeydown(evt as KeyboardEvent); break;
-      }
+        }
+        break;
+      case window:
+        switch (evt.type) {
+          case 'scroll':
+          case 'wheel': this.onWindowWheel(evt); break;
+        }
+        break;
+      case this.element:
+        switch (evt.type) {
+          case 'blur': this.onBlur(); break;
+          case 'keydown': this.onKeydown(evt as KeyboardEvent); break;
+        }
+        break;
     }
   }
 
