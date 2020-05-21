@@ -1,7 +1,7 @@
 import { customElement, useView, bindable, inject, PLATFORM, TaskQueue, bindingMode } from 'aurelia-framework';
 import { UxInputElement } from '@aurelia-ux/input';
 import { UxComponent, StyleEngine, normalizeNumberAttribute } from '@aurelia-ux/core';
-import { DiscardablePromise, discard } from './discardable-promise';
+import { DiscardablePromise } from './discardable-promise';
 import { UxDefaultLookupConfiguration } from './ux-lookup-configuration';
 import { UxLookupTheme } from './ux-lookup-theme';
 
@@ -222,7 +222,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
       return;
     }
 
-    discard(this.debouncePromise);
+    this.debouncePromise?.discard();
     this.debouncePromise = new DiscardablePromise(new Promise(r => setTimeout(() => r(), this.debounceNumber ?? 0)));
     try {
       await this.debouncePromise;
@@ -231,7 +231,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
       return;
     }
     this.setValue(undefined);
-    discard(this.searchPromise);
+    this.searchPromise?.discard();
     if (!this.isOpen) {
       this.open();
     }
