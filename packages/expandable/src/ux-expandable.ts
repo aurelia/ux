@@ -45,9 +45,9 @@ export class UxExpandable implements UxComponent {
   }
 
   setContentContainerHeightToAuto() {
-    this.content.style.overflow = "visible";
-    this.content.style.height = "auto";
-    this.content.removeEventListener("transitionend", this);
+    this.contentContainer.style.overflow = "visible";
+    this.contentContainer.style.height = "auto";
+    this.contentContainer.removeEventListener("transitionend", this);
   }
 
   bind() { }
