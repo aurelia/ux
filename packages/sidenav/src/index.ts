@@ -18,4 +18,4 @@ export function configure(config: FrameworkConfiguration, callback?: (config: Ux
   }
 }
 
-export { UxSidenav };
+export { UxSidenav, UxDefaultSidenavConfiguration };
