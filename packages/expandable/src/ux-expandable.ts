@@ -30,7 +30,10 @@ export class UxExpandable implements UxComponent {
   openChanged() {
     this.openBoolean = normalizeBooleanAttribute('open', this.open);
     this.updateContainerHeight();
-    this.element.dispatchEvent(new CustomEvent(UxExpandable.OPEN_CHANGED_EVENT, { detail: { component: this, open: this.openBoolean } }));
+    this.element.dispatchEvent(new CustomEvent(
+      UxExpandable.OPEN_CHANGED_EVENT,
+      { detail: { component: this, open: this.openBoolean } }
+    ));
   }
 
   @bindable
