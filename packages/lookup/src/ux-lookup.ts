@@ -8,6 +8,9 @@ import { UxLookupTheme } from './ux-lookup-theme';
 const UP = 38;
 const DOWN = 40;
 const ENTER = 13;
+const windowEvents = ['wheel', 'scroll', 'resize'];
+const inputEvents = ['click', 'blur', 'change', 'keydown'];
+const lookupEvents = ['blur', 'keydown'];
 
 @inject(Element, TaskQueue, UxDefaultLookupConfiguration, StyleEngine)
 @customElement('ux-lookup')
@@ -126,17 +129,17 @@ export class UxLookup implements UxComponent, EventListenerObject {
   attached() {
     this.inputElement = this.element.parentElement?.querySelector<UxInputElement>('ux-input');
     if (this.inputElement) {
-      ['click', 'blur', 'change', 'keydown'].map(x => this.inputElement!.addEventListener(x, this));
+      inputEvents.map(x => this.inputElement!.addEventListener(x, this));
     }
-    ['blur', 'keydown'].map(x => this.element.addEventListener(x, this));
+    lookupEvents.map(x => this.element.addEventListener(x, this));
     this.valueChanged();
   }
 
   detached() {
     if (this.inputElement) {
-      ['click', 'blur', 'change', 'keydown'].map(x => this.inputElement!.removeEventListener(x, this));
+      inputEvents.map(x => this.inputElement!.removeEventListener(x, this));
     }
-    ['blur', 'keydown'].map(x => this.element.removeEventListener(x, this));
+    lookupEvents.map(x => this.element.removeEventListener(x, this));
   }
 
   async open() {
@@ -144,14 +147,14 @@ export class UxLookup implements UxComponent, EventListenerObject {
       return;
     }
     this.updateAnchor();
-    ['wheel', 'scroll'].map(x => window.addEventListener(x, this, true));
+    windowEvents.map(x => window.addEventListener(x, this, true));
     this.taskQueue.queueTask(() => this.isOpen = true);
   }
 
   close() {
     this.isOpen = false;
     this.focusedOption = undefined;
-    ['wheel', 'scroll'].map(x => window.addEventListener(x, this, true));
+    windowEvents.map(x => window.addEventListener(x, this, true));
   }
 
   updateAnchor() {
@@ -192,14 +195,13 @@ export class UxLookup implements UxComponent, EventListenerObject {
           case 'blur': this.onInputBlur(); break;
           case 'change': this.filterChanged(); break;
           case 'keydown': this.onInputKeydown(evt as KeyboardEvent); break;
-          case 'scroll': console.log('scroll'); break;
-
         }
         break;
       case window:
         switch (evt.type) {
           case 'scroll':
           case 'wheel': this.onWindowWheel(evt); break;
+          case 'resize': this.onWindowResize(); break;
         }
         break;
       case this.element:
@@ -329,5 +331,11 @@ export class UxLookup implements UxComponent, EventListenerObject {
         break;
     }
     evt.preventDefault();
+  }
+
+  onWindowResize() {
+    if(this.isOpen){
+      this.updateAnchor();
+    }
   }
 }
