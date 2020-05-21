@@ -1,15 +1,17 @@
-import { UxCheckboxTheme } from './../../packages/checkbox/src/ux-checkbox-theme';
-import { UxRadioTheme } from './../../packages/radio/src/ux-radio-theme';
-import { UxSliderTheme } from './../../packages/slider/src/ux-slider-theme';
-import { UxDatepickerTheme } from './../../packages/datepicker/src/ux-datepicker-theme';
-import { UxTextAreaTheme } from './../../packages/textarea/src/ux-textarea-theme';
+import { UxCheckboxTheme } from '@aurelia-ux/checkbox';
+import { UxRadioTheme } from '@aurelia-ux/radio';
+import { UxSliderTheme } from '@aurelia-ux/slider';
+import { UxDatepickerTheme } from '@aurelia-ux/datepicker';
+import { UxTextAreaTheme } from '@aurelia-ux/textarea';
 import { StyleEngine, UxTheme } from '@aurelia-ux/core';
 import * as themes from './themes.json';
 import { inject, observable } from 'aurelia-framework';
 import { UxInputTheme } from '@aurelia-ux/input';
 import { UxChipInputTheme } from '@aurelia-ux/chip-input';
 import { UxButtonTheme } from '@aurelia-ux/button';
+import { UxExpandableTheme } from '@aurelia-ux/expandable';
 import { UxSidenavTheme } from '@aurelia-ux/sidenav';
+import { Theming } from './theming';
 
 export interface ThemesSet {
   name: string;
@@ -32,6 +34,7 @@ export class ThemeService {
   public chipInput: UxChipInputTheme = { themeKey: 'chip-input' };
   public sidenav: UxSidenavTheme;
   public slider: UxSliderTheme = { themeKey: 'slider' };
+  public expandable: UxExpandableTheme;
   @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderRadius: number = 2;
   @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderWidth: number = 1;
   @observable({ changeHandler: 'inputVariableChanged' }) public inputBorderRadius: number = 2;
@@ -83,7 +86,7 @@ export class ThemeService {
     const name = `New theme ${this.themesSets.length + 1}`;
     this.themesSets.push({
       name,
-      themes: [...this.light, this.sidenav]
+      themes: [...this.light, this.sidenav, this.expandable]
     });
     localStorage.setItem('themes', JSON.stringify(this.themesSets));
   }
@@ -127,8 +130,9 @@ export class ThemeService {
     }
     this.currentTheme = theme;
     localStorage.setItem('currentTheme', this.currentTheme.toString());
+    this.expandable = { ...new UxExpandableTheme(), ...themeToApply.find(x => x.themeKey === 'expandable') };
     this.sidenav = {...new UxSidenavTheme(), ...themeToApply.find(x => x.themeKey === 'sidenav') as UxSidenavTheme};    
-    themeToApply.push(this.sidenav);
+    themeToApply.push(this.sidenav, this.expandable);
     this.styleEngine.applyThemeGroup(themeToApply);
   }
 

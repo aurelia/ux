@@ -6,6 +6,7 @@ export * from '@aurelia-ux/checkbox';
 export * from '@aurelia-ux/chip-input';
 export * from '@aurelia-ux/grid';
 export * from '@aurelia-ux/datepicker';
+export * from '@aurelia-ux/expandable';
 export * from '@aurelia-ux/form';
 export * from '@aurelia-ux/input';
 export * from '@aurelia-ux/input-info';
@@ -22,6 +23,7 @@ export function configure(config: FrameworkConfiguration) {
   config.plugin(PLATFORM.moduleName('@aurelia-ux/checkbox'));
   config.plugin(PLATFORM.moduleName('@aurelia-ux/chip-input'));
   config.plugin(PLATFORM.moduleName('@aurelia-ux/datepicker'));
+  config.plugin(PLATFORM.moduleName('@aurelia-ux/expandable'));
   config.plugin(PLATFORM.moduleName('@aurelia-ux/grid'));
   config.plugin(PLATFORM.moduleName('@aurelia-ux/form'));
   config.plugin(PLATFORM.moduleName('@aurelia-ux/input'));

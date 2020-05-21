@@ -401,4 +401,20 @@
     <ux-slider if.bind="!progressIndeterminate" min="0" max="100" value.bind="progressValue"></ux-slider>
     <ux-progress value.bind="progressValue"></ux-progress>
   </section>
+
+  <section class="components">
+    <h2>Expandable</h2>
+    <ux-expandable accordion>
+      <div slot="header">I'm an accordion 1</div>
+      There can be only one open accordion in a container
+    </ux-expandable>
+    <ux-expandable accordion>
+      <div slot="header">I'm an accordion 2</div>
+      There can be only one open accordion in a container
+    </ux-expandable>
+    <ux-expandable>
+      <div slot="header">I'm not an accordion</div>
+      Content
+    </ux-expandable>
+  </section>
 </template>

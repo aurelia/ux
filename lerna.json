@@ -8,6 +8,7 @@
     "packages/components",
     "packages/core",
     "packages/datepicker",
+    "packages/expandable",
     "packages/form",
     "packages/grid",
     "packages/icons",
