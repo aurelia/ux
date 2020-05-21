@@ -334,5 +334,20 @@
     </ux-grid>
   </section>
 
-  <section></section>
+  <section>
+    <h2>Progress</h2>
+    <ux-field>
+      <label>Mode</label>
+      <div class="ux-form__row">
+        <ux-radio name="progressMode" checked.bind="progressIndeterminate" model.bind="true"></ux-radio>
+        <label>indeterminate</label>
+      </div>
+      <div class="ux-form__row">
+        <ux-radio name="progressMode" checked.bind="progressIndeterminate" model.bind="false"></ux-radio>
+        <label>determinate</label>
+      </div>
+    </ux-field>
+    <ux-slider if.bind="!progressIndeterminate" min="0" max="100" value.bind="progressValue"></ux-slider>
+    <ux-progress value.bind="progressValue"></ux-progress>
+  </section>
 </template>
