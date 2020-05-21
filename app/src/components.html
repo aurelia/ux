@@ -415,4 +415,20 @@
     </p>
     <p innerhtml.bind="lookupValue | json"></p>
   </section>
+
+  <section class="components">
+    <h2>Expandable</h2>
+    <ux-expandable accordion>
+      <div slot="header">I'm an accordion 1</div>
+      There can be only one open accordion in a container
+    </ux-expandable>
+    <ux-expandable accordion>
+      <div slot="header">I'm an accordion 2</div>
+      There can be only one open accordion in a container
+    </ux-expandable>
+    <ux-expandable>
+      <div slot="header">I'm not an accordion</div>
+      Content
+    </ux-expandable>
+  </section>
 </template>

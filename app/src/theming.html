@@ -173,6 +173,7 @@
       <ux-chip click.delegate="selectComponent('checkbox')" class="${selectedComponent === 'checkbox' ? 'ux-chip--selected':''}">Checkbox</ux-chip>
       <ux-chip click.delegate="selectComponent('radio')" class="${selectedComponent === 'radio' ? 'ux-chip--selected':''}">Radio</ux-chip>
       <ux-chip click.delegate="selectComponent('lookup')" class="${selectedComponent === 'lookup' ? 'ux-chip--selected':''}">Lookup</ux-chip>
+      <ux-chip click.delegate="selectComponent('expandable')" class="${selectedComponent === 'expandable' ? 'ux-chip--selected':''}">Expandable</ux-chip>
       <ux-chip click.delegate="selectComponent('sidenav')" class="${selectedComponent === 'sidenav' ? 'ux-chip--selected':''}">Sidenav</ux-chip>
     </div>
 
@@ -777,6 +778,35 @@
       <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
         <ux-card-content innerhtml.bind="json(themeService.radio)">
         </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'expandable'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Expandable</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-expandable>
+            <div slot="header">Click me</div>
+            Content
+          </ux-expandable>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field>
+            <label>Border radius</label>
+            <br><ux-slider value.bind="themeService.expandable.borderRadius | pixelsToNumber" min="1" max="20" step="1"
+              mouseup.delegate="expandableChanged()"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.expandable) & signal:'expandable-changed'"></ux-card-content>
       </ux-card>
     </ux-grid>
 

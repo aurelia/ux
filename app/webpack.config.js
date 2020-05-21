@@ -68,6 +68,7 @@ module.exports = function ({ production = '' } = {}) {
           'chip-input',
           'core',
           'datepicker',
+          'expandable',
           'form',
           'grid',
           'icons',

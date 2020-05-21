@@ -18,6 +18,7 @@
     "@aurelia-ux/chip-input": "file:../packages/chip-input",
     "@aurelia-ux/core": "file:../packages/core",
     "@aurelia-ux/datepicker": "file:../packages/datepicker",
+    "@aurelia-ux/expandable": "file:../packages/expandable",
     "@aurelia-ux/grid": "file:../packages/grid",
     "@aurelia-ux/icons": "file:../packages/icons",
     "@aurelia-ux/input": "file:../packages/input",

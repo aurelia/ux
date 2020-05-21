@@ -9,7 +9,7 @@ export class Theming {
 
   public design: Design;
 
-  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' | 'sidenav' = 'select';
+  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' | 'expandable' | 'sidenav' | 'lookup' = 'select';
 
   public buttonPreviewClass = '';
   public buttonPreviewType = 'raised';
@@ -84,6 +84,10 @@ export class Theming {
 
   public sidenavChanged() {
     this.signaler.signal('sidenav-changed');
+  }
+
+  public expandableChanged() {
+    this.signaler.signal('expandable-changed');
   }
 
   public lookupChanged() {
