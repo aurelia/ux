@@ -36,3 +36,8 @@
 .component-selector ux-chip {
   cursor: pointer;
 }
+
+ux-sidenav.theming {
+  flex: 1;
+  width: 100%;
+}

@@ -10,6 +10,7 @@ import { UxInputTheme } from '@aurelia-ux/input';
 import { UxChipInputTheme } from '@aurelia-ux/chip-input';
 import { UxButtonTheme } from '@aurelia-ux/button';
 import { UxExpandableTheme } from '@aurelia-ux/expandable';
+import { UxSidenavTheme } from '@aurelia-ux/sidenav';
 import { Theming } from './theming';
 
 export interface ThemesSet {
@@ -31,6 +32,7 @@ export class ThemeService {
   public radio: UxRadioTheme = { themeKey: 'radio' };
   public datepicker: UxDatepickerTheme = { themeKey: 'datepicker' };
   public chipInput: UxChipInputTheme = { themeKey: 'chip-input' };
+  public sidenav: UxSidenavTheme;
   public slider: UxSliderTheme = { themeKey: 'slider' };
   public expandable: UxExpandableTheme;
   @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderRadius: number = 2;
@@ -84,7 +86,7 @@ export class ThemeService {
     const name = `New theme ${this.themesSets.length + 1}`;
     this.themesSets.push({
       name,
-      themes: [...this.light, this.expandable]
+      themes: [...this.light, this.sidenav, this.expandable]
     });
     localStorage.setItem('themes', JSON.stringify(this.themesSets));
   }
@@ -129,7 +131,8 @@ export class ThemeService {
     this.currentTheme = theme;
     localStorage.setItem('currentTheme', this.currentTheme.toString());
     this.expandable = { ...new UxExpandableTheme(), ...themeToApply.find(x => x.themeKey === 'expandable') };
-    themeToApply.push(this.expandable);
+    this.sidenav = {...new UxSidenavTheme(), ...themeToApply.find(x => x.themeKey === 'sidenav') as UxSidenavTheme};    
+    themeToApply.push(this.sidenav, this.expandable);
     this.styleEngine.applyThemeGroup(themeToApply);
   }
 

@@ -1,5 +1,7 @@
 <template>
   <require from="./theming.css"></require>
+  <require from="./components.css"></require>
+
   <section>
     <h1>Components</h1>
     <p>Demo of each component and diverse styles and types</p>
@@ -7,7 +9,7 @@
 
   <section>
     <h2>Buttons</h2>
-  
+
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="4">
         <h4>Primary (default)</h4>
@@ -35,7 +37,7 @@
       </ux-grid-cell>
     </ux-grid>
   </section>
-  
+
   <section>
     <h2>Input & Input Info</h2>
     <ux-grid class="ux-grid--remove-padding">
@@ -48,7 +50,7 @@
         </p>
         <p>
           <ux-input class="ux-input-component--has-error" label="With error">
-              <ux-icon icon="error" slot="trailing-icon"></ux-icon>
+            <ux-icon icon="error" slot="trailing-icon"></ux-icon>
           </ux-input>
           <ux-input-info>Error message</ux-input-info>
         </p>
@@ -76,27 +78,15 @@
       <ux-grid-cell sm="6">
         <h4>Filled</h4>
         <p><ux-textarea placeholder="With placeholder"></ux-textarea></p>
-        <p>
-          <ux-textarea label="With floating label" auto-resize></ux-textarea>
-        </p>
-        <p>
-          <ux-textarea class="ux-input-component--has-error" label="With error"></ux-textarea>
-        </p>
-        <p>
-          <ux-textarea auto-resize label="Auto Resize"></ux-textarea>
-        </p>
+        <p><ux-textarea label="With floating label" auto-resize></ux-textarea></p>
+        <p><ux-textarea class="ux-input-component--has-error" label="With error"></ux-textarea></p>
+        <p><ux-textarea auto-resize label="Auto Resize"></ux-textarea></p>
       </ux-grid-cell>
       <ux-grid-cell sm="6">
         <h4>Outline</h4>
-        <p>
-          <ux-textarea variant="outline" label="Default"></ux-textarea>
-        </p>
-        <p>
-          <ux-textarea variant="outline" class="ux-input-component--has-error" label="With error"></ux-textarea>
-        </p>
-        <p>
-          <ux-textarea variant="outline" auto-resize label="Auto Resize"></ux-textarea>
-        </p>
+        <p><ux-textarea variant="outline" label="Default"></ux-textarea></p>
+        <p><ux-textarea variant="outline" class="ux-input-component--has-error" label="With error"></ux-textarea></p>
+        <p><ux-textarea variant="outline" auto-resize label="Auto Resize"></ux-textarea></p>
       </ux-grid-cell>
     </ux-grid>
   </section>
@@ -106,13 +96,15 @@
     <ux-grid class="ux-grid--remove-padding">
       <ux-grid-cell sm="6">
         <h4>Filled</h4>
-        <p><ux-select placeholder="Choose an option">
-          <ux-option>Option 1</ux-option>
-          <ux-option>Option 2</ux-option>
-          <ux-option>Option 3</ux-option>
-          <ux-option>Option 4</ux-option>
-          <ux-option>Option 5</ux-option>
-        </ux-select></p>
+        <p>
+          <ux-select placeholder="Choose an option">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
         <p>
           <ux-select label="With floating label">
             <ux-option>Option 1</ux-option>
@@ -134,13 +126,15 @@
       </ux-grid-cell>
       <ux-grid-cell sm="6">
         <h4>Outline</h4>
-        <p><ux-select variant="outline" placeholder="Choose an option">
-          <ux-option>Option 1</ux-option>
-          <ux-option>Option 2</ux-option>
-          <ux-option>Option 3</ux-option>
-          <ux-option>Option 4</ux-option>
-          <ux-option>Option 5</ux-option>
-        </ux-select></p>
+        <p>
+          <ux-select variant="outline" placeholder="Choose an option">
+            <ux-option>Option 1</ux-option>
+            <ux-option>Option 2</ux-option>
+            <ux-option>Option 3</ux-option>
+            <ux-option>Option 4</ux-option>
+            <ux-option>Option 5</ux-option>
+          </ux-select>
+        </p>
         <p>
           <ux-select label="With floating label" variant="outline">
             <ux-option>Option 1</ux-option>
@@ -205,10 +199,12 @@
         <h4>Slider (default)</h4>
         <p><ux-slider min="0" max="100"></ux-slider></p>
         <h4>With icons</h4>
-        <p><ux-slider min="0" max="100">
-          <ux-icon icon="volume_down" slot="leading-icon"></ux-icon>
-          <ux-icon icon="volume_up" slot="trailing-icon"></ux-icon>
-        </ux-slider></p>
+        <p>
+          <ux-slider min="0" max="100">
+            <ux-icon icon="volume_down" slot="leading-icon"></ux-icon>
+            <ux-icon icon="volume_up" slot="trailing-icon"></ux-icon>
+          </ux-slider>
+        </p>
       </ux-grid-cell>
       <ux-grid-cell sm="6">
         <h4>With value</h4>
@@ -332,6 +328,78 @@
         </ux-field>
       </ux-grid-cell>
     </ux-grid>
+  </section>
+
+  <section class="components">
+    <h2>Sidenav</h2>
+    <ux-sidenav>
+      <ux-sidenav-drawer side="left" view-model.ref="leftDrawer" backdrop.bind="leftDrawerBackdrop"
+        over.bind="leftDrawerOver">Left drawer</ux-sidenav-drawer>
+      <ux-sidenav-content>
+        <div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="leftDrawerOver" model.bind="true"></ux-checkbox>
+            <label>over</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="leftDrawerBackdrop" model.bind="true"></ux-checkbox>
+            <label>backdrop</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-button click.delegate="leftDrawer.toggle()">Toggle left</ux-button>
+          </div>
+        </div>
+        <div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="bottomDrawerOver" model.bind="true"></ux-checkbox>
+            <label>over</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-checkbox checked.bind="bottomDrawerBackdrop" model.bind="true"></ux-checkbox>
+            <label>backdrop</label>
+          </div>
+          <div class="ux-form__row">
+            <ux-button click.delegate="bottomDrawer.toggle()">Toggle bottom</ux-button>
+          </div>
+        </div>
+        <div>
+          <div>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="rightDrawerOver" model.bind="true"></ux-checkbox>
+              <label>over</label>
+            </div>
+            <div class="ux-form__row">
+              <ux-checkbox checked.bind="rightDrawerBackdrop" model.bind="true"></ux-checkbox>
+              <label>backdrop</label>
+            </div>
+            <div class="ux-form__row">
+              <ux-button click.delegate="rightDrawer.toggle()">Toggle right</ux-button>
+            </div>
+          </div>
+        </div>
+      </ux-sidenav-content>
+      <ux-sidenav-drawer side="right" view-model.ref="rightDrawer" backdrop.bind="rightDrawerBackdrop"
+        over.bind="rightDrawerOver">Right drawer</ux-sidenav-drawer>
+      <ux-sidenav-drawer side="bottom" view-model.ref="bottomDrawer" backdrop.bind="bottomDrawerBackdrop"
+        over.bind="bottomDrawerOver"><div style="height: 100px">Bottom drawer</div></ux-sidenav-drawer>
+    </ux-sidenav>
+  </section>
+
+  <section>
+    <h2>Progress</h2>
+    <ux-field>
+      <label>Mode</label>
+      <div class="ux-form__row">
+        <ux-radio name="progressMode" checked.bind="progressIndeterminate" model.bind="true"></ux-radio>
+        <label>indeterminate</label>
+      </div>
+      <div class="ux-form__row">
+        <ux-radio name="progressMode" checked.bind="progressIndeterminate" model.bind="false"></ux-radio>
+        <label>determinate</label>
+      </div>
+    </ux-field>
+    <ux-slider if.bind="!progressIndeterminate" min="0" max="100" value.bind="progressValue"></ux-slider>
+    <ux-progress value.bind="progressValue"></ux-progress>
   </section>
 
   <section class="components">

@@ -24,6 +24,7 @@
     "@aurelia-ux/input": "file:../packages/input",
     "@aurelia-ux/input-info": "file:../packages/input-info",
     "@aurelia-ux/list": "file:../packages/list",
+    "@aurelia-ux/progress": "file:../packages/progress",
     "@aurelia-ux/radio": "file:../packages/radio",
     "@aurelia-ux/select": "file:../packages/select",
     "@aurelia-ux/slider": "file:../packages/slider",

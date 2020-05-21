@@ -5,6 +5,7 @@ import { WebpackLoader } from 'aurelia-loader-webpack';
 import { UxDefaultModalConfiguration } from '@aurelia-ux/modal';
 import { UxPositioningConfiguration } from '@aurelia-ux/positioning';
 import icons from './../../packages/icons/sets/full-array.json';
+import { UxDefaultSidenavConfiguration } from '../../packages/sidenav/src/ux-default-sidenav-configuration';
 
 async function configure(aurelia: Aurelia): Promise<void> {
   aurelia
@@ -32,8 +33,14 @@ async function configure(aurelia: Aurelia): Promise<void> {
       config.offsetX = 10;
       config.offsetY = 10;
     })
+    .plugin(PLATFORM.moduleName('@aurelia-ux/progress'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/radio'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/select'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/sidenav'), (config: UxDefaultSidenavConfiguration) => {
+      config.modalBreakpoint = 600;
+      config.backdrop = false;
+      config.over = false;
+    })
     .plugin(PLATFORM.moduleName('@aurelia-ux/slider'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/switch'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/textarea'))
