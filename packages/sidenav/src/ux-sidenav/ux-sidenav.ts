@@ -1,5 +1,5 @@
 import { customElement, useView, inject, TaskQueue, PLATFORM, bindable } from "aurelia-framework";
-import { UxSidenavDrawer, OPEN_CHANGED } from "../ux-sidenav-drawer/ux-sidenav-drawer";
+import { UxSidenavDrawer } from "../ux-sidenav-drawer/ux-sidenav-drawer";
 import { UxSidenavTheme } from "./ux-sidenav-theme";
 import { StyleEngine, normalizeNumberAttribute } from "@aurelia-ux/core";
 import { IUxSidenavDrawerElement } from "../ux-sidenav-drawer/i-ux-sidenav-drawer-element";
@@ -42,28 +42,28 @@ export class UxSidenav {
     this.bottomDrawer = this.element.querySelector<IUxSidenavDrawerElement>('ux-sidenav-drawer[side="bottom"]')?.au.controller.viewModel;
     if (this.leftDrawer) {
       this.updatePadding(this.leftDrawer);
-      this.leftDrawer.element.addEventListener(OPEN_CHANGED, this.leftDrawerOpenChanged);
+      this.leftDrawer.element.addEventListener(UxSidenavDrawer.OPEN_CHANGED_EVENT, this.leftDrawerOpenChanged);
     }
     if (this.rightDrawer) {
       this.updatePadding(this.rightDrawer);
-      this.rightDrawer.element.addEventListener(OPEN_CHANGED, this.rightDrawerOpenChanged);
+      this.rightDrawer.element.addEventListener(UxSidenavDrawer.OPEN_CHANGED_EVENT, this.rightDrawerOpenChanged);
     }
     if (this.bottomDrawer) {
       this.updatePadding(this.bottomDrawer);
-      this.bottomDrawer.element.addEventListener(OPEN_CHANGED, this.bottomDrawerOpenChanged);
+      this.bottomDrawer.element.addEventListener(UxSidenavDrawer.OPEN_CHANGED_EVENT, this.bottomDrawerOpenChanged);
     }
     this.taskQueue.queueTask(() => this.element.classList.add('ux-sidenav--transition'));
   }
 
   detached() {
     if (this.leftDrawer) {
-      this.leftDrawer.element.removeEventListener(OPEN_CHANGED, this.leftDrawerOpenChanged);
+      this.leftDrawer.element.removeEventListener(UxSidenavDrawer.OPEN_CHANGED_EVENT, this.leftDrawerOpenChanged);
     }
     if (this.rightDrawer) {
-      this.rightDrawer.element.removeEventListener(OPEN_CHANGED, this.rightDrawerOpenChanged);
+      this.rightDrawer.element.removeEventListener(UxSidenavDrawer.OPEN_CHANGED_EVENT, this.rightDrawerOpenChanged);
     }
     if (this.bottomDrawer) {
-      this.bottomDrawer.element.removeEventListener(OPEN_CHANGED, this.bottomDrawerOpenChanged);
+      this.bottomDrawer.element.removeEventListener(UxSidenavDrawer.OPEN_CHANGED_EVENT, this.bottomDrawerOpenChanged);
     }
   }
 

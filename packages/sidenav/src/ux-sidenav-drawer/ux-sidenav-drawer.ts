@@ -2,13 +2,14 @@ import { useView, customElement, PLATFORM, inject, bindable } from "aurelia-fram
 import { normalizeBooleanAttribute } from "@aurelia-ux/core";
 import { UxDefaultSidenavConfiguration } from "../ux-default-sidenav-configuration";
 
-export const OPEN_CHANGED = 'open-changed';
-
 @inject(Element, UxDefaultSidenavConfiguration)
 @customElement('ux-sidenav-drawer')
 @useView(PLATFORM.moduleName('./ux-sidenav-drawer.html'))
 export class UxSidenavDrawer {
   constructor(public element: HTMLElement, private defaultConfig: UxDefaultSidenavConfiguration) { }
+
+  static OPEN_CHANGED_EVENT = 'open-changed';
+
 
   @bindable
   side: 'left' | 'right' | 'bottom' = 'left';
@@ -18,7 +19,7 @@ export class UxSidenavDrawer {
   open: boolean | string = false;
   openChanged() {
     this.openBoolean = normalizeBooleanAttribute('open', this.open);
-    this.element.dispatchEvent(new CustomEvent(OPEN_CHANGED, { detail: this.openBoolean }));
+    this.element.dispatchEvent(new CustomEvent(UxSidenavDrawer.OPEN_CHANGED_EVENT, { detail: this.openBoolean }));
   }
 
   @bindable
