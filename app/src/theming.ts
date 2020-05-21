@@ -9,7 +9,7 @@ export class Theming {
 
   public design: Design;
 
-  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' = 'select';
+  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' | 'sidenav' = 'select';
 
   public buttonPreviewClass = '';
   public buttonPreviewType = 'raised';
@@ -50,7 +50,7 @@ export class Theming {
     this.design = this.ux.design;
   }
 
-  public selectTheme(theme: 'light' | 'dark' | number) {
+  public selectTheme(theme: 'light' | 'dark' | number) {
     this.themeService.apply(theme);
   }
 
@@ -82,8 +82,11 @@ export class Theming {
       .replace(/\s/g, '&nbsp;');
   }
 
+  public sidenavChanged() {
+    this.signaler.signal('sidenav-changed');
+  }
+
   public lookupChanged() {
     this.signaler.signal('lookup-changed');
   }
-
 }

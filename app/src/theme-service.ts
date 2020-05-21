@@ -10,6 +10,7 @@ import { inject, observable } from 'aurelia-framework';
 import { UxInputTheme } from '@aurelia-ux/input';
 import { UxChipInputTheme } from '@aurelia-ux/chip-input';
 import { UxButtonTheme } from '@aurelia-ux/button';
+import { UxSidenavTheme } from '@aurelia-ux/sidenav';
 
 export interface ThemesSet {
   name: string;
@@ -30,6 +31,7 @@ export class ThemeService {
   public radio: UxRadioTheme = { themeKey: 'radio' };
   public datepicker: UxDatepickerTheme = { themeKey: 'datepicker' };
   public chipInput: UxChipInputTheme = { themeKey: 'chip-input' };
+  public sidenav: UxSidenavTheme;
   public slider: UxSliderTheme = { themeKey: 'slider' };
   public lookup: UxLookupTheme;
   @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderRadius: number = 2;
@@ -83,7 +85,7 @@ export class ThemeService {
     const name = `New theme ${this.themesSets.length + 1}`;
     this.themesSets.push({
       name,
-      themes: [...this.light, this.lookup]
+      themes: [...this.light, this.sidenav, this.lookup]
     });
     localStorage.setItem('themes', JSON.stringify(this.themesSets));
   }
@@ -128,7 +130,8 @@ export class ThemeService {
     this.currentTheme = theme;
     localStorage.setItem('currentTheme', this.currentTheme.toString());
     this.lookup = { ...new UxLookupTheme(), ...themeToApply.find(x => x.themeKey === 'lookup') };
-    themeToApply.push(this.lookup);
+    this.sidenav = {...new UxSidenavTheme(), ...themeToApply.find(x => x.themeKey === 'sidenav') as UxSidenavTheme};    
+    themeToApply.push(this.sidenav, this.lookup);
     this.styleEngine.applyThemeGroup(themeToApply);
   }
 

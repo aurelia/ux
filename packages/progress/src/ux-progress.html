@@ -1,0 +1,11 @@
+<template class="ux-progress--${valueNumber===undefined ? 'indeterminate' : 'determinate'}"
+  style="width:${diameterNumber}px; height:${diameterNumber}px;">
+  <require from="./ux-progress.css"></require>
+
+  <svg preserveAspectRatio="xMidYMid meet" focusable="false" view-box.bind="viewBox"
+    style="width:${diameterNumber}px; height:${diameterNumber}px;">
+    <circle cx="50%" cy="50%" r="${(diameterNumber-strokeWidthNumber)/2}"
+      css="stroke-dasharray: ${strokeCircumference}px; stroke-dashoffset:${strokeDashOffset}px; stroke-width:${strokeWidthNumber}px; animation-name: ux-progress-stroke-rotate-${diameter}-${strokeWidthNumber}">
+    </circle>
+  </svg>
+</template>

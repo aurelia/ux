@@ -1,0 +1,28 @@
+@import '../common.scss';
+$backdropColor: rgba(0,0,0,0.6);
+
+ux-sidenav {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+
+  &.ux-sidenav--transition {
+    transition: {
+      duration: $duration;
+      timing-function: $timing-function;
+      property: padding-left, padding-right, padding-bottom;
+    }
+  }
+
+  >.ux-sidenav__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: $backdropColor;
+    background: var(--aurelia-ux--sidenav-backdrop-color, $backdropColor);
+    z-index: 2;
+  }
+}

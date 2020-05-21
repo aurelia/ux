@@ -1,3 +1,6 @@
+import { observable } from "aurelia-binding";
+import { timingSafeEqual } from "crypto";
+
 export class Components {
 
   public interests: Array<string> = ['sport'];
@@ -6,4 +9,12 @@ export class Components {
   public ageGroup2: string = '40+';
   public lookupOptions = Array.from({ length: 20 }, (x, i) => ({ id: i, name: `option ${i}${i === 5 ? ' loooooooooooooong' : ''}` }));
   public lookupValue = this.lookupOptions[1];
+  
+  @observable
+  public progressIndeterminate: boolean = false;
+  progressIndeterminateChanged() {
+    this.progressValue = this.progressIndeterminate ? undefined : 75;
+  }
+
+  public progressValue: number | undefined = 75;
 }

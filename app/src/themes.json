@@ -1,6 +1,5 @@
 {
-  "none": [
-    {
+  "none": [{
       "themeKey": "design",
       "controlBackground": "",
       "controlForeground": "",
@@ -24,11 +23,15 @@
       "accentLightForeground": "",
       "accentDark": "",
       "accentDarkForeground": ""
-    }],
-  "light": [
+    },
     {
+      "themeKey": "sidenav",
+      "backdropColor": ""
+    }
+  ],
+  "light": [{
       "themeKey": "design",
-    
+
       "controlBackground": "#EFEFEF",
       "controlForeground": "#333333",
       "appBackground": "#FAFAFA",
@@ -51,9 +54,13 @@
       "accentLightForeground": "#FFFFFF",
       "accentDark": "#F50057",
       "accentDarkForeground": "#FFFFFF"
-    }],
-  "dark": [
+    },
     {
+      "themeKey": "sidenav",
+      "backdropColor": "rgba(0, 0, 0, 0.6)"
+    }
+  ],
+  "dark": [{
       "themeKey": "design",
       "appBackground": "#222255",
       "appForeground": "#BABABA",
@@ -78,6 +85,10 @@
       "accentLightForeground": "#FFFFFF",
       "accentDark": "#F50057",
       "accentDarkForeground": "#FFFFFF"
+    },
+    {
+      "themeKey": "sidenav",
+      "backdropColor": "rgba(189, 189, 189, 0.6)"
     }
   ]
 }
