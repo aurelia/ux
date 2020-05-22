@@ -92,7 +92,8 @@
     "devDependencies": {}
   },
   "peerDependencies": {
-    "@aurelia-ux/core": "^0.20.0"
+    "@aurelia-ux/core": "^0.20.0",
+    "aurelia-event-aggregator": "^1.0.3"
   },
   "devDependencies": {
     "@aurelia-ux/core": "^0.20.0",
