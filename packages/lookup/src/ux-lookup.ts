@@ -25,7 +25,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
 
   static SELECTED_EVENT = 'selected';
 
-  private inputElement: UxInputElement | undefined | null;
+  private inputElement: UxInputElement | HTMLInputElement | undefined | null;
   public anchor: { left: number, top: string | undefined, bottom: string | undefined, maxHeight: number, width: number } | null;
   public isOpen: boolean = false;
   public optionsArray: unknown[];
@@ -127,7 +127,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
   }
 
   attached() {
-    this.inputElement = this.element.parentElement?.querySelector<UxInputElement>('ux-input');
+    this.inputElement = this.element.parentElement?.querySelector<UxInputElement | HTMLInputElement>('ux-input,input');
     if (this.inputElement) {
       inputEvents.forEach(x => this.inputElement!.addEventListener(x, this));
     }
@@ -334,7 +334,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
   }
 
   onWindowResize() {
-    if(this.isOpen){
+    if (this.isOpen) {
       this.updateAnchor();
     }
   }
