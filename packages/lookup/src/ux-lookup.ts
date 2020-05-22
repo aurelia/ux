@@ -129,17 +129,17 @@ export class UxLookup implements UxComponent, EventListenerObject {
   attached() {
     this.inputElement = this.element.parentElement?.querySelector<UxInputElement>('ux-input');
     if (this.inputElement) {
-      inputEvents.map(x => this.inputElement!.addEventListener(x, this));
+      inputEvents.forEach(x => this.inputElement!.addEventListener(x, this));
     }
-    lookupEvents.map(x => this.element.addEventListener(x, this));
+    lookupEvents.forEach(x => this.element.addEventListener(x, this));
     this.valueChanged();
   }
 
   detached() {
     if (this.inputElement) {
-      inputEvents.map(x => this.inputElement!.removeEventListener(x, this));
+      inputEvents.forEach(x => this.inputElement!.removeEventListener(x, this));
     }
-    lookupEvents.map(x => this.element.removeEventListener(x, this));
+    lookupEvents.forEach(x => this.element.removeEventListener(x, this));
   }
 
   async open() {
@@ -147,14 +147,14 @@ export class UxLookup implements UxComponent, EventListenerObject {
       return;
     }
     this.updateAnchor();
-    windowEvents.map(x => window.addEventListener(x, this, true));
+    windowEvents.forEach(x => window.addEventListener(x, this, true));
     this.taskQueue.queueTask(() => this.isOpen = true);
   }
 
   close() {
     this.isOpen = false;
     this.focusedOption = undefined;
-    windowEvents.map(x => window.addEventListener(x, this, true));
+    windowEvents.forEach(x => window.addEventListener(x, this, true));
   }
 
   updateAnchor() {
