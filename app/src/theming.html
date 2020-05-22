@@ -172,6 +172,7 @@
       <ux-chip click.delegate="selectComponent('slider')" class="${selectedComponent === 'slider' ? 'ux-chip--selected':''}">Slider</ux-chip>
       <ux-chip click.delegate="selectComponent('checkbox')" class="${selectedComponent === 'checkbox' ? 'ux-chip--selected':''}">Checkbox</ux-chip>
       <ux-chip click.delegate="selectComponent('radio')" class="${selectedComponent === 'radio' ? 'ux-chip--selected':''}">Radio</ux-chip>
+      <ux-chip click.delegate="selectComponent('lookup')" class="${selectedComponent === 'lookup' ? 'ux-chip--selected':''}">Lookup</ux-chip>
       <ux-chip click.delegate="selectComponent('expandable')" class="${selectedComponent === 'expandable' ? 'ux-chip--selected':''}">Expandable</ux-chip>
       <ux-chip click.delegate="selectComponent('sidenav')" class="${selectedComponent === 'sidenav' ? 'ux-chip--selected':''}">Sidenav</ux-chip>
     </div>
@@ -841,6 +842,51 @@
       </ux-card>
     </ux-grid>
 
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'lookup'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Radio</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-input label="Lookup"></ux-input>
+          <ux-lookup options.bind="['option 1', 'option 2']"> </ux-lookup>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content change.delegate="lookupChanged()">
+          <ux-field repeat.for="prop of ['background', 'foreground', 'optionHoverBackground', 'optionFocusedBackground']">
+            <ux-input label.bind="prop" value.bind="themeService.lookup[prop]">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.lookup[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field>
+            <label>Input distance</label>
+            <br><ux-slider value.bind="themeService.lookup.inputDistance" min="1" max="10" step="1" mouseup.delegate="lookupChanged()"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <label>Window edge distance</label>
+            <br><ux-slider value.bind="themeService.lookup.windowEdgeDistance" min="1" max="20" step="1" mouseup.delegate="lookupChanged()"></ux-slider>
+          </ux-field>
+          <ux-field>
+            <ux-input label="Elevation" value.bind="themeService.lookup.elevation"></ux-input>
+          </ux-field>
+          <ux-field>
+            <ux-input label="Transition duration" value.bind="themeService.lookup.transitionDuration"></ux-input>
+          </ux-field>
+          <ux-field>
+            <ux-input label="Bottom height threshold" value.bind="themeService.lookup.bottomHeightThreshold"></ux-input>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="json(themeService.lookup) & signal:'lookup-changed' ">
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
   </section>
 
 </template>

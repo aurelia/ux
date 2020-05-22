@@ -1,5 +1,6 @@
 <template>
   <require from="./theming.css"></require>
+  <require from='./json-converter'></require>
   <require from="./components.css"></require>
 
   <section>
@@ -400,6 +401,19 @@
     </ux-field>
     <ux-slider if.bind="!progressIndeterminate" min="0" max="100" value.bind="progressValue"></ux-slider>
     <ux-progress value.bind="progressValue"></ux-progress>
+  </section>
+
+  <section>
+    <h2>Lookup</h2>
+    <p>
+      <ux-input label="Lookup"></ux-input>
+      <ux-lookup options.bind="lookupOptions" display-field="name" value.bind="lookupValue">
+        <!-- <template replace-part="option">
+
+        </template> -->
+      </ux-lookup>
+    </p>
+    <p innerhtml.bind="lookupValue | json"></p>
   </section>
 
   <section class="components">

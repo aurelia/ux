@@ -1,5 +1,4 @@
 import { UxTheme } from './../../packages/core/src/styles/ux-theme';
-// import { Design } from './../../packages/core/src/designs/design';
 import { ThemeService, ThemesSet } from './theme-service';
 import { inject } from 'aurelia-framework';
 import { AureliaUX, Design } from '@aurelia-ux/core';
@@ -10,7 +9,7 @@ export class Theming {
 
   public design: Design;
 
-  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' | 'expandable' | 'sidenav' = 'select';
+  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' | 'expandable' | 'sidenav' | 'lookup' = 'select';
 
   public buttonPreviewClass = '';
   public buttonPreviewType = 'raised';
@@ -89,5 +88,9 @@ export class Theming {
 
   public expandableChanged() {
     this.signaler.signal('expandable-changed');
+  }
+
+  public lookupChanged() {
+    this.signaler.signal('lookup-changed');
   }
 }

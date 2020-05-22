@@ -3,6 +3,7 @@ import { UxRadioTheme } from '@aurelia-ux/radio';
 import { UxSliderTheme } from '@aurelia-ux/slider';
 import { UxDatepickerTheme } from '@aurelia-ux/datepicker';
 import { UxTextAreaTheme } from '@aurelia-ux/textarea';
+import { UxLookupTheme } from '@aurelia-ux/lookup';
 import { StyleEngine, UxTheme } from '@aurelia-ux/core';
 import * as themes from './themes.json';
 import { inject, observable } from 'aurelia-framework';
@@ -34,6 +35,7 @@ export class ThemeService {
   public chipInput: UxChipInputTheme = { themeKey: 'chip-input' };
   public sidenav: UxSidenavTheme;
   public slider: UxSliderTheme = { themeKey: 'slider' };
+  public lookup: UxLookupTheme;
   public expandable: UxExpandableTheme;
   @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderRadius: number = 2;
   @observable({ changeHandler: 'buttonVariableChanged' }) public buttonBorderWidth: number = 1;
@@ -86,7 +88,7 @@ export class ThemeService {
     const name = `New theme ${this.themesSets.length + 1}`;
     this.themesSets.push({
       name,
-      themes: [...this.light, this.sidenav, this.expandable]
+      themes: [...this.light, this.sidenav, this.expandable, this.lookup]
     });
     localStorage.setItem('themes', JSON.stringify(this.themesSets));
   }
@@ -130,9 +132,10 @@ export class ThemeService {
     }
     this.currentTheme = theme;
     localStorage.setItem('currentTheme', this.currentTheme.toString());
+    this.lookup = { ...new UxLookupTheme(), ...themeToApply.find(x => x.themeKey === 'lookup') };
     this.expandable = { ...new UxExpandableTheme(), ...themeToApply.find(x => x.themeKey === 'expandable') };
     this.sidenav = {...new UxSidenavTheme(), ...themeToApply.find(x => x.themeKey === 'sidenav') as UxSidenavTheme};    
-    themeToApply.push(this.sidenav, this.expandable);
+    themeToApply.push(this.sidenav, this.expandable, this.lookup);
     this.styleEngine.applyThemeGroup(themeToApply);
   }
 
