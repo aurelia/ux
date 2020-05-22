@@ -15,6 +15,7 @@
     "packages/input",
     "packages/input-info",
     "packages/list",
+    "packages/lookup",
     "packages/modal",
     "packages/positioning",
     "packages/progress",

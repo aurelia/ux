@@ -20,7 +20,7 @@ export function normalizeBooleanAttribute(attributeName: string, value: boolean 
   return ret;
 }
 
-export function normalizeNumberAttribute(val: number | string): number | undefined | null {
+export function normalizeNumberAttribute(val: number | string | undefined): number | undefined | null {
   if (val === undefined || val === '' || val === 'undefined' || val === 'NaN') {
     return undefined;
   } else if (val === null || val === 'null') {

@@ -5,7 +5,7 @@ import { WebpackLoader } from 'aurelia-loader-webpack';
 import { UxDefaultModalConfiguration } from '@aurelia-ux/modal';
 import { UxPositioningConfiguration } from '@aurelia-ux/positioning';
 import icons from './../../packages/icons/sets/full-array.json';
-import { UxDefaultSidenavConfiguration } from '../../packages/sidenav/src/ux-default-sidenav-configuration';
+import { UxDefaultSidenavConfiguration } from '@aurelia-ux/sidenav';
 
 async function configure(aurelia: Aurelia): Promise<void> {
   aurelia
@@ -25,6 +25,7 @@ async function configure(aurelia: Aurelia): Promise<void> {
     .plugin(PLATFORM.moduleName('@aurelia-ux/input'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/input-info'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/list'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/lookup'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/modal'), (config: UxDefaultModalConfiguration) => {
       config.position = 'top';
       config.overlayDismiss = true;

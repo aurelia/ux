@@ -1,0 +1,31 @@
+<template class="ux-lookup--${isOpen ? 'open' : 'closed'}"
+  css="top: ${anchor.top}; bottom: ${anchor.bottom}; left: ${anchor.left}px; max-height: ${anchor.maxHeight}px; width: ${anchor.width}px"
+  tabindex="-1">
+  <require from="./ux-lookup.css"></require>
+
+  <div class="ux-lookup__option ux-lookup__option-searching" if.bind="searching">
+    <template replaceable part="searching">
+      ${defaultConfiguration.searchingMessage}
+    </template>
+  </div>
+
+  <div class="ux-lookup__option ux-lookup__option-error" if.bind="errorMessage">
+    <template replaceable part="error">
+      ${errorMessage}
+    </template>
+  </div>
+
+  <div class="ux-lookup__option ux-lookup__option-not-found" if.bind="notFound">
+    <template replaceable part="not-found">
+      ${defaultConfiguration.notFoundMessage}
+    </template>
+  </div>
+
+  <div repeat.for="option of optionsArray"
+    class="ux-lookup__option ${option===focusedOption ? 'ux-lookup__option--focused' : ''}"
+    mousedown.delegate="select(option)">
+    <template replaceable part="option">
+      ${getDisplay(option)}
+    </template>
+  </div>
+</template>
