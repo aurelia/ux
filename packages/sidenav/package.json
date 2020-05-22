@@ -90,5 +90,27 @@
   },
   "peerDependencies": {
     "@aurelia-ux/core": "^0.20.0"
+  },
+  "devDependencies": {
+    "@aurelia-ux/core": "^0.20.0",
+    "concurrently": "^3.4.0",
+    "conventional-changelog-cli": "^2.0.27",
+    "copyfiles": "^1.2.0",
+    "cross-env": "^3.2.4",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-coverage-istanbul-reporter": "^1.4.1",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-jasmine": "^1.1.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.13",
+    "rimraf": "^3.0.0",
+    "tslint": "^5.20.1",
+    "typedoc": "^0.17.7",
+    "typescript": "^3.9.3",
+    "webpack": "^4.43.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }

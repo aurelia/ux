@@ -43,6 +43,7 @@
     "aurelia-pal": "^1.8.2",
     "aurelia-task-queue": "^1.3.3",
     "aurelia-templating": "^1.10.2",
+    "aurelia-templating-binding": "^1.5.3",
     "aurelia-templating-resources": "^1.6.0",
     "moment": "^2.26.0",
     "tslib": "^2.0.0"
@@ -80,7 +81,9 @@
     "ts-node": "^5.0.1",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.1",
-    "typedoc": "^0.9.0",
-    "typescript": "^3.9.3"
+    "typedoc": "^0.17.7",
+    "typescript": "^3.9.3",
+    "webpack": "^4.43.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }
