@@ -31,7 +31,7 @@ const defaultOptions = {
       alias: {
         src: path.resolve(__dirname, "src"),
         test: path.resolve(__dirname, 'test')
-      }
+      },
     },
     devtool: 'inline-source-map',
     module: {
@@ -49,19 +49,11 @@ const defaultOptions = {
           }
         },
         {
-          test: /\.html$/i,
-          loader: 'html-loader'
-        },
-        {
           enforce: 'post',
           exclude: /(node_modules|\.spec\.ts$)/,
           loader: 'istanbul-instrumenter-loader',
           options: { esModules: true },
           test: /src[\/\\].+\.ts$/
-        },
-        {
-          test: /\.css$/,
-          loader: 'css-loader'
         }
       ]
     },
