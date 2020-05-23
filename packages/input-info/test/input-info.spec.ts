@@ -2,7 +2,7 @@ import './setup';
 import { UxInputInfo } from '../src/index';
 import { Container } from 'aurelia-framework';
 
-describe('@aurelia-ux/input-input', () => {
+describe('@aurelia-ux/input-info', () => {
   describe('input-info.spec.ts', () => {
     it('binds/unbinds correctly', () => {
       const container = new Container();
