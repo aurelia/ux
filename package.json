@@ -66,6 +66,7 @@
     "conventional-changelog-cli": "^2.0.27",
     "copyfiles": "^1.2.0",
     "cross-env": "^3.2.4",
+    "css-loader": "^3.5.3",
     "html-entities": "^1.2.1",
     "istanbul-instrumenter-loader": "^3.0.0",
     "jasmine-core": "^2.99.1",
