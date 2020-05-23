@@ -1,4 +1,5 @@
-import { AureliaUX } from '../../src/index';
+import './setup';
+import { AureliaUX } from '../src/index';
 import { Container, bindingMode, ObserverLocator } from 'aurelia-framework';
 
 describe('aurelia-ux/core', () => {
