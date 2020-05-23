@@ -27,7 +27,7 @@
   },
   "scripts": {
     "lint": "cross-env tslint --project tsconfig.json",
-    "test": "cross-env TS_NODE_PROJECT=\"./tsconfig-test.json\" karma start --single-run",
+    "test": "karma start --single-run",
     "develop": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start",
     "build-ts:amd": "tsc -p tsconfig.build.json -t es5 -m amd      --outDir dist/amd",
     "build-ts:cjs": "tsc -p tsconfig.build.json -t es5 -m commonjs --outDir dist/commonjs",
