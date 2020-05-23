@@ -1,5 +1,5 @@
 import './setup';
-import { configure, UxButton } from '../src/index';
+import { UxButton } from '../src/index';
 import { Container } from 'aurelia-framework';
 
 describe('@aurelia-ux/button/test/index.spec.ts', () => {
