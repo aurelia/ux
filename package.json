@@ -84,6 +84,7 @@
     "requirejs-text": "^2.0.15",
     "rimraf": "^3.0.0",
     "strip-ansi": "^6.0.0",
+    "ts-loader": "^7.0.4",
     "ts-node": "^5.0.1",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.1",

@@ -70,6 +70,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.13",
     "rimraf": "^3.0.0",
+    "ts-loader": "^7.0.4",
     "tslint": "^5.20.1",
     "typedoc": "^0.17.7",
     "typescript": "^3.9.3",
