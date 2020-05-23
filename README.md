@@ -120,6 +120,5 @@ This will use `webpack-dev-server` and `webpack` to alias all `ux` dependencies 
 
 ## Online playground
 
-1. Go to [https://gist.run/?id=f543dce545b7139e4019fd51c0bcbd4d](https://gist.run/?id=f543dce545b7139e4019fd51c0bcbd4d)
-2. Select Fork Gist (near top right button)
-3. Add new files and play around
+1. Go to [https://gist.dumber.app/?gist=7f63f733103a72e5f8660a9eba60ff0e](https://gist.dumber.app/?gist=7f63f733103a72e5f8660a9eba60ff0e)
+2. Add new files and play around, alternatively, fork (button near top left) to create a new gist to share
