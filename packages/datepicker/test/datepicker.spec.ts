@@ -12,7 +12,7 @@ describe('@aurelia-ux/datepicker', () => {
 
       spyOn(uxDatePicker, 'typeChanged');
       spyOn(uxDatePicker, 'themeChanged');
-  
+
       uxDatePicker.bind();
 
       expect(uxDatePicker.typeChanged).toHaveBeenCalledTimes(1);

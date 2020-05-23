@@ -7,10 +7,6 @@ module.exports = (config) => {
       __dirname,
       '../core/src'
     );
-    options.webpack.module.rules.push({
-      test: /\.css$/,
-      loader: 'css-loader'
-    });
     options.basePath = path.resolve(__dirname);
   });
 };
