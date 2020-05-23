@@ -8,6 +8,34 @@ This library is part of the [Aurelia](http://www.aurelia.io/) platform and exten
 
 > To keep up to date on [Aurelia](http://www.aurelia.io/), please visit and subscribe to [the official blog](http://blog.aurelia.io/) and [our email list](http://eepurl.com/ces50j). We also invite you to [follow us on twitter](https://twitter.com/aureliaeffect). If you have questions look around our [Discourse forums](https://discourse.aurelia.io/), chat in our [community on Gitter](https://gitter.im/aurelia/discuss) or use [stack overflow](http://stackoverflow.com/search?q=aurelia). Documentation can be found [in our developer hub](http://aurelia.io/docs). If you would like to have deeper insight into our development process, please install the [ZenHub](https://zenhub.io) Chrome or Firefox Extension and visit any of our repository's boards.
 
+## Installation
+
+To use this library, you can do
+```
+npm i @aurelia-ux/core @aurelia-ux/input
+```
+
+and in the main entry of your app, do:
+
+```ts
+export function configure(aurelia) {
+  aurelia.use
+    .plugin('@aurelia-ux/core')
+    .plugin('@aurelia-ux/input)
+    // ... and more
+}
+```
+
+If you are using webpack, instead do:
+```ts
+export function configure(aurelia) {
+  aurelia.use
+    .plugin(PLATFORM.moduleName('@aurelia-ux/core'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/input))
+    // ... and more
+}
+```
+
 ## Documentation
 
 Check out the [showcase application](https://github.com/aurelia/app-ux-showcase) for demos and documentation. If you are interested in contributing, have a read through [our wiki](https://github.com/aurelia/ux/wiki). You can view an online demo here, [https://aux-demo.web.app](https://aux-demo.web.app).

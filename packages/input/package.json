@@ -49,66 +49,15 @@
     "preprepare-release": "cross-env npm run test",
     "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
   },
-  "jspm": {
-    "registry": "npm",
-    "jspmPackage": true,
-    "main": "index",
-    "format": "amd",
-    "directories": {
-      "dist": "dist/amd"
-    },
-    "peerDependencies": {
-      "aurelia-binding": "^2.0.0",
-      "aurelia-dependency-injection": "^1.0.0",
-      "aurelia-logging": "^1.0.0",
-      "aurelia-pal": "^1.0.0",
-      "aurelia-task-queue": "^1.0.0",
-      "aurelia-templating": "^1.0.0",
-      "aurelia-loader": "^1.0.0",
-      "aurelia-templating-binding": "^1.0.0",
-      "aurelia-framework": "^1.0.0",
-      "aurelia-metadata": "^1.0.0",
-      "aurelia-path": "^1.0.0",
-      "@aurelia-ux/core": "^0.3.0"
-    },
-    "dependencies": {
-      "aurelia-binding": "^2.0.0",
-      "aurelia-dependency-injection": "^1.0.0",
-      "aurelia-logging": "^1.0.0",
-      "aurelia-pal": "^1.0.0",
-      "aurelia-task-queue": "^1.0.0",
-      "aurelia-templating": "^1.0.0",
-      "aurelia-loader": "^1.0.0",
-      "aurelia-templating-binding": "^1.0.0",
-      "aurelia-framework": "^1.0.0",
-      "aurelia-metadata": "^1.0.0",
-      "aurelia-path": "^1.0.0",
-      "@aurelia-ux/core": "^0.3.0"
-    },
-    "devDependencies": {}
-  },
-  "dependencies": {
-    "@aurelia-ux/core": "^0.20.0",
-    "aurelia-binding": "^2.0.0"
+  "peerDependencies": {
+    "@aurelia-ux/core": "^0.20.0"
   },
   "devDependencies": {
-    "@types/jasmine": "^2.8.6",
-    "@types/karma": "^1.7.3",
-    "@types/node": "^7.0.11",
-    "@types/webpack": "^4.39.8",
-    "aurelia-bootstrapper": "^2.1.1",
-    "aurelia-framework": "^1.3.1",
-    "aurelia-pal-browser": "^1.2.0",
-    "aurelia-pal-nodejs": "^1.0.0-beta.1.0.0",
-    "aurelia-polyfills": "^1.2.1",
-    "aurelia-testing": "^1.0.0-beta.3.0.1",
-    "aurelia-webpack-plugin": "^4.0.0",
+    "@aurelia-ux/core": "^0.20.0",
     "concurrently": "^3.4.0",
     "conventional-changelog-cli": "^2.0.27",
     "copyfiles": "^1.2.0",
     "cross-env": "^3.2.4",
-    "istanbul-instrumenter-loader": "^3.0.0",
-    "jasmine-core": "^2.99.1",
     "karma": "^1.7.1",
     "karma-chrome-launcher": "^2.0.0",
     "karma-coverage": "^1.1.1",
@@ -118,29 +67,11 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.13",
-    "path": "^0.12.7",
-    "requirejs": "^2.3.3",
-    "requirejs-text": "^2.0.15",
     "rimraf": "^3.0.0",
-    "rollup": "^1.26.3",
-    "rollup-plugin-typescript2": "^0.25.2",
-    "ts-loader": "^6.2.1",
-    "ts-node": "^5.0.1",
-    "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.1",
-    "typedoc": "^0.9.0",
-    "typescript": "^3.7.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
-  },
-  "aurelia": {
-    "build": {
-      "resources": [
-        "@aurelia-ux/input/ux-input"
-      ]
-    },
-    "documentation": {
-      "articles": []
-    }
+    "typedoc": "^0.17.7",
+    "typescript": "^3.9.3",
+    "webpack": "^4.43.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }
