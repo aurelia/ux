@@ -4,6 +4,16 @@ const webpack = require('webpack');
 // @ts-ignore
 // const { AureliaPlugin } = require('aurelia-webpack-plugin');
 
+/**
+ * @typedef KarmaConfigCustomOptions
+ * @property {import('webpack').Configuration} webpack
+ * @property {any} coverageIstanbulReporter
+ * @property {any} webpackServer
+ */
+
+/**
+ * @typedef {import('karma').Config & KarmaConfigCustomOptions & { package: string; }} KarmaConfig
+ */
 // export interface KarmaConfig extends karma.Config, KarmaConfigOptions {
 //   package?: string;
 //   set(config: KarmaConfigOptions): void;
@@ -18,10 +28,9 @@ const webpack = require('webpack');
 const defaultOptions = {
   basePath: './',
   frameworks: ['jasmine'],
-  files: ["test/**/*.spec.ts", "test/**/*.spec.tsx"],
+  files: ["test/**/*.spec.ts"],
   preprocessors: {
-    "test/**/*.spec.ts": ["webpack", "sourcemap"],
-    "test/**/*.spec.tsx": ["webpack", "sourcemap"]
+    "test/**/*.spec.ts": ["webpack", "sourcemap"]
   },
   webpack: {
     mode: 'development',
@@ -54,6 +63,10 @@ const defaultOptions = {
           loader: 'istanbul-instrumenter-loader',
           options: { esModules: true },
           test: /src[\/\\].+\.ts$/
+        },
+        {
+          test: /\.css$/,
+          loader: 'css-loader'
         }
       ]
     },
@@ -95,8 +108,8 @@ const defaultOptions = {
 };
 
 /**
- * @param {Karmaconfig} config
- * @param {KarmaConfigureOptions} configure
+ * @param {KarmaConfig} config
+ * @param {import('karma').ConfigOptions & KarmaConfigCustomOptions} configure
  */
 exports.configureKarma = function(
   config,
@@ -111,4 +124,11 @@ exports.configureKarma = function(
     configure(options);
   }
   config.set(options);
+}
+
+/**
+ * @param {import('karma').ConfigOptions & KarmaConfigCustomOptions} options
+ */
+exports.configureAliasCore = function(options) {
+  options.webpack.resolve.alias['@aurelia-ux/core'] = path.resolve(__dirname, './packages/core/src');
 }
