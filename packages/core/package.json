@@ -28,6 +28,8 @@
   "scripts": {
     "lint": "cross-env tslint --project tsconfig.json",
     "test": "karma start --single-run",
+    "test:watch": "karma start",
+    "test:debugger": "karma start --browsers ChromeDebugging",
     "develop": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start",
     "build-ts:amd": "tsc -p tsconfig.build.json -t es5 -m amd      --outDir dist/amd",
     "build-ts:cjs": "tsc -p tsconfig.build.json -t es5 -m commonjs --outDir dist/commonjs",

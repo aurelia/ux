@@ -14,7 +14,7 @@ commands:
       - run: npm run bootstrap
 
 jobs:
-  unit_test:
+  unit_integration_test:
     executor: docker-circleci
     steps:
       - checkout_install_bootstrap
@@ -24,11 +24,11 @@ jobs:
     executor: docker-circleci
     steps:
       - checkout_install_bootstrap
-      - run: npm lint
+      - run: npm run lint
       - run: npm build
 
 workflows:
   build_test:
     jobs:
-      - unit_test
+      - unit_integration_test
       - prepare_release

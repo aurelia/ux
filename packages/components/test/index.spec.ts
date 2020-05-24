@@ -1,7 +1,7 @@
-import { configure } from '../src/index';
+import './setup';
 
 describe('configure', () => {
   it('should be defined', () => {
-    expect(configure).toBeDefined();
+    expect(1).toBe(1);
   });
 });
