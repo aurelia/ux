@@ -331,7 +331,7 @@ export class UxModalService {
 
     (modal as UxModal & UxModalServiceModal).whenClosed = () => {
       return whenClosed;
-    }
+    };
     bindingContext.dismiss = () => {
       modal.element.remove();
       modal.detached();
@@ -339,7 +339,7 @@ export class UxModalService {
         wasCancelled: true,
         output: null
       });
-    }
+    };
     bindingContext.ok = (event: CustomEvent) => {
       modal.element.remove();
       modal.detached();
@@ -347,7 +347,7 @@ export class UxModalService {
         wasCancelled: false,
         output: event.detail
       });
-    }
+    };
     return modal as UxModal & UxModalServiceModal;
   }
 

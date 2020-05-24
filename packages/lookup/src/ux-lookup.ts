@@ -92,7 +92,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
       return;
     }
     await this.updateFilterBasedOnValue();
-    this.element.dispatchEvent(new CustomEvent('change', { detail: { value: this.value } }))
+    this.element.dispatchEvent(new CustomEvent('change', { detail: { value: this.value } }));
   }
   setValue(value: unknown) {
     if (this.value === value) {
