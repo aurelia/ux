@@ -559,10 +559,18 @@ describe('aurelia-ux/core', () => {
   let styleEngine: GlobalStyleEngine;
   let styleElement: HTMLStyleElement;
 
+
   beforeAll(() => {
+    // test must not be randomized because the grouped style result accounts for button as well
+    // so tests need to be run in order
+    jasmine.getEnv().randomizeTests(false);
     styleEngine = new GlobalStyleEngine();
     styleElement = document.querySelector('#aurelia-ux-core') as HTMLStyleElement;
   });
+
+  afterAll(() => {
+    jasmine.getEnv().randomizeTests(true);
+  })
 
   it('expect style element to be created', () => {
     expect(styleElement instanceof HTMLStyleElement).toBeTruthy();
