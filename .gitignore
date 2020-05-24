@@ -13,3 +13,4 @@ dist/test
 coverage
 app/dist
 *.css.map
+debug.log

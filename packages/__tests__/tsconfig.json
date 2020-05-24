@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig-test.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "esnext",
+    "paths": {
+      "@aurelia-ux/*": ["../*/src"]
+    }
+  },
+  "include": ["test"]
+}

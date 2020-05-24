@@ -37,6 +37,8 @@ export class UxSidenav {
   }
 
   attached() {
+    // todo: refactor this. In the combination of shadowDOM emulation and deeply nested sidenav
+    // it's not guaranteeed to  have sidenav populated correctly. The only safe way is to react via children change
     this.leftDrawer = this.element.querySelector<IUxSidenavDrawerElement>('ux-sidenav-drawer[side="left"]')?.au.controller.viewModel;
     this.rightDrawer = this.element.querySelector<IUxSidenavDrawerElement>('ux-sidenav-drawer[side="right"]')?.au.controller.viewModel;
     this.bottomDrawer = this.element.querySelector<IUxSidenavDrawerElement>('ux-sidenav-drawer[side="bottom"]')?.au.controller.viewModel;

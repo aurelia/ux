@@ -1,6 +1,7 @@
 {
   "lerna": "3.18.4",
   "packages": [
+    "packages/__tests__",
     "packages/button",
     "packages/card",
     "packages/checkbox",

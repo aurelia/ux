@@ -12,7 +12,7 @@ This library is part of the [Aurelia](http://www.aurelia.io/) platform and exten
 
 To use this library, you can do
 ```
-npm i @aurelia-ux/core @aurelia-ux/input
+npm i @aurelia-ux/core @aurelia-ux/input tslib
 ```
 
 and in the main entry of your app, do:
@@ -35,6 +35,13 @@ export function configure(aurelia) {
     // ... and more
 }
 ```
+
+If you are using `datepicker` component, makes sure you are also installing moment:
+```
+npm install moment
+```
+
+Note: `tslib` is a peer dependency of this library, as it helps with reducing the amount of code duplication
 
 ## Documentation
 

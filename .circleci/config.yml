@@ -1,0 +1,34 @@
+version: 2.1
+
+executors:
+  docker-circleci:
+    working_directory: "~/repo"
+    docker:
+      - image: "circleci/node:10.12-stretch-browsers"
+
+commands:
+  checkout_install_bootstrap:
+    steps:
+      - checkout
+      - npm ci --ignore-scripts
+      - npm run bootstrap
+
+jobs:
+  unit_test:
+    executor: docker-circleci
+    steps:
+      - checkout_install_bootstrap
+      - run: npm test
+
+  prepare_release:
+    executor: docker-circleci
+    steps:
+      - checkout_install_bootstrap
+      - run: npm lint
+      - run: npm build
+
+workflows:
+  build_test:
+    jobs:
+      - unit_test
+      - prepare_release

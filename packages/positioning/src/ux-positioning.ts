@@ -48,7 +48,8 @@ export class UxPositioning {
     public taskQueue: TaskQueue,
     anchor: HTMLElement,
     element: HTMLElement,
-    options?: UxPositioningOptions) {
+    options?: UxPositioningOptions
+  ) {
     const settings: UxPositioningOptions = {...configuration, ...options};
     this.anchor = anchor;
     this.element = element;
