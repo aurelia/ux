@@ -1,4 +1,4 @@
-import { Aurelia, Controller, TaskQueue, PLATFORM } from 'aurelia-framework';
+import { Aurelia, Controller, TaskQueue } from 'aurelia-framework';
 
 let taskQueue: TaskQueue;
 
@@ -10,7 +10,7 @@ export async function createFixture<T>(root: Constructable<T>, resources: any[] 
   if (taskQueue) {
     aurelia.container.registerInstance(TaskQueue, taskQueue);
   } else {
-    taskQueue = aurelia.container.get(taskQueue);
+    taskQueue = aurelia.container.get(TaskQueue);
   }
 
   aurelia
