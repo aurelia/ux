@@ -1,4 +1,4 @@
-import { configure } from '../../src/index';
+import { configure } from '../src/index';
 
 describe('configure', () => {
   it('should be defined', () => {
