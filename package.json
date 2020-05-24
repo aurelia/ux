@@ -20,7 +20,7 @@
   },
   "scripts": {
     "lint": "cross-env tslint --project tsconfig.json",
-    "test": "lerna run test --scope=@aurelia-ux/core",
+    "test": "lerna run test",
     "develop": "cross-env TS_NODE_PROJECT=\"tsconfig-tsnode.json\" karma start --package=core",
     "bootstrap": "lerna bootstrap --hoist",
     "build": "lerna run build  --ignore @aurelia-ux/__e2e__",

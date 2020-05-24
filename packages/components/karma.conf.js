@@ -1,8 +1,8 @@
-import * as path from 'path';
-import { configureKarma, KarmaConfig, KarmaConfigOptions } from '../../karma.conf';
+const path = require('path');
+const { configureKarma } = require('../../karma.conf');
 
-export default (config: KarmaConfig): void => {
-  configureKarma(config, (options: KarmaConfigOptions) => {
+module.exports = (config) => {
+  configureKarma(config, (options) => {
     options.basePath = path.resolve(__dirname);
   });
 };
