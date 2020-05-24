@@ -1,8 +1,6 @@
 const path = require('path');
 const karma = require('karma');
 const webpack = require('webpack');
-// @ts-ignore
-// const { AureliaPlugin } = require('aurelia-webpack-plugin');
 
 /**
  * @typedef KarmaConfigCustomOptions
@@ -14,16 +12,6 @@ const webpack = require('webpack');
 /**
  * @typedef {import('karma').Config & KarmaConfigCustomOptions & { package: string; }} KarmaConfig
  */
-// export interface KarmaConfig extends karma.Config, KarmaConfigOptions {
-//   package?: string;
-//   set(config: KarmaConfigOptions): void;
-// }
-
-// export interface KarmaConfigOptions extends karma.ConfigOptions {
-//   webpack: webpack.Configuration;
-//   coverageIstanbulReporter: any;
-//   webpackServer: any;
-// }
 
 const defaultOptions = {
   basePath: './',
@@ -37,10 +25,7 @@ const defaultOptions = {
     resolve: {
       extensions: [".ts", ".js"],
       modules: ['src', 'test', 'node_modules'],
-      alias: {
-        src: path.resolve(__dirname, "src"),
-        test: path.resolve(__dirname, 'test')
-      },
+      alias: {},
     },
     devtool: 'inline-source-map',
     module: {
@@ -67,13 +52,7 @@ const defaultOptions = {
         }
       ]
     },
-    plugins: [
-      // new AureliaPlugin({
-      //   aureliaApp: undefined,
-      //   noHtmlLoader: true,
-      //   noWebpackLoader: true
-      // })
-    ]
+    plugins: []
   },
   mime: {
     'text/x-typescript': ['ts']
