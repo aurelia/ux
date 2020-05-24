@@ -35,7 +35,7 @@ const defaultOptions = {
   webpack: {
     mode: 'development',
     resolve: {
-      extensions: [".ts", ".tsx", ".js", ".css"],
+      extensions: [".ts", ".js"],
       modules: ['src', 'test', 'node_modules'],
       alias: {
         src: path.resolve(__dirname, "src"),
@@ -51,9 +51,6 @@ const defaultOptions = {
           exclude: /node_modules/,
           options: {
             configFile: 'tsconfig-test.json',
-            // compilerOptions: {
-            //   sourceMap: true,
-            // },
             transpileOnly: true
           }
         },
@@ -109,7 +106,7 @@ const defaultOptions = {
 
 /**
  * @param {KarmaConfig} config
- * @param {import('karma').ConfigOptions & KarmaConfigCustomOptions} configure
+ * @param {(options: import('karma').ConfigOptions & KarmaConfigCustomOptions) => void} configure
  */
 exports.configureKarma = function(
   config,
