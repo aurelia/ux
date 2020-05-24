@@ -19,7 +19,7 @@
     "url": "https://github.com/aurelia/ux"
   },
   "scripts": {
-    "lint": "cross-env tslint --project tsconfig.json",
+    "lint": "eslint packages/**/src/*.ts",
     "test": "lerna run test",
     "develop": "cross-env TS_NODE_PROJECT=\"tsconfig-tsnode.json\" karma start --package=core",
     "bootstrap": "lerna bootstrap --hoist",
@@ -61,6 +61,8 @@
     "@types/lodash": "^4.14.149",
     "@types/node": "^7.0.11",
     "@types/webpack": "^4.39.8",
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
+    "@typescript-eslint/parser": "^3.0.0",
     "aurelia-pal-nodejs": "^1.0.0-beta.1.0.0",
     "aurelia-testing": "^1.0.0-beta.3.0.1",
     "aurelia-webpack-plugin": "^4.0.0",
@@ -69,6 +71,7 @@
     "copyfiles": "^1.2.0",
     "cross-env": "^3.2.4",
     "css-loader": "^3.5.3",
+    "eslint": "^7.1.0",
     "html-entities": "^1.2.1",
     "istanbul-instrumenter-loader": "^3.0.0",
     "jasmine-core": "3.5.0",
