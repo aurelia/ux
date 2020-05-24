@@ -23,7 +23,7 @@
     "test": "lerna run test",
     "develop": "cross-env TS_NODE_PROJECT=\"tsconfig-tsnode.json\" karma start --package=core",
     "bootstrap": "lerna bootstrap --hoist",
-    "build": "lerna run build  --ignore @aurelia-ux/__e2e__",
+    "build": "lerna run build  --ignore @aurelia-ux/__e2e__ --ignore @aurelia-ux/__tests__",
     "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
     "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
     "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",

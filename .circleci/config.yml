@@ -10,8 +10,8 @@ commands:
   checkout_install_bootstrap:
     steps:
       - checkout
-      - npm ci --ignore-scripts
-      - npm run bootstrap
+      - run: npm ci --ignore-scripts
+      - run: npm run bootstrap
 
 jobs:
   unit_test:
