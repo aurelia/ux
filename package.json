@@ -19,7 +19,7 @@
     "url": "https://github.com/aurelia/ux"
   },
   "scripts": {
-    "lint": "eslint packages/**/src/*.ts",
+    "lint": "eslint -c .eslintrc.json packages/**/src/*.ts",
     "test": "lerna run test",
     "develop": "cross-env TS_NODE_PROJECT=\"tsconfig-tsnode.json\" karma start --package=core",
     "bootstrap": "lerna bootstrap --hoist",
