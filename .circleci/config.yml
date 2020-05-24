@@ -24,7 +24,7 @@ jobs:
     executor: docker-circleci
     steps:
       - checkout_install_bootstrap
-      - run: npm lint
+      - run: npm run lint
       - run: npm build
 
 workflows:

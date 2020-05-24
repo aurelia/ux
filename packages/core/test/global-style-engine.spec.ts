@@ -555,14 +555,6 @@ ux-button>button.fab:focus {
 
 }`;
 
-// tslint:enable
-
-describe('aurelia-ux/cores', () => {
-  it('configure is defined', () => {
-    expect(true).toBeDefined();
-  });
-});
-
 describe('aurelia-ux/core', () => {
   let styleEngine: GlobalStyleEngine;
   let styleElement: HTMLStyleElement;
