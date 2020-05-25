@@ -236,14 +236,15 @@ const defineUxInputElementApis = (element: HTMLElement) => {
     },
     focus: {
       value() {
-        getVm<UxInput>(this).focused = true;
+        getVm<UxInput>(this).focus();
       },
       configurable: true
     },
     blur: {
       value() {
-        getVm<UxInput>(this).focused = false;
-      }
+        getVm<UxInput>(this).blur();
+      },
+      configurable: true
     }
   });
 };
