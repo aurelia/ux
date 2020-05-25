@@ -209,5 +209,5 @@ const defineUxTextAreaElementApis = (element: HTMLElement) => {
       },
       configurable: true
     }
-  })
+  });
 };
