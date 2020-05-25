@@ -559,33 +559,26 @@ describe('aurelia-ux/core', () => {
   let styleEngine: GlobalStyleEngine;
   let styleElement: HTMLStyleElement;
 
-
   beforeAll(() => {
-    // test must not be randomized because the grouped style result accounts for button as well
-    // so tests need to be run in order
-    jasmine.getEnv().randomizeTests(false);
     styleEngine = new GlobalStyleEngine();
     styleElement = document.querySelector('#aurelia-ux-core') as HTMLStyleElement;
   });
-
-  afterAll(() => {
-    jasmine.getEnv().randomizeTests(true);
-  })
 
   it('expect style element to be created', () => {
     expect(styleElement instanceof HTMLStyleElement).toBeTruthy();
   });
 
-  it('Can add styles', () => {
-    styleEngine.addOrUpdateGlobalStyle('@aurelia-ux/button/button.css', testStyle);
+  it('Can add styles with/without group', () => {
+    for (const [id, style, expectedStyle, group] of [
+      ['@aurelia-ux/button/button.css', testStyle, expectedTestStyleResult, undefined],
+      ['@aurelia-ux/core design variables', testStyleGroup, expectedTestStyleGroupResult, ':root'],
+    ]) {
+      styleEngine.addOrUpdateGlobalStyle(id, style, group);
+      if (group !== undefined) {
+        styleEngine.addOrUpdateGlobalStyle(`${id} copy`, style, group);
+      }
 
-    expect(styleElement.innerHTML).toBe(expectedTestStyleResult);
-  });
-
-  it('Can group styles', () => {
-    styleEngine.addOrUpdateGlobalStyle('@aurelia-ux/core design variables', testStyleGroup, ':root');
-    styleEngine.addOrUpdateGlobalStyle('@aurelia-ux/core design variables copy', testStyleGroup, ':root');
-
-    expect(styleElement.innerHTML).toBe(expectedTestStyleGroupResult);
+      expect(styleElement.innerHTML).toBe(expectedStyle);
+    }
   });
 });
