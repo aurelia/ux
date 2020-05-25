@@ -11,11 +11,11 @@ Inputable components should implement a `focus()` and `blur()` public API. Calli
 
 Also, if the inner HTML component receives focus (for exemple by the user hitting <TAB> key), the component must become in focused state.
 
-Since Aurelia has a built-in `focus` custom attribute, we expect Aurelia UX components to work seemlessly with this attribute. This constraints prevents us to use a `@bindable` for the focus attribute because the way Aurelia handles custom attributes conflicts with the bindable. The chosen solution is to add the `focus` and `blur` methods to the component's HTML element (through the custom prototype).
+Since Aurelia has a built-in `focus` custom attribute, we expect Aurelia UX components to work seemlessly with this attribute. This constraints prevents us to use a `@bindable` for the focus attribute because the way Aurelia handles custom attributes conflicts with the bindable. The chosen solution is to add the `focus` and `blur` methods to the component's HTML element (through the custom properties, defined on the host elements).
 
 ### CSS
 
-When a component is in `focused` state, it must receive the CSS class `<comp-name>--focused`.
+When a component is in `focused` state, it must receive the CSS class `ux-input-component--focused`.
 
 ### Design
 
