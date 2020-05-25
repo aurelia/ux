@@ -3,7 +3,7 @@ import { BindingBehaviorResource, FrameworkConfiguration, PLATFORM } from 'aurel
 import { AureliaUX } from './aurelia-ux';
 import { BooleanBB } from './components/boolean-attr-binding-behavior';
 
-export { Size, UxSizeCustomAttribute } from './attributes/size-attribute';
+export { Size, UxSizeCustomAttribute } from './attributes/ux-size-attribute';
 export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
 export { processDesignAttributes } from './designs/design-attributes';
