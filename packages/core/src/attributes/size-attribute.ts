@@ -6,9 +6,9 @@ export interface Size {
   height: number;
 }
 
-@customAttribute('size')
+@customAttribute('ux-size')
 @inject(Element)
-export class SizeCustomAttribute {
+export class UxSizeCustomAttribute {
 
   private observer: any;
   @bindable({ defaultBindingMode: bindingMode.fromView, primaryProperty: true })
