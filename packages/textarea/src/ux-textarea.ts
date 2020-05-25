@@ -25,7 +25,6 @@ export class UxTextArea implements UxInputComponent {
   @bindable public autoResize: boolean | string = false;
   @bindable public cols: number;
   @bindable public disabled: boolean | string = false;
-  @bindable public focus: boolean | string = false;
   @bindable public maxlength: number;
   @bindable public minlength: number;
   @bindable public readonly: boolean | string = false;
@@ -39,12 +38,15 @@ export class UxTextArea implements UxInputComponent {
   @observable({ initializer: () => '' })
   public rawValue: string;
 
+  @observable()
+  focused: boolean = false;
+
   public value: any = undefined;
 
   public textbox: HTMLTextAreaElement;
 
   constructor(private element: UxTextAreaElement, private styleEngine: StyleEngine) {
-    Object.setPrototypeOf(element, uxTextAreaElementProto);
+    defineUxTextAreaElementApis(element);
   }
 
   public bind() {
@@ -53,7 +55,7 @@ export class UxTextArea implements UxInputComponent {
     const textbox = this.textbox;
 
     if (this.autofocus || this.autofocus === '') {
-      this.focus = true;
+      this.focused = true;
     }
 
     this.dense = normalizeBooleanAttribute('dense', this.dense);
@@ -99,6 +101,16 @@ export class UxTextArea implements UxInputComponent {
 
     textbox.removeEventListener('change', stopEvent);
     textbox.removeEventListener('input', stopEvent);
+  }
+
+  public focus() {
+    this.textbox.focus();
+  }
+
+  public blur() {
+    if (document.activeElement === this.textbox) {
+      this.textbox.blur();
+    }
   }
 
   public getValue() {
@@ -151,7 +163,7 @@ export class UxTextArea implements UxInputComponent {
     }
   }
 
-  public focusChanged(focus: boolean | string) {
+  public focusedChanged(focus: boolean | string) {
     focus = focus || focus === '' ? true : false;
     this.element.classList.toggle('ux-input-component--focused', focus);
     this.element.dispatchEvent(DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
@@ -174,13 +186,28 @@ function stopEvent(e: Event) {
 }
 
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
-const uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
-  value: {
-    get() {
-      return getVm<UxTextArea>(this).getValue();
+const defineUxTextAreaElementApis = (element: HTMLElement) => {
+  Object.defineProperties(element, {
+    value: {
+      get() {
+        return getVm<UxTextArea>(this).getValue();
+      },
+      set(value: any) {
+        getVm<UxTextArea>(this).setValue(value);
+      },
+      configurable: true
     },
-    set(value: any) {
-      getVm<UxTextArea>(this).setValue(value);
+    focus: {
+      value() {
+        getVm<UxTextArea>(this).focus();
+      },
+      configurable: true
+    },
+    blur: {
+      value() {
+        getVm<UxTextArea>(this).blur();
+      },
+      configurable: true
     }
-  }
-});
+  });
+};

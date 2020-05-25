@@ -44,7 +44,7 @@ export class UxInput implements UxInputComponent {
   public textbox: HTMLInputElement;
 
   constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
-    Object.setPrototypeOf(element, uxInputElementProto);
+    defineUxInputElementApis(element);
   }
 
   public bind() {
@@ -195,8 +195,14 @@ export class UxInput implements UxInputComponent {
     this.setValue(newValue);
   }
 
-  public focusInput() {
+  public focus() {
     this.textbox.focus();
+  }
+
+  public blur() {
+    if (document.activeElement === this.textbox) {
+      this.textbox.blur();
+    }
   }
 
   public variantChanged(newValue: string) {
@@ -217,13 +223,28 @@ function stopEvent(e: Event) {
 }
 
 const getVm = <T>(_: any) => _.au.controller.viewModel as T;
-const uxInputElementProto = Object.create(HTMLElement.prototype, {
-  value: {
-    get() {
-      return getVm<UxInput>(this).getValue();
+const defineUxInputElementApis = (element: HTMLElement) => {
+  Object.defineProperties(element, {
+    value: {
+      get() {
+        return getVm<UxInput>(this).getValue();
+      },
+      set(value: any) {
+        getVm<UxInput>(this).setValue(value);
+      },
+      configurable: true
     },
-    set(value: any) {
-      getVm<UxInput>(this).setValue(value);
+    focus: {
+      value() {
+        getVm<UxInput>(this).focus();
+      },
+      configurable: true
+    },
+    blur: {
+      value() {
+        getVm<UxInput>(this).blur();
+      },
+      configurable: true
     }
-  }
-});
+  });
+};
