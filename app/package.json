@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build:dev": "webpack --extractCss",
+    "build:ci": "webpack --extractCss --env.production=production --env.stats=verbose",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
