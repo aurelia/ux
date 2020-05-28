@@ -21,7 +21,11 @@
   display: flex;
 }
 
-.ux-input--has-error+.ux-input-info {
+.ux-input--has-error+.ux-input-info,
+.ux-datepicker--has-error+.ux-input-info,
+.ux-textarea--has-error+.ux-input-info,
+.ux-lookup--has-error+.ux-input-info,
+.ux-select--has-error+.ux-input-info {
   color: #F44336;
   color: var(--aurelia-ux--input-info-error, var(--aurelia-ux--design-error, #F44336));
 }
