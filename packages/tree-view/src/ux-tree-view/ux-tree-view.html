@@ -4,9 +4,9 @@
     <li repeat.for="$node of nodes" class="ux-tree-view--list-item">
       <let $tree.bind="element"></let>
       <let $tree-vm.bind="$parent"></let>
-      <div class="ux-tree-view--node ${$node.selected ? 'ux-tree-view--node-selected' : ''}" click.delegate="nodeClicked($node)">
+      <div class="ux-tree-view--node ${$node.selected ? 'ux-tree-view--node-selected' : ''}" click.trigger="nodeClicked($node)">
         <ux-button if.bind="$node.children" type="fab" size="small" class="ux-tree-view--expander"
-          click.delegate="toggleExpanded($node, $event)">
+          click.trigger="toggleExpanded($node, $event)">
           <ux-icon icon.bind="$node.expanded ? 'expand_more' : 'chevron_right'"></ux-icon>
         </ux-button>
         <div else class="ux-tree-view--leaf-padding"></div>
