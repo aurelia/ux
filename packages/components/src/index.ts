@@ -13,10 +13,11 @@ export * from '@aurelia-ux/input-info';
 export * from '@aurelia-ux/list';
 export * from '@aurelia-ux/progress';
 export * from '@aurelia-ux/radio';
-export * from '@aurelia-ux/textarea';
 export * from '@aurelia-ux/switch';
 export * from '@aurelia-ux/select';
 export * from '@aurelia-ux/slider';
+export * from '@aurelia-ux/textarea';
+export * from '@aurelia-ux/tree-view';
 
 export function configure(config: FrameworkConfiguration) {
   config
@@ -33,8 +34,9 @@ export function configure(config: FrameworkConfiguration) {
     .plugin(PLATFORM.moduleName('@aurelia-ux/list'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/progress'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/radio'))
-    .plugin(PLATFORM.moduleName('@aurelia-ux/textarea'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/switch'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/select'))
-    .plugin(PLATFORM.moduleName('@aurelia-ux/slider'));
+    .plugin(PLATFORM.moduleName('@aurelia-ux/slider'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/textarea'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/tree-view'));
 }

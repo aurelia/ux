@@ -64,7 +64,8 @@
     "@aurelia-ux/sidenav": "^0.20.0",
     "@aurelia-ux/slider": "^0.20.0",
     "@aurelia-ux/switch": "^0.20.0",
-    "@aurelia-ux/textarea": "^0.20.0"
+    "@aurelia-ux/textarea": "^0.20.0",
+    "@aurelia-ux/tree-view": "^0.20.0"
   },
   "devDependencies": {
     "aurelia-logging-console": "^1.1.1",
