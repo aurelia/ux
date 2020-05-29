@@ -44,7 +44,7 @@ export class UxTreeView implements UxComponent {
         this.nodeViewFactory = nodeViewFactory;
       } else {
         // create a default <tree-node/> factory
-        this.nodeViewFactory = container.get(ViewCompiler).compile('<template>${node}</template>', container.get(ViewResources));
+        this.nodeViewFactory = container.get(ViewCompiler).compile('<template>${$node}</template>', container.get(ViewResources));
       }
     } else {
       this.nodeViewFactory = parent.nodeViewFactory;
@@ -82,7 +82,10 @@ export class UxTreeView implements UxComponent {
     }
     n.selected = true;
     this.selectedNode = n;
-    this.element.dispatchEvent(new CustomEvent(UxTreeView.NODE_SELECTED_EVENT, { detail: { node: n }, bubbles: true }));
+    this.element.dispatchEvent(new CustomEvent(
+      UxTreeView.NODE_SELECTED_EVENT,
+      { detail: { node: n }, bubbles: true })
+    );
     return true;
   }
 
