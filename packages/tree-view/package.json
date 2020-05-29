@@ -1,0 +1,89 @@
+{
+  "name": "@aurelia-ux/tree-view",
+  "version": "0.20.0",
+  "description": "Tree view component for Aurelia UX",
+  "keywords": [
+    "aurelia",
+    "styles",
+    "components",
+    "ux",
+    "tree"
+  ],
+  "homepage": "http://aurelia.io",
+  "bugs": {
+    "url": "https://github.com/aurelia/ux/issues"
+  },
+  "license": "MIT",
+  "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
+  "contributors": [
+    "Zach Hollingshead <zach.hollingshead@gmail.com>",
+    "bigopon <bigopon.777@gmail.com>",
+    "Maxim Balaganskiy <m.balaganskiy@gmail.com>"
+  ],
+  "main": "dist/commonjs/index.js",
+  "module": "dist/native-modules/index.js",
+  "typings": "dist/types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aurelia/ux"
+  },
+  "scripts": {
+    "lint": "cross-env tslint --project tsconfig.json",
+    "test": "karma start --single-run",
+    "develop": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start",
+    "build-ts:amd": "tsc -p tsconfig.build.json -t es5 -m amd      --outDir dist/amd",
+    "build-ts:cjs": "tsc -p tsconfig.build.json -t es5 -m commonjs --outDir dist/commonjs",
+    "build-ts:ntv": "tsc -p tsconfig.build.json -t es5 -m es6      --outDir dist/native-modules",
+    "build-ts:es6": "tsc -p tsconfig.build.json -t es6 -m es6      --outDir dist/es2015",
+    "build-ts:types": "tsc -p tsconfig.build.json --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+    "build-assets:amd": "copyfiles -u 1 src/**/*.html src/**/*.css dist/amd",
+    "build-assets:cjs": "copyfiles -u 1 src/**/*.html src/**/*.css dist/commonjs",
+    "build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",
+    "build-assets:es6": "copyfiles -u 1 src/**/*.html src/**/*.css dist/es2015",
+    "prebuild": "rimraf dist",
+    "build": "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\"",
+    "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
+    "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
+    "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",
+    "changelog": "cross-env conventional-changelog -p ux -i doc/CHANGELOG.md -s",
+    "bump-version": "npm --no-git-tag-version version",
+    "preprepare-release": "cross-env npm run test",
+    "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
+  },
+  "peerDependencies": {
+    "@aurelia-ux/core": "^0.20.0",
+    "@aurelia-ux/button": "^0.20.0",
+    "@aurelia-ux/icons": "^0.20.0"
+  },
+  "devDependencies": {
+    "@aurelia-ux/core": "^0.20.0",
+    "@aurelia-ux/button": "^0.20.0",
+    "@aurelia-ux/icons": "^0.20.0",
+    "aurelia-logging-console": "^1.1.1",
+    "aurelia-templating-router": "^1.4.0",
+    "aurelia-webpack-plugin": "^4.0.0",
+    "concurrently": "^3.4.0",
+    "conventional-changelog-cli": "^2.0.27",
+    "copyfiles": "^1.2.0",
+    "cross-env": "^3.2.4",
+    "css-loader": "^3.5.3",
+    "html-loader": "^1.1.0",
+    "jasmine-core": "3.5.0",
+    "karma": "^5.0.9",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "2.0.2",
+    "karma-coverage-istanbul-reporter": "3.0.2",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-jasmine": "3.1.1",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "4.0.2",
+    "rimraf": "^3.0.0",
+    "ts-loader": "^7.0.4",
+    "tslint": "^5.20.1",
+    "typedoc": "^0.17.7",
+    "typescript": "^3.9.3",
+    "webpack": "^4.43.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

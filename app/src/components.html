@@ -431,4 +431,11 @@
       Content
     </ux-expandable>
   </section>
+
+  <section>
+    <h2>Tree view</h2>
+    <ux-tree-view nodes.bind="treeViewNodes">
+      <ux-tree-node>${$node.name}</ux-tree-node>
+    </ux-tree-view>
+  </section>
 </template>

@@ -9,7 +9,11 @@ export class Components {
   public ageGroup2: string = '40+';
   public lookupOptions = Array.from({ length: 20 }, (x, i) => ({ id: i, name: `option ${i}${i === 5 ? ' loooooooooooooong' : ''}` }));
   public lookupValue = this.lookupOptions[1];
-  
+  public treeViewNodes = [
+    { name: 'item1', children: [{ name: 'child11', children: [{ name: 'child111' }, { name: 'child112' }] }, { name: 'child12' }] },
+    { name: 'item2', children: [{ name: 'child21' }, { name: 'child22' }] }
+  ];
+
   @observable
   public progressIndeterminate: boolean = false;
   progressIndeterminateChanged() {

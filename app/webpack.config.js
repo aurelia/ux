@@ -85,6 +85,7 @@ module.exports = function ({ production = '' } = {}) {
           'slider',
           'switch',
           'textarea',
+          'tree-view',
         ].reduce((map, packageName) => {
           const mappedPackagedName = `@aurelia-ux/${packageName}`;
           map[mappedPackagedName] = path.resolve(__dirname, `../packages/${packageName}/src`);
