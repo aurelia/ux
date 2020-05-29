@@ -34,7 +34,7 @@ export class UxTreeView implements UxComponent {
     if (this.defaultConfiguration.theme) {
       this.theme = this.defaultConfiguration.theme;
     }
-    const parent = container.parent.get(Optional.of(UxTreeView));
+    const parent = container.parent?.get(Optional.of(UxTreeView));
     const isRoot = !parent;
     if (isRoot) {
       const nodeTemplateId = this.element.getAttribute('data-template-id');
