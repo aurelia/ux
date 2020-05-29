@@ -4,8 +4,7 @@ import { UxTreeView } from './ux-tree-view/ux-tree-view';
 
 export function configure(config: FrameworkConfiguration, callback?: (config: UxDefaultTreeViewConfiguration) => void) {
   config.globalResources([
-    PLATFORM.moduleName('./ux-tree-view/ux-tree-view'),
-    PLATFORM.moduleName('./ux-tree-node/ux-tree-node')
+    PLATFORM.moduleName('./ux-tree-view/ux-tree-view')
   ]);
   if (typeof callback === 'function') {
     const defaults = config.container.get(UxDefaultTreeViewConfiguration);

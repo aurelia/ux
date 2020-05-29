@@ -1,5 +1,6 @@
 <template class="ux-tree-view">
   <require from="./ux-tree-view.css"></require>
+  <require from="../ux-tree-node/ux-tree-node"></require>
   <ul class="ux-tree-view--list">
     <li repeat.for="$node of nodes" class="ux-tree-view--list-item">
       <let $tree.bind="element"></let>
