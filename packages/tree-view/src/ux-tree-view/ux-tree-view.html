@@ -15,7 +15,7 @@
       </div>
       <!-- show.bind is necessary to enable node search -->
       <!-- elements hidden with if.bind would not populate treeViews array -->
-      <ux-tree-view show.bind="$node.children && $node.expanded" nodes.bind="$node.children"
+      <ux-tree-view if.bind="$node.children && $node.expanded" nodes.bind="$node.children"
         node-selected.trigger="childNodeSelected($event.detail.node)" view-model.ref="treeViews[$index]"></tree-view>
     </li>
   </ul>

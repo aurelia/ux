@@ -1,6 +1,6 @@
 import {
   customElement, bindable, useView, PLATFORM, processContent, ViewCompiler, ViewResources, BehaviorInstruction,
-  inject, Optional, Container, ViewFactory
+  inject, Optional, Container, ViewFactory, TaskQueue
 } from 'aurelia-framework';
 import { INode } from './i-node';
 import { UxComponent, StyleEngine } from '@aurelia-ux/core';
@@ -11,7 +11,7 @@ let id = 0;
 const templateLookup: Record<string, string> = {};
 const getNextNodeTemplateId = () => ++id;
 
-@inject(Element, Container, StyleEngine, UxDefaultTreeViewConfiguration)
+@inject(Element, Container, StyleEngine, UxDefaultTreeViewConfiguration, TaskQueue)
 @customElement('ux-tree-view')
 @useView(PLATFORM.moduleName('./ux-tree-view.html'))
 @processContent(UxTreeView.processContent)
@@ -30,7 +30,7 @@ export class UxTreeView implements UxComponent {
   static NODE_SELECTED_EVENT = 'node-selected';
 
   constructor(private element: HTMLElement, container: Container, private styleEngine: StyleEngine,
-    public defaultConfiguration: UxDefaultTreeViewConfiguration) {
+    public defaultConfiguration: UxDefaultTreeViewConfiguration, private taskQueue: TaskQueue) {
     if (this.defaultConfiguration.theme) {
       this.theme = this.defaultConfiguration.theme;
     }
@@ -96,21 +96,44 @@ export class UxTreeView implements UxComponent {
     this.selectedNode = n;
   }
 
-  find(predicate: (node: INode) => boolean): INode | undefined {
-    for (let i = 0; i < this.nodes.length; ++i) {
-      if (predicate(this.nodes[i])) {
-        return this.nodes[i];
+  findPath(nodes: INode[], predicate: (node: INode) => boolean): number[] {
+    const path: number[] = [];
+    for (let i = 0; i < nodes.length; ++i) {
+      if (predicate(nodes[i])) {
+        return [i];
       }
-      if (!this.nodes[i].children) {
+      if (!nodes[i].children) {
         continue;
       }
-      const n = this.treeViews[i].find(predicate);
-      if (n) {
-        this.nodes[i].expanded = true;
-        return n;
+      const childPath = this.findPath(nodes[i].children!, predicate);
+      if (childPath.length) {
+        return [i, ...childPath];
       }
     }
-    return undefined;
+    return path;
+  }
+
+  expandPath(path: number[]) {
+    if (path.length === 1) {
+      this.nodeClicked(this.nodes[path[0]]);
+      this.element.querySelectorAll('.ux-tree-view--node')[path[0]].scrollIntoView();
+    } else {
+      this.nodes[path[0]].expanded = true;
+      // let Aurelia populate treeViews by queueing the task
+      this.taskQueue.queueTask(() => {
+        this.treeViews[path[0]].expandPath(path.slice(1));
+      });
+    }
+  }
+
+  find(predicate: (node: INode) => boolean) {
+    // to avoid rendering the whole tree finding a node is a 2-step process
+    // firstly, find the path - nodes which need to be expanded to display the target node
+    const path = this.findPath(this.nodes, predicate);
+    if (path.length) {
+      // secondly, expand the path
+      this.expandPath(path);
+    }
   }
 
   dispatchEvent(type: string, node: INode) {
