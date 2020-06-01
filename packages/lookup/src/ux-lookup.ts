@@ -163,9 +163,12 @@ export class UxLookup implements UxComponent, EventListenerObject {
     }
     const inputRect = this.inputElement.getBoundingClientRect();
     const style = getComputedStyle(this.element);
-    const inputDistance = parseInt(style.getPropertyValue('--aurelia-ux--lookup-input-distance') ?? UxLookupTheme.DEFAULT_INPUT_DISTANCE.toString());
-    const windowEdgeDistance = parseInt(style.getPropertyValue('--aurelia-ux--lookup-window-edge-distance') ?? UxLookupTheme.DEFAULT_WINDOW_EDGE_DISTANCE.toString());
-    const bottomHeightThreshold = parseInt(style.getPropertyValue('--aurelia-ux--lookup-bottom-height-threshold') ?? UxLookupTheme.DEFAULT_BOTTOM_HEIGHT_THRESHOLD.toString());
+    const inputDistanceString = style.getPropertyValue('--aurelia-ux--lookup-input-distance');
+    const inputDistance = parseInt(inputDistanceString ? inputDistanceString : UxLookupTheme.DEFAULT_INPUT_DISTANCE.toString());
+    const windowEdgeDistanceString = style.getPropertyValue('--aurelia-ux--lookup-window-edge-distance');
+    const windowEdgeDistance = parseInt(windowEdgeDistanceString ? windowEdgeDistanceString : UxLookupTheme.DEFAULT_WINDOW_EDGE_DISTANCE.toString());
+    const bottomHeightThresholdString = style.getPropertyValue('--aurelia-ux--lookup-bottom-height-threshold');
+    const bottomHeightThreshold = parseInt(bottomHeightThresholdString ? bottomHeightThresholdString : UxLookupTheme.DEFAULT_BOTTOM_HEIGHT_THRESHOLD.toString());
     let availableHeight = document.body.scrollTop + window.innerHeight - inputRect.bottom - inputDistance - windowEdgeDistance;
     if (availableHeight > bottomHeightThreshold) {
       this.anchor = {
