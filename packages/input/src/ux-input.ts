@@ -2,7 +2,7 @@ import { customElement, bindable, useView } from 'aurelia-templating';
 import { DOM, PLATFORM } from 'aurelia-pal';
 import { observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents, InputVariant } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component.css';
@@ -13,8 +13,6 @@ import { UxDefaultInputConfiguration } from './ux-default-input-configuration';
 export interface UxInputElement extends HTMLElement {
   value: any;
 }
-
-export type InputVariant = 'filled' | 'outline';
 
 @inject(Element, StyleEngine, UxDefaultInputConfiguration)
 @customElement('ux-input')

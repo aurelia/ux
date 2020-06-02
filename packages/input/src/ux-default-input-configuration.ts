@@ -1,5 +1,5 @@
 import { UxInputTheme } from './ux-input-theme';
-import { InputVariant } from './ux-input';
+import { InputVariant } from '@aurelia-ux/core';
 
 export class UxDefaultInputConfiguration {
   public theme?: UxInputTheme;
