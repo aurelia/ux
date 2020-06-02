@@ -46,16 +46,16 @@ export class UxInput implements UxInputComponent {
   public value: any;
   public textbox: HTMLInputElement;
 
-  constructor(private element: UxInputElement, public styleEngine: StyleEngine, private defaultConfiguration: UxDefaultInputConfiguration) {
+  constructor(private element: UxInputElement, public styleEngine: StyleEngine, defaultConfiguration: UxDefaultInputConfiguration) {
     defineUxInputElementApis(element);
-    if (this.defaultConfiguration.theme !== undefined) {
-      this.theme = this.defaultConfiguration.theme;
+    if (defaultConfiguration.theme !== undefined) {
+      this.theme = defaultConfiguration.theme;
     }
-    if (this.defaultConfiguration.dense !== undefined) {
-      this.dense = this.defaultConfiguration.dense;
+    if (defaultConfiguration.dense !== undefined) {
+      this.dense = defaultConfiguration.dense;
     }
-    if (this.defaultConfiguration.variant !== undefined) {
-      this.variant = this.defaultConfiguration.variant;
+    if (defaultConfiguration.variant !== undefined) {
+      this.variant = defaultConfiguration.variant;
     }
   }
 
