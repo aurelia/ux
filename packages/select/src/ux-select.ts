@@ -16,7 +16,7 @@ import {
 } from 'aurelia-framework';
 
 import { getLogger } from 'aurelia-logging';
-import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents, InputVariant } from '@aurelia-ux/core';
 
 import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
@@ -27,6 +27,7 @@ import { getAuViewModel, bool } from './util';
 import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component--outline.css';
+import { UxDefaultSelectConfiguration } from './ux-default-select-configuration';
 
 declare module './ux-option' {
   interface UxOption {
@@ -60,7 +61,7 @@ export interface UxOptionContainer extends HTMLElement {
   children: HTMLCollectionOf<UxOptGroupElement | UxOptionElement>;
 }
 
-@inject(Element, StyleEngine, ObserverLocator, TaskQueue)
+@inject(Element, StyleEngine, ObserverLocator, TaskQueue, UxDefaultSelectConfiguration)
 @processContent(ensureUxOptionOrUxOptGroup)
 @customElement('ux-select')
 @useView(PLATFORM.moduleName('./ux-select.html'))
@@ -90,7 +91,7 @@ export class UxSelect implements UxInputComponent {
   @bindable public placeholder: string;
 
   @bindable()
-  public variant: 'filled' | 'outline' = 'filled';
+  public variant: InputVariant = 'filled';
 
   @bindable public dense: any = false;
 
@@ -106,10 +107,20 @@ export class UxSelect implements UxInputComponent {
     public readonly element: UxSelectElement,
     private styleEngine: StyleEngine,
     private observerLocator: ObserverLocator,
-    private taskQueue: TaskQueue
+    private taskQueue: TaskQueue,
+    defaultConfiguration: UxDefaultSelectConfiguration
   ) {
     // Only chrome persist the element prototype when cloning with clone node
     Object.setPrototypeOf(element, UxSelectElementProto);
+    if (defaultConfiguration.theme !== undefined) {
+      this.theme = defaultConfiguration.theme;
+    }
+    if (defaultConfiguration.dense !== undefined) {
+      this.dense = defaultConfiguration.dense;
+    }
+    if (defaultConfiguration.variant !== undefined) {
+      this.variant = defaultConfiguration.variant;
+    }
   }
 
   public bind() {
@@ -338,7 +349,7 @@ export class UxSelect implements UxInputComponent {
     this.isCollapsing = true;
     this.optionCtEl.classList.remove('ux-select__list-container--open');
     setTimeout(() => {
-      this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
+      this.optionWrapperEl?.classList.remove('ux-select__list-wrapper--open');
       this.isCollapsing = false;
       this.expanded = false;
       this.setFocusedOption(null);
@@ -498,7 +509,7 @@ export class UxSelect implements UxInputComponent {
 
   @computedFrom('label')
   get placeholderMode(): boolean {
-    return typeof this.label !== 'string' || this.label.length === 0;
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 
   public get options(): UxOptionElement[] {
