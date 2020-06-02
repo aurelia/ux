@@ -351,7 +351,7 @@ export class UxSelect implements UxInputComponent {
     this.isCollapsing = true;
     this.optionCtEl.classList.remove('ux-select__list-container--open');
     setTimeout(() => {
-      this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
+      this.optionWrapperEl?.classList.remove('ux-select__list-wrapper--open');
       this.isCollapsing = false;
       this.expanded = false;
       this.setFocusedOption(null);
