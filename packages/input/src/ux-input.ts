@@ -173,6 +173,9 @@ export class UxInput implements UxInputComponent {
   public typeChanged(newValue: any) {
     if (![
       'text',
+      'date',
+      'time',
+      'datetime-local',
       'password',
       'number',
       'email',
@@ -197,6 +200,7 @@ export class UxInput implements UxInputComponent {
 
   public focus() {
     this.textbox.focus();
+    return true;
   }
 
   public blur() {
