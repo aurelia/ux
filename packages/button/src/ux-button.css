@@ -134,7 +134,9 @@ ux-button {
   color: #9E9E9E;
   color: var(--aurelia-ux--button-disabled-background, var(--aurelia-ux--disabled-primary, #9E9E9E));
 }
-
+.ux-button--disabled * {
+  pointer-events: none;
+}
 
 
 /* Button States */

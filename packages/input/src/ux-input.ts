@@ -2,18 +2,19 @@ import { customElement, bindable, useView } from 'aurelia-templating';
 import { DOM, PLATFORM } from 'aurelia-pal';
 import { observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
-import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents, InputVariant } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component--outline.css';
+import { UxDefaultInputConfiguration } from './ux-default-input-configuration';
 
 export interface UxInputElement extends HTMLElement {
   value: any;
 }
 
-@inject(Element, StyleEngine)
+@inject(Element, StyleEngine, UxDefaultInputConfiguration)
 @customElement('ux-input')
 @useView(PLATFORM.moduleName('./ux-input.html'))
 export class UxInput implements UxInputComponent {
@@ -31,7 +32,7 @@ export class UxInput implements UxInputComponent {
   @bindable public label: string;
   @bindable public placeholder: string;
   @bindable public type: any;
-  @bindable public variant: 'filled' | 'outline' = 'filled';
+  @bindable public variant: InputVariant = 'filled';
   @bindable public dense: any = false;
 
   @observable
@@ -43,8 +44,17 @@ export class UxInput implements UxInputComponent {
   public value: any;
   public textbox: HTMLInputElement;
 
-  constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
+  constructor(private element: UxInputElement, public styleEngine: StyleEngine, defaultConfiguration: UxDefaultInputConfiguration) {
     defineUxInputElementApis(element);
+    if (defaultConfiguration.theme !== undefined) {
+      this.theme = defaultConfiguration.theme;
+    }
+    if (defaultConfiguration.dense !== undefined) {
+      this.dense = defaultConfiguration.dense;
+    }
+    if (defaultConfiguration.variant !== undefined) {
+      this.variant = defaultConfiguration.variant;
+    }
   }
 
   public bind() {
@@ -173,6 +183,9 @@ export class UxInput implements UxInputComponent {
   public typeChanged(newValue: any) {
     if (![
       'text',
+      'date',
+      'time',
+      'datetime-local',
       'password',
       'number',
       'email',
@@ -197,6 +210,7 @@ export class UxInput implements UxInputComponent {
 
   public focus() {
     this.textbox.focus();
+    return true;
   }
 
   public blur() {
@@ -213,7 +227,7 @@ export class UxInput implements UxInputComponent {
 
   @computedFrom('label')
   get placeholderMode(): boolean {
-    return typeof this.label !== 'string' || this.label.length === 0;
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 
 }
