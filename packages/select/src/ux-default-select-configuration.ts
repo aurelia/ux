@@ -1,5 +1,5 @@
 import { UxSelectTheme } from './ux-select-theme';
-import { InputVariant } from './ux-select';
+import { InputVariant } from '@aurelia-ux/core';
 
 export class UxDefaultSelectConfiguration {
   public theme?: UxSelectTheme;

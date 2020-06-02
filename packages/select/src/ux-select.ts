@@ -16,7 +16,7 @@ import {
 } from 'aurelia-framework';
 
 import { getLogger } from 'aurelia-logging';
-import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents, InputVariant } from '@aurelia-ux/core';
 
 import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
@@ -60,8 +60,6 @@ export interface UxSelectElement<T = any> extends HTMLElement {
 export interface UxOptionContainer extends HTMLElement {
   children: HTMLCollectionOf<UxOptGroupElement | UxOptionElement>;
 }
-
-export type InputVariant = 'filled' | 'outline';
 
 @inject(Element, StyleEngine, ObserverLocator, TaskQueue, UxDefaultSelectConfiguration)
 @processContent(ensureUxOptionOrUxOptGroup)
