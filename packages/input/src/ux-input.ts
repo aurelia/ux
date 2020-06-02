@@ -208,12 +208,11 @@ export class UxInput implements UxInputComponent {
     this.setValue(newValue);
   }
 
-  public focus() {
+  public focus(): void {
     this.textbox.focus();
-    return true;
   }
 
-  public blur() {
+  public blur(): void {
     if (document.activeElement === this.textbox) {
       this.textbox.blur();
     }

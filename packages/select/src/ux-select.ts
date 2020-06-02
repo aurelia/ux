@@ -53,6 +53,7 @@ const invalidMultipleValueMsg = 'Only null or Array instances can be bound to a 
 const selectArrayContext = 'context:ux-select';
 
 export interface UxSelectElement<T = any> extends HTMLElement {
+  options: UxOptionElement[];
   matcher(a: any, b: any): boolean;
   value: T;
 }
@@ -111,7 +112,7 @@ export class UxSelect implements UxInputComponent {
     defaultConfiguration: UxDefaultSelectConfiguration
   ) {
     // Only chrome persist the element prototype when cloning with clone node
-    Object.setPrototypeOf(element, UxSelectElementProto);
+    defineUxSelectElementApis(element);
     if (defaultConfiguration.theme !== undefined) {
       this.theme = defaultConfiguration.theme;
     }
@@ -534,7 +535,7 @@ export class UxSelect implements UxInputComponent {
     return result;
   }
 
-  public getOptions() {
+  public getOptions(): UxOptionElement[] {
     return this.options;
   }
 
@@ -576,21 +577,25 @@ function ensureUxOptionOrUxOptGroup(
   return true;
 }
 
-const UxSelectElementProto = Object.create(HTMLElement.prototype, {
-  value: {
-    get() {
-      return getAuViewModel<UxSelect>(this).getValue();
+const defineUxSelectElementApis = (element: Element) => {
+  Object.defineProperties(element, {
+    value: {
+      get() {
+        return getAuViewModel<UxSelect>(this).getValue();
+      },
+      set(v: any) {
+        getAuViewModel<UxSelect>(this).setValue(v);
+      },
+      configurable: true
     },
-    set(v: any) {
-      return getAuViewModel<UxSelect>(this).setValue(v);
+    options: {
+      get() {
+        return getAuViewModel<UxSelect>(this).getOptions();
+      },
+      configurable: true
     }
-  },
-  options: {
-    get() {
-      return getAuViewModel<UxSelect>(this).getOptions();
-    }
-  }
-});
+  });
+};
 
 function defaultMatcher<T = any>(a: T, b: T) {
   return a === b;
