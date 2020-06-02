@@ -8,12 +8,15 @@ import { UxInputTheme } from './ux-input-theme';
 import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component--outline.css';
+import { UxDefaultInputConfiguration } from './ux-default-input-configuration';
 
 export interface UxInputElement extends HTMLElement {
   value: any;
 }
 
-@inject(Element, StyleEngine)
+export type InputVariant = 'filled' | 'outline';
+
+@inject(Element, StyleEngine, UxDefaultInputConfiguration)
 @customElement('ux-input')
 @useView(PLATFORM.moduleName('./ux-input.html'))
 export class UxInput implements UxInputComponent {
@@ -31,7 +34,7 @@ export class UxInput implements UxInputComponent {
   @bindable public label: string;
   @bindable public placeholder: string;
   @bindable public type: any;
-  @bindable public variant: 'filled' | 'outline' = 'filled';
+  @bindable public variant: InputVariant = 'filled';
   @bindable public dense: any = false;
 
   @observable
@@ -43,8 +46,17 @@ export class UxInput implements UxInputComponent {
   public value: any;
   public textbox: HTMLInputElement;
 
-  constructor(private element: UxInputElement, public styleEngine: StyleEngine) {
+  constructor(private element: UxInputElement, public styleEngine: StyleEngine, private defaultConfiguration: UxDefaultInputConfiguration) {
     defineUxInputElementApis(element);
+    if (this.defaultConfiguration.theme !== undefined) {
+      this.theme = this.defaultConfiguration.theme;
+    }
+    if (this.defaultConfiguration.dense !== undefined) {
+      this.dense = this.defaultConfiguration.dense;
+    }
+    if (this.defaultConfiguration.variant !== undefined) {
+      this.variant = this.defaultConfiguration.variant;
+    }
   }
 
   public bind() {
@@ -217,7 +229,7 @@ export class UxInput implements UxInputComponent {
 
   @computedFrom('label')
   get placeholderMode(): boolean {
-    return typeof this.label !== 'string' || this.label.length === 0;
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 
 }
