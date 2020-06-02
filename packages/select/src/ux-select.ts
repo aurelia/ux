@@ -27,6 +27,7 @@ import { getAuViewModel, bool } from './util';
 import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component--outline.css';
+import { UxDefaultSelectConfiguration } from './ux-default-select-configuration';
 
 declare module './ux-option' {
   interface UxOption {
@@ -60,7 +61,9 @@ export interface UxOptionContainer extends HTMLElement {
   children: HTMLCollectionOf<UxOptGroupElement | UxOptionElement>;
 }
 
-@inject(Element, StyleEngine, ObserverLocator, TaskQueue)
+export type InputVariant = 'filled' | 'outline';
+
+@inject(Element, StyleEngine, ObserverLocator, TaskQueue, UxDefaultSelectConfiguration)
 @processContent(ensureUxOptionOrUxOptGroup)
 @customElement('ux-select')
 @useView(PLATFORM.moduleName('./ux-select.html'))
@@ -90,7 +93,7 @@ export class UxSelect implements UxInputComponent {
   @bindable public placeholder: string;
 
   @bindable()
-  public variant: 'filled' | 'outline' = 'filled';
+  public variant: InputVariant = 'filled';
 
   @bindable public dense: any = false;
 
@@ -106,10 +109,20 @@ export class UxSelect implements UxInputComponent {
     public readonly element: UxSelectElement,
     private styleEngine: StyleEngine,
     private observerLocator: ObserverLocator,
-    private taskQueue: TaskQueue
+    private taskQueue: TaskQueue,
+    private defaultConfiguration: UxDefaultSelectConfiguration
   ) {
     // Only chrome persist the element prototype when cloning with clone node
     Object.setPrototypeOf(element, UxSelectElementProto);
+    if (this.defaultConfiguration.theme !== undefined) {
+      this.theme = this.defaultConfiguration.theme;
+    }
+    if (this.defaultConfiguration.dense !== undefined) {
+      this.dense = this.defaultConfiguration.dense;
+    }
+    if (this.defaultConfiguration.variant !== undefined) {
+      this.variant = this.defaultConfiguration.variant;
+    }
   }
 
   public bind() {
@@ -498,7 +511,7 @@ export class UxSelect implements UxInputComponent {
 
   @computedFrom('label')
   get placeholderMode(): boolean {
-    return typeof this.label !== 'string' || this.label.length === 0;
+    return typeof this.label !== 'string' || this.label.length === 0;
   }
 
   public get options(): UxOptionElement[] {
