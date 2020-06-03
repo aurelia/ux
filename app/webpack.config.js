@@ -6,9 +6,10 @@ const AureliaWebpackPlugin = require('aurelia-webpack-plugin');
 
 const outDir = path.resolve(__dirname, 'dist');
 /**
+ * @param {{ production?: string; stats?: import('webpack').Stats.ToStringOptions }} param0
  * @returns {import('webpack').Configuration}
  */
-module.exports = function ({ production = '' } = {}) {
+module.exports = function ({ production = '', stats = 'errors-only' } = {}) {
   return {
     mode: production === 'production' ? 'production' : 'development',
     devtool: production ? false : 'source-map',
@@ -18,6 +19,7 @@ module.exports = function ({ production = '' } = {}) {
       sourceMapFilename: production ? '[name].[chunkhash].bundle.map' : '[name].[hash].bundle.map',
       chunkFilename: production ? '[name].[chunkhash].chunk.js' : '[name].[hash].chunk.js'
     },
+    stats: stats,
     resolve: {
       extensions: ['.ts', '.js'],
       modules: [

@@ -13,7 +13,7 @@ export { PaperRipple } from './effects/paper-ripple';
 export { normalizeBooleanAttribute, normalizeNumberAttribute } from './components/html-attributes';
 export { getBackgroundColorThroughParents } from './components/background-color-parent';
 export { UxComponent } from './components/ux-component';
-export { UxInputComponent } from './components/ux-input-component';
+export { UxInputComponent, InputVariant } from './components/ux-input-component';
 export { UxChoiceAttribute } from './components/ux-choice-attribute';
 export { UxChoiceContainerAttribute } from './components/ux-choice-container-attribute';
 export { IController } from './components/i-controller';
