@@ -1,6 +1,17 @@
 import {
-  customElement, bindable, useView, PLATFORM, processContent, ViewCompiler, ViewResources, BehaviorInstruction,
-  inject, Optional, Container, ViewFactory, TaskQueue
+  customElement,
+  bindable,
+  useView,
+  PLATFORM,
+  processContent,
+  ViewCompiler,
+  ViewResources,
+  BehaviorInstruction,
+  inject,
+  Optional,
+  Container,
+  ViewFactory,
+  TaskQueue
 } from 'aurelia-framework';
 import { INode } from './i-node';
 import { UxComponent, StyleEngine } from '@aurelia-ux/core';
@@ -11,11 +22,20 @@ let id = 0;
 const templateLookup: Record<string, string> = {};
 const getNextNodeTemplateId = () => ++id;
 
-@inject(Element, Container, StyleEngine, UxDefaultTreeViewConfiguration, TaskQueue)
+@inject(
+  Element,
+  TaskQueue,
+  StyleEngine,
+  UxDefaultTreeViewConfiguration,
+  Container,
+)
 @customElement('ux-tree-view')
 @useView(PLATFORM.moduleName('./ux-tree-view.html'))
 @processContent(UxTreeView.processContent)
 export class UxTreeView implements UxComponent {
+
+  static NODE_SELECTED_EVENT = 'node-selected';
+
   static processContent(_viewCompiler: ViewCompiler, _resources: ViewResources, element: Element, _instruction: BehaviorInstruction) {
     const treeNode = element.querySelector('ux-tree-node');
     if (treeNode) {
@@ -27,29 +47,47 @@ export class UxTreeView implements UxComponent {
     return false;
   }
 
-  static NODE_SELECTED_EVENT = 'node-selected';
-
-  constructor(private element: HTMLElement, container: Container, private styleEngine: StyleEngine,
-    public defaultConfiguration: UxDefaultTreeViewConfiguration, private taskQueue: TaskQueue) {
-    if (this.defaultConfiguration.theme) {
-      this.theme = this.defaultConfiguration.theme;
-    }
+  /**
+   * @param element the host element of a <ux-tree-view/>
+   * @param container the container associated with a <ux-tree-view/>
+   */
+  private static getNodeFactory(element: Element, container: Container): ViewFactory {
     const parent = container.parent?.get(Optional.of(UxTreeView));
     const isRoot = !parent;
+    // a root ux-tree view means a consumer defined one
+    // this potentiall contains the template for the tree node
     if (isRoot) {
-      const nodeTemplateId = this.element.getAttribute('data-template-id');
+      const nodeTemplateId = element.getAttribute('data-template-id');
       if (nodeTemplateId && templateLookup[nodeTemplateId]) {
         const nodeTemplate = templateLookup[nodeTemplateId];
         const nodeViewFactory = container.get(ViewCompiler).compile(`<template>${nodeTemplate}</template>`, container.get(ViewResources));
-        this.nodeViewFactory = nodeViewFactory;
+        return nodeViewFactory;
       } else {
-        // create a default <tree-node/> factory
-        this.nodeViewFactory = container.get(ViewCompiler).compile('<template>${$node}</template>', container.get(ViewResources));
+        // create a default <ux-tree-node/> factory
+        return container.get(ViewCompiler).compile('<template>${$node}</template>', container.get(ViewResources));
       }
     } else {
-      this.nodeViewFactory = parent.nodeViewFactory;
+      // if it's not a root <ux-tree-view/>
+      // assume that the parent has already built the node factory and simply get it from there
+      return parent.nodeViewFactory;
     }
   }
+
+  constructor(
+    private element: HTMLElement,
+    private taskQueue: TaskQueue,
+    private styleEngine: StyleEngine,
+    defaultConfiguration: UxDefaultTreeViewConfiguration,
+    container: Container,
+  ) {
+    if (defaultConfiguration.theme) {
+      this.theme = defaultConfiguration.theme;
+    }
+    this.nodeViewFactory = UxTreeView.getNodeFactory(element, container);
+  }
+
+  nodeViewFactory: ViewFactory;
+  selectedNode: INode;
 
   @bindable
   nodes: INode[];
@@ -63,9 +101,6 @@ export class UxTreeView implements UxComponent {
 
     this.styleEngine.applyTheme(newValue, this.element);
   }
-
-  nodeViewFactory: ViewFactory;
-  selectedNode: INode;
 
   // this is populated by the HTML template
   treeViews: UxTreeView[] = [];
@@ -120,6 +155,8 @@ export class UxTreeView implements UxComponent {
     } else {
       this.nodes[path[0]].expanded = true;
       // let Aurelia populate treeViews by queueing the task
+      // todo: flatten the data source via a data normalization step first
+      // as this technique requires many round of queueTask if the node selected is deep
       this.taskQueue.queueTask(() => {
         this.treeViews[path[0]].expandPath(path.slice(1));
       });
@@ -139,6 +176,5 @@ export class UxTreeView implements UxComponent {
   dispatchEvent(type: string, node: INode) {
     this.element.dispatchEvent(new CustomEvent(type, { bubbles: true, detail: { node } }));
   }
-
 }
 
