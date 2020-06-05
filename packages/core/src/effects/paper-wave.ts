@@ -1,12 +1,6 @@
-import { PLATFORM } from 'aurelia-pal';
+import { PLATFORM, DOM } from 'aurelia-pal';
 import { ElementRect } from './element-rect';
 import { Point } from './point';
-
-// tslint:disable:variable-name
-const _window: Window = PLATFORM.global;
-const  _doc = _window.document;
-const  _now = PLATFORM.performance.now.bind(PLATFORM.performance);
-// tslint:enable:variable-name
 
 /**
  * Provides all the logic to produce a one-time rippling effect.
@@ -86,16 +80,16 @@ export class PaperWave {
    * Initializes a new instance of the `PaperWave` class with the specified `PaperRipple` instance.
    */
   constructor(options: any) {
-    this.color = _window.getComputedStyle(options.$).color;
+    this.color = DOM.getComputedStyle(options.$).color;
     this.containerRect = new ElementRect(options.$);
     this.recenters = options.recenters || false;
     this.center = options.center || false;
     this.initialOpacity = options.initialOpacity || 0.25;
     this.opacityDecayVelocity = options.opacityDecayVelocity || 0.8;
-    this.$wave = _doc.createElement('div');
+    this.$wave = DOM.createElement('div') as HTMLDivElement;
     this.$wave.classList.add('paper-ripple__wave');
     this.$wave.style.backgroundColor = this.color!;
-    this.$ = _doc.createElement('div');
+    this.$ = DOM.createElement('div') as HTMLDivElement;
     this.$.classList.add('paper-ripple__wave-container');
     this.$.appendChild(this.$wave);
     this.resetDefaults();
@@ -110,7 +104,7 @@ export class PaperWave {
       return 0;
     }
 
-    let elapsed = _now() - this.touchDownStarted;
+    let elapsed = PLATFORM.performance.now() - this.touchDownStarted;
 
     if (this.touchUpStarted) {
       elapsed -= this.touchUpElapsed;
@@ -124,7 +118,7 @@ export class PaperWave {
    * @returns The time in milliseconds.
    */
   get touchUpElapsed() {
-    return this.touchUpStarted ? _now() - this.touchUpStarted : 0;
+    return this.touchUpStarted ? PLATFORM.performance.now() - this.touchUpStarted : 0;
   }
 
   /**
@@ -304,7 +298,7 @@ export class PaperWave {
 
     this.resetDefaults();
 
-    this.touchDownStarted = _now();
+    this.touchDownStarted = PLATFORM.performance.now();
     this.startPosition = this.center || !event ?
       containerCenter :
       {
@@ -331,7 +325,7 @@ export class PaperWave {
       return this;
     }
 
-    this.touchUpStarted = _now();
+    this.touchUpStarted = PLATFORM.performance.now();
 
     return this;
   }
