@@ -1,0 +1,41 @@
+ux-tree-view {
+  display: block;
+}
+
+ux-tree-view .ux-tree-view--node {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+ux-tree-view .ux-tree-view--node > .ux-tree-view--expander button {
+  background: transparent;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  color: black;
+  color: var(--aurelia-ux--tree-view-expander-foreground, var(--aurelia-ux--design-app-foreground, black));
+}
+
+ux-tree-view .ux-tree-view--node .ux-tree-view--leaf-padding {
+  width: 40px;
+  height: 40px;
+}
+
+ux-tree-view .ux-tree-view--node.ux-tree-view--node-selected {
+  background-color: #00000011;
+  background-color: var(--aurelia-ux--tree-view-selected-background, #00000011);
+}
+
+ux-tree-view > .ux-tree-view--list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ux-tree-view > .ux-tree-view--list > .ux-tree-view--list-item > ux-tree-view {
+  margin-left: 15px;
+  margin-left: var(--aurelia-ux--tree-view-child-margin, 15px);
+}
+/*# sourceMappingURL=ux-tree-view.css.map */

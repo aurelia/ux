@@ -63,6 +63,7 @@ module.exports = (config) => {
         'slider',
         'switch',
         'textarea',
+        'tree-view'
       ].reduce((map, packageName) => {
         const mappedPackagedName = `@aurelia-ux/${packageName}`;
         map[mappedPackagedName] = path.resolve(__dirname, `../${packageName}/src/`);

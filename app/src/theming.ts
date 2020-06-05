@@ -9,7 +9,7 @@ export class Theming {
 
   public design: Design;
 
-  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' | 'expandable' | 'sidenav' | 'lookup' = 'select';
+  public selectedComponent: 'button' | 'input' | 'textarea' | 'select' | 'datepicker' | 'chip-input' | 'slider' | 'checkbox' | 'radio' | 'expandable' | 'sidenav' | 'lookup' | 'tree-view' = 'select';
 
   public buttonPreviewClass = '';
   public buttonPreviewType = 'raised';
@@ -45,6 +45,11 @@ export class Theming {
   public checkboxPreviewDisabled = false;
 
   public radioPreviewDisabled = false;
+
+  public treeViewNodes = [
+    { name: 'item1', children: [{ name: 'child11', children: [{ name: 'child111' }, { name: 'child112' }] }, { name: 'child12' }] },
+    { name: 'item2', children: [{ name: 'child21' }, { name: 'child22' }] }
+  ];
 
   constructor(private themeService: ThemeService, private ux: AureliaUX, private signaler: BindingSignaler) {
     this.design = this.ux.design;
@@ -92,5 +97,9 @@ export class Theming {
 
   public lookupChanged() {
     this.signaler.signal('lookup-changed');
+  }
+
+  public treeViewChanged() {
+    this.signaler.signal('tree-view-changed');
   }
 }

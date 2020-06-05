@@ -1,6 +1,7 @@
 <template>
   <require from="./theming.css"></require>
   <require from="./pixels-to-number-converter"></require>
+  <require from="./json-converter"></require>
 
   <section>
     <h2>1. Set up your themes</h2>
@@ -175,6 +176,7 @@
       <ux-chip click.delegate="selectComponent('lookup')" class="${selectedComponent === 'lookup' ? 'ux-chip--selected':''}">Lookup</ux-chip>
       <ux-chip click.delegate="selectComponent('expandable')" class="${selectedComponent === 'expandable' ? 'ux-chip--selected':''}">Expandable</ux-chip>
       <ux-chip click.delegate="selectComponent('sidenav')" class="${selectedComponent === 'sidenav' ? 'ux-chip--selected':''}">Sidenav</ux-chip>
+      <ux-chip click.delegate="selectComponent('tree-view')" class="${selectedComponent === 'tree-view' ? 'ux-chip--selected':''}">Tree view</ux-chip>
     </div>
 
     <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'button'">
@@ -806,7 +808,7 @@
         </ux-card-content>
       </ux-card>
       <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
-        <ux-card-content innerhtml.bind="json(themeService.expandable) & signal:'expandable-changed'"></ux-card-content>
+        <ux-card-content innerhtml.bind="themeService.expandable | json & signal:'expandable-changed'"></ux-card-content>
       </ux-card>
     </ux-grid>
 
@@ -837,7 +839,7 @@
         </ux-card-content>
       </ux-card>
       <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
-        <ux-card-content innerhtml.bind="json(themeService.sidenav) & signal:'sidenav-changed'">
+        <ux-card-content innerhtml.bind="themeService.sidenav | json & signal:'sidenav-changed'">
         </ux-card-content>
       </ux-card>
     </ux-grid>
@@ -883,10 +885,45 @@
         </ux-card-content>
       </ux-card>
       <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
-        <ux-card-content innerhtml.bind="json(themeService.lookup) & signal:'lookup-changed' ">
+        <ux-card-content innerhtml.bind="themeService.lookup | json & signal:'lookup-changed' ">
         </ux-card-content>
       </ux-card>
     </ux-grid>
+
+    <ux-grid class="ux-grid--remove-padding" if.bind="selectedComponent === 'tree-view'">
+      <ux-card sm="4" md="3">
+        <ux-card-header color="primary">
+          <ux-icon icon="color_lens" class="ux-card__thumbnail"></ux-icon>
+          <div class="ux-card-header__row">
+            <span class="ux-card__title">Ux-Tree-View</span>
+          </div>
+        </ux-card-header>
+        <ux-card-media class="ux-card-component__media">
+          <ux-tree-view nodes.bind="treeViewNodes" style="width: 100%">
+            <ux-tree-node>${$node.name}</ux-tree-node>
+          </ux-tree-view>
+        </ux-card-media>
+      </ux-card>
+      <ux-card sm="8" md="6" style="max-height: calc(100vh - 200px); overflow: auto;">
+        <ux-card-content>
+          <ux-field repeat.for="prop of ['selectedBackground', 'expanderForeground']">
+            <ux-input label.bind="prop" value.bind="themeService.treeView[prop]">
+              <span slot="trailing-icon" class="color-feedback" css="background-color:${themeService.treeView[prop]}"></span>
+            </ux-input>
+          </ux-field>
+          <div class="ux-card__separator"></div>
+          <ux-field>
+            <label>Child margin</label>
+            <br><ux-slider value.bind="themeService.treeView.childMargin | pixelsToNumber" min="1" max="20" step="1"
+              mouseup.delegate="treeViewChanged()"></ux-slider>
+          </ux-field>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="12" md="3" style="background-color: #EFEFEF; color: #333;">
+        <ux-card-content innerhtml.bind="themeService.treeView | json & signal:'tree-view-changed'"></ux-card-content>
+      </ux-card>
+    </ux-grid>
+
   </section>
 
 </template>

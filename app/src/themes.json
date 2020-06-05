@@ -89,6 +89,10 @@
     {
       "themeKey": "sidenav",
       "backdropColor": "rgba(189, 189, 189, 0.6)"
+    },
+    {
+      "themeKey": "tree-view",
+      "selectedBackground": "#FFFFFF11"
     }
   ]
 }
