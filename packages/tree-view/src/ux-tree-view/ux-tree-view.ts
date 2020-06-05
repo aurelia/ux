@@ -52,7 +52,7 @@ export class UxTreeView implements UxComponent {
    * @param container the container associated with a <ux-tree-view/>
    */
   private static getNodeFactory(element: Element, container: Container): ViewFactory {
-    const parent = container.parent?.get(Optional.of(UxTreeView));
+    const parent = container.parent ? container.parent.get(Optional.of(UxTreeView)) : null;
     const isRoot = !parent;
     // a root ux-tree view means a consumer defined one
     // this potentiall contains the template for the tree node
