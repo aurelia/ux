@@ -356,13 +356,16 @@ export class UxSelect implements UxInputComponent {
     }
     this.isCollapsing = true;
     this.optionCtEl.classList.remove('ux-select__list-container--open');
+    const listTransitionString = getComputedStyle(this.element).getPropertyValue('--aurelia-ux--select-list-transition')
+      || UxSelectTheme.DEFAULT_LIST_TRANSITION;
+    const listTransition = parseInt(listTransitionString.replace('ms', ''));
     setTimeout(() => {
       this.optionWrapperEl?.classList.remove('ux-select__list-wrapper--open');
       this.isCollapsing = false;
       this.expanded = false;
       this.setFocusedOption(null);
       this.unsetupListAnchor();
-    }, this.theme && this.theme.listTransition || 125);
+    }, listTransition);
   }
 
   private setFocusedOption(focusedOption: UxOptionElement | null) {
