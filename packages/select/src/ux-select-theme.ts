@@ -3,6 +3,8 @@ import { UxTheme } from '@aurelia-ux/core';
 export class UxSelectTheme implements UxTheme {
   public themeKey = 'select';
 
+  static DEFAULT_LIST_TRANSITION = '125ms';
+
   public foreground?: string;
   public foregroundLabel?: string;
   public background?: string;
@@ -29,7 +31,7 @@ export class UxSelectTheme implements UxTheme {
   public listBackground?: string;
   public listForeground?: string;
   public listElevation?: string;
-  public listTransition?: number;
+  public listTransition?: string;
 
   public optionHover?: string;
   public optionFocused?: string;
