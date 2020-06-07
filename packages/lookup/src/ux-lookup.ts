@@ -28,6 +28,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
   private inputElement: UxInputElement | HTMLInputElement | undefined | null;
   public anchor: { left: number, top: string | undefined, bottom: string | undefined, maxHeight: number, width: number } | null;
   public isOpen: boolean = false;
+  public isWrapperOpen: boolean = false;
   public optionsArray: unknown[];
   public focusedOption: unknown = undefined;
   public searching: boolean = false;
@@ -148,11 +149,16 @@ export class UxLookup implements UxComponent, EventListenerObject {
     }
     this.updateAnchor();
     windowEvents.forEach(x => window.addEventListener(x, this, true));
-    this.taskQueue.queueTask(() => this.isOpen = true);
+    this.isWrapperOpen = true;
+    this.isOpen = true;
   }
 
   close() {
     this.isOpen = false;
+    const transitionDurationString = getComputedStyle(this.element).getPropertyValue('--aurelia-ux--lookup-transition-duration')
+      || UxLookupTheme.DEFAULT_TRANSITION_DURATION;
+    const transitionDuration = parseInt(transitionDurationString.replace('ms', ''));
+    setTimeout(() => this.isWrapperOpen = false, transitionDuration);
     this.focusedOption = undefined;
     windowEvents.forEach(x => window.addEventListener(x, this, true));
   }
