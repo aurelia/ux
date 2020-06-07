@@ -7,6 +7,7 @@ import {
   DOM,
   processContent,
   ElementEvents,
+  Factory,
   inject,
   PLATFORM,
   InternalCollectionObserver,
@@ -14,6 +15,7 @@ import {
   TaskQueue,
   useView,
 } from 'aurelia-framework';
+import { UxPositioning, UxPositioningFactory } from '@aurelia-ux/positioning';
 
 import { getLogger } from 'aurelia-logging';
 import { StyleEngine, UxInputComponent, normalizeBooleanAttribute, getBackgroundColorThroughParents, InputVariant } from '@aurelia-ux/core';
@@ -62,12 +64,12 @@ export interface UxOptionContainer extends HTMLElement {
   children: HTMLCollectionOf<UxOptGroupElement | UxOptionElement>;
 }
 
-@inject(Element, StyleEngine, ObserverLocator, TaskQueue, UxDefaultSelectConfiguration)
+@inject(Element, StyleEngine, ObserverLocator, TaskQueue, UxDefaultSelectConfiguration, Factory.of(UxPositioning))
 @processContent(ensureUxOptionOrUxOptGroup)
 @customElement('ux-select')
 @useView(PLATFORM.moduleName('./ux-select.html'))
 export class UxSelect implements UxInputComponent {
-
+  private positioning: UxPositioning;
   private selectedOption: UxOptionElement | null = null;
 
   // Temporarily used to store <ux-option/> reference in interaction
@@ -109,7 +111,8 @@ export class UxSelect implements UxInputComponent {
     private styleEngine: StyleEngine,
     private observerLocator: ObserverLocator,
     private taskQueue: TaskQueue,
-    defaultConfiguration: UxDefaultSelectConfiguration
+    defaultConfiguration: UxDefaultSelectConfiguration,
+    private positioningFactory: UxPositioningFactory
   ) {
     // Only chrome persist the element prototype when cloning with clone node
     defineUxSelectElementApis(element);
@@ -148,6 +151,15 @@ export class UxSelect implements UxInputComponent {
   public attached() {
     this.resolveDisplayValue();
     this.variantChanged(this.variant);
+	this.positioning = this.positioningFactory(
+      this.element,
+      this.optionWrapperEl,
+      {
+        placement: 'bottom-start',
+        constraintElement: window,
+        offsetY: 0,
+      }
+    );
   }
 
   public unbind() {
@@ -250,7 +262,9 @@ export class UxSelect implements UxInputComponent {
   }
 
   private setupListAnchor() {
-    this.calcAnchorPosition();
+    if (this.positioning) {
+      this.positioning.update();
+    }
     this.winEvents.subscribe('wheel', (e: WheelEvent) => {
       if (this.expanded) {
         if (e.target === PLATFORM.global || !this.optionWrapperEl.contains(e.target as HTMLElement)) {
@@ -261,15 +275,7 @@ export class UxSelect implements UxInputComponent {
   }
 
   private unsetupListAnchor() {
-    this.listAnchor = null;
     this.winEvents.disposeAll();
-  }
-
-  public listAnchor: { x: number | string, y: number | string } | null;
-  private calcAnchorPosition() {
-    const elDim = this.element.getBoundingClientRect();
-    const offsetY = (48 - elDim.height) / 2;
-    this.listAnchor = { x: elDim.left, y: elDim.top - offsetY };
   }
 
   private onKeyboardSelect() {
