@@ -144,6 +144,7 @@ export class UxSelect implements UxInputComponent {
     if (!this.winEvents) {
       this.winEvents = new ElementEvents(window);
     }
+    this.themeChanged(this.theme);
     // Initially Synchronize options with value of this element
     this.taskQueue.queueMicroTask(this);
   }
