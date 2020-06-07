@@ -69,7 +69,7 @@ export interface UxOptionContainer extends HTMLElement {
 @customElement('ux-select')
 @useView(PLATFORM.moduleName('./ux-select.html'))
 export class UxSelect implements UxInputComponent {
-
+  private positioning: UxPositioning;
   private selectedOption: UxOptionElement | null = null;
 
   // Temporarily used to store <ux-option/> reference in interaction
@@ -151,6 +151,15 @@ export class UxSelect implements UxInputComponent {
   public attached() {
     this.resolveDisplayValue();
     this.variantChanged(this.variant);
+	this.positioning = this.positioningFactory(
+      this.element,
+      this.optionWrapperEl,
+      {
+        placement: 'bottom-start',
+        constraintElement: window,
+        offsetY: 0,
+      }
+    );
   }
 
   public unbind() {
@@ -253,7 +262,9 @@ export class UxSelect implements UxInputComponent {
   }
 
   private setupListAnchor() {
-    this.setListAnchorPosition();
+    if (this.positioning) {
+      this.positioning.update();
+    }
     this.winEvents.subscribe('wheel', (e: WheelEvent) => {
       if (this.expanded) {
         if (e.target === PLATFORM.global || !this.optionWrapperEl.contains(e.target as HTMLElement)) {
@@ -265,18 +276,6 @@ export class UxSelect implements UxInputComponent {
 
   private unsetupListAnchor() {
     this.winEvents.disposeAll();
-  }
-
-  private setListAnchorPosition() {
-    this.positioningFactory(
-      this.element,
-      this.optionWrapperEl,
-      {
-        placement: 'bottom-start',
-        constraintElement: window,
-        offsetY: 0,
-      }
-    ).update();
   }
 
   private onKeyboardSelect() {
