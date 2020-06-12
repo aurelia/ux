@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/tree-view",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "description": "Tree view component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -52,14 +52,14 @@
     "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
   },
   "peerDependencies": {
-    "@aurelia-ux/core": "^0.20.0",
     "@aurelia-ux/button": "^0.20.0",
+    "@aurelia-ux/core": "^0.20.0",
     "@aurelia-ux/icons": "^0.20.0"
   },
   "devDependencies": {
-    "@aurelia-ux/core": "^0.20.0",
-    "@aurelia-ux/button": "^0.20.0",
-    "@aurelia-ux/icons": "^0.20.0",
+    "@aurelia-ux/button": "^0.21.0",
+    "@aurelia-ux/core": "^0.21.0",
+    "@aurelia-ux/icons": "^0.21.0",
     "aurelia-logging-console": "^1.1.1",
     "aurelia-templating-router": "^1.4.0",
     "aurelia-webpack-plugin": "^4.0.0",
