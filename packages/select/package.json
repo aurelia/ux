@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/select",
-  "version": "0.22.0",
+  "version": "0.23.0",
   "description": "Select component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -54,8 +54,8 @@
     "@aurelia-ux/positioning": "^0.20.0"
   },
   "devDependencies": {
-    "@aurelia-ux/core": "^0.22.0",
-    "@aurelia-ux/positioning": "^0.22.0",
+    "@aurelia-ux/core": "^0.23.0",
+    "@aurelia-ux/positioning": "^0.23.0",
     "aurelia-logging-console": "^1.1.1",
     "aurelia-templating-router": "^1.4.0",
     "aurelia-webpack-plugin": "^4.0.0",
