@@ -1,1 +1,1 @@
-{"version":3,"file":"ux-card-footer.js","sourceRoot":"","sources":["../../src/ux-card-footer.ts"],"names":[],"mappings":";;;;;;;;;IAGA;QAAA;QACA,CAAC;QADY,YAAY;YADxB,kCAAa,CAAC,gBAAgB,CAAC;WACnB,YAAY,CACxB;QAAD,mBAAC;KAAA,AADD,IACC;IADY,oCAAY"}
+{"version":3,"file":"ux-card-footer.js","sourceRoot":"","sources":["../../src/ux-card-footer.ts"],"names":[],"mappings":";;;;IAKA;QAAA;QACA,CAAC;QADY,YAAY;YAFxB,kCAAa,CAAC,gBAAgB,CAAC;YAC/B,4BAAO,CAAC,sBAAQ,CAAC,UAAU,CAAC,uBAAuB,CAAC,CAAC;WACzC,YAAY,CACxB;QAAD,mBAAC;KAAA,AADD,IACC;IADY,oCAAY"}

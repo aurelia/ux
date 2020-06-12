@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxDefaultModalConfiguration = void 0;
 var UxDefaultModalConfiguration = /** @class */ (function () {
     function UxDefaultModalConfiguration() {
         this.modalBreakpoint = void 0;
@@ -14,3 +15,4 @@ var UxDefaultModalConfiguration = /** @class */ (function () {
     return UxDefaultModalConfiguration;
 }());
 exports.UxDefaultModalConfiguration = UxDefaultModalConfiguration;
+//# sourceMappingURL=ux-modal-configuration.js.map

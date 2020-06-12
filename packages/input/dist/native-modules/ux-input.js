@@ -1,11 +1,6 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-import { customElement, bindable } from 'aurelia-templating';
-import { DOM } from 'aurelia-pal';
+import { __decorate } from "tslib";
+import { customElement, bindable, useView } from 'aurelia-templating';
+import { DOM, PLATFORM } from 'aurelia-pal';
 import { observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
@@ -13,8 +8,9 @@ import { StyleEngine, normalizeBooleanAttribute, getBackgroundColorThroughParent
 import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component--outline.css';
+import { UxDefaultInputConfiguration } from './ux-default-input-configuration';
 var UxInput = /** @class */ (function () {
-    function UxInput(element, styleEngine) {
+    function UxInput(element, styleEngine, defaultConfiguration) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.autofocus = null;
@@ -24,7 +20,16 @@ var UxInput = /** @class */ (function () {
         this.dense = false;
         this.rawValue = '';
         this.focused = false;
-        Object.setPrototypeOf(element, uxInputElementProto);
+        defineUxInputElementApis(element);
+        if (defaultConfiguration.theme !== undefined) {
+            this.theme = defaultConfiguration.theme;
+        }
+        if (defaultConfiguration.dense !== undefined) {
+            this.dense = defaultConfiguration.dense;
+        }
+        if (defaultConfiguration.variant !== undefined) {
+            this.variant = defaultConfiguration.variant;
+        }
     }
     UxInput.prototype.bind = function () {
         var element = this.element;
@@ -129,6 +134,9 @@ var UxInput = /** @class */ (function () {
     UxInput.prototype.typeChanged = function (newValue) {
         if (![
             'text',
+            'date',
+            'time',
+            'datetime-local',
             'password',
             'number',
             'email',
@@ -148,8 +156,13 @@ var UxInput = /** @class */ (function () {
         }
         this.setValue(newValue);
     };
-    UxInput.prototype.focusInput = function () {
+    UxInput.prototype.focus = function () {
         this.textbox.focus();
+    };
+    UxInput.prototype.blur = function () {
+        if (document.activeElement === this.textbox) {
+            this.textbox.blur();
+        }
     };
     UxInput.prototype.variantChanged = function (newValue) {
         this.element.style.backgroundColor = newValue === 'outline' ?
@@ -160,7 +173,7 @@ var UxInput = /** @class */ (function () {
         get: function () {
             return typeof this.label !== 'string' || this.label.length === 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     __decorate([
@@ -215,8 +228,9 @@ var UxInput = /** @class */ (function () {
         computedFrom('label')
     ], UxInput.prototype, "placeholderMode", null);
     UxInput = __decorate([
-        inject(Element, StyleEngine),
-        customElement('ux-input')
+        inject(Element, StyleEngine, UxDefaultInputConfiguration),
+        customElement('ux-input'),
+        useView(PLATFORM.moduleName('./ux-input.html'))
     ], UxInput);
     return UxInput;
 }());
@@ -225,14 +239,29 @@ function stopEvent(e) {
     e.stopPropagation();
 }
 var getVm = function (_) { return _.au.controller.viewModel; };
-var uxInputElementProto = Object.create(HTMLElement.prototype, {
-    value: {
-        get: function () {
-            return getVm(this).getValue();
+var defineUxInputElementApis = function (element) {
+    Object.defineProperties(element, {
+        value: {
+            get: function () {
+                return getVm(this).getValue();
+            },
+            set: function (value) {
+                getVm(this).setValue(value);
+            },
+            configurable: true
         },
-        set: function (value) {
-            getVm(this).setValue(value);
+        focus: {
+            value: function () {
+                getVm(this).focus();
+            },
+            configurable: true
+        },
+        blur: {
+            value: function () {
+                getVm(this).blur();
+            },
+            configurable: true
         }
-    }
-});
+    });
+};
 //# sourceMappingURL=ux-input.js.map

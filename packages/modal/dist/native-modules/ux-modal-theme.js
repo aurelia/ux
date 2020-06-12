@@ -15,3 +15,4 @@ var UxModalTheme = /** @class */ (function () {
     return UxModalTheme;
 }());
 export { UxModalTheme };
+//# sourceMappingURL=ux-modal-theme.js.map

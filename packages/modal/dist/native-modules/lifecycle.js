@@ -19,3 +19,4 @@ export function invokeLifecycle(instance, name, model) {
     }
     return Promise.resolve(true);
 }
+//# sourceMappingURL=lifecycle.js.map

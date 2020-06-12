@@ -1,11 +1,7 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxChoiceContainerAttribute = void 0;
+var tslib_1 = require("tslib");
 var ux_choice_attribute_1 = require("./ux-choice-attribute");
 var aurelia_framework_1 = require("aurelia-framework");
 var UxChoiceContainerAttribute = /** @class */ (function () {
@@ -125,13 +121,13 @@ var UxChoiceContainerAttribute = /** @class */ (function () {
             }
         }
     };
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay, primaryProperty: true })
     ], UxChoiceContainerAttribute.prototype, "value", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable
     ], UxChoiceContainerAttribute.prototype, "multiple", void 0);
-    UxChoiceContainerAttribute = __decorate([
+    UxChoiceContainerAttribute = tslib_1.__decorate([
         aurelia_framework_1.customAttribute('ux-choice-container', undefined, ['ux-choice-value']),
         aurelia_framework_1.inject(Element, aurelia_framework_1.TaskQueue)
     ], UxChoiceContainerAttribute);

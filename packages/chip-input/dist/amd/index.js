@@ -1,10 +1,11 @@
 define(["require", "exports", "aurelia-framework", "./ux-chip", "./ux-chip-input", "./ux-chip-input-theme", "./ux-chip-theme"], function (require, exports, aurelia_framework_1, ux_chip_1, ux_chip_input_1, ux_chip_input_theme_1, ux_chip_theme_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.UxChip = ux_chip_1.UxChip;
-    exports.UxChipInput = ux_chip_input_1.UxChipInput;
-    exports.UxChipInputTheme = ux_chip_input_theme_1.UxChipInputTheme;
-    exports.UxChipTheme = ux_chip_theme_1.UxChipTheme;
+    exports.configure = exports.UxChipInput = exports.UxChip = void 0;
+    Object.defineProperty(exports, "UxChip", { enumerable: true, get: function () { return ux_chip_1.UxChip; } });
+    Object.defineProperty(exports, "UxChipInput", { enumerable: true, get: function () { return ux_chip_input_1.UxChipInput; } });
+    Object.defineProperty(exports, "UxChipInputTheme", { enumerable: true, get: function () { return ux_chip_input_theme_1.UxChipInputTheme; } });
+    Object.defineProperty(exports, "UxChipTheme", { enumerable: true, get: function () { return ux_chip_theme_1.UxChipTheme; } });
     function configure(config) {
         config.globalResources([
             aurelia_framework_1.PLATFORM.moduleName('./ux-chip-input'),

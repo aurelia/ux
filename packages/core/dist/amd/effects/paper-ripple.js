@@ -1,6 +1,7 @@
 define(["require", "exports", "./paper-wave", "aurelia-pal"], function (require, exports, paper_wave_1, aurelia_pal_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.PaperRipple = void 0;
     /**
      * Provides all the logic to produce ripple visual effect.
      * Other elements can use it to simulate rippling effect emanating from the point of contact.
@@ -39,7 +40,7 @@ define(["require", "exports", "./paper-wave", "aurelia-pal"], function (require,
                     this.$.removeAttribute('recenters');
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperRipple.prototype, "center", {
@@ -62,7 +63,7 @@ define(["require", "exports", "./paper-wave", "aurelia-pal"], function (require,
                     this.$.removeAttribute('center');
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperRipple.prototype, "round", {
@@ -80,7 +81,7 @@ define(["require", "exports", "./paper-wave", "aurelia-pal"], function (require,
             set: function (newValue) {
                 this.$.classList.toggle('paper-ripple--round', newValue);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperRipple.prototype, "shouldKeepAnimating", {
@@ -91,7 +92,7 @@ define(["require", "exports", "./paper-wave", "aurelia-pal"], function (require,
             get: function () {
                 return this.waves.some(function (wave) { return !wave.isAnimationComplete; });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         PaperRipple.prototype.initTarget = function (target) {

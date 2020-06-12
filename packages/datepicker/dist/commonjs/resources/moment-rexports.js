@@ -1,9 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var moment_1 = __importDefault(require("moment"));
+exports.moment = void 0;
+var tslib_1 = require("tslib");
+var moment_1 = tslib_1.__importDefault(require("moment"));
 // tslint:disable-next-line: variable-name
 var _moment = moment_1.default;
 exports.moment = _moment;

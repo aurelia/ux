@@ -1,14 +1,11 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxYearList = void 0;
+var tslib_1 = require("tslib");
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_binding_1 = require("aurelia-binding");
+var aurelia_pal_1 = require("aurelia-pal");
 // import UX_YEAR_LIST_VIEW from './ux-year-list.html';
 // import { PLATFORM } from 'aurelia-pal';
 var UxYearList = /** @class */ (function () {
@@ -42,7 +39,7 @@ var UxYearList = /** @class */ (function () {
             }
             return yearList;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     UxYearList.prototype.scrollToActive = function () {
@@ -54,24 +51,25 @@ var UxYearList = /** @class */ (function () {
             selected.scrollIntoView();
         }
     };
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxYearList.prototype, "theme", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxYearList.prototype, "minDate", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxYearList.prototype, "maxDate", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxYearList.prototype, "value", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.computedFrom('minDate', 'maxDate')
     ], UxYearList.prototype, "yearList", null);
-    UxYearList = __decorate([
+    UxYearList = tslib_1.__decorate([
         aurelia_dependency_injection_1.inject(Element, aurelia_templating_1.ViewResources),
-        aurelia_templating_1.customElement('ux-year-list')
+        aurelia_templating_1.customElement('ux-year-list'),
+        aurelia_templating_1.useView(aurelia_pal_1.PLATFORM.moduleName('./ux-year-list.html'))
         // @inlineView(
         //   UX_YEAR_LIST_VIEW,
         //   [PLATFORM.moduleName('@aurelia-ux/datepicker/ux-year-list.css')]

@@ -1,19 +1,18 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxSelect = void 0;
+var tslib_1 = require("tslib");
 var aurelia_framework_1 = require("aurelia-framework");
+var positioning_1 = require("@aurelia-ux/positioning");
 var aurelia_logging_1 = require("aurelia-logging");
 var core_1 = require("@aurelia-ux/core");
+var ux_select_theme_1 = require("./ux-select-theme");
 var util_1 = require("./util");
 // tslint:disable-next-line: no-submodule-imports
 require("@aurelia-ux/core/components/ux-input-component.css");
 // tslint:disable-next-line: no-submodule-imports
 require("@aurelia-ux/core/components/ux-input-component--outline.css");
+var ux_default_select_configuration_1 = require("./ux-default-select-configuration");
 var UP = 38;
 // const RIGHT = 39;
 var DOWN = 40;
@@ -25,17 +24,27 @@ var logger = aurelia_logging_1.getLogger('ux-select');
 var invalidMultipleValueMsg = 'Only null or Array instances can be bound to a multi-select';
 var selectArrayContext = 'context:ux-select';
 var UxSelect = /** @class */ (function () {
-    function UxSelect(element, styleEngine, observerLocator, taskQueue) {
+    function UxSelect(element, styleEngine, observerLocator, taskQueue, defaultConfiguration, positioningFactory) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.observerLocator = observerLocator;
         this.taskQueue = taskQueue;
+        this.positioningFactory = positioningFactory;
         this.selectedOption = null;
         this.variant = 'filled';
         this.dense = false;
         this.ignoreSelectEvent = true;
         // Only chrome persist the element prototype when cloning with clone node
-        Object.setPrototypeOf(element, UxSelectElementProto);
+        defineUxSelectElementApis(element);
+        if (defaultConfiguration.theme !== undefined) {
+            this.theme = defaultConfiguration.theme;
+        }
+        if (defaultConfiguration.dense !== undefined) {
+            this.dense = defaultConfiguration.dense;
+        }
+        if (defaultConfiguration.variant !== undefined) {
+            this.variant = defaultConfiguration.variant;
+        }
     }
     UxSelect.prototype.bind = function () {
         if (util_1.bool(this.autofocus)) {
@@ -53,12 +62,18 @@ var UxSelect = /** @class */ (function () {
         if (!this.winEvents) {
             this.winEvents = new aurelia_framework_1.ElementEvents(window);
         }
+        this.themeChanged(this.theme);
         // Initially Synchronize options with value of this element
         this.taskQueue.queueMicroTask(this);
     };
     UxSelect.prototype.attached = function () {
         this.resolveDisplayValue();
         this.variantChanged(this.variant);
+        this.positioning = this.positioningFactory(this.element, this.optionWrapperEl, {
+            placement: 'bottom-start',
+            constraintElement: window,
+            offsetY: 0,
+        });
     };
     UxSelect.prototype.unbind = function () {
         this.winEvents.disposeAll();
@@ -164,7 +179,9 @@ var UxSelect = /** @class */ (function () {
     };
     UxSelect.prototype.setupListAnchor = function () {
         var _this = this;
-        this.calcAnchorPosition();
+        if (this.positioning) {
+            this.positioning.update();
+        }
         this.winEvents.subscribe('wheel', function (e) {
             if (_this.expanded) {
                 if (e.target === aurelia_framework_1.PLATFORM.global || !_this.optionWrapperEl.contains(e.target)) {
@@ -174,13 +191,7 @@ var UxSelect = /** @class */ (function () {
         }, true);
     };
     UxSelect.prototype.unsetupListAnchor = function () {
-        this.listAnchor = null;
         this.winEvents.disposeAll();
-    };
-    UxSelect.prototype.calcAnchorPosition = function () {
-        var elDim = this.element.getBoundingClientRect();
-        var offsetY = (48 - elDim.height) / 2;
-        this.listAnchor = { x: elDim.left, y: elDim.top - offsetY };
     };
     UxSelect.prototype.onKeyboardSelect = function () {
         if (!this.expanded) {
@@ -253,13 +264,17 @@ var UxSelect = /** @class */ (function () {
         }
         this.isCollapsing = true;
         this.optionCtEl.classList.remove('ux-select__list-container--open');
+        var listTransitionString = getComputedStyle(this.element).getPropertyValue('--aurelia-ux--select-list-transition')
+            || ux_select_theme_1.UxSelectTheme.DEFAULT_LIST_TRANSITION;
+        var listTransition = parseInt(listTransitionString.replace('ms', ''));
         setTimeout(function () {
-            _this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
+            var _a;
+            (_a = _this.optionWrapperEl) === null || _a === void 0 ? void 0 : _a.classList.remove('ux-select__list-wrapper--open');
             _this.isCollapsing = false;
             _this.expanded = false;
             _this.setFocusedOption(null);
             _this.unsetupListAnchor();
-        }, this.theme && this.theme.listTransition || 125);
+        }, listTransition);
     };
     UxSelect.prototype.setFocusedOption = function (focusedOption) {
         var oldFocusedOption = this.focusedUxOption;
@@ -410,7 +425,7 @@ var UxSelect = /** @class */ (function () {
         get: function () {
             return typeof this.label !== 'string' || this.label.length === 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(UxSelect.prototype, "options", {
@@ -436,7 +451,7 @@ var UxSelect = /** @class */ (function () {
             }
             return result;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     UxSelect.prototype.getOptions = function () {
@@ -446,53 +461,54 @@ var UxSelect = /** @class */ (function () {
         get: function () {
             return util_1.bool(this.multiple);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(UxSelect.prototype, "isDisabled", {
         get: function () {
             return util_1.bool(this.disabled);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable()
     ], UxSelect.prototype, "theme", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable()
     ], UxSelect.prototype, "autofocus", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable({ defaultValue: false })
     ], UxSelect.prototype, "disabled", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable({ defaultValue: false })
     ], UxSelect.prototype, "multiple", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable
     ], UxSelect.prototype, "label", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable
     ], UxSelect.prototype, "placeholder", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable()
     ], UxSelect.prototype, "variant", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable
     ], UxSelect.prototype, "dense", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.computedFrom('label')
     ], UxSelect.prototype, "placeholderMode", null);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.computedFrom('multiple')
     ], UxSelect.prototype, "isMultiple", null);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.computedFrom('disabled')
     ], UxSelect.prototype, "isDisabled", null);
-    UxSelect = __decorate([
-        aurelia_framework_1.inject(Element, core_1.StyleEngine, aurelia_framework_1.ObserverLocator, aurelia_framework_1.TaskQueue),
+    UxSelect = tslib_1.__decorate([
+        aurelia_framework_1.inject(Element, core_1.StyleEngine, aurelia_framework_1.ObserverLocator, aurelia_framework_1.TaskQueue, ux_default_select_configuration_1.UxDefaultSelectConfiguration, aurelia_framework_1.Factory.of(positioning_1.UxPositioning)),
         aurelia_framework_1.processContent(ensureUxOptionOrUxOptGroup),
-        aurelia_framework_1.customElement('ux-select')
+        aurelia_framework_1.customElement('ux-select'),
+        aurelia_framework_1.useView(aurelia_framework_1.PLATFORM.moduleName('./ux-select.html'))
     ], UxSelect);
     return UxSelect;
 }());
@@ -518,21 +534,25 @@ function ensureUxOptionOrUxOptGroup(_, __, node) {
     }
     return true;
 }
-var UxSelectElementProto = Object.create(HTMLElement.prototype, {
-    value: {
-        get: function () {
-            return util_1.getAuViewModel(this).getValue();
+var defineUxSelectElementApis = function (element) {
+    Object.defineProperties(element, {
+        value: {
+            get: function () {
+                return util_1.getAuViewModel(this).getValue();
+            },
+            set: function (v) {
+                util_1.getAuViewModel(this).setValue(v);
+            },
+            configurable: true
         },
-        set: function (v) {
-            return util_1.getAuViewModel(this).setValue(v);
+        options: {
+            get: function () {
+                return util_1.getAuViewModel(this).getOptions();
+            },
+            configurable: true
         }
-    },
-    options: {
-        get: function () {
-            return util_1.getAuViewModel(this).getOptions();
-        }
-    }
-});
+    });
+};
 function defaultMatcher(a, b) {
     return a === b;
 }

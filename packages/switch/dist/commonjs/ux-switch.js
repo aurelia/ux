@@ -1,11 +1,7 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxSwitch = void 0;
+var tslib_1 = require("tslib");
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
@@ -24,7 +20,7 @@ var UxSwitch = /** @class */ (function () {
         get: function () {
             return core_1.normalizeBooleanAttribute('disabled', this.disabled);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     UxSwitch.prototype.bind = function () {
@@ -135,33 +131,34 @@ var UxSwitch = /** @class */ (function () {
         }
         e.preventDefault();
     };
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxSwitch.prototype, "disabled", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxSwitch.prototype, "effect", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxSwitch.prototype, "id", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxSwitch.prototype, "theme", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.observable()
     ], UxSwitch.prototype, "checked", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.observable({ initializer: function () { return false; } })
     ], UxSwitch.prototype, "value", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.observable()
     ], UxSwitch.prototype, "focused", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.computedFrom('disabled')
     ], UxSwitch.prototype, "isDisabled", null);
-    UxSwitch = __decorate([
+    UxSwitch = tslib_1.__decorate([
         aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
-        aurelia_templating_1.customElement('ux-switch')
+        aurelia_templating_1.customElement('ux-switch'),
+        aurelia_framework_1.useView(aurelia_framework_1.PLATFORM.moduleName('./ux-switch.html'))
     ], UxSwitch);
     return UxSwitch;
 }());

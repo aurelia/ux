@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.configure = void 0;
 var aurelia_framework_1 = require("aurelia-framework");
 var aurelia_binding_1 = require("aurelia-binding");
 var core_1 = require("@aurelia-ux/core");
 var ux_radio_theme_1 = require("./ux-radio-theme");
-exports.UxRadioTheme = ux_radio_theme_1.UxRadioTheme;
+Object.defineProperty(exports, "UxRadioTheme", { enumerable: true, get: function () { return ux_radio_theme_1.UxRadioTheme; } });
 var ux_radio_1 = require("./ux-radio");
-exports.UxRadio = ux_radio_1.UxRadio;
+Object.defineProperty(exports, "UxRadio", { enumerable: true, get: function () { return ux_radio_1.UxRadio; } });
 function configure(config) {
     config.container.get(core_1.AureliaUX).registerUxElementConfig(uxRadioConfig);
     config.globalResources(aurelia_framework_1.PLATFORM.moduleName('./ux-radio'));

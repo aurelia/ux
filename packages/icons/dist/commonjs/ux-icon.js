@@ -1,11 +1,7 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxIcon = void 0;
+var tslib_1 = require("tslib");
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_logging_1 = require("aurelia-logging");
 var aurelia_binding_1 = require("aurelia-binding");
@@ -13,6 +9,7 @@ var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
 var ux_icon_theme_1 = require("./ux-icon-theme");
 var ux_icon_map_1 = require("./ux-icon-map");
+var aurelia_pal_1 = require("aurelia-pal");
 var UxIcon = /** @class */ (function () {
     function UxIcon(element, iconMap, styleEngine, logger) {
         this.element = element;
@@ -51,18 +48,19 @@ var UxIcon = /** @class */ (function () {
             this.logger.warn('ux-icon: no matching icon found', this.element);
         }
     };
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxIcon.prototype, "size", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxIcon.prototype, "theme", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
     ], UxIcon.prototype, "icon", void 0);
-    UxIcon = __decorate([
+    UxIcon = tslib_1.__decorate([
         aurelia_dependency_injection_1.inject(Element, ux_icon_map_1.UxIconMap, core_1.StyleEngine, aurelia_logging_1.Logger),
         aurelia_templating_1.customElement('ux-icon'),
+        aurelia_templating_1.useView(aurelia_pal_1.PLATFORM.moduleName('./ux-icon.html')),
         aurelia_templating_1.processAttributes(core_1.processDesignAttributes)
     ], UxIcon);
     return UxIcon;

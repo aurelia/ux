@@ -1,12 +1,7 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-define(["require", "exports", "./ux-choice-attribute", "aurelia-framework"], function (require, exports, ux_choice_attribute_1, aurelia_framework_1) {
+define(["require", "exports", "tslib", "./ux-choice-attribute", "aurelia-framework"], function (require, exports, tslib_1, ux_choice_attribute_1, aurelia_framework_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxChoiceContainerAttribute = void 0;
     var UxChoiceContainerAttribute = /** @class */ (function () {
         function UxChoiceContainerAttribute(element, taskQueue) {
             this.element = element;
@@ -124,13 +119,13 @@ define(["require", "exports", "./ux-choice-attribute", "aurelia-framework"], fun
                 }
             }
         };
-        __decorate([
+        tslib_1.__decorate([
             aurelia_framework_1.bindable({ defaultBindingMode: aurelia_framework_1.bindingMode.twoWay, primaryProperty: true })
         ], UxChoiceContainerAttribute.prototype, "value", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_framework_1.bindable
         ], UxChoiceContainerAttribute.prototype, "multiple", void 0);
-        UxChoiceContainerAttribute = __decorate([
+        UxChoiceContainerAttribute = tslib_1.__decorate([
             aurelia_framework_1.customAttribute('ux-choice-container', undefined, ['ux-choice-value']),
             aurelia_framework_1.inject(Element, aurelia_framework_1.TaskQueue)
         ], UxChoiceContainerAttribute);

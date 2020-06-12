@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxCheckboxTheme = void 0;
     var UxCheckboxTheme = /** @class */ (function () {
         function UxCheckboxTheme() {
             this.themeKey = 'checkbox';

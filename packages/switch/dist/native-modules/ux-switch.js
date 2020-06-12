@@ -1,14 +1,9 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
+import { __decorate } from "tslib";
 import { customElement, bindable } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, PaperRipple, normalizeBooleanAttribute } from '@aurelia-ux/core';
-import { DOM, ElementEvents } from 'aurelia-framework';
+import { DOM, ElementEvents, useView, PLATFORM } from 'aurelia-framework';
 var UxSwitch = /** @class */ (function () {
     function UxSwitch(element, styleEngine) {
         this.element = element;
@@ -22,7 +17,7 @@ var UxSwitch = /** @class */ (function () {
         get: function () {
             return normalizeBooleanAttribute('disabled', this.disabled);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     UxSwitch.prototype.bind = function () {
@@ -159,7 +154,8 @@ var UxSwitch = /** @class */ (function () {
     ], UxSwitch.prototype, "isDisabled", null);
     UxSwitch = __decorate([
         inject(Element, StyleEngine),
-        customElement('ux-switch')
+        customElement('ux-switch'),
+        useView(PLATFORM.moduleName('./ux-switch.html'))
     ], UxSwitch);
     return UxSwitch;
 }());

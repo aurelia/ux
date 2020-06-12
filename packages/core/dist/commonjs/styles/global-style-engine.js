@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.GlobalStyleEngine = void 0;
 var aurelia_logging_1 = require("aurelia-logging");
 var aurelia_pal_1 = require("aurelia-pal");
 var GlobalStyleEngine = /** @class */ (function () {

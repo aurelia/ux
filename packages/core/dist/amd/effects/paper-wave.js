@@ -1,11 +1,7 @@
 define(["require", "exports", "aurelia-pal", "./element-rect"], function (require, exports, aurelia_pal_1, element_rect_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    // tslint:disable:variable-name
-    var _window = aurelia_pal_1.PLATFORM.global;
-    var _doc = _window.document;
-    var _now = aurelia_pal_1.PLATFORM.performance.now.bind(aurelia_pal_1.PLATFORM.performance);
-    // tslint:enable:variable-name
+    exports.PaperWave = void 0;
     /**
      * Provides all the logic to produce a one-time rippling effect.
      */
@@ -14,16 +10,16 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
          * Initializes a new instance of the `PaperWave` class with the specified `PaperRipple` instance.
          */
         function PaperWave(options) {
-            this.color = _window.getComputedStyle(options.$).color;
+            this.color = aurelia_pal_1.DOM.getComputedStyle(options.$).color;
             this.containerRect = new element_rect_1.ElementRect(options.$);
             this.recenters = options.recenters || false;
             this.center = options.center || false;
             this.initialOpacity = options.initialOpacity || 0.25;
             this.opacityDecayVelocity = options.opacityDecayVelocity || 0.8;
-            this.$wave = _doc.createElement('div');
+            this.$wave = aurelia_pal_1.DOM.createElement('div');
             this.$wave.classList.add('paper-ripple__wave');
             this.$wave.style.backgroundColor = this.color;
-            this.$ = _doc.createElement('div');
+            this.$ = aurelia_pal_1.DOM.createElement('div');
             this.$.classList.add('paper-ripple__wave-container');
             this.$.appendChild(this.$wave);
             this.resetDefaults();
@@ -37,13 +33,13 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
                 if (!this.touchDownStarted) {
                     return 0;
                 }
-                var elapsed = _now() - this.touchDownStarted;
+                var elapsed = aurelia_pal_1.PLATFORM.performance.now() - this.touchDownStarted;
                 if (this.touchUpStarted) {
                     elapsed -= this.touchUpElapsed;
                 }
                 return elapsed;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "touchUpElapsed", {
@@ -52,9 +48,9 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
              * @returns The time in milliseconds.
              */
             get: function () {
-                return this.touchUpStarted ? _now() - this.touchUpStarted : 0;
+                return this.touchUpStarted ? aurelia_pal_1.PLATFORM.performance.now() - this.touchUpStarted : 0;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "touchDownElapsedSeconds", {
@@ -65,7 +61,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             get: function () {
                 return this.touchDownElapsed / 1000;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "touchUpElapsedSeconds", {
@@ -76,7 +72,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             get: function () {
                 return this.touchUpElapsed / 1000;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "mouseInteractionSeconds", {
@@ -87,7 +83,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             get: function () {
                 return this.touchDownElapsedSeconds + this.touchUpElapsedSeconds;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "radius", {
@@ -103,7 +99,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
                 var actualRadius = radius * (1 - Math.pow(80, -currentTime));
                 return Math.abs(actualRadius);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "opacity", {
@@ -117,7 +113,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
                 }
                 return Math.max(0, this.initialOpacity - this.touchUpElapsedSeconds * this.opacityDecayVelocity);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "outerOpacity", {
@@ -128,7 +124,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             get: function () {
                 return Math.max(0, Math.min(this.touchUpElapsedSeconds * 0.3, this.opacity));
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "isWaveFullyOpaque", {
@@ -139,7 +135,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             get: function () {
                 return this.opacity < 0.01 && this.radius >= Math.min(this.maxRadius, PaperWave.MAX_RADIUS);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "isMaxRadiusReached", {
@@ -150,7 +146,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             get: function () {
                 return this.opacity >= this.initialOpacity && this.radius >= Math.min(this.maxRadius, PaperWave.MAX_RADIUS);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "isAnimationComplete", {
@@ -161,7 +157,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             get: function () {
                 return this.touchUpStarted ? this.isWaveFullyOpaque : this.isMaxRadiusReached;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "translationFraction", {
@@ -172,7 +168,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             get: function () {
                 return Math.min(1, this.radius / this.containerRect.size * 2 / Math.sqrt(2));
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "currentPosition", {
@@ -192,7 +188,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
                 }
                 return { x: x, y: y };
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PaperWave.prototype, "isTouchDown", {
@@ -204,7 +200,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             get: function () {
                 return this.touchDownStarted && !this.touchUpStarted;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -255,7 +251,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             if (event === void 0) { event = null; }
             var containerCenter = this.containerRect.center;
             this.resetDefaults();
-            this.touchDownStarted = _now();
+            this.touchDownStarted = aurelia_pal_1.PLATFORM.performance.now();
             this.startPosition = this.center || !event ?
                 containerCenter :
                 {
@@ -278,7 +274,7 @@ define(["require", "exports", "aurelia-pal", "./element-rect"], function (requir
             if (!this.isTouchDown) {
                 return this;
             }
-            this.touchUpStarted = _now();
+            this.touchUpStarted = aurelia_pal_1.PLATFORM.performance.now();
             return this;
         };
         /**

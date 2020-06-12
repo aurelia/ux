@@ -1,11 +1,7 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxOption = void 0;
+var tslib_1 = require("tslib");
 var aurelia_framework_1 = require("aurelia-framework");
 var core_1 = require("@aurelia-ux/core");
 var util_1 = require("./util");
@@ -143,15 +139,16 @@ var UxOption = /** @class */ (function () {
             }
         }
     };
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable()
     ], UxOption.prototype, "text", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_framework_1.bindable()
     ], UxOption.prototype, "value", void 0);
-    UxOption = __decorate([
+    UxOption = tslib_1.__decorate([
         aurelia_framework_1.inject(aurelia_framework_1.DOM.Element, aurelia_framework_1.BindingEngine),
         aurelia_framework_1.customElement('ux-option'),
+        aurelia_framework_1.useView(aurelia_framework_1.PLATFORM.moduleName('./ux-option.html')),
         aurelia_framework_1.processAttributes(convertTextToAttr)
     ], UxOption);
     return UxOption;

@@ -1,16 +1,12 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-import { customElement, bindable, processAttributes } from 'aurelia-templating';
+import { __decorate } from "tslib";
+import { customElement, bindable, processAttributes, useView } from 'aurelia-templating';
 import { Logger } from 'aurelia-logging';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, processDesignAttributes } from '@aurelia-ux/core';
 import { UxIconTheme } from './ux-icon-theme';
 import { UxIconMap } from './ux-icon-map';
+import { PLATFORM } from 'aurelia-pal';
 var UxIcon = /** @class */ (function () {
     function UxIcon(element, iconMap, styleEngine, logger) {
         this.element = element;
@@ -61,6 +57,7 @@ var UxIcon = /** @class */ (function () {
     UxIcon = __decorate([
         inject(Element, UxIconMap, StyleEngine, Logger),
         customElement('ux-icon'),
+        useView(PLATFORM.moduleName('./ux-icon.html')),
         processAttributes(processDesignAttributes)
     ], UxIcon);
     return UxIcon;

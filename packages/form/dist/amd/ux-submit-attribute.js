@@ -1,12 +1,7 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-define(["require", "exports", "aurelia-dependency-injection", "aurelia-pal", "aurelia-templating"], function (require, exports, aurelia_dependency_injection_1, aurelia_pal_1, aurelia_templating_1) {
+define(["require", "exports", "tslib", "aurelia-dependency-injection", "aurelia-pal", "aurelia-templating"], function (require, exports, tslib_1, aurelia_dependency_injection_1, aurelia_pal_1, aurelia_templating_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxSubmitCustomAttribute = void 0;
     var UxSubmitCustomAttribute = /** @class */ (function () {
         function UxSubmitCustomAttribute(element) {
             this.element = element;
@@ -35,7 +30,7 @@ define(["require", "exports", "aurelia-dependency-injection", "aurelia-pal", "au
                 });
             }
         };
-        UxSubmitCustomAttribute = __decorate([
+        UxSubmitCustomAttribute = tslib_1.__decorate([
             aurelia_templating_1.customAttribute('ux-submit'),
             aurelia_dependency_injection_1.inject(Element)
         ], UxSubmitCustomAttribute);

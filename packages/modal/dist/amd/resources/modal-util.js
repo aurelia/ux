@@ -1,6 +1,7 @@
 define(["require", "exports", "../ux-modal"], function (require, exports, ux_modal_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.modalViewModelFromElement = exports.findModal = void 0;
     function findModal(item) {
         var element = item;
         if (element === null)
@@ -31,3 +32,4 @@ define(["require", "exports", "../ux-modal"], function (require, exports, ux_mod
     }
     exports.modalViewModelFromElement = modalViewModelFromElement;
 });
+//# sourceMappingURL=modal-util.js.map

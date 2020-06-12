@@ -38,7 +38,7 @@ var PaperRipple = /** @class */ (function () {
                 this.$.removeAttribute('recenters');
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperRipple.prototype, "center", {
@@ -61,7 +61,7 @@ var PaperRipple = /** @class */ (function () {
                 this.$.removeAttribute('center');
             }
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperRipple.prototype, "round", {
@@ -79,7 +79,7 @@ var PaperRipple = /** @class */ (function () {
         set: function (newValue) {
             this.$.classList.toggle('paper-ripple--round', newValue);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperRipple.prototype, "shouldKeepAnimating", {
@@ -90,7 +90,7 @@ var PaperRipple = /** @class */ (function () {
         get: function () {
             return this.waves.some(function (wave) { return !wave.isAnimationComplete; });
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     PaperRipple.prototype.initTarget = function (target) {

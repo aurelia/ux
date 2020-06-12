@@ -1,11 +1,7 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-import { customElement, bindable } from 'aurelia-templating';
+import { __decorate } from "tslib";
+import { customElement, bindable, useView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
+import { PLATFORM } from 'aurelia-pal';
 var UxField = /** @class */ (function () {
     function UxField(element) {
         this.element = element;
@@ -28,7 +24,8 @@ var UxField = /** @class */ (function () {
     ], UxField.prototype, "label", void 0);
     UxField = __decorate([
         inject(Element),
-        customElement('ux-field')
+        customElement('ux-field'),
+        useView(PLATFORM.moduleName('./ux-field.html'))
     ], UxField);
     return UxField;
 }());

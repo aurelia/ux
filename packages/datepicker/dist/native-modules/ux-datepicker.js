@@ -1,15 +1,10 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-import { customElement, bindable, ViewResources } from 'aurelia-templating';
+import { __decorate } from "tslib";
+import { customElement, bindable, ViewResources, useView } from 'aurelia-templating';
 import { bindingMode, observable, computedFrom } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
 import { DatetimeUtility } from './resources/datetime-utility';
-import { DOM } from 'aurelia-pal';
+import { DOM, PLATFORM } from 'aurelia-pal';
 import { moment } from './resources/moment-rexports';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component.css';
@@ -191,7 +186,7 @@ var UxDatepicker = /** @class */ (function () {
         get: function () {
             return typeof this.label !== 'string' || this.label.length === 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     __decorate([
@@ -256,7 +251,8 @@ var UxDatepicker = /** @class */ (function () {
     ], UxDatepicker.prototype, "placeholderMode", null);
     UxDatepicker = __decorate([
         inject(Element, ViewResources, StyleEngine),
-        customElement('ux-datepicker')
+        customElement('ux-datepicker'),
+        useView(PLATFORM.moduleName('./ux-datepicker.html'))
         // @inlineView(
         //   UX_DATEPICKER_VIEW,
         //   [PLATFORM.moduleName('@aurelia-ux/datepicker/ux-datepicker.css')]

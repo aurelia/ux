@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxModalTheme = void 0;
 var UxModalTheme = /** @class */ (function () {
     function UxModalTheme() {
         this.themeKey = 'modal';
@@ -17,3 +18,4 @@ var UxModalTheme = /** @class */ (function () {
     return UxModalTheme;
 }());
 exports.UxModalTheme = UxModalTheme;
+//# sourceMappingURL=ux-modal-theme.js.map

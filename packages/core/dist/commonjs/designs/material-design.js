@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.MaterialDesign = void 0;
 var swatches_1 = require("../colors/swatches");
 var shadows_1 = require("../colors/shadows");
 var MaterialDesign = /** @class */ (function () {

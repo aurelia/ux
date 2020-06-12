@@ -4,10 +4,9 @@
   readonly.bind="readonly & booleanAttr"
   aria-disabled.bind="disabled & booleanAttr"
   aria-readonly.bind="readonly & booleanAttr"
-  click.trigger="focusInput()">
+  click.trigger="focus() || true">
   <require from="./ux-input.css"></require>
 
-  
   <slot name="leading-icon"></slot>
 
   <span class="ux-input-component__content">

@@ -1,14 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.configure = exports.UxChipInput = exports.UxChip = void 0;
 var aurelia_framework_1 = require("aurelia-framework");
 var ux_chip_1 = require("./ux-chip");
-exports.UxChip = ux_chip_1.UxChip;
+Object.defineProperty(exports, "UxChip", { enumerable: true, get: function () { return ux_chip_1.UxChip; } });
 var ux_chip_input_1 = require("./ux-chip-input");
-exports.UxChipInput = ux_chip_input_1.UxChipInput;
+Object.defineProperty(exports, "UxChipInput", { enumerable: true, get: function () { return ux_chip_input_1.UxChipInput; } });
 var ux_chip_input_theme_1 = require("./ux-chip-input-theme");
-exports.UxChipInputTheme = ux_chip_input_theme_1.UxChipInputTheme;
+Object.defineProperty(exports, "UxChipInputTheme", { enumerable: true, get: function () { return ux_chip_input_theme_1.UxChipInputTheme; } });
 var ux_chip_theme_1 = require("./ux-chip-theme");
-exports.UxChipTheme = ux_chip_theme_1.UxChipTheme;
+Object.defineProperty(exports, "UxChipTheme", { enumerable: true, get: function () { return ux_chip_theme_1.UxChipTheme; } });
 function configure(config) {
     config.globalResources([
         aurelia_framework_1.PLATFORM.moduleName('./ux-chip-input'),

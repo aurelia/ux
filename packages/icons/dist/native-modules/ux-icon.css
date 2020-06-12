@@ -12,5 +12,5 @@ ux-icon > svg {
     width: var(--aurelia-ux--icon-size, 24px);
     height: 24px;
     height: var(--aurelia-ux--icon-size, 24px);
-    fill: currentColor;
+    fill: var(--aurelia-ux--icon-foreground, currentColor);
 }

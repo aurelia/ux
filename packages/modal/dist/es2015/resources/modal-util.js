@@ -26,3 +26,4 @@ export function modalViewModelFromElement(element) {
     }
     return null;
 }
+//# sourceMappingURL=modal-util.js.map

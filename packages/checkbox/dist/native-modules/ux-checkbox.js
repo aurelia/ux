@@ -1,14 +1,9 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-import { customElement, bindable, ElementEvents } from 'aurelia-templating';
+import { __decorate } from "tslib";
+import { customElement, bindable, ElementEvents, useView } from 'aurelia-templating';
 import { computedFrom, observable } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, PaperRipple, normalizeBooleanAttribute, } from '@aurelia-ux/core';
-import { DOM } from 'aurelia-pal';
+import { DOM, PLATFORM } from 'aurelia-pal';
 var UxCheckbox = /** @class */ (function () {
     function UxCheckbox(element, styleEngine) {
         this.element = element;
@@ -23,7 +18,7 @@ var UxCheckbox = /** @class */ (function () {
         get: function () {
             return normalizeBooleanAttribute('disabled', this.disabled);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     UxCheckbox.prototype.bind = function () {
@@ -170,7 +165,8 @@ var UxCheckbox = /** @class */ (function () {
     ], UxCheckbox.prototype, "isDisabled", null);
     UxCheckbox = __decorate([
         inject(Element, StyleEngine),
-        customElement('ux-checkbox')
+        customElement('ux-checkbox'),
+        useView(PLATFORM.moduleName('./ux-checkbox.html'))
     ], UxCheckbox);
     return UxCheckbox;
 }());

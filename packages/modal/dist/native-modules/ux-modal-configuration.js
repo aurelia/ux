@@ -12,3 +12,4 @@ var UxDefaultModalConfiguration = /** @class */ (function () {
     return UxDefaultModalConfiguration;
 }());
 export { UxDefaultModalConfiguration };
+//# sourceMappingURL=ux-modal-configuration.js.map

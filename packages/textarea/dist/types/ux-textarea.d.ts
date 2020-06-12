@@ -15,7 +15,6 @@ export declare class UxTextArea implements UxInputComponent {
     autoResize: boolean | string;
     cols: number;
     disabled: boolean | string;
-    focus: boolean | string;
     maxlength: number;
     minlength: number;
     readonly: boolean | string;
@@ -26,19 +25,22 @@ export declare class UxTextArea implements UxInputComponent {
     variant: 'filled' | 'outline';
     dense: any;
     rawValue: string;
+    focused: boolean;
     value: any;
     textbox: HTMLTextAreaElement;
     constructor(element: UxTextAreaElement, styleEngine: StyleEngine);
     bind(): void;
     attached(): void;
     detached(): void;
+    focus(): void;
+    blur(): void;
     getValue(): any;
     setValue(value: any): void;
     autocompleteChanged(newValue: any): void;
     rawValueChanged(newValue: string): void;
     themeChanged(newValue: any): void;
     fitTextContent(): void;
-    focusChanged(focus: boolean | string): void;
+    focusedChanged(focus: boolean | string): void;
     variantChanged(newValue: string): void;
     get placeholderMode(): boolean;
 }

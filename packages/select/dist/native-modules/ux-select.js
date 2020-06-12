@@ -1,17 +1,15 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-import { customElement, bindable, computedFrom, DOM, processContent, ElementEvents, inject, PLATFORM, ObserverLocator, TaskQueue, } from 'aurelia-framework';
+import { __decorate } from "tslib";
+import { customElement, bindable, computedFrom, DOM, processContent, ElementEvents, Factory, inject, PLATFORM, ObserverLocator, TaskQueue, useView, } from 'aurelia-framework';
+import { UxPositioning } from '@aurelia-ux/positioning';
 import { getLogger } from 'aurelia-logging';
 import { StyleEngine, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
+import { UxSelectTheme } from './ux-select-theme';
 import { getAuViewModel, bool } from './util';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component--outline.css';
+import { UxDefaultSelectConfiguration } from './ux-default-select-configuration';
 var UP = 38;
 // const RIGHT = 39;
 var DOWN = 40;
@@ -23,17 +21,27 @@ var logger = getLogger('ux-select');
 var invalidMultipleValueMsg = 'Only null or Array instances can be bound to a multi-select';
 var selectArrayContext = 'context:ux-select';
 var UxSelect = /** @class */ (function () {
-    function UxSelect(element, styleEngine, observerLocator, taskQueue) {
+    function UxSelect(element, styleEngine, observerLocator, taskQueue, defaultConfiguration, positioningFactory) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.observerLocator = observerLocator;
         this.taskQueue = taskQueue;
+        this.positioningFactory = positioningFactory;
         this.selectedOption = null;
         this.variant = 'filled';
         this.dense = false;
         this.ignoreSelectEvent = true;
         // Only chrome persist the element prototype when cloning with clone node
-        Object.setPrototypeOf(element, UxSelectElementProto);
+        defineUxSelectElementApis(element);
+        if (defaultConfiguration.theme !== undefined) {
+            this.theme = defaultConfiguration.theme;
+        }
+        if (defaultConfiguration.dense !== undefined) {
+            this.dense = defaultConfiguration.dense;
+        }
+        if (defaultConfiguration.variant !== undefined) {
+            this.variant = defaultConfiguration.variant;
+        }
     }
     UxSelect.prototype.bind = function () {
         if (bool(this.autofocus)) {
@@ -51,12 +59,18 @@ var UxSelect = /** @class */ (function () {
         if (!this.winEvents) {
             this.winEvents = new ElementEvents(window);
         }
+        this.themeChanged(this.theme);
         // Initially Synchronize options with value of this element
         this.taskQueue.queueMicroTask(this);
     };
     UxSelect.prototype.attached = function () {
         this.resolveDisplayValue();
         this.variantChanged(this.variant);
+        this.positioning = this.positioningFactory(this.element, this.optionWrapperEl, {
+            placement: 'bottom-start',
+            constraintElement: window,
+            offsetY: 0,
+        });
     };
     UxSelect.prototype.unbind = function () {
         this.winEvents.disposeAll();
@@ -162,7 +176,9 @@ var UxSelect = /** @class */ (function () {
     };
     UxSelect.prototype.setupListAnchor = function () {
         var _this = this;
-        this.calcAnchorPosition();
+        if (this.positioning) {
+            this.positioning.update();
+        }
         this.winEvents.subscribe('wheel', function (e) {
             if (_this.expanded) {
                 if (e.target === PLATFORM.global || !_this.optionWrapperEl.contains(e.target)) {
@@ -172,13 +188,7 @@ var UxSelect = /** @class */ (function () {
         }, true);
     };
     UxSelect.prototype.unsetupListAnchor = function () {
-        this.listAnchor = null;
         this.winEvents.disposeAll();
-    };
-    UxSelect.prototype.calcAnchorPosition = function () {
-        var elDim = this.element.getBoundingClientRect();
-        var offsetY = (48 - elDim.height) / 2;
-        this.listAnchor = { x: elDim.left, y: elDim.top - offsetY };
     };
     UxSelect.prototype.onKeyboardSelect = function () {
         if (!this.expanded) {
@@ -251,13 +261,17 @@ var UxSelect = /** @class */ (function () {
         }
         this.isCollapsing = true;
         this.optionCtEl.classList.remove('ux-select__list-container--open');
+        var listTransitionString = getComputedStyle(this.element).getPropertyValue('--aurelia-ux--select-list-transition')
+            || UxSelectTheme.DEFAULT_LIST_TRANSITION;
+        var listTransition = parseInt(listTransitionString.replace('ms', ''));
         setTimeout(function () {
-            _this.optionWrapperEl.classList.remove('ux-select__list-wrapper--open');
+            var _a;
+            (_a = _this.optionWrapperEl) === null || _a === void 0 ? void 0 : _a.classList.remove('ux-select__list-wrapper--open');
             _this.isCollapsing = false;
             _this.expanded = false;
             _this.setFocusedOption(null);
             _this.unsetupListAnchor();
-        }, this.theme && this.theme.listTransition || 125);
+        }, listTransition);
     };
     UxSelect.prototype.setFocusedOption = function (focusedOption) {
         var oldFocusedOption = this.focusedUxOption;
@@ -408,7 +422,7 @@ var UxSelect = /** @class */ (function () {
         get: function () {
             return typeof this.label !== 'string' || this.label.length === 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(UxSelect.prototype, "options", {
@@ -434,7 +448,7 @@ var UxSelect = /** @class */ (function () {
             }
             return result;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     UxSelect.prototype.getOptions = function () {
@@ -444,14 +458,14 @@ var UxSelect = /** @class */ (function () {
         get: function () {
             return bool(this.multiple);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(UxSelect.prototype, "isDisabled", {
         get: function () {
             return bool(this.disabled);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     __decorate([
@@ -488,9 +502,10 @@ var UxSelect = /** @class */ (function () {
         computedFrom('disabled')
     ], UxSelect.prototype, "isDisabled", null);
     UxSelect = __decorate([
-        inject(Element, StyleEngine, ObserverLocator, TaskQueue),
+        inject(Element, StyleEngine, ObserverLocator, TaskQueue, UxDefaultSelectConfiguration, Factory.of(UxPositioning)),
         processContent(ensureUxOptionOrUxOptGroup),
-        customElement('ux-select')
+        customElement('ux-select'),
+        useView(PLATFORM.moduleName('./ux-select.html'))
     ], UxSelect);
     return UxSelect;
 }());
@@ -516,21 +531,25 @@ function ensureUxOptionOrUxOptGroup(_, __, node) {
     }
     return true;
 }
-var UxSelectElementProto = Object.create(HTMLElement.prototype, {
-    value: {
-        get: function () {
-            return getAuViewModel(this).getValue();
+var defineUxSelectElementApis = function (element) {
+    Object.defineProperties(element, {
+        value: {
+            get: function () {
+                return getAuViewModel(this).getValue();
+            },
+            set: function (v) {
+                getAuViewModel(this).setValue(v);
+            },
+            configurable: true
         },
-        set: function (v) {
-            return getAuViewModel(this).setValue(v);
+        options: {
+            get: function () {
+                return getAuViewModel(this).getOptions();
+            },
+            configurable: true
         }
-    },
-    options: {
-        get: function () {
-            return getAuViewModel(this).getOptions();
-        }
-    }
-});
+    });
+};
 function defaultMatcher(a, b) {
     return a === b;
 }

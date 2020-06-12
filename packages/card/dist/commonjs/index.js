@@ -1,18 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.configure = exports.UxCardFooter = exports.UxCardContent = exports.UxCardActionRow = exports.UxCardHeader = exports.UxCard = void 0;
 var aurelia_framework_1 = require("aurelia-framework");
 var ux_card_1 = require("./ux-card");
-exports.UxCard = ux_card_1.UxCard;
+Object.defineProperty(exports, "UxCard", { enumerable: true, get: function () { return ux_card_1.UxCard; } });
 var ux_card_header_1 = require("./ux-card-header");
-exports.UxCardHeader = ux_card_header_1.UxCardHeader;
+Object.defineProperty(exports, "UxCardHeader", { enumerable: true, get: function () { return ux_card_header_1.UxCardHeader; } });
 var ux_card_action_row_1 = require("./ux-card-action-row");
-exports.UxCardActionRow = ux_card_action_row_1.UxCardActionRow;
+Object.defineProperty(exports, "UxCardActionRow", { enumerable: true, get: function () { return ux_card_action_row_1.UxCardActionRow; } });
 var ux_card_content_1 = require("./ux-card-content");
-exports.UxCardContent = ux_card_content_1.UxCardContent;
+Object.defineProperty(exports, "UxCardContent", { enumerable: true, get: function () { return ux_card_content_1.UxCardContent; } });
 var ux_card_footer_1 = require("./ux-card-footer");
-exports.UxCardFooter = ux_card_footer_1.UxCardFooter;
+Object.defineProperty(exports, "UxCardFooter", { enumerable: true, get: function () { return ux_card_footer_1.UxCardFooter; } });
 var ux_card_theme_1 = require("./ux-card-theme");
-exports.UxCardTheme = ux_card_theme_1.UxCardTheme;
+Object.defineProperty(exports, "UxCardTheme", { enumerable: true, get: function () { return ux_card_theme_1.UxCardTheme; } });
 function configure(config) {
     config.globalResources([
         aurelia_framework_1.PLATFORM.moduleName('./ux-card'),

@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.configure = void 0;
 var aurelia_framework_1 = require("aurelia-framework");
 var aurelia_binding_1 = require("aurelia-binding");
 var core_1 = require("@aurelia-ux/core");
 var ux_checkbox_theme_1 = require("./ux-checkbox-theme");
-exports.UxCheckboxTheme = ux_checkbox_theme_1.UxCheckboxTheme;
+Object.defineProperty(exports, "UxCheckboxTheme", { enumerable: true, get: function () { return ux_checkbox_theme_1.UxCheckboxTheme; } });
 var ux_checkbox_1 = require("./ux-checkbox");
-exports.UxCheckbox = ux_checkbox_1.UxCheckbox;
+Object.defineProperty(exports, "UxCheckbox", { enumerable: true, get: function () { return ux_checkbox_1.UxCheckbox; } });
 function configure(config) {
     config.container.get(core_1.AureliaUX).registerUxElementConfig(uxCheckBoxConfig);
     config.globalResources(aurelia_framework_1.PLATFORM.moduleName('./ux-checkbox'));

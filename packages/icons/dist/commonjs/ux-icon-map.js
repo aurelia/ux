@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxIconMap = void 0;
 var aurelia_logging_1 = require("aurelia-logging");
 var logger = aurelia_logging_1.getLogger('ux-icon-map');
 var UxIconMap = /** @class */ (function () {

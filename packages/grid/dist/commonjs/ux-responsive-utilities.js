@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxResponsiveUtilities = void 0;
 var aurelia_pal_1 = require("aurelia-pal");
 /** Utility class that assists with designing a responsive site. */
 var UxResponsiveUtilities = /** @class */ (function () {

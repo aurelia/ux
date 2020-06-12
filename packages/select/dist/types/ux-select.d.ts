@@ -1,10 +1,12 @@
 import { ObserverLocator, TaskQueue } from 'aurelia-framework';
-import { StyleEngine, UxInputComponent } from '@aurelia-ux/core';
+import { UxPositioningFactory } from '@aurelia-ux/positioning';
+import { StyleEngine, UxInputComponent, InputVariant } from '@aurelia-ux/core';
 import { UxSelectTheme } from './ux-select-theme';
 import { UxOptGroupElement } from './ux-optgroup';
 import { UxOptionElement } from './ux-option';
 import '@aurelia-ux/core/components/ux-input-component.css';
 import '@aurelia-ux/core/components/ux-input-component--outline.css';
+import { UxDefaultSelectConfiguration } from './ux-default-select-configuration';
 declare module './ux-option' {
     interface UxOption {
         uxSelect: UxSelect;
@@ -16,6 +18,7 @@ declare module './ux-optgroup' {
     }
 }
 export interface UxSelectElement<T = any> extends HTMLElement {
+    options: UxOptionElement[];
     matcher(a: any, b: any): boolean;
     value: T;
 }
@@ -27,6 +30,8 @@ export declare class UxSelect implements UxInputComponent {
     private styleEngine;
     private observerLocator;
     private taskQueue;
+    private positioningFactory;
+    private positioning;
     private selectedOption;
     private focusedUxOption;
     private winEvents;
@@ -36,14 +41,14 @@ export declare class UxSelect implements UxInputComponent {
     multiple: boolean | string;
     label: string;
     placeholder: string;
-    variant: 'filled' | 'outline';
+    variant: InputVariant;
     dense: any;
     value: any;
     displayValue: string;
     expanded: boolean;
     readonly optionWrapperEl: HTMLElement;
     readonly optionCtEl: UxOptionContainer;
-    constructor(element: UxSelectElement, styleEngine: StyleEngine, observerLocator: ObserverLocator, taskQueue: TaskQueue);
+    constructor(element: UxSelectElement, styleEngine: StyleEngine, observerLocator: ObserverLocator, taskQueue: TaskQueue, defaultConfiguration: UxDefaultSelectConfiguration, positioningFactory: UxPositioningFactory);
     bind(): void;
     attached(): void;
     unbind(): void;
@@ -53,11 +58,6 @@ export declare class UxSelect implements UxInputComponent {
     private synchronizeValue;
     private setupListAnchor;
     private unsetupListAnchor;
-    listAnchor: {
-        x: number | string;
-        y: number | string;
-    } | null;
-    private calcAnchorPosition;
     private onKeyboardSelect;
     call(): void;
     getValue(): any;

@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.invokeLifecycle = void 0;
     /**
      * Call a lifecycle method on a viewModel if it exists.
      * @function
@@ -24,3 +25,4 @@ define(["require", "exports"], function (require, exports) {
     }
     exports.invokeLifecycle = invokeLifecycle;
 });
+//# sourceMappingURL=lifecycle.js.map

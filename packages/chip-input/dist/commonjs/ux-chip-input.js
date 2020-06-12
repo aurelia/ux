@@ -1,11 +1,7 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxChipInput = void 0;
+var tslib_1 = require("tslib");
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_binding_1 = require("aurelia-binding");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
@@ -14,6 +10,7 @@ var core_1 = require("@aurelia-ux/core");
 require("@aurelia-ux/core/components/ux-input-component.css");
 // tslint:disable-next-line: no-submodule-imports
 require("@aurelia-ux/core/components/ux-input-component--outline.css");
+var aurelia_pal_1 = require("aurelia-pal");
 var UxChipInput = /** @class */ (function () {
     function UxChipInput(element, styleEngine) {
         this.element = element;
@@ -156,54 +153,55 @@ var UxChipInput = /** @class */ (function () {
         get: function () {
             return typeof this.label !== 'string' || this.label.length === 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     UxChipInput.prototype.stopEvent = function (event) {
         event.stopPropagation();
     };
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxChipInput.prototype, "disabled", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxChipInput.prototype, "readonly", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxChipInput.prototype, "theme", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxChipInput.prototype, "label", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxChipInput.prototype, "placeholder", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxChipInput.prototype, "separator", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxChipInput.prototype, "variant", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxChipInput.prototype, "chipVariant", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxChipInput.prototype, "dense", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.observable
     ], UxChipInput.prototype, "focused", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
     ], UxChipInput.prototype, "value", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
     ], UxChipInput.prototype, "chips", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.computedFrom('label')
     ], UxChipInput.prototype, "placeholderMode", null);
-    UxChipInput = __decorate([
+    UxChipInput = tslib_1.__decorate([
         aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
-        aurelia_templating_1.customElement('ux-chip-input')
+        aurelia_templating_1.customElement('ux-chip-input'),
+        aurelia_templating_1.useView(aurelia_pal_1.PLATFORM.moduleName('./ux-chip-input.html'))
     ], UxChipInput);
     return UxChipInput;
 }());

@@ -1,12 +1,7 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-define(["require", "exports", "aurelia-templating", "aurelia-logging", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-icon-theme", "./ux-icon-map"], function (require, exports, aurelia_templating_1, aurelia_logging_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_icon_theme_1, ux_icon_map_1) {
+define(["require", "exports", "tslib", "aurelia-templating", "aurelia-logging", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "./ux-icon-theme", "./ux-icon-map", "aurelia-pal"], function (require, exports, tslib_1, aurelia_templating_1, aurelia_logging_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, ux_icon_theme_1, ux_icon_map_1, aurelia_pal_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxIcon = void 0;
     var UxIcon = /** @class */ (function () {
         function UxIcon(element, iconMap, styleEngine, logger) {
             this.element = element;
@@ -45,18 +40,19 @@ define(["require", "exports", "aurelia-templating", "aurelia-logging", "aurelia-
                 this.logger.warn('ux-icon: no matching icon found', this.element);
             }
         };
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxIcon.prototype, "size", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxIcon.prototype, "theme", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
         ], UxIcon.prototype, "icon", void 0);
-        UxIcon = __decorate([
+        UxIcon = tslib_1.__decorate([
             aurelia_dependency_injection_1.inject(Element, ux_icon_map_1.UxIconMap, core_1.StyleEngine, aurelia_logging_1.Logger),
             aurelia_templating_1.customElement('ux-icon'),
+            aurelia_templating_1.useView(aurelia_pal_1.PLATFORM.moduleName('./ux-icon.html')),
             aurelia_templating_1.processAttributes(core_1.processDesignAttributes)
         ], UxIcon);
         return UxIcon;

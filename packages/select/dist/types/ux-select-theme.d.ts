@@ -1,6 +1,7 @@
 import { UxTheme } from '@aurelia-ux/core';
 export declare class UxSelectTheme implements UxTheme {
     themeKey: string;
+    static DEFAULT_LIST_TRANSITION: string;
     foreground?: string;
     foregroundLabel?: string;
     background?: string;
@@ -22,7 +23,7 @@ export declare class UxSelectTheme implements UxTheme {
     listBackground?: string;
     listForeground?: string;
     listElevation?: string;
-    listTransition?: number;
+    listTransition?: string;
     optionHover?: string;
     optionFocused?: string;
     optionSelected?: string;

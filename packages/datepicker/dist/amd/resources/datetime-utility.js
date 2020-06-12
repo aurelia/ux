@@ -1,17 +1,7 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-define(["require", "exports", "./moment-rexports"], function (require, exports, moment_rexports_1) {
+define(["require", "exports", "tslib", "./moment-rexports"], function (require, exports, tslib_1, moment_rexports_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.DatetimeUtility = void 0;
     var DatetimeUtility = /** @class */ (function () {
         function DatetimeUtility() {
         }
@@ -42,7 +32,7 @@ define(["require", "exports", "./moment-rexports"], function (require, exports, 
                 return disabledDateConfig.weekday === date.weekday();
             }
             if (disabledDateConfig.day || disabledDateConfig.month || disabledDateConfig.year) {
-                var disabledDate = __assign({}, disabledDateConfig);
+                var disabledDate = tslib_1.__assign({}, disabledDateConfig);
                 if (disabledDate.year == null) {
                     disabledDate.year = date.year();
                 }

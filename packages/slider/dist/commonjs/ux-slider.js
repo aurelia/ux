@@ -1,15 +1,12 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxSlider = void 0;
+var tslib_1 = require("tslib");
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var core_1 = require("@aurelia-ux/core");
 var aurelia_binding_1 = require("aurelia-binding");
+var aurelia_pal_1 = require("aurelia-pal");
 var UxSlider = /** @class */ (function () {
     function UxSlider(element, styleEngine) {
         this.element = element;
@@ -20,14 +17,14 @@ var UxSlider = /** @class */ (function () {
         get: function () {
             return this.percentValue * 100;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(UxSlider.prototype, "sliderAfterWidth", {
         get: function () {
             return (1 - this.percentValue) * 100;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     UxSlider.prototype.bind = function () {
@@ -149,33 +146,34 @@ var UxSlider = /** @class */ (function () {
                 ? this.min
                 : potentialValue;
     };
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxSlider.prototype, "theme", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
     ], UxSlider.prototype, "value", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxSlider.prototype, "min", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxSlider.prototype, "max", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxSlider.prototype, "disabled", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxSlider.prototype, "step", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.computedFrom('percentValue')
     ], UxSlider.prototype, "sliderBeforeWidth", null);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.computedFrom('percentValue')
     ], UxSlider.prototype, "sliderAfterWidth", null);
-    UxSlider = __decorate([
+    UxSlider = tslib_1.__decorate([
         aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
-        aurelia_templating_1.customElement('ux-slider')
+        aurelia_templating_1.customElement('ux-slider'),
+        aurelia_templating_1.useView(aurelia_pal_1.PLATFORM.moduleName('./ux-slider.html'))
     ], UxSlider);
     return UxSlider;
 }());

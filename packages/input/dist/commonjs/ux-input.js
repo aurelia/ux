@@ -1,11 +1,7 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxInput = void 0;
+var tslib_1 = require("tslib");
 var aurelia_templating_1 = require("aurelia-templating");
 var aurelia_pal_1 = require("aurelia-pal");
 var aurelia_binding_1 = require("aurelia-binding");
@@ -15,8 +11,9 @@ var core_1 = require("@aurelia-ux/core");
 require("@aurelia-ux/core/components/ux-input-component.css");
 // tslint:disable-next-line: no-submodule-imports
 require("@aurelia-ux/core/components/ux-input-component--outline.css");
+var ux_default_input_configuration_1 = require("./ux-default-input-configuration");
 var UxInput = /** @class */ (function () {
-    function UxInput(element, styleEngine) {
+    function UxInput(element, styleEngine, defaultConfiguration) {
         this.element = element;
         this.styleEngine = styleEngine;
         this.autofocus = null;
@@ -26,7 +23,16 @@ var UxInput = /** @class */ (function () {
         this.dense = false;
         this.rawValue = '';
         this.focused = false;
-        Object.setPrototypeOf(element, uxInputElementProto);
+        defineUxInputElementApis(element);
+        if (defaultConfiguration.theme !== undefined) {
+            this.theme = defaultConfiguration.theme;
+        }
+        if (defaultConfiguration.dense !== undefined) {
+            this.dense = defaultConfiguration.dense;
+        }
+        if (defaultConfiguration.variant !== undefined) {
+            this.variant = defaultConfiguration.variant;
+        }
     }
     UxInput.prototype.bind = function () {
         var element = this.element;
@@ -131,6 +137,9 @@ var UxInput = /** @class */ (function () {
     UxInput.prototype.typeChanged = function (newValue) {
         if (![
             'text',
+            'date',
+            'time',
+            'datetime-local',
             'password',
             'number',
             'email',
@@ -150,8 +159,13 @@ var UxInput = /** @class */ (function () {
         }
         this.setValue(newValue);
     };
-    UxInput.prototype.focusInput = function () {
+    UxInput.prototype.focus = function () {
         this.textbox.focus();
+    };
+    UxInput.prototype.blur = function () {
+        if (document.activeElement === this.textbox) {
+            this.textbox.blur();
+        }
     };
     UxInput.prototype.variantChanged = function (newValue) {
         this.element.style.backgroundColor = newValue === 'outline' ?
@@ -162,63 +176,64 @@ var UxInput = /** @class */ (function () {
         get: function () {
             return typeof this.label !== 'string' || this.label.length === 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "autofocus", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "autocomplete", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "disabled", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "maxlength", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "minlength", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "min", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "max", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "readonly", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "theme", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "label", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "placeholder", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "type", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "variant", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxInput.prototype, "dense", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.observable
     ], UxInput.prototype, "rawValue", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.observable
     ], UxInput.prototype, "focused", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_binding_1.computedFrom('label')
     ], UxInput.prototype, "placeholderMode", null);
-    UxInput = __decorate([
-        aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
-        aurelia_templating_1.customElement('ux-input')
+    UxInput = tslib_1.__decorate([
+        aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine, ux_default_input_configuration_1.UxDefaultInputConfiguration),
+        aurelia_templating_1.customElement('ux-input'),
+        aurelia_templating_1.useView(aurelia_pal_1.PLATFORM.moduleName('./ux-input.html'))
     ], UxInput);
     return UxInput;
 }());
@@ -227,14 +242,29 @@ function stopEvent(e) {
     e.stopPropagation();
 }
 var getVm = function (_) { return _.au.controller.viewModel; };
-var uxInputElementProto = Object.create(HTMLElement.prototype, {
-    value: {
-        get: function () {
-            return getVm(this).getValue();
+var defineUxInputElementApis = function (element) {
+    Object.defineProperties(element, {
+        value: {
+            get: function () {
+                return getVm(this).getValue();
+            },
+            set: function (value) {
+                getVm(this).setValue(value);
+            },
+            configurable: true
         },
-        set: function (value) {
-            getVm(this).setValue(value);
+        focus: {
+            value: function () {
+                getVm(this).focus();
+            },
+            configurable: true
+        },
+        blur: {
+            value: function () {
+                getVm(this).blur();
+            },
+            configurable: true
         }
-    }
-});
+    });
+};
 //# sourceMappingURL=ux-input.js.map

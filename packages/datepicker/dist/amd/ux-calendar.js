@@ -1,12 +1,7 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "./resources/datetime-utility", "./resources/moment-rexports"], function (require, exports, aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, datetime_utility_1, moment_rexports_1) {
+define(["require", "exports", "tslib", "aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "./resources/datetime-utility", "./resources/moment-rexports", "aurelia-pal"], function (require, exports, tslib_1, aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, datetime_utility_1, moment_rexports_1, aurelia_pal_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxCalendar = void 0;
     var UxCalendar = /** @class */ (function () {
         function UxCalendar(resources) {
             this.resources = resources;
@@ -59,30 +54,31 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
         UxCalendar.prototype.isValidDate = function (date) {
             return datetime_utility_1.DatetimeUtility.dateOutOfRange(date, this.minDate, this.maxDate, this.config);
         };
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxCalendar.prototype, "theme", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxCalendar.prototype, "weekdays", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxCalendar.prototype, "minDate", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxCalendar.prototype, "maxDate", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxCalendar.prototype, "value", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxCalendar.prototype, "config", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_binding_1.observable
         ], UxCalendar.prototype, "displayMonth", void 0);
-        UxCalendar = __decorate([
+        UxCalendar = tslib_1.__decorate([
             aurelia_dependency_injection_1.inject(aurelia_templating_1.ViewResources),
-            aurelia_templating_1.customElement('ux-calendar')
+            aurelia_templating_1.customElement('ux-calendar'),
+            aurelia_templating_1.useView(aurelia_pal_1.PLATFORM.moduleName('./ux-calendar.html'))
         ], UxCalendar);
         return UxCalendar;
     }());

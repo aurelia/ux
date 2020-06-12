@@ -1,8 +1,9 @@
 define(["require", "exports", "aurelia-framework", "aurelia-binding", "@aurelia-ux/core", "./ux-radio-theme", "./ux-radio"], function (require, exports, aurelia_framework_1, aurelia_binding_1, core_1, ux_radio_theme_1, ux_radio_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.UxRadioTheme = ux_radio_theme_1.UxRadioTheme;
-    exports.UxRadio = ux_radio_1.UxRadio;
+    exports.configure = void 0;
+    Object.defineProperty(exports, "UxRadioTheme", { enumerable: true, get: function () { return ux_radio_theme_1.UxRadioTheme; } });
+    Object.defineProperty(exports, "UxRadio", { enumerable: true, get: function () { return ux_radio_1.UxRadio; } });
     function configure(config) {
         config.container.get(core_1.AureliaUX).registerUxElementConfig(uxRadioConfig);
         config.globalResources(aurelia_framework_1.PLATFORM.moduleName('./ux-radio'));

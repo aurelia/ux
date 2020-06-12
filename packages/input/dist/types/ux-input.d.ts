@@ -1,7 +1,8 @@
-import { StyleEngine, UxInputComponent } from '@aurelia-ux/core';
+import { StyleEngine, UxInputComponent, InputVariant } from '@aurelia-ux/core';
 import { UxInputTheme } from './ux-input-theme';
 import '@aurelia-ux/core/components/ux-input-component.css';
 import '@aurelia-ux/core/components/ux-input-component--outline.css';
+import { UxDefaultInputConfiguration } from './ux-default-input-configuration';
 export interface UxInputElement extends HTMLElement {
     value: any;
 }
@@ -21,13 +22,13 @@ export declare class UxInput implements UxInputComponent {
     label: string;
     placeholder: string;
     type: any;
-    variant: 'filled' | 'outline';
+    variant: InputVariant;
     dense: any;
     rawValue: string;
     focused: boolean;
     value: any;
     textbox: HTMLInputElement;
-    constructor(element: UxInputElement, styleEngine: StyleEngine);
+    constructor(element: UxInputElement, styleEngine: StyleEngine, defaultConfiguration: UxDefaultInputConfiguration);
     bind(): void;
     attached(): void;
     detached(): void;
@@ -39,7 +40,8 @@ export declare class UxInput implements UxInputComponent {
     focusedChanged(focused: boolean): void;
     typeChanged(newValue: any): void;
     rawValueChanged(newValue: string): void;
-    focusInput(): void;
+    focus(): void;
+    blur(): void;
     variantChanged(newValue: string): void;
     get placeholderMode(): boolean;
 }

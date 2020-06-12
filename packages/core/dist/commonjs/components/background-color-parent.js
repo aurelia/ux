@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getBackgroundColorThroughParents = void 0;
 /**
  * @description This function will try to find the background color upon which
  * an element is placed by going up the DOM tree until it finds an element with

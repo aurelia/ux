@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxListTheme = void 0;
     var UxListTheme = /** @class */ (function () {
         function UxListTheme() {
             this.themeKey = 'list';

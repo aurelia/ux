@@ -1,6 +1,7 @@
 define(["require", "exports", "aurelia-logging", "aurelia-pal"], function (require, exports, aurelia_logging_1, aurelia_pal_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.GlobalStyleEngine = void 0;
     var GlobalStyleEngine = /** @class */ (function () {
         function GlobalStyleEngine() {
             this.logger = aurelia_logging_1.getLogger('aurelia-ux');

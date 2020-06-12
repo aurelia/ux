@@ -1,12 +1,7 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-define(["require", "exports", "aurelia-framework", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core"], function (require, exports, aurelia_framework_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1) {
+define(["require", "exports", "tslib", "aurelia-framework", "aurelia-pal", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core"], function (require, exports, tslib_1, aurelia_framework_1, aurelia_pal_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxChip = void 0;
     var UxChip = /** @class */ (function () {
         function UxChip(element, styleEngine) {
             this.element = element;
@@ -48,24 +43,25 @@ define(["require", "exports", "aurelia-framework", "aurelia-pal", "aurelia-bindi
             var closeEvent = aurelia_pal_1.DOM.createCustomEvent('close', { bubbles: false });
             this.element.dispatchEvent(closeEvent);
         };
-        __decorate([
+        tslib_1.__decorate([
             aurelia_framework_1.bindable
         ], UxChip.prototype, "theme", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_framework_1.bindable
         ], UxChip.prototype, "variant", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_framework_1.bindable
         ], UxChip.prototype, "selectedIcon", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_framework_1.observable
         ], UxChip.prototype, "focused", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_framework_1.bindable({ defaultBindingMode: aurelia_binding_1.bindingMode.twoWay })
         ], UxChip.prototype, "selected", void 0);
-        UxChip = __decorate([
+        UxChip = tslib_1.__decorate([
             aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
-            aurelia_framework_1.customElement('ux-chip')
+            aurelia_framework_1.customElement('ux-chip'),
+            aurelia_framework_1.useView(aurelia_pal_1.PLATFORM.moduleName('./ux-chip.html'))
         ], UxChip);
         return UxChip;
     }());

@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.shadows = void 0;
     exports.shadows = {
         depth_0: 'none',
         depth_2dp: '0 2px 2px 0 rgba(0, 0, 0, 0.14),' +

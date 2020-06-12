@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ElementRect = void 0;
 /**
  * Provides the utilities for getting element's metrics.
  */
@@ -9,8 +10,9 @@ var ElementRect = /** @class */ (function () {
      */
     function ElementRect(element) {
         this.element = element;
-        this.width = this.boundingRect.width;
-        this.height = this.boundingRect.height;
+        var rect = this.boundingRect;
+        this.width = rect.width;
+        this.height = rect.height;
         this.size = Math.max(this.width, this.height);
     }
     Object.defineProperty(ElementRect.prototype, "center", {
@@ -23,7 +25,7 @@ var ElementRect = /** @class */ (function () {
                 y: this.height / 2
             };
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(ElementRect.prototype, "boundingRect", {
@@ -33,7 +35,7 @@ var ElementRect = /** @class */ (function () {
         get: function () {
             return this.element.getBoundingClientRect();
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**
@@ -65,10 +67,11 @@ var ElementRect = /** @class */ (function () {
      * point inside this element's rectangle, otherwise `false`.
      */
     ElementRect.prototype.contains = function (ev) {
-        var l = this.boundingRect.left;
-        var t = this.boundingRect.top;
-        var w = this.boundingRect.width;
-        var h = this.boundingRect.height;
+        var rect = this.boundingRect;
+        var l = rect.left;
+        var t = rect.top;
+        var w = rect.width;
+        var h = rect.height;
         var x = ev.x || ev.clientX || 0;
         var y = ev.y || ev.clientY || 0;
         return x >= l && x <= l + w && y >= t && y <= t + h;

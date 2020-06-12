@@ -1,0 +1,28 @@
+ux-sidenav {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+ux-sidenav.ux-sidenav--transition {
+  -webkit-transition-duration: 400ms;
+          transition-duration: 400ms;
+  -webkit-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+          transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  -webkit-transition-property: padding-left, padding-right, padding-bottom;
+  transition-property: padding-left, padding-right, padding-bottom;
+}
+
+ux-sidenav > .ux-sidenav__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  background: var(--aurelia-ux--sidenav-backdrop-color, rgba(0, 0, 0, 0.6));
+  z-index: 2;
+}
+/*# sourceMappingURL=ux-sidenav.css.map */

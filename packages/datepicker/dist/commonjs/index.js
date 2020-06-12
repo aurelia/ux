@@ -1,16 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.configure = void 0;
 var aurelia_framework_1 = require("aurelia-framework");
 var ux_datepicker_theme_1 = require("./ux-datepicker-theme");
-exports.UxDatepickerTheme = ux_datepicker_theme_1.UxDatepickerTheme;
+Object.defineProperty(exports, "UxDatepickerTheme", { enumerable: true, get: function () { return ux_datepicker_theme_1.UxDatepickerTheme; } });
 var ux_calendar_1 = require("./ux-calendar");
-exports.UxCalendar = ux_calendar_1.UxCalendar;
+Object.defineProperty(exports, "UxCalendar", { enumerable: true, get: function () { return ux_calendar_1.UxCalendar; } });
 var ux_datepicker_1 = require("./ux-datepicker");
-exports.UxDatepicker = ux_datepicker_1.UxDatepicker;
+Object.defineProperty(exports, "UxDatepicker", { enumerable: true, get: function () { return ux_datepicker_1.UxDatepicker; } });
 var ux_picker_dialog_1 = require("./ux-picker-dialog");
-exports.UxPickerDialog = ux_picker_dialog_1.UxPickerDialog;
+Object.defineProperty(exports, "UxPickerDialog", { enumerable: true, get: function () { return ux_picker_dialog_1.UxPickerDialog; } });
 var ux_year_list_1 = require("./ux-year-list");
-exports.UxYearList = ux_year_list_1.UxYearList;
+Object.defineProperty(exports, "UxYearList", { enumerable: true, get: function () { return ux_year_list_1.UxYearList; } });
 function configure(config) {
     config.globalResources([
         aurelia_framework_1.PLATFORM.moduleName('./ux-calendar'),

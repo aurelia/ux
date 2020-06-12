@@ -1,6 +1,7 @@
 define(["require", "exports", "aurelia-logging"], function (require, exports, aurelia_logging_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxIconMap = void 0;
     var logger = aurelia_logging_1.getLogger('ux-icon-map');
     var UxIconMap = /** @class */ (function () {
         function UxIconMap() {

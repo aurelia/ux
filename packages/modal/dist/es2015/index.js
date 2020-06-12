@@ -19,3 +19,4 @@ export { UxModalTheme } from './ux-modal-theme';
 export { UxModal } from './ux-modal';
 export * from './ux-modal-service';
 export * from './ux-modal-configuration';
+//# sourceMappingURL=index.js.map

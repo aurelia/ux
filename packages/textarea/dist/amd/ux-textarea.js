@@ -1,12 +1,7 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-dependency-injection", "@aurelia-ux/core", "aurelia-framework", "@aurelia-ux/core/components/ux-input-component.css", "@aurelia-ux/core/components/ux-input-component--outline.css"], function (require, exports, aurelia_templating_1, aurelia_pal_1, aurelia_dependency_injection_1, core_1, aurelia_framework_1) {
+define(["require", "exports", "tslib", "aurelia-templating", "aurelia-pal", "aurelia-dependency-injection", "@aurelia-ux/core", "aurelia-framework", "@aurelia-ux/core/components/ux-input-component.css", "@aurelia-ux/core/components/ux-input-component--outline.css"], function (require, exports, tslib_1, aurelia_templating_1, aurelia_pal_1, aurelia_dependency_injection_1, core_1, aurelia_framework_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxTextArea = void 0;
     var UxTextArea = /** @class */ (function () {
         function UxTextArea(element, styleEngine) {
             this.element = element;
@@ -14,18 +9,18 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-depe
             this.autofocus = null;
             this.autoResize = false;
             this.disabled = false;
-            this.focus = false;
             this.readonly = false;
             this.variant = 'filled';
             this.dense = false;
+            this.focused = false;
             this.value = undefined;
-            Object.setPrototypeOf(element, uxTextAreaElementProto);
+            defineUxTextAreaElementApis(element);
         }
         UxTextArea.prototype.bind = function () {
             var element = this.element;
             var textbox = this.textbox;
             if (this.autofocus || this.autofocus === '') {
-                this.focus = true;
+                this.focused = true;
             }
             this.dense = core_1.normalizeBooleanAttribute('dense', this.dense);
             if (this.cols) {
@@ -60,6 +55,14 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-depe
             this.isAttached = false;
             textbox.removeEventListener('change', stopEvent);
             textbox.removeEventListener('input', stopEvent);
+        };
+        UxTextArea.prototype.focus = function () {
+            this.textbox.focus();
+        };
+        UxTextArea.prototype.blur = function () {
+            if (document.activeElement === this.textbox) {
+                this.textbox.blur();
+            }
         };
         UxTextArea.prototype.getValue = function () {
             return this.value;
@@ -103,7 +106,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-depe
                 this.textbox.style.height = this.textbox.scrollHeight + 2 + "px";
             }
         };
-        UxTextArea.prototype.focusChanged = function (focus) {
+        UxTextArea.prototype.focusedChanged = function (focus) {
             focus = focus || focus === '' ? true : false;
             this.element.classList.toggle('ux-input-component--focused', focus);
             this.element.dispatchEvent(aurelia_pal_1.DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
@@ -117,63 +120,64 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-depe
             get: function () {
                 return typeof this.label !== 'string' || this.label.length === 0;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "autocomplete", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "autofocus", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "autoResize", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "cols", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "disabled", void 0);
-        __decorate([
-            aurelia_templating_1.bindable
-        ], UxTextArea.prototype, "focus", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "maxlength", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "minlength", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "readonly", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "rows", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "label", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "placeholder", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "theme", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "variant", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxTextArea.prototype, "dense", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_framework_1.observable({ initializer: function () { return ''; } })
         ], UxTextArea.prototype, "rawValue", void 0);
-        __decorate([
+        tslib_1.__decorate([
+            aurelia_framework_1.observable()
+        ], UxTextArea.prototype, "focused", void 0);
+        tslib_1.__decorate([
             aurelia_framework_1.computedFrom('label')
         ], UxTextArea.prototype, "placeholderMode", null);
-        UxTextArea = __decorate([
+        UxTextArea = tslib_1.__decorate([
             aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
-            aurelia_templating_1.customElement('ux-textarea')
+            aurelia_templating_1.customElement('ux-textarea'),
+            aurelia_framework_1.useView(aurelia_pal_1.PLATFORM.moduleName('./ux-textarea.html'))
         ], UxTextArea);
         return UxTextArea;
     }());
@@ -182,15 +186,30 @@ define(["require", "exports", "aurelia-templating", "aurelia-pal", "aurelia-depe
         e.stopPropagation();
     }
     var getVm = function (_) { return _.au.controller.viewModel; };
-    var uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
-        value: {
-            get: function () {
-                return getVm(this).getValue();
+    var defineUxTextAreaElementApis = function (element) {
+        Object.defineProperties(element, {
+            value: {
+                get: function () {
+                    return getVm(this).getValue();
+                },
+                set: function (value) {
+                    getVm(this).setValue(value);
+                },
+                configurable: true
             },
-            set: function (value) {
-                getVm(this).setValue(value);
+            focus: {
+                value: function () {
+                    getVm(this).focus();
+                },
+                configurable: true
+            },
+            blur: {
+                value: function () {
+                    getVm(this).blur();
+                },
+                configurable: true
             }
-        }
-    });
+        });
+    };
 });
 //# sourceMappingURL=ux-textarea.js.map

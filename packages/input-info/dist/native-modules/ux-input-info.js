@@ -1,13 +1,9 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-import { customElement, bindable } from 'aurelia-templating';
+import { __decorate } from "tslib";
+import { customElement, bindable, useView } from 'aurelia-templating';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
 import { computedFrom } from 'aurelia-binding';
+import { PLATFORM } from 'aurelia-pal';
 var UxInputInfo = /** @class */ (function () {
     function UxInputInfo(element, styleEngine) {
         this.element = element;
@@ -43,7 +39,7 @@ var UxInputInfo = /** @class */ (function () {
             }
             return 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(UxInputInfo.prototype, "length", {
@@ -54,7 +50,7 @@ var UxInputInfo = /** @class */ (function () {
             }
             return 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     __decorate([
@@ -74,7 +70,8 @@ var UxInputInfo = /** @class */ (function () {
     ], UxInputInfo.prototype, "length", null);
     UxInputInfo = __decorate([
         inject(Element, StyleEngine),
-        customElement('ux-input-info')
+        customElement('ux-input-info'),
+        useView(PLATFORM.moduleName('./ux-input-info.html'))
     ], UxInputInfo);
     return UxInputInfo;
 }());

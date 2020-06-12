@@ -1,14 +1,11 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxCard = void 0;
+var tslib_1 = require("tslib");
 var aurelia_dependency_injection_1 = require("aurelia-dependency-injection");
 var aurelia_templating_1 = require("aurelia-templating");
 var core_1 = require("@aurelia-ux/core");
+var aurelia_pal_1 = require("aurelia-pal");
 var UxCard = /** @class */ (function () {
     function UxCard(element, styleEngine) {
         this.element = element;
@@ -61,30 +58,31 @@ var UxCard = /** @class */ (function () {
     UxCard.prototype.themeChanged = function (newValue) {
         this.styleEngine.applyTheme(newValue, this.element);
     };
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxCard.prototype, "xs", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxCard.prototype, "sm", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxCard.prototype, "md", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxCard.prototype, "lg", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxCard.prototype, "xl", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxCard.prototype, "order", void 0);
-    __decorate([
+    tslib_1.__decorate([
         aurelia_templating_1.bindable
     ], UxCard.prototype, "theme", void 0);
-    UxCard = __decorate([
+    UxCard = tslib_1.__decorate([
         aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
-        aurelia_templating_1.customElement('ux-card')
+        aurelia_templating_1.customElement('ux-card'),
+        aurelia_templating_1.useView(aurelia_pal_1.PLATFORM.moduleName('./ux-card.html'))
     ], UxCard);
     return UxCard;
 }());

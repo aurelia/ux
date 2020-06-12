@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.configure = exports.UxIconMap = exports.UxIcon = void 0;
 var aurelia_framework_1 = require("aurelia-framework");
 var ux_icon_1 = require("./ux-icon");
-exports.UxIcon = ux_icon_1.UxIcon;
+Object.defineProperty(exports, "UxIcon", { enumerable: true, get: function () { return ux_icon_1.UxIcon; } });
 var ux_icon_theme_1 = require("./ux-icon-theme");
-exports.UxIconTheme = ux_icon_theme_1.UxIconTheme;
+Object.defineProperty(exports, "UxIconTheme", { enumerable: true, get: function () { return ux_icon_theme_1.UxIconTheme; } });
 var ux_icon_map_1 = require("./ux-icon-map");
-exports.UxIconMap = ux_icon_map_1.UxIconMap;
+Object.defineProperty(exports, "UxIconMap", { enumerable: true, get: function () { return ux_icon_map_1.UxIconMap; } });
 function configure(config, iconsOrConfig) {
     config.globalResources(aurelia_framework_1.PLATFORM.moduleName('./ux-icon'));
     var uxConfig = {};

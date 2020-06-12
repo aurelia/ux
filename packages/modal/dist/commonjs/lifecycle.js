@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.invokeLifecycle = void 0;
 /**
  * Call a lifecycle method on a viewModel if it exists.
  * @function
@@ -22,3 +23,4 @@ function invokeLifecycle(instance, name, model) {
     return Promise.resolve(true);
 }
 exports.invokeLifecycle = invokeLifecycle;
+//# sourceMappingURL=lifecycle.js.map

@@ -1,12 +1,7 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "aurelia-framework"], function (require, exports, aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, aurelia_framework_1) {
+define(["require", "exports", "tslib", "aurelia-templating", "aurelia-binding", "aurelia-dependency-injection", "@aurelia-ux/core", "aurelia-framework"], function (require, exports, tslib_1, aurelia_templating_1, aurelia_binding_1, aurelia_dependency_injection_1, core_1, aurelia_framework_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxRadio = void 0;
     var UxRadio = /** @class */ (function () {
         function UxRadio(element, styleEngine) {
             this.element = element;
@@ -21,7 +16,7 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             get: function () {
                 return core_1.normalizeBooleanAttribute('disabled', this.disabled);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         UxRadio.prototype.bind = function () {
@@ -141,30 +136,31 @@ define(["require", "exports", "aurelia-templating", "aurelia-binding", "aurelia-
             // https://github.com/aurelia/ux/pull/232#discussion_r375815578
             return true;
         };
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxRadio.prototype, "disabled", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxRadio.prototype, "effect", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxRadio.prototype, "id", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_templating_1.bindable
         ], UxRadio.prototype, "theme", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_binding_1.observable({ initializer: function () { return false; } })
         ], UxRadio.prototype, "value", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_binding_1.observable()
         ], UxRadio.prototype, "focused", void 0);
-        __decorate([
+        tslib_1.__decorate([
             aurelia_binding_1.computedFrom('disabled')
         ], UxRadio.prototype, "isDisabled", null);
-        UxRadio = __decorate([
+        UxRadio = tslib_1.__decorate([
             aurelia_dependency_injection_1.inject(Element, core_1.StyleEngine),
-            aurelia_templating_1.customElement('ux-radio')
+            aurelia_templating_1.customElement('ux-radio'),
+            aurelia_framework_1.useView(aurelia_framework_1.PLATFORM.moduleName('./ux-radio.html'))
         ], UxRadio);
         return UxRadio;
     }());

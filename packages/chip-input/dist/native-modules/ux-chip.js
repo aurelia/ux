@@ -1,11 +1,6 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-import { customElement, bindable, observable } from 'aurelia-framework';
-import { DOM } from 'aurelia-pal';
+import { __decorate } from "tslib";
+import { customElement, bindable, observable, useView } from 'aurelia-framework';
+import { DOM, PLATFORM } from 'aurelia-pal';
 import { bindingMode } from 'aurelia-binding';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine } from '@aurelia-ux/core';
@@ -67,7 +62,8 @@ var UxChip = /** @class */ (function () {
     ], UxChip.prototype, "selected", void 0);
     UxChip = __decorate([
         inject(Element, StyleEngine),
-        customElement('ux-chip')
+        customElement('ux-chip'),
+        useView(PLATFORM.moduleName('./ux-chip.html'))
     ], UxChip);
     return UxChip;
 }());

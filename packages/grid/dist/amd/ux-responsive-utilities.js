@@ -1,6 +1,7 @@
 define(["require", "exports", "aurelia-pal"], function (require, exports, aurelia_pal_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxResponsiveUtilities = void 0;
     /** Utility class that assists with designing a responsive site. */
     var UxResponsiveUtilities = /** @class */ (function () {
         function UxResponsiveUtilities() {

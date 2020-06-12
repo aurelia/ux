@@ -1,9 +1,7 @@
-define(["require", "exports", "./resources/ok-modal-attribute", "./resources/dismiss-modal-attribute", "./resources/attach-focus-attribute", "./ux-modal-configuration", "aurelia-framework", "./ux-modal-theme", "./ux-modal", "./ux-modal-service", "./ux-modal-configuration"], function (require, exports, ok_modal_attribute_1, dismiss_modal_attribute_1, attach_focus_attribute_1, ux_modal_configuration_1, aurelia_framework_1, ux_modal_theme_1, ux_modal_1, ux_modal_service_1, ux_modal_configuration_2) {
+define(["require", "exports", "tslib", "./resources/ok-modal-attribute", "./resources/dismiss-modal-attribute", "./resources/attach-focus-attribute", "./ux-modal-configuration", "aurelia-framework", "./ux-modal-theme", "./ux-modal", "./ux-modal-service", "./ux-modal-configuration"], function (require, exports, tslib_1, ok_modal_attribute_1, dismiss_modal_attribute_1, attach_focus_attribute_1, ux_modal_configuration_1, aurelia_framework_1, ux_modal_theme_1, ux_modal_1, ux_modal_service_1, ux_modal_configuration_2) {
     "use strict";
-    function __export(m) {
-        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.configure = void 0;
     function configure(frameworkConfig, callback) {
         frameworkConfig.globalResources([
             attach_focus_attribute_1.AttachFocusAttribute,
@@ -17,8 +15,9 @@ define(["require", "exports", "./resources/ok-modal-attribute", "./resources/dis
         }
     }
     exports.configure = configure;
-    exports.UxModalTheme = ux_modal_theme_1.UxModalTheme;
-    exports.UxModal = ux_modal_1.UxModal;
-    __export(ux_modal_service_1);
-    __export(ux_modal_configuration_2);
+    Object.defineProperty(exports, "UxModalTheme", { enumerable: true, get: function () { return ux_modal_theme_1.UxModalTheme; } });
+    Object.defineProperty(exports, "UxModal", { enumerable: true, get: function () { return ux_modal_1.UxModal; } });
+    tslib_1.__exportStar(ux_modal_service_1, exports);
+    tslib_1.__exportStar(ux_modal_configuration_2, exports);
 });
+//# sourceMappingURL=index.js.map

@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxDefaultModalConfiguration = void 0;
     var UxDefaultModalConfiguration = /** @class */ (function () {
         function UxDefaultModalConfiguration() {
             this.modalBreakpoint = void 0;
@@ -16,3 +17,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.UxDefaultModalConfiguration = UxDefaultModalConfiguration;
 });
+//# sourceMappingURL=ux-modal-configuration.js.map

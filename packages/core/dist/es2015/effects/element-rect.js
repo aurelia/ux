@@ -7,8 +7,9 @@ export class ElementRect {
      */
     constructor(element) {
         this.element = element;
-        this.width = this.boundingRect.width;
-        this.height = this.boundingRect.height;
+        const rect = this.boundingRect;
+        this.width = rect.width;
+        this.height = rect.height;
         this.size = Math.max(this.width, this.height);
     }
     /**
@@ -54,10 +55,11 @@ export class ElementRect {
      * point inside this element's rectangle, otherwise `false`.
      */
     contains(ev) {
-        const l = this.boundingRect.left;
-        const t = this.boundingRect.top;
-        const w = this.boundingRect.width;
-        const h = this.boundingRect.height;
+        const rect = this.boundingRect;
+        const l = rect.left;
+        const t = rect.top;
+        const w = rect.width;
+        const h = rect.height;
         const x = ev.x || ev.clientX || 0;
         const y = ev.y || ev.clientY || 0;
         return x >= l && x <= l + w && y >= t && y <= t + h;

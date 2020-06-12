@@ -1,14 +1,9 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
+import { __decorate } from "tslib";
 import { customElement, bindable } from 'aurelia-templating';
-import { DOM } from 'aurelia-pal';
+import { DOM, PLATFORM } from 'aurelia-pal';
 import { inject } from 'aurelia-dependency-injection';
 import { StyleEngine, normalizeBooleanAttribute, getBackgroundColorThroughParents } from '@aurelia-ux/core';
-import { observable, computedFrom } from 'aurelia-framework';
+import { observable, computedFrom, useView } from 'aurelia-framework';
 // tslint:disable-next-line: no-submodule-imports
 import '@aurelia-ux/core/components/ux-input-component.css';
 // tslint:disable-next-line: no-submodule-imports
@@ -20,18 +15,18 @@ var UxTextArea = /** @class */ (function () {
         this.autofocus = null;
         this.autoResize = false;
         this.disabled = false;
-        this.focus = false;
         this.readonly = false;
         this.variant = 'filled';
         this.dense = false;
+        this.focused = false;
         this.value = undefined;
-        Object.setPrototypeOf(element, uxTextAreaElementProto);
+        defineUxTextAreaElementApis(element);
     }
     UxTextArea.prototype.bind = function () {
         var element = this.element;
         var textbox = this.textbox;
         if (this.autofocus || this.autofocus === '') {
-            this.focus = true;
+            this.focused = true;
         }
         this.dense = normalizeBooleanAttribute('dense', this.dense);
         if (this.cols) {
@@ -66,6 +61,14 @@ var UxTextArea = /** @class */ (function () {
         this.isAttached = false;
         textbox.removeEventListener('change', stopEvent);
         textbox.removeEventListener('input', stopEvent);
+    };
+    UxTextArea.prototype.focus = function () {
+        this.textbox.focus();
+    };
+    UxTextArea.prototype.blur = function () {
+        if (document.activeElement === this.textbox) {
+            this.textbox.blur();
+        }
     };
     UxTextArea.prototype.getValue = function () {
         return this.value;
@@ -109,7 +112,7 @@ var UxTextArea = /** @class */ (function () {
             this.textbox.style.height = this.textbox.scrollHeight + 2 + "px";
         }
     };
-    UxTextArea.prototype.focusChanged = function (focus) {
+    UxTextArea.prototype.focusedChanged = function (focus) {
         focus = focus || focus === '' ? true : false;
         this.element.classList.toggle('ux-input-component--focused', focus);
         this.element.dispatchEvent(DOM.createCustomEvent(focus ? 'focus' : 'blur', { bubbles: true }));
@@ -123,7 +126,7 @@ var UxTextArea = /** @class */ (function () {
         get: function () {
             return typeof this.label !== 'string' || this.label.length === 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     __decorate([
@@ -141,9 +144,6 @@ var UxTextArea = /** @class */ (function () {
     __decorate([
         bindable
     ], UxTextArea.prototype, "disabled", void 0);
-    __decorate([
-        bindable
-    ], UxTextArea.prototype, "focus", void 0);
     __decorate([
         bindable
     ], UxTextArea.prototype, "maxlength", void 0);
@@ -175,11 +175,15 @@ var UxTextArea = /** @class */ (function () {
         observable({ initializer: function () { return ''; } })
     ], UxTextArea.prototype, "rawValue", void 0);
     __decorate([
+        observable()
+    ], UxTextArea.prototype, "focused", void 0);
+    __decorate([
         computedFrom('label')
     ], UxTextArea.prototype, "placeholderMode", null);
     UxTextArea = __decorate([
         inject(Element, StyleEngine),
-        customElement('ux-textarea')
+        customElement('ux-textarea'),
+        useView(PLATFORM.moduleName('./ux-textarea.html'))
     ], UxTextArea);
     return UxTextArea;
 }());
@@ -188,14 +192,29 @@ function stopEvent(e) {
     e.stopPropagation();
 }
 var getVm = function (_) { return _.au.controller.viewModel; };
-var uxTextAreaElementProto = Object.create(HTMLElement.prototype, {
-    value: {
-        get: function () {
-            return getVm(this).getValue();
+var defineUxTextAreaElementApis = function (element) {
+    Object.defineProperties(element, {
+        value: {
+            get: function () {
+                return getVm(this).getValue();
+            },
+            set: function (value) {
+                getVm(this).setValue(value);
+            },
+            configurable: true
         },
-        set: function (value) {
-            getVm(this).setValue(value);
+        focus: {
+            value: function () {
+                getVm(this).focus();
+            },
+            configurable: true
+        },
+        blur: {
+            value: function () {
+                getVm(this).blur();
+            },
+            configurable: true
         }
-    }
-});
+    });
+};
 //# sourceMappingURL=ux-textarea.js.map

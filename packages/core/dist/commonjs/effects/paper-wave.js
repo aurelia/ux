@@ -1,12 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PaperWave = void 0;
 var aurelia_pal_1 = require("aurelia-pal");
 var element_rect_1 = require("./element-rect");
-// tslint:disable:variable-name
-var _window = aurelia_pal_1.PLATFORM.global;
-var _doc = _window.document;
-var _now = aurelia_pal_1.PLATFORM.performance.now.bind(aurelia_pal_1.PLATFORM.performance);
-// tslint:enable:variable-name
 /**
  * Provides all the logic to produce a one-time rippling effect.
  */
@@ -15,16 +11,16 @@ var PaperWave = /** @class */ (function () {
      * Initializes a new instance of the `PaperWave` class with the specified `PaperRipple` instance.
      */
     function PaperWave(options) {
-        this.color = _window.getComputedStyle(options.$).color;
+        this.color = aurelia_pal_1.DOM.getComputedStyle(options.$).color;
         this.containerRect = new element_rect_1.ElementRect(options.$);
         this.recenters = options.recenters || false;
         this.center = options.center || false;
         this.initialOpacity = options.initialOpacity || 0.25;
         this.opacityDecayVelocity = options.opacityDecayVelocity || 0.8;
-        this.$wave = _doc.createElement('div');
+        this.$wave = aurelia_pal_1.DOM.createElement('div');
         this.$wave.classList.add('paper-ripple__wave');
         this.$wave.style.backgroundColor = this.color;
-        this.$ = _doc.createElement('div');
+        this.$ = aurelia_pal_1.DOM.createElement('div');
         this.$.classList.add('paper-ripple__wave-container');
         this.$.appendChild(this.$wave);
         this.resetDefaults();
@@ -38,13 +34,13 @@ var PaperWave = /** @class */ (function () {
             if (!this.touchDownStarted) {
                 return 0;
             }
-            var elapsed = _now() - this.touchDownStarted;
+            var elapsed = aurelia_pal_1.PLATFORM.performance.now() - this.touchDownStarted;
             if (this.touchUpStarted) {
                 elapsed -= this.touchUpElapsed;
             }
             return elapsed;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "touchUpElapsed", {
@@ -53,9 +49,9 @@ var PaperWave = /** @class */ (function () {
          * @returns The time in milliseconds.
          */
         get: function () {
-            return this.touchUpStarted ? _now() - this.touchUpStarted : 0;
+            return this.touchUpStarted ? aurelia_pal_1.PLATFORM.performance.now() - this.touchUpStarted : 0;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "touchDownElapsedSeconds", {
@@ -66,7 +62,7 @@ var PaperWave = /** @class */ (function () {
         get: function () {
             return this.touchDownElapsed / 1000;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "touchUpElapsedSeconds", {
@@ -77,7 +73,7 @@ var PaperWave = /** @class */ (function () {
         get: function () {
             return this.touchUpElapsed / 1000;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "mouseInteractionSeconds", {
@@ -88,7 +84,7 @@ var PaperWave = /** @class */ (function () {
         get: function () {
             return this.touchDownElapsedSeconds + this.touchUpElapsedSeconds;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "radius", {
@@ -104,7 +100,7 @@ var PaperWave = /** @class */ (function () {
             var actualRadius = radius * (1 - Math.pow(80, -currentTime));
             return Math.abs(actualRadius);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "opacity", {
@@ -118,7 +114,7 @@ var PaperWave = /** @class */ (function () {
             }
             return Math.max(0, this.initialOpacity - this.touchUpElapsedSeconds * this.opacityDecayVelocity);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "outerOpacity", {
@@ -129,7 +125,7 @@ var PaperWave = /** @class */ (function () {
         get: function () {
             return Math.max(0, Math.min(this.touchUpElapsedSeconds * 0.3, this.opacity));
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "isWaveFullyOpaque", {
@@ -140,7 +136,7 @@ var PaperWave = /** @class */ (function () {
         get: function () {
             return this.opacity < 0.01 && this.radius >= Math.min(this.maxRadius, PaperWave.MAX_RADIUS);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "isMaxRadiusReached", {
@@ -151,7 +147,7 @@ var PaperWave = /** @class */ (function () {
         get: function () {
             return this.opacity >= this.initialOpacity && this.radius >= Math.min(this.maxRadius, PaperWave.MAX_RADIUS);
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "isAnimationComplete", {
@@ -162,7 +158,7 @@ var PaperWave = /** @class */ (function () {
         get: function () {
             return this.touchUpStarted ? this.isWaveFullyOpaque : this.isMaxRadiusReached;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "translationFraction", {
@@ -173,7 +169,7 @@ var PaperWave = /** @class */ (function () {
         get: function () {
             return Math.min(1, this.radius / this.containerRect.size * 2 / Math.sqrt(2));
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "currentPosition", {
@@ -193,7 +189,7 @@ var PaperWave = /** @class */ (function () {
             }
             return { x: x, y: y };
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     Object.defineProperty(PaperWave.prototype, "isTouchDown", {
@@ -205,7 +201,7 @@ var PaperWave = /** @class */ (function () {
         get: function () {
             return this.touchDownStarted && !this.touchUpStarted;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**
@@ -256,7 +252,7 @@ var PaperWave = /** @class */ (function () {
         if (event === void 0) { event = null; }
         var containerCenter = this.containerRect.center;
         this.resetDefaults();
-        this.touchDownStarted = _now();
+        this.touchDownStarted = aurelia_pal_1.PLATFORM.performance.now();
         this.startPosition = this.center || !event ?
             containerCenter :
             {
@@ -279,7 +275,7 @@ var PaperWave = /** @class */ (function () {
         if (!this.isTouchDown) {
             return this;
         }
-        this.touchUpStarted = _now();
+        this.touchUpStarted = aurelia_pal_1.PLATFORM.performance.now();
         return this;
     };
     /**

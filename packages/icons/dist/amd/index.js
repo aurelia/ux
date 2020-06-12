@@ -1,9 +1,10 @@
 define(["require", "exports", "aurelia-framework", "./ux-icon", "./ux-icon-theme", "./ux-icon-map"], function (require, exports, aurelia_framework_1, ux_icon_1, ux_icon_theme_1, ux_icon_map_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.UxIcon = ux_icon_1.UxIcon;
-    exports.UxIconTheme = ux_icon_theme_1.UxIconTheme;
-    exports.UxIconMap = ux_icon_map_1.UxIconMap;
+    exports.configure = exports.UxIconMap = exports.UxIcon = void 0;
+    Object.defineProperty(exports, "UxIcon", { enumerable: true, get: function () { return ux_icon_1.UxIcon; } });
+    Object.defineProperty(exports, "UxIconTheme", { enumerable: true, get: function () { return ux_icon_theme_1.UxIconTheme; } });
+    Object.defineProperty(exports, "UxIconMap", { enumerable: true, get: function () { return ux_icon_map_1.UxIconMap; } });
     function configure(config, iconsOrConfig) {
         config.globalResources(aurelia_framework_1.PLATFORM.moduleName('./ux-icon'));
         var uxConfig = {};

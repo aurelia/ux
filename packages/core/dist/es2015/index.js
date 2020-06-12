@@ -1,11 +1,12 @@
 import { BindingBehaviorResource, PLATFORM } from 'aurelia-framework';
 import { AureliaUX } from './aurelia-ux';
 import { BooleanBB } from './components/boolean-attr-binding-behavior';
+export { UxSizeCustomAttribute } from './attributes/ux-size-attribute';
 export { swatches } from './colors/swatches';
 export { shadows } from './colors/shadows';
 export { processDesignAttributes } from './designs/design-attributes';
 export { PaperRipple } from './effects/paper-ripple';
-export { normalizeBooleanAttribute } from './components/html-attributes';
+export { normalizeBooleanAttribute, normalizeNumberAttribute } from './components/html-attributes';
 export { getBackgroundColorThroughParents } from './components/background-color-parent';
 export { UxChoiceAttribute } from './components/ux-choice-attribute';
 export { UxChoiceContainerAttribute } from './components/ux-choice-container-attribute';
@@ -23,6 +24,7 @@ export function configure(config, callback) {
     boolAttr.initialize(config.container, BooleanBB);
     boolAttr.register(config.aurelia.resources, 'booleanAttr');
     config.globalResources([
+        PLATFORM.moduleName('./attributes/ux-size-attribute'),
         PLATFORM.moduleName('./components/ux-choice-attribute'),
         PLATFORM.moduleName('./components/ux-choice-container-attribute')
     ]);

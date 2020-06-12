@@ -157,6 +157,12 @@
   justify-content: flex-end;
 }
 
+.ux-modal--desktop .ux-modal__content > .ux-card,
+.ux-modal--desktop > compose > .ux-modal__content > .ux-card {
+  max-height: 90vh;
+  position: relative;
+}
+
 .ux-modal--mobile .ux-modal__content > .ux-card > .ux-card__header, 
 .ux-modal--mobile .ux-modal__content > compose > .ux-card > .ux-card__header {
   margin-top: constant(safe-area-inset-top, 20px);

@@ -1,0 +1,19 @@
+<template class="ux-expandable--${openBoolean?'open':'closed'}">
+  <require from="./ux-expandable.css"></require>
+  <div class="ux-expandable__header ux-expandable__header--${openBoolean?'open':'closed'}" ref="header"
+    click.delegate="toggle()">
+    <div class=ux-expandable__header__caption>
+      <slot name="header">Header</slot>
+    </div>
+    <div class=ux-expandable__header__indicator>
+      <slot name="indicator" class="test">
+        <ux-icon icon="expand_more"></ux-icon>
+      </slot>
+    </div>
+  </div>
+  <div class="ux-expandable__content-container" ref="contentContainer">
+    <div class="ux-expandable__content" ref="content">
+      <slot></slot>
+    </div>
+  </div>
+</template>

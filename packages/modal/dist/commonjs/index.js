@@ -1,8 +1,7 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.configure = void 0;
+var tslib_1 = require("tslib");
 var ok_modal_attribute_1 = require("./resources/ok-modal-attribute");
 var dismiss_modal_attribute_1 = require("./resources/dismiss-modal-attribute");
 var attach_focus_attribute_1 = require("./resources/attach-focus-attribute");
@@ -22,8 +21,9 @@ function configure(frameworkConfig, callback) {
 }
 exports.configure = configure;
 var ux_modal_theme_1 = require("./ux-modal-theme");
-exports.UxModalTheme = ux_modal_theme_1.UxModalTheme;
+Object.defineProperty(exports, "UxModalTheme", { enumerable: true, get: function () { return ux_modal_theme_1.UxModalTheme; } });
 var ux_modal_1 = require("./ux-modal");
-exports.UxModal = ux_modal_1.UxModal;
-__export(require("./ux-modal-service"));
-__export(require("./ux-modal-configuration"));
+Object.defineProperty(exports, "UxModal", { enumerable: true, get: function () { return ux_modal_1.UxModal; } });
+tslib_1.__exportStar(require("./ux-modal-service"), exports);
+tslib_1.__exportStar(require("./ux-modal-configuration"), exports);
+//# sourceMappingURL=index.js.map

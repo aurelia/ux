@@ -1,12 +1,7 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-define(["require", "exports", "aurelia-dependency-injection", "aurelia-binding", "./global-style-engine", "../aurelia-ux"], function (require, exports, aurelia_dependency_injection_1, aurelia_binding_1, global_style_engine_1, aurelia_ux_1) {
+define(["require", "exports", "tslib", "aurelia-dependency-injection", "aurelia-binding", "./global-style-engine", "../aurelia-ux"], function (require, exports, tslib_1, aurelia_dependency_injection_1, aurelia_binding_1, global_style_engine_1, aurelia_ux_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.StyleController = void 0;
     var StyleController = /** @class */ (function () {
         function StyleController(observerLocator, globalStyleEngine, ux) {
             this.observerLocator = observerLocator;
@@ -94,7 +89,7 @@ define(["require", "exports", "aurelia-dependency-injection", "aurelia-binding",
             }
             return designInnerHtml;
         };
-        StyleController = __decorate([
+        StyleController = tslib_1.__decorate([
             aurelia_dependency_injection_1.inject(aurelia_binding_1.ObserverLocator, global_style_engine_1.GlobalStyleEngine, aurelia_ux_1.AureliaUX)
         ], StyleController);
         return StyleController;

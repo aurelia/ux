@@ -1,10 +1,5 @@
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-import { customElement, bindable, processContent, DOM, inject, BindingEngine, } from 'aurelia-framework';
+import { __decorate } from "tslib";
+import { customElement, bindable, processContent, DOM, inject, BindingEngine, useView, PLATFORM, } from 'aurelia-framework';
 import { getAuViewModel } from './util';
 var UxOptGroup = /** @class */ (function () {
     function UxOptGroup(element, bindingEngine) {
@@ -68,7 +63,8 @@ var UxOptGroup = /** @class */ (function () {
     UxOptGroup = __decorate([
         inject(DOM.Element, BindingEngine),
         processContent(ensureOnlyUxOption),
-        customElement('ux-optgroup')
+        customElement('ux-optgroup'),
+        useView(PLATFORM.moduleName('./ux-optgroup.html'))
     ], UxOptGroup);
     return UxOptGroup;
 }());

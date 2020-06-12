@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UxChipTheme = void 0;
 var UxChipTheme = /** @class */ (function () {
     function UxChipTheme() {
         this.themeKey = 'chip';

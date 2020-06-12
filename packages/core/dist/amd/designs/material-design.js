@@ -1,6 +1,7 @@
 define(["require", "exports", "../colors/swatches", "../colors/shadows"], function (require, exports, swatches_1, shadows_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.MaterialDesign = void 0;
     var MaterialDesign = /** @class */ (function () {
         function MaterialDesign() {
             this.type = 'material';

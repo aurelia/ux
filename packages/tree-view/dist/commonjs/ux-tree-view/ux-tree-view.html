@@ -1,0 +1,23 @@
+<template class="ux-tree-view">
+  <require from="./ux-tree-view.css"></require>
+  <require from="../ux-tree-node/ux-tree-node"></require>
+  <ul class="ux-tree-view--list">
+    <li repeat.for="$node of nodes" class="ux-tree-view--list-item">
+      <let $tree.bind="element"></let>
+      <let $tree-vm.bind="$parent"></let>
+      <div class="ux-tree-view--node ${$node.selected ? 'ux-tree-view--node-selected' : ''}" click.trigger="nodeClicked($node)">
+        <ux-button if.bind="$node.children" type="fab" size="small" class="ux-tree-view--expander"
+          click.trigger="toggleExpanded($node, $event)">
+          <ux-icon icon.bind="$node.expanded ? 'expand_more' : 'chevron_right'"></ux-icon>
+        </ux-button>
+        <div else class="ux-tree-view--leaf-padding"></div>
+        <ux-tree-node factory.bind="nodeViewFactory"></ux-tree-node>
+      </div>
+      <!-- show.bind is necessary to enable node search -->
+      <!-- elements hidden with if.bind would not populate treeViews array -->
+      <ux-tree-view if.bind="$node.children && $node.expanded" nodes.bind="$node.children"
+        node-selected.trigger="childNodeSelected($event.detail.node)" view-model.ref="treeViews[$index]"></tree-view>
+    </li>
+  </ul>
+  <slot></slot>
+</template>

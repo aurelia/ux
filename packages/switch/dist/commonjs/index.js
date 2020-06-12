@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.configure = void 0;
 var aurelia_framework_1 = require("aurelia-framework");
 var aurelia_binding_1 = require("aurelia-binding");
 var core_1 = require("@aurelia-ux/core");
 var ux_switch_theme_1 = require("./ux-switch-theme");
-exports.UxSwitchTheme = ux_switch_theme_1.UxSwitchTheme;
+Object.defineProperty(exports, "UxSwitchTheme", { enumerable: true, get: function () { return ux_switch_theme_1.UxSwitchTheme; } });
 var ux_switch_1 = require("./ux-switch");
-exports.UxSwitch = ux_switch_1.UxSwitch;
+Object.defineProperty(exports, "UxSwitch", { enumerable: true, get: function () { return ux_switch_1.UxSwitch; } });
 function configure(config) {
     config.container.get(core_1.AureliaUX).registerUxElementConfig(uxSwitchConfig);
     config.globalResources(aurelia_framework_1.PLATFORM.moduleName('./ux-switch'));

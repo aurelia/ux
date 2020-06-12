@@ -10,3 +10,4 @@ export class UxDefaultModalConfiguration {
         this.theme = void 0;
     }
 }
+//# sourceMappingURL=ux-modal-configuration.js.map

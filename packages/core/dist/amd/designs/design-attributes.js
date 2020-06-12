@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.processDesignAttributes = void 0;
     function processDesignAttributes(_, __, node, attributes, ___) {
         var prefix = 'material-'; // TODO: get this from somewhere
         var length = prefix.length;

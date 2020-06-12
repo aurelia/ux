@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.UxDatepickerTheme = void 0;
     var UxDatepickerTheme = /** @class */ (function () {
         function UxDatepickerTheme() {
             this.themeKey = 'datepicker';
