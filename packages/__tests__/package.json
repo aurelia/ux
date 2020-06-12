@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/__tests__",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "private": true,
   "scripts": {
     "test": "karma start --single-run",

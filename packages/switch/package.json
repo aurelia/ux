@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/switch",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "description": "Switch component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -53,7 +53,7 @@
     "@aurelia-ux/core": "^0.20.0"
   },
   "devDependencies": {
-    "@aurelia-ux/core": "^0.21.0",
+    "@aurelia-ux/core": "^0.22.0",
     "aurelia-logging-console": "^1.1.1",
     "aurelia-templating-router": "^1.4.0",
     "aurelia-webpack-plugin": "^4.0.0",
