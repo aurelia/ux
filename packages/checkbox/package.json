@@ -47,7 +47,8 @@
     "bump-version": "npm --no-git-tag-version version",
     "preprepare-release": "cross-env npm run test",
     "prepare-release": "cross-env npm run changelog && npm run build && npm run doc",
-    "update-ux": "cross-env rimraf node_modules/aurelia-ux/dist && cross-env copyfiles --up 3 ux/dist/**/*.ts node_modules/aurelia-ux/dist"
+    "update-ux": "cross-env rimraf node_modules/aurelia-ux/dist && cross-env copyfiles --up 3 ux/dist/**/*.ts node_modules/aurelia-ux/dist",
+    "version": "node ../update-peers.js"
   },
   "peerDependencies": {
     "@aurelia-ux/core": "^0.20.0"

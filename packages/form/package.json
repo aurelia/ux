@@ -38,7 +38,8 @@
     "build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",
     "build-assets:es6": "copyfiles -u 1 src/**/*.html src/**/*.css dist/es2015",
     "prebuild": "rimraf dist",
-    "build": "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\""
+    "build": "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\"",
+    "version": "node ../update-peers.js"
   },
   "peerDependencies": {
     "@aurelia-ux/core": "^0.20.0"

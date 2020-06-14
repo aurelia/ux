@@ -48,7 +48,8 @@
     "changelog": "cross-env conventional-changelog -p ux -i doc/CHANGELOG.md -s",
     "bump-version": "npm --no-git-tag-version version",
     "preprepare-release": "cross-env npm run test",
-    "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
+    "prepare-release": "cross-env npm run changelog && npm run build && npm run doc",
+    "version": "node ../update-peers.js"
   },
   "peerDependencies": {
     "@aurelia-ux/core": "^0.20.0",
