@@ -1,0 +1,30 @@
+<template class="ux-pagination">
+  <require from="./ux-pagination.css"></require>
+  <ux-button if.bind="showFirstLast" type="fab" size="small" click.delegate="setFirstPage()"
+    disabled.bind="activePage === 1" class="ux-pagination__page">
+    <ux-icon icon="first_page"></ux-icon>
+  </ux-button>
+  <ux-button if.bind="showPrevNext" type="fab" size="small" click.delegate="setPreviousPage()"
+    disabled.bind="activePage === 1" class="ux-pagination__page">
+    <ux-icon icon="chevron_left"></ux-icon>
+  </ux-button>
+  <template if.bind="showPageLinks">
+    <ux-button if.bind="pageLinks[0] > 1" type="fab" size="small" click.delegate="setActivePage(pageLinks[0])" class="ux-pagination__page">
+      <ux-icon icon="more_horiz"></ux-icon>
+    </ux-button>
+    <ux-button repeat.for="p of pageLinks" type="fab" size="small" click.delegate="setActivePage(p)" class="ux-pagination__page ${p === activePage ? 'ux-pagination__page--active' : ''}">
+      ${p}
+    </ux-button>
+    <ux-button if.bind="pageLinks[visiblePages-1] < pages" type="fab" size="small" click.delegate="setActivePage(pageLinks[visiblePages-1])" class="ux-pagination__page">
+      <ux-icon icon="more_horiz"></ux-icon>
+    </ux-button>
+  </template>
+  <ux-button if.bind="showPrevNext" type="fab" size="small" click.delegate="setNextPage()"
+    disabled.bind="activePage === pages" class="ux-pagination__page">
+    <ux-icon icon="chevron_right"></ux-icon>
+  </ux-button>
+  <ux-button if.bind="showFirstLast" type="fab" size="small" click.delegate="setLastPage()"
+    disabled.bind="activePage === pages" class="ux-pagination__page">
+    <ux-icon icon="last_page"></ux-icon>
+  </ux-button>
+</template>

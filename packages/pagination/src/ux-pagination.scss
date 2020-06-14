@@ -1,0 +1,19 @@
+.ux-pagination {
+  display: flex;
+  align-items: center;
+
+  .ux-pagination__page {
+    &:not(.ux-pagination__page--active) {
+      button {
+        background-color: transparent !important;
+        box-shadow: none !important;
+        color: var(--aurelia-ux--design-control-foreground);
+        transition: none;
+
+        &:disabled {
+          color: var(--aurelia-ux--design-disabled-foreground);
+        }
+      }
+    }
+  }
+}

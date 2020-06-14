@@ -51,6 +51,7 @@ module.exports = function ({ production = '', stats = 'errors-only' } = {}) {
           'templating-resources',
           'templating-router',
           'task-queue',
+          'typed-observable-plugin'
         ].reduce(
           /**
            * @param {Record<string, string>} map
@@ -79,6 +80,7 @@ module.exports = function ({ production = '', stats = 'errors-only' } = {}) {
           'list',
           'lookup',
           'modal',
+          'pagination',
           'positioning',
           'progress',
           'radio',
