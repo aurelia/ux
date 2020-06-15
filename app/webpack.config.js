@@ -131,5 +131,5 @@ module.exports = function ({ production = '', stats = 'errors-only' } = {}) {
       }),
       new HtmlWebpackPlugin({ template: './index.ejs' })
     ]
-  }
-}
+  };
+};
