@@ -53,11 +53,13 @@
     "version": "node ../update-peers.js"
   },
   "peerDependencies": {
-    "@aurelia-ux/button": "^0.20.0",
-    "@aurelia-ux/icons": "^0.20.0",
+    "@aurelia-ux/core": "^0.23.0",
+    "@aurelia-ux/button": "^0.23.0",
+    "@aurelia-ux/icons": "^0.23.0",
     "aurelia-typed-observable-plugin": "^0.4.2"
   },
   "devDependencies": {
+    "@aurelia-ux/core": "^0.23.0",
     "@aurelia-ux/button": "^0.23.0",
     "@aurelia-ux/icons": "^0.23.0",
     "aurelia-logging-console": "^1.1.1",
