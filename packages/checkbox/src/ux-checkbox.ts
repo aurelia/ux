@@ -20,8 +20,9 @@ export interface UxCheckboxElement extends HTMLElement {
 @inject(Element, StyleEngine)
 @customElement('ux-checkbox')
 @useView(PLATFORM.moduleName('./ux-checkbox.html'))
-export class UxCheckbox implements UxComponent {
+export class UxCheckbox implements UxComponent, EventListenerObject {
   private ignoreValueChanges: boolean = false;
+  private label?: HTMLLabelElement;
 
   @bindable public disabled: boolean | string = false;
   @bindable public effect = 'ripple';
@@ -52,6 +53,21 @@ export class UxCheckbox implements UxComponent {
     private styleEngine: StyleEngine
   ) {
     Object.setPrototypeOf(element, uxCheckboxElementProto);
+  }
+
+  handleEvent(evt: Event): void {
+    switch (evt.currentTarget) {
+      case this.label:
+        switch (evt.type) {
+          case 'mousedown': this.onLabelMouseDown(evt as MouseEvent); break;
+        }
+        break;
+      case this.checkbox:
+        switch (evt.type) {
+          case 'change': stopEvent(evt); break;
+        }
+        break;
+    }
   }
 
   public bind() {
@@ -88,11 +104,19 @@ export class UxCheckbox implements UxComponent {
   }
 
   public attached() {
-    this.checkbox.addEventListener('change', stopEvent);
+    this.checkbox.addEventListener('change', this);
+    if (this.element.nextElementSibling && (this.element.nextElementSibling as HTMLLabelElement).tagName === 'LABEL') {
+      this.label = this.element.nextElementSibling as HTMLLabelElement;
+      this.label.addEventListener('mousedown', this);
+      this.label.style.cursor = 'pointer';
+    }
   }
 
   public detached() {
-    this.checkbox.removeEventListener('change', stopEvent);
+    this.checkbox.removeEventListener('change', this);
+    if (this.label) {
+      this.label.removeEventListener('mousedown', this);
+    }
   }
 
   public getChecked() {
@@ -164,37 +188,47 @@ export class UxCheckbox implements UxComponent {
     this.setChecked(newValue);
   }
 
+  private onLabelMouseDown(e: MouseEvent) {
+    this.value = !this.value;
+    this.showRipple(e);
+  }
+
   public onMouseDown(e: MouseEvent) {
     if (e.button !== 0 || this.isDisabled) {
       return;
     }
 
-    if (this.element.classList.contains('ripple')) {
-      if (this.ripple === null) {
-        this.ripple = new PaperRipple();
-        const container = this.element.querySelector('.ripplecontainer');
-
-        if (container != null) {
-          container.appendChild(this.ripple.$);
-        }
-      }
-
-      this.ripple.center = true;
-      this.ripple.round = true;
-
-      this.ripple.downAction(e);
-      const winEvents = new ElementEvents(window as any);
-      const upAction = () => {
-        this.ripple!.upAction();
-        winEvents.disposeAll();
-      };
-      winEvents.subscribe('blur', upAction);
-      winEvents.subscribe('mouseup', upAction, true);
-    }
+    this.showRipple(e);
 
     // TODO: 6.2.2020 - Follow up to make sure we don't need to return false / preventDefault ?
     // https://github.com/aurelia/ux/pull/232#discussion_r375815578
     return true;
+  }
+
+  private showRipple(e: MouseEvent) {
+    if (!this.element.classList.contains('ripple')) {
+      return;
+    }
+    if (this.ripple === null) {
+      this.ripple = new PaperRipple();
+      const container = this.element.querySelector('.ripplecontainer');
+
+      if (container != null) {
+        container.appendChild(this.ripple.$);
+      }
+    }
+
+    this.ripple.center = true;
+    this.ripple.round = true;
+
+    this.ripple.downAction(e);
+    const winEvents = new ElementEvents(window as any);
+    const upAction = () => {
+      this.ripple!.upAction();
+      winEvents.disposeAll();
+    };
+    winEvents.subscribe('blur', upAction);
+    winEvents.subscribe('mouseup', upAction, true);
   }
 }
 
