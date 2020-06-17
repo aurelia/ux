@@ -164,7 +164,7 @@ export class UxSelect implements UxInputComponent {
   }
 
   public detached() {
-    this.element.appendChild(this.optionWrapperEl);
+    this.unsetupListAnchor();
   }
 
   public unbind() {
@@ -266,8 +266,16 @@ export class UxSelect implements UxInputComponent {
     }
   }
 
-  private setupListAnchor() {
+  private moveToBody() {
     document.body.appendChild(this.optionWrapperEl);
+  }
+
+  private moveToElement() {
+    this.element.appendChild(this.optionWrapperEl);
+  }
+
+  private setupListAnchor() {
+    this.moveToBody();
     if (this.positioning) {
       this.positioning.update();
     }
@@ -281,7 +289,7 @@ export class UxSelect implements UxInputComponent {
   }
 
   private unsetupListAnchor() {
-    this.element.appendChild(this.optionWrapperEl);
+    this.moveToElement();
     this.winEvents.disposeAll();
   }
 
