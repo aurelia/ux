@@ -52,7 +52,7 @@
     "version": "node ../update-peers.js"
   },
   "peerDependencies": {
-    "@aurelia-ux/core": "^0.20.0"
+    "@aurelia-ux/core": "^0.23.0"
   },
   "devDependencies": {
     "@aurelia-ux/core": "^0.23.0",
