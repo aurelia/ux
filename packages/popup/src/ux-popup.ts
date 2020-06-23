@@ -1,5 +1,5 @@
 import { customElement, inject, bindable, PLATFORM, TaskQueue, useView } from 'aurelia-framework';
-import { UxComponent, StyleEngine } from '@aurelia-ux/core';
+import { UxComponent, StyleEngine, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxPopupTheme } from './ux-popup-theme';
 
 const windowEvents = ['click', 'wheel', 'scroll', 'resize'];
@@ -42,6 +42,9 @@ export class UxPopup implements UxComponent, EventListenerObject {
     this.styleEngine.applyTheme(newValue, this.element);
   }
 
+  @bindable
+  autoclose: string | boolean = true;
+
   detached() {
     this.trigger?.removeEventListener('click', this);
   }
@@ -81,7 +84,7 @@ export class UxPopup implements UxComponent, EventListenerObject {
 
   close() {
     this.isOpen = false;
-    let transitionDurationString = this.styleEngine.getVariableValue(this.element, 'popup','transition-duration', UxPopupTheme.DEFAULT_TRANSITION_DURATION);
+    let transitionDurationString = this.styleEngine.getVariableValue(this.element, 'popup', 'transition-duration', UxPopupTheme.DEFAULT_TRANSITION_DURATION);
     const transitionDuration = parseInt(transitionDurationString);
     setTimeout(() => this.isWrapperOpen = false, transitionDuration);
     windowEvents.forEach(x => window.addEventListener(x, this, true));
@@ -94,9 +97,9 @@ export class UxPopup implements UxComponent, EventListenerObject {
     const rect = this.trigger.getBoundingClientRect();
     // by the time updateAnchor is called the dimensions will be known because isMeasured flag sets a class
     const popupRect = this.element.getBoundingClientRect();
-    const triggerDistanceString = this.styleEngine.getVariableValue(this.element, 'popup','trigger-distance', UxPopupTheme.DEFAULT_TRIGGER_DISTANCE.toString());
+    const triggerDistanceString = this.styleEngine.getVariableValue(this.element, 'popup', 'trigger-distance', UxPopupTheme.DEFAULT_TRIGGER_DISTANCE.toString());
     const triggerDistance = parseInt(triggerDistanceString);
-    const windowEdgeDistanceString = this.styleEngine.getVariableValue(this.element, 'popup','window-edge-distance', UxPopupTheme.DEFAULT_WINDOW_EDGE_DISTANCE.toString());
+    const windowEdgeDistanceString = this.styleEngine.getVariableValue(this.element, 'popup', 'window-edge-distance', UxPopupTheme.DEFAULT_WINDOW_EDGE_DISTANCE.toString());
     const windowEdgeDistance = parseInt(windowEdgeDistanceString);
     const anchor: IAnchor = { left: undefined, right: undefined, top: undefined, bottom: undefined, maxHeight: undefined, maxWidth: undefined };
     const availableSpaceBottom = document.body.scrollTop + window.innerHeight - rect.bottom - triggerDistance - windowEdgeDistance;
@@ -135,6 +138,9 @@ export class UxPopup implements UxComponent, EventListenerObject {
   }
 
   onWindowClick(evt: Event) {
+    if (!this.isOpen || !normalizeBooleanAttribute('autoclose', this.autoclose)) {
+      return;
+    }
     let triggerClicked = false;
     let parent: HTMLElement | null = evt.target as HTMLElement;
     while (parent) {
@@ -144,7 +150,7 @@ export class UxPopup implements UxComponent, EventListenerObject {
       }
       parent = parent.parentElement;
     }
-    if (this.isOpen && !triggerClicked) {
+    if (!triggerClicked) {
       this.close();
     }
   }
