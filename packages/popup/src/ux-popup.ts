@@ -84,7 +84,7 @@ export class UxPopup implements UxComponent, EventListenerObject {
 
   close() {
     this.isOpen = false;
-    let transitionDurationString = this.styleEngine.getVariableValue(this.element, 'popup', 'transition-duration', UxPopupTheme.DEFAULT_TRANSITION_DURATION);
+    let transitionDurationString = this.getVariableValue(this.element, 'popup', 'transition-duration', UxPopupTheme.DEFAULT_TRANSITION_DURATION);
     const transitionDuration = parseInt(transitionDurationString);
     setTimeout(() => this.isWrapperOpen = false, transitionDuration);
     windowEvents.forEach(x => window.addEventListener(x, this, true));
@@ -97,9 +97,9 @@ export class UxPopup implements UxComponent, EventListenerObject {
     const rect = this.trigger.getBoundingClientRect();
     // by the time updateAnchor is called the dimensions will be known because isMeasured flag sets a class
     const popupRect = this.element.getBoundingClientRect();
-    const triggerDistanceString = this.styleEngine.getVariableValue(this.element, 'popup', 'trigger-distance', UxPopupTheme.DEFAULT_TRIGGER_DISTANCE.toString());
+    const triggerDistanceString = this.getVariableValue(this.element, 'popup', 'trigger-distance', UxPopupTheme.DEFAULT_TRIGGER_DISTANCE.toString());
     const triggerDistance = parseInt(triggerDistanceString);
-    const windowEdgeDistanceString = this.styleEngine.getVariableValue(this.element, 'popup', 'window-edge-distance', UxPopupTheme.DEFAULT_WINDOW_EDGE_DISTANCE.toString());
+    const windowEdgeDistanceString = this.getVariableValue(this.element, 'popup', 'window-edge-distance', UxPopupTheme.DEFAULT_WINDOW_EDGE_DISTANCE.toString());
     const windowEdgeDistance = parseInt(windowEdgeDistanceString);
     const anchor: IAnchor = { left: undefined, right: undefined, top: undefined, bottom: undefined, maxHeight: undefined, maxWidth: undefined };
     const availableSpaceBottom = document.body.scrollTop + window.innerHeight - rect.bottom - triggerDistance - windowEdgeDistance;
@@ -153,5 +153,17 @@ export class UxPopup implements UxComponent, EventListenerObject {
     if (!triggerClicked) {
       this.close();
     }
+  }
+
+  /**
+   * Retrieves the computed CSS variable value for the given element and key.
+   * 
+   * @param element 
+   * @param key Key of the theme
+   * @param variableName Name of the theme variable to retrieve
+   * @param defaultValue Default value
+   */
+  public getVariableValue(element: Element, key: string, variableName: string, defaultValue?: string): string {
+    return getComputedStyle(element).getPropertyValue(`--aurelia-ux--${key}-${variableName}`) || defaultValue || '';
   }
 }

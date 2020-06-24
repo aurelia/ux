@@ -43,16 +43,4 @@ export class StyleEngine {
   public getDefaultTheme(key: string) {
     return this.styleController.themes[key as any];
   }
-
-  /**
-   * Retrieves the computed CSS variable value for the given element and key.
-   * 
-   * @param element 
-   * @param key Key of the theme
-   * @param variableName Name of the theme variable to retrieve
-   * @param defaultValue Default value
-   */
-  public getVariableValue(element: Element, key: string, variableName: string, defaultValue?: string): string {
-    return getComputedStyle(element).getPropertyValue(`--aurelia-ux--${key}-${variableName}`) || defaultValue || '';
-  }
 }
