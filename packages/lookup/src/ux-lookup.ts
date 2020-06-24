@@ -137,7 +137,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
     }
     lookupEvents.forEach(x => this.element.addEventListener(x, this));
     this.valueChanged();
-    if (normalizeBooleanAttribute('preload-options', this.preloadOptions)) {
+    if (!this.value && normalizeBooleanAttribute('preload-options', this.preloadOptions)) {
       try {
         await this.loadOptions();
       }
