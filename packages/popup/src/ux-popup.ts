@@ -26,10 +26,16 @@ export class UxPopup implements UxComponent, EventListenerObject {
   public isMeasured: boolean = false;
 
   @bindable
-  trigger: HTMLElement;
-  triggerChanged(newValue: HTMLElement, oldValue: HTMLElement) {
-    oldValue?.removeEventListener('click', this);
-    newValue?.addEventListener('click', this);
+  trigger: HTMLElement | string | null;
+  triggerChanged(newValue: HTMLElement | string, oldValue: HTMLElement | string) {
+    if (typeof (newValue) === 'string') {
+      this.trigger = document.querySelector<HTMLElement>(newValue);
+    } else {
+      if (oldValue && typeof (oldValue) !== 'string') {
+        oldValue.removeEventListener('click', this);
+      }
+      newValue?.addEventListener('click', this);
+    }
   }
 
   @bindable
@@ -46,7 +52,9 @@ export class UxPopup implements UxComponent, EventListenerObject {
   autoclose: string | boolean = true;
 
   detached() {
-    this.trigger?.removeEventListener('click', this);
+    if (this.trigger && typeof (this.trigger) !== 'string') {
+      this.trigger?.removeEventListener('click', this);
+    }
   }
 
   handleEvent(evt: Event): void {
@@ -91,7 +99,7 @@ export class UxPopup implements UxComponent, EventListenerObject {
   }
 
   updateAnchor() {
-    if (!this.trigger) {
+    if (!this.trigger || typeof (this.trigger) === 'string') {
       return;
     }
     const rect = this.trigger.getBoundingClientRect();
