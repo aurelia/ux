@@ -27,16 +27,6 @@ export class UxPopup implements UxComponent, EventListenerObject {
 
   @bindable
   trigger: HTMLElement | string | null;
-  triggerChanged(newValue: HTMLElement | string, oldValue: HTMLElement | string) {
-    if (typeof (newValue) === 'string') {
-      this.taskQueue.queueTask(() => this.trigger = DOM.querySelector(newValue) as HTMLElement);
-    } else {
-      if (oldValue && typeof (oldValue) !== 'string') {
-        oldValue.removeEventListener('click', this);
-      }
-      newValue && newValue.addEventListener('click', this);
-    }
-  }
 
   @bindable
   theme: UxPopupTheme;
@@ -51,10 +41,12 @@ export class UxPopup implements UxComponent, EventListenerObject {
   @bindable
   autoclose: string | boolean = true;
 
+  attached() {
+    windowEvents.forEach(x => window.addEventListener(x, this, true));
+  }
+
   detached() {
-    if (this.trigger && typeof (this.trigger) !== 'string') {
-      this.trigger.removeEventListener('click', this);
-    }
+    windowEvents.forEach(x => window.removeEventListener(x, this, true));
   }
 
   handleEvent(evt: Event): void {
@@ -84,7 +76,6 @@ export class UxPopup implements UxComponent, EventListenerObject {
     this.taskQueue.queueTask(() => {
       this.isMeasured = false;
       this.updateAnchor();
-      windowEvents.forEach(x => window.addEventListener(x, this, true));
       this.isWrapperOpen = true;
       this.isOpen = true;
     });
@@ -95,7 +86,6 @@ export class UxPopup implements UxComponent, EventListenerObject {
     let transitionDurationString = this.getVariableValue(this.element, 'popup', 'transition-duration', UxPopupTheme.DEFAULT_TRANSITION_DURATION);
     const transitionDuration = parseInt(transitionDurationString);
     setTimeout(() => this.isWrapperOpen = false, transitionDuration);
-    windowEvents.forEach(x => window.addEventListener(x, this, true));
   }
 
   updateAnchor() {
@@ -146,14 +136,14 @@ export class UxPopup implements UxComponent, EventListenerObject {
   }
 
   onWindowClick(evt: Event) {
-    if (!this.isOpen
-      || !normalizeBooleanAttribute('autoclose', this.autoclose)
-      || !this.trigger
-      || typeof (this.trigger) === 'string'
-      || this.trigger.contains(evt.target as HTMLElement)) {
-      return;
+    if (typeof (this.trigger) === 'string') {
+      this.trigger = DOM.querySelector(this.trigger) as HTMLElement;
     }
-    this.close();
+    if (this.trigger && this.trigger.contains(evt.target as HTMLElement)) {
+      this.triggerClick();
+    } else if (this.isOpen && normalizeBooleanAttribute('autoclose', this.autoclose)) {
+      this.close();
+    }
   }
 
   /**
