@@ -29,7 +29,7 @@ export class UxPopup implements UxComponent, EventListenerObject {
   trigger: HTMLElement | string | null;
   triggerChanged(newValue: HTMLElement | string, oldValue: HTMLElement | string) {
     if (typeof (newValue) === 'string') {
-      this.trigger = document.querySelector<HTMLElement>(newValue);
+      this.taskQueue.queueTask(() => this.trigger = document.querySelector<HTMLElement>(newValue));
     } else {
       if (oldValue && typeof (oldValue) !== 'string') {
         oldValue.removeEventListener('click', this);
