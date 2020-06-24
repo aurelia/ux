@@ -1,4 +1,4 @@
-import { customElement, inject, bindable, PLATFORM, TaskQueue, useView } from 'aurelia-framework';
+import { customElement, inject, bindable, PLATFORM, TaskQueue, useView, DOM } from 'aurelia-framework';
 import { UxComponent, StyleEngine, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxPopupTheme } from './ux-popup-theme';
 
@@ -29,12 +29,12 @@ export class UxPopup implements UxComponent, EventListenerObject {
   trigger: HTMLElement | string | null;
   triggerChanged(newValue: HTMLElement | string, oldValue: HTMLElement | string) {
     if (typeof (newValue) === 'string') {
-      this.taskQueue.queueTask(() => this.trigger = document.querySelector<HTMLElement>(newValue));
+      this.taskQueue.queueTask(() => this.trigger = DOM.querySelector(newValue) as HTMLElement);
     } else {
       if (oldValue && typeof (oldValue) !== 'string') {
         oldValue.removeEventListener('click', this);
       }
-      newValue?.addEventListener('click', this);
+      newValue && newValue.addEventListener('click', this);
     }
   }
 
@@ -53,7 +53,7 @@ export class UxPopup implements UxComponent, EventListenerObject {
 
   detached() {
     if (this.trigger && typeof (this.trigger) !== 'string') {
-      this.trigger?.removeEventListener('click', this);
+      this.trigger.removeEventListener('click', this);
     }
   }
 

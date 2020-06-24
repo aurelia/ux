@@ -20,7 +20,7 @@ describe('__tests__/input.integration.spec.ts', () => {
       aurelia => {
         aurelia.use
           .feature(PLATFORM.moduleName('@aurelia-ux/core/index'))
-          .feature(PLATFORM.moduleName('@aurelia-ux/input/index'))
+          .feature(PLATFORM.moduleName('@aurelia-ux/input/index'));
       }
     );
 

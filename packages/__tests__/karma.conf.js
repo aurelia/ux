@@ -55,6 +55,7 @@ module.exports = (config) => {
         'list',
         'lookup',
         'modal',
+        'popup',
         'positioning',
         'progress',
         'radio',
