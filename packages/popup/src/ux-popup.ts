@@ -146,21 +146,14 @@ export class UxPopup implements UxComponent, EventListenerObject {
   }
 
   onWindowClick(evt: Event) {
-    if (!this.isOpen || !normalizeBooleanAttribute('autoclose', this.autoclose)) {
+    if (!this.isOpen
+      || !normalizeBooleanAttribute('autoclose', this.autoclose)
+      || !this.trigger
+      || typeof (this.trigger) === 'string'
+      || this.trigger.contains(evt.target as HTMLElement)) {
       return;
     }
-    let triggerClicked = false;
-    let parent: HTMLElement | null = evt.target as HTMLElement;
-    while (parent) {
-      if (parent === this.trigger) {
-        triggerClicked = true;
-        break;
-      }
-      parent = parent.parentElement;
-    }
-    if (!triggerClicked) {
-      this.close();
-    }
+    this.close();
   }
 
   /**
