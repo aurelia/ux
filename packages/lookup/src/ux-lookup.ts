@@ -1,6 +1,6 @@
 import { customElement, useView, bindable, inject, PLATFORM, TaskQueue, bindingMode } from 'aurelia-framework';
 import { UxInputElement } from '@aurelia-ux/input';
-import { UxComponent, StyleEngine, normalizeNumberAttribute } from '@aurelia-ux/core';
+import { UxComponent, StyleEngine, normalizeNumberAttribute, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { DiscardablePromise } from './discardable-promise';
 import { UxDefaultLookupConfiguration } from './ux-lookup-configuration';
 import { UxLookupTheme } from './ux-lookup-theme';
@@ -80,7 +80,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
     if (value) {
       return Promise.resolve([options.find(x => this.getValue(x) === value)]);
     } else {
-      return Promise.resolve(options.filter(x => this.getDisplay(x).toUpperCase().includes(filter.toUpperCase())));
+      return Promise.resolve(options.filter(x => this.getDisplay(x).toUpperCase().includes((filter || '').toUpperCase())));
     }
   }
 
@@ -120,6 +120,9 @@ export class UxLookup implements UxComponent, EventListenerObject {
     this.debounceNumber = normalizeNumberAttribute(this.debounce);
   }
 
+  @bindable
+  preloadOptions: boolean | string;
+
   bind() {
     this.themeChanged(this.theme);
     this.valueFieldChanged();
@@ -127,13 +130,19 @@ export class UxLookup implements UxComponent, EventListenerObject {
     this.optionsChanged();
   }
 
-  attached() {
+  async attached() {
     this.inputElement = this.element.parentElement?.querySelector<UxInputElement | HTMLInputElement>('ux-input,input');
     if (this.inputElement) {
       inputEvents.forEach(x => this.inputElement!.addEventListener(x, this));
     }
     lookupEvents.forEach(x => this.element.addEventListener(x, this));
     this.valueChanged();
+    if (normalizeBooleanAttribute('preload-options', this.preloadOptions)) {
+      try {
+        await this.loadOptions();
+      }
+      catch{ }
+    }
   }
 
   detached() {
@@ -250,9 +259,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
 
     this.optionsArray = [];
     try {
-      this.searchPromise = new DiscardablePromise(this.getOptions(this.inputElement?.value, undefined));
-      this.optionsArray = await this.searchPromise;
-      this.notFound = !this.optionsArray?.length;
+      await this.loadOptions();
       this.updateAnchor();
     }
     catch (e) {
@@ -263,6 +270,12 @@ export class UxLookup implements UxComponent, EventListenerObject {
     finally {
       this.searching = false;
     }
+  }
+
+  async loadOptions() {
+    this.searchPromise = new DiscardablePromise(this.getOptions(this.inputElement?.value, undefined));
+    this.optionsArray = await this.searchPromise;
+    this.notFound = !this.optionsArray?.length;
   }
 
   setFilter(filter: string | undefined) {
