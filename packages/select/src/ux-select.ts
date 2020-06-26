@@ -501,7 +501,7 @@ export class UxSelect implements UxInputComponent {
 
   public themeChanged(newValue: UxSelectTheme) {
     if (newValue && !newValue.themeKey) {
-      newValue.themeKey = 'ux-select';
+      newValue.themeKey = 'select';
     }
 
     this.styleEngine.applyTheme(newValue, this.element);
