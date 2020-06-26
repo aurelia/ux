@@ -39,20 +39,6 @@ export class UxExpandable implements UxComponent {
   @bindable
   accordion: boolean | string = false;
 
-  handleEvent(e: Event) {
-    switch (e.type) {
-      case 'transitionend':
-        this.setContentContainerHeightToAuto();
-        break;
-    }
-  }
-
-  setContentContainerHeightToAuto() {
-    this.contentContainer.style.overflow = "visible";
-    this.contentContainer.style.height = "auto";
-    this.contentContainer.removeEventListener("transitionend", this);
-  }
-
   bind() { }
 
   attached() {
@@ -61,16 +47,9 @@ export class UxExpandable implements UxComponent {
 
   updateContainerHeight() {
     if (this.openBoolean) {
-      // after transition set body height to auto so that expandable children are visible
-      this.contentContainer.addEventListener("transitionend", this);
-      this.contentContainer.style.height = this.content.clientHeight + "px";
+      this.contentContainer.style.height = this.content.clientHeight + 'px';
     } else {
-      // the following line is needed because height has been restored to auto"
-      this.contentContainer.style.height = this.content.clientHeight + "px";
-      this.taskQueue.queueTask(() => {
-        this.contentContainer.style.overflow = "hidden";
-        this.contentContainer.style.height = "0";
-      });
+      this.contentContainer.style.height = '0';
     }
   }
 
