@@ -1,4 +1,4 @@
-import { customElement, useView, PLATFORM, bindable, TaskQueue, inject } from 'aurelia-framework';
+import { customElement, useView, PLATFORM, bindable, TaskQueue, inject, DOM } from 'aurelia-framework';
 import { UxComponent, StyleEngine, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxExpandableTheme } from './ux-expandable-theme';
 
@@ -6,7 +6,7 @@ import { UxExpandableTheme } from './ux-expandable-theme';
 @customElement('ux-expandable')
 @useView(PLATFORM.moduleName('./ux-expandable.html'))
 export class UxExpandable implements UxComponent {
-  constructor(public element: HTMLElement, private styleEngine: StyleEngine, private taskQueue: TaskQueue) { }
+  constructor(public element: HTMLElement, private styleEngine: StyleEngine) { }
 
   static OPEN_CHANGED_EVENT = 'open-changed';
 
@@ -37,7 +37,7 @@ export class UxExpandable implements UxComponent {
   }
 
   @bindable
-  accordion: boolean | string = false;
+  accordion: string | undefined = undefined;
 
   bind() { }
 
@@ -54,8 +54,10 @@ export class UxExpandable implements UxComponent {
   }
 
   toggle() {
-    if (!this.openBoolean && normalizeBooleanAttribute('accordion', this.accordion)) {
-      const otherAccordions = Array.from(this.element!.parentElement!.querySelectorAll('ux-expandable[accordion].ux-expandable--open'));
+    if (!this.openBoolean && this.accordion !== undefined) {
+      const otherAccordions = this.accordion === ''
+        ? Array.from(this.element!.parentElement!.querySelectorAll('ux-expandable[accordion].ux-expandable--open'))
+        : Array.from(DOM.querySelectorAll(`ux-expandable[accordion="${this.accordion}"].ux-expandable--open`));
       otherAccordions.filter(x => x !== this.element)
         .map(x => (x as any).au['ux-expandable'].viewModel as UxExpandable)
         .forEach(x => x.toggle());
