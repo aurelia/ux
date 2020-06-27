@@ -48,9 +48,9 @@ export class UxExpandable implements UxComponent {
   }
 
   setContentContainerHeightToAuto() {
-    this.contentContainer.style.overflow = "visible";
-    this.contentContainer.style.height = "auto";
-    this.contentContainer.removeEventListener("transitionend", this);
+    this.contentContainer.style.overflow = 'visible';
+    this.contentContainer.style.height = 'auto';
+    this.contentContainer.removeEventListener('transitionend', this);
   }
 
   bind() { }
@@ -62,14 +62,14 @@ export class UxExpandable implements UxComponent {
   updateContainerHeight() {
     if (this.openBoolean) {
       // after transition set body height to auto so that expandable children are visible
-      this.contentContainer.addEventListener("transitionend", this);
-      this.contentContainer.style.height = this.content.clientHeight + "px";
+      this.contentContainer.addEventListener('transitionend', this);
+      this.contentContainer.style.height = this.content.clientHeight + 'px';
     } else {
-      // the following line is needed because height has been restored to auto"
-      this.contentContainer.style.height = this.content.clientHeight + "px";
+      // the following line is needed because height has been restored to auto'
+      this.contentContainer.style.height = this.content.clientHeight + 'px';
       this.taskQueue.queueTask(() => {
-        this.contentContainer.style.overflow = "hidden";
-        this.contentContainer.style.height = "0";
+        this.contentContainer.style.overflow = 'hidden';
+        this.contentContainer.style.height = '0';
       });
     }
   }
@@ -78,7 +78,7 @@ export class UxExpandable implements UxComponent {
     if (!this.openBoolean && this.accordion !== undefined) {
       const otherAccordions = this.accordion === ''
         ? Array.from(this.element!.parentElement!.querySelectorAll('ux-expandable[accordion].ux-expandable--open'))
-        : Array.from(DOM.querySelectorAll(`ux-expandable[accordion="${this.accordion}"].ux-expandable--open`));
+        : Array.from(DOM.querySelectorAll(`ux-expandable[accordion='${this.accordion}'].ux-expandable--open`));
       otherAccordions.filter(x => x !== this.element)
         .map(x => (x as any).au['ux-expandable'].viewModel as UxExpandable)
         .forEach(x => x.toggle());
