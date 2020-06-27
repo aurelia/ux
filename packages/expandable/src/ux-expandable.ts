@@ -6,7 +6,7 @@ import { UxExpandableTheme } from './ux-expandable-theme';
 @customElement('ux-expandable')
 @useView(PLATFORM.moduleName('./ux-expandable.html'))
 export class UxExpandable implements UxComponent {
-  constructor(public element: HTMLElement, private styleEngine: StyleEngine) { }
+  constructor(public element: HTMLElement, private styleEngine: StyleEngine, private taskQueue: TaskQueue) { }
 
   static OPEN_CHANGED_EVENT = 'open-changed';
 
@@ -39,6 +39,20 @@ export class UxExpandable implements UxComponent {
   @bindable
   accordion: string | undefined = undefined;
 
+  handleEvent(e: Event) {
+    switch (e.type) {
+      case 'transitionend':
+        this.setContentContainerHeightToAuto();
+        break;
+    }
+  }
+
+  setContentContainerHeightToAuto() {
+    this.contentContainer.style.overflow = "visible";
+    this.contentContainer.style.height = "auto";
+    this.contentContainer.removeEventListener("transitionend", this);
+  }
+
   bind() { }
 
   attached() {
@@ -47,9 +61,16 @@ export class UxExpandable implements UxComponent {
 
   updateContainerHeight() {
     if (this.openBoolean) {
-      this.contentContainer.style.height = this.content.clientHeight + 'px';
+      // after transition set body height to auto so that expandable children are visible
+      this.contentContainer.addEventListener("transitionend", this);
+      this.contentContainer.style.height = this.content.clientHeight + "px";
     } else {
-      this.contentContainer.style.height = '0';
+      // the following line is needed because height has been restored to auto"
+      this.contentContainer.style.height = this.content.clientHeight + "px";
+      this.taskQueue.queueTask(() => {
+        this.contentContainer.style.overflow = "hidden";
+        this.contentContainer.style.height = "0";
+      });
     }
   }
 
