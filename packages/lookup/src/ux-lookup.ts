@@ -130,7 +130,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
     this.optionsChanged();
   }
 
-  async attached() {
+  attached() {
     this.inputElement = this.element.parentElement?.querySelector<UxInputElement | HTMLInputElement>('ux-input,input');
     if (this.inputElement) {
       inputEvents.forEach(x => this.inputElement!.addEventListener(x, this));
@@ -138,10 +138,7 @@ export class UxLookup implements UxComponent, EventListenerObject {
     lookupEvents.forEach(x => this.element.addEventListener(x, this));
     this.valueChanged();
     if (!this.value && normalizeBooleanAttribute('preload-options', this.preloadOptions)) {
-      try {
-        await this.loadOptions();
-      }
-      catch{ }
+      this.loadOptions().catch();
     }
   }
 
