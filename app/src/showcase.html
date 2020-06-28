@@ -47,7 +47,7 @@
     </ux-card>
 
     <ux-grid class="ux-grid--remove-padding">
-      <ux-card sm="6">
+      <ux-card sm="6" style="overflow: hidden;">
         <ux-card-header><span class="ux-card__title">Input components</span></ux-card-header>
         <ux-card-content>
           <ux-form>
@@ -80,6 +80,18 @@
             <ux-field>
               <label if.bind="labelPosition === 'top'">Contact Type</label>
               <ux-select dense.bind="dense" label="${labelPosition === 'floating' ? 'Contact Type' : ''}" placeholder="${labelPosition === 'placeholder' ? 'Contact Type' : ''}" variant.bind="variant" value.bind="contactType" placeholder="Choose an option">
+                <ux-option>Private</ux-option>
+                <ux-option>Professionnal</ux-option>
+                <ux-option>Private</ux-option>
+                <ux-option>Professionnal</ux-option>
+                <ux-option>Private</ux-option>
+                <ux-option>Professionnal</ux-option>
+                <ux-option>Private</ux-option>
+                <ux-option>Professionnal</ux-option>
+                <ux-option>Private</ux-option>
+                <ux-option>Professionnal</ux-option>
+                <ux-option>Private</ux-option>
+                <ux-option>Professionnal</ux-option>
                 <ux-option>Private</ux-option>
                 <ux-option>Professionnal</ux-option>
               </ux-select>
