@@ -448,8 +448,8 @@
       <div class="ux-popup__option"><a>Option 3</a></div>
     </ux-popup>
 
-    <ux-button id="trigger2">Random content</ux-button>  
-    <ux-popup trigger="#trigger2" autoclose.bind="false" view-model.ref="popup">
+    <ux-button ref="trigger2">Random content</ux-button>  
+    <ux-popup trigger.bind="trigger2" autoclose.bind="false" view-model.ref="popup">
       <ux-card style="margin-bottom: 0">
         <ux-card-content>
           Random content

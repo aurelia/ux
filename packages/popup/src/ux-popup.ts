@@ -1,4 +1,4 @@
-import { customElement, inject, bindable, PLATFORM, TaskQueue, useView, DOM } from 'aurelia-framework';
+import { customElement, inject, bindable, PLATFORM, TaskQueue, useView } from 'aurelia-framework';
 import { UxComponent, StyleEngine, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { UxPopupTheme } from './ux-popup-theme';
 
@@ -26,7 +26,11 @@ export class UxPopup implements UxComponent, EventListenerObject {
   public isMeasured: boolean = false;
 
   @bindable
-  trigger: HTMLElement | string | null;
+  trigger: HTMLElement | undefined;
+  triggerChanged(newValue: HTMLElement, oldValue: HTMLElement) {
+    oldValue && oldValue.removeEventListener('click', this);
+    newValue && newValue.addEventListener('click', this);
+  }
 
   @bindable
   theme: UxPopupTheme;
@@ -41,12 +45,8 @@ export class UxPopup implements UxComponent, EventListenerObject {
   @bindable
   autoclose: string | boolean = true;
 
-  attached() {
-    windowEvents.forEach(x => window.addEventListener(x, this, true));
-  }
-
   detached() {
-    windowEvents.forEach(x => window.removeEventListener(x, this, true));
+    this.trigger && this.trigger.removeEventListener('click', this);
   }
 
   handleEvent(evt: Event): void {
@@ -76,6 +76,7 @@ export class UxPopup implements UxComponent, EventListenerObject {
     this.taskQueue.queueTask(() => {
       this.isMeasured = false;
       this.updateAnchor();
+      windowEvents.forEach(x => window.addEventListener(x, this, true));
       this.isWrapperOpen = true;
       this.isOpen = true;
     });
@@ -86,10 +87,11 @@ export class UxPopup implements UxComponent, EventListenerObject {
     let transitionDurationString = this.getVariableValue(this.element, 'popup', 'transition-duration', UxPopupTheme.DEFAULT_TRANSITION_DURATION);
     const transitionDuration = parseInt(transitionDurationString);
     setTimeout(() => this.isWrapperOpen = false, transitionDuration);
+    windowEvents.forEach(x => window.removeEventListener(x, this, true));
   }
 
   updateAnchor() {
-    if (!this.trigger || typeof (this.trigger) === 'string') {
+    if (!this.trigger) {
       return;
     }
     const rect = this.trigger.getBoundingClientRect();
@@ -136,13 +138,11 @@ export class UxPopup implements UxComponent, EventListenerObject {
   }
 
   onWindowClick(evt: Event) {
-    if (typeof (this.trigger) === 'string') {
-      this.trigger = DOM.querySelector(this.trigger) as HTMLElement;
-    }
-    if (this.trigger && this.trigger.contains(evt.target as HTMLElement)) {
-      this.triggerClick();
-    } else if (this.isOpen && normalizeBooleanAttribute('autoclose', this.autoclose)) {
-      this.close();
+    if (this.isOpen && normalizeBooleanAttribute('autoclose', this.autoclose)) {
+      const triggerClicked = this.trigger && this.trigger.contains(evt.target as HTMLElement);
+      if (!triggerClicked) {
+        this.close();
+      }
     }
   }
 
