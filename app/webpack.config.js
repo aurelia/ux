@@ -79,6 +79,7 @@ module.exports = function ({ production = '', stats = 'errors-only' } = {}) {
           'list',
           'lookup',
           'modal',
+          'popup',
           'positioning',
           'progress',
           'radio',

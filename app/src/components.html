@@ -438,4 +438,28 @@
       <ux-tree-node>${$node.name}</ux-tree-node>
     </ux-tree-view>
   </section>
+
+  <section>
+    <h2>Popup</h2>
+    <ux-button ref="trigger1">Click me</ux-button>  
+    <ux-popup trigger.bind="trigger1">
+      <div class="ux-popup__option"><a>Option 1</a></div>
+      <div class="ux-popup__option"><a>Option 2</a></div>
+      <div class="ux-popup__option"><a>Option 3</a></div>
+    </ux-popup>
+
+    <ux-button ref="trigger2">Random content</ux-button>  
+    <ux-popup trigger.bind="trigger2" autoclose.bind="false" view-model.ref="popup">
+      <ux-card style="margin-bottom: 0">
+        <ux-card-content>
+          Random content
+        </ux-card-content>
+        <ux-card-footer>
+          <ux-button type="text">Action</ux-button>
+          <ux-button click.delegate="popup.close()">Close</ux-button>
+        </ux-card-footer>
+      </ux-card>
+    </ux-popup>
+  </section>
+
 </template>
