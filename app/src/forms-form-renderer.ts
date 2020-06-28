@@ -5,10 +5,10 @@ import {
 } from 'aurelia-validation';
 
 const errorClasses: {[key: string]: string} = {
-  'ux-input': 'ux-input--has-error',
-  'ux-datepicker': 'ux-datepicker--has-error',
-  'ux-select': 'ux-select--has-error',
-  'ux-textarea': 'ux-textarea--has-error'
+  'ux-input': 'ux-input--has-error ux-input-component--has-error',
+  'ux-datepicker': 'ux-datepicker--has-error ux-input-component--has-error',
+  'ux-select': 'ux-select--has-error ux-input-component--has-error',
+  'ux-textarea': 'ux-textarea--has-error ux-input-component--has-error'
 };
 
 export class AureliaUXFormRenderer {
@@ -33,7 +33,7 @@ export class AureliaUXFormRenderer {
 
     for (const tag in errorClasses) {
       if (element.classList.contains(tag)) {
-        element.classList.add(errorClasses[tag]);
+        element.classList.add(...errorClasses[tag].split(' '));
       }
     }
 
@@ -62,7 +62,7 @@ export class AureliaUXFormRenderer {
 
     for (const tag in errorClasses) {
       if (element.classList.contains(tag)) {
-        element.classList.remove(errorClasses[tag]);
+        element.classList.remove(...errorClasses[tag].split(' '));
       }
     }
 

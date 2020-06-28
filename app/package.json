@@ -27,6 +27,7 @@
     "@aurelia-ux/list": "file:../packages/list",
     "@aurelia-ux/lookup": "file:../packages/lookup",
     "@aurelia-ux/pagination": "file:../packages/pagination",
+    "@aurelia-ux/popup": "file:../packages/popup",
     "@aurelia-ux/progress": "file:../packages/progress",
     "@aurelia-ux/radio": "file:../packages/radio",
     "@aurelia-ux/select": "file:../packages/select",

@@ -1,12 +1,14 @@
-ux-lookup {
+.ux-lookup {
   display: block;
   position: fixed;
   opacity: 0;
   z-index: 9999;
   -webkit-transform: scale(0.7, 0.7);
           transform: scale(0.7, 0.7);
-  -webkit-transition: var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1);
-  transition: var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1);
+  -webkit-transition: opacity var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: opacity var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1), opacity var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1), opacity var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1), -webkit-transform var(--aurelia-ux--lookup-transition-duration, 125ms) cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow-y: auto;
   background-color: #F5F5F5;
   background-color: var(--aurelia-ux--lookup-background, var(--aurelia-ux--design-surface-background, #F5F5F5));
@@ -18,17 +20,17 @@ ux-lookup {
           box-shadow: var(--aurelia-ux--lookup-elevation, var(--aurelia-ux--design-elevation2dp, 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)));
 }
 
-ux-lookup:focus {
+.ux-lookup:focus {
   outline: none;
 }
 
-ux-lookup.ux-lookup--open {
+.ux-lookup.ux-lookup--open {
   opacity: 1;
   -webkit-transform: scale(1, 1);
           transform: scale(1, 1);
 }
 
-ux-lookup .ux-lookup__option {
+.ux-lookup .ux-lookup__option {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -52,11 +54,11 @@ ux-lookup .ux-lookup__option {
   cursor: pointer;
 }
 
-ux-lookup .ux-lookup__option:hover {
+.ux-lookup .ux-lookup__option:hover {
   background-color: var(--aurelia-ux--lookup-option-hover-background, rgba(0, 0, 0, 0.05));
 }
 
-ux-lookup .ux-lookup__option.ux-lookup__option--focused {
+.ux-lookup .ux-lookup__option.ux-lookup__option--focused {
   background-color: var(--aurelia-ux--lookup-option-focused-background, rgba(0, 0, 0, 0.1));
 }
 /*# sourceMappingURL=ux-lookup.css.map */

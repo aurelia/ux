@@ -30,6 +30,7 @@ async function configure(aurelia: Aurelia): Promise<void> {
       config.position = 'top';
       config.overlayDismiss = true;
     })
+    .plugin(PLATFORM.moduleName('@aurelia-ux/popup'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/positioning'), (config: UxPositioningConfiguration) => {
       config.offsetX = 10;
       config.offsetY = 10;

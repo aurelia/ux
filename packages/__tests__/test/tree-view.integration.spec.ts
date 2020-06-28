@@ -20,7 +20,7 @@ describe('__tests__/tree-view.integration.spec.ts', () => {
       aurelia => {
         aurelia.use
           .feature(PLATFORM.moduleName('@aurelia-ux/core/index'))
-          .feature(PLATFORM.moduleName('@aurelia-ux/tree-view/index'))
+          .feature(PLATFORM.moduleName('@aurelia-ux/tree-view/index'));
       }
     );
 
@@ -50,7 +50,7 @@ describe('__tests__/tree-view.integration.spec.ts', () => {
       aurelia => {
         aurelia.use
           .feature(PLATFORM.moduleName('@aurelia-ux/core/index'))
-          .feature(PLATFORM.moduleName('@aurelia-ux/tree-view/index'))
+          .feature(PLATFORM.moduleName('@aurelia-ux/tree-view/index'));
       }
     );
 

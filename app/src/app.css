@@ -6,10 +6,14 @@ body {
   font-weight: 300;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   background: var(--aurelia-ux--design-app-background);
   color: var(--aurelia-ux--design-app-foreground);
-
+  height: 100%;
 }
 
 section {

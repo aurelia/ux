@@ -81,6 +81,7 @@ module.exports = function ({ production = '', stats = 'errors-only' } = {}) {
           'lookup',
           'modal',
           'pagination',
+          'popup',
           'positioning',
           'progress',
           'radio',
@@ -133,5 +134,5 @@ module.exports = function ({ production = '', stats = 'errors-only' } = {}) {
       }),
       new HtmlWebpackPlugin({ template: './index.ejs' })
     ]
-  }
-}
+  };
+};

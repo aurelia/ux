@@ -20,6 +20,7 @@ export async function createFixture<T>(root: Constructable<T>, resources: any[] 
     .globalResources(resources);
 
   const host = document.createElement('div');
+  document.body.appendChild(host);
 
   if (typeof beforeStart === 'function') {
     await beforeStart(aurelia, host);
@@ -40,7 +41,7 @@ export async function createFixture<T>(root: Constructable<T>, resources: any[] 
       rootController.unbind();
       host.remove();
     }
-  }
+  };
 }
 
 interface Constructable<T> {
