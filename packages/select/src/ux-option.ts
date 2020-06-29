@@ -185,6 +185,7 @@ export class UxOption {
 
   public onMouseDown(e: MouseEvent) {
     this.addWave(e);
+    e.preventDefault();
     return true;
   }
 
