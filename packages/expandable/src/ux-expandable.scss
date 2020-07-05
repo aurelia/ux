@@ -3,7 +3,7 @@ $timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
 $defaultBorderRadius: 2px;
 $fast-out-slow-in-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !default;
 
-ux-expandable {
+.ux-expandable {
   display: block;
 
   &:first-of-type {
@@ -30,7 +30,7 @@ ux-expandable {
     property: margin;
   }
 
-  .ux-expandable__header {
+  >.ux-expandable__header {
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -62,11 +62,11 @@ ux-expandable {
       property: height;
     }
 
-    .ux-expandable__header__caption {
+    >.ux-expandable__header__caption {
       flex: 1;
     }
 
-    .ux-expandable__header__indicator {
+    >.ux-expandable__header__indicator {
       ux-icon {
         transition: {
           duration: $duration;
@@ -81,7 +81,7 @@ ux-expandable {
 
   }
 
-  .ux-expandable__content-container {
+  >.ux-expandable__content-container {
     height: 0;
     overflow: hidden;
 
@@ -91,7 +91,7 @@ ux-expandable {
       property: height;
     }
 
-    .ux-expandable__content {
+    >.ux-expandable__content {
       padding: 0 24px 16px;
     }
   }
