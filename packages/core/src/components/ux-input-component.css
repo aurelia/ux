@@ -233,6 +233,18 @@
   color: #9E9E9E;
   color: var(--disabled-foreground, #9E9E9E);
 }
+/* following styles are required on safari to prevent very light disabled input color */
+.ux-input-component--filled.ux-input-component--disabled .ux-input-component__inner-input,
+.ux-input-component--filled[disabled] .ux-input-component__inner-input,
+.ux-input-component--filled[readonly] .ux-input-component__inner-input{
+  color: #9E9E9E;
+  color: var(--disabled-foreground, #9E9E9E);
+  -webkit-text-fill-color: #9E9E9E;
+  -webkit-text-fill-color: var(--disabled-foreground, #9E9E9E);
+  opacity: 1; /* required on iOS */
+  background-color: #e1e1e1;
+  background-color: var(--disabled-background, #9E9E9E);
+}
 
 /* PLACEHOLDER LABEL */
 .ux-input-component--placeholder {
