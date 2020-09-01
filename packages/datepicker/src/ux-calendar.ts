@@ -12,7 +12,7 @@ import { PLATFORM } from 'aurelia-pal';
 export class UxCalendar {
   @bindable public theme = null;
 
-  @bindable public weekdays = moment.weekdays();
+  @bindable public weekdays = moment.weekdays(true);
 
   @bindable public minDate: Moment;
   @bindable public maxDate: Moment;
