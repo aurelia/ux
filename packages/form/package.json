@@ -42,7 +42,7 @@
     "version": "node ../update-peers.js"
   },
   "peerDependencies": {
-    "@aurelia-ux/core": "^0.24.0"
+    "@aurelia-ux/core": "^0.20.0"
   },
   "devDependencies": {
     "@aurelia-ux/core": "^0.24.0",
@@ -72,5 +72,6 @@
     "typescript": "^3.9.3",
     "webpack": "^4.43.0",
     "webpack-dev-server": "^3.11.0"
-  }
+  },
+  "gitHead": "0016f3569d93c29bcbfcb9bc06cbcaefb20c05a7"
 }

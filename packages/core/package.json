@@ -89,5 +89,6 @@
     "typescript": "^3.9.3",
     "webpack": "^4.43.0",
     "webpack-dev-server": "^3.11.0"
-  }
+  },
+  "gitHead": "0016f3569d93c29bcbfcb9bc06cbcaefb20c05a7"
 }
