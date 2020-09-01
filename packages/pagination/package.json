@@ -1,12 +1,13 @@
 {
-  "name": "@aurelia-ux/components",
+  "name": "@aurelia-ux/pagination",
   "version": "0.23.0",
-  "description": "Official components made with Aurelia UX",
+  "description": "Pagination component for Aurelia UX",
   "keywords": [
     "aurelia",
     "styles",
     "components",
-    "ux"
+    "ux",
+    "pagination"
   ],
   "homepage": "http://aurelia.io",
   "bugs": {
@@ -15,7 +16,9 @@
   "license": "MIT",
   "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
   "contributors": [
-    "Zach Hollingshead <zach.hollingshead@gmail.com>"
+    "Zach Hollingshead <zach.hollingshead@gmail.com>",
+    "bigopon <bigopon.777@gmail.com>",
+    "Maxim Balaganskiy <m.balaganskiy@gmail.com>"
   ],
   "main": "dist/commonjs/index.js",
   "module": "dist/native-modules/index.js",
@@ -27,54 +30,41 @@
   "scripts": {
     "lint": "cross-env tslint --project tsconfig.json",
     "test": "karma start --single-run",
+    "test:debugger": "karma start --browsers ChromeDebugging",
     "develop": "cross-env TS_NODE_PROJECT=\"../../tsconfig-tsnode.json\" karma start",
     "build-ts:amd": "tsc -p tsconfig.build.json -t es5 -m amd      --outDir dist/amd",
     "build-ts:cjs": "tsc -p tsconfig.build.json -t es5 -m commonjs --outDir dist/commonjs",
     "build-ts:ntv": "tsc -p tsconfig.build.json -t es5 -m es6      --outDir dist/native-modules",
     "build-ts:es6": "tsc -p tsconfig.build.json -t es6 -m es6      --outDir dist/es2015",
     "build-ts:types": "tsc -p tsconfig.build.json --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+    "build-assets:amd": "copyfiles -u 1 src/**/*.html src/**/*.css dist/amd",
+    "build-assets:cjs": "copyfiles -u 1 src/**/*.html src/**/*.css dist/commonjs",
+    "build-assets:ntv": "copyfiles -u 1 src/**/*.html src/**/*.css dist/native-modules",
+    "build-assets:es6": "copyfiles -u 1 src/**/*.html src/**/*.css dist/es2015",
     "prebuild": "rimraf dist",
-    "build": "concurrently \"npm:build-ts:*\"",
-    "build:typings": "tsc --skipLibCheck -d --emitDeclarationOnly --declarationDir dist/types",
+    "build": "concurrently \"npm:build-ts:*\" && concurrently \"npm:build-assets:*\"",
     "predoc": "cross-env rimraf doc/api.json && rimraf dist/doc-temp && tsc --project tsconfig.json --outFile dist/doc-temp/aurelia-ux.js && node doc/shape-defs && copyfiles tsconfig.json dist/doc-temp",
     "doc": "cross-env typedoc --json doc/api.json --excludeExternals --includeDeclarations --mode modules --target ES6 --name aurelia-ux-docs dist/doc-temp/",
     "postdoc": "cross-env node doc/shape-doc && rimraf dist/doc-temp",
     "changelog": "cross-env conventional-changelog -p ux -i doc/CHANGELOG.md -s",
     "bump-version": "npm --no-git-tag-version version",
     "preprepare-release": "cross-env npm run test",
-    "prepare-release": "cross-env npm run changelog && npm run build && npm run doc"
+    "prepare-release": "cross-env npm run changelog && npm run build && npm run doc",
+    "version": "node ../update-peers.js"
   },
-  "dependencies": {
-    "@aurelia-ux/button": "^0.23.0",
-    "@aurelia-ux/card": "^0.23.0",
-    "@aurelia-ux/checkbox": "^0.23.0",
-    "@aurelia-ux/chip-input": "^0.23.0",
+  "peerDependencies": {
     "@aurelia-ux/core": "^0.23.0",
-    "@aurelia-ux/datepicker": "^0.23.0",
-    "@aurelia-ux/expandable": "^0.23.0",
-    "@aurelia-ux/form": "^0.23.0",
-    "@aurelia-ux/grid": "^0.23.0",
+    "@aurelia-ux/button": "^0.23.0",
     "@aurelia-ux/icons": "^0.23.0",
-    "@aurelia-ux/input": "^0.23.0",
-    "@aurelia-ux/input-info": "^0.23.0",
-    "@aurelia-ux/list": "^0.23.0",
-    "@aurelia-ux/lookup": "^0.23.0",
-    "@aurelia-ux/modal": "^0.23.0",
-    "@aurelia-ux/pagination": "^0.23.0",
-    "@aurelia-ux/popup": "^0.23.0",
-    "@aurelia-ux/positioning": "^0.23.0",
-    "@aurelia-ux/progress": "^0.23.0",
-    "@aurelia-ux/radio": "^0.23.0",
-    "@aurelia-ux/select": "^0.23.0",
-    "@aurelia-ux/sidenav": "^0.23.0",
-    "@aurelia-ux/slider": "^0.23.0",
-    "@aurelia-ux/switch": "^0.23.0",
-    "@aurelia-ux/textarea": "^0.23.0",
-    "@aurelia-ux/tree-view": "^0.23.0"
+    "aurelia-typed-observable-plugin": "^0.4.2"
   },
   "devDependencies": {
+    "@aurelia-ux/core": "^0.23.0",
+    "@aurelia-ux/button": "^0.23.0",
+    "@aurelia-ux/icons": "^0.23.0",
     "aurelia-logging-console": "^1.1.1",
     "aurelia-templating-router": "^1.4.0",
+    "aurelia-typed-observable-plugin": "^0.4.2",
     "aurelia-webpack-plugin": "^4.0.0",
     "concurrently": "^3.4.0",
     "conventional-changelog-cli": "^2.0.27",

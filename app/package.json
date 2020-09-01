@@ -26,6 +26,7 @@
     "@aurelia-ux/input-info": "file:../packages/input-info",
     "@aurelia-ux/list": "file:../packages/list",
     "@aurelia-ux/lookup": "file:../packages/lookup",
+    "@aurelia-ux/pagination": "file:../packages/pagination",
     "@aurelia-ux/popup": "file:../packages/popup",
     "@aurelia-ux/progress": "file:../packages/progress",
     "@aurelia-ux/radio": "file:../packages/radio",
@@ -43,6 +44,7 @@
     "aurelia-templating": "^1.10.3",
     "aurelia-templating-resources": "^1.13.0",
     "aurelia-templating-router": "^1.4.0",
+    "aurelia-typed-observable-plugin": "^0.4.2",
     "aurelia-validation": "^1.6.0",
     "moment": "^2.26.0",
     "tslib": "^2.0.0"

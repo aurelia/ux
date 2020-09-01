@@ -13,6 +13,7 @@ export * from '@aurelia-ux/input';
 export * from '@aurelia-ux/input-info';
 export * from '@aurelia-ux/list';
 export * from '@aurelia-ux/modal';
+export * from '@aurelia-ux/pagination';
 export * from '@aurelia-ux/popup';
 export * from '@aurelia-ux/positioning';
 export * from '@aurelia-ux/progress';
@@ -38,6 +39,7 @@ export function configure(config: FrameworkConfiguration) {
     .plugin(PLATFORM.moduleName('@aurelia-ux/input-info'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/list'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/modal'))
+    .plugin(PLATFORM.moduleName('@aurelia-ux/pagination'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/popup'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/positioning'))
     .plugin(PLATFORM.moduleName('@aurelia-ux/progress'))

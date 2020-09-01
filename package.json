@@ -52,6 +52,7 @@
     "aurelia-templating-binding": "^1.5.3",
     "aurelia-templating-resources": "^1.6.0",
     "aurelia-templating-router": "^1.4.0",
+    "aurelia-typed-observable-plugin": "^0.4.2",
     "moment": "^2.26.0",
     "tslib": "^2.0.0"
   },

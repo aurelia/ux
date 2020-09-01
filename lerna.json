@@ -18,6 +18,7 @@
     "packages/list",
     "packages/lookup",
     "packages/modal",
+    "packages/pagination",
     "packages/popup",
     "packages/positioning",
     "packages/progress",

@@ -1,0 +1,22 @@
+.ux-pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.ux-pagination .ux-pagination__page:not(.ux-pagination__page--active) button {
+  background-color: transparent !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  color: var(--aurelia-ux--design-control-foreground);
+  -webkit-transition: none;
+  transition: none;
+}
+
+.ux-pagination .ux-pagination__page:not(.ux-pagination__page--active) button:disabled {
+  color: var(--aurelia-ux--design-disabled-foreground);
+}
+/*# sourceMappingURL=ux-pagination.css.map */

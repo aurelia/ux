@@ -21,4 +21,5 @@ export class Components {
   }
 
   public progressValue: number | undefined = 75;
+  public activePage: number = 2;
 }
