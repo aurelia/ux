@@ -7,9 +7,13 @@ export * from '@aurelia-ux/grid';
 export * from '@aurelia-ux/datepicker';
 export * from '@aurelia-ux/expandable';
 export * from '@aurelia-ux/form';
+export * from '@aurelia-ux/icons';
 export * from '@aurelia-ux/input';
 export * from '@aurelia-ux/input-info';
 export * from '@aurelia-ux/list';
+export * from '@aurelia-ux/modal';
+export * from '@aurelia-ux/popup';
+export * from '@aurelia-ux/positioning';
 export * from '@aurelia-ux/progress';
 export * from '@aurelia-ux/radio';
 export * from '@aurelia-ux/switch';
@@ -27,9 +31,13 @@ export function configure(config) {
         .plugin(PLATFORM.moduleName('@aurelia-ux/expandable'))
         .plugin(PLATFORM.moduleName('@aurelia-ux/grid'))
         .plugin(PLATFORM.moduleName('@aurelia-ux/form'))
+        .plugin(PLATFORM.moduleName('@aurelia-ux/icons'))
         .plugin(PLATFORM.moduleName('@aurelia-ux/input'))
         .plugin(PLATFORM.moduleName('@aurelia-ux/input-info'))
         .plugin(PLATFORM.moduleName('@aurelia-ux/list'))
+        .plugin(PLATFORM.moduleName('@aurelia-ux/modal'))
+        .plugin(PLATFORM.moduleName('@aurelia-ux/popup'))
+        .plugin(PLATFORM.moduleName('@aurelia-ux/positioning'))
         .plugin(PLATFORM.moduleName('@aurelia-ux/progress'))
         .plugin(PLATFORM.moduleName('@aurelia-ux/radio'))
         .plugin(PLATFORM.moduleName('@aurelia-ux/switch'))

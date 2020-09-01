@@ -1,5 +1,5 @@
 import { __decorate } from "tslib";
-import { customElement, useView, PLATFORM, bindable, TaskQueue, inject } from 'aurelia-framework';
+import { customElement, useView, PLATFORM, bindable, TaskQueue, inject, DOM } from 'aurelia-framework';
 import { StyleEngine, normalizeBooleanAttribute } from '@aurelia-ux/core';
 let UxExpandable = /** @class */ (() => {
     var UxExpandable_1;
@@ -10,7 +10,7 @@ let UxExpandable = /** @class */ (() => {
             this.taskQueue = taskQueue;
             this.openBoolean = false;
             this.open = false;
-            this.accordion = false;
+            this.accordion = undefined;
         }
         themeChanged(newValue) {
             if (newValue != null && newValue.themeKey == null) {
@@ -31,9 +31,9 @@ let UxExpandable = /** @class */ (() => {
             }
         }
         setContentContainerHeightToAuto() {
-            this.contentContainer.style.overflow = "visible";
-            this.contentContainer.style.height = "auto";
-            this.contentContainer.removeEventListener("transitionend", this);
+            this.contentContainer.style.overflow = 'visible';
+            this.contentContainer.style.height = 'auto';
+            this.contentContainer.removeEventListener('transitionend', this);
         }
         bind() { }
         attached() {
@@ -42,21 +42,23 @@ let UxExpandable = /** @class */ (() => {
         updateContainerHeight() {
             if (this.openBoolean) {
                 // after transition set body height to auto so that expandable children are visible
-                this.contentContainer.addEventListener("transitionend", this);
-                this.contentContainer.style.height = this.content.clientHeight + "px";
+                this.contentContainer.addEventListener('transitionend', this);
+                this.contentContainer.style.height = this.content.clientHeight + 'px';
             }
             else {
-                // the following line is needed because height has been restored to auto"
-                this.contentContainer.style.height = this.content.clientHeight + "px";
+                // the following line is needed because height has been restored to auto'
+                this.contentContainer.style.height = this.content.clientHeight + 'px';
                 this.taskQueue.queueTask(() => {
-                    this.contentContainer.style.overflow = "hidden";
-                    this.contentContainer.style.height = "0";
+                    this.contentContainer.style.overflow = 'hidden';
+                    this.contentContainer.style.height = '0';
                 });
             }
         }
         toggle() {
-            if (!this.openBoolean && normalizeBooleanAttribute('accordion', this.accordion)) {
-                const otherAccordions = Array.from(this.element.parentElement.querySelectorAll('ux-expandable[accordion].ux-expandable--open'));
+            if (!this.openBoolean && this.accordion !== undefined) {
+                const otherAccordions = this.accordion === ''
+                    ? Array.from(this.element.parentElement.querySelectorAll('ux-expandable[accordion].ux-expandable--open'))
+                    : Array.from(DOM.querySelectorAll(`ux-expandable[accordion='${this.accordion}'].ux-expandable--open`));
                 otherAccordions.filter(x => x !== this.element)
                     .map(x => x.au['ux-expandable'].viewModel)
                     .forEach(x => x.toggle());

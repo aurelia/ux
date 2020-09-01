@@ -72,6 +72,9 @@ var UxSelect = /** @class */ (function () {
             offsetY: 0,
         });
     };
+    UxSelect.prototype.detached = function () {
+        this.unsetupListAnchor();
+    };
     UxSelect.prototype.unbind = function () {
         this.winEvents.disposeAll();
         if (this.arrayObserver) {
@@ -174,8 +177,15 @@ var UxSelect = /** @class */ (function () {
             this.setValue(optionValues);
         }
     };
+    UxSelect.prototype.moveToBody = function () {
+        document.body.appendChild(this.optionWrapperEl);
+    };
+    UxSelect.prototype.moveToElement = function () {
+        this.element.appendChild(this.optionWrapperEl);
+    };
     UxSelect.prototype.setupListAnchor = function () {
         var _this = this;
+        this.moveToBody();
         if (this.positioning) {
             this.positioning.update();
         }
@@ -188,6 +198,7 @@ var UxSelect = /** @class */ (function () {
         }, true);
     };
     UxSelect.prototype.unsetupListAnchor = function () {
+        this.moveToElement();
         this.winEvents.disposeAll();
     };
     UxSelect.prototype.onKeyboardSelect = function () {
@@ -391,7 +402,7 @@ var UxSelect = /** @class */ (function () {
     };
     UxSelect.prototype.themeChanged = function (newValue) {
         if (newValue && !newValue.themeKey) {
-            newValue.themeKey = 'ux-select';
+            newValue.themeKey = 'select';
         }
         this.styleEngine.applyTheme(newValue, this.element);
     };

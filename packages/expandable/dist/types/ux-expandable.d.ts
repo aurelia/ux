@@ -15,7 +15,7 @@ export declare class UxExpandable implements UxComponent {
     openBoolean: boolean;
     open: boolean | string;
     openChanged(): void;
-    accordion: boolean | string;
+    accordion: string | undefined;
     handleEvent(e: Event): void;
     setContentContainerHeightToAuto(): void;
     bind(): void;

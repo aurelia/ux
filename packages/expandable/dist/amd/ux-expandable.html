@@ -1,4 +1,4 @@
-<template class="ux-expandable--${openBoolean?'open':'closed'}">
+<template class="ux-expandable ux-expandable--${openBoolean?'open':'closed'}">
   <require from="./ux-expandable.css"></require>
   <div class="ux-expandable__header ux-expandable__header--${openBoolean?'open':'closed'}" ref="header"
     click.delegate="toggle()">

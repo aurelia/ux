@@ -1,0 +1,8 @@
+<template class="ux-popup ux-popup--${isOpen ? 'open' : 'closed'} ${isMeasured ? 'ux-popup--measured' : ''}"
+  css="top: ${anchor.top}; bottom: ${anchor.bottom}; left: ${anchor.left}; right: ${anchor.right}; max-height: ${isMeasured ? 9999 : anchor.maxHeight}px; max-width: ${isMeasured ? 9999 : anchor.maxWidth}px;"
+  tabindex="-1">
+  <require from="./ux-popup.css"></require>
+  <div show.bind="isWrapperOpen || isMeasured">
+    <slot></slot>
+  </div>
+</template>

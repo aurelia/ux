@@ -64,6 +64,9 @@ define(["require", "exports", "tslib", "aurelia-framework", "@aurelia-ux/positio
                 offsetY: 0,
             });
         };
+        UxSelect.prototype.detached = function () {
+            this.unsetupListAnchor();
+        };
         UxSelect.prototype.unbind = function () {
             this.winEvents.disposeAll();
             if (this.arrayObserver) {
@@ -166,8 +169,15 @@ define(["require", "exports", "tslib", "aurelia-framework", "@aurelia-ux/positio
                 this.setValue(optionValues);
             }
         };
+        UxSelect.prototype.moveToBody = function () {
+            document.body.appendChild(this.optionWrapperEl);
+        };
+        UxSelect.prototype.moveToElement = function () {
+            this.element.appendChild(this.optionWrapperEl);
+        };
         UxSelect.prototype.setupListAnchor = function () {
             var _this = this;
+            this.moveToBody();
             if (this.positioning) {
                 this.positioning.update();
             }
@@ -180,6 +190,7 @@ define(["require", "exports", "tslib", "aurelia-framework", "@aurelia-ux/positio
             }, true);
         };
         UxSelect.prototype.unsetupListAnchor = function () {
+            this.moveToElement();
             this.winEvents.disposeAll();
         };
         UxSelect.prototype.onKeyboardSelect = function () {
@@ -383,7 +394,7 @@ define(["require", "exports", "tslib", "aurelia-framework", "@aurelia-ux/positio
         };
         UxSelect.prototype.themeChanged = function (newValue) {
             if (newValue && !newValue.themeKey) {
-                newValue.themeKey = 'ux-select';
+                newValue.themeKey = 'select';
             }
             this.styleEngine.applyTheme(newValue, this.element);
         };

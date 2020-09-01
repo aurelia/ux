@@ -150,3 +150,13 @@
   border-color: #e1e1e1;
   border-color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
 }
+/* following styles are required on safari to prevent very light disabled input color */
+.ux-input-component--outline.ux-input-component--disabled,
+.ux-input-component--outline[disabled],
+.ux-input-component--outline[readonly] {
+  color: #e1e1e1;
+  color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+  -webkit-text-fill-color: #e1e1e1;
+  -webkit-text-fill-color: var(--aurelia-ux--input-disabled-background, var(--aurelia-ux--design-disabled-background, #e1e1e1));
+  opacity: 1; /* required on iOS */
+}

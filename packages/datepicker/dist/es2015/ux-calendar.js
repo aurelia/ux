@@ -10,7 +10,7 @@ let UxCalendar = /** @class */ (() => {
         constructor(resources) {
             this.resources = resources;
             this.theme = null;
-            this.weekdays = moment.weekdays();
+            this.weekdays = moment.weekdays(true);
             this.calendarRows = new Array();
         }
         bind() {

@@ -9,7 +9,7 @@ var UxCalendar = /** @class */ (function () {
     function UxCalendar(resources) {
         this.resources = resources;
         this.theme = null;
-        this.weekdays = moment.weekdays();
+        this.weekdays = moment.weekdays(true);
         this.calendarRows = new Array();
     }
     UxCalendar.prototype.bind = function () {

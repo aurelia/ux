@@ -11,9 +11,13 @@ tslib_1.__exportStar(require("@aurelia-ux/grid"), exports);
 tslib_1.__exportStar(require("@aurelia-ux/datepicker"), exports);
 tslib_1.__exportStar(require("@aurelia-ux/expandable"), exports);
 tslib_1.__exportStar(require("@aurelia-ux/form"), exports);
+tslib_1.__exportStar(require("@aurelia-ux/icons"), exports);
 tslib_1.__exportStar(require("@aurelia-ux/input"), exports);
 tslib_1.__exportStar(require("@aurelia-ux/input-info"), exports);
 tslib_1.__exportStar(require("@aurelia-ux/list"), exports);
+tslib_1.__exportStar(require("@aurelia-ux/modal"), exports);
+tslib_1.__exportStar(require("@aurelia-ux/popup"), exports);
+tslib_1.__exportStar(require("@aurelia-ux/positioning"), exports);
 tslib_1.__exportStar(require("@aurelia-ux/progress"), exports);
 tslib_1.__exportStar(require("@aurelia-ux/radio"), exports);
 tslib_1.__exportStar(require("@aurelia-ux/switch"), exports);
@@ -31,9 +35,13 @@ function configure(config) {
         .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/expandable'))
         .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/grid'))
         .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/form'))
+        .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/icons'))
         .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/input'))
         .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/input-info'))
         .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/list'))
+        .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/modal'))
+        .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/popup'))
+        .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/positioning'))
         .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/progress'))
         .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/radio'))
         .plugin(aurelia_framework_1.PLATFORM.moduleName('@aurelia-ux/switch'))

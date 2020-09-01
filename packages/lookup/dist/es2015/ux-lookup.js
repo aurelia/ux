@@ -1,6 +1,6 @@
 import { __awaiter, __decorate } from "tslib";
 import { customElement, useView, bindable, inject, PLATFORM, TaskQueue, bindingMode } from 'aurelia-framework';
-import { StyleEngine, normalizeNumberAttribute } from '@aurelia-ux/core';
+import { StyleEngine, normalizeNumberAttribute, normalizeBooleanAttribute } from '@aurelia-ux/core';
 import { DiscardablePromise } from './discardable-promise';
 import { UxDefaultLookupConfiguration } from './ux-lookup-configuration';
 import { UxLookupTheme } from './ux-lookup-theme';
@@ -69,7 +69,7 @@ let UxLookup = /** @class */ (() => {
                     return Promise.resolve([options.find(x => this.getValue(x) === value)]);
                 }
                 else {
-                    return Promise.resolve(options.filter(x => this.getDisplay(x).toUpperCase().includes(filter.toUpperCase())));
+                    return Promise.resolve(options.filter(x => this.getDisplay(x).toUpperCase().includes((filter || '').toUpperCase())));
                 }
             });
         }
@@ -113,6 +113,9 @@ let UxLookup = /** @class */ (() => {
             }
             lookupEvents.forEach(x => this.element.addEventListener(x, this));
             this.valueChanged();
+            if (!this.value && normalizeBooleanAttribute('preload-options', this.preloadOptions)) {
+                this.loadOptions().catch();
+            }
         }
         detached() {
             if (this.inputElement) {
@@ -215,7 +218,7 @@ let UxLookup = /** @class */ (() => {
             }
         }
         filterChanged() {
-            var _a, _b, _c, _d;
+            var _a, _b;
             return __awaiter(this, void 0, void 0, function* () {
                 if (this.suppressFilterChanged) {
                     this.suppressFilterChanged = false;
@@ -239,9 +242,7 @@ let UxLookup = /** @class */ (() => {
                 this.notFound = false;
                 this.optionsArray = [];
                 try {
-                    this.searchPromise = new DiscardablePromise(this.getOptions((_c = this.inputElement) === null || _c === void 0 ? void 0 : _c.value, undefined));
-                    this.optionsArray = yield this.searchPromise;
-                    this.notFound = !((_d = this.optionsArray) === null || _d === void 0 ? void 0 : _d.length);
+                    yield this.loadOptions();
                     this.updateAnchor();
                 }
                 catch (e) {
@@ -252,6 +253,14 @@ let UxLookup = /** @class */ (() => {
                 finally {
                     this.searching = false;
                 }
+            });
+        }
+        loadOptions() {
+            var _a, _b;
+            return __awaiter(this, void 0, void 0, function* () {
+                this.searchPromise = new DiscardablePromise(this.getOptions((_a = this.inputElement) === null || _a === void 0 ? void 0 : _a.value, undefined));
+                this.optionsArray = yield this.searchPromise;
+                this.notFound = !((_b = this.optionsArray) === null || _b === void 0 ? void 0 : _b.length);
             });
         }
         setFilter(filter) {
@@ -351,6 +360,9 @@ let UxLookup = /** @class */ (() => {
     __decorate([
         bindable
     ], UxLookup.prototype, "debounce", void 0);
+    __decorate([
+        bindable
+    ], UxLookup.prototype, "preloadOptions", void 0);
     UxLookup = UxLookup_1 = __decorate([
         inject(Element, TaskQueue, UxDefaultLookupConfiguration, StyleEngine),
         customElement('ux-lookup'),

@@ -51,11 +51,14 @@ export declare class UxSelect implements UxInputComponent {
     constructor(element: UxSelectElement, styleEngine: StyleEngine, observerLocator: ObserverLocator, taskQueue: TaskQueue, defaultConfiguration: UxDefaultSelectConfiguration, positioningFactory: UxPositioningFactory);
     bind(): void;
     attached(): void;
+    detached(): void;
     unbind(): void;
     private resolveDisplayValue;
     private ignoreSelectEvent;
     private synchronizeOptions;
     private synchronizeValue;
+    private moveToBody;
+    private moveToElement;
     private setupListAnchor;
     private unsetupListAnchor;
     private onKeyboardSelect;

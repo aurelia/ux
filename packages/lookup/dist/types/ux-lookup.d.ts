@@ -44,6 +44,7 @@ export declare class UxLookup implements UxComponent, EventListenerObject {
     debounceNumber: number | null | undefined;
     debounce: number | string | undefined;
     debounceChanged(): void;
+    preloadOptions: boolean | string;
     bind(): void;
     attached(): void;
     detached(): void;
@@ -55,6 +56,7 @@ export declare class UxLookup implements UxComponent, EventListenerObject {
     searchPromise: DiscardablePromise<unknown[]>;
     suppressFilterChanged: boolean;
     filterChanged(): Promise<void>;
+    loadOptions(): Promise<void>;
     setFilter(filter: string | undefined): void;
     updateFilterBasedOnValue(): Promise<void>;
     select(option: unknown): void;

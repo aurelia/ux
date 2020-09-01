@@ -6,7 +6,7 @@ define(["require", "exports", "tslib", "aurelia-templating", "aurelia-binding", 
         function UxCalendar(resources) {
             this.resources = resources;
             this.theme = null;
-            this.weekdays = moment_rexports_1.moment.weekdays();
+            this.weekdays = moment_rexports_1.moment.weekdays(true);
             this.calendarRows = new Array();
         }
         UxCalendar.prototype.bind = function () {

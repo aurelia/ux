@@ -76,7 +76,7 @@ var UxLookup = /** @class */ (function () {
                     return [2 /*return*/, Promise.resolve([options.find(function (x) { return _this.getValue(x) === value; })])];
                 }
                 else {
-                    return [2 /*return*/, Promise.resolve(options.filter(function (x) { return _this.getDisplay(x).toUpperCase().includes(filter.toUpperCase()); }))];
+                    return [2 /*return*/, Promise.resolve(options.filter(function (x) { return _this.getDisplay(x).toUpperCase().includes((filter || '').toUpperCase()); }))];
                 }
                 return [2 /*return*/];
             });
@@ -131,6 +131,9 @@ var UxLookup = /** @class */ (function () {
         }
         lookupEvents.forEach(function (x) { return _this.element.addEventListener(x, _this); });
         this.valueChanged();
+        if (!this.value && core_1.normalizeBooleanAttribute('preload-options', this.preloadOptions)) {
+            this.loadOptions().catch();
+        }
     };
     UxLookup.prototype.detached = function () {
         var _this = this;
@@ -239,12 +242,12 @@ var UxLookup = /** @class */ (function () {
         }
     };
     UxLookup.prototype.filterChanged = function () {
-        var _a, _b, _c, _d;
+        var _a, _b;
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var e_1, _e, e_2;
+            var e_1, e_2;
             var _this = this;
-            return tslib_1.__generator(this, function (_f) {
-                switch (_f.label) {
+            return tslib_1.__generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         if (this.suppressFilterChanged) {
                             this.suppressFilterChanged = false;
@@ -252,15 +255,15 @@ var UxLookup = /** @class */ (function () {
                         }
                         (_a = this.debouncePromise) === null || _a === void 0 ? void 0 : _a.discard();
                         this.debouncePromise = new discardable_promise_1.DiscardablePromise(new Promise(function (r) { var _a; return setTimeout(function () { return r(); }, (_a = _this.debounceNumber) !== null && _a !== void 0 ? _a : 0); }));
-                        _f.label = 1;
+                        _c.label = 1;
                     case 1:
-                        _f.trys.push([1, 3, , 4]);
+                        _c.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, this.debouncePromise];
                     case 2:
-                        _f.sent();
+                        _c.sent();
                         return [3 /*break*/, 4];
                     case 3:
-                        e_1 = _f.sent();
+                        e_1 = _c.sent();
                         return [2 /*return*/];
                     case 4:
                         this.setValue(undefined);
@@ -272,19 +275,16 @@ var UxLookup = /** @class */ (function () {
                         this.errorMessage = undefined;
                         this.notFound = false;
                         this.optionsArray = [];
-                        _f.label = 5;
+                        _c.label = 5;
                     case 5:
-                        _f.trys.push([5, 7, 8, 9]);
-                        this.searchPromise = new discardable_promise_1.DiscardablePromise(this.getOptions((_c = this.inputElement) === null || _c === void 0 ? void 0 : _c.value, undefined));
-                        _e = this;
-                        return [4 /*yield*/, this.searchPromise];
+                        _c.trys.push([5, 7, 8, 9]);
+                        return [4 /*yield*/, this.loadOptions()];
                     case 6:
-                        _e.optionsArray = _f.sent();
-                        this.notFound = !((_d = this.optionsArray) === null || _d === void 0 ? void 0 : _d.length);
+                        _c.sent();
                         this.updateAnchor();
                         return [3 /*break*/, 9];
                     case 7:
-                        e_2 = _f.sent();
+                        e_2 = _c.sent();
                         if (e_2 !== discardable_promise_1.DiscardablePromise.discarded) {
                             this.errorMessage = e_2.message;
                         }
@@ -293,6 +293,24 @@ var UxLookup = /** @class */ (function () {
                         this.searching = false;
                         return [7 /*endfinally*/];
                     case 9: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UxLookup.prototype.loadOptions = function () {
+        var _a, _b;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var _c;
+            return tslib_1.__generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        this.searchPromise = new discardable_promise_1.DiscardablePromise(this.getOptions((_a = this.inputElement) === null || _a === void 0 ? void 0 : _a.value, undefined));
+                        _c = this;
+                        return [4 /*yield*/, this.searchPromise];
+                    case 1:
+                        _c.optionsArray = _d.sent();
+                        this.notFound = !((_b = this.optionsArray) === null || _b === void 0 ? void 0 : _b.length);
+                        return [2 /*return*/];
                 }
             });
         });
@@ -406,6 +424,9 @@ var UxLookup = /** @class */ (function () {
     tslib_1.__decorate([
         aurelia_framework_1.bindable
     ], UxLookup.prototype, "debounce", void 0);
+    tslib_1.__decorate([
+        aurelia_framework_1.bindable
+    ], UxLookup.prototype, "preloadOptions", void 0);
     UxLookup = UxLookup_1 = tslib_1.__decorate([
         aurelia_framework_1.inject(Element, aurelia_framework_1.TaskQueue, ux_lookup_configuration_1.UxDefaultLookupConfiguration, core_1.StyleEngine),
         aurelia_framework_1.customElement('ux-lookup'),
