@@ -1,6 +1,6 @@
 {
   "name": "@aurelia-ux/lookup",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "description": "Lookup component for Aurelia UX",
   "keywords": [
     "aurelia",
@@ -52,12 +52,12 @@
     "version": "node ../update-peers.js"
   },
   "peerDependencies": {
-    "@aurelia-ux/core": "^0.20.0",
-    "@aurelia-ux/input": "^0.20.0"
+    "@aurelia-ux/core": "^0.25.0",
+    "@aurelia-ux/input": "^0.25.0"
   },
   "devDependencies": {
-    "@aurelia-ux/core": "^0.24.0",
-    "@aurelia-ux/input": "^0.24.0",
+    "@aurelia-ux/core": "^0.25.0",
+    "@aurelia-ux/input": "^0.25.0",
     "aurelia-logging-console": "^1.1.1",
     "aurelia-templating-router": "^1.4.0",
     "aurelia-webpack-plugin": "^4.0.0",
