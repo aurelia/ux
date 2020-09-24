@@ -237,6 +237,13 @@
 .ux-input-component--filled.ux-input-component--disabled .ux-input-component__inner-input,
 .ux-input-component--filled[disabled] .ux-input-component__inner-input,
 .ux-input-component--filled[readonly] .ux-input-component__inner-input{
+  display: none;
+}
+
+.ux-input-component--has-value.ux-input-component--filled.ux-input-component--disabled .ux-input-component__inner-input,
+.ux-input-component--has-value.ux-input-component--filled[disabled] .ux-input-component__inner-input,
+.ux-input-component--has-value.ux-input-component--filled[readonly] .ux-input-component__inner-input {
+  display: block;
   color: #9E9E9E;
   color: var(--disabled-foreground, #9E9E9E);
   -webkit-text-fill-color: #9E9E9E;
