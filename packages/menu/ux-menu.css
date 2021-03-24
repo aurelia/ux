@@ -1,0 +1,71 @@
+.ux-menu {
+  display: block;
+}
+
+.ux-menu-anchor {
+  position: absolute;
+}
+
+.ux-menu-panel {
+  position: relative;
+  max-width: 300px;
+  max-height: 400px;
+  padding: 8px 0;
+  background-color: #fff;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  transform: scale(.7, 0) translateY(-30px);
+  transform-origin: top left;
+  opacity: 1;
+  transition: transform 0.125s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.125s linear;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.ux-menu-anchor.active .ux-menu-panel {
+  transform: scale(1, 1) translateY(0);
+}
+
+.ux-menu-anchor.active.faded .ux-menu-panel {
+  opacity: 0;
+}
+
+.ux-menuitem {
+  position: relative;
+  display: flex;
+  min-width: 200px;
+  line-height: 32px;
+  height: 32px;
+  padding: 0 16px 0 24px;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  text-decoration: none;
+}
+
+.ux-menuitem:hover,
+.ux-menuitem:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.ux-menuitem-text {
+  flex-grow: 1;
+  min-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ux-menuitem-helper-text {
+  flex-shrink: 0;
+  flex-basis: auto;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.ux-menuitem-helper-text:empty {
+  display: none;
+}
