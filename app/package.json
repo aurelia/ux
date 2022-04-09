@@ -44,7 +44,7 @@
     "aurelia-templating-resources": "^1.13.0",
     "aurelia-templating-router": "^1.4.0",
     "aurelia-validation": "^1.6.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.2",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
